@@ -1,0 +1,20 @@
+(->
+  dependencies = {
+    default: []
+  }
+  current = dependencies.default
+  npm = (pkg, target) ->
+    current.push [pkg, target]
+
+  group = (name, body) ->
+    current = dependencies[name] ||= []
+    body()
+    current = dependencies.default
+
+  # Packages declared for install in the Nemfile are inserted below
+  # by the cake install file.
+
+{{{npm}}}
+
+  return dependencies
+)()

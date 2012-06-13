@@ -1,0 +1,23 @@
+{print} = require 'util'
+{spawn} = require 'child_process'
+
+packages = []
+
+# The npm function register pkg as a npm install package.
+# Optionally a target can be specified for the installed package.
+npm = (pkg, target) ->
+  pkg = "#{pkg}@#{target}" if target?
+  packages.push pkg
+
+# The group function allow to group required module by context.
+group = (name, body) -> body()
+
+# Packages declared for install in the Nemfile are inserted below
+# by the cake install file.
+
+###_NPM_DECLARATION_###
+
+# Executes npm install with the declared dependencies.
+exe = spawn 'npm', ['install'].concat packages
+exe.stdout.on 'data', (data) -> print data.toString()
+exe.stderr.on 'data', (data) -> print data.toString()

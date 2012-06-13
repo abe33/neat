@@ -1,0 +1,388 @@
+<!DOCTYPE html>  <html> <head>   <title>string.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="array.html">                 array.coffee               </a>                                           <a class="source" href="index.html">                 index.coffee               </a>                                           <a class="source" href="mixin.html">                 mixin.coffee               </a>                                           <a class="source" href="module.html">                 module.coffee               </a>                                           <a class="source" href="number.html">                 number.coffee               </a>                                           <a class="source" href="object.html">                 object.coffee               </a>                                           <a class="source" href="string.html">                 string.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               string.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>This file contains String's extensions that mimics some of the ruby
+String methods.</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h3>Instances Extensions</h3>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h4>String::append</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>Returns a new string where <code>str</code> have been appended to the original string.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">append </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="py">this</span><span class="si">}#{</span><span class="nx">str</span><span class="si">}</span><span class="s">&quot;</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h4>String::camelize</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>Returns a <code>camelCase</code> version of the current string.</p>
+
+<pre><code>'foo bar'.camelize() # 'fooBar'
+'foo-bar'.camelize() # 'fooBar'
+'FOO_BAR'.camelize() # 'fooBar'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">camelize </span><span class="o">=</span> <span class="o">-&gt;</span>
+  <span class="nv">a </span><span class="o">=</span> <span class="py">@toLowerCase</span><span class="p">().</span><span class="nx">split</span> <span class="sr">/</span><span class="src">[_-</span><span class="sre">\s</span><span class="src">]</span><span class="sr">/</span>
+  <span class="nv">s </span><span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+  <span class="nv">s </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">s</span><span class="si">}#{</span><span class="nx">w</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">w</span> <span class="k">in</span> <span class="nx">a</span>
+  <span class="nx">s</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <h4>String::capitalize</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Returns a string where the case of the first char of the first word was
+changed to upper case.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">capitalize </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="py">@toLowerCase</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^</span><span class="src">[a-z]</span><span class="sr">/</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <h4>String::capitalizeAll</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Returns a string where the case of the first char of each word was
+changed to upper case.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">capitalizeAll </span><span class="o">=</span> <span class="o">-&gt;</span>
+  <span class="py">@toLowerCase</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">(^|</span><span class="sre">\s</span><span class="sro">)(</span><span class="src">[a-z]</span><span class="sro">)</span><span class="sr">/g</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">a</span><span class="si">}#{</span><span class="nx">b</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span></pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <h4>String::center</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>If <code>width</code> is greater than the length of this string, returns a string
+of length <code>width</code> with this string's value centered and padded with <code>pad</code>;
+otherwise, returns this string.</p>
+
+<pre><code>'foo'.center 10 # '   foo    '
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">center </span><span class="o">=</span> <span class="p">(</span><span class="nv">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">pad</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">width</span> <span class="o">&gt;</span> <span class="py">@length</span>
+    <span class="nv">padLeftLength </span><span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">width</span> <span class="o">-</span> <span class="py">@length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="nv">padRightLength </span><span class="o">=</span> <span class="nx">width</span> <span class="o">-</span> <span class="py">@length</span> <span class="o">-</span> <span class="nx">padLeftLength</span>
+    <span class="py">@padLeft</span><span class="p">(</span><span class="nx">padLeftLength</span><span class="p">,</span> <span class="nx">pad</span><span class="p">).</span><span class="nx">padRight</span><span class="p">(</span><span class="nx">padRightLength</span><span class="p">,</span> <span class="nx">pad</span><span class="p">)</span>
+  <span class="k">else</span> <span class="py">@valueOf</span><span class="p">()</span></pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <h4>String::compact</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <p>Removes all space characters in the string.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">compact </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="py">@replace</span> <span class="sr">/</span><span class="sre">\s</span><span class="sro">+</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;&#39;</span></pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <h4>String::padLeft</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Returns a string padded on the left with <code>pad</code> of an amount equal to <code>left</code>.</p>
+
+<pre><code>'foo'.padLeft 4        # '    foo'
+'foo'.padLeft 4, '123' # '1231foo'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">padLeft </span><span class="o">=</span> <span class="p">(</span><span class="nv">length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">pad</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@prepend</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">pad</span></pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <h4>String::padRight</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <p>Returns a string padded on the right with <code>pad</code> of an amount equal to <code>left</code>.</p>
+
+<pre><code>'foo'.padRight 4        # 'foo    '
+'foo'.padRight 4, '123' # 'foo1231'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">padRight </span><span class="o">=</span> <span class="p">(</span><span class="nv">length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">pad</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@append</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">pad</span></pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <h4>String::prepend</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>Returns a new string where <code>str</code> have been prepended to the original string.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">prepend </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">str</span><span class="si">}#{</span><span class="py">this</span><span class="si">}</span><span class="s">&quot;</span></pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <h4>String::parameterize</h4>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">parameterize </span><span class="o">=</span> <span class="o">-&gt;</span>
+  <span class="py">@nopunctuation</span><span class="p">().</span><span class="nx">nodiacritics</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">squeeze</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/</span><span class="sre">\s</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;-&#39;</span></pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <h4>String::squeeze</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>Returns a new string where all duplicates of the passed-in match are removed.
+The <code>squeeze</code> method support char range such as <code>A-z</code> or <code>a-f</code>.
+By default the <code>squeeze</code> method operates on spaces chars.</p>
+
+<pre><code>'hello   world'.squeeze()      # 'hello world'
+'hello worllld'.squeeze('l')   # 'helo world'
+'hello wwoorld'.squeeze('m-z') # 'hello world'
+'foofoobarbar'.squeeze('foo')  # 'foobarbar'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">squeeze </span><span class="o">=</span> <span class="p">(</span><span class="nv">match</span><span class="o">=</span><span class="s">&#39;\\s&#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">rangeRe </span><span class="o">=</span> <span class="sr">/</span><span class="sro">^(</span><span class="src">[A-Za-z_]</span><span class="sro">)</span><span class="sr">-</span><span class="sro">(</span><span class="src">[A-Za-z]</span><span class="sro">)$</span><span class="sr">/</span>
+  <span class="nv">re </span><span class="o">=</span> <span class="kc">null</span>
+
+  <span class="k">if</span> <span class="nx">rangeRe</span><span class="p">.</span><span class="nx">test</span> <span class="nx">match</span>
+    <span class="p">[</span><span class="nx">m</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">e</span><span class="p">]</span> <span class="o">=</span> <span class="nx">rangeRe</span><span class="p">.</span><span class="nx">exec</span> <span class="nx">match</span>
+    <span class="nv">a </span><span class="o">=</span> <span class="p">[]</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">to</span> <span class="nx">e</span><span class="p">,</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">push</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">c</span><span class="si">}</span><span class="s">+&quot;</span>
+
+    <span class="nv">re </span><span class="o">=</span> <span class="sr">///</span><span class="si">#{</span><span class="nx">a</span><span class="p">.</span><span class="nx">join</span> <span class="s">&#39;|&#39;</span><span class="si">}</span><span class="sr">///g</span>
+
+  <span class="k">else</span> <span class="k">if</span> <span class="nx">match</span> <span class="o">is</span> <span class="s">&#39;\\s&#39;</span>
+    <span class="nv">re </span><span class="o">=</span> <span class="sr">/</span><span class="sre">\n</span><span class="sro">+|</span><span class="sr"> </span><span class="sro">+|</span><span class="sre">\t</span><span class="sro">+</span><span class="sr">/g</span>
+
+  <span class="k">else</span>
+    <span class="nv">re </span><span class="o">=</span> <span class="sr">///</span><span class="sro">(</span><span class="si">#{</span><span class="nx">match</span><span class="si">}</span><span class="sro">)+</span><span class="sr">///g</span>
+    <span class="k">return</span> <span class="py">@replace</span> <span class="nx">re</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">w</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">w</span>
+
+  <span class="py">@replace</span> <span class="nx">re</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">substr</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span></pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <h4>String::to</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>Iterates from the first char of this string to the first char of the <code>end</code>
+string using the Unicode of the characters.</p>
+
+<pre><code>str = ''
+'A'.to 'z', (c) -&gt; str += c
+# str = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">to </span><span class="o">=</span> <span class="p">(</span><span class="nx">end</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">start </span><span class="o">=</span> <span class="py">@charCodeAt</span> <span class="mi">0</span>
+  <span class="nv">end </span><span class="o">=</span> <span class="nx">end</span><span class="p">.</span><span class="nx">charCodeAt</span> <span class="mi">0</span>
+  <span class="nx">callback</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span> <span class="nx">i</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="nx">start</span><span class="p">..</span><span class="nx">end</span><span class="p">]</span></pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <h4>String::underscore</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>Returns a <code>snake_case</code> version of the current string.</p>
+
+<pre><code>'fooBar'.underscore()  # 'foo_bar'
+'Foo Bar'.underscore() # 'foo_bar'
+'FOO-BAR'.underscore() # 'foo_bar'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">underscore </span><span class="o">=</span> <span class="o">-&gt;</span>
+  <span class="py">@replace</span><span class="p">(</span><span class="sr">/</span><span class="sro">(</span><span class="src">[a-z]</span><span class="sro">)(</span><span class="src">[A-Z]</span><span class="sro">)</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&quot;$1_$2&quot;</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="sr">/-|\s/g</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">()</span></pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <h4>String::nodiacritics</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>Removes all the accented characters and ligatures from the string.</p>
+
+<pre><code>'ÉéÀàÈè'.nodiacritics() # 'EeAaEe'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">nodiacritics </span><span class="o">=</span> <span class="o">-&gt;</span>
+  <span class="nv">str </span><span class="o">=</span> <span class="py">this</span>
+  <span class="nv">str </span><span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">k</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nb">String</span><span class="p">.</span><span class="nb">DACRITICS_MAP</span>
+  <span class="nx">str</span></pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <h4>String::nopunctuation</h4>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="o">::</span><span class="nv">nopunctuation </span><span class="o">=</span> <span class="o">-&gt;</span>
+  <span class="py">@replace</span> <span class="sr">/</span><span class="src">[,?;.:/!§*%=</span><span class="sr">\[\]</span><span class="sro">(){}</span><span class="sr">&#39;&quot;`\\_&lt;&gt;-</span><span class="err">]</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;&#39;</span></pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <h3>Class Methods</h3>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <h4>String.fill</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-33">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-33">&#182;</a>               </div>               <p>Returns a string of length <code>length</code> filled with the chars in <code>filler</code>.</p>
+
+<pre><code>String.fill 3        # '   '
+String.fill 4, '123' # '1231'
+String.fill 5, 'ab'  # 'ababa'
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="p">.</span><span class="nv">fill </span><span class="o">=</span> <span class="p">(</span><span class="nx">length</span><span class="p">,</span> <span class="nv">filler</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">s </span><span class="o">=</span> <span class="s">&#39;&#39;</span>
+  <span class="nv">fillerChar </span><span class="o">=</span> <span class="mi">0</span>
+  <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="nv">s </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">s</span><span class="si">}#{</span><span class="nx">filler</span><span class="p">[</span><span class="nx">fillerChar</span><span class="o">++</span><span class="p">]</span><span class="si">}</span><span class="s">&quot;</span>
+    <span class="nv">fillerChar </span><span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="nx">fillerChar</span> <span class="o">&gt;=</span> <span class="nx">filler</span><span class="p">.</span><span class="nx">length</span>
+  <span class="nx">s</span></pre></div>             </td>           </tr>                               <tr id="section-34">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-34">&#182;</a>               </div>               <h3>Class Properties</h3>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-35">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-35">&#182;</a>               </div>               <h4>String.DACRITICS_MAP</h4>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-36">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-36">&#182;</a>               </div>               <p>An object that contains all the diacrictics mapped with their corresponding
+replacement char(s).</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">String</span><span class="p">.</span><span class="nb">DACRITICS_MAP</span> <span class="o">=</span>
+  <span class="py">A</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0041\u24B6\uFF21\u00C0\u00C1</span>
+<span class="sr">    \u00C2\u1EA6\u1EA4\u1EAA\u1EA8</span>
+<span class="sr">    \u00C3\u0100\u0102\u1EB0\u1EAE</span>
+<span class="sr">    \u1EB4\u1EB2\u0226\u01E0\u00C4</span>
+<span class="sr">    \u01DE\u1EA2\u00C5\u01FA\u01CD</span>
+<span class="sr">    \u0200\u0202\u1EA0\u1EAC\u1EB6</span>
+<span class="sr">    \u1E00\u0104\u023A\u2C6F</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="nb">AA</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA732</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">AE</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u00C6\u01FC\u01E2</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">AO</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA734</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">AU</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA736</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">AV</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA738\uA73A</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">AY</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA73C</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">B</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0042\u24B7\uFF22\u1E02\u1E04\u1E06\u0243\u0182\u0181</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">C</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0043\u24B8\uFF23\u0106\u0108</span>
+<span class="sr">    \u010A\u010C\u00C7\u1E08\u0187</span>
+<span class="sr">    \u023B\uA73E</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">D</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0044\u24B9\uFF24\u1E0A\u010E</span>
+<span class="sr">    \u1E0C\u1E10\u1E12\u1E0E\u0110</span>
+<span class="sr">    \u018B\u018A\u0189\uA779</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="nb">DZ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01F1\u01C4</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">Dz</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01F2\u01C5</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">E</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0045\u24BA\uFF25\u00C8\u00C9</span>
+<span class="sr">    \u00CA\u1EC0\u1EBE\u1EC4\u1EC2</span>
+<span class="sr">    \u1EBC\u0112\u1E14\u1E16\u0114</span>
+<span class="sr">    \u0116\u00CB\u1EBA\u011A\u0204</span>
+<span class="sr">    \u0206\u1EB8\u1EC6\u0228\u1E1C</span>
+<span class="sr">    \u0118\u1E18\u1E1A\u0190\u018E</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">F</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0046\u24BB\uFF26\u1E1E\u0191\uA77B</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">G</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0047\u24BC\uFF27\u01F4\u011C</span>
+<span class="sr">    \u1E20\u011E\u0120\u01E6\u0122</span>
+<span class="sr">    \u01E4\u0193\uA7A0\uA77D\uA77E</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">H</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0048\u24BD\uFF28\u0124\u1E22</span>
+<span class="sr">    \u1E26\u021E\u1E24\u1E28\u1E2A</span>
+<span class="sr">    \u0126\u2C67\u2C75\uA78D</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">I</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0049\u24BE\uFF29\u00CC\u00CD</span>
+<span class="sr">    \u00CE\u0128\u012A\u012C\u0130</span>
+<span class="sr">    \u00CF\u1E2E\u1EC8\u01CF\u0208</span>
+<span class="sr">    \u020A\u1ECA\u012E\u1E2C\u0197</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">J</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u004A\u24BF\uFF2A\u0134\u0248</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">K</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u004B\u24C0\uFF2B\u1E30\u01E8</span>
+<span class="sr">    \u1E32\u0136\u1E34\u0198\u2C69</span>
+<span class="sr">    \uA740\uA742\uA744\uA7A2</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">L</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u004C\u24C1\uFF2C\u013F\u0139</span>
+<span class="sr">    \u013D\u1E36\u1E38\u013B\u1E3C</span>
+<span class="sr">    \u1E3A\u0141\u023D\u2C62\u2C60</span>
+<span class="sr">    \uA748\uA746\uA780</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="nb">LJ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01C7</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">Lj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01C8</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">M</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u004D\u24C2\uFF2D\u1E3E\u1E40\u1E42\u2C6E\u019C</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">N</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u004E\u24C3\uFF2E\u01F8</span>
+<span class="sr">    \u0143\u00D1\u1E44\u0147</span>
+<span class="sr">    \u1E46\u0145\u1E4A\u1E48</span>
+<span class="sr">    \u0220\u019D\uA790\uA7A4</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="nb">NJ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01CA</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">Nj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01CB</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">O</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u004F\u24C4\uFF2F\u00D2</span>
+<span class="sr">    \u00D3\u00D4\u1ED2\u1ED0</span>
+<span class="sr">    \u1ED6\u1ED4\u00D5\u1E4C</span>
+<span class="sr">    \u022C\u1E4E\u014C\u1E50</span>
+<span class="sr">    \u1E52\u014E\u022E\u0230</span>
+<span class="sr">    \u00D6\u022A\u1ECE\u0150</span>
+<span class="sr">    \u01D1\u020C\u020E\u01A0</span>
+<span class="sr">    \u1EDC\u1EDA\u1EE0\u1EDE</span>
+<span class="sr">    \u1EE2\u1ECC\u1ED8\u01EA</span>
+<span class="sr">    \u01EC\u00D8\u01FE\u0186</span>
+<span class="sr">    \u019F\uA74A\uA74C</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="nb">OI</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01A2</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">OO</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA74E</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">OU</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0222</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">P</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0050\u24C5\uFF30\u1E54\u1E56\u01A4\u2C63\uA750\uA752\uA754</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">Q</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0051\u24C6\uFF31\uA756\uA758\u024A</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">R</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0052\u24C7\uFF32\u0154</span>
+<span class="sr">    \u1E58\u0158\u0210\u0212</span>
+<span class="sr">    \u1E5A\u1E5C\u0156\u1E5E</span>
+<span class="sr">    \u024C\u2C64\uA75A\uA7A6</span>
+<span class="sr">    \uA782</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">S</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0053\u24C8\uFF33\u1E9E</span>
+<span class="sr">    \u015A\u1E64\u015C\u1E60</span>
+<span class="sr">    \u0160\u1E66\u1E62\u1E68</span>
+<span class="sr">    \u0218\u015E\u2C7E\uA7A8</span>
+<span class="sr">    \uA784</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">T</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0054\u24C9\uFF34\u1E6A</span>
+<span class="sr">    \u0164\u1E6C\u021A\u0162</span>
+<span class="sr">    \u1E70\u1E6E\u0166\u01AC</span>
+<span class="sr">    \u01AE\u023E\uA786</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="nb">TZ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA728</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">U</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0055\u24CA\uFF35\u00D9</span>
+<span class="sr">    \u00DA\u00DB\u0168\u1E78</span>
+<span class="sr">    \u016A\u1E7A\u016C\u00DC</span>
+<span class="sr">    \u01DB\u01D7\u01D5\u01D9</span>
+<span class="sr">    \u1EE6\u016E\u0170\u01D3</span>
+<span class="sr">    \u0214\u0216\u01AF\u1EEA</span>
+<span class="sr">    \u1EE8\u1EEE\u1EEC\u1EF0</span>
+<span class="sr">    \u1EE4\u1E72\u0172\u1E76</span>
+<span class="sr">    \u1E74\u0244</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">V</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0056\u24CB\uFF36\u1E7C\u1E7E\u01B2\uA75E\u0245</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="nb">VY</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA760</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">W</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0057\u24CC\uFF37\u1E80\u1E82\u0174\u1E86\u1E84\u1E88\u2C72</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">X</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0058\u24CD\uFF38\u1E8A\u1E8C</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">Y</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span><span class="sr">\u0059\u24CE\uFF39\u1EF2</span>
+<span class="sr">    \u00DD\u0176\u1EF8\u0232</span>
+<span class="sr">    \u1E8E\u0178\u1EF6\u1EF4</span>
+<span class="sr">    \u01B3\u024E\u1EFE</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">Z</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u005A\u24CF\uFF3A\u0179</span>
+<span class="sr">    \u1E90\u017B\u017D\u1E92</span>
+<span class="sr">    \u1E94\u01B5\u0224\u2C7F</span>
+<span class="sr">    \u2C6B\uA762</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">a</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0061\u24D0\uFF41\u1E9A</span>
+<span class="sr">    \u00E0\u00E1\u00E2\u1EA7</span>
+<span class="sr">    \u1EA5\u1EAB\u1EA9\u00E3</span>
+<span class="sr">    \u0101\u0103\u1EB1\u1EAF</span>
+<span class="sr">    \u1EB5\u1EB3\u0227\u01E1</span>
+<span class="sr">    \u00E4\u01DF\u1EA3\u00E5</span>
+<span class="sr">    \u01FB\u01CE\u0201\u0203</span>
+<span class="sr">    \u1EA1\u1EAD\u1EB7\u1E01</span>
+<span class="sr">    \u0105\u2C65\u0250</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">aa</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA733</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">ae</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u00E6\u01FD\u01E3</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">ao</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA735</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">au</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA737</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">av</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA739\uA73B</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">ay</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA73D</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">b</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0062\u24D1\uFF42\u1E03\u1E05\u1E07\u0180\u0183\u0253</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">c</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0063\u24D2\uFF43\u0107</span>
+<span class="sr">    \u0109\u010B\u010D\u00E7</span>
+<span class="sr">    \u1E09\u0188\u023C\uA73F</span>
+<span class="sr">    \u2184</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">d</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0064\u24D3\uFF44\u1E0B</span>
+<span class="sr">    \u010F\u1E0D\u1E11\u1E13</span>
+<span class="sr">    \u1E0F\u0111\u018C\u0256</span>
+<span class="sr">    \u0257\uA77A</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">dz</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01F3\u01C6</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">e</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0065\u24D4\uFF45\u00E8</span>
+<span class="sr">    \u00E9\u00EA\u1EC1\u1EBF</span>
+<span class="sr">    \u1EC5\u1EC3\u1EBD\u0113</span>
+<span class="sr">    \u1E15\u1E17\u0115\u0117</span>
+<span class="sr">    \u00EB\u1EBB\u011B\u0205</span>
+<span class="sr">    \u0207\u1EB9\u1EC7\u0229</span>
+<span class="sr">    \u1E1D\u0119\u1E19\u1E1B</span>
+<span class="sr">    \u0247\u025B\u01DD</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">f</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0066\u24D5\uFF46\u1E1F\u0192\uA77C</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">g</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0067\u24D6\uFF47\u01F5</span>
+<span class="sr">    \u011D\u1E21\u011F\u0121</span>
+<span class="sr">    \u01E7\u0123\u01E5\u0260</span>
+<span class="sr">    \uA7A1\u1D79\uA77F</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">h</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0068\u24D7\uFF48\u0125</span>
+<span class="sr">    \u1E23\u1E27\u021F\u1E25</span>
+<span class="sr">    \u1E29\u1E2B\u1E96\u0127</span>
+<span class="sr">    \u2C68\u2C76\u0265</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">hv</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0195</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">i</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0069\u24D8\uFF49\u00EC</span>
+<span class="sr">    \u00ED\u00EE\u0129\u012B</span>
+<span class="sr">    \u012D\u00EF\u1E2F\u1EC9</span>
+<span class="sr">    \u01D0\u0209\u020B\u1ECB</span>
+<span class="sr">    \u012F\u1E2D\u0268\u0131</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">j</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u006A\u24D9\uFF4A\u0135\u01F0\u0249</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">k</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u006B\u24DA\uFF4B\u1E31</span>
+<span class="sr">    \u01E9\u1E33\u0137\u1E35</span>
+<span class="sr">    \u0199\u2C6A\uA741\uA743</span>
+<span class="sr">    \uA745\uA7A3</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">l</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u006C\u24DB\uFF4C\u0140</span>
+<span class="sr">    \u013A\u013E\u1E37\u1E39</span>
+<span class="sr">    \u013C\u1E3D\u1E3B\u017F</span>
+<span class="sr">    \u0142\u019A\u026B\u2C61</span>
+<span class="sr">    \uA749\uA781\uA747</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">lj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01C9</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">m</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u006D\u24DC\uFF4D\u1E3F\u1E41\u1E43\u0271\u026F</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">n</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u006E\u24DD\uFF4E\u01F9</span>
+<span class="sr">    \u0144\u00F1\u1E45\u0148</span>
+<span class="sr">    \u1E47\u0146\u1E4B\u1E49</span>
+<span class="sr">    \u019E\u0272\u0149\uA791</span>
+<span class="sr">    \uA7A5</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">nj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01CC</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">o</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u006F\u24DE\uFF4F\u00F2</span>
+<span class="sr">    \u00F3\u00F4\u1ED3\u1ED1</span>
+<span class="sr">    \u1ED7\u1ED5\u00F5\u1E4D</span>
+<span class="sr">    \u022D\u1E4F\u014D\u1E51</span>
+<span class="sr">    \u1E53\u014F\u022F\u0231</span>
+<span class="sr">    \u00F6\u022B\u1ECF\u0151</span>
+<span class="sr">    \u01D2\u020D\u020F\u01A1</span>
+<span class="sr">    \u1EDD\u1EDB\u1EE1\u1EDF</span>
+<span class="sr">    \u1EE3\u1ECD\u1ED9\u01EB</span>
+<span class="sr">    \u01ED\u00F8\u01FF\u0254</span>
+<span class="sr">    \uA74B\uA74D\u0275</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">oi</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01A3</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">ou</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0223</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">oo</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA74F</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">p</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0070\u24DF\uFF50\u1E55\u1E57\u01A5\u1D7D\uA751\uA753\uA755</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">q</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0071\u24E0\uFF51\u024B\uA757\uA759</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">r</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0072\u24E1\uFF52\u0155</span>
+<span class="sr">    \u1E59\u0159\u0211\u0213</span>
+<span class="sr">    \u1E5B\u1E5D\u0157\u1E5F</span>
+<span class="sr">    \u024D\u027D\uA75B\uA7A7</span>
+<span class="sr">    \uA783</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">s</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0073\u24E2\uFF53\u00DF</span>
+<span class="sr">    \u015B\u1E65\u015D\u1E61</span>
+<span class="sr">    \u0161\u1E67\u1E63\u1E69</span>
+<span class="sr">    \u0219\u015F\u023F\uA7A9</span>
+<span class="sr">    \uA785\u1E9B</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">t</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0074\u24E3\uFF54\u1E6B</span>
+<span class="sr">    \u1E97\u0165\u1E6D\u021B</span>
+<span class="sr">    \u0163\u1E71\u1E6F\u0167</span>
+<span class="sr">    \u01AD\u0288\u2C66\uA787</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">tz</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA729</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">u</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0075\u24E4\uFF55\u00F9</span>
+<span class="sr">    \u00FA\u00FB\u0169\u1E79</span>
+<span class="sr">    \u016B\u1E7B\u016D\u00FC</span>
+<span class="sr">    \u01DC\u01D8\u01D6\u01DA</span>
+<span class="sr">    \u1EE7\u016F\u0171\u01D4</span>
+<span class="sr">    \u0215\u0217\u01B0\u1EEB</span>
+<span class="sr">    \u1EE9\u1EEF\u1EED\u1EF1</span>
+<span class="sr">    \u1EE5\u1E73\u0173\u1E77</span>
+<span class="sr">    \u1E75\u0289</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">v</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0076\u24E5\uFF56\u1E7D\u1E7F\u028B\uA75F\u028C</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">vy</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA761</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">w</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0077\u24E6\uFF57\u1E81\u1E83\u0175\u1E87\u1E85\u1E98\u1E89\u2C73</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">x</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0078\u24E7\uFF58\u1E8B\u1E8D</span><span class="err">]</span><span class="sr">/g</span>
+  <span class="py">y</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u0079\u24E8\uFF59\u1EF3</span>
+<span class="sr">    \u00FD\u0177\u1EF9\u0233</span>
+<span class="sr">    \u1E8F\u00FF\u1EF7\u1E99</span>
+<span class="sr">    \u1EF5\u01B4\u024F\u1EFF</span><span class="err">]</span>
+  <span class="sr">///g</span>
+  <span class="py">z</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
+<span class="src">    </span><span class="sr">\u007A\u24E9\uFF5A\u017A</span>
+<span class="sr">    \u1E91\u017C\u017E\u1E93</span>
+<span class="sr">    \u1E95\u01B6\u0225\u0240</span>
+<span class="sr">    \u2C6C\uA763</span><span class="err">]</span>
+  <span class="sr">///g</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

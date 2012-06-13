@@ -1,0 +1,6 @@
+- if @title?
+  = "#{@title}\n"
+
+- for k,v of @list
+  - description = if v.description? then " - #{v.description}" else ''
+  = "  * #{k.cyan}#{description}"

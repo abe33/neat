@@ -1,0 +1,8 @@
+:plain
+  Where [generator] can be any of:
+
+- for k,v of @generators
+  - label = if v.usages? then v.usages.join(',') else k
+  - description = if v.description? then " - #{v.description}" else ''
+  :plain
+      * #{label.cyan}#{description}

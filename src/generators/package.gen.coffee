@@ -1,0 +1,70 @@
+fs = require "fs"
+{resolve, existsSync:exists} = require 'path'
+{Neat} = require '../env'
+
+utils = resolve Neat.neatRoot, "lib/utils"
+{namespace} = require resolve utils, "exports"
+{describe} = require resolve utils, "commands"
+{puts, error} = require resolve utils, "logs"
+{render} = require resolve utils, "templates"
+{dirWithIndexSync} = require resolve utils, "files"
+cup = require resolve utils, "cup"
+
+describe 'Generates the package.json file',
+index = (generator, args..., cb) ->
+
+  unless Neat.root?
+    return puts error "Can't run package generator outside of a Neat project."
+
+  ##### 1 - Metadata
+  pkg = {}
+  fs.readFile resolve(Neat.root, ".neat"), (err, meta) ->
+    meta = cup.read meta
+    pkg[k] = v for k,v of meta
+
+    ##### 2 - Dependencies (Nemfile)
+    fs.readFile 'Nemfile', (err, nemfile) ->
+      return puts warn "No #{"Nemfile".red} in the current directory" if err
+
+      puts "Nemfile found" if Neat.env.verbose
+
+      path = resolve __dirname, "package/dependencies"
+      context = npm: nemfile.toString().replace /^(.|$)/gm,"  $1"
+
+      render path, context, (err, source) ->
+        return puts error err.message if err?
+
+        dependencies = cup.read source
+        return unless dependencies?
+
+        pkg.dependencies = {}
+        pkg.devDependencies = {}
+
+        for g,a of dependencies
+          if g in ["default", "production"]
+            pkg.dependencies[p] = v or "*" for [p,v] in a
+          else
+            pkg.devDependencies[p] = v or "*" for [p,v] in a
+
+        ##### 3 - Main File
+        hasLibIndex = dirWithIndexSync resolve Neat.root, "lib"
+        hasSrcIndex = dirWithIndexSync resolve Neat.root, "src"
+
+        pkg.main = './lib/index' if hasLibIndex or hasSrcIndex
+
+        ##### 4 - Binaries
+        if exists resolve Neat.root, "bin"
+          binaries = fs.readdirSync resolve Neat.root, "bin"
+          if binaries?
+            pkg.bin = {}
+            pkg.bin[bin] = "./bin/#{bin}" for bin in binaries
+
+        ##### 5 - Package.json Generation
+        pkgfile = resolve Neat.root, "package.json"
+        fs.writeFile pkgfile, JSON.stringify(pkg, null, 2), (err) ->
+          return puts error err.message if err?
+          puts "package.json generated".green
+          cb?()
+
+module.exports = namespace "package", {index}
+

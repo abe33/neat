@@ -1,0 +1,6 @@
+:plain
+  name: "#{@name}"
+  version: "0.0.1"
+  author: "#{@author or 'TODO: Type your name here'}"
+  keywords: ["TODO: Add node module keywords here"]
+

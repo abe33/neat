@@ -1,0 +1,26 @@
+{
+  "name": "neat",
+  "version": "0.0.51",
+  "description": "",
+  "author": "Cédric Néhémie <cedric.nehemie@gmail.com>",
+  "keywords": [
+    "neat",
+    "coffee"
+  ],
+  "dependencies": {
+    "colors": "*",
+    "commander": "*",
+    "coffee-script": ">= 1.3.0",
+    "haml-coffee": ">= 0.6.3",
+    "mustache": ">= 0.4.0"
+  },
+  "devDependencies": {
+    "docco": "*",
+    "coffeelint": "*",
+    "jasmine-node": "*"
+  },
+  "main": "./lib/index",
+  "bin": {
+    "neat": "./bin/neat"
+  }
+}
