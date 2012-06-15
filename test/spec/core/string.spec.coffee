@@ -1,3 +1,5 @@
+require '../../../lib/core'
+
 describe 'String::squeeze', ->
   it 'should remove all duplicated spaces characters', ->
     s = 'i  r    r e\nl e\t\tv  a n\n\t t'
