@@ -31,7 +31,7 @@ run = (command, options, callback) ->
   exe.stderr.on 'data', (data) -> print data.toString()
   exe.on 'exit', (status)-> callback? status
 
-asyncFailureTrap = (callback) -> (err, args...) ->
+asyncErrorTrap = (callback) -> (err, args...) ->
   return print "#{err.stack}\n" if err?
   callback?.apply null, args
 
@@ -41,9 +41,8 @@ install = (options, callback) ->
   # The content of the `Nemfile` file is inserted in a placeholder in
   # the `templates/commands/install.plain` file that contains the `npm`
   # function declaration.
-
-  fs.readFile NPM_TEMPLATE, asyncFailureTrap (nem) ->
-    fs.readFile NEMFILE, asyncFailureTrap (nemfile) ->
+  fs.readFile NPM_TEMPLATE, asyncErrorTrap (nem) ->
+    fs.readFile NEMFILE, asyncErrorTrap (nemfile) ->
       source = nem.toString().replace NPM_TOKEN, nemfile.toString()
 
       # The produced source code is then executed by `coffee`.
@@ -71,9 +70,6 @@ compile = (options, callback) ->
   [callback, options] = [options, {}] if typeof options is "function"
 
   run COFFEE, ['-c', '-o', 'lib', 'src'], (status)->
-    # if err? then puts 'Compilation failed'.red
-    # else
-      # print output
     switch status
       when 0 then puts green 'Compilation done'
       when 1 then puts red 'Compilation failed'
@@ -81,10 +77,10 @@ compile = (options, callback) ->
     callback? status
 
 recursiveWatch = (dir, watcher) ->
-  fs.readdir dir, asyncFailureTrap (files)->
+  fs.readdir dir, asyncErrorTrap (files)->
     files.forEach (file) ->
       file = path.resolve dir, file
-      fs.lstat file, asyncFailureTrap (stats) ->
+      fs.lstat file, asyncErrorTrap (stats) ->
         if stats.isDirectory()
           # Watch the directory and traverse the child file.
           fs.watch file, watcher
@@ -132,29 +128,29 @@ bump = (majorBump=0, minorBump=0, buildBump=1, options, callback) ->
     callback? null, data.toString().replace(re, replaceFunc)
 
   # Here starts the bumping
-  fs.readFile ".neat", replaceVersion asyncFailureTrap (res) ->
-    fs.writeFile ".neat", res, asyncFailureTrap ->
+  fs.readFile ".neat", replaceVersion asyncErrorTrap (res) ->
+    fs.writeFile ".neat", res, asyncErrorTrap ->
 
       unless path.existsSync 'package.json'
         return puts green "Version bumped to #{newVersion}"
 
-      fs.readFile "package.json", asyncFailureTrap (data) ->
+      fs.readFile "package.json", asyncErrorTrap (data) ->
         output = data.toString().replace re, "\"version\": \"#{newVersion}\""
 
-        fs.writeFile "package.json", output, asyncFailureTrap ->
+        fs.writeFile "package.json", output, asyncErrorTrap ->
           puts green "Version bumped to #{newVersion}"
           callback?()
 
-task 'compile', 'Compiles the application',
+task 'compile', 'Compiles the sources',
       (opt) -> compile opt
 
 task 'test',    'Tests Nails',
       (opt) -> compile opt, (e) -> test opt if e is 0
 
-task 'deploy',  'Installs the application',
+task 'deploy',  'Installs the module globally through npm',
       (opt) -> bump 0, 0, 1, opt, -> compile opt, (e) -> deploy opt if e is 0
 
-task 'install', 'Installs the application dependencies in the current project',
+task 'install', 'Installs the module dependencies in the current project',
       (opt) -> install opt
 
 task 'watch',   'Watches for changes in the src directory and run compile',
