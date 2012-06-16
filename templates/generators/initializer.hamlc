@@ -1,0 +1,3 @@
+:plain
+  exports.initialize = (config) ->
+    # Initialization goes here
