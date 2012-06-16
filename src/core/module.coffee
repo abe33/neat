@@ -51,7 +51,7 @@ class Module
 
         # The current class is registered as constructor for
         # for the mixed method.
-        @__superOf__[key] = @__super__ if value instanceof Function
+        @__superOf__[key] = @__super__ if typeof value is 'function'
 
       # Mixins can provide a function called `constructorHook`.
       # That function will be stored in a specific prototype
@@ -61,6 +61,7 @@ class Module
         hook = mixin.constructorHook
         @__hooks__ = @__hooks__.concat hook
 
+    # The mixin is notified of its inclusion at the end of the process.
     mixin.included? this
     this
 
@@ -78,7 +79,7 @@ class Module
   ##### Instance Members
 
   # When `preventConstructorHooksInModule` is `true`, the `Module`
-  # constructor will not triggers the constructors hook, allowing
+  # constructor will not triggers the constructor hooks, allowing
   # a subclass to handle the hooks in its own constructor.
   #
   # Subclasses that prevent the `Module` constructor to trigger
