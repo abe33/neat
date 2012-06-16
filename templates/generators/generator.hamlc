@@ -1,7 +1,3 @@
 :plain
-  {Neat} = require 'neat'
-
-  #{@name} = (generator, args..., cb) ->
+  exports.#{@name} = (generator, args..., cb) ->
     # TODO Write your generator
-
-  module.exports = {#{@name}}
