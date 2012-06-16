@@ -1,6 +1,6 @@
 fs = require 'fs'
 {resolve, extname} = require 'path'
-{Neat} = require '../env'
+{Neat} = require '../neat'
 
 {findSiblingFile} = require "../utils/files"
 {puts, error, warn, missing, neatBroken} = require "../utils/logs"

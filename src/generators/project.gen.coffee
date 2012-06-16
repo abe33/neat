@@ -1,5 +1,5 @@
 {resolve, existsSync:exists, basename, extname} = require 'path'
-{Neat} = require '../env'
+{Neat} = require '../neat'
 {puts, error, warn, missing, neatBroken} = require resolve Neat.neatRoot,
                                                            "lib/utils/logs"
 {ensureSync, touchSync} = require resolve Neat.neatRoot, "lib/utils/files"

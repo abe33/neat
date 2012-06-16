@@ -1,6 +1,6 @@
 fs = require 'fs'
 {resolve} = require 'path'
-{Neat} = require '../env'
+{Neat} = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
 

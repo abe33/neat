@@ -1,57 +1,137 @@
-# This file contains the main initialization of the `neat` command line tool.
-#
-# This file is loaded by the bin bootstrap. If the `neat` command line tool
-# is run inside a Neat project, the local installation files will be used
-# if they are available.
+# This file contains the creation process of the `Neat` object and the
+# corresponding environment.
+
 fs = require 'fs'
 pr = require 'commander'
-{print} = require 'util'
-{spawn} = require 'child_process'
-{resolve} = require 'path'
-# The core module is loaded before any other *local* modules.
+{resolve, existsSync:exists} = require 'path'
 
-core = require resolve __dirname, 'core'
-# The Neat environment is loaded.
-{Neat} = require resolve __dirname, 'env'
+# We need a reference to the Neat module root directory for later use.
+NEAT_ROOT = resolve __dirname, '..'
 
-{puts, error, missing} = require resolve __dirname, "utils/logs"
+# Requiring internal utilities.
+utils = "#{NEAT_ROOT}/lib/utils"
+{puts, warn, error, missing, neatBroken} = require "#{utils}/logs"
+{findSync, neatRootSync, isNeatRootSync} = require "#{utils}/files"
+cup = require "#{utils}/cup"
 
-# All the commands are required through this single call.
-#
-# The `index` of the `commands` directory contains a script that
-# merge all the commands defined in all of the following places:
-#
-#  1. The Neat installation.
-#  2. All the Neat projects in installed modules.
-#  3. The project `commands` directory.
-commands  = require resolve __dirname, "commands"
+# The `Neat` object provides information about Neat and the current project.
+class Neat
+  #### Environment Setup
+  constructor: (root) ->
+    @root     = @ROOT      = root
+    @neatRoot = @NEAT_ROOT = NEAT_ROOT
+    # Paths where environments and initializers can be found.
+    @envPath  = @ENV_PATH  = "lib/config/environments"
+    @initPath = @INIT_PATH = "lib/config/initializers"
+    # `PATHS` will stores the various paths into which Neat will look
+    # when searching files.
+    @paths    = @PATHS     = [@neatRoot]
+    # The environment object is defined asynchronously through
+    # the `initEnvironment` or the `setEnvironment` methods.
+    @env      = @ENV       = null
+    @meta     = @META      = @loadMeta()
 
-# The commands will be register in a hash with their aliases as keys.
-cmdMap = {}
-register = (k, c) ->
-  # Commands must have aliases.
-  unless c.aliases?
-    return print "Can't register command #{k} due to missing aliases\n".red
+    @discoverUserPaths() if @root?
 
-  for alias in c.aliases
-    pr.command(alias).description(c.description).action(c)
-    cmdMap[k] = c
+  discoverUserPaths: ->
+    modulesDir = resolve @root, "node_modules"
+    if exists modulesDir
+      # All the node modules that contains a `.neat` file at their
+      # root will be appended to `PATHS`.
+      modules = fs.readdirSync modulesDir
+      modules = (resolve modulesDir, m for m in modules when m isnt "neat")
+      @paths.push m for m in modules when isNeatRootSync m
 
-# The commander program is initialized
-pr.version(Neat.meta.version)
+    else puts warn "No node modules found, run neat install."
 
-# All the commands are registered.
-register(k, g pr, cmdMap) for k,g of commands
+    # The current Neat project root is the last path in `PATHS`.
+    @paths.push @root if @root not in @paths
 
-# Handles the invalid commands.
-pr.command("*").action (command) ->
-  puts """#{missing "Command #{command}"}
+  loadMeta: ->
+    # The `.neat` file at the root of a project contains the metadata
+    # for the project. In the case of Neat, the `.neat` file is loaded
+    # and available in `Neat.meta`.
+    neatFilePath = "#{@neatRoot}/.neat"
 
-          Try `neat help` for a list of the available commands."""
+    try
+      neatFile = fs.readFileSync neatFilePath
+    catch e
+      return puts """#{missing neatFilePath}
 
-# Starts commander parsing.
-pr.parse(process.argv)
+                     #{neatBroken}"""
 
-# Nothing was triggered by commander, the help is displayed.
-{help} = cmdMap
-help() if pr.args.length is 0 and help?
+    meta = cup.read neatFile.toString()
+    meta or puts error """Invalid .neat file at:
+                          #{neatFilePath.red}
+
+                          #{neatBroken}"""
+
+  initEnvironment: ->
+    @setEnvironment process.env['NEAT_ENV'] or 'default'
+
+  setEnvironment: (env) ->
+    # The environment object contains the paths defined in the `Neat` object.
+    # In that way, configurators and initializers can perform operations
+    # knowing the paths of the project.
+    envObject = {
+      @root, @neatRoot, @paths, @initPath, @envPath,
+      @ROOT, @NEAT_ROOT, @PATHS, @INIT_PATH, @ENV_PATH,
+      verbose:false,
+    }
+
+    ##### Configurations
+
+    # The `configurators` array initially contains the files which
+    # must be executed before any other configurator.
+    #
+    # The default configurators are always called to ensure that
+    # the environment defaults are present if not overriden
+    # by the specified environment.
+    paths = @paths.map (p)=> "#{p}/#{@envPath}"
+    configurators = findSync /^default$/, "js", paths
+
+    return puts error """#{missing 'config/environments/default.js'}
+
+                         #{neatBroken}""" unless configurators? and
+                                                 configurators.length isnt 0
+
+    # Configurators for the given environment are searched in the
+    # `environments` directory of each path.
+    files = findSync ///^#{env}$///, "js", paths
+    configurators.push f for f in files when f not in configurators
+
+    # All the configurators found are required and then executed.
+    for configurator in configurators
+      puts "Running #{configurator}" if envObject.verbose
+      # The execution of a configurator is handled in a `try..catch` block
+      # in order to avoid a failing configurators to prevent `Neat`
+      # to be loaded.
+      # For instance this behavior is needed to run `neat install` in a fresh
+      # project where some dependencies cannot be satisfied yet because
+      # no modules have been installed.
+      try
+        {setup} = require configurator
+        setup? envObject
+      catch e
+        # However errors are reported to the console.
+        puts error 'Something went wrong with a configurator!!!'.red
+        puts e.stack if envObject.verbose
+    ##### Initializations
+
+    # Every initializers are executed whatever the environment.
+    initializers = findSync 'js', @paths.map (o) => "#{o}/#{@initPath}"
+
+    for initializer in initializers
+      # The same precautions are taken towards initializers execution
+      # as for configurators.
+      try
+        {initialize} = require initializer
+        initialize? envObject
+      catch e
+        puts error 'Something went wrong with an initializer!!!'.red
+        puts e.stack if envObject.verbose
+
+    # The new environment object is then stored in `Neat`.
+    @ENV = @env = envObject
+
+module.exports = Neat: new Neat neatRootSync()

@@ -7,13 +7,13 @@ var projectRoot = neatRootSync()
 
 // Uses the local neat install when available.
 if(projectRoot) {
-  var neat = path.resolve(projectRoot, "node_modules/neat/lib/neat.js")
+  var neat = path.resolve(projectRoot, "node_modules/neat/lib/env.js")
   if(path.existsSync(neat)){
     require(neat)
   } else {
-    require(path.resolve(__dirname, "../lib/neat"))
+    require(path.resolve(__dirname, "../lib/env"))
   }
 }
 else {
-  require(path.resolve(__dirname, "../lib/neat"))
+  require(path.resolve(__dirname, "../lib/env"))
 }

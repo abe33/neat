@@ -1,5 +1,5 @@
 {resolve} = require 'path'
-{Neat} = require '../env'
+{Neat} = require '../neat'
 {namespace} = require resolve Neat.neatRoot, "lib/utils/exports"
 {describe} = require resolve Neat.neatRoot, "lib/utils/commands"
 
