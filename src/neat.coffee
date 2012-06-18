@@ -21,8 +21,8 @@ class Neat
     @root     = @ROOT      = root
     @neatRoot = @NEAT_ROOT = NEAT_ROOT
     # Paths where environments and initializers can be found.
-    @envPath  = @ENV_PATH  = "lib/config/environments"
-    @initPath = @INIT_PATH = "lib/config/initializers"
+    @envPath  = @ENV_PATH  = 'lib/config/environments'
+    @initPath = @INIT_PATH = 'lib/config/initializers'
     # `PATHS` will stores the various paths into which Neat will look
     # when searching files.
     @paths    = @PATHS     = [@neatRoot]
@@ -33,20 +33,23 @@ class Neat
 
     @discoverUserPaths() if @root?
 
+  # Browses the user directory to find neat projects either at the
+  # root directory or in the node modules installed in the project.
   discoverUserPaths: ->
-    modulesDir = resolve @root, "node_modules"
+    modulesDir = resolve @root, 'node_modules'
     if exists modulesDir
       # All the node modules that contains a `.neat` file at their
       # root will be appended to `PATHS`.
       modules = fs.readdirSync modulesDir
-      modules = (resolve modulesDir, m for m in modules when m isnt "neat")
+      modules = (resolve modulesDir, m for m in modules when m isnt 'neat')
       @paths.push m for m in modules when isNeatRootSync m
 
-    else puts warn "No node modules found, run neat install."
+    else puts warn 'No node modules found, run neat install.'
 
     # The current Neat project root is the last path in `PATHS`.
     @paths.push @root if @root not in @paths
 
+  # Loads and returns the meta contained in the `.neat` file.
   loadMeta: ->
     # The `.neat` file at the root of a project contains the metadata
     # for the project. In the case of Neat, the `.neat` file is loaded
@@ -66,9 +69,15 @@ class Neat
 
                           #{neatBroken}"""
 
+  # Initializes the `Neat` instance with the default environment.
+  # If the `NEAT_ENV` environment variable is set, the corresponding
+  # environment is loaded.
   initEnvironment: ->
     @setEnvironment process.env['NEAT_ENV'] or 'default'
 
+  # Changes the environment of the `Neat` instance. All the process
+  # of loading the environment configurators and the initializers
+  # are executed on a brand new environment object.
   setEnvironment: (env) ->
     # The environment object contains the paths defined in the `Neat` object.
     # In that way, configurators and initializers can perform operations
@@ -88,7 +97,7 @@ class Neat
     # the environment defaults are present if not overriden
     # by the specified environment.
     paths = @paths.map (p)=> "#{p}/#{@envPath}"
-    configurators = findSync /^default$/, "js", paths
+    configurators = findSync /^default$/, 'js', paths
 
     return puts error """#{missing 'config/environments/default.js'}
 
@@ -114,8 +123,9 @@ class Neat
         setup? envObject
       catch e
         # However errors are reported to the console.
-        puts error 'Something went wrong with a configurator!!!'.red
-        puts e.stack if envObject.verbose
+        puts error """#{'Something went wrong with a configurator!!!'.red}
+
+                      #{e.stack}"""
     ##### Initializations
 
     # Every initializers are executed whatever the environment.
@@ -128,8 +138,9 @@ class Neat
         {initialize} = require initializer
         initialize? envObject
       catch e
-        puts error 'Something went wrong with an initializer!!!'.red
-        puts e.stack if envObject.verbose
+        puts error """#{'Something went wrong with an initializer!!!'.red}
+
+                      #{e.stack}"""
 
     # The new environment object is then stored in `Neat`.
     @ENV = @env = envObject
