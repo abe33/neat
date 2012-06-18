@@ -17,7 +17,7 @@ ensureSync = (dir) -> fs.mkdirSync dir unless existsSync dir
 
 ##### ensurePathSync
 
-# Ensures that the path exists and creates the missing folder if needed.
+# Ensures that the path exists and creates the missing folders if needed.
 ensurePathSync = (path) ->
   dirs = path.split '/'
   dirs.shift()
