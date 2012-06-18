@@ -5,7 +5,8 @@ npm 'haml-coffee', '>= 0.6.3'
 npm 'mustache', '>= 0.4.0'
 
 group 'development', ->
-  npm 'docco'
+  # npm '/git://github.com/abe33/docco.git'
+  npm '/home/cedric/Developpement/javascript/coffeescript/docco'
   npm 'coffeelint'
 
 group 'test', ->
