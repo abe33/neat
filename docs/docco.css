@@ -1,6 +1,8 @@
 /*--------------------- Layout and Typography ----------------------------*/
+@import url("http://fonts.googleapis.com/css?family=Homenaje");
+
 body {
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
+  font-family: 'Homenaje', serif;
   font-size: 15px;
   line-height: 22px;
   color: #252519;
@@ -9,9 +11,9 @@ body {
 a {
   color: #261a3b;
 }
-  a:visited {
-    color: #261a3b;
-  }
+a:visited {
+  color: #261a3b;
+}
 p {
   margin: 0 0 15px 0;
 }
@@ -38,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
   font: 10px Arial;
   text-transform: uppercase;
   cursor: pointer;
-  text-align: right;
+  text-align: left;
 }
 #jump_to, #jump_wrapper {
   position: fixed;
@@ -66,6 +68,9 @@ h1, h2, h3, h4, h5, h6 {
           background: #f5f5ff;
         }
         #jump_page .source:first-child {
+        }
+        #jump_page .source .red {
+          color: #cb4b16;
         }
 table td {
   border: 0;
@@ -120,67 +125,91 @@ table td {
     }
 
 
-/*---------------------- Syntax Highlighting -----------------------------*/
-td.linenos { background-color: #f0f0f0; padding-right: 10px; }
-span.lineno { background-color: #f0f0f0; padding: 0 5px 0 5px; }
-body .hll { background-color: #ffffcc }
-body .c { color: #408080; font-style: italic }  /* Comment */
-body .err { border: 1px solid #FF0000 }         /* Error */
-body .k { color: #954121 }                      /* Keyword */
-body .o { color: #666666 }                      /* Operator */
-body .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-body .cp { color: #BC7A00 }                     /* Comment.Preproc */
-body .c1 { color: #408080; font-style: italic } /* Comment.Single */
-body .cs { color: #408080; font-style: italic } /* Comment.Special */
-body .gd { color: #A00000 }                     /* Generic.Deleted */
-body .ge { font-style: italic }                 /* Generic.Emph */
-body .gr { color: #FF0000 }                     /* Generic.Error */
-body .gh { color: #000080; font-weight: bold }  /* Generic.Heading */
-body .gi { color: #00A000 }                     /* Generic.Inserted */
-body .go { color: #808080 }                     /* Generic.Output */
-body .gp { color: #000080; font-weight: bold }  /* Generic.Prompt */
-body .gs { font-weight: bold }                  /* Generic.Strong */
-body .gu { color: #800080; font-weight: bold }  /* Generic.Subheading */
-body .gt { color: #0040D0 }                     /* Generic.Traceback */
-body .kc { color: #954121 }                     /* Keyword.Constant */
-body .kd { color: #954121; font-weight: bold }  /* Keyword.Declaration */
-body .kn { color: #954121; font-weight: bold }  /* Keyword.Namespace */
-body .kp { color: #954121 }                     /* Keyword.Pseudo */
-body .kr { color: #954121; font-weight: bold }  /* Keyword.Reserved */
-body .kt { color: #B00040 }                     /* Keyword.Type */
-body .m { color: #666666 }                      /* Literal.Number */
-body .s { color: #219161 }                      /* Literal.String */
-body .na { color: #7D9029 }                     /* Name.Attribute */
-body .nb { color: #954121 }                     /* Name.Builtin */
-body .nc { color: #0000FF; font-weight: bold }  /* Name.Class */
-body .no { color: #880000 }                     /* Name.Constant */
-body .nd { color: #AA22FF }                     /* Name.Decorator */
-body .ni { color: #999999; font-weight: bold }  /* Name.Entity */
-body .ne { color: #D2413A; font-weight: bold }  /* Name.Exception */
-body .nf { color: #0000FF }                     /* Name.Function */
-body .nl { color: #A0A000 }                     /* Name.Label */
-body .nn { color: #0000FF; font-weight: bold }  /* Name.Namespace */
-body .nt { color: #954121; font-weight: bold }  /* Name.Tag */
-body .nv { color: #19469D }                     /* Name.Variable */
-body .ow { color: #AA22FF; font-weight: bold }  /* Operator.Word */
-body .w { color: #bbbbbb }                      /* Text.Whitespace */
-body .mf { color: #666666 }                     /* Literal.Number.Float */
-body .mh { color: #666666 }                     /* Literal.Number.Hex */
-body .mi { color: #666666 }                     /* Literal.Number.Integer */
-body .mo { color: #666666 }                     /* Literal.Number.Oct */
-body .sb { color: #219161 }                     /* Literal.String.Backtick */
-body .sc { color: #219161 }                     /* Literal.String.Char */
-body .sd { color: #219161; font-style: italic } /* Literal.String.Doc */
-body .s2 { color: #219161 }                     /* Literal.String.Double */
-body .se { color: #BB6622; font-weight: bold }  /* Literal.String.Escape */
-body .sh { color: #219161 }                     /* Literal.String.Heredoc */
-body .si { color: #BB6688; font-weight: bold }  /* Literal.String.Interpol */
-body .sx { color: #954121 }                     /* Literal.String.Other */
-body .sr { color: #BB6688 }                     /* Literal.String.Regex */
-body .s1 { color: #219161 }                     /* Literal.String.Single */
-body .ss { color: #19469D }                     /* Literal.String.Symbol */
-body .bp { color: #954121 }                     /* Name.Builtin.Pseudo */
-body .vc { color: #19469D }                     /* Name.Variable.Class */
-body .vg { color: #19469D }                     /* Name.Variable.Global */
-body .vi { color: #19469D }                     /* Name.Variable.Instance */
-body .il { color: #666666 }                     /* Literal.Number.Integer.Long */
+td.docs,th.docs{overflow-x:auto !important}
+.docs{background:#bbc4c4 !important;color:#586e75;overflow:auto !important;font-family:"Palatino Linotype","Book Antiqua",Palatino,FreeSerif,serif;font-size:14px}
+.docs code,.docs pre{background:rgba(166,176,176,0.5) !important;border:1px solid #a6b0b0 !important;color:#073642}
+.docs pre code{background:none !important;border:none !important}
+.docs h1,.docs h2,.docs h3,.docs h4,.docs h5,.docs h6{color:#002b36;font-family:"Palatino Linotype","Book Antiqua",Palatino,FreeSerif,serif}
+.docs h1{font-size:28px}
+.docs h1:first-letter{color:#77822f}
+.docs h3{font-size:20px}
+.docs h3:first-letter{color:#2d74a6}
+.docs h4{font-size:16px}
+.docs h4:first-letter{color:#cb4b16}
+.docs .demo-table td{width:100px}
+#container{color:#839496;background:#a6b0b0 !important}
+#container #background{background:#042029;border-left:2px solid #888}
+#container td.code,#container th.code{border-left:2px solid #888;background-color:#042029;color:#93a1a1}
+#container td.code .bp,#container th.code .bp{color:#999}
+#container td.code .c1,#container th.code .c1{color:#586e75 !important;font-style:italic !important}
+#container td.code .cm,#container th.code .cm{color:#586e75 !important;font-style:italic !important}
+#container td.code .cp,#container th.code .cp{color:#586e75 !important;font-style:italic !important}
+#container td.code .cs,#container th.code .cs{color:#586e75 !important;font-weight:bold !important;font-style:italic !important}
+#container td.code .c,#container th.code .c{color:#586e75 !important;font-style:italic !important}
+#container td.code .err,#container th.code .err{color:#dc322f !important;background:none !important}
+#container td.code .gd .x,#container th.code .gd .x{color:#93a1a1 !important;background-color:#4d2d33 !important;display:inline-block}
+#container td.code .gd,#container th.code .gd{color:#93a1a1 !important;background-color:#372c34 !important;display:inline-block}
+#container td.code .ge,#container th.code .ge{color:#93a1a1 !important;font-style:italic !important}
+#container td.code .gh,#container th.code .gh{color:#586e75 !important}
+#container td.code .gi .x,#container th.code .gi .x{color:#93a1a1 !important;background-color:#355720 !important;display:inline-block}
+#container td.code .gi,#container th.code .gi{color:#93a1a1 !important;background-color:#1a412b !important;display:inline-block}
+#container td.code .go,#container th.code .go{color:#888}
+#container td.code .gp,#container th.code .gp{color:#555}
+#container td.code .gr,#container th.code .gr{color:#a00}
+#container td.code .gs,#container th.code .gs{color:#93a1a1 !important;font-weight:bold !important}
+#container td.code .gt,#container th.code .gt{color:#a00}
+#container td.code .gu,#container th.code .gu{color:#6c71c4 !important}
+#container td.code .il,#container th.code .il{color:#099}
+#container td.code .kc,#container th.code .kc{color:#b58900 !important}
+#container td.code .kd,#container th.code .kd{color:#268bd2 !important}
+#container td.code .kp,#container th.code .kp{color:#cb4b16 !important;font-weight:bold !important}
+#container td.code .kr,#container th.code .kr{color:#d33682 !important;font-weight:bold !important}
+#container td.code .kt,#container th.code .kt{color:#2aa198 !important}
+#container td.code .k,#container th.code .k{color:#859900 !important}
+#container td.code .mf,#container th.code .mf{color:#2aa198 !important}
+#container td.code .mh,#container th.code .mh{color:#2aa198 !important}
+#container td.code .mi,#container th.code .mi{color:#2aa198 !important}
+#container td.code .mo,#container th.code .mo{color:#099}
+#container td.code .m,#container th.code .m{color:#2aa198 !important}
+#container td.code .na,#container th.code .na{color:#268bd2 !important}
+#container td.code .nb,#container th.code .nb{color:#b58900 !important}
+#container td.code .nc,#container th.code .nc{color:#d33682 !important}
+#container td.code .ne,#container th.code .ne{color:#268bd2 !important;font-weight:bold !important}
+#container td.code .nf,#container th.code .nf{color:#268bd2 !important;font-weight:bold !important}
+#container td.code .ni,#container th.code .ni{color:purple}
+#container td.code .nl,#container th.code .nl{color:#859900 !important}
+#container td.code .nn,#container th.code .nn{color:#b58900 !important}
+#container td.code .no,#container th.code .no{color:#b58900 !important}
+#container td.code .nt,#container th.code .nt{color:#268bd2 !important;font-weight:bold !important}
+#container td.code .nv,#container th.code .nv{color:#93a1a1 !important}
+#container td.code .nx,#container th.code .nx{color:#93a1a1 !important}
+#container td.code .n,#container th.code .n{color:#268bd2 !important}
+#container td.code .ow,#container th.code .ow{color:#2aa198 !important;font-weight:bold !important}
+#container td.code .o,#container th.code .o{color:#859900 !important}
+#container td.code .p,#container th.code .p{color:#859900 !important}
+#container td.code .py,#container th.code .py{color:#268bd2 !important}
+#container td.code .s1,#container th.code .s1{color:#2aa198 !important}
+#container td.code .s2,#container th.code .s2{color:#2aa198 !important}
+#container td.code .sb,#container th.code .sb{color:#d14}
+#container td.code .sc,#container th.code .sc{color:#d14}
+#container td.code .sd,#container th.code .sd{color:#2aa198 !important}
+#container td.code .se,#container th.code .se{color:#dc322f !important}
+#container td.code .sh,#container th.code .sh{color:#d14}
+#container td.code .si,#container th.code .si{color:#cb4b16 !important;font-weight:normal !important}
+#container td.code .sr,#container th.code .sr{color:red !important}
+#container td.code .src,#container th.code .src{color:#cb4b16 !important}
+#container td.code .sre,#container th.code .sre{color:#aa2a08 !important}
+#container td.code .sro,#container th.code .sro{color:#b58900 !important}
+#container td.code .sri,#container th.code .sri{color:#2aa198 !important}
+#container td.code .ss,#container th.code .ss{color:#990073}
+#container td.code .sx,#container th.code .sx{color:#d14}
+#container td.code .s,#container th.code .s{color:#2aa198 !important}
+#container td.code .vc,#container th.code .vc{color:teal}
+#container td.code .vg,#container th.code .vg{color:#268bd2 !important}
+#container td.code .vi,#container th.code .vi{color:#268bd2 !important}
+#container td.code .w,#container th.code .w{color:#bbb}
+#container td.code div .gd,#container td.code div .gd .x,#container td.code div .gi,#container td.code div .gi .x,#container th.code div .gd,#container th.code div .gd .x,#container th.code div .gi,#container th.code div .gi .x{display:inline-block;width:100%}
+.font,.widget-common,.text-content,body,h4{font-size:18px;font-family:"Homenaje",sans-serif}
+
+
+body {background: #BBC4C4;}
