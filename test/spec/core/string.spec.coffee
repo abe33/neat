@@ -72,6 +72,7 @@ describe 'String::underscore', ->
     expect('FooBar'.underscore()).toBe('foo_bar')
     expect('Foo BAR'.underscore()).toBe('foo_bar')
     expect('foo-BAR'.underscore()).toBe('foo_bar')
+    expect('foo/BAR'.underscore()).toBe('foo_bar')
 
 describe 'String::nodiacritics', ->
   it 'should remove the accented and ligature chars in the string', ->

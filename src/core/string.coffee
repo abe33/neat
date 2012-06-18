@@ -129,8 +129,9 @@ String::to = (end, callback) ->
 #     'fooBar'.underscore()  # 'foo_bar'
 #     'Foo Bar'.underscore() # 'foo_bar'
 #     'FOO-BAR'.underscore() # 'foo_bar'
+#     'foo/BAR'.underscore() # 'foo_bar'
 String::underscore = ->
-  @replace(/([a-z])([A-Z])/g, "$1_$2").split(/-|\s/g).join("_").toLowerCase()
+  @replace(/([a-z])([A-Z])/g, "$1_$2").split(/[-/]|\s/g).join("_").toLowerCase()
 
 ##### String::nodiacritics
 
