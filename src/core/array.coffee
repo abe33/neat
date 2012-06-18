@@ -11,6 +11,11 @@ Array.isArray = (a) -> a?.type() is 'array'
 
 #### Instances Extensions
 
+##### Array::empty
+
+Array::empty = -> @length is 0
+
+
 ##### Array::first
 
 # Returns the first element in this array.
