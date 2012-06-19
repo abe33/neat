@@ -9,4 +9,3 @@ exports.initialize = (config) ->
   config.docco =
     paths:
       sources: sources
-
