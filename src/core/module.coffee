@@ -102,4 +102,4 @@ class Module
   super: (method, args...) ->
     @constructor.__superOf__[method]?[method]?.apply this, args
 
-module.exports = {Module}
+module.exports = Module

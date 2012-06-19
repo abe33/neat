@@ -13,4 +13,4 @@ Mixin = (mixin) ->
 
   mixin
 
-module.exports = {Mixin}
+module.exports = Mixin
