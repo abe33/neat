@@ -3,8 +3,8 @@ require './types/string'
 require './types/number'
 require './types/array'
 
-Module = require './module'
-Mixin = require './mixin'
-Signal = require './signal'
-
-module.exports = {Module, Mixin, Signal}
+module.exports =
+  Module: require './module'
+  Mixin: require './mixin'
+  Signal: require './signal'
+  async: require './async'
