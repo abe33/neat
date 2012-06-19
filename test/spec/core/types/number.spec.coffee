@@ -1,3 +1,5 @@
+require '../../../../lib/core'
+
 describe 'Number::times', ->
   it 'should iterate the same count as the number', ->
     n = 0

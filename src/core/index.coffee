@@ -1,10 +1,10 @@
-require './object'
-require './string'
-require './number'
-require './array'
-mod = require './module'
-mix = require './mixin'
+require './types/object'
+require './types/string'
+require './types/number'
+require './types/array'
 
-module.exports =
-  Module: mod.Module
-  Mixin: mix.Mixin
+Module = require './module'
+Mixin = require './mixin'
+Signal = require './signal'
+
+module.exports = {Module, Mixin, Signal}

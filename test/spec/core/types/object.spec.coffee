@@ -1,4 +1,4 @@
-{Module, Mixin} = require '../../../lib/core'
+{Module, Mixin} = require '../../../../lib/core'
 
 describe 'Object::merge', ->
   it 'should merge the passed-in object in the current one', ->

@@ -1,4 +1,4 @@
-require '../../../lib/core'
+require '../../../../lib/core'
 
 describe 'String::squeeze', ->
   it 'should remove all duplicated spaces characters', ->

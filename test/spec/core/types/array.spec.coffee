@@ -1,3 +1,5 @@
+require '../../../../lib/core'
+
 describe 'Array::flatten', ->
   it 'should flatten all the sub arrays in the array', ->
     array = [[["foo"],"bar"],"baz"].flatten()
