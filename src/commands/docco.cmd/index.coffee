@@ -1,6 +1,6 @@
 fs = require 'fs'
 {resolve, existsSync, basename, extname, relative} = require 'path'
-{Neat} = require '../neat'
+{Neat} = require '../../neat'
 
 utils = resolve Neat.neatRoot, 'lib/utils'
 
@@ -8,6 +8,9 @@ utils = resolve Neat.neatRoot, 'lib/utils'
 {aliases, describe} = require resolve utils, 'commands'
 {ensureSync} = require resolve utils, 'files'
 {render} = require resolve utils, 'templates'
+
+DoccoFile = require './docco_file'
+DoccoFileProcessor = require './docco_file_processor'
 
 # The following expression math sprockets like require
 # in documentation and extract the token to require.
@@ -21,14 +24,6 @@ REQUIRE_RE = ///^
   \s+
   ([^\s]+)      # the configuration name
 ///gm
-
-class DoccoFile
-  constructor: (@path) ->
-    @relativePath = relative Neat.root, @path
-    @basename = basename @path
-    outputBase = @relativePath.replace(extname(@path), '').underscore()
-    @outputPath = "#{Neat.root}/docs/#{outputBase}.html"
-    @linkPath = relative "#{Neat.root}/docs", @outputPath
 
 docco = (pr) ->
   return puts error 'No program provided to docco' unless pr?
@@ -50,9 +45,10 @@ docco = (pr) ->
     if not paths? or paths.empty()
       return puts warn 'No paths specified for documentation generation.'
 
-    navTplPath = resolve __dirname, 'docco/_navigation'
-    headerTplPath = resolve __dirname, 'docco/_header'
-    pageTplPath = resolve __dirname, 'docco/_page'
+    dirname = __dirname.replace '.cmd', ''
+    navTplPath = resolve dirname, '_navigation'
+    headerTplPath = resolve dirname, '_header'
+    pageTplPath = resolve dirname, '_page'
 
     files = (new DoccoFile path for path in paths)
 
@@ -64,11 +60,15 @@ docco = (pr) ->
       render headerTplPath, {files}, (err, header) ->
         throw err if err?
 
+        highlightFile = (path, sections, callback) ->
+          highlight path, sections, ->
+            callback?()
+
         generateDocumentation = (file, sources, callback) ->
           fs.readFile file.path, (err, code) ->
             throw err if err?
             sections = parse file.path, code.toString()
-            highlight file.path, sections, ->
+            highlightFile file.path, sections, ->
               context = {sections, header, nav}
               render pageTplPath, context, (err, page) ->
                 throw err if err?
