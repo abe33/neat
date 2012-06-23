@@ -46,7 +46,4 @@ class DoccoPreProcessor
       else
         callback?()
 
-
-
-
 module.exports = DoccoPreProcessor
