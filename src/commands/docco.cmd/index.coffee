@@ -8,9 +8,10 @@ utils = resolve Neat.neatRoot, 'lib/utils'
 {aliases, describe} = require resolve utils, 'commands'
 {ensureSync} = require resolve utils, 'files'
 {render} = require resolve utils, 'templates'
+Parallel = require '../../async/parallel'
 
 DoccoFile = require './docco_file'
-DoccoFileProcessor = require './docco_file_processor'
+Processor = require './docco_file_processor'
 
 # The following expression math sprockets like require
 # in documentation and extract the token to require.
@@ -34,13 +35,6 @@ docco = (pr) ->
     unless Neat.root?
       return puts error "Can't run neat docco outside of a Neat project."
 
-    try
-      {parse, highlight} = require 'docco'
-    catch e
-      return puts error """#{'Can\'t find the docco module.'.red}
-
-                           Run cake install to install the dependencies"""
-
     paths = Neat.env.docco.paths.sources.concat()
     if not paths? or paths.empty()
       return puts warn 'No paths specified for documentation generation.'
@@ -60,33 +54,12 @@ docco = (pr) ->
       render headerTplPath, {files}, (err, header) ->
         throw err if err?
 
-        highlightFile = (path, sections, callback) ->
-          highlight path, sections, ->
-            callback?()
+        processors = []
+        for file in files
+          processors.push Processor.asCommand(file, header, nav)
 
-        generateDocumentation = (file, sources, callback) ->
-          fs.readFile file.path, (err, code) ->
-            throw err if err?
-            sections = parse file.path, code.toString()
-            highlightFile file.path, sections, ->
-              context = {sections, header, nav}
-              render pageTplPath, context, (err, page) ->
-                throw err if err?
-                fs.writeFile file.outputPath, page, (err) ->
-                  throw err if err?
-                  console.log "source for #{file.relativePath}
-                               documentation processed".squeeze()
-                  callback?()
-
-        nextFile =  ->
-          if files.length
-            generateDocumentation files.shift(),
-                                  Neat.env.docco.paths.sources,
-                                  nextFile
-          else
-            console.log 'Documentation successfully generated'.green
-            callback?()
-
-        nextFile()
+        new Parallel(processors).run ->
+          console.log 'Documentation successfully generated'.green
+          callback?()
 
 module.exports = {docco}
