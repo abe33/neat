@@ -1,6 +1,7 @@
 !!!5
 %html
   %meta{charset: 'utf-8'}
+  %title=@file.basename
   %head
     != @header
   %body

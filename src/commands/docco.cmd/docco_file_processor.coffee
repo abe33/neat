@@ -37,7 +37,7 @@ class DoccoFileProcessor
       sections = parse @file.path, code.toString()
       @highlightFile @file.path, sections, =>
 
-        context = {sections, @header, @nav}
+        context = {sections, @header, @nav, @file}
         render @constructor.TPL_PATH, context, (err, page) =>
           throw err if err?
 
