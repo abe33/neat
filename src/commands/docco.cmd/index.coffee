@@ -13,19 +13,6 @@ Parallel = require '../../async/parallel'
 DoccoFile = require './docco_file'
 Processor = require './docco_file_processor'
 
-# The following expression math sprockets like require
-# in documentation and extract the token to require.
-#
-# In fact, the token is the base name of a configuration
-# file in `config/commands/docco/demos` that will be used to generate
-# a live demo within the documentation.
-REQUIRE_RE = ///^
-  \s*           # indentation
-  \#=\s*require # rails convention for require
-  \s+
-  ([^\s]+)      # the configuration name
-///gm
-
 docco = (pr) ->
   return puts error 'No program provided to docco' unless pr?
 
