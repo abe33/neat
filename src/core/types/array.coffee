@@ -105,10 +105,10 @@ Array::select = (f) -> o for o in this when f? o
 Array::step = (n,f) ->
   f?.apply this, @[i*n..i*n + n-1] for i in [0..Math.ceil(@length / n)-1]
 
-##### Array::unique
+##### Array::uniq
 
 # Returns a new array where all values are unique.
-Array::unique = ->
+Array::uniq = ->
   out = []
   out.push v for v in this when v not in out
   out

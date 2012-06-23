@@ -104,9 +104,9 @@ describe 'Array::rotate', ->
 
     expect(array).toEqual(['foo','bar','baz'])
 
-describe 'Array::unique', ->
+describe 'Array::uniq', ->
   it 'should removes all duplicates in the current array', ->
-    array = ['foo','bar','foo','baz','bar'].unique()
+    array = ['foo','bar','foo','baz','bar'].uniq()
 
     expect(array).toEqual(['foo','bar','baz'])
 
