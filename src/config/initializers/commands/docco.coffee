@@ -2,10 +2,14 @@
 
 exports.initialize = (config) ->
 
-  # sources = ['/home/cedric/Developpement/javascript/coffeescript/neat/src/core/types/string.coffee']
+  dirs = [
+    'src/async',
+    'src/core',
+    'src/utils',
+  ]
+
   sources = []
-  sources = sources.concat findSync 'coffee', 'src/core'
-  sources = sources.concat findSync 'coffee', 'src/utils'
+  sources = sources.concat findSync 'coffee', d for d in dirs
 
   config.docco =
     paths:

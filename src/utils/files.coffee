@@ -186,7 +186,8 @@ findSiblingFile = (path, roots, dir, exts..., paths) ->
 # For instance, the following call will returns the path to all the commands
 # in the `lib/commands` directories of a Neat project.
 #
-#     commands = find /\.cmd$/, 'js', Neat.paths.map (p)-> "#{p}/lib/commands"
+#     paths = Neat.paths.map (p)-> "#{p}/lib/commands"
+#     commands = find /\.cmd$/, 'js', paths
 #
 # The `pattern` argument is optional and match against the `basename`
 # of the file.

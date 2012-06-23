@@ -4,7 +4,7 @@
 {spawn} = require 'child_process'
 {resolve} = require 'path'
 {puts, error} = require './logs'
-{Neat} = require '../neat'
+Neat = require '../neat'
 
 ## Private
 

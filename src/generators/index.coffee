@@ -1,5 +1,5 @@
 {resolve} = require 'path'
-{Neat} = require '../neat'
+Neat = require '../neat'
 {combine} = require "../utils/exports"
 
 module.exports = combine /\.gen$/,

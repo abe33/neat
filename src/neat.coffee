@@ -145,4 +145,4 @@ class Neat
     # The new environment object is then stored in `Neat`.
     @ENV = @env = envObject
 
-module.exports = Neat: new Neat neatRootSync()
+module.exports = new Neat neatRootSync()

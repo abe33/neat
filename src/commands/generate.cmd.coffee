@@ -1,6 +1,6 @@
 {resolve} = require 'path'
 {help:helpCmd} = require './help.cmd'
-{Neat} = require '../neat'
+Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
 

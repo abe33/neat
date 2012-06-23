@@ -12,7 +12,7 @@ pr = require 'commander'
 
 core = require resolve __dirname, 'core'
 # The Neat environment is loaded.
-{Neat} = require resolve __dirname, 'neat'
+Neat = require resolve __dirname, 'neat'
 
 Neat.initEnvironment()
 

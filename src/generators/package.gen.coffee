@@ -1,6 +1,6 @@
 fs = require "fs"
 {resolve, existsSync:exists} = require 'path'
-{Neat} = require '../neat'
+Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
 {namespace} = require resolve utils, "exports"
