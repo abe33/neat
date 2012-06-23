@@ -7,4 +7,3 @@ module.exports =
   Module: require './module'
   Mixin: require './mixin'
   Signal: require './signal'
-  async: require './async'
