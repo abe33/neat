@@ -90,3 +90,9 @@ describe 'String::parameterize', ->
 
     expect('Béliqueux, le bougre!'.parameterize())
       .toBe('beliqueux-le-bougre')
+
+describe 'String::strip', ->
+  it 'should removes the spaces at both extremities of the string', ->
+
+    expect('   foo'.strip()).toBe('foo')
+    expect('foo   '.strip()).toBe('foo')
