@@ -109,6 +109,14 @@ String::squeeze = (match='\\s') ->
 
   @replace re, (m) -> m.substr 0, 1
 
+##### String::strip
+
+# Removes the spaces at both extremities of the string.
+#
+#     '   foo'.strip() # 'foo'
+#     'foo   '.strip() # 'foo'
+String::strip = -> @replace /^\s+|\s+$/g, ''
+
 ##### String::to
 
 # Iterates from the first char of this string to the first char of the `end`

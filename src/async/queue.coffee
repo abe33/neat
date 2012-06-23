@@ -3,8 +3,8 @@
 # that takes a callback function as only argument.
 class Queue
   # Constructs the queue with the passed-in commands.
-  constructor: (@commands...) ->
-    @commands = @commands.flatten()
+  constructor: (commands...) ->
+    @commands = commands.flatten()
     @iterator = 0
 
   # Starts the queue process.
@@ -13,7 +13,7 @@ class Queue
     if @iterator < @commands.length
       # The command is executed with a callback that'll
       # let the queue continue.
-      @commands[ @iterator ] => @run callback
+      @commands[@iterator] => @run callback
       @iterator += 1
     else callback?()
 

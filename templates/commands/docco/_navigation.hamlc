@@ -1,0 +1,8 @@
+:coffeescript
+  parse = (str) -> str.replace /\//g, '<span class="red">/</span>'
+
+Jump To &hellip;
+  #jump_wrapper
+    #jump_page
+      - for file in @files
+        %a{href:file.linkPath, class:'source'}!= parse file.relativePath
