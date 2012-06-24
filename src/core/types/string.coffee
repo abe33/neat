@@ -25,12 +25,16 @@ String::camelize = ->
 
 # Returns a string where the case of the first char of the first word was
 # changed to upper case.
+#
+#     'foo bar'.capitalize() # 'Foo bar'
 String::capitalize = -> @toLowerCase().replace /^[a-z]/, (m) -> m.toUpperCase()
 
 ##### String::capitalizeAll
 
 # Returns a string where the case of the first char of each word was
 # changed to upper case.
+#
+#     'foo bar'.capitalizeAll() # 'Foo Bar'
 String::capitalizeAll = ->
   @toLowerCase().replace /(^|\s)([a-z])/g, (m,a,b) -> "#{a}#{b.toUpperCase()}"
 
@@ -51,6 +55,8 @@ String::center = (width=0, pad=' ') ->
 ##### String::compact
 
 # Removes all space characters in the string.
+#
+#     'aa bb     cc   dd'.compact() # 'aabbccdd'
 String::compact = -> @replace /\s+/g, ''
 
 ##### String::padLeft
@@ -76,6 +82,10 @@ String::prepend = (str) -> "#{str}#{this}"
 
 ##### String::parameterize
 
+# Returns a version of the current string that render nicely used in an url.
+#
+#     "Il était une fois...".parameterize()
+#     # 'il-etait-une-fois'
 String::parameterize = ->
   @nopunctuation().nodiacritics().toLowerCase().squeeze().replace /\s/g, '-'
 
@@ -153,6 +163,10 @@ String::nodiacritics = ->
 
 ##### String::nopunctuation
 
+# Returns the current string without the punctuation.
+#
+#     'Something, is (wrong): in- this! !phrase?'.nopunctuation()
+#     # 'Something is wrong in this phrase'
 String::nopunctuation = ->
   @replace /[,?;.:/!§*%=\[\](){}'"`\\_<>-]/g, ''
 

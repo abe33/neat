@@ -13,8 +13,8 @@ Array.isArray = (a) -> a?.type() is 'array'
 
 ##### Array::empty
 
+# Returns `true` if the array is empty.
 Array::empty = -> @length is 0
-
 
 ##### Array::first
 
