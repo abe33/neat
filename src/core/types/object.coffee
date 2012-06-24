@@ -1,5 +1,6 @@
 # This file contains Object's extensions that mimics some of the ruby
 # Object and Hash methods.
+# @toc
 
 #### Helpers
 
@@ -11,7 +12,7 @@ def = (o) ->
                              name,
                              enumerable: false, value: value
 
-#### Object Class Extensions
+#### Class Extensions
 
 ##### Object.new
 
@@ -21,7 +22,7 @@ def = (o) ->
 #     # {foo: 10, bar: 20, baz: 30}
 Object.new = (a) -> o = {}; a.step(2, (k,v) -> o[k] = v); return o
 
-#### Object Instances Extensions
+#### Instances Extensions
 
 ##### Object::contains
 

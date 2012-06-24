@@ -9,6 +9,11 @@
       #jump_to!= @nav
 
       %table{cellpadding:0, cellspacing:0}
+        %tr
+          %th.docs
+            %h1=@file.basename
+          %th.code
+            %pre
         - for section in @sections
           %tr
             %td.docs!= section.docs_html

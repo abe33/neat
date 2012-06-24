@@ -1,5 +1,6 @@
 # This file contains String's extensions that mimics some of the ruby
 # String methods.
+# @toc
 
 #### Instances Extensions
 

@@ -23,6 +23,33 @@ h1, h2, h3, h4, h5, h6 {
   h1 {
     margin-top: 40px;
   }
+.toc {
+  margin: 0px;
+  padding-left: 20px;
+  border-left: 1px solid #888888;
+}
+.toc li{ list-style: none; }
+/*.toc li:before {
+  content: "#";
+  color: #cb4b16;
+}*/
+.toc li a {
+  text-decoration: none;
+  color: #002b36;
+}
+.toc li a:hover {
+  text-decoration: underline;
+  color: #252519;
+}
+
+.toc li.level0 {  }
+.toc li.level1 { margin-left: 20px; }
+.toc li.level2 { margin-left: 40px;  }
+.toc li.level3 { margin-left: 20px;  }
+.toc li.level4 { margin-left: 40px;  }
+.toc li.level5 { margin-left: 100px;  }
+
+
 #container {
   position: relative;
 }
@@ -99,10 +126,10 @@ table td {
     .docs pre {
       margin: 15px 0 15px;
       padding: 8px 0px 8px 12px;
+      border: 1px solid #dedede;
     }
     .docs p tt, .docs p code {
       background: #f8f8ff;
-      border: 1px solid #dedede;
       font-size: 12px;
       padding: 0 0.2em;
     }
@@ -154,16 +181,16 @@ td.docs, th.docs {
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif; }
   .docs h1 {
     font-size: 28px; }
-    .docs h1:first-letter {
-      color: #77822f; }
+    .do/*cs h1:first-letter {
+      color: #7*/7822f; }
   .docs h3 {
     font-size: 20px; }
-    .docs h3:first-letter {
-      color: #2d74a6; }
+    .docs h3:/*first-letter {
+      color: #2d*/74a6; }
   .docs h4 {
     font-size: 16px; }
-    .docs h4:first-letter {
-      color: #cb4b16; }
+    .docs h4:f/*irst-letter {
+      color: #cb4*/b16; }
   .docs .demo-table td {
     width: 100px; }
 
