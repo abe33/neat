@@ -1,4 +1,4 @@
-exports.setup = (config) ->
+module.exports = (config) ->
   config.verbose = false
 
   config.engines =

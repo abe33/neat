@@ -1,2 +1,2 @@
-exports.setup = (config) ->
+module.exports = (config) ->
   config.production = "production"

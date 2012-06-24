@@ -3,20 +3,22 @@
 # This file is loaded by the bin bootstrap. If the `neat` command line tool
 # is run inside a Neat project, the local installation files will be used
 # if they are available.
+
+#### Global Requires
 fs = require 'fs'
 pr = require 'commander'
 {print} = require 'util'
 {spawn} = require 'child_process'
 {resolve} = require 'path'
-# The core module is loaded before any other *local* modules.
 
+# The core module is loaded before any other *local* modules.
 core = require resolve __dirname, 'core'
+{puts, error, missing} = require resolve __dirname, "utils/logs"
 # The Neat environment is loaded.
 Neat = require resolve __dirname, 'neat'
-
 Neat.initEnvironment()
 
-{puts, error, missing} = require resolve __dirname, "utils/logs"
+#### Commands Registration
 
 # All the commands are required through this single call.
 #
@@ -39,13 +41,15 @@ register = (k, c) ->
     pr.command(alias).description(c.description).action(c)
     cmdMap[k] = c
 
+#### Neat CLI
+
 # The commander program is initialized
 pr.version(Neat.meta.version)
 
 # All the commands are registered.
 register(k, g pr, cmdMap) for k,g of commands
 
-# Handles the invalid commands.
+# Handler for invalid commands.
 pr.command("*").action (command) ->
   puts """#{missing "Command #{command}"}
 

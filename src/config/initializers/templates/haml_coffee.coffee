@@ -1,7 +1,7 @@
 {resolve} = require 'path'
 {puts, error} = require '../../../utils/logs'
 
-exports.initialize = (config) ->
+module.exports = (config) ->
 
   config.engines.templates.hamlc =
     render: (tpl, context) ->

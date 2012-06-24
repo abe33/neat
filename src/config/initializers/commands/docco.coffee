@@ -1,6 +1,6 @@
 {findSync} = require "../../../utils/files"
 
-exports.initialize = (config) ->
+module.exports = (config) ->
 
   dirs = [
     'src/async',

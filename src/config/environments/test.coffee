@@ -1,3 +1,3 @@
-exports.setup = (config) ->
+module.exports = (config) ->
   config.test = "test"
   config.verbose = true
