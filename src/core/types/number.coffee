@@ -1,5 +1,6 @@
 # This file contains Number's extensions that mimics some of the ruby
 # Number methods.
+# @toc
 
 ##### Number::ago
 

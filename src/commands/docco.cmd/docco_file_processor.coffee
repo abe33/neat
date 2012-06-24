@@ -4,6 +4,7 @@ fs = require 'fs'
 {render} = require '../../utils/templates'
 
 DoccoPreProcessor = require './docco_pre_processor'
+DoccoTitleProcessor = require './docco_title_processor'
 Parallel = require '../../async/parallel'
 
 try
@@ -15,7 +16,8 @@ catch e
 
 class DoccoFileProcessor
 
-  @TPL_PATH = resolve __dirname.replace('.cmd',''), '_page'
+  TPL_PATH = resolve __dirname.replace('.cmd',''), '_page'
+  TPL_TOC = resolve __dirname.replace('.cmd',''), '_toc'
 
   @asCommand = (f, h, n) -> (cb) -> new DoccoFileProcessor(f, h, n).process cb
 
@@ -23,23 +25,34 @@ class DoccoFileProcessor
 
   highlightFile: (path, sections, callback) ->
     highlight path, sections, =>
-      processors = []
-      for section in sections
-        processors.push DoccoPreProcessor.asCommand path, section
 
-      new Parallel(processors).run ->
-        callback()
+      titles = []
+      presCmd = []
+      titlesCmd = []
+      for section in sections
+        presCmd.push DoccoPreProcessor.asCommand path, section
+        titlesCmd.push DoccoTitleProcessor.asCommand path, section, titles
+
+      new Parallel(presCmd).run =>
+        new Parallel(titlesCmd).run =>
+          minLevel = titles.reduce ((a,b) -> Math.min a, b.level), 100
+
+          render TPL_TOC, {titles, minLevel}, (err, toc) =>
+            throw err if err?
+            callback toc
 
   process: (callback) ->
     fs.readFile @file.path, (err, code) =>
       throw err if err?
 
       sections = parse @file.path, code.toString()
-      @highlightFile @file.path, sections, =>
+      @highlightFile @file.path, sections, (toc) =>
 
         context = {sections, @header, @nav, @file}
-        render @constructor.TPL_PATH, context, (err, page) =>
+        render TPL_PATH, context, (err, page) =>
           throw err if err?
+
+          page = page.replace /@toc/g, toc
 
           fs.writeFile @file.outputPath, page, (err) =>
             throw err if err?

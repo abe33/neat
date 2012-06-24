@@ -1,5 +1,6 @@
 # This file contains Array's extensions that mimics some of the ruby
 # Array methods.
+# @toc
 
 #### Class Extensions
 

@@ -1,5 +1,5 @@
-#### Module
-#
+#@toc
+
 # Modules allow polymorphism through mixins.
 #
 # A Mixin is an object whose properties will
@@ -13,6 +13,10 @@
 #       clone: -> ...
 #
 class Module
+  #### Class Members
+
+  ##### Module.include
+
   # Call the static `@include` method in your class body
   # to specify the mixins that the class will implement.
   #
@@ -22,7 +26,6 @@ class Module
   #       # rest of the class definition...
   #
   @include: (mixins...) ->
-    ##### Class Members
 
     # Calling `super` inside a mixin method that overides
     # a inherited method will fail. To resolve it, a `@super`
@@ -65,18 +68,26 @@ class Module
     mixin.included? this
     this
 
+  ##### Module.copy
+
   # Returns a copy of the passed-in object `o`.
   @copy: (o) ->
     r = {}
     r[i] = o[i] for i in o if o?
     r
+  ##### Module.\_\_hooks\_\_
 
   # Stores the mixins constructor hooks.
   @__hooks__: []
+
+  ##### Module.\_\_superOf\_\_
+
   # Stores the respective super objects of mixed methods.
   @__superOf__: {}
 
-  ##### Instance Members
+  #### Instance Members
+
+  ##### Module::preventConstructorHooksInModule
 
   # When `preventConstructorHooksInModule` is `true`, the `Module`
   # constructor will not triggers the constructor hooks, allowing
@@ -87,15 +98,21 @@ class Module
   # constructor to allow their subclasses to do so.
   preventConstructorHooksInModule: false
 
+  ##### Module::constructor
+
   # The `Module` constructor behavior is to automatically
   # triggers the constructor hooks.
   constructor: ->
     @triggerConstructorHooks() unless @preventConstructorHooksInModule
 
+  ##### Module::triggerConstructorHooks
+
   # Loop through all the constructor hooks and call
   # them with the current object as context.
   triggerConstructorHooks: ->
     hook.call this for hook in @constructor.__hooks__
+
+  ##### Module::super
 
   # Use `@super "methodName"` in a mixin's function to call the
   # super function of the specified method.

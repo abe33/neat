@@ -1,0 +1,6 @@
+%h3= "Table Of Content"
+%ul.toc
+  - for title in @titles
+    - level = title.level - @minLevel
+    %li{class: "level#{level}"}
+      %a{href: "##{title.id}"}= title.content
