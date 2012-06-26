@@ -13,7 +13,7 @@ module.exports = (config) ->
     'src/env.coffee',
     'src/index.coffee',
   ]
-  sources = sources.concat findSync 'coffee', d for d in dirs
+  sources = sources.concat findSync('coffee', d).sort() for d in dirs
 
   config.docco =
     paths:
