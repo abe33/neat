@@ -241,3 +241,28 @@ describe 'Object::quacksLike', ->
     expect(instanceD2.quacksLike MockModuleD).toBeFalsy()
     expect(object1.quacksLike TestMixinA).toBeTruthy()
     expect(object2.quacksLike TestMixinA).toBeFalsy()
+
+describe 'Object::concat', ->
+  it 'should return a new object that is a copy of the original
+      one when called without arguments'.squeeze(), ->
+
+    original =
+      foo: "bar"
+      bar: "foo"
+
+    copy = original.concat()
+
+    expect(copy).not.toBe(original)
+    expect(copy).toEqual(original)
+
+  it 'should merge the passed-in arguments within the created object', ->
+
+    original =
+      foo: "bar"
+      bar: "foo"
+
+    copy = original.concat baz: 'baz'
+
+    expect(copy).not.toBe(original)
+    expect(copy).not.toEqual(original)
+    expect(copy).toEqual(foo: "bar", bar: 'foo', baz: 'baz')

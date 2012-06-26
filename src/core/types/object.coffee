@@ -24,6 +24,16 @@ Object.new = (a) -> o = {}; a.step(2, (k,v) -> o[k] = v); return o
 
 #### Instances Extensions
 
+##### Object::concat
+
+# Returns a new object that is the result of the merge of the current
+# object with the passed-in argument. If no argument is provided,
+# the return a copy of the current object.
+#
+#     {foo: 'foo', bar: 'bar'}.concat baz: 'baz'
+#     # {foo: 'foo', bar: 'bar', baz: 'baz'}
+def concat: (m) -> o = {}; o[k] = v for k,v of this; return o.merge(m || {})
+
 ##### Object::contains
 
 # `Object::has` alias.
@@ -72,7 +82,7 @@ def length: -> @keys().length
 #     target = foo: 10
 #     target.merge bar: 20, baz: 30
 #     # target = {foo: 10, bar: 20, baz: 30}
-def merge: (o) -> @[k] = v for k,v of o
+def merge: (o) -> @[k] = v for k,v of o; this
 
 ##### Object::reject
 
