@@ -6,11 +6,11 @@
 # be used to decorate a class prototype.
 #
 #     Serializable =
-#       toString: -> ...
-#       fromString: (string) -> ...
+#       toSource: -> # ...
+#       fromSource: (string) -> # ...
 #
 #     Cloneable =
-#       clone: -> ...
+#       clone: -> # ...
 #
 class Module
   #### Class Members
@@ -38,7 +38,7 @@ class Module
     # A copy the hash is made each time the `mixins` method is called.
     # It prevents the hash of a parent class to be affected by changes
     # made in child class.
-    @__superOf__ = @copy @__superOf__
+    @__superOf__ = @__superOf__.concat()
 
     __excluded__ = ["constructorHook", "included", "excluded"]
     for mixin in mixins
@@ -68,13 +68,6 @@ class Module
     mixin.included? this
     this
 
-  ##### Module.copy
-
-  # Returns a copy of the passed-in object `o`.
-  @copy: (o) ->
-    r = {}
-    r[i] = o[i] for i in o if o?
-    r
   ##### Module.\_\_hooks\_\_
 
   # Stores the mixins constructor hooks.
