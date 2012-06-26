@@ -1,4 +1,6 @@
 # This file contains some utilities to deal with exports and requires.
+# @toc
+
 {resolve, basename} = require 'path'
 
 {puts, error, warn, missing} = require './logs'
@@ -29,8 +31,8 @@ namespace = (namespace, exports) ->
 ##### combine
 
 # Combines in a single object all the exports of files that match
-# the passed-in `filePattern` that can be found in directories that
-# match `pathPattern` in the paths of a project.
+# the passed-in `filePattern` that can be found in `paths` directories.
+# The search is performed recursively in the subdirectories of each path.
 #
 # This function is used to aggregate all the commands and generators
 # in a project and initialize the Neat command line tool with them.

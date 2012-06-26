@@ -1,5 +1,6 @@
 # This file contains the various utilities used to work with files
 # within a Neat project.
+# @toc
 
 fs = require 'fs'
 {resolve, existsSync, exists, basename, relative} = require 'path'
