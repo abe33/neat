@@ -64,7 +64,7 @@ Number::times = (target) ->
   o = target
 
   for i in [1..@valueOf()-1]
-    if target.concat?
+    if Array.isArray o
       o = o.concat target
     else
       o += target
