@@ -40,11 +40,11 @@ class Queue
   # either contains arrays of commands.
   constructor: (commands...) ->
     @commands = commands.flatten()
-    @iterator = 0
 
   # Starts the queue process. The `callback` arguments will
   # be called at the end of the whole queue process.
   run: (callback) ->
+    @iterator = 0
     # While there's still a command to process.
     if @iterator < @commands.length
       # The command is executed with a callback that'll
