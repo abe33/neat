@@ -1,11 +1,14 @@
 # Use a `Signal` object wherever you need to dispatch an event.
 # A `Signal` is a dispatcher that have only one channel.
+# @toc
 #
 # Signals are generally defined as property of an object. And
 # their name generally end with a past tense verb, such as in:
 #
 #     myObject.somethingChanged
 class Signal
+
+  ##### Signal::constructor
 
   # Signals maintain an array of listeners.
   constructor: ->
@@ -16,6 +19,8 @@ class Signal
   # Listeners are stored internally as an array with the form:
   #
   #     [listener, context, calledOnce, priority]
+
+  ##### Signal::add
 
   # You can register a listener with or without a context.
   # The context is the object that can be accessed through `this`
@@ -47,6 +52,8 @@ class Signal
       # a new listener is added.
       @sortListeners()
 
+  ##### Signal::addOnce
+
   # Listeners can be registered for only one call.
   #
   # All the others rules are the same. So you can't add
@@ -55,6 +62,8 @@ class Signal
     if not @registered listener, context
       @listeners.push [listener, context, true, priority]
       @sortListeners()
+
+  ##### Signal::remove
 
   # Listeners can be removed, but only with the context with which
   # they was added to the signal.
@@ -67,9 +76,13 @@ class Signal
     if @registered listener, context
       @listeners.splice @indexOf(listener, context), 1
 
+  ##### Signal::removeAll
+
   # All listeners can be removed at once if needed.
   removeAll: ->
     @listeners = []
+
+  ##### Signal::indexOf
 
   # `indexOf` returns the position of the listener/context couple
   # in the listeners array.
@@ -77,10 +90,19 @@ class Signal
     return i for [l,c],i in @listeners when listener is l and context is c
     -1
 
+  ##### Signal::registered
+
   # Use the `registered` method to test whether a listener/context couple
   # have been registered in this signal.
   registered: (listener, context) ->
     @indexOf(listener, context) isnt -1
+
+  ##### Signal::hasListeners
+
+  # Returns true if the signal has listeners.
+  hasListeners: -> @listeners.length isnt 0
+
+  ##### Signal::sortListeners
 
   # The listeners are sorted according to their `priority`.
   # The higher the priority the lower the listener will be
@@ -92,7 +114,7 @@ class Signal
 
       if pA < pB then 1 else if pB < pA then -1 else 0
 
-  #### Dispatch
+  ##### Signal::dispatch
 
   # Signals are dispatched to all the listeners. All the arguments
   # passed to the dispatch become the signal's message.

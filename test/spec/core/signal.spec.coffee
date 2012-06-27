@@ -140,3 +140,15 @@ describe Signal, ->
 
     signal.removeAll()
     expect(signal.listeners.length).toBe(0)
+
+  it 'should be able to tell when listeners are registered', ->
+
+    signal = new Signal
+
+    expect(signal.hasListeners()).toBeFalsy()
+
+    listener = ->
+
+    signal.add listener
+
+    expect(signal.hasListeners()).toBeTruthy()
