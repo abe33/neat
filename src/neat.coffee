@@ -9,7 +9,7 @@ pr = require 'commander'
 NEAT_ROOT = resolve __dirname, '..'
 
 # Requiring internal utilities.
-{puts, warn, error, missing, neatBroken} = require "./utils/logs"
+{logger, puts, warn, error, missing, neatBroken} = require "./utils/logs"
 {findSync, neatRootSync, isNeatRootSync} = require "./utils/files"
 cup = require "./utils/cup"
 
@@ -40,6 +40,10 @@ class Neat
   # environment is loaded.
   initEnvironment: ->
     @setEnvironment process.env['NEAT_ENV'] or 'default'
+
+  # Setup the logging engine for this `Neat` instance.
+  initLogging: ->
+    logger.add @env.engines.logging[@env.defaultLoggingEngine]
 
   # Changes the environment of the `Neat` instance. All the process
   # of loading the environment configurators and the initializers

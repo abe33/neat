@@ -5,3 +5,7 @@ module.exports = (config) ->
     templates: {}
     databases: {}
     tests: {}
+    logging: {}
+
+  config.defaultLoggingEngine = 'console'
+

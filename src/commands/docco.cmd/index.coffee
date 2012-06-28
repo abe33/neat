@@ -46,7 +46,7 @@ docco = (pr) ->
           processors.push Processor.asCommand(file, header, nav)
 
         new Parallel(processors).run ->
-          console.log 'Documentation successfully generated'.green
+          puts 'Documentation successfully generated'.green
           callback?()
 
 module.exports = {docco}

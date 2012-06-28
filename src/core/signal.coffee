@@ -114,6 +114,8 @@ class Signal
 
       if pA < pB then 1 else if pB < pA then -1 else 0
 
+  #### Signal Dispatch
+
   ##### Signal::dispatch
 
   # Signals are dispatched to all the listeners. All the arguments

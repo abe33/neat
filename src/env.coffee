@@ -7,16 +7,16 @@
 #### Global Requires
 fs = require 'fs'
 pr = require 'commander'
-{print} = require 'util'
 {spawn} = require 'child_process'
 {resolve} = require 'path'
 
 # The core module is loaded before any other *local* modules.
 core = require resolve __dirname, 'core'
-{puts, error, missing} = require resolve __dirname, "utils/logs"
+{puts, print, error, missing} = require resolve __dirname, "utils/logs"
 # The Neat environment is loaded.
 Neat = require resolve __dirname, 'neat'
 Neat.initEnvironment()
+Neat.initLogging()
 
 #### Commands Registration
 

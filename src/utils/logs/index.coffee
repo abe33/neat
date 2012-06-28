@@ -1,4 +1,5 @@
-{print} = require 'util'
+Signal = require '../core/signal'
+Logger = require './logger'
 
 try
   colors = require 'colors'
@@ -6,6 +7,9 @@ catch e
   console.log """Can't find colors module
 
                  Run cake install to install the dependencies."""
+
+
+logger = new Logger
 
 color = (str, color) ->  if str[color]? then str[color] else str
 
@@ -17,7 +21,9 @@ magenta = (str) -> color str, 'magenta'
 red     = (str) -> color str, 'red'
 yellow  = (str) -> color str, 'yellow'
 
-puts = (str) -> print "#{str}\n"
+puts = (str, level=0) -> logger.log "#{str}\n", level
+print = (str, level=0) -> logger.log str, level
+
 prefix = (string, prefix) -> "#{prefix} #{string}"
 
 error = (string) -> prefix string, inverse red " ERROR "
@@ -38,11 +44,13 @@ module.exports = {
   green,
   info,
   inverse,
+  logger,
   magenta,
   missing,
   neatBroken,
   notOutsideNeat,
   prefix,
+  print,
   puts,
   red,
   warn,

@@ -1,9 +1,7 @@
 # This file contains utilities to setup commands and generators.
-
-{print} = require 'util'
 {spawn} = require 'child_process'
 {resolve} = require 'path'
-{puts, error} = require './logs'
+{puts, print, error} = require './logs'
 Neat = require '../neat'
 
 ## Private
