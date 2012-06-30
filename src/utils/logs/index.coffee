@@ -1,4 +1,3 @@
-Signal = require '../core/signal'
 Logger = require './logger'
 
 try

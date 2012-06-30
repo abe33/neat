@@ -1,3 +1,5 @@
+Signal = require '../../core/signal'
+
 class Logger
   constructor: ->
     @logged = new Signal
