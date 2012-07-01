@@ -148,7 +148,7 @@ task 'test',    'Tests Nails',
       (opt) -> compile opt, (e) -> test opt if e is 0
 
 task 'deploy',  'Installs the module globally through npm',
-      (opt) -> bump 0, 0, 1, opt, -> compile opt, (e) -> deploy opt if e is 0
+      (opt) -> compile opt, (e) -> deploy opt if e is 0
 
 task 'install', 'Installs the module dependencies in the current project',
       (opt) -> install opt
