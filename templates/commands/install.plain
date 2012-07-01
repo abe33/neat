@@ -3,9 +3,14 @@
 
 packages = []
 
+# Validates that `target` is a path or an url.
+isURL = (target) ->
+  /^(http:\/\/|git:\/\/|\/\w+)/.test target
+
 # The npm function register pkg as a npm install package.
 # Optionally a target can be specified for the installed package.
 npm = (pkg, target) ->
+  return packages.push target if isURL target
   pkg = "#{pkg}@#{target}" if target?
   packages.push pkg
 
