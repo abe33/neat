@@ -35,7 +35,7 @@ cmdMap = {}
 register = (k, c) ->
   # Commands must have aliases.
   unless c.aliases?
-    return print "Can't register command #{k} due to missing aliases\n".red
+    return error "Can't register command #{k} due to missing aliases\n".red
 
   for alias in c.aliases
     pr.command(alias).description(c.description).action(c)
@@ -51,9 +51,9 @@ register(k, g pr, cmdMap) for k,g of commands
 
 # Handler for invalid commands.
 pr.command("*").action (command) ->
-  puts """#{missing "Command #{command}"}
+  error """#{missing "Command #{command}"}
 
-          Try `neat help` for a list of the available commands."""
+           Try `neat help` for a list of the available commands."""
 
 # Starts commander parsing.
 pr.parse(process.argv)

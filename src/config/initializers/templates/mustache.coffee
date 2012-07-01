@@ -8,9 +8,9 @@ module.exports = (config) ->
       try
         {to_html} = require 'mustache'
       catch e
-        msg = """#{error 'Mustache module not found, run neat install.'.red}
+        msg = """#{'Mustache module not found, run neat install.'.red}
 
                  #{e.stack}"""
-        return puts msg
+        return error msg
 
       to_html tpl, context

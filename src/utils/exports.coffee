@@ -50,7 +50,7 @@ combine = (filePattern, paths) ->
       s = error """#{"Broken file #{file}".red}
 
                    #{e.stack}"""
-      puts s.red
+      error s.red
 
   packaged
 

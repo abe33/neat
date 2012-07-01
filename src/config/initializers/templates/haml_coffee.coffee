@@ -8,10 +8,10 @@ module.exports = (config) ->
       try
         {compile} = require 'haml-coffee'
       catch e
-        msg = """#{error 'Haml-coffee module not found, run neat install.'.red}
+        msg = """#{'Haml-coffee module not found, run neat install.'.red}
 
                  #{e.stack}"""
-        return puts msg
+        return error msg
 
       compile(tpl)(context)
 

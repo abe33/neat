@@ -55,7 +55,7 @@ help = (help, target) -> decorate target, 'help', help
 #       console.log Neat.env.test? # true
 withEnv = (env, target) -> ->
   Neat.setEnvironment env
-  puts "Set environment #{env}".yellow if Neat.env.verbose
+  puts "Set environment #{env}".yellow, 1
   target.apply null, arguments
 
 ##### run

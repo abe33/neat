@@ -25,12 +25,13 @@ print = (str, level=0) -> logger.log str, level
 
 prefix = (string, prefix) -> "#{prefix} #{string}"
 
-error = (string) -> prefix string, inverse red " ERROR "
-warn  = (string) -> prefix string, inverse yellow " WARN "
-info  = (string) -> prefix string, inverse green " INFO "
-debug = (string) -> prefix string, inverse blue " DEBUG "
+fatal = (string) -> puts prefix string, inverse red " FATAL ", logger.FATAL
+error = (string) -> puts prefix string, inverse red " ERROR ", logger.ERROR
+warn  = (string) -> puts prefix string, inverse yellow " WARN ", logger.WARN
+info  = (string) -> puts prefix string, inverse green " INFO ", logger.INFO
+debug = (string) -> puts prefix string, inverse blue " DEBUG ", logger.DEBUG
 
-missing = (path) -> error red "#{path} can't be found."
+missing = (path) -> red "#{path} can't be found."
 
 neatBroken = "Your Neat installation is probably broken."
 notOutsideNeat = (s) -> error red "Can't run #{s} outside of a Neat project."

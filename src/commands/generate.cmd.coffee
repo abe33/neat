@@ -9,7 +9,7 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {renderSync:render} = require resolve utils, "templates"
 
 generate = (pr, commands) ->
-  return puts error "No program provided to generate" unless pr?
+  return error "No program provided to generate" unless pr?
 
   generators = require resolve Neat.neatRoot, "lib/generators"
 
@@ -25,14 +25,14 @@ generate = (pr, commands) ->
         if gen.help? and typeof gen.help is 'function'
           gen.help.apply(null, arguments)
         else
-          puts render helptpl, gen
+          console.log render helptpl, gen
       else
-        puts missing "Generator #{generator}"
+        error missing "Generator #{generator}"
     else
       context = {}
       context.merge target
       context.help = render resolve(__dirname, "help/_list"), listContext
-      puts render helptpl, context
+      console.log render helptpl, context
 
   aliases 'g', 'generate',
   usages 'neat generate [generator]',
@@ -51,13 +51,13 @@ generate = (pr, commands) ->
       args.push(command) and command = callback
 
     unless generator of generators
-      return puts missing "Generator #{generator}"
+      return error missing "Generator #{generator}"
       callback?()
 
     gen = generators[generator]
 
     unless typeof gen is "function"
-      return puts error "Generators must be a function, was #{typeof gen}"
+      return error "Generators must be a function, was #{typeof gen}"
       callback?()
 
     gen.apply null, [generator].concat(args).concat(callback)

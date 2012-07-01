@@ -4,7 +4,7 @@ Neat = require '../../neat'
 
 utils = resolve Neat.neatRoot, 'lib/utils'
 
-{puts, error, warn, missing, neatBroken} = require resolve utils, 'logs'
+{error, info, warn, missing, neatBroken} = require resolve utils, 'logs'
 {aliases, describe} = require resolve utils, 'commands'
 {ensureSync} = require resolve utils, 'files'
 {render} = require resolve utils, 'templates'
@@ -14,17 +14,17 @@ DoccoFile = require './docco_file'
 Processor = require './docco_file_processor'
 
 docco = (pr) ->
-  return puts error 'No program provided to docco' unless pr?
+  return error 'No program provided to docco' unless pr?
 
   aliases 'docco',
   describe 'Generates the documentation for a Neat project through docco',
   f = (callback) ->
     unless Neat.root?
-      return puts error "Can't run neat docco outside of a Neat project."
+      return error "Can't run neat docco outside of a Neat project."
 
     paths = Neat.env.docco.paths.sources.concat()
     if not paths? or paths.empty()
-      return puts warn 'No paths specified for documentation generation.'
+      return warn 'No paths specified for documentation generation.'
 
     dirname = __dirname.replace '.cmd', ''
     navTplPath = resolve dirname, '_navigation'
@@ -46,7 +46,7 @@ docco = (pr) ->
           processors.push Processor.asCommand(file, header, nav)
 
         new Parallel(processors).run ->
-          puts 'Documentation successfully generated'.green
+          info 'Documentation successfully generated'.green
           callback?()
 
 module.exports = {docco}

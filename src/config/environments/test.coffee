@@ -1,3 +1,3 @@
 module.exports = (config) ->
   config.test = "test"
-  config.verbose = true
+  config.verbosity = 0

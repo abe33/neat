@@ -11,9 +11,9 @@ Parallel = require '../../async/parallel'
 try
   {parse, highlight} = require 'docco'
 catch e
-  return puts error """#{'Can\'t find the docco module.'.red}
+  return error """#{'Can\'t find the docco module.'.red}
 
-                       Run cake install to install the dependencies"""
+                  Run cake install to install the dependencies"""
 
 class DoccoFileProcessor
 

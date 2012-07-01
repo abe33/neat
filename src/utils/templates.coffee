@@ -15,7 +15,7 @@ render = (file, context, callback) ->
                                               Explored paths:
                                               #{a.join "\n"}"""
 
-  puts "template found: #{tplfile}" if Neat.env.verbose
+  puts "template found: #{tplfile}"
 
   ext = extname(tplfile)[1..]
 
@@ -25,7 +25,7 @@ render = (file, context, callback) ->
 
   callback? new Error "#{missing "#{ext} template backend"}" unless render?
 
-  puts "engine found for #{ext}" if Neat.env.verbose
+  puts "engine found for #{ext}"
 
   fs.readFile tplfile, (err, tpl) ->
     if err then callback? new Error error """Can't access #{tplfile}
@@ -43,7 +43,7 @@ renderSync = (file, context) ->
                                           Explored paths:
                                           #{a.join "\n"}"""
 
-  puts "template found: #{tplfile.green}" if Neat.env.verbose
+  puts "template found: #{tplfile.green}"
 
   ext = extname(tplfile)[1..]
 
@@ -54,7 +54,7 @@ renderSync = (file, context) ->
   unless render?
     throw new Error "#{missing "#{ext} template backend"}"
 
-  puts "engine found for #{ext.cyan}" if Neat.env.verbose
+  puts "engine found for #{ext.cyan}"
 
   try
     tpl = fs.readFileSync tplfile

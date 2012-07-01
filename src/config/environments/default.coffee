@@ -1,5 +1,5 @@
 module.exports = (config) ->
-  config.verbose = false
+  config.verbosity = 0
 
   config.engines =
     templates: {}

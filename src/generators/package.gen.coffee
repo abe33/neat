@@ -5,7 +5,7 @@ Neat = require '../neat'
 utils = resolve Neat.neatRoot, "lib/utils"
 {namespace} = require resolve utils, "exports"
 {describe} = require resolve utils, "commands"
-{puts, error} = require resolve utils, "logs"
+{puts, error, info} = require resolve utils, "logs"
 {render} = require resolve utils, "templates"
 {dirWithIndexSync} = require resolve utils, "files"
 cup = require resolve utils, "cup"
@@ -14,7 +14,7 @@ describe 'Generates the package.json file',
 index = (generator, args..., cb) ->
 
   unless Neat.root?
-    return puts error "Can't run package generator outside of a Neat project."
+    return error "Can't run package generator outside of a Neat project."
 
   ##### 1 - Metadata
   pkg = {}
@@ -24,15 +24,15 @@ index = (generator, args..., cb) ->
 
     ##### 2 - Dependencies (Nemfile)
     fs.readFile 'Nemfile', (err, nemfile) ->
-      return puts warn "No #{"Nemfile".red} in the current directory" if err
+      return warn "No #{"Nemfile".red} in the current directory" if err
 
-      puts "Nemfile found" if Neat.env.verbose
+      puts "Nemfile found"
 
       path = resolve __dirname, "package/dependencies"
       context = npm: nemfile.toString().replace /^(.|$)/gm,"  $1"
 
       render path, context, (err, source) ->
-        return puts error err.message if err?
+        return error err.message if err?
 
         dependencies = cup.read source
         return unless dependencies?
@@ -62,8 +62,8 @@ index = (generator, args..., cb) ->
         ##### 5 - Package.json Generation
         pkgfile = resolve Neat.root, "package.json"
         fs.writeFile pkgfile, JSON.stringify(pkg, null, 2), (err) ->
-          return puts error err.message if err?
-          puts "package.json generated".green
+          return error err.message if err?
+          info "package.json generated".green
           cb?()
 
 module.exports = namespace "package", {index}

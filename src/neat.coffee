@@ -82,10 +82,10 @@ class Neat
     paths = @paths.map (p)=> "#{p}/#{@envPath}"
     configurators = findSync /^default$/, 'js', paths
 
-    return puts error """#{missing 'config/environments/default.js'}
+    return error """#{missing 'config/environments/default.js'}
 
-                         #{neatBroken}""" unless configurators? and
-                                                 configurators.length isnt 0
+                    #{neatBroken}""" unless configurators? and
+                                            configurators.length isnt 0
 
     # Configurators for the given environment are searched in the
     # `environments` directory of each path.
@@ -94,7 +94,7 @@ class Neat
 
     # All the configurators found are required and then executed.
     for configurator in configurators
-      puts "Running #{configurator}" if envObject.verbose
+      puts "Running #{configurator}"
       # The execution of a configurator is handled in a `try..catch` block
       # in order to avoid a failing configurators to prevent `Neat`
       # to be loaded.
@@ -106,9 +106,9 @@ class Neat
         setup? envObject
       catch e
         # However errors are reported to the console.
-        puts error """#{'Something went wrong with a configurator!!!'.red}
+        error """#{'Something went wrong with a configurator!!!'.red}
 
-                      #{e.stack}"""
+                 #{e.stack}"""
 
     ##### Initializations
     #
@@ -135,9 +135,9 @@ class Neat
         initialize = require initializer
         initialize? envObject
       catch e
-        puts error """#{'Something went wrong with an initializer!!!'.red}
+        error """#{'Something went wrong with an initializer!!!'.red}
 
-                      #{e.stack}"""
+                 #{e.stack}"""
 
     # After configurators and initializers have been run,
     # the new environment object is then stored in `Neat`.
@@ -156,7 +156,7 @@ class Neat
       modules = (resolve modulesDir, m for m in modules when m isnt 'neat')
       @paths.push m for m in modules when isNeatRootSync m
 
-    else puts warn 'No node modules found, run neat install.'
+    else warn 'No node modules found, run neat install.'
 
     # The current Neat project root is the last path in `PATHS`.
     @paths.push @root if @root not in @paths
@@ -171,14 +171,14 @@ class Neat
     try
       neatFile = fs.readFileSync neatFilePath
     catch e
-      return puts """#{missing neatFilePath}
+      return error """#{missing neatFilePath}
 
-                     #{neatBroken}"""
+                      #{neatBroken}"""
 
     meta = cup.read neatFile.toString()
-    meta or puts error """Invalid .neat file at:
-                          #{neatFilePath.red}
+    meta or error """Invalid .neat file at:
+                    #{neatFilePath.red}
 
-                          #{neatBroken}"""
+                    #{neatBroken}"""
 
 module.exports = new Neat neatRootSync()
