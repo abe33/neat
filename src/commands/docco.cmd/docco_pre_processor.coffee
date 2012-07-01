@@ -1,5 +1,6 @@
 fs = require 'fs'
 {resolve} = require 'path'
+{error} = require '../../utils/logs'
 
 try
   {parse, highlight} = require 'docco'

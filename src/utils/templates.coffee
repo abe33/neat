@@ -15,7 +15,7 @@ render = (file, context, callback) ->
                                               Explored paths:
                                               #{a.join "\n"}"""
 
-  puts "template found: #{tplfile}"
+  puts "template found: #{tplfile.yellow}"
 
   ext = extname(tplfile)[1..]
 
@@ -25,10 +25,10 @@ render = (file, context, callback) ->
 
   callback? new Error "#{missing "#{ext} template backend"}" unless render?
 
-  puts "engine found for #{ext}"
+  puts "engine found for #{ext.cyan}"
 
   fs.readFile tplfile, (err, tpl) ->
-    if err then callback? new Error error """Can't access #{tplfile}
+    if err then callback? new Error error """Can't access #{tplfile.red}
 
                                              #{err.stack}"""
 
@@ -43,7 +43,7 @@ renderSync = (file, context) ->
                                           Explored paths:
                                           #{a.join "\n"}"""
 
-  puts "template found: #{tplfile.green}"
+  puts "template found: #{tplfile.yellow}"
 
   ext = extname(tplfile)[1..]
 
@@ -59,7 +59,7 @@ renderSync = (file, context) ->
   try
     tpl = fs.readFileSync tplfile
   catch e
-    e.message = error """Can't access #{tplfile}
+    e.message = error """Can't access #{tplfile.red}
                          #{e.message}"""
 
     throw e

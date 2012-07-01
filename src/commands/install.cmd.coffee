@@ -29,7 +29,7 @@ install = (pr) ->
 
         # The produced source code is then executed by `coffee`.
         run 'coffee', ['-e', source], ->
-          info "Your bundle is complete.".info
+          info "Your bundle is complete.".green
           cb?()
 
 module.exports = {install}

@@ -1,7 +1,7 @@
 fs = require 'fs'
 {resolve} = require 'path'
 
-{puts} = require '../../utils/logs'
+{puts, error} = require '../../utils/logs'
 {render} = require '../../utils/templates'
 
 DoccoPreProcessor = require './docco_pre_processor'
@@ -57,8 +57,8 @@ class DoccoFileProcessor
 
           fs.writeFile @file.outputPath, page, (err) =>
             throw err if err?
-            print "source for #{@file.relativePath}
-                   documentation processed".squeeze()
+            puts "source for #{@file.relativePath.yellow}
+                  documentation processed".squeeze(), 1
             callback?()
 
 module.exports = DoccoFileProcessor

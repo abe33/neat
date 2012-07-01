@@ -25,11 +25,11 @@ print = (str, level=0) -> logger.log str, level
 
 prefix = (string, prefix) -> "#{prefix} #{string}"
 
-fatal = (string) -> puts prefix string, inverse red " FATAL ", logger.FATAL
-error = (string) -> puts prefix string, inverse red " ERROR ", logger.ERROR
-warn  = (string) -> puts prefix string, inverse yellow " WARN ", logger.WARN
-info  = (string) -> puts prefix string, inverse green " INFO ", logger.INFO
-debug = (string) -> puts prefix string, inverse blue " DEBUG ", logger.DEBUG
+fatal = (string) -> puts prefix(string, inverse red " FATAL "), Logger.FATAL
+error = (string) -> puts prefix(string, inverse red " ERROR "), Logger.ERROR
+warn  = (string) -> puts prefix(string, inverse yellow " WARN "), Logger.WARN
+info  = (string) -> puts prefix(string, inverse green " INFO "), Logger.INFO
+debug = (string) -> puts prefix(string, inverse blue " DEBUG "), Logger.DEBUG
 
 missing = (path) -> red "#{path} can't be found."
 
