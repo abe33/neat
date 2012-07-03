@@ -45,8 +45,8 @@ h1, h2, h3, h4, h5, h6 {
 .toc li.level0 {  }
 .toc li.level1 { margin-left: 20px; }
 .toc li.level2 { margin-left: 40px;  }
-.toc li.level3 { margin-left: 20px;  }
-.toc li.level4 { margin-left: 40px;  }
+.toc li.level3 { margin-left: 60px;  }
+.toc li.level4 { margin-left: 80px;  }
 .toc li.level5 { margin-left: 100px;  }
 
 

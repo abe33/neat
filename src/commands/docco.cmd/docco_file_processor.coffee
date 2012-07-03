@@ -36,9 +36,7 @@ class DoccoFileProcessor
 
       new Parallel(presCmd).run =>
         new Parallel(titlesCmd).run =>
-          minLevel = titles.reduce ((a,b) -> Math.min a, b.level), 100
-
-          render TPL_TOC, {titles, minLevel}, (err, toc) =>
+          render TPL_TOC, {titles}, (err, toc) =>
             throw err if err?
             callback toc
 
