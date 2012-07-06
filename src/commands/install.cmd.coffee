@@ -4,7 +4,6 @@ Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
 
-{findSiblingFile} = require resolve utils, "files"
 {puts, error, info, warn, missing, neatBroken} = require resolve utils, "logs"
 {run, aliases, describe} = require resolve utils, "commands"
 {render} = require resolve utils, "templates"
