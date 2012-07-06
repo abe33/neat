@@ -1,10 +1,12 @@
 # This file contains utilities to setup commands and generators.
+# @toc
+
 {spawn} = require 'child_process'
 {resolve} = require 'path'
 {puts, print, error} = require './logs'
 Neat = require '../neat'
 
-## Private
+#### Private
 
 ##### decorate
 
@@ -13,7 +15,7 @@ decorate = (target, property, value) ->
   target[property] = value
   target
 
-## Public
+#### Public
 
 ##### usages
 
@@ -46,7 +48,7 @@ describe = (description, target) -> decorate target, 'description', description
 #       console.lgog 'command was called'
 help = (help, target) -> decorate target, 'help', help
 
-##### help
+##### withEnv
 
 # Loads automatically the specified environment before triggering
 # the `target`.

@@ -1,11 +1,13 @@
 # Use a `Signal` object wherever you need to dispatch an event.
 # A `Signal` is a dispatcher that have only one channel.
 # @toc
-#
+
+## Signal
+
 # Signals are generally defined as property of an object. And
 # their name generally end with a past tense verb, such as in:
 #
-#     myObject.somethingChanged
+#     myObject.somethingChanged = new Signal
 class Signal
 
   ##### Signal::constructor
