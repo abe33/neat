@@ -2,12 +2,12 @@ fs = require 'fs'
 {resolve, extname} = require 'path'
 Neat = require '../neat'
 
-{findSiblingFile} = require "../utils/files"
+{findSiblingFileSync} = require "../utils/files"
 {puts, error, warn, missing, neatBroken} = require "../utils/logs"
 
 render = (file, context, callback) ->
   a = []
-  tplfile = findSiblingFile file, Neat.paths, "templates", "*", a
+  tplfile = findSiblingFileSync file, Neat.paths, "templates", "*", a
   [context, callback] = [{}, context] if typeof context is 'function'
 
   unless tplfile? then callback? new Error """#{missing tplfile}
@@ -36,7 +36,7 @@ render = (file, context, callback) ->
 
 renderSync = (file, context) ->
   a = []
-  tplfile = findSiblingFile file, Neat.paths, "templates", "*", a
+  tplfile = findSiblingFileSync file, Neat.paths, "templates", "*", a
 
   unless tplfile? then throw new Error """#{missing tplfile}
 

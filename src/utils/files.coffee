@@ -3,22 +3,117 @@
 # @toc
 
 fs = require 'fs'
-{resolve, existsSync, exists, basename, relative} = require 'path'
+{resolve, existsSync, exists, basename, relative, extname} = require 'path'
 {puts, error, warn, missing} = require './logs'
 
-##### noExtension
+parallel = (fns, callback) ->
+  count = 0
+  cb = -> count += 1; if count is fns.length then callback?()
+  fn cb for fn in fns
 
-# Removes all the extensions from a file name.
-noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
+##### dirWithIndex
+
+# Returns the path to the `index` present in the `dir` directory
+# if this directory contains an index file which extension is `ext`.
+# If no `ext` is provided any file with a basename of `index` is returned.
+#
+#     dirWithIndex '/path/to/dir', (index) ->
+#       if index?
+#         # do something with the index
+#
+#     dirWithIndex '/path/to/dir', 'js', (index) ->
+#       if index?
+#         # do something with index.js
+dirWithIndex = (dir, ext=null, callback) ->
+  [ext, callback] = [callback, ext] if typeof ext is 'function'
+  exists dir, (b) ->
+    return callback?() unless b
+
+    index = if ext? then "index.#{ext}" else "index"
+
+    findBase dir, index, (res) ->
+      callback res?[0]
+
+##### dirWithIndexSync
+
+# Returns the path to the `index` present in the `dir` directory
+# if this directory contains an index file which extension is `ext`.
+# If no `ext` is provided any file with a basename of `index` is returned.
+#
+#     index = dirWithIndexSync '/path/to/dir'
+#     if index?
+#       # do something with the index
+#
+#     index = dirWithIndexSync '/path/to/dir', 'js'
+#     if index?
+#       # do something with index.js
+dirWithIndexSync = (dir, ext=null) ->
+  return unless existsSync dir
+
+  index = if ext? then "index.#{ext}" else "index"
+
+  findBaseSync(dir, index)?[0]
+
+##### ensure
+
+# Ensures that the `dir` folder exists, and creates it otherwise.
+#
+#     ensure '/path/to/dir', (err, created) ->
+#       # handle errors
+#
+# The `created` argument of the callback function is a boolean
+# value that indicates if the directory was created or not.
+ensure = (dir, callback) ->
+  exists dir, (b) ->
+    if b then callback? null, false
+    else fs.mkdir dir, (err) ->
+      if err? then callback? err, false
+      else callback? null, true
 
 ##### ensureSync
 
 # Ensures that the `dir` folder exists, and creates it otherwise.
+#
+#     ensureSync '/path/to/dir'
+#
+# Note that the function will fail with an error in this
+# context if `/path/to` don't exist.
 ensureSync = (dir) -> fs.mkdirSync dir unless existsSync dir
+
+##### ensurePath
+
+# Ensures that the path exists and creates the missing folders if needed.
+#
+#     ensurePath '/path/to/dir', (err, created) ->
+#       # handle error
+#
+# In that context, if the `path` and `to` folders don't exist
+# they will be created and then the `dir` one.
+#
+# The `created` argument of the callback function is a boolean
+# value that indicates if the directory was created or not.
+ensurePath = (path, callback) ->
+  stack = []
+  generator = (d) -> (callback) -> ensure d, callback
+  next = (err, created) ->
+    callback? err, false if err?
+    if stack.length > 0 then stack.shift()? next else callback? null, created
+
+  dirs = path.split('/')[1..-1]
+  p = ''
+
+  stack.push generator p = "#{p}/#{d}" for d in dirs
+
+  next()
 
 ##### ensurePathSync
 
 # Ensures that the path exists and creates the missing folders if needed.
+#
+#     ensurePathSync '/path/to/dir'
+#
+# In that context, if the `path` and `to` folders don't exist
+# they will be created and then the `dir` one.
 ensurePathSync = (path) ->
   dirs = path.split '/'
   dirs.shift()
@@ -28,63 +123,336 @@ ensurePathSync = (path) ->
     p = resolve p, d
     fs.mkdirSync p unless existsSync p
 
-##### touchSync
+##### find
 
-# Creates a file at path unless the file already exists.
-touchSync = (path, content='') ->
-  fs.writeFileSync path, content unless existsSync path
+# Returns an array containing the paths to files in `paths` that match
+# both the provided `pattern` and `ext`.
+#
+# For instance, the following call will returns the path to all the commands
+# in the `lib/commands` directories of a Neat project.
+#
+#     paths = Neat.paths.map (p)-> "#{p}/lib/commands"
+#     find /\.cmd$/, 'js', paths, (err, commands) ->
+#       # do something with commands
+#
+# The `pattern` argument is optional and match against the `basename`
+# of the file.
+find = (pattern, ext, paths, callback) ->
+  # Arguments are reorganized if no pattern is provided.
+  [pattern, ext, paths, callback] = [
+    null,
+    pattern,
+    ext
+    paths
+  ] if typeof pattern is "string"
+
+  # If `paths` is a string, the search is performed on this sole path.
+  if typeof paths is "string"
+    findOnce pattern, ext, paths, callback
+  # Otherwise, the search is performed on each path.
+  else
+    output = []
+    lookup = (pattern, ext, paths) -> (cb) ->
+      findOnce pattern, ext, paths, (err, files) ->
+        output.push file for file in files if files?
+        cb?()
+
+    if paths.empty()
+      callback? null, output
+    else
+      parallel (lookup(pattern, ext, p) for p in paths), ->
+        callback? null, output
+
+##### findOnce
+
+# Performs the `find` search routine over a single path.
+findOnce = (pattern, ext, path, callback, output) ->
+
+  exists path, (b) ->
+    callback? new Error '' unless b?
+    # Stores the results of the search.
+    out = []
+    # Matchs the file extension.
+    extRe = ///\.#{ext}$///
+
+    lookup = (path, output) -> (cb) ->
+      p = basename path
+      fs.lstat path, (err, stats) ->
+        if stats.isDirectory()
+          # The search continue in the directory.
+          find pattern, ext, path, (err, files) ->
+            return callback? err if err?
+
+            output.push file for file in files if files?
+
+            # When a `pattern` is provided and the directory name match against it,
+            # the function will then look for the presence of an index file.
+            index = resolve path, "index.#{ext}"
+            exists index, (b) ->
+              if pattern? and p.match(pattern) and b
+                output.push index
+
+              cb?()
+        # The path is a file that match the specified file extension.
+        else if p.match extRe
+          # If a `pattern` is provided and the file match against it,
+          # the path is set as a found.
+          if pattern?
+            if p.replace(extRe,'').match pattern
+              found = path
+          # Otherwise the path is a found by default.
+          else
+            found = path
+          # The paths found in this directory are added to the output array.
+          output.push(found) if found?
+
+          cb?()
+        else cb?()
+
+    # Reads the current directory.
+    fs.readdir path, (err, content)->
+      output = []
+
+      if content.empty()
+        callback? null, output
+      else
+        parallel (lookup(resolve(path, p), output) for p in content), ->
+          callback? null, output
+
+##### findSync
+
+# Returns an array containing the paths to files in `paths` that match
+# both the provided `pattern` and `ext`.
+#
+# For instance, the following call will returns the path to all the commands
+# in the `lib/commands` directories of a Neat project.
+#
+#     paths = Neat.paths.map (p)-> "#{p}/lib/commands"
+#     commands = find /\.cmd$/, 'js', paths
+#
+# The `pattern` argument is optional and match against the `basename`
+# of the file.
+findSync = (pattern, ext, paths) ->
+  # Arguments are reorganized if no pattern is provided.
+  [pattern, ext, paths] = [null, pattern, ext] if typeof pattern is "string"
+
+  # If `paths` is a string, the search is performed on this sole path.
+  if typeof paths is "string"
+    findSyncOnce pattern, ext, paths
+  # Otherwise, the search is performed on each path.
+  else
+    out = []
+    for path in paths
+      # Results from a search are concatened into the output array.
+      founds = findSyncOnce pattern, ext, path
+      out = out.concat founds if founds?
+    out
+
+##### findSyncOnce
+
+# Performs the `find` search routine over a single path.
+findSyncOnce = (pattern, ext, path) ->
+  return unless existsSync path
+
+  # Stores the results of the search.
+  out = []
+  # Matchs the file extension.
+  extRe = ///\.#{ext}$///
+
+  # Reads the current directory.
+  content = fs.readdirSync path
+  for p in content
+    # `found` will stores the results of the searches.
+    found = null
+
+    # Constructs the path to test.
+    _path = resolve path, p
+    # And retreives information for this path.
+    stats = fs.lstatSync _path
+    # The path is a directory.
+    if stats.isDirectory()
+      # The search continue in the directory.
+      found = findSync pattern, ext, _path
+
+      # When a `pattern` is provided and the directory name match against it,
+      # the function will then look for the presence of an index file.
+      index = resolve _path, "index.#{ext}"
+      if pattern? and p.match(pattern) and existsSync index
+        found ?= []
+        found.push index
+    # The path is a file that match the specified file extension.
+    else if p.match extRe
+      # If a `pattern` is provided and the file match against it,
+      # the path is set as a found.
+      if pattern?
+        if p.replace(extRe,'').match pattern
+          found = _path
+      # Otherwise the path is a found by default.
+      else
+        found = _path
+    # The paths found in this directory are added to the output array.
+    out = out.concat(found) if found?
+
+  # If the output array is not empty the array is returned, otherwise
+  # the function returns `null`.
+  if out.length > 0 then out else null
+
+##### findBase
+
+# Returns an array containing all the paths in `dir` whose name
+# match `base`.
+#
+#     findBase '/path/to/dir', 'file', (files) ->
+#       # files = [
+#       #   /path/to/dir/file.coffee
+#       #   /path/to/dir/file.js
+#       #   /path/to/dir/file.spec.coffee
+#       # ]
+findBase = (dir, base, callback) ->
+  exists dir, (b) ->
+    return callback?() unless b
+
+    fs.readdir dir, (err, content) ->
+      return callback?() if err?
+
+      res = (resolve dir, f for f in content when f.match ///^#{base}(\.|$)///)
+      callback? res
 
 ##### findBaseSync
 
-# Returns an array containing all the paths in `dir` whose base name
+# Returns an array containing all the paths in `dir` whose name
 # match `base`.
+#
+#     files = findBaseSync '/path/to/dir', 'file'
+#     # files = [
+#     #   /path/to/dir/file.coffee
+#     #   /path/to/dir/file.js
+#     #   /path/to/dir/file.spec.coffee
+#     # ]
 findBaseSync = (dir, base) ->
   return unless existsSync dir
 
   content = fs.readdirSync dir
   resolve dir, f for f in content when f.match ///^#{base}(\.|$)///
 
-##### isNeatRootSync
-
-# Returns `true` if the passed-in `dir` is a Neat project root directory.
-isNeatRootSync = (dir) ->
-  existsSync resolve dir, ".neat"
-
-##### neatRootSync
-
-# Finds the first Neat project root directory starting from `path`
-# and then moving up along its lineage.
-neatRootSync = (path=".") ->
-  path = resolve path
-
-  if isNeatRootSync path then path
-  else
-    parentPath = resolve path, ".."
-    neatRootSync parentPath unless parentPath is path
-
-##### dirWithIndexSync
-
-# Returns `true` if the passed-in `dir` is a directory containing an index
-# file which extension is `ext`. If no `ext` is provided any file with
-# a basename of `index` is returned.
-dirWithIndexSync = (dir, ext=null) ->
-  return unless existsSync dir
-
-  index = if ext? then "index.#{ext}" else "index"
-
-  findBaseSync(dir, index)?[0]
-
 ##### findSiblingFile
+
+# Look for a file related to the provided `path` in a different
+# directory structure.
+#
+# Lets say we have a file in `lib/commands/my_commands`, we want to find
+# its sibling template file. We will call `findSiblingFile` like this:
+#
+#     path = "#{Neat.root}/lib/commands/my_commands/my_file.cmd.js"
+#     findSiblingFile path, Neat.paths, 'templates', (err, file) ->
+#       # file is either undefined
+#       # or a string containing the found file path
+#
+# This basic exemple will return any file in `templates/commands/my_commands`
+# with a base name that match the one of the original file. For instance, in
+# our case, a file named `my_file.html.hamlc` could be returned if it exists
+# in the corresponding folder.
+# If a directory has the same name as the base name of the source file, and
+# it contains an `index` file that match the criteria, the path to the index
+# is returned.
+#
+# The `exts` splats allow to define a list of allowed extensions for the
+# searched files. You can use `'*'` to allow any extension.
+findSiblingFile = (path, roots, dir, exts..., callback) ->
+  paths = []
+
+  # The specified `path` must be in a Neat project.
+  neatRoot path, (pathRoot) ->
+    return callback? new Error '' unless pathRoot?
+
+    # Prepares the path structure that will be used in the search.
+    # Note that, unlike the `basename` function, all the extensions
+    # are removed from the path. It allow to use additional extensions
+    # in file names and at the same time to don't have to duplicate this
+    # additional extensions in the searched files.
+    start = noExtension path
+    base = basename start
+    dif = relative pathRoot, resolve start, ".."
+    newPath = dif.replace /^[^\/]+/, dir
+    exts = '*' if not exts? or
+                  exts.empty() or
+                  (exts.length is 1 and exts[0] is '*')
+
+    # Will hold the tested path.
+    p = undefined
+
+    # The roots paths are reverted to prioritize the user and plugins
+    # directories over the Neat directory, allowing a user or a plugin
+    # to *override* that file.
+    roots = roots.concat()
+    roots.reverse()
+    matches = {}
+    found = []
+    matchExtensions = (p) -> extname(p).substr(1) in exts or exts is "*"
+    # The `lookup` function generates a command that perform the lookup
+    # for the given `root`.
+    lookup = (root) -> (cb) ->
+      # Constructs a path to the directory that should contains
+      # the searched file.
+      basepath = resolve root, newPath
+
+      # Retrieves all the files or directories that match the base name.
+      findBase basepath, base, (ps) ->
+
+        # If there's matches.
+        if ps? and not ps.empty()
+          ps.sort()
+
+          # The `entryMatch` function generates a command that perform
+          # the lookup for a path whose base match the original file.
+          entryMatch = (p) -> (cb) ->
+            fs.lstat p, (err, stats) ->
+              return callback? err, null, path if err?
+              # The path is a directory.
+              if stats.isDirectory()
+                # Stores in `paths` the current searched path.
+                paths.push resolve p, 'index.*'
+
+                # Looks for an index file in the directory.
+                dirWithIndex p, (ip) ->
+                  if ip? and matchExtensions ip
+                      matches[roots.indexOf root] ||= []
+                      matches[roots.indexOf root].push ip
+                  cb?()
+              else
+                # The path is a file, it'll ensure that the path match
+                # the extension if provided.
+                if matchExtensions p
+                  matches[roots.indexOf root] ||= []
+                  matches[roots.indexOf root].push p
+                cb?()
+          # Runs a verification on each path returned by `finBase`.
+          parallel (entryMatch(p) for p in ps), ->
+            found.push matches[i] for r,i in roots
+            found = found.flatten()
+            cb?()
+        # Nothing was returned by `findBase`, the lookup callback.
+        else cb?()
+
+    # In the case `roots` is empty, the function callback.
+    if roots.empty()
+      callback? null, null, paths
+    # Otherwise a lookup is perform for each root.
+    else
+      parallel (lookup(root) for root in roots), ->
+        callback? null, found[0], paths
+
+##### findSiblingFileSync
 
 # Returns the path to a file related to the provided `path` in a different
 # directory structure. If no file can't be found, the function return
 # `undefined`
 #
 # Lets say we have a file in `lib/commands/my_commands`, we want to find
-# its sibling template file. We will call `findSiblingFile` like this:
+# its sibling template file. We will call `findSiblingFileSync` like this:
 #
 #     path = "#{Neat.root}/lib/commands/my_commands/my_file.cmd.js"
-#     findSiblingFile path, Neat.paths, 'templates'
+#     findSiblingFileSync path, Neat.paths, 'templates'
 #
 # This basic exemple will return any file in `templates/commands/my_commands`
 # with a base name that match the one of the original file. For instance, in
@@ -99,7 +467,8 @@ dirWithIndexSync = (dir, ext=null) ->
 #
 # The `paths` argument is optional, pass an array and the function will
 # collect in this array all the paths that was tried during the call.
-findSiblingFile = (path, roots, dir, exts..., paths) ->
+findSiblingFileSync = (path, roots, dir, exts..., paths) ->
+  # The specified `path` must be in a Neat project.
   pathRoot = neatRootSync path
   return unless pathRoot?
 
@@ -179,93 +548,117 @@ findSiblingFile = (path, roots, dir, exts..., paths) ->
   # Nothing was found, it returns undefined.
   undefined
 
-##### findSync
+##### isNeatRoot
 
-# Returns an array containing the paths to files in `paths` that match
-# both the provided `pattern` and `ext`.
+# Returns `true` if the passed-in `dir` is a Neat project root directory.
 #
-# For instance, the following call will returns the path to all the commands
-# in the `lib/commands` directories of a Neat project.
-#
-#     paths = Neat.paths.map (p)-> "#{p}/lib/commands"
-#     commands = find /\.cmd$/, 'js', paths
-#
-# The `pattern` argument is optional and match against the `basename`
-# of the file.
-findSync = (pattern, ext, paths) ->
-  # Arguments are reorganized if no pattern is provided.
-  [pattern, ext, paths] = [null, pattern, ext] if typeof pattern is "string"
+#     isNeatRoot '/path/to/dir', (found) ->
+#       if found
+#         # '/path/to/project' is a neat project root
+isNeatRoot = (dir, callback) ->
+  exists resolve(dir, ".neat"), callback
 
-  # If `paths` is a string, the search is performed on this sole path.
-  if typeof paths is "string"
-    findOneSync pattern, ext, paths
-  # Otherwise, the search is performed on each path.
+##### isNeatRootSync
+
+# Returns `true` if the passed-in `dir` is a Neat project root directory.
+#
+#     if isNeatRootSync '/path/to/dir'
+#       # '/path/to/project' is a neat project root
+isNeatRootSync = (dir) ->
+  existsSync resolve dir, ".neat"
+
+##### noExtension
+
+# Removes all the extensions from a file name.
+#
+#     noExtension 'foo.bar.baz' # 'foo'
+noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
+
+##### neatRoot
+
+# Finds the first Neat project root directory starting from `path`
+# and then moving up along its lineage.
+#
+#     neatRoot __filename, (root) ->
+#       if root?
+#         # the current file is part of a neat project
+#         # root = '/path/to/project'
+neatRoot = (path=".", callback) ->
+  path = resolve path
+
+  isNeatRoot path, (bool) ->
+    if bool then return callback? path
+    else
+      parentPath = resolve path, ".."
+
+      if parentPath is path then return callback?()
+      neatRoot parentPath, callback
+
+##### neatRootSync
+
+# Finds the first Neat project root directory starting from `path`
+# and then moving up along its lineage.
+#
+#     root = neatRootSync __filename
+#     if root?
+#       # the current file is part of a neat project
+#       # root = '/path/to/project'
+neatRootSync = (path=".") ->
+  path = resolve path
+
+  if isNeatRootSync path then path
   else
-    out = []
-    for path in paths
-      # Results from a search are concatened into the output array.
-      founds = findOneSync pattern, ext, path
-      out = out.concat founds if founds?
-    out
+    parentPath = resolve path, ".."
+    neatRootSync parentPath unless parentPath is path
 
-##### findOneSync
+##### touch
 
-# Performs the `find` search routine over a single path.
-findOneSync = (pattern, ext, path) ->
-  return unless existsSync path
+# Creates a file at path unless the file already exists.
+#
+#     touch '/path/to/file.ext', (err, created) ->
+#       # handle errors
+#
+#     touch '/path/to/file.ext', 'file content', (err, created) ->
+#       # handle errors
+touch = (path, content='', callback) ->
+  [content, callback] = [callback, content] if typeof content is 'function'
+  exists path, (b) ->
+    if b then callback? null, false
+    else fs.writeFile path, content, (err) ->
+      if err? then callback? err, false
+      else callback? null, true
 
-  # Stores the results of the search.
-  out = []
-  # Matchs the file extension.
-  extRe = ///\.#{ext}$///
+##### touchSync
 
-  # Reads the current directory.
-  content = fs.readdirSync path
-  for p in content
-    # `found` will stores the results of the searches.
-    found = null
-
-    # Constructs the path to test.
-    _path = resolve path, p
-    # And retreives information for this path.
-    stats = fs.lstatSync _path
-    # The path is a directory.
-    if stats.isDirectory()
-      # The search continue in the directory.
-      found = findSync pattern, ext, _path
-
-      # When a `pattern` is provided and the directory name match against it,
-      # the function will then look for the presence of an index file.
-      index = resolve _path, "index.#{ext}"
-      if pattern? and p.match(pattern) and existsSync index
-        found ?= []
-        found.push index
-    # The path is a file that match the specified file extension.
-    else if p.match extRe
-      # If a `pattern` is provided and the file match against it,
-      # the path is set as a found.
-      if pattern?
-        if p.replace(extRe,'').match pattern
-          found = _path
-      # Otherwise the path is a found by default.
-      else
-        found = _path
-    # The paths found in this directory are added to the output array.
-    out = out.concat(found) if found?
-
-  # If the output array is not empty the array is returned, otherwise
-  # the function returns `null`.
-  if out.length > 0 then out else null
+# Creates a file at path unless the file already exists.
+#
+#     touchSync '/path/to/file.ext'
+#
+#     touchSync '/path/to/file.ext', 'file content'
+#
+# Note that the function will fail with an error in this
+# context if `/path/to` don't exist.
+touchSync = (path, content='') ->
+  fs.writeFileSync path, content unless existsSync path
 
 module.exports = {
+  dirWithIndex,
   dirWithIndexSync,
+  ensure,
   ensureSync,
+  ensurePath,
   ensurePathSync,
+  find,
   findSync,
+  findBase,
   findBaseSync,
   findSiblingFile,
+  findSiblingFileSync,
+  isNeatRoot,
   isNeatRootSync,
+  neatRoot,
   neatRootSync,
   noExtension,
+  touch,
   touchSync,
 }
