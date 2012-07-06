@@ -11,7 +11,14 @@ if(projectRoot) {
   if(path.existsSync(neat)){
     require(neat)
   } else {
-    require(path.resolve(__dirname, "../lib/env"))
+    // We look if we are in the neat project directory
+    // (this is needed to allow to run neat in the neat repo)
+    neat = path.resolve(projectRoot, "./lib/env.js")
+    if(path.existsSync(neat)){
+      require(neat)
+    } else {
+      require(path.resolve(__dirname, "../lib/env"))
+    }
   }
 }
 else {
