@@ -15,13 +15,11 @@
 # If the object contains a property named `index`, then its content will
 # be available in the resulting object with the namespace alone.
 #
-#     module.exports = namespace 'mygenerators',
+#     namespace 'foo',
 #       index: -> # ...
-#       project: -> # ...
+#       bar: -> # ...
 #
-#     # module.exports =
-#     #   mygenerators: -> # ...
-#     #   'mygenerators:project': -> # ...
+#     # { foo: [Function], 'foo:bar': [Function] }
 namespace = (namespace, exports) ->
   packaged = {}
   packaged[namespace] = exports["index"] if exports["index"]?
@@ -36,6 +34,14 @@ namespace = (namespace, exports) ->
 #
 # This function is used to aggregate all the commands and generators
 # in a project and initialize the Neat command line tool with them.
+#
+# Below is a real world example from the generators index file.
+#
+#     Neat = require '../neat'
+#     {combine} = require "../utils/exports"
+#
+#     paths = Neat.paths.map (p) -> "#{p}/lib/generators"
+#     module.exports = combine /\.gen$/, paths
 combine = (filePattern, paths) ->
   files = findSync filePattern, 'js', paths
 
