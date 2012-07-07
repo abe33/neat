@@ -5,11 +5,7 @@
 fs = require 'fs'
 {resolve, existsSync, exists, basename, relative, extname} = require 'path'
 {puts, error, warn, missing} = require './logs'
-
-parallel = (fns, callback) ->
-  count = 0
-  cb = -> count += 1; if count is fns.length then callback?()
-  fn cb for fn in fns
+{parallel} = require '../async'
 
 ##### dirWithIndex
 

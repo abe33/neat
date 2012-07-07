@@ -8,7 +8,7 @@ utils = resolve Neat.neatRoot, 'lib/utils'
 {aliases, describe} = require resolve utils, 'commands'
 {ensureSync} = require resolve utils, 'files'
 {render} = require resolve utils, 'templates'
-Parallel = require '../../async/parallel'
+{parallel} = require '../../async'
 
 DoccoFile = require './docco_file'
 Processor = require './docco_file_processor'
@@ -45,7 +45,7 @@ docco = (pr) ->
         for file in files
           processors.push Processor.asCommand(file, header, nav)
 
-        new Parallel(processors).run ->
+        parallel processors, ->
           info 'Documentation successfully generated'.green
           callback?()
 

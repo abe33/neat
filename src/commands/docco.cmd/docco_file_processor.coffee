@@ -6,7 +6,7 @@ fs = require 'fs'
 
 DoccoPreProcessor = require './docco_pre_processor'
 DoccoTitleProcessor = require './docco_title_processor'
-Parallel = require '../../async/parallel'
+{parallel} = require '../../async'
 
 try
   {parse, highlight} = require 'docco'
@@ -34,8 +34,8 @@ class DoccoFileProcessor
         presCmd.push DoccoPreProcessor.asCommand path, section
         titlesCmd.push DoccoTitleProcessor.asCommand path, section, titles
 
-      new Parallel(presCmd).run =>
-        new Parallel(titlesCmd).run =>
+      parallel presCmd, =>
+        parallel titlesCmd, =>
           render TPL_TOC, {titles}, (err, toc) =>
             throw err if err?
             callback toc
