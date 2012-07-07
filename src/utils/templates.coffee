@@ -2,37 +2,37 @@ fs = require 'fs'
 {resolve, extname} = require 'path'
 Neat = require '../neat'
 
-{findSiblingFileSync} = require "../utils/files"
+{findSiblingFile, findSiblingFileSync} = require "../utils/files"
 {puts, error, warn, missing, neatBroken} = require "../utils/logs"
 
 render = (file, context, callback) ->
   a = []
-  tplfile = findSiblingFileSync file, Neat.paths, "templates", "*", a
-  [context, callback] = [{}, context] if typeof context is 'function'
+  findSiblingFile file, Neat.paths, "templates", (e, tplfile, a) ->
+    [context, callback] = [{}, context] if typeof context is 'function'
+    return callback? e if e?
+    unless tplfile? then return callback? new Error """#{missing tplfile}
 
-  unless tplfile? then callback? new Error """#{missing tplfile}
+                                                    Explored paths:
+                                                    #{a.join "\n"}"""
 
-                                              Explored paths:
-                                              #{a.join "\n"}"""
+    puts "template found: #{tplfile.yellow}"
 
-  puts "template found: #{tplfile.yellow}"
+    ext = extname(tplfile)[1..]
 
-  ext = extname(tplfile)[1..]
+    engines = Neat.env.engines.templates
 
-  engines = Neat.env.engines.templates
+    render = v.render for k,v of engines when ext is k
 
-  render = v.render for k,v of engines when ext is k
+    callback? new Error "#{missing "#{ext} template backend"}" unless render?
 
-  callback? new Error "#{missing "#{ext} template backend"}" unless render?
+    puts "engine found for #{ext.cyan}"
 
-  puts "engine found for #{ext.cyan}"
+    fs.readFile tplfile, (err, tpl) ->
+      if err then callback? new Error error """Can't access #{tplfile.red}
 
-  fs.readFile tplfile, (err, tpl) ->
-    if err then callback? new Error error """Can't access #{tplfile.red}
+                                               #{err.stack}"""
 
-                                             #{err.stack}"""
-
-    callback? null, render tpl.toString(), context
+      callback? null, render tpl.toString(), context
 
 renderSync = (file, context) ->
   a = []
