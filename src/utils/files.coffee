@@ -246,7 +246,7 @@ findSync = (pattern, ext, paths) ->
 
 ##### findSyncOnce
 
-# Performs the `find` search routine over a single path.
+# Performs the `findSync` search routine over a single path.
 findSyncOnce = (pattern, ext, path) ->
   return unless existsSync path
 
