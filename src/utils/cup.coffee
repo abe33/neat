@@ -3,13 +3,7 @@
 {compile} = require 'coffee-script'
 {puts, error} = require './logs'
 
-read = (content) ->
-  content = "#{content}"
-
-  try
-    src = compile content, bare:true
-    eval src
-  catch e
-    null
+read = (str) ->
+  try eval compile "#{str}", bare:true catch e then null
 
 module.exports = {read}
