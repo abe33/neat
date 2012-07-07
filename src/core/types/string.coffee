@@ -1,13 +1,14 @@
 # This file contains String's extensions that mimics some of the ruby
 # String methods.
 # @toc
+{def} = require './utils'
 
 #### Instances Extensions
 
 ##### String::append
 
 # Returns a new string where `str` have been appended to the original string.
-String::append = (str) -> "#{this}#{str}"
+def String, append: (str) -> "#{this}#{str}"
 
 ##### String::camelize
 
@@ -16,7 +17,7 @@ String::append = (str) -> "#{this}#{str}"
 #     'foo bar'.camelize() # 'fooBar'
 #     'foo-bar'.camelize() # 'fooBar'
 #     'FOO_BAR'.camelize() # 'fooBar'
-String::camelize = ->
+def String, camelize: ->
   a = @toLowerCase().split /[_-\s]/
   s = a.shift()
   s = "#{s}#{w.capitalize()}" for w in a
@@ -28,7 +29,8 @@ String::camelize = ->
 # changed to upper case.
 #
 #     'foo bar'.capitalize() # 'Foo bar'
-String::capitalize = -> @toLowerCase().replace /^[a-z]/, (m) -> m.toUpperCase()
+def String, capitalize: ->
+  @toLowerCase().replace /^[a-z]/, (m) -> m.toUpperCase()
 
 ##### String::capitalizeAll
 
@@ -36,7 +38,7 @@ String::capitalize = -> @toLowerCase().replace /^[a-z]/, (m) -> m.toUpperCase()
 # changed to upper case.
 #
 #     'foo bar'.capitalizeAll() # 'Foo Bar'
-String::capitalizeAll = ->
+def String, capitalizeAll: ->
   @toLowerCase().replace /(^|\s)([a-z])/g, (m,a,b) -> "#{a}#{b.toUpperCase()}"
 
 ##### String::center
@@ -46,7 +48,7 @@ String::capitalizeAll = ->
 # otherwise, returns this string.
 #
 #     'foo'.center 10 # '   foo    '
-String::center = (width=0, pad=' ') ->
+def String, center: (width=0, pad=' ') ->
   if width > @length
     padLeftLength = Math.floor((width - @length) / 2)
     padRightLength = width - @length - padLeftLength
@@ -58,7 +60,7 @@ String::center = (width=0, pad=' ') ->
 # Removes all space characters in the string.
 #
 #     'aa bb     cc   dd'.compact() # 'aabbccdd'
-String::compact = -> @replace /\s+/g, ''
+def String, compact: -> @replace /\s+/g, ''
 
 ##### String::padLeft
 
@@ -66,7 +68,7 @@ String::compact = -> @replace /\s+/g, ''
 #
 #     'foo'.padLeft 4        # '    foo'
 #     'foo'.padLeft 4, '123' # '1231foo'
-String::padLeft = (length=0, pad=' ') -> @prepend String.fill length, pad
+def String, padLeft: (length=0, pad=' ') -> @prepend String.fill length, pad
 
 ##### String::padRight
 
@@ -74,12 +76,12 @@ String::padLeft = (length=0, pad=' ') -> @prepend String.fill length, pad
 #
 #     'foo'.padRight 4        # 'foo    '
 #     'foo'.padRight 4, '123' # 'foo1231'
-String::padRight = (length=0, pad=' ') -> @append String.fill length, pad
+def String, padRight: (length=0, pad=' ') -> @append String.fill length, pad
 
 ##### String::prepend
 
 # Returns a new string where `str` have been prepended to the original string.
-String::prepend = (str) -> "#{str}#{this}"
+def String, prepend: (str) -> "#{str}#{this}"
 
 ##### String::parameterize
 
@@ -87,7 +89,7 @@ String::prepend = (str) -> "#{str}#{this}"
 #
 #     "Il était une fois...".parameterize()
 #     # 'il-etait-une-fois'
-String::parameterize = ->
+def String, parameterize: ->
   @nopunctuation().nodiacritics().toLowerCase().squeeze().replace /\s/g, '-'
 
 ##### String::squeeze
@@ -100,7 +102,7 @@ String::parameterize = ->
 #     'hello worllld'.squeeze('l')   # 'helo world'
 #     'hello wwoorld'.squeeze('m-z') # 'hello world'
 #     'foofoobarbar'.squeeze('foo')  # 'foobarbar'
-String::squeeze = (match='\\s') ->
+def String, squeeze: (match='\\s') ->
   rangeRe = /^([A-Za-z_])-([A-Za-z])$/
   re = null
 
@@ -126,7 +128,7 @@ String::squeeze = (match='\\s') ->
 #
 #     '   foo'.strip() # 'foo'
 #     'foo   '.strip() # 'foo'
-String::strip = -> @replace /^\s+|\s+$/g, ''
+def String, strip: -> @replace /^\s+|\s+$/g, ''
 
 ##### String::to
 
@@ -136,7 +138,7 @@ String::strip = -> @replace /^\s+|\s+$/g, ''
 #     str = ''
 #     'A'.to 'z', (c) -> str += c
 #     # str = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-String::to = (end, callback) ->
+def String, to: (end, callback) ->
   start = @charCodeAt 0
   end = end.charCodeAt 0
   callback String.fromCharCode i for i in [start..end]
@@ -149,15 +151,18 @@ String::to = (end, callback) ->
 #     'Foo Bar'.underscore() # 'foo_bar'
 #     'FOO-BAR'.underscore() # 'foo_bar'
 #     'foo/BAR'.underscore() # 'foo_bar'
-String::underscore = ->
-  @replace(/([a-z])([A-Z])/g, "$1_$2").split(/[-/]|\s/g).join("_").toLowerCase()
+def String, underscore: ->
+  @replace(/([a-z])([A-Z])/g, "$1_$2")
+    .split(/[-/]|\s/g)
+    .join("_")
+    .toLowerCase()
 
 ##### String::nodiacritics
 
 # Removes all the accented characters and ligatures from the string.
 #
 #     'ÉéÀàÈè'.nodiacritics() # 'EeAaEe'
-String::nodiacritics = ->
+def String, nodiacritics: ->
   str = this
   str = str.replace v, k for k,v of String.DACRITICS_MAP
   str
@@ -168,7 +173,7 @@ String::nodiacritics = ->
 #
 #     'Something, is (wrong): in- this! !phrase?'.nopunctuation()
 #     # 'Something is wrong in this phrase'
-String::nopunctuation = ->
+def String, nopunctuation: ->
   @replace /[,?;.:/!§*%=\[\](){}'"`\\_<>-]/g, ''
 
 #### Class Methods

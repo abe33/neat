@@ -1,31 +1,32 @@
 # This file contains Number's extensions that mimics some of the ruby
 # Number methods.
 # @toc
+{def} = require './utils'
 
 ##### Number::ago
 
-Number::ago = -> new Date new Date().getTime() - @valueOf()
+def Number, ago: -> new Date new Date().getTime() - @valueOf()
 
 ##### Number::days
 
 # Returns the current number as days converted in milliseconds.
-Number::days = -> @hours() * 24
+def Number, days: -> @hours() * 24
 
 ##### Number::even
 
 # Returns `true` if the current number is even.
-Number::even = -> @valueOf() % 2 is 0
+def Number, even: -> @valueOf() % 2 is 0
 
 ##### Number::fromNow
 
 # Returns a `Date` object that correspond to the time of the call
 # plus the current number as milliseconds.
-Number::fromNow = -> new Date new Date().getTime() + @valueOf()
+def Number, fromNow: -> new Date new Date().getTime() + @valueOf()
 
 ##### Number::hours
 
 # Returns the current number as hours converted in milliseconds.
-Number::hours = -> @minutes() * 60
+def Number, hours: -> @minutes() * 60
 
 ##### Number::later
 
@@ -35,17 +36,17 @@ Number.later = -> @fromNow()
 ##### Number::minutes
 
 # Returns the current number as minutes converted in milliseconds.
-Number::minutes = -> @seconds() * 60
+def Number, minutes: -> @seconds() * 60
 
 ##### Number::odd
 
 # Returns `true` if the current number is odd.
-Number::odd = -> @valueOf() % 2 is 1
+def Number, odd: -> @valueOf() % 2 is 1
 
 ##### Number::seconds
 
 # Returns the current number as seconds converted in milliseconds.
-Number::seconds = -> @valueOf() * 1000
+def Number, seconds: -> @valueOf() * 1000
 
 ##### Number::times
 
@@ -59,7 +60,7 @@ Number::seconds = -> @valueOf() * 1000
 #     5.times "*"                  # '*****'
 #     5.times 10                   # 50
 #     2.times ['foo', 1]           # ['foo', 1, 'foo', 1]
-Number::times = (target) ->
+def Number, times: (target) ->
   return (target i for i in [0..@valueOf()-1]) if typeof target is "function"
   o = target
 
@@ -75,10 +76,10 @@ Number::times = (target) ->
 # Iterates from the current value to the passed-in value.
 #
 #     5.to 10, (i) -> print "#{i} " # 5 6 7 8 9 10
-Number::to = (end, callback) -> callback i for i in [@valueOf()..end]
+def Number, to: (end, callback) -> callback i for i in [@valueOf()..end]
 
 ##### Number::weeks
 
 # Returns the current number as weeks converted in milliseconds.
-Number::weeks = -> @days() * 7
+def Number, weeks: -> @days() * 7
 

@@ -1,16 +1,7 @@
 # This file contains Object's extensions that mimics some of the ruby
 # Object and Hash methods.
 # @toc
-
-#### Helpers
-
-# Defines a non-enumerable property on `Object.prototype`.
-def = (o) ->
-  for name,value of o
-    unless Object.prototype[name]?
-      Object.defineProperty? Object.prototype,
-                             name,
-                             enumerable: false, value: value
+{def} = require './utils'
 
 #### Class Extensions
 
@@ -32,12 +23,13 @@ Object.new = (a) -> o = {}; a.step(2, (k,v) -> o[k] = v); return o
 #
 #     {foo: 'foo', bar: 'bar'}.concat baz: 'baz'
 #     # {foo: 'foo', bar: 'bar', baz: 'baz'}
-def concat: (m) -> o = {}; o[k] = v for k,v of this; return o.merge(m || {})
+def Object, concat: (m) ->
+  o = {}; o[k] = v for k,v of this; return o.merge(m || {})
 
 ##### Object::contains
 
 # `Object::has` alias.
-def contains: (value) -> @has value
+def Object, contains: (value) -> @has value
 
 ##### Object::flatten
 
@@ -46,18 +38,18 @@ def contains: (value) -> @has value
 #
 #     {foo: 10, bar: 20, baz: 30}.flatten()
 #     # ['foo', 10, 'bar', 20, 'baz', 30]
-def flatten: -> a = []; a = a.concat [k,v] for k,v of this; return a
+def Object, flatten: -> a = []; a = a.concat [k,v] for k,v of this; return a
 
 ##### Object::has
 
 # Retuns `true` if the specified values is contained in one of the object
 # enumerable properties.
-def has: (value) -> value in @values()
+def Object, has: (value) -> value in @values()
 
 ##### Object::hasKey
 
 # Returns `true` if the specified key is defined on this object.
-def hasKey: (key) -> @[key]?
+def Object, hasKey: (key) -> @[key]?
 
 ##### Object::keys
 
@@ -65,12 +57,12 @@ def hasKey: (key) -> @[key]?
 #
 # The keys are returned as the `for..in` construct iterates on them.
 # Use `sortedKeys` to retreive the keys sorted alphabetically.
-def keys: -> k for k of this
+def Object, keys: -> k for k of this
 
 ##### Object::length
 
 # Returns the count of enumerable properties on this object.
-def length: -> @keys().length
+def Object, length: -> @keys().length
 
 ##### Object::merge
 
@@ -82,7 +74,7 @@ def length: -> @keys().length
 #     target = foo: 10
 #     target.merge bar: 20, baz: 30
 #     # target = {foo: 10, bar: 20, baz: 30}
-def merge: (o) -> @[k] = v for k,v of o; this
+def Object, merge: (o) -> @[k] = v for k,v of o; this
 
 ##### Object::reject
 
@@ -92,7 +84,8 @@ def merge: (o) -> @[k] = v for k,v of o; this
 #     source = foo: 10, bar: 20, baz: 30
 #     target = source.reject (k,v) -> v > 10
 #     # target = {foo: 10}
-def reject: (f) -> o = {}; o[k] = v for k,v of this when not f? k, v; return o
+def Object, reject: (f) ->
+  o = {}; o[k] = v for k,v of this when not f? k, v; return o
 
 ##### Object::select
 
@@ -102,36 +95,37 @@ def reject: (f) -> o = {}; o[k] = v for k,v of this when not f? k, v; return o
 #     source = foo: 10, bar: 20, baz: 30
 #     target = source.select (k,v) -> v > 10
 #     # target = {bar: 20, baz: 30}
-def select: (f) -> o = {}; o[k] = v for k,v of this when f? k, v; return o
+def Object, select: (f) ->
+  o = {}; o[k] = v for k,v of this when f? k, v; return o
 
 ##### Object::size
 
 # `Object::length` alias.
-def size: -> @length()
+def Object, size: -> @length()
 
 ##### Object::sortedKeys
 
 # Returns the enumerable keys sorted alphabetically.
-def sortedKeys: -> @keys().sort()
+def Object, sortedKeys: -> @keys().sort()
 
 ##### Object::sortedValues
 
 # Returns the values of the enumerable properties of this object.
 # The values are ordered such as each key in `sortedKeys` correspond
 # to the value at the same index in `sortedValues`.
-def sortedValues: -> @[k] for k in @sortedKeys()
+def Object, sortedValues: -> @[k] for k in @sortedKeys()
 
 ##### Object::type
 
 # Returns the results of calling `Object::toString` on the current object
 # and extracting the class name to lower case.
-def type: ->
+def Object, type: ->
   Object::toString.call(@).toLowerCase().replace /\[object (\w+)\]/, "$1"
 
 ##### Object::update
 
 # `Object::merge` alias.
-def update: -> (o) -> @merge o
+def Object, update: -> (o) -> @merge o
 
 ##### Object::values
 
@@ -139,7 +133,7 @@ def update: -> (o) -> @merge o
 # The values are returned as the `for..in` construct iterates on this object.
 # Use `sortedValues` to retreive the values based on the alphabetically
 # sorted keys.
-def values: -> @[k] for k in @keys()
+def Object, values: -> @[k] for k in @keys()
 
 #### Duck Typing
 
@@ -196,7 +190,7 @@ def values: -> @[k] for k in @keys()
 #         y: 'number'
 #
 #       constructor: (@x, @y) ->
-def quacksLike: (type) ->
+def Object, quacksLike: (type) ->
   if type.__definition__?
     definition = type.__definition__
     return definition this if typeof definition is "function"
