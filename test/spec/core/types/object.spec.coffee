@@ -266,3 +266,34 @@ describe 'Object::concat', ->
     expect(copy).not.toBe(original)
     expect(copy).not.toEqual(original)
     expect(copy).toEqual(foo: "bar", bar: 'foo', baz: 'baz')
+
+describe 'Object::empty', ->
+  it 'should return true for an empty object', ->
+    expect({}.empty()).toBeTruthy()
+
+  it 'should return false for an object with properties', ->
+    expect({foo: 10}.empty()).toBeFalsy()
+
+describe 'Object::first', ->
+  it 'should return a tuple containing the first key:value', ->
+    o =
+      foo:10
+      bar:20
+
+    expect(o.first()).toEqual(['foo',10])
+
+  it 'should return null if the object is empty', ->
+    expect({}.first()).toBeNull()
+
+describe 'Object::last', ->
+  it 'should return a tuple containing the last key:value', ->
+    o =
+      foo:10
+      bar:20
+
+    expect(o.last()).toEqual(['bar',20])
+
+  it 'should return null if the object is empty', ->
+    expect({}.last()).toBeNull()
+
+

@@ -31,6 +31,21 @@ def Object, concat: (m) ->
 # `Object::has` alias.
 def Object, contains: (value) -> @has value
 
+##### Object::empty
+
+# Returns true if the current object don't contains any enumerable properties.
+#
+#     {}.empty()        # true
+#     {foo: 10}.empty() # false
+def Object, empty: -> @keys().empty()
+
+##### Object::first
+
+# Returns the first pair of key and value of the current object as a tuple.
+#
+#     {foo: 10, bar: 20}.first() # ['foo', 10]
+def Object, first: -> if @empty() then null else @flatten().group(2).first()
+
 ##### Object::flatten
 
 # Returns an array such as `[key, value, key, value]` with the name
@@ -62,7 +77,18 @@ def Object, keys: -> k for k of this
 ##### Object::length
 
 # Returns the count of enumerable properties on this object.
+#
+#     {}.length()                 # 0
+#     {foo: 10}.length()          # 1
+#     {foo: 10, bar: 20}.length() # 2
 def Object, length: -> @keys().length
+
+##### Object::last
+
+# Returns the last pair of key and value of the current object as a tuple.
+#
+#     {foo: 10, bar: 20}.last() # ['bar', 20]
+def Object, last: -> if @empty() then null else @flatten().group(2).last()
 
 ##### Object::merge
 
