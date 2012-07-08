@@ -59,11 +59,25 @@ def Object, flatten: -> a = []; a = a.concat [k,v] for k,v of this; return a
 
 # Retuns `true` if the specified values is contained in one of the object
 # enumerable properties.
+#
+#     object =
+#       foo: 10
+#       bar: 20
+#
+#     object.has 20 # true
+#     object.has 30 # false
 def Object, has: (value) -> value in @values()
 
 ##### Object::hasKey
 
 # Returns `true` if the specified key is defined on this object.
+#
+#     object =
+#       foo: 10
+#       bar: 20
+#
+#     object.hasKey 'foo' # true
+#     object.hasKey 'baz' # false
 def Object, hasKey: (key) -> @[key]?
 
 ##### Object::keys
@@ -72,6 +86,12 @@ def Object, hasKey: (key) -> @[key]?
 #
 # The keys are returned as the `for..in` construct iterates on them.
 # Use `sortedKeys` to retreive the keys sorted alphabetically.
+#
+#     object =
+#       foo: 10
+#       bar: 20
+#
+#     object.keys() # ['foo', 'bar']
 def Object, keys: -> k for k of this
 
 ##### Object::length
@@ -132,6 +152,12 @@ def Object, size: -> @length()
 ##### Object::sortedKeys
 
 # Returns the enumerable keys sorted alphabetically.
+#
+#     object =
+#       foo: 10
+#       bar: 20
+#
+#     object.sortedKeys() # ['bar', 'foo']
 def Object, sortedKeys: -> @keys().sort()
 
 ##### Object::sortedValues
@@ -139,6 +165,12 @@ def Object, sortedKeys: -> @keys().sort()
 # Returns the values of the enumerable properties of this object.
 # The values are ordered such as each key in `sortedKeys` correspond
 # to the value at the same index in `sortedValues`.
+#
+#     object =
+#       foo: 10
+#       bar: 20
+#
+#     object.sortedValues() # [20, 10]
 def Object, sortedValues: -> @[k] for k in @sortedKeys()
 
 ##### Object::type
@@ -159,6 +191,12 @@ def Object, update: -> (o) -> @merge o
 # The values are returned as the `for..in` construct iterates on this object.
 # Use `sortedValues` to retreive the values based on the alphabetically
 # sorted keys.
+#
+#     object =
+#       foo: 10
+#       bar: 20
+#
+#     object.values() # [10, 20]
 def Object, values: -> @[k] for k in @keys()
 
 #### Duck Typing
