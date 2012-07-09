@@ -3,6 +3,7 @@
 # This file is loaded by the bin bootstrap. If the `neat` command line tool
 # is run inside a Neat project, the local installation files will be used
 # if they are available.
+# @toc
 
 #### Global Requires
 fs = require 'fs'

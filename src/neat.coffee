@@ -1,5 +1,6 @@
 # This file contains the creation process of the `Neat` object and the
 # corresponding environment.
+# @toc
 
 fs = require 'fs'
 pr = require 'commander'
@@ -17,6 +18,7 @@ cup = require "./utils/cup"
 
 # A `Neat` instance provides information about Neat and the current project.
 class Neat
+  ##### Neat::constructor
   constructor: (root) ->
     @root     = @ROOT      = root
     @neatRoot = @NEAT_ROOT = NEAT_ROOT
@@ -35,15 +37,21 @@ class Neat
 
   #### Environment Setup
 
+  ##### Neat::initLogging
+
+  # Setup the logging engine for this `Neat` instance.
+  initLogging: ->
+    logger.add @env.engines.logging[@env.defaultLoggingEngine]
+
+  ##### Neat::initEnvironment
+
   # Initializes the `Neat` instance with the default environment.
   # If the `NEAT_ENV` environment variable is set, the corresponding
   # environment is loaded.
   initEnvironment: ->
     @setEnvironment process.env['NEAT_ENV'] or 'default'
 
-  # Setup the logging engine for this `Neat` instance.
-  initLogging: ->
-    logger.add @env.engines.logging[@env.defaultLoggingEngine]
+  ##### Neat::setEnvironment
 
   # Changes the environment of the `Neat` instance. All the process
   # of loading the environment configurators and the initializers
@@ -58,7 +66,7 @@ class Neat
       verbose:false,
     }
 
-    ##### Configurations
+    ###### Configurations
     #
     # Configuration of the environment is done through `configurators`.
     #
@@ -110,7 +118,7 @@ class Neat
 
                  #{e.stack}"""
 
-    ##### Initializations
+    ###### Initializations
     #
     # Initializations of plugins or components are done through `initializers`
     #
@@ -145,6 +153,8 @@ class Neat
 
   #### Environment Setup Utilities
 
+  ##### Neat::discoverUserPaths
+
   # Browses the user directory to find neat projects either at the
   # root directory or in the node modules installed in the project.
   discoverUserPaths: ->
@@ -160,6 +170,8 @@ class Neat
 
     # The current Neat project root is the last path in `PATHS`.
     @paths.push @root if @root not in @paths
+
+  ##### Neat::loadMeta
 
   # Loads and returns the meta contained in the `.neat` file.
   loadMeta: ->
