@@ -37,6 +37,8 @@ asyncErrorTrap = (callback) -> (err, args...) ->
 
 puts = (str) -> print "#{str}\n"
 
+ensure = (dir) -> fs.mkdirSync dir unless path.existsSync dir
+
 install = (options, callback) ->
   # The content of the `Nemfile` file is inserted in a placeholder in
   # the `templates/commands/install.plain` file that contains the `npm`
@@ -68,7 +70,7 @@ test = (options, callback) ->
 
 compile = (options, callback) ->
   [callback, options] = [options, {}] if typeof options is "function"
-
+  ensure "#{__dirname}/lib"
   run COFFEE, ['-c', '-o', 'lib', 'src'], (status)->
     switch status
       when 0 then puts green 'Compilation done'
