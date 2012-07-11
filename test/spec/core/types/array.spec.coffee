@@ -121,3 +121,9 @@ describe 'Array::max', ->
     max = [5, 2, 3, 8].max()
 
     expect(max).toBe(8)
+
+describe 'Array::compact', ->
+  it 'should remove the undefined elements from an array', ->
+    a = ['foo', 10, null, false, undefined]
+
+    expect(a.compact()).toEqual(['foo', 10, false])

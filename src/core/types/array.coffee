@@ -12,9 +12,19 @@ Array.isArray = (a) -> a?.type() is 'array'
 
 #### Instances Extensions
 
+##### Array::compact
+
+# Returns a new array without all the undefined elements of the previous array.
+#
+#     ['foo', null, 10].compact() # ['foo', 10]
+Array::compact = -> @select (el) -> el?
+
 ##### Array::empty
 
 # Returns `true` if the array is empty.
+#
+#     [].empty()      # true
+#     ['foo'].empty() # false
 Array::empty = -> @length is 0
 
 ##### Array::first
