@@ -28,10 +28,11 @@ render = (file, context, callback) ->
     # If either an error is raised or no sibling file can be found,
     # the function callback with an error.
     return callback? e if e?
-    unless tplfile? then return callback? new Error """#{missing tplfile}
+    unless tplfile?
+      return callback? new Error """#{missing "Template for #{file}"}
 
-                                                    Explored paths:
-                                                    #{a.join "\n"}"""
+                                    Explored paths:
+                                    #{a.join "\n"}"""
 
     puts "template found: #{tplfile.yellow}"
 
@@ -74,10 +75,11 @@ renderSync = (file, context) ->
   # We first search for a template file.
   tplfile = findSiblingFileSync file, Neat.paths, "templates", "*", paths
   # If no sibling file can be found an error is raised.
-  unless tplfile? then throw new Error """#{missing tplfile}
+  unless tplfile?
+      return callback? new Error """#{missing "Template for #{file}"}
 
-                                          Explored paths:
-                                          #{paths.join "\n"}"""
+                                    Explored paths:
+                                    #{a.join "\n"}"""
 
   puts "template found: #{tplfile.yellow}"
   # The extension is extracted from the template file name.
