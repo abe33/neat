@@ -12,14 +12,20 @@ pr = require 'commander'
 {resolve} = require 'path'
 
 # The core module is loaded before any other *local* modules.
-core = require resolve __dirname, 'core'
-{puts, print, error, missing} = require resolve __dirname, "utils/logs"
+core = require './core'
+{puts, print, error, missing} = require "./utils/logs"
 # The Neat environment is loaded.
-Neat = require resolve __dirname, 'neat'
+Neat = require './neat'
 Neat.initEnvironment()
 Neat.initLogging()
 
 #### Commands Registration
+
+# Commands are defined by the `CLICommand` interface.
+#
+# Commands are functions with a property `aliases` which
+# is an array of strings.
+CLICommand = require './core/interfaces/cli_command'
 
 # All the commands are required through this single call.
 #
@@ -29,14 +35,16 @@ Neat.initLogging()
 #  1. The Neat installation.
 #  2. All the Neat projects in installed modules.
 #  3. The project `commands` directory.
-commands  = require resolve __dirname, "commands"
+commands  = require "./commands"
 
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}
 register = (k, c) ->
-  # Commands must have aliases.
-  unless c.aliases?
-    return error "Can't register command #{k} due to missing aliases\n".red
+  # Passed-in commands are duck tested against the `CLICommand` interface.
+  unless c.quacksLike CLICommand
+    return error """#{"Can't register command #{k}".red}
+
+                    A command must be function with an aliases."""
 
   for alias in c.aliases
     pr.command(alias).description(c.description).action(c)
