@@ -392,9 +392,10 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
       # the searched file.
       basepath = resolve root, newPath
 
+      paths.push basepath
+
       # Retrieves all the files or directories that match the base name.
       findBase basepath, base, (ps) ->
-
         # If there's matches.
         if ps? and not ps.empty()
           ps.sort()
@@ -404,6 +405,7 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
           entryMatch = (p) -> (cb) ->
             fs.lstat p, (err, stats) ->
               return callback? err, null, path if err?
+              paths.push p
               # The path is a directory.
               if stats.isDirectory()
                 # Stores in `paths` the current searched path.
@@ -425,7 +427,7 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
           # Runs a verification on each path returned by `finBase`.
           parallel (entryMatch(p) for p in ps), ->
             found.push matches[i] for r,i in roots
-            found = found.flatten()
+            found = found.flatten().compact()
             cb?()
         # Nothing was returned by `findBase`, the lookup callback.
         else cb?()

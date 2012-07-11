@@ -34,7 +34,6 @@ describe 'neatRootSync', ->
     it 'should return null', ->
       expect(fu.neatRootSync resolve root, "..").toBeUndefined()
 
-
 describe 'findSiblingFileSync', ->
   it '''should find the corresponding file in a different directory
         and with a different extension''', ->
