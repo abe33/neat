@@ -19,8 +19,9 @@ cup = require "./utils/cup"
 # A `Neat` instance provides information about Neat and the current project.
 class Neat
   ##### Neat::constructor
-  constructor: (root) ->
-    @root     = @ROOT      = root
+  constructor: (@root) ->
+    @defaultEnvironment = 'default'
+    @ROOT     = @root
     @neatRoot = @NEAT_ROOT = NEAT_ROOT
     # Paths where environments and initializers can be found.
     @envPath  = @ENV_PATH  = 'lib/config/environments'
@@ -49,7 +50,7 @@ class Neat
   # If the `NEAT_ENV` environment variable is set, the corresponding
   # environment is loaded.
   initEnvironment: ->
-    @setEnvironment process.env['NEAT_ENV'] or 'default'
+    @setEnvironment process.env['NEAT_ENV'] or @defaultEnvironment
 
   ##### Neat::setEnvironment
 

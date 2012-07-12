@@ -55,11 +55,7 @@ help = (help, target) -> decorate target, 'help', help
 #
 #     withEnv 'test', ->
 #       console.log Neat.env.test? # true
-withEnv = (env, target) -> ->
-  Neat.setEnvironment env
-  puts "Set environment #{env}".yellow, 1
-  target.apply null, arguments
-
+withEnv = (env, target) -> decorate target, 'environment', env
 ##### run
 
 # Runs the specified `command` with the passed-in `options`.

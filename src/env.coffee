@@ -16,8 +16,6 @@ core = require './core'
 {puts, print, error, missing} = require "./utils/logs"
 # The Neat environment is loaded.
 Neat = require './neat'
-Neat.initEnvironment()
-Neat.initLogging()
 
 #### Commands Registration
 
@@ -37,6 +35,16 @@ CLICommand = require './core/interfaces/cli_command'
 #  3. The project `commands` directory.
 commands  = require "./commands"
 
+# Generates a function that execute the passed-in command after initializing
+# the Neat environment.
+commandTrigger = (c) -> ->
+  if c.environment?
+      Neat.defaultEnvironment = c.environment
+
+  Neat.initEnvironment()
+  Neat.initLogging()
+  c.apply null, arguments
+
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}
 register = (k, c) ->
@@ -47,7 +55,7 @@ register = (k, c) ->
                     A command must be function with an aliases."""
 
   for alias in c.aliases
-    pr.command(alias).description(c.description).action(c)
+    pr.command(alias).description(c.description).action commandTrigger c
     cmdMap[k] = c
 
 #### Neat CLI
@@ -69,4 +77,4 @@ pr.parse(process.argv)
 
 # Nothing was triggered by commander, the help is displayed.
 {help} = cmdMap
-help() if pr.args.length is 0 and help?
+commandTrigger(help)() if pr.args.length is 0 and help?
