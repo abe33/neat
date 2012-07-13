@@ -48,14 +48,14 @@ describe = (description, target) -> decorate target, 'description', description
 #       console.lgog 'command was called'
 help = (help, target) -> decorate target, 'help', help
 
-##### withEnv
+##### environment
 
 # Loads automatically the specified environment before triggering
 # the `target`.
 #
-#     withEnv 'test', ->
+#     environment 'test', ->
 #       console.log Neat.env.test? # true
-withEnv = (env, target) -> decorate target, 'environment', env
+environment = (env, target) -> decorate target, 'environment', env
 ##### run
 
 # Runs the specified `command` with the passed-in `options`.
@@ -76,5 +76,5 @@ module.exports = {
   help,
   run,
   usages,
-  withEnv,
+  environment,
 }

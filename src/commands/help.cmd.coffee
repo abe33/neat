@@ -8,16 +8,17 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {puts, error, warn, missing, neatBroken} = require resolve utils, "logs"
 
 cmds = resolve utils, "commands"
-{run, aliases, usages, describe, help:withHelp} = require cmds
+{run, aliases, usages, describe, help:withHelp, environment} = require cmds
 
 help = (pr, commands) ->
   return error "No program provided to help" unless pr?
   return error "No commands map provided" unless commands?
 
   aliases 'h', 'help',
+  environment 'production',
   usages 'neat help [command]',
-  describe 'Display the help of the specified command',
-  withHelp """This is the help""",
+  describe 'Display the help of the specified [command]',
+  withHelp """Display the help of the specified [command].""",
   f = (command, args..., cb) ->
     args.push cb if typeof cb isnt 'function'
 

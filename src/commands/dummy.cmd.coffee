@@ -14,14 +14,14 @@ utils = resolve Neat.neatRoot, "lib/utils"
   neatBroken,
   logger,
 } = require resolve utils, "logs"
-{run, aliases, describe, withEnv} = require resolve utils, "commands"
+{run, aliases, describe, environment} = require resolve utils, "commands"
 
 dummy = (pr) ->
   return error "No program provided to dummy" unless pr?
 
   aliases 'dummy',
   describe "I'am a dummy command that print some stuff",
-  withEnv 'foo',
+  environment 'foo',
   f = (cb)->
     print ".".red, 0
     print ".".yellow, 1
