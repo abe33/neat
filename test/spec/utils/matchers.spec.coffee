@@ -30,7 +30,7 @@ describe 'anyOf', ->
     a = ['foo', 10, false]
     b = [20, 20, 10]
 
-    matcher = _.anyOf _.equalTo(20), _.isType('string')
+    matcher = _.anyOf 20, _.isType('string')
 
     expect(a.some matcher).toBeTruthy()
     expect(b.some matcher).toBeTruthy()
@@ -43,7 +43,7 @@ describe 'allOf', ->
     a = ['foo', 10, false]
     b = [20, 20, '10']
 
-    matcher = _.allOf _.equalTo('foo'), _.isType('string')
+    matcher = _.allOf 'foo', _.isType('string')
 
     expect(a.some matcher).toBeTruthy()
     expect(b.some matcher).toBeFalsy()
@@ -52,23 +52,28 @@ describe 'allOf', ->
     expect(b.every matcher).toBeFalsy()
 
 describe 'isNot', ->
-  it 'should inverse the result of the passed-in matcher', ->
+  describe 'when called with a matcher', ->
+    it 'should inverse the result of the passed-in matcher', ->
 
-    a = ['foo', 10, false]
-    b = [20, 20, 20]
+      a = ['foo', 10, false]
+      b = [20, 20, 20]
 
-    expect(a.some _.isNot _.equalTo 20).toBeTruthy()
-    expect(b.some _.isNot _.equalTo 20).toBeFalsy()
+      expect(a.some _.isNot _.equalTo 20).toBeTruthy()
+      expect(b.some _.isNot _.equalTo 20).toBeFalsy()
 
-    expect(a.every _.isNot _.equalTo 20).toBeTruthy()
-    expect(b.every _.isNot _.equalTo 20).toBeFalsy()
+      expect(a.every _.isNot _.equalTo 20).toBeTruthy()
+      expect(b.every _.isNot _.equalTo 20).toBeFalsy()
 
-  it 'should compare with equality if the argument is not a matcher', ->
+  describe 'when called with a value', ->
+    it 'should return true if the element isnt the value', ->
+      a = ['foo', 10, false]
+      b = [20, 20, 20]
 
-    a = ['foo', 10, false]
+      expect(a.some _.isNot 20).toBeTruthy()
+      expect(b.some _.isNot 20).toBeFalsy()
 
-    expect(a.some _.isNot 10).toBeTruthy()
-    expect(a.every _.isNot 10).toBeFalsy()
+      expect(a.every _.isNot 20).toBeTruthy()
+      expect(b.every _.isNot 20).toBeFalsy()
 
 describe 'isNull', ->
   it 'should match null elements', ->
@@ -98,7 +103,7 @@ describe 'hasProperty', ->
   it 'should match when an object contains the given property', ->
     a = [
       {foo: 10, bar: 20},
-      {foo: 10},
+      {foo: null},
       {foo: 10, baz: 20},
     ]
 
@@ -129,7 +134,7 @@ describe 'hasProperties', ->
 
     a = [
       {foo: 10, bar: 20},
-      {foo: 20},
+      {foo: null},
       {foo: 30, baz: 20},
     ]
 
@@ -137,6 +142,7 @@ describe 'hasProperties', ->
     expect(a.some _.hasProperties 'foo', bar:20).toBeTruthy()
     expect(a.some _.hasProperties 'foo', bar: _.equalTo 20).toBeTruthy()
 
+    expect(a.every _.hasProperties 'foo').toBeTruthy()
     expect(a.every _.hasProperties 'foo', 'bar').toBeFalsy()
     expect(a.every _.hasProperties 'foo', bar:20).toBeFalsy()
     expect(a.every _.hasProperties 'foo', bar: _.equalTo 20).toBeFalsy()
@@ -150,8 +156,7 @@ describe 'quacksLike', ->
       {foo: 30, baz: 20},
     ]
 
-    def =
-      __definition__:
+    def = __definition__:
         foo: 'number'
         bar: 'number'
 
