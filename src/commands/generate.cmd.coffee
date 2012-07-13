@@ -36,7 +36,7 @@ generate = (pr, commands) ->
 
   aliases 'g', 'generate',
   usages 'neat generate [generator]',
-  describe 'Runs the specified [generator].',
+  describe 'Runs the specified [generator]',
   f = (generator, args..., command, callback) ->
     # No generator displays the command help.
     return f.help.apply(null, arguments) and

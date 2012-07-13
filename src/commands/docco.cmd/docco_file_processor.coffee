@@ -55,8 +55,7 @@ class DoccoFileProcessor
 
           fs.writeFile @file.outputPath, page, (err) =>
             throw err if err?
-            puts "source for #{@file.relativePath.yellow}
-                  documentation processed".squeeze(), 1
+            puts "#{@file.relativePath.yellow} documentation processed", 1
             callback?()
 
 module.exports = DoccoFileProcessor
