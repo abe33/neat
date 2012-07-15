@@ -42,7 +42,6 @@ commandTrigger = (c) -> ->
       Neat.defaultEnvironment = c.environment
 
   Neat.initEnvironment()
-  Neat.initLogging()
   c.apply null, arguments
 
 # The commands will be register in a hash with their aliases as keys.

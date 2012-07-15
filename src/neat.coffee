@@ -18,6 +18,7 @@ cup = require "./utils/cup"
 
 # A `Neat` instance provides information about Neat and the current project.
 class Neat
+
   ##### Neat::constructor
   constructor: (@root) ->
     @defaultEnvironment = 'default'
@@ -36,6 +37,14 @@ class Neat
 
     @discoverUserPaths() if @root?
 
+  ##### Neat::require
+
+  # Loads a module from the Neat directory using the `require` function.
+  #
+  #     Neat = require 'neat'
+  #     {parallel} = Neat.require 'async'
+  require: (module) -> require "#{@neatRoot}/lib/#{module}"
+
   #### Environment Setup
 
   ##### Neat::initLogging
@@ -51,6 +60,7 @@ class Neat
   # environment is loaded.
   initEnvironment: ->
     @setEnvironment process.env['NEAT_ENV'] or @defaultEnvironment
+    @initLogging()
 
   ##### Neat::setEnvironment
 
