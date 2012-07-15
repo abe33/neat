@@ -9,4 +9,4 @@ group 'development', ->
   npm 'coffeelint'
 
 group 'test', ->
-  npm 'jasmine-node'
+  npm 'jasmine-node', 'git://github.com/abe33/jasmine-node.git#patch-1'
