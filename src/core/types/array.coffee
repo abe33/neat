@@ -30,6 +30,8 @@ Array::empty = -> @length is 0
 ##### Array::first
 
 # Returns the first element in this array.
+#
+#     ['foo', 'bar'].first() # 'foo'
 Array::first = -> if @length > 0 then @[0] else undefined
 
 ##### Array::flatten
@@ -65,7 +67,23 @@ Array::group = (size) ->
 ##### Array::last
 
 # Returns the last element in this array.
+#
+#     ['foo', 'bar'].last() # 'bar'
 Array::last = -> if @length > 0 then @[@length-1] else undefined
+
+##### Array::max
+
+# Returns the maximum value contained in this array.
+#
+#     [0, 10, 20, 30].max() # 30
+Array::max = -> Math.max.apply null, this
+
+##### Array::min
+
+# Returns the minimum value contained in this array.
+#
+#     [0, 10, 20, 30].min() # 0
+Array::min = -> Math.min.apply null, this
 
 ##### Array::reject
 
@@ -90,10 +108,11 @@ Array::rotate = (amount=1) ->
   amount = 1 if amount is 0
   direction = amount > 0
   out = @concat()
+  range = [0..Math.abs(amount)-1]
   if direction
-    out.push out.shift() for i in [0..Math.abs(amount)-1]
+    out.push out.shift() for i in range
   else
-    out.unshift out.pop() for i in [0..Math.abs(amount)-1]
+    out.unshift out.pop() for i in range
   out
 
 ##### Array::select
@@ -108,7 +127,7 @@ Array::select = (f) -> o for o in this when f? o
 
 ##### Array::step
 
-# Iterates over the array according to the given `step`.
+# Iterates over the array according to the given step.
 #
 #     ['foo', 'bar', 'baz'].step 2, (a, b) -> console.log a, b
 #     # 'foo' 'bar'
@@ -119,17 +138,10 @@ Array::step = (n,f) ->
 ##### Array::uniq
 
 # Returns a new array where all values are unique.
+#
+#     ['foo', 'foo', 'bar'].uniq() # ['foo', 'bar']
 Array::uniq = ->
   out = []
   out.push v for v in this when v not in out
   out
 
-##### Array::min
-
-# Returns the minimum value contained in this array.
-Array::min = -> Math.min.apply null, this
-
-##### Array::max
-
-# Returns the maximum value contained in this array.
-Array::max = -> Math.max.apply null, this
