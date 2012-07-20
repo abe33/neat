@@ -1,1 +1,14 @@
-# TODO: Add tasks
+{print} = require 'util'
+
+try
+  Neat = require './node_modules/neat/lib'
+catch e
+  print """Can't find the neat module.
+
+           Run neat install to install the dependencies.
+           #{e.stack}
+           \n"""
+           """
+
+# Loads all the tasks of the project.
+Neat.require 'tasks'

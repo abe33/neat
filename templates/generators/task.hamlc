@@ -1,0 +1,3 @@
+:plain
+  task '#{@name}', ->
+    # TODO Task goes here
