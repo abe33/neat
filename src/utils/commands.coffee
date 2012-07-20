@@ -67,7 +67,7 @@ run = (command, options, callback) ->
   exe = spawn command, options
   exe.stdout.on 'data', (data) -> print data.toString()
   exe.stderr.on 'data', (data) -> print error data.toString()
-  exe.on 'exit', (status) -> callback?()
+  exe.on 'exit', (status) -> callback? status
 
 module.exports = {
   aliases,

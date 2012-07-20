@@ -26,3 +26,4 @@ group = (name, body) -> body()
 exe = spawn 'npm', ['install'].concat packages
 exe.stdout.on 'data', (data) -> print data.toString()
 exe.stderr.on 'data', (data) -> print data.toString()
+exe.on 'exit', (status) -> process.exit status
