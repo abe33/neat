@@ -5,8 +5,8 @@
 
   exports['#{@name}'] = neatTask
     name:'#{@name}'
-    description: '#{@description || ''}'
+    description: '#{@description || 'TODO: Description goes here'}'
     environment: '#{@environment || 'default'}'
     action: (callback) ->
-      # TODO Task goes here
+      # TODO: Task goes here
       callback?()

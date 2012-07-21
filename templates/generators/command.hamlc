@@ -1,0 +1,16 @@
+:plain
+  Neat = require 'neat'
+
+  {error} = Neat.require 'utils/logs'
+  {aliases, describe, environment} = Neat.require 'utils/commands'
+
+  #{@name} = (pr) ->
+    return error "No program provided to #{@name}" unless pr?
+
+    aliases '#{@name}',
+    describe "#{@description || 'TODO: Description goes here'}",
+    environment '#{@environment || 'default'}',
+    cmd = (cb)->
+      # TODO: Command goes here
+
+  module.exports = {#{@name}}
