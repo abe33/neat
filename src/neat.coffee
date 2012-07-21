@@ -45,6 +45,15 @@ class Neat
   #     {parallel} = Neat.require 'async'
   require: (module) -> require "#{@neatRoot}/lib/#{module}"
 
+  ##### Neat::task
+
+  # Returns the cake task whose name is `task`.
+  #
+  #     compile = Neat.task 'compile'
+  #     compile (status) ->
+  #       # do something after compilation
+  task: (task) -> @require('tasks')[task]
+
   #### Environment Setup
 
   ##### Neat::initLogging

@@ -45,7 +45,7 @@ describe = (description, target) -> decorate target, 'description', description
 # Defines the help of the `target`.
 #
 #     help 'This is the help', ->
-#       console.lgog 'command was called'
+#       console.log 'command was called'
 help = (help, target) -> decorate target, 'help', help
 
 ##### environment
@@ -56,6 +56,7 @@ help = (help, target) -> decorate target, 'help', help
 #     environment 'test', ->
 #       console.log Neat.env.test? # true
 environment = (env, target) -> decorate target, 'environment', env
+
 ##### run
 
 # Runs the specified `command` with the passed-in `options`.
@@ -66,15 +67,52 @@ environment = (env, target) -> decorate target, 'environment', env
 run = (command, options, callback) ->
   exe = spawn command, options
   exe.stdout.on 'data', (data) -> print data.toString()
-  exe.stderr.on 'data', (data) -> print error data.toString()
+  exe.stderr.on 'data', (data) -> print data.toString()
   exe.on 'exit', (status) -> callback? status
+
+##### neatTask
+
+# Register a cake task that will run through Neat.
+#
+#     exports.taskName = neatTask
+#       name: 'taskName'                # required
+#       description: 'task description' # optional
+#       environment: 'production'       # optional
+#       action: -> ...                  # required
+neatTask = (options) ->
+  {name, description, action, environment} = options
+
+  throw new Error "Tasks must have a name" unless name?
+  throw new Error "Tasks must have an action" unless action?
+
+  taskAction = ->
+    Neat.defaultEnvironment = environment if environment?
+    Neat.initEnvironment()
+    action()
+
+  task name, description, taskAction
+  action
+
+##### asyncErrorTrap
+
+# Trap error returned by asynchronous function in the callback arguments
+# by generating a callback wrapper that will call the callback only if
+# no errors was received. The error arguments isn't passed to the callback.
+#
+#     fs.readFile "/path/to/file", asyncErrorTrap (content) ->
+#       # do something with content
+asyncErrorTrap = (callback) -> (err, args...) ->
+  return error "#{err.stack}\n" if err?
+  callback?.apply null, args
 
 module.exports = {
   aliases,
+  asyncErrorTrap,
   decorate,
   describe,
+  environment,
   help,
+  neatTask,
   run,
   usages,
-  environment,
 }

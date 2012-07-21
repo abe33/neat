@@ -1,3 +1,12 @@
 :plain
-  task '#{@name}', ->
-    # TODO Task goes here
+  Neat = require 'neat'
+  {run, neatTask} = Neat.require 'utils/commands'
+  {error, info, green, red, puts} = Neat.require 'utils/logs'
+
+  exports['#{@name}'] = neatTask
+    name:'#{@name}'
+    description: '#{@description || ''}'
+    environment: '#{@environment || 'default'}'
+    action: (callback) ->
+      # TODO Task goes here
+      callback?()
