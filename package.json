@@ -13,12 +13,11 @@
     "coffee-script": ">= 1.3.0",
     "haml-coffee": ">= 0.6.3",
     "mustache": ">= 0.4.0",
-    "docco": "git://github.com/abe33/docco.git#feature-exports"
-  },
-  "devDependencies": {
+    "docco": "git://github.com/abe33/docco.git#feature-exports",
     "coffeelint": "*",
-    "jasmine-node": "*"
+    "jasmine-node": "git://github.com/abe33/jasmine-node.git#patch-1"
   },
+  "devDependencies": {},
   "main": "./lib/index",
   "bin": {
     "neat": "./bin/neat"
