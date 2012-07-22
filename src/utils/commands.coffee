@@ -59,15 +59,31 @@ environment = (env, target) -> decorate target, 'environment', env
 
 ##### run
 
-# Runs the specified `command` with the passed-in `options`.
+# Runs the specified `command` with the passed-in `params`.
 # The `callback` is called on the command exit if provided.
 #
-#     run 'coffee', ['-pcb', 'console.log "foo"'], ->
-#       console.log 'command exited'
-run = (command, options, callback) ->
-  exe = spawn command, options
-  exe.stdout.on 'data', (data) -> print data.toString()
-  exe.stderr.on 'data', (data) -> print data.toString()
+#     run 'coffee', ['-pcb', 'console.log "foo"'], (status) ->
+#       console.log "command exited with status #{status}"
+#
+# You can also prevent the function to print the command output
+# or register your own output listeners using the `options` hash.
+#
+#     options =
+#       noStdout: true
+#       stdError: (data) -> # Do something with data
+#
+#     run 'coffee', ['src/*'], options, (status) ->
+#       console.log "command exited with status #{status}"
+run = (command, params, options, callback) ->
+  [callback, options] = [options, callback] if typeof options is 'function'
+
+  exe = spawn command, params
+
+  unless options?.noStdout?
+    exe.stdout.on 'data', options?.stdout || (data) -> print data.toString()
+  unless options?.noStderr?
+    exe.stderr.on 'data',  options?.stderr || (data) -> print data.toString()
+
   exe.on 'exit', (status) -> callback? status
 
 ##### neatTask
