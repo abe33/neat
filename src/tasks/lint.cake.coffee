@@ -7,7 +7,6 @@ Neat = require '../neat'
 
 COFFEE_LINT = "#{Neat.root}/node_modules/.bin/coffeelint"
 
-
 exports['lint'] = neatTask
   name:'lint'
   description: 'Lint the sources with coffee-lint'
