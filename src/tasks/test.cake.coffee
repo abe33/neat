@@ -14,6 +14,7 @@ test = (k,f) -> (callback) ->
 exports.test = neatTask
   name:'test'
   description: 'Tests the sources'
+  environment: 'test'
   action: (callback) ->
     Neat.task('compile') (status) ->
       if status is 0
