@@ -1,7 +1,7 @@
 path = require 'path'
 Neat = require '../neat'
 {run, neatTask} = Neat.require 'utils/commands'
-{error, info, green, red, puts, print} = Neat.require 'utils/logs'
+{error, info, green, red, puts, print, yellow} = Neat.require 'utils/logs'
 {find} = Neat.require 'utils/files'
 {queue} = Neat.require 'async'
 
