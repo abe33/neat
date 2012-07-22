@@ -20,9 +20,9 @@ cup = require "./utils/cup"
 class Neat
 
   ##### Neat::constructor
-  constructor: (@root) ->
+  constructor: (@ROOT) ->
     @defaultEnvironment = 'default'
-    @ROOT     = @root
+    @root     = @ROOT
     @neatRoot = @NEAT_ROOT = NEAT_ROOT
     # Paths where environments and initializers can be found.
     @envPath  = @ENV_PATH  = 'lib/config/environments'
@@ -33,9 +33,16 @@ class Neat
     # The environment object is defined asynchronously through
     # the `initEnvironment` or the `setEnvironment` methods.
     @env      = @ENV       = null
-    @meta     = @META      = @loadMeta()
+    # The `.neat` file at the root of a project contains the metadata
+    # for the project. In the case of Neat, the `.neat` file is loaded
+    # and available in `Neat.meta`.
+    @meta     = @META      = @loadMeta @neatRoot
 
-    @discoverUserPaths() if @root?
+    if @root?
+      @discoverUserPaths()
+      # The current project meta are available through `Neat.project`
+      # or `Neat.PROJECT`.
+      @project  = @PROJECT   = @loadMeta @root
 
   ##### Neat::require
 
@@ -194,11 +201,8 @@ class Neat
   ##### Neat::loadMeta
 
   # Loads and returns the meta contained in the `.neat` file.
-  loadMeta: ->
-    # The `.neat` file at the root of a project contains the metadata
-    # for the project. In the case of Neat, the `.neat` file is loaded
-    # and available in `Neat.meta`.
-    neatFilePath = "#{@neatRoot}/.neat"
+  loadMeta: (root) ->
+    neatFilePath = "#{root}/.neat"
 
     try
       neatFile = fs.readFileSync neatFilePath
