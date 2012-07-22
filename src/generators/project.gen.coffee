@@ -52,7 +52,6 @@ project = (generator, name, args..., callback) ->
     touchSync resolve path, "src/config/environments/.gitkeep"
     touchSync resolve path, "src/config/initializers/.gitkeep"
     touchSync resolve path, "templates/.gitkeep"
-    touchSync resolve path, "test/.gitkeep"
     touchSync resolve path, "test/fixtures/.gitkeep"
     touchSync resolve path, "test/spec/.gitkeep"
   catch e
