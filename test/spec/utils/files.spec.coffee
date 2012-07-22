@@ -51,33 +51,35 @@ describe 'findSiblingFileSync', ->
 
     file_d = "#{root}/foo/utils/files/folder/file_d"
 
-    expect(fu.findSiblingFileSync "#{file_d}.hamlc", roots, "test/fixtures", "*")
+    expect(fu.findSiblingFileSync "#{file_d}.hamlc",
+                                  roots, "test/fixtures", "*")
       .toBe("#{root}
             /test/fixtures/utils/files/folder/file_d/index.coffee".compact())
 
     expect(fu.findSiblingFileSync "#{file_d}.hamlc",
-                              roots,
-                              "test/fixtures",
-                              "coffee")
+                                  roots, "test/fixtures", "coffee")
       .toBe("#{root}
             /test/fixtures/utils/files/folder/file_d/index.coffee".compact())
 
-    expect(fu.findSiblingFileSync "#{file_d}.hamlc", roots, "test/fixtures", "js")
+    expect(fu.findSiblingFileSync "#{file_d}.hamlc",
+                                  roots, "test/fixtures", "js")
       .toBeUndefined()
 
   it 'should return void when there\'s no files that matches', ->
     roots = [root]
-    expect(fu.findSiblingFileSync "#{root}/foo/commands.hamlc", roots,
-           "test/fixtures", "coffee").toBeUndefined()
+    expect(fu.findSiblingFileSync "#{root}/foo/commands.hamlc",
+                                  roots, "test/fixtures", "coffee")
+      .toBeUndefined()
 
     expect(fu.findSiblingFileSync "#{root}/foo/bar",
-                              roots, "test/fixtures", "*")
+                                  roots, "test/fixtures", "*")
       .toBeUndefined()
 
   it 'should return void when start isn\'t in a neat project', ->
     roots = [root]
-    expect(fu.findSiblingFileSync "/usr/bin/foo/commands.hamlc", roots,
-           "test/fixtures", "coffee").toBeUndefined()
+    expect(fu.findSiblingFileSync "/usr/bin/foo/commands.hamlc",
+                                  roots, "test/fixtures", "coffee")
+      .toBeUndefined()
 
 
   describe 'when an array is passed as last argument', ->
@@ -85,7 +87,7 @@ describe 'findSiblingFileSync', ->
       roots = [root]
       a = []
       p = fu.findSiblingFileSync "#{root}/lib/commands.js",
-                             roots, "src", "*", a
+                                 roots, "src", "*", a
 
       expect(a).toContain("#{root}/src/commands")
       expect(a).toContain("#{root}/src/commands/index")

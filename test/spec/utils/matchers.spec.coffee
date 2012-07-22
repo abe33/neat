@@ -157,8 +157,8 @@ describe 'quacksLike', ->
     ]
 
     def = __definition__:
-        foo: 'number'
-        bar: 'number'
+      foo: 'number'
+      bar: 'number'
 
     expect(a.some _.quacksLike def).toBeTruthy()
     expect(a.every _.quacksLike def).toBeFalsy()

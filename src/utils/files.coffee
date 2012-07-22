@@ -181,8 +181,9 @@ findOnce = (pattern, ext, path, callback, output) ->
 
             output.push file for file in files if files?
 
-            # When a `pattern` is provided and the directory name match against it,
-            # the function will then look for the presence of an index file.
+            # When a `pattern` is provided and the directory name match
+            # against it, the function will then look for the presence
+            # of an index file.
             index = resolve path, "index.#{ext}"
             exists index, (b) ->
               if pattern? and p.match(pattern) and b
@@ -414,8 +415,8 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
                 # Looks for an index file in the directory.
                 dirWithIndex p, (ip) ->
                   if ip? and matchExtensions ip
-                      matches[roots.indexOf root] ||= []
-                      matches[roots.indexOf root].push ip
+                    matches[roots.indexOf root] ||= []
+                    matches[roots.indexOf root].push ip
                   cb?()
               else
                 # The path is a file, it'll ensure that the path match
