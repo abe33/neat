@@ -534,13 +534,13 @@ findSiblingFileSync = (path, roots, dir, exts..., paths) ->
 
             # Ensures that the index match the extension if provided.
             if ext isnt "*"
-              if p.match ///\.#{ext}$/// then return p else p = undefined
+              if p?.match ///\.#{ext}$/// then return p else p = undefined
             else
               return p
           # The path is a file, it'll ensure that the path match
           # the extension if provided.
           else if ext isnt "*"
-            if p.match ///\.#{ext}$/// then return p else p = undefined
+            if p?.match ///\.#{ext}$/// then return p else p = undefined
           else
             return p
   # Nothing was found, it returns undefined.
