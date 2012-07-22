@@ -3,7 +3,7 @@ Neat = require '../../../neat'
 {run} = require '../../../utils/commands'
 {error, red, yellow} = require '../../../utils/logs'
 
-JASMINE = "#{Neat.root}/node_modules/.bin/jasmine-node"
+JASMINE = "#{Neat.neatRoot}/node_modules/.bin/jasmine-node"
 
 module.exports = (config) ->
   config.engines.tests.jasmine = (callback) ->

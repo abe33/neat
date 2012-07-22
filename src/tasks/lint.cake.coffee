@@ -5,7 +5,7 @@ Neat = require '../neat'
 {find} = Neat.require 'utils/files'
 {queue} = Neat.require 'async'
 
-COFFEE_LINT = "#{Neat.root}/node_modules/.bin/coffeelint"
+COFFEE_LINT = "#{Neat.neatRoot}/node_modules/.bin/coffeelint"
 
 exports['lint'] = neatTask
   name:'lint'
