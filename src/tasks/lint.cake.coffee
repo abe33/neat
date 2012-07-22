@@ -1,8 +1,10 @@
 path = require 'path'
 Neat = require '../neat'
-{run, neatTask} = Neat.require 'utils/commands'
-{error, info, green, red, puts, print, yellow} = Neat.require 'utils/logs'
-{find} = Neat.require 'utils/files'
+{run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
+{
+  error, info, green, red, puts, print, yellow, missing
+} = Neat.require 'utils/logs'
+{find, findSiblingFile} = Neat.require 'utils/files'
 {queue} = Neat.require 'async'
 
 COFFEE_LINT = "#{Neat.neatRoot}/node_modules/.bin/coffeelint"
@@ -18,36 +20,43 @@ exports['lint'] = neatTask
                Run #{yellow 'neat install'} to install the dependencies."""
       return callback?()
 
-    errors = []
-    # Generates a command function that lint the specified `file`.
-    lint = (file) -> (callback) ->
-      params = ["-f", "lib/config/lint.json", file]
+    path = __filename
+    dir = 'lib/config'
+    findSiblingFile path, Neat.paths, dir, 'json', asyncErrorTrap (conf) ->
+      unless conf?
+        error missing "lint configuration"
+        return callback?()
 
-      logs = []
-      opts =
-        noStdout: true
-        stderr: (data) -> logs.push -> print data
+      errors = []
+      # Generates a command function that lint the specified `file`.
+      lint = (file) -> (callback) ->
+        params = ["-f", conf, file]
 
-      run 'coffeelint', params, opts, (status) ->
-        if status is 0
-          print green '.'
-        else
-          print red 'F'
-          errors.push ->
-            puts red "#{file.replace "#{Neat.root}/", ''} is not ok"
-            log() for log in logs
+        logs = []
+        opts =
+          noStdout: true
+          stderr: (data) -> logs.push -> print data
 
-        callback?()
+        run 'coffeelint', params, opts, (status) ->
+          if status is 0
+            print green '.'
+          else
+            print red 'F'
+            errors.push ->
+              puts red "#{file.replace "#{Neat.root}/", ''} is not ok"
+              log() for log in logs
 
-    paths = ["#{Neat.root}/src", "#{Neat.root}/test"]
+          callback?()
 
-    files = find 'coffee', paths, (err, files) ->
-      queue (lint file for file in files), ->
-        puts ''
+      paths = ["#{Neat.root}/src", "#{Neat.root}/test"]
 
-        if errors.length is 0
-          info green 'All files linted'
-        else
-          error() for error in errors
+      files = find 'coffee', paths, (err, files) ->
+        queue (lint file for file in files), ->
+          puts ''
 
-        callback?()
+          if errors.length is 0
+            info green 'All files linted'
+          else
+            error() for error in errors
+
+          callback?()
