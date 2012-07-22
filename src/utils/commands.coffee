@@ -80,12 +80,13 @@ run = (command, options, callback) ->
 #       environment: 'production'       # optional
 #       action: -> ...                  # required
 neatTask = (options) ->
-  {name, description, action, environment} = options
+  {name, action, description, environment} = options
 
   throw new Error "Tasks must have a name" unless name?
   throw new Error "Tasks must have an action" unless action?
 
   taskAction = ->
+    {action, environment} = options
     Neat.defaultEnvironment = environment if environment?
     Neat.initEnvironment()
     action()
