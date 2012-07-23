@@ -28,8 +28,13 @@ exports['lint'] = neatTask
         return callback?()
 
       errors = []
+      allfiles = 0
+      linted = 0
+      failed = 0
+      allerrors = 0
       # Generates a command function that lint the specified `file`.
       lint = (file) -> (callback) ->
+        allfiles += 1
         params = ["-f", conf, file]
 
         logs = []
@@ -40,10 +45,13 @@ exports['lint'] = neatTask
         run 'coffeelint', params, opts, (status) ->
           if status is 0
             print green '.'
+            linted += 1
           else
             print red 'F'
+            failed += 1
             errors.push ->
               puts red "#{file.replace "#{Neat.root}/", ''} is not ok"
+              allerrors += logs.length
               log() for log in logs
 
           callback?()
@@ -55,8 +63,15 @@ exports['lint'] = neatTask
           puts ''
 
           if errors.length is 0
-            info green 'All files linted'
+            info green "All files linted (#{allfiles})"
           else
             error() for error in errors
+
+            puts "\n
+                  #{allfiles} files,
+                  #{green "#{linted} linted"},
+                  #{red "#{failed} failed"},
+                  #{red "#{allerrors} error#{'s' if allerrors > 0}"}
+                 ".squeeze()
 
           callback?()
