@@ -566,13 +566,6 @@ isNeatRoot = (dir, callback) ->
 isNeatRootSync = (dir) ->
   existsSync resolve dir, ".neat"
 
-##### noExtension
-
-# Removes all the extensions from a file name.
-#
-#     noExtension 'foo.bar.baz' # 'foo'
-noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
-
 ##### neatRoot
 
 # Finds the first Neat project root directory starting from `path`
@@ -609,6 +602,46 @@ neatRootSync = (path=".") ->
   else
     parentPath = resolve path, ".."
     neatRootSync parentPath unless parentPath is path
+
+##### noExtension
+
+# Removes all the extensions from a file name.
+#
+#     noExtension 'foo.bar.baz' # 'foo'
+noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
+
+##### rm
+
+rm = (path, callback) ->
+  rmIteration = (path) -> (callback) -> rm path, callback
+
+  exists path, (exist) ->
+    if exist
+      fs.lstat path, (err, stats) ->
+        return callback? err if err?
+        if stats.isDirectory()
+          fs.readdir path, (err, paths) ->
+            callback? err if err?
+            parallel (rmIteration "#{path}/#{p}" for p in paths), ->
+              fs.rmdir path, (err) ->
+                callback? err
+        else
+          fs.unlink path, (err) ->
+            callback? err
+    else
+      callback?()
+
+##### rmSync
+
+rmSync = (path) ->
+  if existsSync path
+    stats = fs.lstatSync path
+    if stats.isDirectory()
+      paths = fs.readdirSync path
+      rmSync "#{path}/#{p}" for p in paths if paths?
+      fs.rmdirSync path
+    else
+      fs.unlinkSync path
 
 ##### touch
 
@@ -658,6 +691,8 @@ module.exports = {
   neatRoot,
   neatRootSync,
   noExtension,
+  rm,
+  rmSync,
   touch,
   touchSync,
 }

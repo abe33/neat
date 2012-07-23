@@ -518,3 +518,30 @@ describe 'touch', ->
         expect(err).not.toBeNull()
         expect(created).toBeFalsy()
         done()
+
+describe 'rmSync', ->
+  beforeEach ->
+    fs.mkdirSync "#{root}/test/fixtures/utils/files/rm"
+    fs.mkdirSync "#{root}/test/fixtures/utils/files/rm/foo"
+    fs.mkdirSync "#{root}/test/fixtures/utils/files/rm/bar"
+    fs.writeFileSync "#{root}/test/fixtures/utils/files/rm/foo/index", ""
+    fs.writeFileSync "#{root}/test/fixtures/utils/files/rm/bar/index", ""
+
+  it 'should remove all the files and directories recursively', ->
+    fu.rmSync "#{root}/test/fixtures/utils/files/rm"
+
+    expect(existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
+
+describe 'rm', ->
+  beforeEach ->
+    fs.mkdirSync "#{root}/test/fixtures/utils/files/rm"
+    fs.mkdirSync "#{root}/test/fixtures/utils/files/rm/foo"
+    fs.mkdirSync "#{root}/test/fixtures/utils/files/rm/bar"
+    fs.writeFileSync "#{root}/test/fixtures/utils/files/rm/foo/index", ""
+    fs.writeFileSync "#{root}/test/fixtures/utils/files/rm/bar/index", ""
+
+  it 'should remove all the files and directories recursively', (done) ->
+    fu.rm "#{root}/test/fixtures/utils/files/rm", (err) ->
+
+      expect(existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
+      done()
