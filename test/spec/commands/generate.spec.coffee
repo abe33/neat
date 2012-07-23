@@ -1,20 +1,11 @@
 fs = require 'fs'
 {resolve, existsSync:eS} = require 'path'
 {run} = require resolve __dirname, '../../../lib/utils/commands'
+{rmSync:rm} = require resolve __dirname, '../../../lib/utils/files'
 
 TEST_ROOT = resolve '.'
 FIXTURES_ROOT = resolve __dirname, '../../../test/fixtures/commands/generate'
 NEAT_BIN = resolve __dirname, '../../../bin/neat'
-
-rm = (path) ->
-  if eS path
-    stats = fs.lstatSync path
-    if stats.isDirectory()
-      paths = fs.readdirSync path
-      rm "#{path}/#{p}" for p in paths if paths?
-      fs.rmdirSync path
-    else
-      fs.unlinkSync path
 
 describe '`neat generate', ->
   beforeEach ->
