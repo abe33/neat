@@ -1,0 +1,4 @@
+:plain
+  npm 'neat', '#{@version}'
+
+  # TODO: Dependencies goes here
