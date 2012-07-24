@@ -18,4 +18,3 @@ module.exports = (config) ->
   config.docco =
     paths:
       sources: sources.compact()
-

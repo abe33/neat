@@ -29,7 +29,8 @@ project = (generator, name, args..., callback) ->
     touchSync gitignore, render resolve(tplpath, ".gitignore")
     touchSync npmignore, render resolve(tplpath, ".npmignore")
     touchSync neatfile,  render resolve(tplpath, ".neat"), name: name
-    touchSync nemfile,   render resolve(tplpath, "Nemfile")
+    touchSync nemfile,   render resolve(tplpath, "Nemfile"),
+                                version: Neat.meta.version
     touchSync cakefile,  render resolve(tplpath, "Cakefile")
 
     ensureSync resolve path, "lib"
