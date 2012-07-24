@@ -4,7 +4,6 @@ Neat = require '../neat'
 {neatTask} = require '../utils/commands'
 {error, info, green, red, yellow, puts} = require '../utils/logs'
 
-
 test = (k,f) -> (callback) ->
   puts yellow "Running tests using #{k.capitalize()}:"
   f ->

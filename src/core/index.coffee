@@ -1,7 +1,4 @@
-require './types/object'
-require './types/string'
-require './types/number'
-require './types/array'
+require './types'
 
 module.exports =
   Module: require './module'
