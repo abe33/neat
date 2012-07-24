@@ -8,8 +8,8 @@
     return error "No program provided to #{@name}" unless pr?
 
     aliases '#{@name}',
-    describe "#{@description || 'TODO: Description goes here'}",
-    environment '#{@environment || 'default'}',
+    describe "#{@description or 'TODO: Description goes here'}",
+    environment '#{@environment or 'default'}',
     cmd = (cb)->
       # TODO: Command goes here
 
