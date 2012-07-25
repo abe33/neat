@@ -29,20 +29,20 @@ class Neat
     @initPath = @INIT_PATH = 'lib/config/initializers'
     # `PATHS` will stores the various paths into which Neat will look
     # when searching files.
-    @paths    = @PATHS     = [@neatRoot]
+    @paths = @PATHS = [@neatRoot]
     # The environment object is defined asynchronously through
     # the `initEnvironment` or the `setEnvironment` methods.
-    @env      = @ENV       = null
+    @env = @ENV = null
     # The `.neat` file at the root of a project contains the metadata
     # for the project. In the case of Neat, the `.neat` file is loaded
     # and available in `Neat.meta`.
-    @meta     = @META      = @loadMeta @neatRoot
+    @meta = @META = @loadMeta @neatRoot
 
     if @root?
       @discoverUserPaths()
       # The current project meta are available through `Neat.project`
       # or `Neat.PROJECT`.
-      @project  = @PROJECT   = @loadMeta @root
+      @project = @PROJECT = @loadMeta @root
 
   ##### Neat::require
 
