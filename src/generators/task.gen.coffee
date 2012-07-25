@@ -5,6 +5,6 @@ fs = require 'fs'
 
 usages 'neat generate tasks [name]',
 describe 'Generates a [name] task in the tasks directory',
-task = namedEntity __filename, 'tasks', 'cake.coffee'
+task = namedEntity __filename, 'src/tasks', 'cake.coffee'
 
 module.exports = {task}

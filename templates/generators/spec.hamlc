@@ -1,0 +1,4 @@
+:plain
+  describe '#{@name}', ->
+    it 'should be falsy', ->
+      expect(true).toBeFalsy()

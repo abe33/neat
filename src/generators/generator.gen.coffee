@@ -5,7 +5,7 @@ fs = require 'fs'
 
 usages 'neat generate generator [name]',
 describe 'Generates a [name] generator in the generators directory',
-generator = namedEntity __filename, 'generators', 'gen.coffee'
+generator = namedEntity __filename, 'src/generators', 'gen.coffee'
 
 module.exports = {generator}
 

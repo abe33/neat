@@ -5,6 +5,6 @@ fs = require 'fs'
 
 usages 'neat generate command [name]',
 describe 'Generates a [name] command in the commands directory',
-command = namedEntity __filename, 'commands', 'cmd.coffee'
+command = namedEntity __filename, 'src/commands', 'cmd.coffee'
 
 module.exports = {command}

@@ -22,7 +22,7 @@ namedEntity = (src, dir, ext, requireNeat=true) ->
 
                       #{err.stack}""" if err?
 
-      dir = resolve Neat.root,"src/#{dir}/#{a.join '/'}"
+      dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
       ensurePathSync dir
       path = resolve dir, "#{name}.#{ext}"
       fs.writeFile path, data, (err) ->

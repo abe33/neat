@@ -5,6 +5,6 @@ fs = require 'fs'
 
 usages 'neat generate initializer [name]',
 describe 'Generates a [name] initializer in the config/initializers directory',
-initializer = namedEntity __filename, 'config/initializers', 'coffee'
+initializer = namedEntity __filename, 'src/config/initializers', 'coffee'
 
 module.exports = {initializer}

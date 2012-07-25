@@ -128,6 +128,27 @@ describe '`neat generate', ->
 
         done()
 
+  describe 'spec foo`', ->
+    beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
+
+    it 'should generate a new spec foo in the project', (done) ->
+      run 'node', [NEAT_BIN, 'generate', 'spec', 'foo'], (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/spec/foo.spec.coffee"
+        expect(eS path).toBeTruthy()
+
+        done()
+
+  describe 'spec bar/foo`', ->
+    beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
+
+    it 'should generate a new spec foo in the project', (done) ->
+      run 'node', [NEAT_BIN, 'generate', 'spec', 'bar/foo'], (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/spec/bar/foo.spec.coffee"
+        expect(eS path).toBeTruthy()
+
+        done()
+
+
   describe 'package`', ->
     beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
 
