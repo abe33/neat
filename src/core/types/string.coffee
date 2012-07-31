@@ -62,6 +62,10 @@ def String, center: (width=0, pad=' ') ->
 #     'aa bb     cc   dd'.compact() # 'aabbccdd'
 def String, compact: -> @replace /\s+/g, ''
 
+##### String::empty
+
+def String, empty: -> @length is 0
+
 ##### String::padLeft
 
 # Returns a string padded on the left with `pad` of an amount equal to `left`.
