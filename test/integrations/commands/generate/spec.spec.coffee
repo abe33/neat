@@ -9,6 +9,7 @@ withProject 'foo', ->
         path = inProject "test/units/foo.spec.coffee"
         expect(path).toExist()
         expect(path).toContain("describe 'foo', ->")
+        expect(path).toContain("require '../test_helper'")
 
         done()
 
@@ -18,6 +19,7 @@ withProject 'foo', ->
         path = inProject "test/units/bar/foo.spec.coffee"
         expect(path).toExist()
         expect(path).toContain("describe 'foo', ->")
+        expect(path).toContain("require '../../test_helper'")
 
         done()
 
@@ -27,6 +29,7 @@ withProject 'foo', ->
         path = inProject "test/functionals/foo.spec.coffee"
         expect(path).toExist()
         expect(path).toContain("describe 'foo', ->")
+        expect(path).toContain("require '../test_helper'")
 
         done()
 
@@ -37,6 +40,7 @@ withProject 'foo', ->
         path = inProject "test/functionals/bar/foo.spec.coffee"
         expect(path).toExist()
         expect(path).toContain("describe 'foo', ->")
+        expect(path).toContain("require '../../test_helper'")
 
         done()
 
@@ -47,6 +51,7 @@ withProject 'foo', ->
         path = inProject "test/integrations/foo.spec.coffee"
         expect(path).toExist()
         expect(path).toContain("describe 'foo', ->")
+        expect(path).toContain("require '../test_helper'")
 
         done()
 
@@ -57,5 +62,6 @@ withProject 'foo', ->
         path = inProject "test/integrations/bar/foo.spec.coffee"
         expect(path).toExist()
         expect(path).toContain("describe 'foo', ->")
+        expect(path).toContain("require '../../test_helper'")
 
         done()

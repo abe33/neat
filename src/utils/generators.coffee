@@ -8,7 +8,7 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {render} = require resolve utils, "templates"
 {error, info, missing, notOutsideNeat} = require resolve utils, "logs"
 
-namedEntity = (src, dir, ext, requireNeat=true) ->
+namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
   (generator, name, args..., cb) ->
     if requireNeat
       return notOutsideNeat process.argv.join " " unless Neat.root?
@@ -16,17 +16,19 @@ namedEntity = (src, dir, ext, requireNeat=true) ->
 
     a = name.split '/'
     name = a.pop()
+    dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
+    path = resolve dir, "#{name}.#{ext}"
+
     context = if args.empty() then {} else hashArguments args
-    context.merge {name}
+    context.merge ctx
+    context.merge {name, path, dir}
 
     render src, context, (err, data) ->
       return error """#{missing "Template for #{src}"}
 
                       #{err.stack}""" if err?
 
-      dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
       ensurePathSync dir
-      path = resolve dir, "#{name}.#{ext}"
       fs.writeFile path, data, (err) ->
         return error("""#{"Can't write #{path}".red}
 

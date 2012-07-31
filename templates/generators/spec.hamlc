@@ -1,4 +1,6 @@
 :plain
+  require '#{@relative @dir, @testPath}/test_helper'
+
   describe '#{@name}', ->
     it 'should be falsy', ->
       expect(true).toBeFalsy()
