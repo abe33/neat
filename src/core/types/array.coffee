@@ -1,6 +1,7 @@
 # This file contains Array's extensions that mimics some of the ruby
 # Array methods.
 # @toc
+{def} = require './utils'
 
 #### Class Extensions
 
@@ -17,7 +18,7 @@ Array.isArray = (a) -> a?.type() is 'array'
 # Returns a new array without all the undefined elements of the previous array.
 #
 #     ['foo', null, 10].compact() # ['foo', 10]
-Array::compact = -> @select (el) -> el?
+def Array, compact: -> @select (el) -> el?
 
 ##### Array::empty
 
@@ -25,14 +26,14 @@ Array::compact = -> @select (el) -> el?
 #
 #     [].empty()      # true
 #     ['foo'].empty() # false
-Array::empty = -> @length is 0
+def Array, empty: -> @length is 0
 
 ##### Array::first
 
 # Returns the first element in this array.
 #
 #     ['foo', 'bar'].first() # 'foo'
-Array::first = -> if @length > 0 then @[0] else undefined
+def Array, first: -> if @length > 0 then @[0] else undefined
 
 ##### Array::flatten
 
@@ -44,7 +45,7 @@ Array::first = -> if @length > 0 then @[0] else undefined
 #     [0, [1, 2, [3, 4, [5]]]].flatten()  # [0, 1, 2, 3, 4, 5]
 #     [0, [1, 2, [3, 4, [5]]]].flatten(1) # [0, 1, 2, [3, 4, [5]]]
 #     [0, [1, 2, [3, 4, [5]]]].flatten(2) # [0, 1, 2, 3, 4, [5]]
-Array::flatten = (level = Infinity) ->
+def Array, flatten: (level = Infinity) ->
   level = Infinity if level < 0
   a = []
   for el in this
@@ -61,7 +62,7 @@ Array::flatten = (level = Infinity) ->
 #
 #     ['foo', 'bar', 'baz'].group 2
 #     # [['foo', 'bar'], ['baz']]
-Array::group = (size) ->
+def Array, group: (size) ->
   a = []; @step(size, -> a.push (v for v in arguments)); return a
 
 ##### Array::last
@@ -69,21 +70,21 @@ Array::group = (size) ->
 # Returns the last element in this array.
 #
 #     ['foo', 'bar'].last() # 'bar'
-Array::last = -> if @length > 0 then @[@length-1] else undefined
+def Array, last: -> if @length > 0 then @[@length-1] else undefined
 
 ##### Array::max
 
 # Returns the maximum value contained in this array.
 #
 #     [0, 10, 20, 30].max() # 30
-Array::max = -> Math.max.apply null, this
+def Array, max: -> Math.max.apply null, this
 
 ##### Array::min
 
 # Returns the minimum value contained in this array.
 #
 #     [0, 10, 20, 30].min() # 0
-Array::min = -> Math.min.apply null, this
+def Array, min: -> Math.min.apply null, this
 
 ##### Array::reject
 
@@ -93,7 +94,7 @@ Array::min = -> Math.min.apply null, this
 #
 #     ['foo', 'bar', 'baz'].reject (v) -> v.substr(0, 1) is "b"
 #     # ['foo']
-Array::reject = (f) -> o for o in this when not f? o
+def Array, reject: (f) -> o for o in this when not f? o
 
 ##### Array::rotate
 
@@ -104,7 +105,7 @@ Array::reject = (f) -> o for o in this when not f? o
 #     ['a', 'b', 'c', 'd'].rotate()   # ['b', 'c', 'd', 'a']
 #     ['a', 'b', 'c', 'd'].rotate(2)  # ['c', 'd', 'a', 'b']
 #     ['a', 'b', 'c', 'd'].rotate(-1) # ['d', 'a', 'b', 'c']
-Array::rotate = (amount=1) ->
+def Array, rotate: (amount=1) ->
   amount = 1 if amount is 0
   direction = amount > 0
   out = @concat()
@@ -123,7 +124,7 @@ Array::rotate = (amount=1) ->
 #
 #     ['foo', 'bar', 'baz'].select (v) -> v.substr(0, 1) is "b"
 #     # ['bar', 'baz']
-Array::select = (f) -> o for o in this when f? o
+def Array, select: (f) -> o for o in this when f? o
 
 ##### Array::step
 
@@ -132,7 +133,7 @@ Array::select = (f) -> o for o in this when f? o
 #     ['foo', 'bar', 'baz'].step 2, (a, b) -> console.log a, b
 #     # 'foo' 'bar'
 #     # 'baz' undefined
-Array::step = (n,f) ->
+def Array, step: (n,f) ->
   f?.apply this, @[i*n..i*n + n-1] for i in [0..Math.ceil(@length / n)-1]
 
 ##### Array::uniq
@@ -140,7 +141,7 @@ Array::step = (n,f) ->
 # Returns a new array where all values are unique.
 #
 #     ['foo', 'foo', 'bar'].uniq() # ['foo', 'bar']
-Array::uniq = ->
+def Array, uniq: ->
   out = []
   out.push v for v in this when v not in out
   out
