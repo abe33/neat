@@ -1,6 +1,10 @@
+- indent = (s, l) -> s.padLeft(l).replace(/\n/gm, "\n#{String.fill l}" )
+
 - if @title?
   != "#{@title}\n"
 
 - for k,v of @list
-  - description = if v.description? then " - #{v.description}" else ''
-  != "  * #{k.cyan}#{description}"
+  - description = if v.description? then v.description else ''
+  != indent k.yellow, 2
+  != indent description, 4
+  != ""
