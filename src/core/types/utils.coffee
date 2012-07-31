@@ -10,9 +10,8 @@
 #     {foo: 10}.merge bar: 20 # {foo: 10, bar: 20}
 def = (ctor, o) ->
   for name, value of o
-    unless ctor.prototype[name]?
-      Object.defineProperty? ctor.prototype,
-                             name,
-                             enumerable: false, value: value
+    Object.defineProperty? ctor.prototype,
+                           name,
+                           enumerable: false, value: value, writable: true
 
 module.exports = {def}
