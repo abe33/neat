@@ -1,6 +1,0 @@
-:plain
-  name: "#{@name}"
-  version: "0.0.1"
-  author: "#{@author or 'TODO: Your name goes here'}"
-  keywords: ["TODO: Module keywords goes here"]
-

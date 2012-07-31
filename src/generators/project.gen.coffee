@@ -1,16 +1,18 @@
 {resolve, existsSync:exists, basename, extname} = require 'path'
 Neat = require '../neat'
-{puts, error, warn, missing, neatBroken} = require resolve Neat.neatRoot,
-                                                           "lib/utils/logs"
-{ensureSync, touchSync} = require resolve Neat.neatRoot, "lib/utils/files"
-{namespace} = require resolve Neat.neatRoot, "lib/utils/exports"
-{renderSync:render} = require resolve Neat.neatRoot, "lib/utils/templates"
-{usages, describe} = require resolve Neat.neatRoot, "lib/utils/commands"
+{puts, error, warn, missing, neatBroken} = Neat.require "utils/logs"
+{ensureSync, touchSync} = Neat.require "utils/files"
+{namespace} = Neat.require "utils/exports"
+{renderSync:render} = Neat.require "utils/templates"
+{usages, describe, hashArguments} = Neat.require "utils/commands"
 
-usages 'neat generate project [name]',
-describe 'Creates a [name] directory with the default neat project content',
+usages 'neat generate project <name> {description, author, keywords}',
+describe '''Creates a <name> directory with the default neat project content
+            Description, author and keywords can be defined using the hash
+            arguments.''',
 project = (generator, name, args..., callback) ->
   return error "Missing name argument" unless name?
+  args.push callback if args.length is 0 and typeof callback isnt 'function'
 
   path = resolve '.', name
   base = basename __filename
@@ -23,15 +25,17 @@ project = (generator, name, args..., callback) ->
   nemfile   = resolve path, "Nemfile"
   cakefile  = resolve path, "Cakefile"
 
+  context = if args.empty() then {} else hashArguments args
+  context.merge {name, version: Neat.meta.version}
+
   ensureSync path
 
   try
-    touchSync gitignore, render resolve(tplpath, ".gitignore")
-    touchSync npmignore, render resolve(tplpath, ".npmignore")
-    touchSync neatfile,  render resolve(tplpath, ".neat"), name: name
-    touchSync nemfile,   render resolve(tplpath, "Nemfile"),
-                                version: Neat.meta.version
-    touchSync cakefile,  render resolve(tplpath, "Cakefile")
+    touchSync gitignore, render resolve(tplpath, ".gitignore"), context
+    touchSync npmignore, render resolve(tplpath, ".npmignore"), context
+    touchSync neatfile,  render resolve(tplpath, ".neat"), context
+    touchSync nemfile,   render resolve(tplpath, "Nemfile"), context
+    touchSync cakefile,  render resolve(tplpath, "Cakefile"), context
 
     ensureSync resolve path, "lib"
     ensureSync resolve path, "src"
@@ -56,7 +60,7 @@ project = (generator, name, args..., callback) ->
     touchSync resolve path, "src/config/initializers/.gitkeep"
     touchSync resolve path, "templates/.gitkeep"
     touchSync resolve(path, "test/test_helper.coffee"),
-              render resolve(tplpath, "test/test_helper")
+              render resolve(tplpath, "test/test_helper"), context
     touchSync resolve path, "test/fixtures/.gitkeep"
     touchSync resolve path, "test/units/.gitkeep"
     touchSync resolve path, "test/functionals/.gitkeep"

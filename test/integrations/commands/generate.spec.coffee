@@ -20,10 +20,35 @@ describe '`neat generate', ->
 
         eS @actual
 
+      toContain: (matcher) ->
+        actual = @actual
+        notText = if @isNot then " not" else ""
+
+        @message = ->
+         """Expected content:
+            #{@content}
+            of file #{actual}#{notText} to contains "#{@expected}" """
+
+        @content = fs.readFileSync(@actual).toString()
+        if typeof matcher is 'function'
+          matcher.call this, @content
+        else
+          @expected = matcher
+          @content.indexOf(@expected) >= 0
+
     process.chdir FIXTURES_ROOT
     ended = false
     runs ->
-      run 'node', [NEAT_BIN, 'generate', 'project', 'foo'], (status) ->
+      args = [
+        NEAT_BIN,
+        'generate',
+        'project',
+        'foo',
+        'author:"John Doe"',
+        'keywords:foo,bar,baz'
+        'description:"a description"'
+      ]
+      run 'node', args, (status) ->
         ended = true
     waitsFor (-> ended), 'Timed out', 1000
 
@@ -32,8 +57,16 @@ describe '`neat generate', ->
     rm "#{FIXTURES_ROOT}/foo"
 
   describe 'project foo`', ->
+    it 'should generates the neat manifest for the new project', ->
+      p = "#{FIXTURES_ROOT}/foo/.neat"
+      expect(p).toExist()
+      expect(p).toContain('name: "foo"')
+      expect(p).toContain('version: "0.0.1"')
+      expect(p).toContain('author: "John Doe"')
+      expect(p).toContain('description: "a description"')
+      expect(p).toContain('keywords: ["foo", "bar", "baz"]')
+
     it 'should generates a project in the current directory', ->
-      expect("#{FIXTURES_ROOT}/foo/.neat").toExist()
       expect("#{FIXTURES_ROOT}/foo/.gitignore").toExist()
       expect("#{FIXTURES_ROOT}/foo/.npmignore").toExist()
       expect("#{FIXTURES_ROOT}/foo/Cakefile").toExist()
@@ -60,11 +93,53 @@ describe '`neat generate', ->
     beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
 
     it 'should generate a new command foo in the project', (done) ->
-      run 'node', [NEAT_BIN, 'generate', 'command', 'foo'], (status) ->
-
+      args = [
+        NEAT_BIN,
+        'generate',
+        'command',
+        'foo',
+      ]
+      run 'node', args, (status) ->
         expect("#{FIXTURES_ROOT}/foo/src/commands/foo.cmd.coffee")
           .toExist()
 
+        done()
+
+    it 'should defines the properties of the command according
+        to the hash arguments provided'.squeeze(), (done) ->
+      args = [
+        NEAT_BIN,
+        'generate',
+        'command',
+        'foo',
+        'description:"a description"',
+        'usages:foo,bar,baz',
+        'environment:production',
+      ]
+      run 'node', args, (status) ->
+        p = "#{FIXTURES_ROOT}/foo/src/commands/foo.cmd.coffee"
+
+        expect(p).toContain("foo = (pr) ->")
+        expect(p).toContain("module.exports = {foo}")
+        expect(p).toContain("aliases 'foo',")
+        expect(p).toContain("describe 'a description',")
+        expect(p).toContain("usages 'foo', 'bar', 'baz',")
+        expect(p).toContain("environment 'production',")
+        done()
+
+    it 'should defines the usage even when there is only one
+        provided'.squeeze(), (done) ->
+      args = [
+        NEAT_BIN,
+        'generate',
+        'command',
+        'foo',
+        'usages:foo',
+      ]
+      run 'node', args, (status) ->
+        p = "#{FIXTURES_ROOT}/foo/src/commands/foo.cmd.coffee"
+
+        expect(p).toContain("usages 'foo',")
         done()
 
   describe 'command bar/foo`', ->
