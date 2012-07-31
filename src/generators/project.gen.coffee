@@ -55,8 +55,24 @@ project = (generator, name, args..., callback) ->
     touchSync resolve path, "lib/.gitkeep"
     touchSync resolve path, "src/commands/.gitkeep"
     touchSync resolve path, "src/generators/.gitkeep"
+
     touchSync resolve path, "src/tasks/.gitkeep"
-    touchSync resolve path, "src/config/environments/.gitkeep"
+    touchSync resolve(path, "src/config/environments/default.coffee"),
+              render resolve(tplpath, "src/config/environments/default"),
+                     context
+
+    touchSync resolve(path, "src/config/environments/test.coffee"),
+              render resolve(tplpath, "src/config/environments/test"),
+                     context
+
+    touchSync resolve(path, "src/config/environments/development.coffee"),
+              render resolve(tplpath, "src/config/environments/development"),
+                     context
+
+    touchSync resolve(path, "src/config/environments/production.coffee"),
+              render resolve(tplpath, "src/config/environments/production"),
+                     context
+
     touchSync resolve path, "templates/.gitkeep"
     touchSync resolve path, "test/fixtures/.gitkeep"
     touchSync resolve path, "test/units/.gitkeep"

@@ -10,7 +10,6 @@ options = {}
 
 withBundledProject 'foo', ->
   afterEach ->
-    process.chdir TEST_ROOT
     run 'rm', ['-rf', @projectPath]
 
   describe 'running `neat docco`', ->
@@ -25,7 +24,7 @@ withBundledProject 'foo', ->
           ended = true
 
         waitsFor progress(-> ended), 'Timed out', 50000
-, noAfter: true, init: (callback) ->
+, noCleaning: true, init: (callback) ->
   args = [NEAT_BIN, 'generate', 'command', 'foo']
   run 'node', args, options, (status) ->
     run 'cake', ['compile'], options, (status) ->

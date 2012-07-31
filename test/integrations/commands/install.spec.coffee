@@ -4,7 +4,6 @@ Neat = require '../../../lib/neat'
 
 withProject 'foo', ->
   afterEach ->
-    process.chdir TEST_ROOT
     run 'rm', ['-rf', @projectPath]
 
   describe 'running `neat install`', ->
@@ -17,4 +16,4 @@ withProject 'foo', ->
           ended = true
 
         waitsFor progress(-> ended), 'Timed out', 50000
-, noAfter: true
+, noCleaning: true

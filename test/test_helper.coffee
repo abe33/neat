@@ -12,13 +12,15 @@ global.TEST_ROOT = resolve '.'
 global.FIXTURES_ROOT = '/tmp'
 global.NEAT_BIN = resolve __dirname, '../bin/neat'
 
-global.progress = (f) -> ->
-  res = f.apply(this, arguments)
-  print '\b'
-  p = Math.round(new Date().getMilliseconds() / 60) % 4
-  print if res then '.'.green else '|/-\\'[p]
-  res
-
+cursor = 0
+global.progress = (f) ->
+  oldRes = false
+  ->
+    res = f.apply(this, arguments)
+    p = Math.round(new Date().getMilliseconds() / 60) % 4
+    setTimeout (-> print "\b" unless oldRes), 10
+    print "#{'|/-\\'[p]}" unless res
+    oldRes = res
 
 global.addFileMatchers = (scope) ->
   scope.addMatchers
@@ -80,10 +82,11 @@ global.withProject = (name, desc=null, block, opts) ->
 
       waitsFor progress(-> ended), 'Timed out', 1000
 
-    unless opts?.noAfter
-      afterEach ->
-        process.chdir TEST_ROOT
+    afterEach ->
+      process.chdir TEST_ROOT
+      unless opts?.noCleaning
         rm @projectPath if eS @projectPath
+
 
     block.call(this)
 

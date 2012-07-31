@@ -8,4 +8,3 @@ module.exports = (config) ->
     logging: {}
 
   config.defaultLoggingEngine = 'console'
-
