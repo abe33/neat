@@ -110,6 +110,16 @@ def Object, length: -> @keys().length
 #     {foo: 10, bar: 20}.last() # ['bar', 20]
 def Object, last: -> if @empty() then null else @flatten().group(2).last()
 
+##### Object::map
+
+# Iterates over the current object enumerable properties and
+# creates a new object with the mapping function's return.
+#
+#     source = {foo: 10, bar: 50}
+#     result = source.map (k,v) -> ["_#{k}_", v * 100]
+#     # {_foo_: 1000, _bar_: 5000}
+def Object, map: (f) -> Object.new (f(k,v) for k,v of this).flatten()
+
 ##### Object::merge
 
 # Merge the enumerable properties of `o` into this object.

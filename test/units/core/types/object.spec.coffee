@@ -278,8 +278,8 @@ describe 'Object::empty', ->
 describe 'Object::first', ->
   it 'should return a tuple containing the first key:value', ->
     o =
-      foo:10
-      bar:20
+      foo: 10
+      bar: 20
 
     expect(o.first()).toEqual(['foo',10])
 
@@ -289,12 +289,22 @@ describe 'Object::first', ->
 describe 'Object::last', ->
   it 'should return a tuple containing the last key:value', ->
     o =
-      foo:10
-      bar:20
+      foo: 10
+      bar: 20
 
     expect(o.last()).toEqual(['bar',20])
 
   it 'should return null if the object is empty', ->
     expect({}.last()).toBeNull()
 
+describe 'Object::map', ->
+  it 'should map the properties of an object to another object
+      with the mapping function provided', ->
 
+    source =
+      foo: 10
+      bar: "foo"
+
+    result = source.map (k,v) -> ["_#{k}_", v]
+
+    expect(result).toEqual(_foo_: 10, _bar_: "foo")
