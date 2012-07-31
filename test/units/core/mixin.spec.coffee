@@ -1,3 +1,4 @@
+require '../../test_helper'
 {Module, Mixin} = require '../../../lib/core'
 
 describe Mixin, ->

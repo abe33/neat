@@ -1,3 +1,4 @@
+require '../../test_helper'
 fs = require 'fs'
 {resolve, existsSync} = require "path"
 

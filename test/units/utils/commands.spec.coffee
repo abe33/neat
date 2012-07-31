@@ -1,3 +1,4 @@
+require '../../test_helper'
 {resolve} = require "path"
 cmd = require "../../../lib/utils/commands"
 

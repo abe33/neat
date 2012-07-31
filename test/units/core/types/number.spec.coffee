@@ -1,4 +1,4 @@
-require '../../../../lib/core'
+require '../../../test_helper'
 
 describe 'Number::times', ->
   it 'should iterate the same count as the number', ->

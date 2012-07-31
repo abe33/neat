@@ -1,3 +1,4 @@
+require '../../test_helper'
 {Signal} = require '../../../lib/core'
 
 describe Signal, ->

@@ -1,4 +1,4 @@
-require '../../../../lib/core'
+require '../../../test_helper'
 
 describe 'Array::flatten', ->
   it 'should flatten all the sub arrays in the array', ->

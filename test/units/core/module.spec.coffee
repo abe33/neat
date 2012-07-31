@@ -1,3 +1,4 @@
+require '../../test_helper'
 {Module} = require '../../../lib/core'
 
 describe Module, ->

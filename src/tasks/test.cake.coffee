@@ -5,7 +5,7 @@ Neat = require '../neat'
 {error, info, green, red, yellow, puts} = require '../utils/logs'
 
 test = (k,f) -> (callback) ->
-  puts yellow "Running tests using #{k.capitalize()}:"
+  puts yellow "Running tests using #{k.capitalize()}\n"
   f ->
     puts ''
     callback?()

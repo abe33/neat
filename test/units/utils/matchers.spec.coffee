@@ -1,3 +1,4 @@
+require '../../test_helper'
 {resolve} = require "path"
 root = resolve __dirname, '../../../'
 
