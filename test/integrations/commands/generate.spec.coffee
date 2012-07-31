@@ -142,26 +142,72 @@ describe '`neat generate', ->
 
         done()
 
-  describe 'spec foo`', ->
+  describe 'spec:unit foo`', ->
     beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
 
-    it 'should generate a new spec foo in the project', (done) ->
-      run 'node', [NEAT_BIN, 'generate', 'spec', 'foo'], (status) ->
-        path= "#{FIXTURES_ROOT}/foo/test/spec/foo.spec.coffee"
+    it 'should generate a new spec foo in the project unit tests', (done) ->
+      run 'node', [NEAT_BIN, 'generate', 'spec:unit', 'foo'], (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/units/foo.spec.coffee"
         expect(path).toExist()
 
         done()
 
-  describe 'spec bar/foo`', ->
+  describe 'spec:unit bar/foo`', ->
     beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
 
-    it 'should generate a new spec foo in the project', (done) ->
-      run 'node', [NEAT_BIN, 'generate', 'spec', 'bar/foo'], (status) ->
-        path= "#{FIXTURES_ROOT}/foo/test/spec/bar/foo.spec.coffee"
+    it 'should generate a new spec foo in the project unit tests', (done) ->
+      run 'node', [NEAT_BIN, 'generate', 'spec:unit', 'bar/foo'], (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/units/bar/foo.spec.coffee"
         expect(path).toExist()
 
         done()
 
+  describe 'spec:functional foo`', ->
+    beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
+
+    it 'should generate a new spec foo in the
+        project functional tests'.squeeze(), (done) ->
+      run 'node', [NEAT_BIN, 'generate', 'spec:functional', 'foo'], (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/functionals/foo.spec.coffee"
+        expect(path).toExist()
+
+        done()
+
+  describe 'spec:functional bar/foo`', ->
+    beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
+
+    it 'should generate a new spec foo in the project
+        functional tests'.squeeze(), (done) ->
+      args = [NEAT_BIN, 'generate', 'spec:functional', 'bar/foo']
+      run 'node', args, (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/functionals/bar/foo.spec.coffee"
+        expect(path).toExist()
+
+        done()
+
+  describe 'spec:integration foo`', ->
+    beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
+
+    it 'should generate a new spec foo in the
+        project integration tests'.squeeze(), (done) ->
+      args = [NEAT_BIN, 'generate', 'spec:integration', 'foo']
+      run 'node', args, (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/integrations/foo.spec.coffee"
+        expect(path).toExist()
+
+        done()
+
+  describe 'spec:integration bar/foo`', ->
+    beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
+
+    it 'should generate a new spec foo in the project
+        integration tests'.squeeze(), (done) ->
+      args = [NEAT_BIN, 'generate', 'spec:integration', 'bar/foo']
+      run 'node', args, (status) ->
+        path= "#{FIXTURES_ROOT}/foo/test/integrations/bar/foo.spec.coffee"
+        expect(path).toExist()
+
+        done()
 
   describe 'package`', ->
     beforeEach -> process.chdir "#{FIXTURES_ROOT}/foo"
