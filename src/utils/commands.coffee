@@ -17,13 +17,6 @@ decorate = (target, property, value) ->
 
 #### Public
 
-##### usages
-
-# Defines the usages of the `target`.
-#
-#     usages 'foo', 'foo [arg]', -> console.log 'command called'
-usages = (usages..., target) -> decorate target, 'usages', usages
-
 ##### aliases
 
 # Defines the aliases of the `target`. Aliases are used to defined
@@ -31,6 +24,18 @@ usages = (usages..., target) -> decorate target, 'usages', usages
 #
 #     aliases 'f', 'foo', -> console.log 'command was called'
 aliases = (aliases..., target) -> decorate target, 'aliases', aliases
+
+##### asyncErrorTrap
+
+# Trap error returned by asynchronous function in the callback arguments
+# by generating a callback wrapper that will call the callback only if
+# no errors was received. The error arguments isn't passed to the callback.
+#
+#     fs.readFile "/path/to/file", asyncErrorTrap (content) ->
+#       # do something with content
+asyncErrorTrap = (callback) -> (err, args...) ->
+  return error "#{err.stack}\n" if err?
+  callback?.apply null, args
 
 ##### describe
 
@@ -40,14 +45,6 @@ aliases = (aliases..., target) -> decorate target, 'aliases', aliases
 #       console.log 'command was called'
 describe = (description, target) -> decorate target, 'description', description
 
-##### help
-
-# Defines the help of the `target`.
-#
-#     help 'This is the help', ->
-#       console.log 'command was called'
-help = (help, target) -> decorate target, 'help', help
-
 ##### environment
 
 # Loads automatically the specified environment before triggering
@@ -56,6 +53,60 @@ help = (help, target) -> decorate target, 'help', help
 #     environment 'test', ->
 #       console.log Neat.env.test? # true
 environment = (env, target) -> decorate target, 'environment', env
+
+##### hashArguments
+
+hashArguments = (ary...) ->
+  ary = ary.flatten()
+  hash = {}
+  parse = (v) ->
+    switch true
+      when /^(false|no|off)$/.test v then false
+      when /^(true|yes|on)$/.test v then true
+      when /^(-*)\d+$/g.test v then parseInt v
+      when /^(-*)\d+\.\d+$/g.test v then parseFloat v
+      when ',' in String(v) then parse sub for sub in v.split ','
+      else v.replace /^('|")|('|")$/g, ''
+
+  for expr in ary
+    (hash[k] = true; continue) unless ':' in expr
+    [k,v] = expr.split ':'
+    throw new Error "Invalid syntax: #{expr}" if v.empty()
+    hash[k] = parse v
+
+  hash
+
+##### help
+
+# Defines the help of the `target`.
+#
+#     help 'This is the help', ->
+#       console.log 'command was called'
+help = (help, target) -> decorate target, 'help', help
+
+##### neatTask
+
+# Register a cake task that will run through Neat.
+#
+#     exports.taskName = neatTask
+#       name: 'taskName'                # required
+#       description: 'task description' # optional
+#       environment: 'production'       # optional
+#       action: -> ...                  # required
+neatTask = (options) ->
+  {name, action, description, environment} = options
+
+  throw new Error "Tasks must have a name" unless name?
+  throw new Error "Tasks must have an action" unless action?
+
+  taskAction = ->
+    {action, environment} = options
+    Neat.defaultEnvironment = environment if environment?
+    Neat.initEnvironment()
+    action()
+
+  task name, description, taskAction
+  action
 
 ##### run
 
@@ -86,41 +137,12 @@ run = (command, params, options, callback) ->
 
   exe.on 'exit', (status) -> callback? status
 
-##### neatTask
+##### usages
 
-# Register a cake task that will run through Neat.
+# Defines the usages of the `target`.
 #
-#     exports.taskName = neatTask
-#       name: 'taskName'                # required
-#       description: 'task description' # optional
-#       environment: 'production'       # optional
-#       action: -> ...                  # required
-neatTask = (options) ->
-  {name, action, description, environment} = options
-
-  throw new Error "Tasks must have a name" unless name?
-  throw new Error "Tasks must have an action" unless action?
-
-  taskAction = ->
-    {action, environment} = options
-    Neat.defaultEnvironment = environment if environment?
-    Neat.initEnvironment()
-    action()
-
-  task name, description, taskAction
-  action
-
-##### asyncErrorTrap
-
-# Trap error returned by asynchronous function in the callback arguments
-# by generating a callback wrapper that will call the callback only if
-# no errors was received. The error arguments isn't passed to the callback.
-#
-#     fs.readFile "/path/to/file", asyncErrorTrap (content) ->
-#       # do something with content
-asyncErrorTrap = (callback) -> (err, args...) ->
-  return error "#{err.stack}\n" if err?
-  callback?.apply null, args
+#     usages 'foo', 'foo [arg]', -> console.log 'command called'
+usages = (usages..., target) -> decorate target, 'usages', usages
 
 module.exports = {
   aliases,
@@ -128,6 +150,7 @@ module.exports = {
   decorate,
   describe,
   environment,
+  hashArguments,
   help,
   neatTask,
   run,
