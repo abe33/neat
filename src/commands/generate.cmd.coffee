@@ -5,7 +5,9 @@ Neat = require '../neat'
 utils = resolve Neat.neatRoot, "lib/utils"
 
 {puts, error, warn, missing} = require resolve utils, "logs"
-{run, aliases, usages, describe, help} = require resolve utils, "commands"
+{
+  run, aliases, usages, describe, help, environment
+} = require resolve utils, "commands"
 {renderSync:render} = require resolve utils, "templates"
 
 generate = (pr, commands) ->
@@ -39,6 +41,7 @@ generate = (pr, commands) ->
       console.log render helptpl, context
 
   aliases 'g', 'generate',
+  environment 'production',
   usages 'neat generate [generator]',
   describe 'Runs the specified [generator]',
   f = (generator, args..., command, callback) ->
