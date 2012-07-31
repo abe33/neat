@@ -4,7 +4,7 @@ Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
 {ensurePathSync} = require resolve utils, "files"
-{describe, usages} = require resolve utils, "commands"
+{describe, usages, hashArguments} = require resolve utils, "commands"
 {render} = require resolve utils, "templates"
 {error, info, missing, notOutsideNeat} = require resolve utils, "logs"
 
@@ -16,8 +16,10 @@ namedEntity = (src, dir, ext, requireNeat=true) ->
 
     a = name.split '/'
     name = a.pop()
+    context = if args.empty() then {} else hashArguments args
+    context.merge {name}
 
-    render src, {name}, (err, data) ->
+    render src, context, (err, data) ->
       return error """#{missing "Template for #{src}"}
 
                       #{err.stack}""" if err?
