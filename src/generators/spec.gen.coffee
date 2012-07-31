@@ -7,8 +7,8 @@ Neat = require '../neat'
 {namedEntity} = Neat.require 'utils/generators'
 
 meta = (name, target) ->
-  usages "neat generate spec:#{name} [name]",
-  describe "Generates a [name] spec in the test/#{name}s directory",
+  usages "neat generate spec:#{name} <name>",
+  describe "Generates a <name> spec in the test/#{name}s directory",
   target
 
 context = {relative, testPath: resolve Neat.root, 'test'}

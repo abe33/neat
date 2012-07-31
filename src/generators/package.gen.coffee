@@ -4,12 +4,14 @@ Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
 {namespace} = require resolve utils, "exports"
-{describe} = require resolve utils, "commands"
+{describe, usages, environment} = require resolve utils, "commands"
 {puts, error, info} = require resolve utils, "logs"
 {render} = require resolve utils, "templates"
 {dirWithIndexSync} = require resolve utils, "files"
 cup = require resolve utils, "cup"
 
+usages 'neat generate package',
+environment 'production',
 describe 'Generates the package.json file',
 index = (generator, args..., cb) ->
 
