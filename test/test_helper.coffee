@@ -12,6 +12,10 @@ global.TEST_ROOT = resolve '.'
 global.FIXTURES_ROOT = '/tmp'
 global.NEAT_BIN = resolve __dirname, '../bin/neat'
 
+options = #{}
+  stderr: (data)-> print data
+  stdout: (data)-> print data
+
 cursor = 0
 global.progress = (f) ->
   oldRes = false
@@ -73,7 +77,7 @@ global.withProject = (name, desc=null, block, opts) ->
           'keywords:foo,bar,baz'
           'description:"a description"'
         ]
-        run 'node', args, (status) =>
+        run 'node', args, options, (status) =>
           process.chdir @projectPath
           if opts?.init?
             opts.init -> ended = true

@@ -19,72 +19,64 @@ project = (generator, name, args..., callback) ->
   ext = extname __filename
   tplpath = resolve __dirname, "project"
 
-  gitignore = resolve path, ".gitignore"
-  npmignore = resolve path, ".npmignore"
-  neatfile  = resolve path, ".neat"
-  nemfile   = resolve path, "Nemfile"
-  cakefile  = resolve path, "Cakefile"
-
   context = if args.empty() then {} else hashArguments args
   context.merge {name, version: Neat.meta.version}
 
   ensureSync path
 
+  dirs = [
+    "lib",
+    "src",
+    "src/commands",
+    "src/config",
+    "src/config/environments",
+    "src/config/initializers",
+    "src/generators",
+    "src/tasks",
+    "templates",
+    "test",
+    "test/fixtures",
+    "test/functionals",
+    "test/integrations",
+    "test/units",
+  ]
+
+  files = [
+    ["lib/.gitkeep"],
+    ["src/commands/.gitkeep"],
+    ["src/config/environments/default.coffee", true]
+    ["src/config/environments/development.coffee", true]
+    ["src/config/environments/production.coffee", true]
+    ["src/config/environments/test.coffee", true]
+    ["src/config/initializers/docco.coffee", true]
+    ["src/generators/.gitkeep"],
+    ["src/tasks/.gitkeep"],
+    ["templates/.gitkeep"],
+    ["test/fixtures/.gitkeep"],
+    ["test/functionals/.gitkeep"],
+    ["test/integrations/.gitkeep"],
+    ["test/test_helper.coffee", true]
+    ["test/units/.gitkeep"],
+    ['.gitignore', true],
+    ['.neat', true],
+    ['.npmignore', true],
+    ['Cakefile', true],
+    ['Nemfile', true],
+  ]
+
+  t = (a, b, c=false) ->
+    [b,c] = [a,b] if typeof b is 'boolean'
+    b = a unless b?
+    if c
+      touchSync resolve(path, a), render resolve(tplpath, b), context
+    else
+      touchSync resolve(path, a)
+
+  e = (d) -> ensureSync resolve path, d
+
   try
-    touchSync gitignore, render resolve(tplpath, ".gitignore"), context
-    touchSync npmignore, render resolve(tplpath, ".npmignore"), context
-    touchSync neatfile,  render resolve(tplpath, ".neat"), context
-    touchSync nemfile,   render resolve(tplpath, "Nemfile"), context
-    touchSync cakefile,  render resolve(tplpath, "Cakefile"), context
-
-    ensureSync resolve path, "lib"
-    ensureSync resolve path, "src"
-    ensureSync resolve path, "src/commands"
-    ensureSync resolve path, "src/generators"
-    ensureSync resolve path, "src/tasks"
-    ensureSync resolve path, "src/config"
-    ensureSync resolve path, "src/config/environments"
-    ensureSync resolve path, "src/config/initializers"
-    ensureSync resolve path, "templates"
-    ensureSync resolve path, "test"
-    ensureSync resolve path, "test/fixtures"
-    ensureSync resolve path, "test/units"
-    ensureSync resolve path, "test/functionals"
-    ensureSync resolve path, "test/integrations"
-
-    touchSync resolve path, "lib/.gitkeep"
-    touchSync resolve path, "src/commands/.gitkeep"
-    touchSync resolve path, "src/generators/.gitkeep"
-
-    touchSync resolve path, "src/tasks/.gitkeep"
-    touchSync resolve(path, "src/config/environments/default.coffee"),
-              render resolve(tplpath, "src/config/environments/default"),
-                     context
-
-    touchSync resolve(path, "src/config/environments/test.coffee"),
-              render resolve(tplpath, "src/config/environments/test"),
-                     context
-
-    touchSync resolve(path, "src/config/environments/development.coffee"),
-              render resolve(tplpath, "src/config/environments/development"),
-                     context
-
-    touchSync resolve(path, "src/config/environments/production.coffee"),
-              render resolve(tplpath, "src/config/environments/production"),
-                     context
-
-    touchSync resolve path, "templates/.gitkeep"
-    touchSync resolve path, "test/fixtures/.gitkeep"
-    touchSync resolve path, "test/units/.gitkeep"
-    touchSync resolve path, "test/functionals/.gitkeep"
-    touchSync resolve path, "test/integrations/.gitkeep"
-
-    touchSync resolve(path, "src/config/initializers/docco.coffee"),
-              render resolve(tplpath, "src/config/initializers/docco"), context
-
-    touchSync resolve(path, "test/test_helper.coffee"),
-              render resolve(tplpath, "test/test_helper"), context
-
+    e d for d in dirs
+    t a,b,c for [a,b,c] in files
   catch e
     return error """Cannot proceed to the generation of the project
 
