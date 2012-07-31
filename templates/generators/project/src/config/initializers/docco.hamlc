@@ -1,0 +1,13 @@
+:plain
+  Neat = require 'neat'
+  {findSync} = Neat.require "utils/files"
+
+  module.exports = (config) ->
+
+    dirs = ['src']
+
+    sources = []
+    sources = sources.concat findSync('coffee', d)?.sort() for d in dirs
+    console.log sources
+
+    config.docco.paths.sources = sources.compact()
