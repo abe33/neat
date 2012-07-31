@@ -44,7 +44,9 @@ project = (generator, name, args..., callback) ->
     ensureSync resolve path, "templates"
     ensureSync resolve path, "test"
     ensureSync resolve path, "test/fixtures"
-    ensureSync resolve path, "test/spec"
+    ensureSync resolve path, "test/units"
+    ensureSync resolve path, "test/functionals"
+    ensureSync resolve path, "test/integrations"
 
     touchSync resolve path, "lib/.gitkeep"
     touchSync resolve path, "src/commands/.gitkeep"
@@ -53,8 +55,12 @@ project = (generator, name, args..., callback) ->
     touchSync resolve path, "src/config/environments/.gitkeep"
     touchSync resolve path, "src/config/initializers/.gitkeep"
     touchSync resolve path, "templates/.gitkeep"
+    touchSync resolve(path, "test/test_helper.coffee"),
+              render resolve(tplpath, "test/test_helper")
     touchSync resolve path, "test/fixtures/.gitkeep"
-    touchSync resolve path, "test/spec/.gitkeep"
+    touchSync resolve path, "test/units/.gitkeep"
+    touchSync resolve path, "test/functionals/.gitkeep"
+    touchSync resolve path, "test/integrations/.gitkeep"
   catch e
     return error """Cannot proceed to the generation of the project
 
