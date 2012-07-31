@@ -14,7 +14,11 @@ generate = (pr, commands) ->
   generators = require resolve Neat.neatRoot, "lib/generators"
 
   listContext =
-    list: generators
+    list: generators.map (k,v) ->
+      if v.usages?
+        [usage, v] for usage in v.usages
+      else
+        [k,v]
     title: "Generators:"
 
   helpFunc = (target) -> (generator) ->
