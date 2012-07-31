@@ -96,3 +96,8 @@ describe 'String::strip', ->
 
     expect('   foo'.strip()).toBe('foo')
     expect('foo   '.strip()).toBe('foo')
+
+describe 'String::empty', ->
+  it 'should returns true when the string has a length of 0', ->
+    expect(''.empty()).toBeTruthy()
+    expect('foo'.empty()).toBeFalsy()
