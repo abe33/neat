@@ -2,26 +2,41 @@ fs = require 'fs'
 {resolve, existsSync, basename, extname, relative} = require 'path'
 Neat = require '../../neat'
 
-utils = resolve Neat.neatRoot, 'lib/utils'
-
-{error, info, warn, missing, neatBroken} = require resolve utils, 'logs'
-{aliases, describe} = require resolve utils, 'commands'
-{ensureSync} = require resolve utils, 'files'
-{render} = require resolve utils, 'templates'
-{parallel} = require '../../async'
+{error, info, warn, missing, green} = Neat.require 'utils/logs'
+{aliases, describe} = Neat.require 'utils/commands'
+{ensureSync} = Neat.require 'utils/files'
+{render} = Neat.require 'utils/templates'
+{namespace} = Neat.require 'utils/exports'
+{parallel} = Neat.require 'async'
 
 DoccoFile = require './docco_file'
 Processor = require './docco_file_processor'
 
-docco = (pr) ->
-  return error 'No program provided to docco' unless pr?
+cmdgen = (name, desc, fn) -> (pr) ->
+  return error "No program provided to #{name}" unless pr?
 
-  aliases 'docco',
-  describe 'Generates the documentation for a Neat project through docco',
+  aliases name,
+  describe desc,
   f = (callback) ->
     unless Neat.root?
-      return error "Can't run neat docco outside of a Neat project."
+      return error "Can't run neat #{name} outside of a Neat project."
 
+    ensureSync resolve Neat.root, 'docs'
+    fn pr, callback
+
+name = 'docco:stylesheet'
+desc = 'Generates the documentation stylesheet'
+stylesheet = cmdgen name, desc, (pr, callback) ->
+  render __dirname, (err, css) ->
+    throw err if err?
+    fs.writeFile "#{Neat.root}/docs/docco.css", css, (err) ->
+      throw err if err?
+      info green 'Stylesheet successfully generated'
+      callback?()
+
+name = 'docco:documentation'
+desc = 'Generates the documentation throug docco'
+documentation = cmdgen name, desc, (pr, callback) ->
     paths = Neat.env.docco.paths.sources.concat()
     if not paths? or paths.empty()
       return warn 'No paths specified for documentation generation.'
@@ -33,20 +48,20 @@ docco = (pr) ->
 
     files = (new DoccoFile path for path in paths)
 
-    ensureSync resolve Neat.root, 'docs'
-
     render navTplPath, {files}, (err, nav) ->
       throw err if err?
-
       render headerTplPath, {files}, (err, header) ->
         throw err if err?
-
         processors = []
         for file in files
           processors.push Processor.asCommand(file, header, nav)
 
         parallel processors, ->
-          info 'Documentation successfully generated'.green
+          info green 'Documentation successfully generated'
           callback?()
 
-module.exports = {docco}
+index = cmdgen 'docco',
+               'Generates the documentation for a Neat project through docco',
+               (pr, cb) -> stylesheet(pr) -> documentation(pr) cb
+
+module.exports = namespace 'docco', {index, stylesheet, documentation}

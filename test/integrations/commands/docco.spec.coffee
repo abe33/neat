@@ -18,6 +18,7 @@ withBundledProject 'foo', ->
         ended = false
         run 'node', [NEAT_BIN, 'docco'], options, (status) ->
           expect(status).toBe(0)
+          expect(inProject 'docs/docco.css').toExist()
           expect(inProject 'docs/src_commands_foo.cmd.html').toExist()
           expect(inProject 'docs/src_config_initializers_docco.html')
             .toExist()

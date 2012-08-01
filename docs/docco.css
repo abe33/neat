@@ -1,12 +1,11 @@
-/*--------------------- Layout and Typography ----------------------------*/
-/*@import url("http://fonts.googleapis.com/css?family=Homenaje");*/
-
 body {
-  font-family: serif;
+  font-family: sans-serif;
   font-size: 15px;
   line-height: 22px;
   color: #252519;
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
+  background: #bbc4c4;
 }
 a {
   color: #261a3b;
@@ -17,88 +16,22 @@ a:visited {
 p {
   margin: 0 0 15px 0;
 }
-h1, h2, h3, h4, h5, h6 {
-  margin: 0px 0 15px 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 15px 0;
 }
-  h1 {
-    margin-top: 40px;
-  }
-.toc {
-  margin: 0px;
-  padding-left: 20px;
-  border-left: 1px solid #888888;
+h1 {
+  margin-top: 40px;
 }
-.toc li{ list-style: none; }
-/*.toc li:before {
-  content: "#";
-  color: #cb4b16;
-}*/
-.toc li a {
-  text-decoration: none;
-  color: #002b36;
-}
-.toc li a:hover {
-  text-decoration: underline;
-  color: #252519;
-}
-
-.toc li.level0 {  }
-.toc li.level1 { margin-left: 20px; }
-.toc li.level2 { margin-left: 40px;  }
-.toc li.level3 { margin-left: 60px;  }
-.toc li.level4 { margin-left: 80px;  }
-.toc li.level5 { margin-left: 100px;  }
-
-
 #container {
   position: relative;
+  color: #839496;
+  background: #042029;
 }
-#background {
-  position: fixed;
-  top: 0; left: 525px; right: 0; bottom: 0;
-  background: #f5f5ff;
-  border-left: 1px solid #e5e5ee;
-  z-index: -1;
-}
-#jump_to, #jump_page {
-  background: white;
-  -webkit-box-shadow: 0 0 25px #777; -moz-box-shadow: 0 0 25px #777;
-  -webkit-border-bottom-left-radius: 5px; -moz-border-radius-bottomleft: 5px;
-  font: 10px Arial;
-  /*text-transform: uppercase;*/
-  cursor: pointer;
-  text-align: left;
-}
-#jump_to, #jump_wrapper {
-  position: fixed;
-  right: 0; top: 0;
-  padding: 5px 10px;
-}
-  #jump_wrapper {
-    padding: 0;
-    display: none;
-  }
-    #jump_to:hover #jump_wrapper {
-      display: block;
-    }
-    #jump_page {
-      padding: 5px 0 3px;
-      margin: 0 0 25px 25px;
-    }
-      #jump_page .source {
-        display: block;
-        padding: 5px 10px;
-        text-decoration: none;
-        border-top: 1px solid #eee;
-      }
-        #jump_page .source:hover {
-          background: #f5f5ff;
-        }
-        #jump_page .source:first-child {
-        }
-        #jump_page .source .red {
-          color: #cb4b16;
-        }
 #container:before {
   content: '';
   width: 100%;
@@ -107,265 +40,638 @@ h1, h2, h3, h4, h5, h6 {
   position: fixed;
   background-color: #042029;
   z-index: -1;
-  border-left: 2px solid #888888;
+  border-left: 2px solid #888;
 }
-
+#container #background {
+  position: fixed;
+  top: 0;
+  left: 525px;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: #042029;
+  border-left: 2px solid #888;
+}
+#jump_to,
+#jump_page {
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-size: 10px;
+}
+#jump_to,
+#jump_wrapper {
+  position: fixed;
+  right: 0;
+  top: 0;
+  padding: 5px 10px;
+}
+#jump_wrapper {
+  padding: 0;
+  display: none;
+}
+#jump_to:hover #jump_wrapper {
+  display: block;
+}
+#jump_page {
+  padding: 5px 0 3px;
+  margin: 0 0 25px 25px;
+}
+#jump_page .source {
+  display: block;
+  padding: 3px 6px;
+  text-decoration: none;
+  border-top: 1px solid #eee;
+}
+#jump_page .source:hover {
+  background: #f5f5ff;
+}
+#jump_page .source .red {
+  color: #cb4b16;
+}
+.pilwrap {
+  position: relative;
+}
+.pilcrow {
+  font: 12px Arial;
+  text-decoration: none;
+  color: #454545;
+  position: absolute;
+  top: 3px;
+  left: -20px;
+  padding: 1px 2px;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s linear;
+}
+.toc {
+  margin: 0;
+  padding-left: 20px;
+  border-left: 1px solid #888;
+}
+.toc li {
+  list-style: none;
+}
+.toc li a {
+  text-decoration: none;
+  color: #002b36;
+}
+.toc li a:hover {
+  text-decoration: underline;
+  color: #252519;
+}
+.toc li.leveln {
+  margin-left: 0px;
+}
+.toc li.leveln {
+  margin-left: 20px;
+}
+.toc li.leveln {
+  margin-left: 40px;
+}
+.toc li.leveln {
+  margin-left: 60px;
+}
+.toc li.leveln {
+  margin-left: 80px;
+}
+.toc li.leveln {
+  margin-left: 100px;
+}
+pre,
+tt,
+code {
+  font-size: 12px;
+  line-height: 18px;
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  margin: 0;
+  padding: 0;
+}
+table th,
 table td {
   border: 0;
   outline: 0;
 }
-  td.docs, th.docs {
-    max-width: 450px;
-    min-width: 450px;
-    min-height: 5px;
-    padding: 10px 25px 1px 50px;
-    overflow-x: hidden;
-    vertical-align: top;
-    text-align: left;
-  }
-    .docs pre {
-      margin: 15px 0 15px;
-      padding: 8px 0px 8px 12px;
-      border: 1px solid #dedede;
-    }
-    .docs p tt, .docs p code {
-      background: #f8f8ff;
-      font-size: 12px;
-      padding: 0 0.2em;
-    }
-    .pilwrap {
-      position: relative;
-    }
-      .pilcrow {
-        font: 12px Arial;
-        text-decoration: none;
-        color: #454545;
-        position: absolute;
-        top: 3px; left: -20px;
-        padding: 1px 2px;
-        opacity: 0;
-        -webkit-transition: opacity 0.2s linear;
-      }
-        td.docs:hover .pilcrow {
-          opacity: 1;
-        }
-  td.code, th.code {
-    padding: 14px 15px 16px 25px;
-    width: 100%;
-    vertical-align: top;
-    background: #f5f5ff;
-    border-left: 1px solid #e5e5ee;
-  }
-    pre, tt, code {
-      font-size: 12px; line-height: 18px;
-      font-family: Monaco, Consolas, "Lucida Console", monospace;
-      margin: 0; padding: 0;
-    }
-
-td.docs, th.docs {
-  overflow-x: auto !important; }
-
-.docs {
-  background: #bbc4c4 !important;
+table th.docs,
+table td.docs {
+  max-width: 450px;
+  min-width: 450px;
+  min-height: 5px;
+  padding: 10px 25px 1px 50px;
+  vertical-align: top;
+  text-align: left;
+  background: #bbc4c4;
+  font-size: 14px;
   color: #586e75;
-  overflow: auto !important;
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif;
-  font-size: 14px; }
-  .docs code {
-    background: rgba(166, 176, 176, 0.5) !important;
-    border: 1px solid #a6b0b0 !important;
-    color: #073642; }
-
-  .docs h1, .docs h2, .docs h3, .docs h4, .docs h5, .docs h6 {
-    color: #002b36;
-    font-family: "Palatino Linotype", "Book Antiqua", Palatino, FreeSerif, serif; }
-  .docs h1 {
-    font-size: 28px; }
-    .do/*cs h1:first-letter {
-      color: #7*/7822f; }
-  .docs h3 {
-    font-size: 20px; }
-    .docs h3:/*first-letter {
-      color: #2d*/74a6; }
-  .docs h4 {
-    font-size: 16px; }
-    .docs h4:f/*irst-letter {
-      color: #cb4*/b16; }
-  .docs .demo-table td {
-    width: 100px; }
-
-#container {
-  color: #839496;
-  background: #a6b0b0 !important; }
-  #container #background {
-    background: #042029;
-    border-left: 2px solid #888888; }
-  #container td.code, #container td.docs pre, #container th.code, #container th.docs pre {
-    border-left: 2px solid #888888;
-    background-color: #042029;
-    color: #93a1a1; }
-    #container td.code .bp, #container td.docs pre .bp, #container th.code .bp, #container th.docs pre .bp {
-      color: #999999; }
-    #container td.code .c1, #container td.docs pre .c1, #container th.code .c1, #container th.docs pre .c1 {
-      color: #586e75 !important;
-      font-style: italic !important; }
-    #container td.code .cm, #container td.docs pre .cm, #container th.code .cm, #container th.docs pre .cm {
-      color: #586e75 !important;
-      font-style: italic !important; }
-    #container td.code .cp, #container td.docs pre .cp, #container th.code .cp, #container th.docs pre .cp {
-      color: #586e75 !important;
-      font-style: italic !important; }
-    #container td.code .cs, #container td.docs pre .cs, #container th.code .cs, #container th.docs pre .cs {
-      color: #586e75 !important;
-      font-weight: bold !important;
-      font-style: italic !important; }
-    #container td.code .c, #container td.docs pre .c, #container th.code .c, #container th.docs pre .c {
-      color: #586e75 !important;
-      font-style: italic !important; }
-    #container td.code .err, #container td.docs pre .err, #container th.code .err, #container th.docs pre .err {
-      color: #dc322f !important;
-      background: none !important; }
-    #container td.code .gd .x, #container td.docs pre .gd .x, #container th.code .gd .x, #container th.docs pre .gd .x {
-      color: #93a1a1 !important;
-      background-color: #4d2d33 !important;
-      display: inline-block; }
-    #container td.code .gd, #container td.docs pre .gd, #container th.code .gd, #container th.docs pre .gd {
-      color: #93a1a1 !important;
-      background-color: #372c34 !important;
-      display: inline-block; }
-    #container td.code .ge, #container td.docs pre .ge, #container th.code .ge, #container th.docs pre .ge {
-      color: #93a1a1 !important;
-      font-style: italic !important; }
-    #container td.code .gh, #container td.docs pre .gh, #container th.code .gh, #container th.docs pre .gh {
-      color: #586e75 !important; }
-    #container td.code .gi .x, #container td.docs pre .gi .x, #container th.code .gi .x, #container th.docs pre .gi .x {
-      color: #93a1a1 !important;
-      background-color: #355720 !important;
-      display: inline-block; }
-    #container td.code .gi, #container td.docs pre .gi, #container th.code .gi, #container th.docs pre .gi {
-      color: #93a1a1 !important;
-      background-color: #1a412b !important;
-      display: inline-block; }
-    #container td.code .go, #container td.docs pre .go, #container th.code .go, #container th.docs pre .go {
-      color: #888888; }
-    #container td.code .gp, #container td.docs pre .gp, #container th.code .gp, #container th.docs pre .gp {
-      color: #555555; }
-    #container td.code .gr, #container td.docs pre .gr, #container th.code .gr, #container th.docs pre .gr {
-      color: #aa0000; }
-    #container td.code .gs, #container td.docs pre .gs, #container th.code .gs, #container th.docs pre .gs {
-      color: #93a1a1 !important;
-      font-weight: bold !important; }
-    #container td.code .gt, #container td.docs pre .gt, #container th.code .gt, #container th.docs pre .gt {
-      color: #aa0000; }
-    #container td.code .gu, #container td.docs pre .gu, #container th.code .gu, #container th.docs pre .gu {
-      color: #6c71c4 !important; }
-    #container td.code .il, #container td.docs pre .il, #container th.code .il, #container th.docs pre .il {
-      color: #009999; }
-    #container td.code .kc, #container td.docs pre .kc, #container th.code .kc, #container th.docs pre .kc {
-      color: #b58900 !important; }
-    #container td.code .kd, #container td.docs pre .kd, #container th.code .kd, #container th.docs pre .kd {
-      color: #268bd2 !important; }
-    #container td.code .kp, #container td.docs pre .kp, #container th.code .kp, #container th.docs pre .kp {
-      color: #cb4b16 !important;
-      font-weight: bold !important; }
-    #container td.code .kr, #container td.docs pre .kr, #container th.code .kr, #container th.docs pre .kr {
-      color: #d33682 !important;
-      font-weight: bold !important; }
-    #container td.code .kt, #container td.docs pre .kt, #container th.code .kt, #container th.docs pre .kt {
-      color: #2aa198 !important; }
-    #container td.code .k, #container td.docs pre .k, #container th.code .k, #container th.docs pre .k {
-      color: #859900 !important; }
-    #container td.code .mf, #container td.docs pre .mf, #container th.code .mf, #container th.docs pre .mf {
-      color: #2aa198 !important; }
-    #container td.code .mh, #container td.docs pre .mh, #container th.code .mh, #container th.docs pre .mh {
-      color: #2aa198 !important; }
-    #container td.code .mi, #container td.docs pre .mi, #container th.code .mi, #container th.docs pre .mi {
-      color: #2aa198 !important; }
-    #container td.code .mo, #container td.docs pre .mo, #container th.code .mo, #container th.docs pre .mo {
-      color: #009999; }
-    #container td.code .m, #container td.docs pre .m, #container th.code .m, #container th.docs pre .m {
-      color: #2aa198 !important; }
-    #container td.code .na, #container td.docs pre .na, #container th.code .na, #container th.docs pre .na {
-      color: #268bd2 !important; }
-    #container td.code .nb, #container td.docs pre .nb, #container th.code .nb, #container th.docs pre .nb {
-      color: #b58900 !important; }
-    #container td.code .nc, #container td.docs pre .nc, #container th.code .nc, #container th.docs pre .nc {
-      color: #d33682 !important; }
-    #container td.code .ne, #container td.docs pre .ne, #container th.code .ne, #container th.docs pre .ne {
-      color: #268bd2 !important;
-      font-weight: bold !important; }
-    #container td.code .nf, #container td.docs pre .nf, #container th.code .nf, #container th.docs pre .nf {
-      color: #268bd2 !important;
-      font-weight: bold !important; }
-    #container td.code .ni, #container td.docs pre .ni, #container th.code .ni, #container th.docs pre .ni {
-      color: purple; }
-    #container td.code .nl, #container td.docs pre .nl, #container th.code .nl, #container th.docs pre .nl {
-      color: #859900 !important; }
-    #container td.code .nn, #container td.docs pre .nn, #container th.code .nn, #container th.docs pre .nn {
-      color: #b58900 !important; }
-    #container td.code .no, #container td.docs pre .no, #container th.code .no, #container th.docs pre .no {
-      color: #b58900 !important; }
-    #container td.code .nt, #container td.docs pre .nt, #container th.code .nt, #container th.docs pre .nt {
-      color: #268bd2 !important;
-      font-weight: bold !important; }
-    #container td.code .nv, #container td.docs pre .nv, #container th.code .nv, #container th.docs pre .nv {
-      color: #93a1a1 !important; }
-    #container td.code .nx, #container td.docs pre .nx, #container th.code .nx, #container th.docs pre .nx {
-      color: #93a1a1 !important; }
-    #container td.code .n, #container td.docs pre .n, #container th.code .n, #container th.docs pre .n {
-      color: #268bd2 !important; }
-    #container td.code .ow, #container td.docs pre .ow, #container th.code .ow, #container th.docs pre .ow {
-      color: #2aa198 !important;
-      font-weight: bold !important; }
-    #container td.code .o, #container td.docs pre .o, #container th.code .o, #container th.docs pre .o {
-      color: #859900 !important; }
-    #container td.code .p, #container td.docs pre .p, #container th.code .p, #container th.docs pre .p {
-      color: #859900 !important; }
-    #container td.code .py, #container td.docs pre .py, #container th.code .py, #container th.docs pre .py {
-      color: #268bd2 !important; }
-    #container td.code .s1, #container td.docs pre .s1, #container th.code .s1, #container th.docs pre .s1 {
-      color: #2aa198 !important; }
-    #container td.code .s2, #container td.docs pre .s2, #container th.code .s2, #container th.docs pre .s2 {
-      color: #2aa198 !important; }
-    #container td.code .sb, #container td.docs pre .sb, #container th.code .sb, #container th.docs pre .sb {
-      color: #dd1144; }
-    #container td.code .sc, #container td.docs pre .sc, #container th.code .sc, #container th.docs pre .sc {
-      color: #dd1144; }
-    #container td.code .sd, #container td.docs pre .sd, #container th.code .sd, #container th.docs pre .sd {
-      color: #2aa198 !important; }
-    #container td.code .se, #container td.docs pre .se, #container th.code .se, #container th.docs pre .se {
-      color: #dc322f !important; }
-    #container td.code .sh, #container td.docs pre .sh, #container th.code .sh, #container th.docs pre .sh {
-      color: #dd1144; }
-    #container td.code .si, #container td.docs pre .si, #container th.code .si, #container th.docs pre .si {
-      color: #cb4b16 !important;
-      font-weight: normal !important; }
-    #container td.code .sr, #container td.docs pre .sr, #container th.code .sr, #container th.docs pre .sr {
-      color: red !important; }
-    #container td.code .src, #container td.docs pre .src, #container th.code .src, #container th.docs pre .src {
-      color: #cb4b16 !important; }
-    #container td.code .sre, #container td.docs pre .sre, #container th.code .sre, #container th.docs pre .sre {
-      color: #aa2a08 !important; }
-    #container td.code .sro, #container td.docs pre .sro, #container th.code .sro, #container th.docs pre .sro {
-      color: #b58900 !important; }
-    #container td.code .sri, #container td.docs pre .sri, #container th.code .sri, #container th.docs pre .sri {
-      color: #2aa198 !important; }
-    #container td.code .ss, #container td.docs pre .ss, #container th.code .ss, #container th.docs pre .ss {
-      color: #990073; }
-    #container td.code .sx, #container td.docs pre .sx, #container th.code .sx, #container th.docs pre .sx {
-      color: #dd1144; }
-    #container td.code .s, #container td.docs pre .s, #container th.code .s, #container th.docs pre .s {
-      color: #2aa198 !important; }
-    #container td.code .vc, #container td.docs pre .vc, #container th.code .vc, #container th.docs pre .vc {
-      color: teal; }
-    #container td.code .vg, #container td.docs pre .vg, #container th.code .vg, #container th.docs pre .vg {
-      color: #268bd2 !important; }
-    #container td.code .vi, #container td.docs pre .vi, #container th.code .vi, #container th.docs pre .vi {
-      color: #268bd2 !important; }
-    #container td.code .w, #container td.docs pre .w, #container th.code .w, #container th.docs pre .w {
-      color: #bbbbbb; }
-    #container td.code div .gd, #container td.code div .gd .x, #container td.code div .gi, #container td.code div .gi .x, #container td.docs pre div .gd, #container td.docs pre div .gd .x, #container td.docs pre div .gi, #container td.docs pre div .gi .x, #container th.code div .gd, #container th.code div .gd .x, #container th.code div .gi, #container th.code div .gi .x, #container th.docs pre div .gd, #container th.docs pre div .gd .x, #container th.docs pre div .gi, #container th.docs pre div .gi .x {
-      display: inline-block;
-      width: 100%; }
-
-body {background: #BBC4C4;}
+}
+table th.docs pre,
+table td.docs pre {
+  margin: 15px 0 15px;
+  padding: 8px 0px 8px 12px;
+  border: 1px solid #dedede;
+}
+table th.docs:hover .pilcrow,
+table td.docs:hover .pilcrow {
+  opacity: 1;
+}
+table th.docs p tt,
+table td.docs p tt,
+table th.docs p code,
+table td.docs p code {
+  background: rgba(166,176,176,0.5);
+  border: 1px solid #a6b0b0;
+  font-size: 12px;
+  padding: 0 0.2em;
+  color: #073642;
+}
+table th.docs h1,
+table td.docs h1,
+table th.docs h2,
+table td.docs h2,
+table th.docs h3,
+table td.docs h3,
+table th.docs h4,
+table td.docs h4,
+table th.docs h5,
+table td.docs h5,
+table th.docs h6,
+table td.docs h6 {
+  color: #002b36;
+}
+table th.docs h1,
+table td.docs h1 {
+  font-size: 28px;
+}
+table th.docs h3,
+table td.docs h3 {
+  font-size: 20px;
+}
+table th.docs h4,
+table td.docs h4 {
+  font-size: 16px;
+}
+table th.code,
+table td.code {
+  padding: 14px 15px 16px 25px;
+  width: 100%;
+  vertical-align: top;
+  border-left: 1px solid #e5e5ee;
+}
+table th.code,
+table td.code,
+table th.docs pre,
+table td.docs pre {
+  border-left: 2px solid #888;
+  background-color: #042029;
+  color: #93a1a1;
+}
+table th.code .bp,
+table td.code .bp,
+table th.docs pre .bp,
+table td.docs pre .bp {
+  color: #999;
+}
+table th.code .c1,
+table td.code .c1,
+table th.docs pre .c1,
+table td.docs pre .c1 {
+  color: #586e75 !important;
+  font-style: italic !important;
+}
+table th.code .cm,
+table td.code .cm,
+table th.docs pre .cm,
+table td.docs pre .cm {
+  color: #586e75 !important;
+  font-style: italic !important;
+}
+table th.code .cp,
+table td.code .cp,
+table th.docs pre .cp,
+table td.docs pre .cp {
+  color: #586e75 !important;
+  font-style: italic !important;
+}
+table th.code .cs,
+table td.code .cs,
+table th.docs pre .cs,
+table td.docs pre .cs {
+  color: #586e75 !important;
+  font-weight: bold !important;
+  font-style: italic !important;
+}
+table th.code .c,
+table td.code .c,
+table th.docs pre .c,
+table td.docs pre .c {
+  color: #586e75 !important;
+  font-style: italic !important;
+}
+table th.code .err,
+table td.code .err,
+table th.docs pre .err,
+table td.docs pre .err {
+  color: #dc322f !important;
+  background: none !important;
+}
+table th.code .gd .x,
+table td.code .gd .x,
+table th.docs pre .gd .x,
+table td.docs pre .gd .x {
+  color: #93a1a1 !important;
+  background-color: #4d2d33 !important;
+  display: inline-block;
+}
+table th.code .gd,
+table td.code .gd,
+table th.docs pre .gd,
+table td.docs pre .gd {
+  color: #93a1a1 !important;
+  background-color: #372c34 !important;
+  display: inline-block;
+}
+table th.code .ge,
+table td.code .ge,
+table th.docs pre .ge,
+table td.docs pre .ge {
+  color: #93a1a1 !important;
+  font-style: italic !important;
+}
+table th.code .gh,
+table td.code .gh,
+table th.docs pre .gh,
+table td.docs pre .gh {
+  color: #586e75 !important;
+}
+table th.code .gi .x,
+table td.code .gi .x,
+table th.docs pre .gi .x,
+table td.docs pre .gi .x {
+  color: #93a1a1 !important;
+  background-color: #355720 !important;
+  display: inline-block;
+}
+table th.code .gi,
+table td.code .gi,
+table th.docs pre .gi,
+table td.docs pre .gi {
+  color: #93a1a1 !important;
+  background-color: #1a412b !important;
+  display: inline-block;
+}
+table th.code .go,
+table td.code .go,
+table th.docs pre .go,
+table td.docs pre .go {
+  color: #888;
+}
+table th.code .gp,
+table td.code .gp,
+table th.docs pre .gp,
+table td.docs pre .gp {
+  color: #555;
+}
+table th.code .gr,
+table td.code .gr,
+table th.docs pre .gr,
+table td.docs pre .gr {
+  color: #a00;
+}
+table th.code .gs,
+table td.code .gs,
+table th.docs pre .gs,
+table td.docs pre .gs {
+  color: #93a1a1 !important;
+  font-weight: bold !important;
+}
+table th.code .gt,
+table td.code .gt,
+table th.docs pre .gt,
+table td.docs pre .gt {
+  color: #a00;
+}
+table th.code .gu,
+table td.code .gu,
+table th.docs pre .gu,
+table td.docs pre .gu {
+  color: #6c71c4 !important;
+}
+table th.code .il,
+table td.code .il,
+table th.docs pre .il,
+table td.docs pre .il {
+  color: #099;
+}
+table th.code .kc,
+table td.code .kc,
+table th.docs pre .kc,
+table td.docs pre .kc {
+  color: #b58900 !important;
+}
+table th.code .kd,
+table td.code .kd,
+table th.docs pre .kd,
+table td.docs pre .kd {
+  color: #268bd2 !important;
+}
+table th.code .kp,
+table td.code .kp,
+table th.docs pre .kp,
+table td.docs pre .kp {
+  color: #cb4b16 !important;
+  font-weight: bold !important;
+}
+table th.code .kr,
+table td.code .kr,
+table th.docs pre .kr,
+table td.docs pre .kr {
+  color: #d33682 !important;
+  font-weight: bold !important;
+}
+table th.code .kt,
+table td.code .kt,
+table th.docs pre .kt,
+table td.docs pre .kt {
+  color: #2aa198 !important;
+}
+table th.code .k,
+table td.code .k,
+table th.docs pre .k,
+table td.docs pre .k {
+  color: #859900 !important;
+}
+table th.code .mf,
+table td.code .mf,
+table th.docs pre .mf,
+table td.docs pre .mf {
+  color: #2aa198 !important;
+}
+table th.code .mh,
+table td.code .mh,
+table th.docs pre .mh,
+table td.docs pre .mh {
+  color: #2aa198 !important;
+}
+table th.code .mi,
+table td.code .mi,
+table th.docs pre .mi,
+table td.docs pre .mi {
+  color: #2aa198 !important;
+}
+table th.code .mo,
+table td.code .mo,
+table th.docs pre .mo,
+table td.docs pre .mo {
+  color: #099;
+}
+table th.code .m,
+table td.code .m,
+table th.docs pre .m,
+table td.docs pre .m {
+  color: #2aa198 !important;
+}
+table th.code .na,
+table td.code .na,
+table th.docs pre .na,
+table td.docs pre .na {
+  color: #268bd2 !important;
+}
+table th.code .nb,
+table td.code .nb,
+table th.docs pre .nb,
+table td.docs pre .nb {
+  color: #b58900 !important;
+}
+table th.code .nc,
+table td.code .nc,
+table th.docs pre .nc,
+table td.docs pre .nc {
+  color: #d33682 !important;
+}
+table th.code .ne,
+table td.code .ne,
+table th.docs pre .ne,
+table td.docs pre .ne {
+  color: #268bd2 !important;
+  font-weight: bold !important;
+}
+table th.code .nf,
+table td.code .nf,
+table th.docs pre .nf,
+table td.docs pre .nf {
+  color: #268bd2 !important;
+  font-weight: bold !important;
+}
+table th.code .ni,
+table td.code .ni,
+table th.docs pre .ni,
+table td.docs pre .ni {
+  color: #800080;
+}
+table th.code .nl,
+table td.code .nl,
+table th.docs pre .nl,
+table td.docs pre .nl {
+  color: #859900 !important;
+}
+table th.code .nn,
+table td.code .nn,
+table th.docs pre .nn,
+table td.docs pre .nn {
+  color: #b58900 !important;
+}
+table th.code .no,
+table td.code .no,
+table th.docs pre .no,
+table td.docs pre .no {
+  color: #b58900 !important;
+}
+table th.code .nt,
+table td.code .nt,
+table th.docs pre .nt,
+table td.docs pre .nt {
+  color: #268bd2 !important;
+  font-weight: bold !important;
+}
+table th.code .nv,
+table td.code .nv,
+table th.docs pre .nv,
+table td.docs pre .nv {
+  color: #93a1a1 !important;
+}
+table th.code .nx,
+table td.code .nx,
+table th.docs pre .nx,
+table td.docs pre .nx {
+  color: #93a1a1 !important;
+}
+table th.code .n,
+table td.code .n,
+table th.docs pre .n,
+table td.docs pre .n {
+  color: #268bd2 !important;
+}
+table th.code .ow,
+table td.code .ow,
+table th.docs pre .ow,
+table td.docs pre .ow {
+  color: #2aa198 !important;
+  font-weight: bold !important;
+}
+table th.code .o,
+table td.code .o,
+table th.docs pre .o,
+table td.docs pre .o {
+  color: #859900 !important;
+}
+table th.code .p,
+table td.code .p,
+table th.docs pre .p,
+table td.docs pre .p {
+  color: #859900 !important;
+}
+table th.code .py,
+table td.code .py,
+table th.docs pre .py,
+table td.docs pre .py {
+  color: #268bd2 !important;
+}
+table th.code .s1,
+table td.code .s1,
+table th.docs pre .s1,
+table td.docs pre .s1 {
+  color: #2aa198 !important;
+}
+table th.code .s2,
+table td.code .s2,
+table th.docs pre .s2,
+table td.docs pre .s2 {
+  color: #2aa198 !important;
+}
+table th.code .sb,
+table td.code .sb,
+table th.docs pre .sb,
+table td.docs pre .sb {
+  color: #d14;
+}
+table th.code .sc,
+table td.code .sc,
+table th.docs pre .sc,
+table td.docs pre .sc {
+  color: #d14;
+}
+table th.code .sd,
+table td.code .sd,
+table th.docs pre .sd,
+table td.docs pre .sd {
+  color: #2aa198 !important;
+}
+table th.code .se,
+table td.code .se,
+table th.docs pre .se,
+table td.docs pre .se {
+  color: #dc322f !important;
+}
+table th.code .sh,
+table td.code .sh,
+table th.docs pre .sh,
+table td.docs pre .sh {
+  color: #d14;
+}
+table th.code .si,
+table td.code .si,
+table th.docs pre .si,
+table td.docs pre .si {
+  color: #cb4b16 !important;
+  font-weight: normal !important;
+}
+table th.code .sr,
+table td.code .sr,
+table th.docs pre .sr,
+table td.docs pre .sr {
+  color: #f00 !important;
+}
+table th.code .src,
+table td.code .src,
+table th.docs pre .src,
+table td.docs pre .src {
+  color: #cb4b16 !important;
+}
+table th.code .sre,
+table td.code .sre,
+table th.docs pre .sre,
+table td.docs pre .sre {
+  color: #aa2a08 !important;
+}
+table th.code .sro,
+table td.code .sro,
+table th.docs pre .sro,
+table td.docs pre .sro {
+  color: #b58900 !important;
+}
+table th.code .sri,
+table td.code .sri,
+table th.docs pre .sri,
+table td.docs pre .sri {
+  color: #2aa198 !important;
+}
+table th.code .ss,
+table td.code .ss,
+table th.docs pre .ss,
+table td.docs pre .ss {
+  color: #990073;
+}
+table th.code .sx,
+table td.code .sx,
+table th.docs pre .sx,
+table td.docs pre .sx {
+  color: #d14;
+}
+table th.code .s,
+table td.code .s,
+table th.docs pre .s,
+table td.docs pre .s {
+  color: #2aa198 !important;
+}
+table th.code .vc,
+table td.code .vc,
+table th.docs pre .vc,
+table td.docs pre .vc {
+  color: #008080;
+}
+table th.code .vg,
+table td.code .vg,
+table th.docs pre .vg,
+table td.docs pre .vg {
+  color: #268bd2 !important;
+}
+table th.code .vi,
+table td.code .vi,
+table th.docs pre .vi,
+table td.docs pre .vi {
+  color: #268bd2 !important;
+}
+table th.code .w,
+table td.code .w,
+table th.docs pre .w,
+table td.docs pre .w {
+  color: #bbb;
+}
+table th.code div .gd,
+table td.code div .gd,
+table th.docs pre div .gd,
+table td.docs pre div .gd,
+table th.code div .gd .x,
+table td.code div .gd .x,
+table th.docs pre div .gd .x,
+table td.docs pre div .gd .x,
+table th.code div .gi,
+table td.code div .gi,
+table th.docs pre div .gi,
+table td.docs pre div .gi,
+table th.code div .gi .x,
+table td.code div .gi .x,
+table th.docs pre div .gi .x,
+table td.docs pre div .gi .x {
+  display: inline-block;
+  width: 100%;
+}

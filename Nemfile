@@ -9,3 +9,5 @@ npm 'docco', 'git://github.com/abe33/docco.git#feature-exports'
 # tasks to the user projects.
 npm 'coffeelint'
 npm 'jasmine-node', 'git://github.com/abe33/jasmine-node.git#patch-1'
+
+npm 'stylus'
