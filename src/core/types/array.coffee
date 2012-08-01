@@ -9,7 +9,7 @@
 
 # Returns `true` if the passed-in object is an `Array`. This function
 # use the `Object.prototype.toString` hack to test the passed-in object.
-Array.isArray = (a) -> a?.type() is 'array'
+Array.isArray = (a) -> Object::toString.call(a) is '[object Array]'
 
 #### Instances Extensions
 
