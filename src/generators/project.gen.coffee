@@ -1,6 +1,6 @@
 {resolve, existsSync:exists, basename, extname} = require 'path'
 Neat = require '../neat'
-{puts, error, warn, missing, neatBroken} = Neat.require "utils/logs"
+{puts, error, warn, missing, neatBroken, green} = Neat.require "utils/logs"
 {ensureSync, touchSync} = Neat.require "utils/files"
 {namespace} = Neat.require "utils/exports"
 {renderSync:render} = Neat.require "utils/templates"
@@ -67,12 +67,16 @@ project = (generator, name, args..., callback) ->
   t = (a, b, c=false) ->
     [b,c] = [a,b] if typeof b is 'boolean'
     b = a unless b?
+    p = resolve(path, a)
     if c
-      touchSync resolve(path, a), render resolve(tplpath, b), context
+      touchSync p, render resolve(tplpath, b), context
     else
-      touchSync resolve(path, a)
+      touchSync p
+    puts green("#{p} generated"), 1
 
-  e = (d) -> ensureSync resolve path, d
+  e = (d) ->
+    ensureSync resolve path, d
+    puts green("#{d} generated"), 1
 
   try
     e d for d in dirs
