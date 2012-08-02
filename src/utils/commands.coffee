@@ -56,6 +56,40 @@ environment = (env, target) -> decorate target, 'environment', env
 
 ##### hashArguments
 
+# Converts an array of strings with a form such as `key:value`
+# in an object with the corresponding properties.
+#
+# These are supposed to come from a command line input such as
+# some limitations occurs:
+#
+#   1. There cannot be any spaces between the key, the colon and the value.
+#   2. String values that will contains spaces must be wrapped into `"` or `'`.
+#   3. There cannot be any spaces between the element of an array and the
+#      commas before and after it.
+#
+# For instance, in the following command line input:
+#
+#     neat g project dummy author:"John Doe" keywords:foo,bar
+#
+# The hash arguments, once parsed by the `hashArguments` function,
+# will look like:
+#
+#     {author: 'John Doe', keywords: ['foo', 'bar']}
+#
+# Basic types such `String`, `Number`, `Boolean` and `Array` are supported
+# as arguments value:
+#
+#     integer:0                  # 0
+#     float:0.5                  # 0.5
+#     string:foo                 # 'foo'
+#     stringWithSpace:"foo bar"  # 'foo bar'
+#     booleans:yes               # true
+#     arrays:foo,10,false        # ['foo', 10, false]
+#
+# As you may have notice, booleans are available with various aliases:
+#
+#   * `true`: `true`, `on`, `yes`
+#   * `false`: `false`, `off`, `no`
 hashArguments = (ary...) ->
   ary = ary.flatten()
   hash = {}
