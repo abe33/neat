@@ -1,9 +1,28 @@
 require '../../../test_helper'
 Neat = require '../../../../lib/neat'
 
-withProject 'foo', 'when outside of a project', ->
+{run} = Neat.require 'utils/commands'
+{print} = require 'util'
+
+describe 'when outside a project', ->
+  beforeEach -> process.chdir FIXTURES_ROOT
+
+  describe 'running `neat generate project`', ->
+    it "should return a status of 1 and don't generate anything", (done) ->
+      # options =
+      #   stderr: (data)-> print data
+      #   stdout: (data)-> print data
+      run 'node', [NEAT_BIN, 'generate', 'project'], (status) ->
+        expect(status).toBe(1)
+        done()
+
+withProject 'foo', 'when outside a project', ->
   describe 'running `neat generate project foo`', ->
     beforeEach -> process.chdir FIXTURES_ROOT
+
+    it 'should return a status code of 0', ->
+      expect(@status).toBe(0)
+
     it 'should generates the neat manifest for the new project', ->
       path = inProject ".neat"
       expect(path).toExist()
@@ -47,7 +66,8 @@ withProject 'foo', 'when outside of a project', ->
       expect(inProject "src/commands/.gitkeep").toExist()
       expect(inProject "src/generators/.gitkeep").toExist()
 
-      expect(inProject "src/config/initializers/docco.coffee").toExist()
+      expect(inProject "src/config/initializers/commands/docco.coffee")
+        .toExist()
 
       expect(inProject "templates/.gitkeep").toExist()
 

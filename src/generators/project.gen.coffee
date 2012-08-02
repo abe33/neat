@@ -11,7 +11,8 @@ describe '''Creates a <name> directory with the default neat project content
             Description, author and keywords can be defined using the hash
             arguments.''',
 project = (generator, name, args..., callback) ->
-  return error "Missing name argument" unless name?
+  throw new Error "Missing name argument" unless name?
+
   args.push callback if args.length is 0 and typeof callback isnt 'function'
 
   path = resolve '.', name
@@ -31,6 +32,7 @@ project = (generator, name, args..., callback) ->
     "src/config",
     "src/config/environments",
     "src/config/initializers",
+    "src/config/initializers/commands",
     "src/generators",
     "src/tasks",
     "templates",
@@ -48,7 +50,7 @@ project = (generator, name, args..., callback) ->
     ["src/config/environments/development.coffee", true]
     ["src/config/environments/production.coffee", true]
     ["src/config/environments/test.coffee", true]
-    ["src/config/initializers/docco.coffee", true]
+    ["src/config/initializers/commands/docco.coffee", true]
     ["src/generators/.gitkeep"],
     ["src/tasks/.gitkeep"],
     ["templates/.gitkeep"],
@@ -81,10 +83,11 @@ project = (generator, name, args..., callback) ->
     e d for d in dirs
     t a,b,c for [a,b,c] in files
   catch e
-    return error """Cannot proceed to the generation of the project
+    e.message = """Cannot proceed to the generation of the project
 
-                 #{e.stack}"""
+                   #{e.message}"""
+    throw e
 
-  callback?()
+    callback?()
 
 module.exports = {project}

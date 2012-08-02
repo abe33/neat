@@ -78,6 +78,7 @@ global.withProject = (name, desc=null, block, opts) ->
           'description:"a description"'
         ]
         run 'node', args, options, (status) =>
+          @status = status
           process.chdir @projectPath
           if opts?.init?
             opts.init -> ended = true
