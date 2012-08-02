@@ -2,26 +2,45 @@ path = require 'path'
 Neat = require '../neat'
 {queue} = require '../async'
 {neatTask} = require '../utils/commands'
+{namespace} = require '../utils/exports'
 {error, info, green, red, yellow, puts} = require '../utils/logs'
 
-test = (k,f) -> (callback) ->
-  puts yellow "Running tests using #{k.capitalize()}\n"
-  f ->
-    puts ''
-    callback?()
+test = (k,f,n,d) -> (callback) -> f n, d, -> callback?()
 
-exports.test = neatTask
+beforeTests = (test) -> (callback) ->
+  Neat.task('compile') (status) ->
+    if status is 0 then test callback else callback?()
+
+runTests = (name, dir) -> (callback) ->
+  actions = (test k,f,name,dir for k,f of Neat.env.engines.tests)
+  queue actions, -> callback?()
+
+index = neatTask
   name:'test'
-  description: 'Tests the sources'
+  description: 'Run all tests'
   environment: 'test'
-  action: (callback) ->
-    Neat.task('compile') (status) ->
-      if status is 0
-        puts ''
-        actions = (test k,f for k,f of Neat.env.engines.tests)
-        queue actions, ->
-          info green 'All tests complete'
-          callback?()
-      else
-        puts
+  action: beforeTests (callback) ->
+    runTests('unit', 'test/units') (status) ->
+      runTests('functional', 'test/functionals') (status) ->
+        info green 'All tests complete'
         callback?()
+
+unit = neatTask
+  name:'test:unit'
+  description: 'Run unit tests'
+  environment: 'test'
+  action: beforeTests (callback) ->
+    runTests('unit', 'test/units') ->
+      info green 'All tests complete'
+      callback?()
+
+functional = neatTask
+  name:'test:functional'
+  description: 'Run functional tests'
+  environment: 'test'
+  action: beforeTests (callback) ->
+    runTests('functional', 'test/functionals') ->
+      info green 'All tests complete'
+      callback?()
+
+module.exports = namespace 'test', {index, unit, functional}

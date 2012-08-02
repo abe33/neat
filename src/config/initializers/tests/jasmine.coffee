@@ -7,23 +7,15 @@ Neat = require '../../../neat'
 JASMINE = "#{Neat.neatRoot}/node_modules/.bin/jasmine-node"
 
 module.exports = (config) ->
-  config.engines.tests.jasmine = (callback) ->
+  config.engines.tests.jasmine = (name, test, callback) ->
     unless path.existsSync JASMINE
       error """#{red "Can't find jasmine-node module"}
 
                Run #{yellow 'neat install'} to install the dependencies."""
       return callback?()
 
-    paths =
-      units: 'test/units'
-      functional: 'test/functionals'
-
     args = ['.', '--color', '--coffee', '--test-dir']
 
-    runTest = (name, test) -> (callback) ->
-      puts yellow "#{name.capitalize()} tests:"
-      run JASMINE, args.concat("#{Neat.root}/#{test}"), (status) ->
-        callback?()
-
-    queue (runTest k,v for k,v of paths), ->
+    puts yellow "#{name.capitalize()} tests:"
+    run JASMINE, args.concat("#{Neat.root}/#{test}"), (status) ->
       callback?()
