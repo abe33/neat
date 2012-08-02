@@ -25,10 +25,4 @@ functional = namedEntity __filename,
                         'spec.coffee',
                         context
 
-meta 'integration',
-integration = namedEntity __filename,
-                          'test/integrations',
-                          'spec.coffee',
-                          context
-
-module.exports = namespace 'spec', {unit, functional, integration}
+module.exports = namespace 'spec', {unit, functional}

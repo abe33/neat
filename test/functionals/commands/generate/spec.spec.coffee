@@ -43,25 +43,3 @@ withProject 'foo', ->
         expect(path).toContain("require '../../test_helper'")
 
         done()
-
-  describe 'running `neat generate spec:integration foo`', ->
-    it 'should generate a new spec foo in the project', (done) ->
-      args = [NEAT_BIN, 'generate', 'spec:integration', 'foo']
-      run 'node', args, (status) ->
-        path = inProject "test/integrations/foo.spec.coffee"
-        expect(path).toExist()
-        expect(path).toContain("describe 'foo', ->")
-        expect(path).toContain("require '../test_helper'")
-
-        done()
-
-  describe 'running `neat generate spec:integration bar/foo`', ->
-    it 'should generate a new spec foo in the project', (done) ->
-      args = [NEAT_BIN, 'generate', 'spec:integration', 'bar/foo']
-      run 'node', args, (status) ->
-        path = inProject "test/integrations/bar/foo.spec.coffee"
-        expect(path).toExist()
-        expect(path).toContain("describe 'foo', ->")
-        expect(path).toContain("require '../../test_helper'")
-
-        done()

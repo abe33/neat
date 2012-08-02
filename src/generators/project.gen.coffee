@@ -54,7 +54,6 @@ project = (generator, name, args..., callback) ->
     ["templates/.gitkeep"],
     ["test/fixtures/.gitkeep"],
     ["test/functionals/.gitkeep"],
-    ["test/integrations/.gitkeep"],
     ["test/test_helper.coffee", true]
     ["test/units/.gitkeep"],
     ['.gitignore', true],

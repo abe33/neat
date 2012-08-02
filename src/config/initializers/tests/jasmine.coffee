@@ -16,8 +16,7 @@ module.exports = (config) ->
 
     paths =
       units: 'test/units'
-      functionals: 'test/functionals'
-      integrations: 'test/integrations'
+      functional: 'test/functionals'
 
     args = ['.', '--color', '--coffee', '--test-dir']
 

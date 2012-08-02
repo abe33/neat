@@ -54,5 +54,4 @@ withProject 'foo', 'when outside of a project', ->
       expect(inProject "test/test_helper.coffee").toExist()
       expect(inProject "test/units/.gitkeep").toExist()
       expect(inProject "test/functionals/.gitkeep").toExist()
-      expect(inProject "test/integrations/.gitkeep").toExist()
       expect(inProject "test/fixtures/.gitkeep").toExist()
