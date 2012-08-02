@@ -117,7 +117,7 @@ h1
         color: #252519
 
     for n in 0 1 2 3 4 5
-      &.leveln
+      &.level{n}
         margin-left: toc_margin * n
 
 pre, tt, code

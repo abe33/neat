@@ -119,22 +119,22 @@ h1 {
   text-decoration: underline;
   color: #252519;
 }
-.toc li.leveln {
+.toc li.level0 {
   margin-left: 0px;
 }
-.toc li.leveln {
+.toc li.level1 {
   margin-left: 20px;
 }
-.toc li.leveln {
+.toc li.level2 {
   margin-left: 40px;
 }
-.toc li.leveln {
+.toc li.level3 {
   margin-left: 60px;
 }
-.toc li.leveln {
+.toc li.level4 {
   margin-left: 80px;
 }
-.toc li.leveln {
+.toc li.level5 {
   margin-left: 100px;
 }
 pre,
