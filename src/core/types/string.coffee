@@ -64,6 +64,10 @@ def String, compact: -> @replace /\s+/g, ''
 
 ##### String::empty
 
+# Returns `true` if the string is empty.
+#
+#     ''.empty()    # true
+#     'foo'.empty() # false
 def String, empty: -> @length is 0
 
 ##### String::padLeft
