@@ -37,28 +37,28 @@ stylesheet = cmdgen name, desc, (pr, callback) ->
 name = 'docco:documentation'
 desc = 'Generates the documentation throug docco'
 documentation = cmdgen name, desc, (pr, callback) ->
-    paths = Neat.env.docco.paths.sources.concat()
-    if not paths? or paths.empty()
-      return warn 'No paths specified for documentation generation.'
+  paths = Neat.env.docco.paths.sources.concat()
+  if not paths? or paths.empty()
+    return warn 'No paths specified for documentation generation.'
 
-    dirname = __dirname.replace '.cmd', ''
-    navTplPath = resolve dirname, '_navigation'
-    headerTplPath = resolve dirname, '_header'
-    pageTplPath = resolve dirname, '_page'
+  dirname = __dirname.replace '.cmd', ''
+  navTplPath = resolve dirname, '_navigation'
+  headerTplPath = resolve dirname, '_header'
+  pageTplPath = resolve dirname, '_page'
 
-    files = (new DoccoFile path for path in paths)
+  files = (new DoccoFile path for path in paths)
 
-    render navTplPath, {files}, (err, nav) ->
+  render navTplPath, {files}, (err, nav) ->
+    throw err if err?
+    render headerTplPath, {files}, (err, header) ->
       throw err if err?
-      render headerTplPath, {files}, (err, header) ->
-        throw err if err?
-        processors = []
-        for file in files
-          processors.push Processor.asCommand(file, header, nav)
+      processors = []
+      for file in files
+        processors.push Processor.asCommand(file, header, nav)
 
-        parallel processors, ->
-          info green 'Documentation successfully generated'
-          callback?()
+      parallel processors, ->
+        info green 'Documentation successfully generated'
+        callback?()
 
 index = cmdgen 'docco',
                'Generates the documentation for a Neat project through docco',
