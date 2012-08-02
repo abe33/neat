@@ -31,6 +31,7 @@ withProject 'foo', ->
           ended = true
 
       waitsFor progress(-> ended), 'Timed out', 10000
+
   describe 'running `neat generate initializer foo`', ->
     it 'should generate a new initializer foo in the project', (done) ->
       run 'node', [NEAT_BIN, 'generate', 'initializer', 'foo'], (status) ->

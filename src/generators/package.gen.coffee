@@ -16,7 +16,7 @@ describe 'Generates the package.json file',
 index = (generator, args..., cb) ->
 
   unless Neat.root?
-    return error "Can't run package generator outside of a Neat project."
+    throw new Error "Can't run package generator outside of a Neat project."
 
   ##### 1 - Metadata
   pkg = {}
@@ -26,7 +26,7 @@ index = (generator, args..., cb) ->
 
     ##### 2 - Dependencies (Nemfile)
     fs.readFile 'Nemfile', (err, nemfile) ->
-      return warn "No #{"Nemfile".red} in the current directory" if err
+      throw new Error "No #{"Nemfile".red} in the current directory" if err
 
       puts "Nemfile found"
 
@@ -34,7 +34,7 @@ index = (generator, args..., cb) ->
       context = npm: nemfile.toString().replace /^(.|$)/gm,"  $1"
 
       render path, context, (err, source) ->
-        return error err.message if err?
+        throw err if err?
 
         dependencies = cup.read source
         return unless dependencies?
@@ -64,7 +64,7 @@ index = (generator, args..., cb) ->
         ##### 5 - Package.json Generation
         pkgfile = resolve Neat.root, "package.json"
         fs.writeFile pkgfile, JSON.stringify(pkg, null, 2), (err) ->
-          return error err.message if err?
+          throw err if err?
           info "package.json generated".green
           cb?()
 
