@@ -58,14 +58,14 @@ generate = (pr, commands) ->
       args.push(command) and command = callback
 
     unless generator of generators
-      return error missing "Generator #{generator}"
+      return callback? new Error missing "Generator #{generator}"
       callback?()
 
     gen = generators[generator]
 
     unless typeof gen is "function"
-      return error "Generators must be a function, was #{typeof gen}"
-      callback?()
+      return callback? new Error "Generators must be a function,
+                                  was #{typeof gen}".squeeze()
 
     gen.apply null, [generator].concat(args).concat(callback)
 

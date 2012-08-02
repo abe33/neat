@@ -34,7 +34,7 @@ debug = (string) -> puts prefix(string, inverse blue " DEBUG "), Logger.DEBUG
 missing = (path) -> red "#{path} can't be found."
 
 neatBroken = "Your Neat installation is probably broken."
-notOutsideNeat = (s) -> error red "Can't run #{s} outside of a Neat project."
+notOutsideNeat = (s) -> red "Can't run #{s} outside of a Neat project."
 
 module.exports = {
   blue,

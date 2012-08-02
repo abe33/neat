@@ -11,8 +11,8 @@ utils = resolve Neat.neatRoot, "lib/utils"
 namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
   (generator, name, args..., cb) ->
     if requireNeat
-      return notOutsideNeat process.argv.join " " unless Neat.root?
-    return error "Missing name argument" unless name?
+      throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
+    throw new Error "Missing name argument" unless name?
 
     a = name.split '/'
     name = a.pop()

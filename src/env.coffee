@@ -37,11 +37,10 @@ commands  = require "./commands"
 
 # Generates a function that execute the passed-in command after initializing
 # the Neat environment.
-commandTrigger = (c) -> ->
+commandTrigger = (c) -> (args...) ->
   Neat.defaultEnvironment = c.environment if c.environment?
-
   Neat.initEnvironment()
-  c.apply null, arguments
+  c.apply null, args
 
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}

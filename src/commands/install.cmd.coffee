@@ -11,20 +11,20 @@ COFFEE = "#{Neat.neatRoot}/node_modules/.bin/coffee"
 {render} = require resolve utils, "templates"
 
 install = (pr) ->
-  return error "No program provided to install" unless pr?
+  throw new Error "No program provided to install" unless pr?
 
   aliases 'i', 'install',
   describe 'Installs all the dependencies listed in the `Nemfile`',
   f = (cb)->
     unless Neat.root?
-      return error "Can't run neat install outside of a Neat project."
+      throw new Error "Can't run neat install outside of a Neat project."
 
     fs.readFile 'Nemfile', (err, nemfile) ->
-      return error "No #{"Nemfile".red} in the current directory" if err
+      throw new Error "No #{"Nemfile".red} in the current directory" if err
 
       puts "Nemfile found"
       render __filename, (err, source) ->
-        return error err.message if err?
+        throw err if err?
 
         source = source.replace "###_NPM_DECLARATION_###", nemfile.toString()
 

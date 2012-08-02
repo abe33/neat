@@ -20,7 +20,7 @@ withBundledProject 'foo', ->
           expect(status).toBe(0)
           expect(inProject 'docs/docco.css').toExist()
           expect(inProject 'docs/src_commands_foo.cmd.html').toExist()
-          expect(inProject 'docs/src_config_initializers_docco.html')
+          expect(inProject 'docs/src_config_initializers_commands_docco.html')
             .toExist()
           ended = true
 
@@ -34,7 +34,7 @@ withBundledProject 'foo', ->
           expect(status).toBe(0)
           expect(inProject 'docs/docco.css').toExist()
           expect(inProject 'docs/src_commands_foo.cmd.html').not.toExist()
-          expect(inProject 'docs/src_config_initializers_docco.html')
+          expect(inProject 'docs/src_config_initializers_commands_docco.html')
             .not.toExist()
           ended = true
 
@@ -48,7 +48,7 @@ withBundledProject 'foo', ->
           expect(status).toBe(0)
           expect(inProject 'docs/docco.css').not.toExist()
           expect(inProject 'docs/src_commands_foo.cmd.html').toExist()
-          expect(inProject 'docs/src_config_initializers_docco.html')
+          expect(inProject 'docs/src_config_initializers_commands_docco.html')
             .toExist()
           ended = true
 
