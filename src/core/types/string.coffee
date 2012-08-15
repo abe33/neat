@@ -70,8 +70,12 @@ def String, compact: -> @replace /\s+/g, ''
 #     'foo'.empty() # false
 def String, empty: -> @length is 0
 
+##### String::left
+
+# Align the current string to the left in the new string of length `l`.
+#
+#     'foo'.left 10 # 'foo       '
 def String, left: (l) -> @padRight l - @length
-def String, right: (l) -> @padLeft l - @length
 
 ##### String::padLeft
 
@@ -102,6 +106,13 @@ def String, prepend: (str) -> "#{str}#{this}"
 #     # 'il-etait-une-fois'
 def String, parameterize: ->
   @nopunctuation().nodiacritics().toLowerCase().squeeze().replace /\s/g, '-'
+
+##### String::right
+
+# Align the current string to the right in the new string of length `l`.
+#
+#     'foo'.right 10 # '       foo'
+def String, right: (l) -> @padLeft l - @length
 
 ##### String::squeeze
 
