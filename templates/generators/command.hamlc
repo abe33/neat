@@ -17,5 +17,6 @@
 :plain
     cmd = (cb)->
       # TODO: Command goes here
+      cb?()
 
   module.exports = {#{@name}}
