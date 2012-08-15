@@ -17,5 +17,4 @@ module.exports = (config) ->
     args = ['.', '--color', '--coffee', '--test-dir']
 
     puts yellow "#{name.capitalize()} tests:"
-    run JASMINE, args.concat("#{Neat.root}/#{test}"), (status) ->
-      callback?()
+    run JASMINE, args.concat("#{Neat.root}/#{test}"), callback
