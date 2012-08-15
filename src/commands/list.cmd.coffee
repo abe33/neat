@@ -25,8 +25,12 @@ list = (pr, commands) ->
          """.yellow, 5
 
     for k,v of commands
-      env = if v.environment? v.environment.left c2 else 'default'.left c2
-      aliases = if v.aliases? String(v.aliases).left c3 else String.fill c3
+      env = if v.environment? then v.environment.left c2
+      else 'default'.left c2
+
+      aliases = if v.aliases? then String(v.aliases).left c3
+      else String.fill c3
+
       puts "#{k.left c1}#{env}#{aliases}", 5
 
     cb?()
