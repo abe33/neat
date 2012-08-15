@@ -3,7 +3,7 @@ fs = require 'fs'
 Neat = require '../../neat'
 
 {error, info, warn, missing, green} = Neat.require 'utils/logs'
-{aliases, describe} = Neat.require 'utils/commands'
+{aliases, describe, environment} = Neat.require 'utils/commands'
 {ensureSync} = Neat.require 'utils/files'
 {render} = Neat.require 'utils/templates'
 {namespace} = Neat.require 'utils/exports'
@@ -17,6 +17,7 @@ cmdgen = (name, desc, fn) -> (pr) ->
 
   aliases name,
   describe desc,
+  environment 'production',
   f = (callback) ->
     unless Neat.root?
       return error "Can't run neat #{name} outside of a Neat project."
