@@ -70,6 +70,9 @@ def String, compact: -> @replace /\s+/g, ''
 #     'foo'.empty() # false
 def String, empty: -> @length is 0
 
+def String, left: (l) -> @padRight l - @length
+def String, right: (l) -> @padLeft l - @length
+
 ##### String::padLeft
 
 # Returns a string padded on the left with `pad` of an amount equal to `left`.

@@ -101,3 +101,14 @@ describe 'String::empty', ->
   it 'should returns true when the string has a length of 0', ->
     expect(''.empty()).toBeTruthy()
     expect('foo'.empty()).toBeFalsy()
+
+describe 'String::left', ->
+  it 'should pad a string on the right according to its length', ->
+    expect('foo'.left 10).toBe('foo       ')
+    expect('foobar'.left 10).toBe('foobar    ')
+
+describe 'String::right', ->
+  it 'should pad a string on the left according to its length', ->
+    expect('foo'.right 10).toBe('       foo')
+    expect('foobar'.right 10).toBe('    foobar')
+
