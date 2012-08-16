@@ -671,7 +671,8 @@ touch = (path, content='', callback) ->
 # Note that the function will fail with an error in this
 # context if `/path/to` don't exist.
 touchSync = (path, content='') ->
-  fs.writeFileSync path, content unless existsSync path
+  (fs.writeFileSync path, content; return true) unless existsSync path
+  false
 
 module.exports = {
   dirWithIndex,

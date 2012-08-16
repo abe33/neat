@@ -419,7 +419,7 @@ describe 'ensureSync', ->
     fs.rmdirSync deep if existsSync deep
     fs.rmdirSync base if existsSync base
 
-  describe 'when called with a valid path until the dir to create', ->
+  describe 'when called with a valid path to the dir to create', ->
     it 'should create the directory', ->
       fu.ensureSync base
       expect(existsSync base).toBeTruthy()
@@ -436,7 +436,7 @@ describe 'ensure', ->
     fs.rmdirSync deep if existsSync deep
     fs.rmdirSync base if existsSync base
 
-  describe 'when called with a valid path until the dir to create', ->
+  describe 'when called with a valid path to the dir to create', ->
 
     it 'should create the directory', (done) ->
       fu.ensure base, (err, created) ->
@@ -459,7 +459,7 @@ describe 'ensurePathSync', ->
     fs.rmdirSync deep if existsSync deep
     fs.rmdirSync base if existsSync base
 
-  describe 'when called with a valid path until the dir to create', ->
+  describe 'when called with a valid path to the dir to create', ->
     it 'should create the directory', ->
       fu.ensurePathSync deep
       expect(existsSync deep).toBeTruthy()
@@ -472,7 +472,7 @@ describe 'ensurePath', ->
     fs.rmdirSync deep if existsSync deep
     fs.rmdirSync base if existsSync base
 
-  describe 'when called with a valid path until the dir to create', ->
+  describe 'when called with a valid path to the dir to create', ->
     it 'should create the directory', (done) ->
       fu.ensurePath deep, (err, created) ->
         expect(existsSync deep).toBeTruthy()
@@ -488,12 +488,23 @@ describe 'touchSync', ->
     fs.unlinkSync deep if existsSync deep
     fs.unlinkSync base if existsSync base
 
-  describe 'when called with a valid path until the dir to create', ->
+  describe 'when called with a valid path to the file to create', ->
     it 'should create the directory', ->
-      fu.touchSync base
+      res = fu.touchSync base
       expect(existsSync base).toBeTruthy()
 
-  describe 'when called with a path that contains a dir that do not exist', ->
+    it 'should create return true', ->
+      res = fu.touchSync base
+      expect(res).toBeTruthy()
+
+  describe 'when called with a valid path to the file that exist', ->
+    it 'should create return false', ->
+      fu.touchSync base
+      res = fu.touchSync base
+      expect(res).toBeFalsy()
+
+
+  describe 'when called with a path that contains a file that do not exist', ->
     it 'should raise an error', ->
       expect(-> fu.touchSync deep).toThrow()
 
@@ -505,7 +516,7 @@ describe 'touch', ->
     fs.unlinkSync deep if existsSync deep
     fs.unlinkSync base if existsSync base
 
-  describe 'when called with a valid path until the dir to create', ->
+  describe 'when called with a valid path to the file to create', ->
 
     it 'should create the directory', (done) ->
       fu.touch base, (err, created) ->
@@ -513,7 +524,7 @@ describe 'touch', ->
         expect(created).toBeTruthy()
         done()
 
-  describe 'when called with a path that contains a dir that do not exist', ->
+  describe 'when called with a path that contains a file that do not exist', ->
     it 'should raise an error', (done) ->
       fu.touch deep, (err, created) ->
         expect(err).not.toBeNull()
