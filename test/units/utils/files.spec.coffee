@@ -424,6 +424,16 @@ describe 'ensureSync', ->
       fu.ensureSync base
       expect(existsSync base).toBeTruthy()
 
+    it 'should return true', ->
+      res = fu.ensureSync base
+      expect(res).toBeTruthy()
+
+  describe 'when called with a valid path to the dir that exist', ->
+    it 'should return false', ->
+      fu.ensureSync base
+      res = fu.ensureSync base
+      expect(res).toBeFalsy()
+
   describe 'when called with a path that contains a dir that do not exist', ->
     it 'should raise an error', ->
       expect(-> fu.ensureSync deep).toThrow()

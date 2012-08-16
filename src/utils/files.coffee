@@ -74,7 +74,8 @@ ensure = (dir, callback) ->
 #
 # Note that the function will fail with an error in this
 # context if `/path/to` don't exist.
-ensureSync = (dir) -> fs.mkdirSync dir unless existsSync dir
+ensureSync = (dir) ->
+  (fs.mkdirSync dir; return true) unless existsSync dir; false
 
 ##### ensurePath
 
@@ -118,6 +119,7 @@ ensurePathSync = (path) ->
     d = dirs.shift()
     p = resolve p, d
     fs.mkdirSync p unless existsSync p
+
 
 ##### find
 
@@ -663,6 +665,7 @@ touch = (path, content='', callback) ->
 ##### touchSync
 
 # Creates a file at path unless the file already exists.
+# A boolean value is returned and indicate if the file was created.
 #
 #     touchSync '/path/to/file.ext'
 #
