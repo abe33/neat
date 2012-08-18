@@ -1,10 +1,15 @@
 module.exports = (config) ->
-  config.verbosity = 0
+  config.merge
+    verbosity: 0
+    engines:
+      templates: {}
+      databases: {}
+      tests: {}
+      logging: {}
 
-  config.engines =
-    templates: {}
-    databases: {}
-    tests: {}
-    logging: {}
+    tasks:
+      compile:
+        sourceDirectory: 'src'
+        compilationDirectory: 'lib'
 
-  config.defaultLoggingEngine = 'console'
+    defaultLoggingEngine: 'console'

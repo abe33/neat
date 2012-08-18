@@ -39,7 +39,7 @@ render = (file, context, callback) ->
     # The extension is extracted from the template file name.
     ext = extname(tplfile)[1..]
     # And the concrete render function is then retrieved.
-    {render} = Neat.env.engines.templates[ext]
+    {render} = Neat.config.engines.templates[ext]
 
     # The function callback with an error if no engine can be found
     # for the template file.
@@ -85,7 +85,7 @@ renderSync = (file, context) ->
   # The extension is extracted from the template file name.
   ext = extname(tplfile)[1..]
   # And the concrete render function is then retrieved.
-  {render} = Neat.env.engines.templates[ext]
+  {render} = Neat.config.engines.templates[ext]
 
   # The function raise an error if no engine can be found
   # for the template file.

@@ -38,7 +38,7 @@ stylesheet = cmdgen name, desc, (pr, callback) ->
 name = 'docco:documentation'
 desc = 'Generates the documentation throug docco'
 documentation = cmdgen name, desc, (pr, callback) ->
-  paths = Neat.env.docco.paths.sources.concat()
+  paths = Neat.config.docco.paths.sources.concat()
   if not paths? or paths.empty()
     return warn 'No paths specified for documentation generation.'
 

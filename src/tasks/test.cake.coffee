@@ -12,7 +12,7 @@ beforeTests = (test) -> (callback) ->
     if status is 0 then test callback else callback?()
 
 runTests = (name, dir) -> (callback) ->
-  actions = (test k,f,name,dir for k,f of Neat.env.engines.tests)
+  actions = (test k,f,name,dir for k,f of Neat.config.engines.tests)
   queue actions, -> callback?()
 
 index = neatTask

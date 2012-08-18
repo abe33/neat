@@ -8,8 +8,8 @@ exports.compile = neatTask
   name:'compile'
   description: 'Compiles the sources'
   action: (callback) ->
-    lib = "#{Neat.root}/lib"
-    src = "#{Neat.root}/src"
+    lib = "#{Neat.root}/#{Neat.config.tasks.compile.compilationDirectory}"
+    src = "#{Neat.root}/#{Neat.config.tasks.compile.sourceDirectory}"
     run COFFEE, ['-c', '-o', lib, src], (status) ->
 
       if status is 0

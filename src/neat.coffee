@@ -30,8 +30,9 @@ class Neat
     # `PATHS` will stores the various paths into which Neat will look
     # when searching files.
     @paths = @PATHS = [@neatRoot]
-    # The environment object is defined asynchronously through
+    # The config object is defined asynchronously through
     # the `initEnvironment` or the `setEnvironment` methods.
+    @config = @config = null
     @env = @ENV = null
     # The `.neat` file at the root of a project contains the metadata
     # for the project. In the case of Neat, the `.neat` file is loaded
@@ -54,12 +55,12 @@ class Neat
 
   ##### Neat::task
 
-  # Returns the cake task whose name is `task`.
+  # Returns the cake task whose name is `name`.
   #
   #     compile = Neat.task 'compile'
   #     compile (status) ->
   #       # do something after compilation
-  task: (task) -> @require('tasks')[task]
+  task: (name) -> @require('tasks')[name]
 
   #### Environment Setup
 
@@ -67,7 +68,7 @@ class Neat
 
   # Setup the logging engine for this `Neat` instance.
   initLogging: ->
-    logger.add @env.engines.logging[@env.defaultLoggingEngine]
+    logger.add @config.engines.logging[@config.defaultLoggingEngine]
 
   ##### Neat::initEnvironment
 
@@ -104,7 +105,7 @@ class Neat
     #       # Setup your configuration here
     #
     # The `config` object contains the environment object which will
-    # be available through `Neat.env`.
+    # be available through `Neat.config`.
     #
     # The name of the file is the name of the environment to configure.
     #
@@ -176,7 +177,10 @@ class Neat
 
     # After configurators and initializers have been run,
     # the new environment object is then stored in `Neat`.
-    @ENV = @env = envObject
+    @CONFIG = @config = envObject
+    o = {}
+    o[env] = true
+    @ENV = @env = Object::merge.call env, o
 
   #### Environment Setup Utilities
 
