@@ -38,7 +38,9 @@ help = (pr, commands) ->
         description: renderSync(resolve(__dirname, "help/_neat")).yellow
         help: renderSync resolve(__dirname, "help/_list"), listContext
 
-    output = (err, res) -> console.log(res) and cb?()
+    output = (err, res) ->
+      console.log(res)
+      cb?()
 
     if typeof cmd.help is 'function'
       render __filename, cmd.help.apply(null, args), output

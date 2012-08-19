@@ -15,8 +15,8 @@
   - usages = if @usages.join then @usages.map((o)-> "'#{o}'").join(', ') else "'#{@usages}'"
   != "  usages #{usages},"
 :plain
-    cmd = (cb)->
+    cmd = (args..., callback) ->
       # TODO: Command goes here
-      cb?()
+      callback?()
 
   module.exports = {#{@name}}

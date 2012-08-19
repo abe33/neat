@@ -64,6 +64,7 @@ withProject 'foo', ->
         expect(path).toContain("describe 'a description',")
         expect(path).toContain("usages 'foo', 'bar', 'baz',")
         expect(path).toContain("environment 'production',")
+        expect(path).toContain("cmd = (args..., callback) ->")
         done()
 
     it 'should defines the usage even when there is only one

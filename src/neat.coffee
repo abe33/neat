@@ -13,14 +13,22 @@ NEAT_ROOT = resolve __dirname, '..'
 {logger, puts, warn, error, missing, neatBroken} = require "./utils/logs"
 {findSync, neatRootSync, isNeatRootSync} = require "./utils/files"
 cup = require "./utils/cup"
+Signal = require "./core/signal"
 
 ## Neat
 
 # A `Neat` instance provides information about Neat and the current project.
 class Neat
-
   ##### Neat::constructor
   constructor: (@ROOT) ->
+    ###### Signals
+
+    @beforeCommand = new Signal
+    @beforeTask = new Signal
+    @afterCommand = new Signal
+    @afterTask = new Signal
+
+    ###### Other Constructor Setup
     @defaultEnvironment = 'default'
     @root     = @ROOT
     @neatRoot = @NEAT_ROOT = NEAT_ROOT

@@ -15,7 +15,7 @@ install = (pr) ->
 
   aliases 'i', 'install',
   describe 'Installs all the dependencies listed in the `Nemfile`',
-  f = (cb)->
+  f = (args..., callback)->
     unless Neat.root?
       throw new Error "Can't run neat install outside of a Neat project."
 
@@ -34,6 +34,6 @@ install = (pr) ->
             info green "Your bundle is complete."
           else
             error red "An error occured during the installation!"
-          cb?()
+          callback?()
 
 module.exports = {install}

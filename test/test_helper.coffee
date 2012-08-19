@@ -5,7 +5,7 @@ Neat.require 'core'
 
 {run} = require '../lib/utils/commands'
 {resolve, existsSync:eS} = require 'path'
-{rmSync:rm, ensurePath} = require resolve __dirname, '../lib/utils/files'
+{rmSync:rm, ensurePath, touch} = Neat.require 'utils/files'
 {print} = require 'util'
 
 global.TEST_ROOT = resolve '.'
@@ -40,11 +40,12 @@ global.addFileMatchers = (scope) ->
     toContain: (matcher) ->
       actual = @actual
       notText = if @isNot then " not" else ""
-
       @message = ->
         """Expected content:
            #{@content}
            of file #{actual}#{notText} to contains "#{@expected}" """
+
+      return false unless eS @actual
 
       @content = fs.readFileSync(@actual).toString()
       if typeof matcher is 'function'
@@ -52,6 +53,14 @@ global.addFileMatchers = (scope) ->
       else
         @expected = matcher
         @content.indexOf(@expected) >= 0
+
+global.withCompiledFile = (file, content, callback) ->
+  dir = file.split('/')[0..-2].join '/'
+
+  ensurePath dir, (err) ->
+    touch file, content, (err) ->
+      run 'cake', ['compile'], (status) ->
+        callback?()
 
 global.withProject = (name, desc=null, block, opts) ->
   if typeof desc is 'function'
@@ -116,4 +125,3 @@ global.withBundledProject = (name, desc=null, block, opts) ->
           callback?()
 
   withProject name, desc, block, opts
-

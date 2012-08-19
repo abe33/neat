@@ -24,8 +24,8 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
 
   # That function generates a callback for a `readFile` call that
   # bump and then replace the version within the file's content.
-  replaceVersion = (callback) -> (err, data) ->
-    return callback? new Error "Can't find .neat file" if err?
+  replaceVersion = (cb) -> (err, data) ->
+    return cb? new Error "Can't find .neat file" if err?
     replaceFunc = (match, key, majv, minv, build) ->
       build = parseInt(build) + buildBump
 
@@ -46,14 +46,15 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
       newVersion = "#{majv}.#{minv}.#{build}"
       "#{key}: \"#{newVersion}\""
 
-    callback? null, data.toString().replace(re, replaceFunc)
+    cb? null, data.toString().replace(re, replaceFunc)
 
   # Here starts the bumping
   fs.readFile ".neat", replaceVersion asyncErrorTrap (res) ->
     fs.writeFile ".neat", res, asyncErrorTrap ->
 
       unless path.existsSync 'package.json'
-        return info green "Version bumped to #{newVersion}"
+        info green "Version bumped to #{newVersion}"
+        return callback?()
 
       fs.readFile "package.json", asyncErrorTrap (data) ->
         output = data.toString().replace re, "\"version\": \"#{newVersion}\""
@@ -66,15 +67,12 @@ module.exports = namespace 'bump'
   index:  neatTask
     name:'bump'
     description: 'Bump build version of the module'
-    action: (callback) ->
-      bump 0, 0, 1, callback
+    action: (callback) -> bump 0, 0, 1, callback
   minor: neatTask
     name:'bump:minor'
     description: 'Bump minor version of the module'
-    action: (callback) ->
-      bump 0, 1, 0, callback
+    action: (callback) -> bump 0, 1, 0, callback
   major: neatTask
     name:'bump:major'
     description: 'Bump major version of the module'
-    action: (callback) ->
-      bump 1, 0, 0, callback
+    action: (callback) -> bump 1, 0, 0, callback

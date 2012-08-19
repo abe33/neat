@@ -40,7 +40,9 @@ commands  = require "./commands"
 commandTrigger = (c) -> (args...) ->
   Neat.defaultEnvironment = c.environment if c.environment?
   Neat.initEnvironment()
-  c.apply null, args
+  Neat.beforeCommand.dispatch()
+  # args.pop() if typeof args.last() is 'object'
+  c.apply null, args.concat -> Neat.afterCommand.dispatch()
 
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}
