@@ -153,3 +153,34 @@ describe Signal, ->
     signal.add listener
 
     expect(signal.hasListeners()).toBeTruthy()
+
+  describe 'with an asynchronous listener', ->
+    it 'should wait until the callback was called
+        before doing to the next listener'.squeeze(), (done) ->
+
+      listener1Args = null
+      listener2Args = null
+      ended = false
+
+      listener1 = (a,b,c,callback) ->
+        setTimeout ->
+          listener1Args = [a,b,c]
+          callback?()
+        , 100
+
+      listener2 = (a,b,c) ->
+        listener2Args = [a,b,c]
+
+        expect(listener1Args).toEqual(listener2Args)
+
+        done()
+
+      signal = new Signal
+
+      signal.add listener1
+      signal.add listener2
+
+      signal.dispatch(1,2,3)
+
+
+

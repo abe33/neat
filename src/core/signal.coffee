@@ -30,6 +30,17 @@ class Signal
   #
   # An optional `priority` argument allow you to force
   # an order of dispatch for a listener.
+  #
+  # Signals listeners can be asynchronous, in that case the last
+  # argument of the listener must be named `callback`. An async
+  # listener blocks the dispatch until the passed-in `callback`
+  # is triggered.
+  #
+  #     # sync listener
+  #     signal.add (a, b, c) ->
+  #
+  #     # async listener
+  #     signal.add (a, b, c, callback) -> callback()
   add: (listener, context, priority = 0) ->
 
     # A listener can be registered several times, but only
@@ -126,9 +137,21 @@ class Signal
   # Listeners registered for only one call will be removed after
   # the call.
   dispatch: ->
+    args = (o for o in arguments)
     listeners = @listeners.concat()
-    for [listener, context, once, priority] in listeners
-      listener.apply context, arguments
-      @remove listener, context if once
+    next = =>
+      if listeners.length
+        [listener, context, once, priority] = listeners.shift()
+        isAsync = Function::toString.call(listener).indexOf('callback)') != -1
+        if isAsync
+          listener.apply context, args.concat =>
+            @remove listener, context if once
+            next()
+        else
+          listener.apply context, args
+          @remove listener, context if once
+          next()
+
+    next()
 
 module.exports = Signal
