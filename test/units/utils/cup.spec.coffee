@@ -40,3 +40,48 @@ describe 'read', ->
 
       expect(result).toBe(null)
       done()
+
+describe 'write', ->
+  describe 'when called with an object', ->
+    beforeEach ->
+      @object =
+        number: 20
+        string: "Foo Bar"
+        array: [
+          10,
+          'foo',
+          false,
+          foo: 'bar'
+          bar:
+            baz: 'foo'
+        ]
+        object:
+          foo: 'bar'
+          bar:
+            baz: 'foo'
+        function: (callback) ->
+          callback?()
+        regexp: /foo/g
+
+      @expected = """number: 20
+string: 'Foo Bar'
+array: [
+  10
+  'foo'
+  false
+  foo: 'bar'
+  bar:
+    baz: 'foo'
+]
+object:
+  foo: 'bar'
+  bar:
+    baz: 'foo'
+function: `function (callback) {
+            return typeof callback === "function" ? callback() : void 0;
+          }`
+regexp: /foo/g
+"""
+
+    it 'should return a string', ->
+      expect(cup.write @object).toEqual(@expected)
