@@ -155,24 +155,27 @@ describe Signal, ->
     expect(signal.hasListeners()).toBeTruthy()
 
   describe 'with an asynchronous listener', ->
+
     it 'should wait until the callback was called
         before doing to the next listener'.squeeze(), (done) ->
 
+      listener1Called = false
       listener1Args = null
       listener2Args = null
       ended = false
 
       listener1 = (a,b,c,callback) ->
+
         setTimeout ->
           listener1Args = [a,b,c]
+          listener1Called = true
           callback?()
         , 100
 
       listener2 = (a,b,c) ->
         listener2Args = [a,b,c]
-
+        expect(listener1Called).toBeTruthy()
         expect(listener1Args).toEqual(listener2Args)
-
         done()
 
       signal = new Signal
@@ -182,5 +185,32 @@ describe Signal, ->
 
       signal.dispatch(1,2,3)
 
+    it 'should call back the passed-in function
+        at the end of the dispatch'.squeeze(), (done) ->
+
+      listener1 = (a, b, c, callback) -> setTimeout (-> callback()), 100
+      listener2 = (a, b, c, callback) -> setTimeout (-> callback()), 100
+
+      signal = new Signal
+
+      signal.add listener1
+      signal.add listener2
+      ms = new Date().valueOf()
+      signal.dispatch 1, 2, 3, ->
+        ms = new Date().valueOf() - ms
+
+        expect(ms >= 200).toBeTruthy()
+        done()
+
+  describe 'when a listener signature have been specified', ->
+    it 'should prevent invalid listener to be passed', ->
+
+      signal = new Signal 'a', 'b'
+
+      expect(-> signal.add ->).toThrow()
+      expect(-> signal.addOnce ->).toThrow()
+
+      expect(-> signal.add (a, b) ->).not.toThrow()
+      expect(-> signal.add (a, b, callback) ->).not.toThrow()
 
 

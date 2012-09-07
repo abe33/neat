@@ -13,7 +13,7 @@ class Signal
   ##### Signal::constructor
 
   # Signals maintain an array of listeners.
-  constructor: ->
+  constructor: (@signature...) ->
     @listeners = []
 
   #### Listeners management
@@ -42,6 +42,7 @@ class Signal
   #     # async listener
   #     signal.add (a, b, c, callback) -> callback()
   add: (listener, context, priority = 0) ->
+    @validate listener
 
     # A listener can be registered several times, but only
     # if the context object is different each time.
@@ -72,6 +73,7 @@ class Signal
   # All the others rules are the same. So you can't add
   # the same listener/context couple twice through the two methods.
   addOnce: (listener, context, priority = 0) ->
+    @validate listener
     if not @registered listener, context
       @listeners.push [listener, context, true, priority]
       @sortListeners()
@@ -127,6 +129,26 @@ class Signal
 
       if pA < pB then 1 else if pB < pA then -1 else 0
 
+  ##### Signal::validate
+
+  validate: (listener) ->
+    if @signature.length > 0
+      re = /^.*\(([^)]*)\)+.*$/
+      signature = Function::toString.call(listener).replace(re, '$1')
+      args = signature.split /\s*,\s*/g
+
+      args.shift() if args.first() is ''
+      args.pop() if args.last() is 'callback'
+
+      s1 = @signature.join()
+      s2 = args.join()
+
+      if s2 isnt s1
+        throw new Error
+
+  isAsync: (listener) ->
+    Function::toString.call(listener).indexOf('callback)') != -1
+
   #### Signal Dispatch
 
   ##### Signal::dispatch
@@ -136,22 +158,27 @@ class Signal
   #
   # Listeners registered for only one call will be removed after
   # the call.
-  dispatch: ->
-    args = (o for o in arguments)
+  dispatch: (args..., callback)->
+    unless typeof callback is 'function'
+      args.push callback
+      callback = null
+
     listeners = @listeners.concat()
-    next = =>
+    next = (callback) =>
       if listeners.length
         [listener, context, once, priority] = listeners.shift()
-        isAsync = Function::toString.call(listener).indexOf('callback)') != -1
-        if isAsync
+
+        if @isAsync listener
           listener.apply context, args.concat =>
             @remove listener, context if once
-            next()
+            next callback
         else
           listener.apply context, args
           @remove listener, context if once
-          next()
+          next callback
+      else
+        callback?()
 
-    next()
+    next callback
 
 module.exports = Signal
