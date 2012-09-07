@@ -37,12 +37,15 @@ commands  = require "./commands"
 
 # Generates a function that execute the passed-in command after initializing
 # the Neat environment.
-commandTrigger = (c) -> (args...) ->
+commandTrigger = (c) -> (args..., callback) ->
+  if typeof callback isnt 'function'
+    args.push callback
+    callback = null
+
   Neat.defaultEnvironment = c.environment if c.environment?
   Neat.initEnvironment()
-  Neat.beforeCommand.dispatch()
-  # args.pop() if typeof args.last() is 'object'
-  c.apply null, args.concat -> Neat.afterCommand.dispatch()
+  Neat.beforeCommand.dispatch ->
+    c.apply null, args.concat -> Neat.afterCommand.dispatch callback
 
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}

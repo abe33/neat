@@ -10,3 +10,41 @@ withBundledProject 'foo', ->
         expect(inProject 'lib/config/initializers/commands/docco.js')
           .toExist()
         done()
+
+  describe 'setting hooks on compilation', ->
+    beforeEach ->
+
+      hooksPath = inProject('src/config/initializers/hooks.coffee')
+      hooksContent = """
+        Neat = require 'neat'
+        fs = require 'fs'
+
+        module.exports = (config) ->
+          fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+            .write "hooks added\\n"
+
+          Neat.beforeCompilation.add ->
+            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+              .write "beforeCompilation called\\n"
+          Neat.afterCompilation.add ->
+            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+              .write "afterCompilation called\\n"
+        """
+
+      ended = false
+      runs ->
+        withCompiledFile hooksPath, hooksContent, ->
+          ended = true
+
+      waitsFor progress(-> ended), 'Timed out', 1000
+
+     describe 'and running cake compile', ->
+      it 'should trigger the hooks', (done) ->
+        run 'cake', ['compile'], (status) ->
+          expect(status).toBe(0)
+          expect(inProject 'test.log')
+            .toContain("""hooks added
+                          beforeCompilation called
+                          afterCompilation called""")
+          done()
+

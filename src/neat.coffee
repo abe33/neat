@@ -24,8 +24,10 @@ class Neat
     ###### Signals
 
     @beforeCommand = new Signal
+    @beforeCompilation = new Signal
     @beforeTask = new Signal
     @afterCommand = new Signal
+    @afterCompilation = new Signal
     @afterTask = new Signal
 
     ###### Other Constructor Setup

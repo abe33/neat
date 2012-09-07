@@ -7,16 +7,15 @@ exports.compile = neatTask
   name:'compile'
   description: 'Compiles the sources'
   action: (callback) ->
-    {coffee, args, lib} = Neat.config.tasks.compile
-    rm lib, (err) ->
-      return error """#{err.stack}
-                      #{red 'Compilation failed'}""" if err?
+    Neat.beforeCompilation.dispatch ->
+      {coffee, args, lib} = Neat.config.tasks.compile
+      rm lib, (err) ->
+        run coffee, args, (status) ->
 
-      run coffee, args, (status) ->
+          if status is 0
+            info green 'Compilation done'
+          else
+            error red 'Compilation failed'
 
-        if status is 0
-          info green 'Compilation done'
-        else
-          error red 'Compilation failed'
-
-        callback? status
+          Neat.afterCompilation.dispatch ->
+            callback? status
