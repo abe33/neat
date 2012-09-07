@@ -21,15 +21,6 @@ Signal = require "./core/signal"
 class Neat
   ##### Neat::constructor
   constructor: (@ROOT) ->
-    ###### Signals
-
-    @beforeCommand = new Signal
-    @beforeCompilation = new Signal
-    @beforeTask = new Signal
-    @afterCommand = new Signal
-    @afterCompilation = new Signal
-    @afterTask = new Signal
-
     ###### Other Constructor Setup
     @defaultEnvironment = 'default'
     @root     = @ROOT
@@ -54,6 +45,26 @@ class Neat
       # The current project meta are available through `Neat.project`
       # or `Neat.PROJECT`.
       @project = @PROJECT = @loadMeta @root
+
+    @initSignals()
+
+  ##### Neat::initSignals
+  initSignals: ->
+
+    @beforeCommand = new Signal
+    @afterCommand = new Signal
+
+    @beforeCompilation = new Signal
+    @afterCompilation = new Signal
+
+    @beforeTask = new Signal
+    @afterTask = new Signal
+
+    @beforeEnvironment = new Signal
+    @afterEnvironment = new Signal
+
+    @beforeInitialize = new Signal
+    @afterInitialize = new Signal
 
   ##### Neat::require
 
@@ -85,112 +96,120 @@ class Neat
   # Initializes the `Neat` instance with the default environment.
   # If the `NEAT_ENV` environment variable is set, the corresponding
   # environment is loaded.
-  initEnvironment: ->
-    @setEnvironment process.env['NEAT_ENV'] or @defaultEnvironment
-    @initLogging()
+  initEnvironment: (callback) ->
+    @setEnvironment process.env['NEAT_ENV'] or @defaultEnvironment, =>
+      @initLogging()
+      callback?()
 
   ##### Neat::setEnvironment
 
   # Changes the environment of the `Neat` instance. All the process
   # of loading the environment configurators and the initializers
   # are executed on a brand new environment object.
-  setEnvironment: (env) ->
+  setEnvironment: (env, callback) ->
     # The environment object contains the paths defined in the `Neat` object.
     # In that way, configurators and initializers can perform operations
     # knowing the paths of the project.
     envObject = {
-      @root, @neatRoot, @paths, @initPath, @envPath,
+      @root, @neatRoot,  @paths, @initPath,  @envPath,
       @ROOT, @NEAT_ROOT, @PATHS, @INIT_PATH, @ENV_PATH,
-      verbose:false,
     }
 
-    ###### Configurations
-    #
-    # Configuration of the environment is done through `configurators`.
-    #
-    # A configurator is a function exposed as a module and that have
-    # the following form:
-    #
-    #     module.exports = (config) ->
-    #       # Setup your configuration here
-    #
-    # The `config` object contains the environment object which will
-    # be available through `Neat.config`.
-    #
-    # The name of the file is the name of the environment to configure.
-    #
-    # The default configurators are always called to ensure that
-    # the environment defaults are present if not overriden
-    # by the specified environment.
+    @beforeEnvironment.dispatch this, envObject, =>
 
-    # The `configurators` array initially contains the files which
-    # must be executed before any other configurator.
-    paths = @paths.map (p)=> "#{p}/#{@envPath}"
-    configurators = findSync /^default$/, 'js', paths
+      ###### Configurations
+      #
+      # Configuration of the environment is done through `configurators`.
+      #
+      # A configurator is a function exposed as a module and that have
+      # the following form:
+      #
+      #     module.exports = (config) ->
+      #       # Setup your configuration here
+      #
+      # The `config` object contains the environment object which will
+      # be available through `Neat.config`.
+      #
+      # The name of the file is the name of the environment to configure.
+      #
+      # The default configurators are always called to ensure that
+      # the environment defaults are present if not overriden
+      # by the specified environment.
 
-    return error """#{missing 'config/environments/default.js'}
+      # The `configurators` array initially contains the files which
+      # must be executed before any other configurator.
+      paths = @paths.map (p)=> "#{p}/#{@envPath}"
+      configurators = findSync /^default$/, 'js', paths
 
-                    #{neatBroken}""" unless configurators? and
-                                            configurators.length isnt 0
+      return error """#{missing 'config/environments/default.js'}
 
-    # Configurators for the given environment are searched in the
-    # `environments` directory of each path.
-    files = findSync ///^#{env}$///, "js", paths
-    configurators.push f for f in files when f not in configurators
+                      #{neatBroken}""" unless configurators? and
+                                              configurators.length isnt 0
 
-    # All the configurators found are required and then executed.
-    for configurator in configurators
-      puts "Running #{configurator}"
-      # The execution of a configurator is handled in a `try..catch` block
-      # in order to avoid a failing configurators to prevent `Neat`
-      # to be loaded.
-      # For instance this behavior is needed to run `neat install` in a fresh
-      # project where some dependencies cannot be satisfied yet because
-      # no modules have been installed.
-      try
-        setup = require configurator
-        setup? envObject
-      catch e
-        # However errors are reported to the console.
-        error """#{'Something went wrong with a configurator!!!'.red}
+      # Configurators for the given environment are searched in the
+      # `environments` directory of each path.
+      files = findSync ///^#{env}$///, "js", paths
+      configurators.push f for f in files when f not in configurators
 
-                 #{e.stack}"""
+      # All the configurators found are required and then executed.
+      for configurator in configurators
+        puts "Running #{configurator}"
+        # The execution of a configurator is handled in a `try..catch` block
+        # in order to avoid a failing configurators to prevent `Neat`
+        # to be loaded.
+        # For instance this behavior is needed to run `neat install` in a fresh
+        # project where some dependencies cannot be satisfied yet because
+        # no modules have been installed.
+        try
+          setup = require configurator
+          setup? envObject
+        catch e
+          # However errors are reported to the console.
+          error """#{'Something went wrong with a configurator!!!'.red}
 
-    ###### Initializations
-    #
-    # Initializations of plugins or components are done through `initializers`
-    #
-    # An initializer is basically a configurator that will be run after
-    # the environment configuration.
-    #
-    #     module.exports = (config) ->
-    #       # Setup for your module here
-    #
-    # Its purpose is to setup the configuration of a module, a command,
-    # or anything else that will run on top of Neat. The sole difference
-    # is that an initializer file can't have any name, it will be loaded
-    # anyway.
+                   #{e.stack}"""
 
-    # Every initializers are executed whatever the environment.
-    initializers = findSync 'js', @paths.map (o) => "#{o}/#{@initPath}"
+      @afterEnvironment.dispatch this, envObject, =>
+        @beforeInitialize.dispatch this, envObject, =>
 
-    for initializer in initializers
-      # The same precautions are taken towards initializers execution
-      # as for configurators.
-      try
-        initialize = require initializer
-        initialize? envObject
-      catch e
-        error """#{'Something went wrong with an initializer!!!'.red}
+          ###### Initializations
+          #
+          # Initializations of plugins or components are done through
+          # `initializers`.
+          #
+          # An initializer is basically a configurator that will be run after
+          # the environment configuration.
+          #
+          #     module.exports = (config) ->
+          #       # Setup for your module here
+          #
+          # Its purpose is to setup the configuration of a module, a command,
+          # or anything else that will run on top of Neat. The sole difference
+          # is that an initializer file can't have any name, it will be loaded
+          # anyway.
 
-                 #{e.stack}"""
+          # Every initializers are executed whatever the environment.
+          initializers = findSync 'js', @paths.map (o) => "#{o}/#{@initPath}"
 
-    # After configurators and initializers have been run,
-    # the new environment object is then stored in `Neat`.
-    @CONFIG = @config = envObject
-    o = {}
-    o[env] = true
-    @ENV = @env = Object::merge.call env, o
+          for initializer in initializers
+            # The same precautions are taken towards initializers execution
+            # as for configurators.
+            try
+              initialize = require initializer
+              initialize? envObject
+            catch e
+              error """#{'Something went wrong with an initializer!!!'.red}
+
+                       #{e.stack}"""
+
+          # After configurators and initializers have been run,
+          # the new environment object is then stored in `Neat`.
+          @CONFIG = @config = envObject
+          o = {}
+          o[env] = true
+          @ENV = @env = Object::merge.call env, o
+
+          @afterInitialize.dispatch this, envObject, callback
 
   #### Environment Setup Utilities
 

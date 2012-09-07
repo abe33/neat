@@ -43,9 +43,9 @@ commandTrigger = (c) -> (args..., callback) ->
     callback = null
 
   Neat.defaultEnvironment = c.environment if c.environment?
-  Neat.initEnvironment()
-  Neat.beforeCommand.dispatch ->
-    c.apply null, args.concat -> Neat.afterCommand.dispatch callback
+  Neat.initEnvironment ->
+    Neat.beforeCommand.dispatch ->
+      c.apply null, args.concat -> Neat.afterCommand.dispatch callback
 
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}
