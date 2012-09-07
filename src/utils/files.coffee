@@ -612,6 +612,24 @@ neatRootSync = (path=".") ->
 #     noExtension 'foo.bar.baz' # 'foo'
 noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
 
+readFiles = (files, callback) ->
+  res = {}
+  readIteration = (path) -> (callback) ->
+    fs.readFile path, (err, content) ->
+      throw err if err?
+
+      res[path] = String(content)
+      callback?()
+
+  parallel (readIteration p for p in files), ->
+    callback? null, res
+
+readFilesSync = (files) ->
+  res = {}
+  res[path] = fs.readFileSync path for path in files
+  res
+
+
 ##### rm
 
 rm = (path, callback) ->
@@ -695,6 +713,8 @@ module.exports = {
   neatRoot,
   neatRootSync,
   noExtension,
+  readFiles,
+  readFilesSync,
   rm,
   rmSync,
   touch,

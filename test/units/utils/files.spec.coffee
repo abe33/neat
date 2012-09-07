@@ -567,3 +567,30 @@ describe 'rm', ->
 
       expect(existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
       done()
+
+describe 'readFiles', ->
+  it 'should return a hash with the path and content of the files', (done) ->
+    files = [
+      "#{root}/test/fixtures/utils/files/readFiles/file1.txt"
+      "#{root}/test/fixtures/utils/files/readFiles/file2.txt"
+    ]
+    expected = {}
+    expected[files[0]] = "File 1 content\n"
+    expected[files[1]] = "File 2 content\n"
+
+    fu.readFiles files, (err, res) ->
+      expect(String(content)).toEqual(expected[path]) for path, content of res
+      done()
+
+describe 'readFilesSync', ->
+  it 'should return a hash with the path and content of the files', ->
+    files = [
+      "#{root}/test/fixtures/utils/files/readFiles/file1.txt"
+      "#{root}/test/fixtures/utils/files/readFiles/file2.txt"
+    ]
+    expected = {}
+    expected[files[0]] = "File 1 content\n"
+    expected[files[1]] = "File 2 content\n"
+
+    res = fu.readFilesSync files
+    expect(String(content)).toEqual(expected[path]) for path, content of res
