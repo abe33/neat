@@ -54,6 +54,11 @@ global.addFileMatchers = (scope) ->
         @expected = matcher
         @content.indexOf(@expected) >= 0
 
+global.withSourceFile = (file, content, callback) ->
+  dir = file.split('/')[0..-2].join '/'
+  ensurePath dir, (err) ->
+    touch file, content, callback
+
 global.withCompiledFile = (file, content, callback) ->
   dir = file.split('/')[0..-2].join '/'
 
