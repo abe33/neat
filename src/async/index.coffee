@@ -8,4 +8,13 @@ queue = (fns, callback) ->
   next = -> if fns.empty() then callback() else fns.shift() next
   next()
 
-module.exports = {queue, parallel}
+chain = (fns, args..., callback) ->
+  next = (args...) ->
+    if fns.empty()
+      callback.apply null, args
+    else
+      fns.shift().apply null, args.concat next
+
+  next.apply null, args
+
+module.exports = {queue, parallel, chain}
