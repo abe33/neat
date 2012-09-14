@@ -2,6 +2,8 @@ require '../../test_helper'
 require './package_helper'
 Neat = require '../../../lib/neat'
 
+op = require '../../../lib/tasks/package/operators'
+
 {readFileSync} = require 'fs'
 
 describe 'Packager', ->
@@ -10,13 +12,20 @@ describe 'Packager', ->
     "test/fixtures/tasks/package/exports"
   ]
   expected = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
-  packagerWithFiles files, ->
+  operators = [
+    op.stripRequires
+    op.join
+    op.exportsToPackage
+  ]
+  packagerWithFiles.call this, files, operators, ->
     beforeEach -> addFileMatchers this
-    it 'should replace exports with the package', ->
+    it 'should apply the operators on the file', ->
+      path = "#{Neat.root}/packages/fixtures.coffee"
       expected = String(readFileSync expected)
         .squeeze('\n')
         .strip()
         .replace /\#\{file\[(\d+)\]\}/g, (m,n) ->
           "#{Neat.root}/#{files[parseInt n]}.coffee"
-      expect(@result.squeeze('\n').strip()).toEqual(expected)
+
+      expect(@result[path].squeeze('\n').strip()).toEqual(expected)
 

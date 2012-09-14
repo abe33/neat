@@ -1,6 +1,7 @@
 Neat = require '../../../lib/neat'
 Packager = require '../../../lib/tasks/package/packager'
 
+
 Neat.config =
   tasks:
     package:
@@ -8,16 +9,17 @@ Neat.config =
       dir: "#{Neat.root}/packages"
       tmp: "#{Neat.root}/.tmp"
 
-global.packagerWithFiles = (files, bare=true, block) ->
+global.packagerWithFiles = (files, operators, bare=false, block) ->
   [bare, block] = [null, bare] if typeof bare is 'function'
 
-  describe "with [#{files}] as target", ->
+  describe.call this, "with [#{files}] as target", ->
     beforeEach ->
       @packager = new Packager
         name: 'fixtures'
         package: 'neat.fixtures'
         includes: files
         bare: bare
+      , operators
 
       ended = false
       runs ->

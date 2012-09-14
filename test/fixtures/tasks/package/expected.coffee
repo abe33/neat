@@ -2,6 +2,7 @@
 @neat.fixtures ||= {}
 
 `// #{file[0]}`
+# require should have been removed, but this comment is preserved
 
 `// #{file[1]}`
 @neat.fixtures.d = 0
