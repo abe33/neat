@@ -46,15 +46,12 @@ class Packager
     readFiles files, (err, res) =>
       content = @header()
       content += @processFile k,v for k,v of res
-      content = @processExports content
-      @result = content
-      @js = compile content, bare: @conf.bare
-      writeFile "#{tmp}/#{@conf.name}.coffee", content, (err) =>
+      @result = @processExports content
+      @js = compile @result, bare: @conf.bare
+      writeFile "#{tmp}/#{@conf.name}.coffee", @result, (err) =>
         writeFile "#{tmp}/#{@conf.name}.js", @js, (err) -> callback?()
 
-  processFile: (k,v) ->
-    v = @stripRequires v
-    "`// #{k}`\n\n#{v}\n"
+  processFile: (k,v) -> "`// #{k}`\n\n#{@stripRequires v}\n"
 
   processExports: (content) ->
     exp = []
