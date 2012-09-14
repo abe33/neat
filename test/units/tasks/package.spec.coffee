@@ -14,8 +14,10 @@ describe 'Packager', ->
   expected = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
   operators = [
     op.stripRequires
+    op.annotate
     op.join
     op.exportsToPackage
+    op.saveToFile
   ]
   packagerWithFiles.call this, files, operators, ->
     beforeEach -> addFileMatchers this

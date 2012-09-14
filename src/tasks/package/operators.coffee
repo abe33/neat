@@ -1,5 +1,6 @@
 Neat = require '../../neat'
 
+{parallel} = Neat.require 'async'
 {writeFile} = require 'fs'
 {compile:coffee} = require 'coffee-script'
 
@@ -17,6 +18,12 @@ HASH_VALUE_RE = '(\\s*:\\s*([^,}]+))*'
 HASH_RE = -> ///\{(#{HASH_KEY_RE}#{HASH_VALUE_RE},*\s*)+\}///
 REQUIRE_RE = -> ///require\s*(\(\s*)*#{STRING_RE}///gm
 
+annotate = (buffer, conf, callback) ->
+  for path, content of buffer
+    buffer[path] = "`// #{path}`\n\n#{content}\n"
+
+  callback?(buffer, conf)
+
 compile = (buffer, conf, callback) ->
   for path, content of buffer
     path = path.replace('.coffee', '.js')
@@ -24,14 +31,65 @@ compile = (buffer, conf, callback) ->
 
   callback?(buffer, conf)
 
+exportsToPackage = (buffer, conf, callback) ->
+  header = (conf) ->
+    header = ''
+    packages = conf.package.split '.'
+    pkg = "@#{packages.shift()}"
+    header += "#{pkg} ||= {}\n"
+    for p in packages
+      pkg += ".#{p}"
+      header += "#{pkg} ||= {}\n"
+
+    "#{header}\n"
+
+  processExports = (content, conf) ->
+    processProperty = (k,v) -> "@#{conf.package}.#{k} = #{v || k}"
+
+    exp = []
+    content = content.replace EXPORTS_RE(), (m,e,p) =>
+      [member, value] = p.split SPLIT_MEMBER_RE()
+
+      if MEMBER_RE().test member
+        "@#{conf.package}#{p}"
+      else
+        if HASH_RE().test value
+          values = value.replace(/\{|\}/g, '')
+                        .strip()
+                        .split(',')
+                        .map((s) -> s.strip().split(/\s*:\s*/))
+          exp.push processProperty k,v for [k,v] in values
+        else if ///#{OBJECT_RE}///m.test value
+          values = value.split('\n').map((s) -> s.strip().split(/\s*:\s*/))
+          exp.push processProperty k,v for [k,v] in values
+        else
+          value = value.strip()
+          exp.push "@#{conf.package}.#{value} = #{value}"
+        ''
+    "#{content}\n#{exp.join '\n'}"
+
+  for path, content of buffer
+    buffer[path] = "#{header conf}#{processExports content, conf}"
+
+  callback?(buffer, conf)
+
+
 join = (buffer, conf, callback) ->
   newBuffer = {}
   newPath = "#{conf.dir}/#{conf.name}.coffee"
   newContent = ''
-  newContent += "`// #{k}`\n\n#{v}\n" for k,v of buffer
+  newContent += v for k,v of buffer
   newBuffer[newPath] = newContent
 
   callback?(newBuffer, conf)
+
+saveToFile = (buffer, conf, callback) ->
+  gen = (path, content) -> (callback) ->
+    writeFile path, content, ->
+      callback?()
+
+  parallel (gen k,v for k,v of buffer), ->
+    callback?(buffer, conf)
 
 stripRequires = (buffer, conf, callback) ->
   for path, content of buffer
@@ -40,46 +98,11 @@ stripRequires = (buffer, conf, callback) ->
                           .join('\n')
   callback?(buffer, conf)
 
-exportsToPackage = (buffer, conf, callback) ->
-  for path, content of buffer
-    buffer[path] = "#{header conf}#{processExports content, conf}"
-
-  callback?(buffer, conf)
-
-header = (conf) ->
-  header = ''
-  packages = conf.package.split '.'
-  pkg = "@#{packages.shift()}"
-  header += "#{pkg} ||= {}\n"
-  for p in packages
-    pkg += ".#{p}"
-    header += "#{pkg} ||= {}\n"
-
-  "#{header}\n"
-
-processExports = (content, conf) ->
-  processProperty = (k,v) -> "@#{conf.package}.#{k} = #{v || k}"
-
-  exp = []
-  content = content.replace EXPORTS_RE(), (m,e,p) =>
-    [member, value] = p.split SPLIT_MEMBER_RE()
-
-    if MEMBER_RE().test member
-      "@#{conf.package}#{p}"
-    else
-      if HASH_RE().test value
-        values = value.replace(/\{|\}/g, '')
-                      .strip()
-                      .split(',')
-                      .map((s) -> s.strip().split(/\s*:\s*/))
-        exp.push processProperty k,v for [k,v] in values
-      else if ///#{OBJECT_RE}///m.test value
-        values = value.split('\n').map((s) -> s.strip().split(/\s*:\s*/))
-        exp.push processProperty k,v for [k,v] in values
-      else
-        value = value.strip()
-        exp.push "@#{conf.package}.#{value} = #{value}"
-      ''
-  "#{content}\n#{exp.join '\n'}"
-
-module.exports = {join, compile, exportsToPackage, stripRequires}
+module.exports = {
+  annotate,
+  compile,
+  exportsToPackage,
+  join,
+  saveToFile
+  stripRequires,
+}
