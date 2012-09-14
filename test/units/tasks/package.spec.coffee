@@ -12,14 +12,7 @@ describe 'Packager', ->
     "test/fixtures/tasks/package/exports"
   ]
   expected = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
-  operators = [
-    op.stripRequires
-    op.annotate
-    op.join
-    op.exportsToPackage
-    op.saveToFile
-  ]
-  packagerWithFiles.call this, files, operators, ->
+  packagerWithFiles.call this, files, ->
     beforeEach -> addFileMatchers this
     it 'should apply the operators on the file', ->
       path = "#{Neat.root}/packages/fixtures.coffee"

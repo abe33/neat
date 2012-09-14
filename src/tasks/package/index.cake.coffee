@@ -20,16 +20,7 @@ exports['package'] = neatTask
       ensure dir, asyncErrorTrap ->
         find 'cup', conf, asyncErrorTrap (files) ->
           readFiles files, (err, res) ->
-            ops = [
-              op.stripRequires
-              op.annotate
-              op.join
-              op.exportsToPackage
-              op.saveToFile
-              op.compile
-              op.saveToFile
-            ]
-            commands = (Packager.asCommand read(c), ops for p,c of res)
+            commands = (Packager.asCommand read(c) for p,c of res)
             parallel commands, ->
               info green 'all package processed'
               callback?()

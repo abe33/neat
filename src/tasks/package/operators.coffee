@@ -18,7 +18,7 @@ HASH_VALUE_RE = '(\\s*:\\s*([^,}]+))*'
 HASH_RE = -> ///\{(#{HASH_KEY_RE}#{HASH_VALUE_RE},*\s*)+\}///
 REQUIRE_RE = -> ///require\s*(\(\s*)*#{STRING_RE}///gm
 
-annotate = (buffer, conf, callback) ->
+annotateFile = (buffer, conf, callback) ->
   for path, content of buffer
     buffer[path] = "`// #{path}`\n\n#{content}\n"
 
@@ -99,7 +99,7 @@ stripRequires = (buffer, conf, callback) ->
   callback?(buffer, conf)
 
 module.exports = {
-  annotate,
+  annotateFile,
   compile,
   exportsToPackage,
   join,

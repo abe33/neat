@@ -19,7 +19,13 @@ global.packagerWithFiles = (files, operators, bare=false, block) ->
         package: 'neat.fixtures'
         includes: files
         bare: bare
-      , operators
+        operators: [
+          'stripRequires'
+          'annotateFile'
+          'join'
+          'exportsToPackage'
+          'saveToFile'
+        ]
 
       ended = false
       runs ->
