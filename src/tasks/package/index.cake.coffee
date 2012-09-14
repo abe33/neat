@@ -2,6 +2,7 @@
 
 Neat = require 'neat'
 Packager = require './packager'
+op = require './operators'
 
 {parallel} = Neat.require 'async'
 {run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
@@ -19,8 +20,16 @@ exports['package'] = neatTask
       ensure dir, asyncErrorTrap ->
         find 'cup', conf, asyncErrorTrap (files) ->
           readFiles files, (err, res) ->
-            ensure tmp, ->
-              parallel (Packager.asCommand read c for p,c of res), ->
-                info green 'all package processed'
-                # rm tmp, callback
-                callback?()
+            ops = [
+              op.stripRequires
+              op.annotate
+              op.join
+              op.exportsToPackage
+              op.saveToFile
+              op.compile
+              op.saveToFile
+            ]
+            commands = (Packager.asCommand read(c), ops for p,c of res)
+            parallel commands, ->
+              info green 'all package processed'
+              callback?()
