@@ -1,0 +1,7 @@
+- includes = if @includes? then @includes.map((k) -> "\"#{k}\"").join(", ") else '"TODO: includes goes here"'
+- operators = if @operators? then @operators.map((k) -> "\"#{k}\"").join(", ") else '"TODO: operators goes here"'
+:plain
+  name: "#{@name}"
+  package: "#{@package}"
+  includes: [#{includes}]
+  operators: [#{operators}]

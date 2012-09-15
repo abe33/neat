@@ -10,7 +10,7 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {dirWithIndexSync} = require resolve utils, "files"
 cup = require resolve utils, "cup"
 
-usages 'neat generate package',
+usages 'neat generate package.json',
 environment 'production',
 describe 'Generates the package.json file',
 index = (generator, args..., cb) ->
@@ -68,5 +68,5 @@ index = (generator, args..., cb) ->
           info "package.json generated".green
           cb?()
 
-module.exports = namespace "package", {index}
+module.exports = namespace "package.json", {index}
 
