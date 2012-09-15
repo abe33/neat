@@ -29,6 +29,15 @@ CLASS_MEMBER_RE = ->
     (\([^)]+\)\s*)*->   # Function
   ///
 
+STATIC_MEMBER_RE = ->
+  ///
+    ^
+    (\s+)               # Indent
+    @(#{LITERAL_RE})    # Member name
+    \s*:\s*             # :
+    (\([^)]+\)\s*)*->   # Function
+  ///
+
 analyze = (path, content) ->
   out = content.concat()
   i2 = 0
@@ -42,6 +51,10 @@ analyze = (path, content) ->
     if CLASS_MEMBER_RE().test line
       [m,s,p] = CLASS_MEMBER_RE().exec line
       comment = "#{s}`/* #{cleanPath path}<#{curClass}::#{p}> line:#{i+1} */`"
+
+    if STATIC_MEMBER_RE().test line
+      [m,s,p] = STATIC_MEMBER_RE().exec line
+      comment = "#{s}`/* #{cleanPath path}<#{curClass}.#{p}> line:#{i+1} */`"
 
     if comment?
       out.splice i2, 0, comment
