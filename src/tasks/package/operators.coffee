@@ -18,11 +18,52 @@ HASH_VALUE_RE = '(\\s*:\\s*([^,}]+))*'
 HASH_RE = -> ///\{(#{HASH_KEY_RE}#{HASH_VALUE_RE},*\s*)+\}///
 REQUIRE_RE = -> ///require\s*(\(\s*)*#{STRING_RE}///gm
 
-annotateFile = (buffer, conf, callback) ->
+CLASS_RE = -> ///^[^#]*class\s*(#{LITERAL_RE})///
+CLASS_MEMBER_RE = ->
+  ///
+    ^
+    (\s+)               # Indent
+    (#{LITERAL_RE})     # Member name
+    \s*:\s*             # :
+    (\([^)]+\)\s*)*->   # Function
+  ///
+
+analyze = (path, content) ->
+  out = content.concat()
+  i2 = 0
+  curClass = null
+  for line,i in content
+    comment = null
+    if CLASS_RE().test line
+      [m,curClass] = CLASS_RE().exec line
+      comment = "`/* #{cleanPath path}<#{curClass}> line:#{i+1} */`"
+
+    if CLASS_MEMBER_RE().test line
+      [m,s,p] = CLASS_MEMBER_RE().exec line
+      comment = "#{s}`/* #{cleanPath path}<#{curClass}::#{p}> line:#{i+1} */`"
+
+    if comment?
+      out.splice i2, 0, comment
+      i2++
+
+    i2++
+  out
+
+annotateClass = (buffer, conf, callback) ->
   for path, content of buffer
-    buffer[path] = "`// #{path}`\n\n#{content}\n"
+    content = content.split('\n')
+    content = analyze path, content
+    buffer[path] = content.join('\n')
+  callback?(buffer, conf)
+
+annotateFile = (buffer, conf, callback) ->
+  for p, content of buffer
+    buffer[p] = "`/* #{cleanPath p} */`\n\n#{content}\n"
 
   callback?(buffer, conf)
+
+cleanPath = (path) ->
+  path.replace "#{Neat.root}/", ''
 
 compile = (buffer, conf, callback) ->
   for path, content of buffer
@@ -99,6 +140,7 @@ stripRequires = (buffer, conf, callback) ->
   callback?(buffer, conf)
 
 module.exports = {
+  annotateClass,
   annotateFile,
   compile,
   exportsToPackage,

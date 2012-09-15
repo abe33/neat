@@ -2,14 +2,13 @@ require '../../test_helper'
 require './package_helper'
 Neat = require '../../../lib/neat'
 
-op = require '../../../lib/tasks/package/operators'
-
 {readFileSync} = require 'fs'
 
 describe 'Packager', ->
   files = [
     "test/fixtures/tasks/package/require"
     "test/fixtures/tasks/package/exports"
+    "test/fixtures/tasks/package/class"
   ]
   expected = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
   packagerWithFiles.call this, files, ->
@@ -20,7 +19,7 @@ describe 'Packager', ->
         .squeeze('\n')
         .strip()
         .replace /\#\{file\[(\d+)\]\}/g, (m,n) ->
-          "#{Neat.root}/#{files[parseInt n]}.coffee"
+          "#{files[parseInt n]}.coffee"
 
       expect(@result[path].squeeze('\n').strip()).toEqual(expected)
 

@@ -9,10 +9,10 @@ Neat.config =
       dir: "#{Neat.root}/packages"
       tmp: "#{Neat.root}/.tmp"
 
-global.packagerWithFiles = (files, operators, bare=false, block) ->
+global.packagerWithFiles = (files, bare=false, block) ->
   [bare, block] = [null, bare] if typeof bare is 'function'
 
-  describe.call this, "with [#{files}] as target", ->
+  describe "with [#{files}] as target", ->
     beforeEach ->
       @packager = new Packager
         name: 'fixtures'
@@ -21,6 +21,7 @@ global.packagerWithFiles = (files, operators, bare=false, block) ->
         bare: bare
         operators: [
           'stripRequires'
+          'annotateClass'
           'annotateFile'
           'join'
           'exportsToPackage'
@@ -34,7 +35,6 @@ global.packagerWithFiles = (files, operators, bare=false, block) ->
           ended = true
 
       waitsFor progress(-> ended), 'Timed out', 1000
-
     block?.call(this)
 
 global.packagerWithFile = (file, bare=true, block) ->
