@@ -12,9 +12,23 @@ class Signal
 
   ##### Signal::constructor
 
-  # Signals maintain an array of listeners.
-  constructor: (@signature...) ->
-    @listeners = []
+  # Optionally, a signal can have a specific signature.
+  # A signature is a collection of argument names such:
+  #
+  #     positionChanged = new Signal 'target', 'position'
+  #
+  # If a signature is passed to a signal, every listener
+  # added to the signal must then match the signature.
+  #
+  #     positionChanged.add (target, position) ->
+  #       # will be registered
+  #     positionChanged.add (target, position, callback) ->
+  #       # will be registered too
+  #     positionChanged.add () -> # will throw an error
+  #
+  # In the case of an asynchronous listener, the callback argument
+  # is not considered as being part of the signature.
+  constructor: (@signature...) -> @listeners = []
 
   #### Listeners management
   #
@@ -94,6 +108,8 @@ class Signal
   ##### Signal::removeAll
 
   # All listeners can be removed at once if needed.
+  #
+  #     signal.removeAll()
   removeAll: ->
     @listeners = []
 
@@ -131,10 +147,18 @@ class Signal
 
   ##### Signal::validate
 
+  # Throws an error if the passed-in listener's signature
+  # doesn't match the signal's one.
+  #
+  #     signal = new Signal 'a', 'b', 'c'
+  #     signal.validate () -> # false
+  #     signal.validate (a,b,c) -> # true
+  #     signal.validate (a,b,c,callback) -> # true
   validate: (listener) ->
     if @signature.length > 0
-      re = /^.*\(([^)]*)\)+.*$/
-      signature = Function::toString.call(listener).replace(re, '$1')
+      re = /[^(]+\(([^)]+)\).*$/m
+      listenerSignature = Function::toString.call(listener).split('\n').shift()
+      signature = listenerSignature.replace(re, '$1')
       args = signature.split /\s*,\s*/g
 
       args.shift() if args.first() is ''
@@ -143,9 +167,15 @@ class Signal
       s1 = @signature.join()
       s2 = args.join()
 
-      if s2 isnt s1
-        throw new Error
+      m = "The listener #{listener} doesn't match the signal's signature #{s1}"
+      throw new Error m if s2 isnt s1
 
+  ##### Signal::isAsync
+
+  # Returns `true` if the passed-in `listener` is asynchronous.
+  #
+  #     signal.isAsync -> # false
+  #     signal.isAsync (callback) -> # true
   isAsync: (listener) ->
     Function::toString.call(listener).indexOf('callback)') != -1
 
@@ -156,8 +186,17 @@ class Signal
   # Signals are dispatched to all the listeners. All the arguments
   # passed to the dispatch become the signal's message.
   #
+  #     signal.dispatch this, true
+  #
   # Listeners registered for only one call will be removed after
   # the call.
+  #
+  # Optionally you can pass a callback argument to the dispatch function.
+  # This function will be called at the end of the dispatch, allowing to
+  # execute code after all listeners, even asynchronous, have been triggered.
+  #
+  #     signal.dispatch this, true, ->
+  #       # all listeners have finish their execution
   dispatch: (args..., callback)->
     unless typeof callback is 'function'
       args.push callback
