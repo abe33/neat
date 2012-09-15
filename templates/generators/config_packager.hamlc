@@ -2,6 +2,6 @@
 - operators = if @operators? then @operators.map((k) -> "\"#{k}\"").join(", ") else '"TODO: operators goes here"'
 :plain
   name: "#{@name}"
-  package: "#{@package}"
+  package: "#{@package || 'TODO: package here'}"
   includes: [#{includes}]
   operators: [#{operators}]
