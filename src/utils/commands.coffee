@@ -133,6 +133,9 @@ neatTask = (options) ->
   throw new Error "Tasks must have a name" unless name?
   throw new Error "Tasks must have an action" unless action?
 
+  action.environment = environment
+  action.description = description
+
   taskAction = ->
     {action, environment} = options
     Neat.defaultEnvironment = environment if environment?
