@@ -18,7 +18,7 @@ def String, append: (str) -> "#{this}#{str}"
 #     'foo-bar'.camelize() # 'fooBar'
 #     'FOO_BAR'.camelize() # 'fooBar'
 def String, camelize: ->
-  a = @toLowerCase().split /[_-\s]/
+  a = @toLowerCase().split /[_\s-]/
   s = a.shift()
   s = "#{s}#{w.capitalize()}" for w in a
   s
