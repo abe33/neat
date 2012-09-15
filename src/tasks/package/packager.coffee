@@ -4,7 +4,6 @@ Neat = require '../../neat'
 {compile} = require 'coffee-script'
 {chain} = Neat.require 'async'
 {readFiles, ensure} = Neat.require 'utils/files'
-op = require './operators'
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
 PACKAGE_RE = -> ///^(#{LITERAL_RE})(\.#{LITERAL_RE})*$///
@@ -33,10 +32,10 @@ class Packager
     validate 'name', NAME_RE(), 'a file name such foo_bar of foo-bar'
     validate 'package', PACKAGE_RE(), 'a path such com.exemple.foo'
 
-    @operators = (op[k] for k in @conf.operators)
+    @conf.merge Neat.config.tasks.package
+    @operators = (@conf.operatorsMap[k] for k in @conf.operators)
 
   process: (callback) ->
-    @conf.merge Neat.config.tasks.package
     files = @conf.includes.map (p) -> "#{Neat.root}/#{p}.coffee"
     readFiles files, (err, res) =>
       chain.call null, @operators, res, @conf, (buffer) =>
