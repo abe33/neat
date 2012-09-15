@@ -3,6 +3,7 @@ Neat = require '../../neat'
 {parallel} = Neat.require 'async'
 {writeFile} = require 'fs'
 {compile:coffee} = require 'coffee-script'
+{parser, uglify:pro} = require 'uglify-js'
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
 STRING_RE = '["\'][^"\']+["\']'
@@ -66,11 +67,12 @@ cleanPath = (path) ->
   path.replace "#{Neat.root}/", ''
 
 compile = (buffer, conf, callback) ->
+  newBuffer = {}
   for path, content of buffer
     path = path.replace('.coffee', '.js')
-    buffer[path] = coffee content, bare: conf.bare
+    newBuffer[path] = coffee content, bare: conf.bare
 
-  callback?(buffer, conf)
+  callback?(newBuffer, conf)
 
 exportsToPackage = (buffer, conf, callback) ->
   header = (conf) ->
@@ -124,6 +126,15 @@ join = (buffer, conf, callback) ->
 
   callback?(newBuffer, conf)
 
+uglify = (buffer, conf, callback) ->
+  for path, content of buffer
+    ast = parser.parse(content)
+    ast = pro.ast_mangle(ast)
+    ast = pro.ast_squeeze(ast)
+    buffer[path] = pro.gen_code(ast)
+
+  callback?(buffer, conf)
+
 saveToFile = (buffer, conf, callback) ->
   gen = (path, content) -> (callback) ->
     writeFile path, content, ->
@@ -140,11 +151,12 @@ stripRequires = (buffer, conf, callback) ->
   callback?(buffer, conf)
 
 module.exports = {
-  annotateClass,
-  annotateFile,
-  compile,
-  exportsToPackage,
-  join,
+  annotateClass
+  annotateFile
+  compile
+  exportsToPackage
+  join
+  uglify
   saveToFile
-  stripRequires,
+  stripRequires
 }

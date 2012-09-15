@@ -4,6 +4,7 @@ npm 'coffee-script', '>= 1.3.0'
 npm 'haml-coffee', '>= 0.6.3'
 npm 'mustache', '>= 0.4.0'
 npm 'docco', 'git://github.com/abe33/docco.git#feature-exports'
+npm 'uglify-js'
 
 # These are required to provides the default `cake test` and `cake lint`
 # tasks to the user projects.

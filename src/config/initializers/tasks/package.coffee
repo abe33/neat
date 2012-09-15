@@ -7,6 +7,7 @@ module.exports = (config) ->
       'annotate:file': op.annotateFile
       'join': op.join
       'compile': op.compile
+      'uglify': op.uglify
       'strip:requires': op.stripRequires
       'exports:package': op.exportsToPackage
       'saveToFile': op.saveToFile
