@@ -12,12 +12,12 @@ describe 'when outside a project', ->
     process.chdir FIXTURES_ROOT
     addFileMatchers this
 
-  describe 'running `neat generate package`', ->
+  describe 'running `neat generate package.json`', ->
 
     it "should return a status of 1 and don't generate anything", ->
       ended = false
       runs ->
-        args = [NEAT_BIN, 'generate', 'package']
+        args = [NEAT_BIN, 'generate', 'package.json']
         run 'node', args, options, (status) ->
           expect(status).toBe(1)
           expect("#{FIXTURES_ROOT}/package.json").not.toExist()
@@ -26,11 +26,11 @@ describe 'when outside a project', ->
       waitsFor progress(-> ended), 'Timed out', 10000
 
 withProject 'foo', ->
-  describe 'running `neat generate package`', ->
+  describe 'running `neat generate package.json`', ->
     args = [
       NEAT_BIN,
       'generate',
-      'package',
+      'package.json',
     ]
     it 'should generate a package.json file at the project root', (done) ->
       run 'node', args, (status) ->

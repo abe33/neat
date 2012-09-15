@@ -36,6 +36,6 @@ withBundledProject 'foo', ->
         done()
 
 , init: (callback) ->
-  args = [NEAT_BIN, 'generate', 'package']
+  args = [NEAT_BIN, 'generate', 'package.json']
   run 'node', args, options, (status) ->
     callback?()
