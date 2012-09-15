@@ -84,8 +84,8 @@ exportsToPackage = (buffer, conf, callback) ->
 
     "#{header}\n"
 
-  processExports = (content, conf) ->
-    processProperty = (k,v) -> "@#{conf.package}.#{k} = #{v || k}"
+  convertExports = (content, conf) ->
+    packageFor = (k,v) -> "@#{conf.package}.#{k} = #{v || k}"
 
     exp = []
     content = content.replace EXPORTS_RE(), (m,e,p) =>
@@ -99,10 +99,10 @@ exportsToPackage = (buffer, conf, callback) ->
                         .strip()
                         .split(',')
                         .map((s) -> s.strip().split(/\s*:\s*/))
-          exp.push processProperty k,v for [k,v] in values
+          exp.push packageFor k,v for [k,v] in values
         else if ///#{OBJECT_RE}///m.test value
           values = value.split('\n').map((s) -> s.strip().split(/\s*:\s*/))
-          exp.push processProperty k,v for [k,v] in values
+          exp.push packageFor k,v for [k,v] in values
         else
           value = value.strip()
           exp.push "@#{conf.package}.#{value} = #{value}"
@@ -110,7 +110,7 @@ exportsToPackage = (buffer, conf, callback) ->
     "#{content}\n#{exp.join '\n'}"
 
   for path, content of buffer
-    buffer[path] = "#{header conf}#{processExports content, conf}"
+    buffer[path] = "#{header conf}#{convertExports content, conf}"
 
   callback?(buffer, conf)
 
