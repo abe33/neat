@@ -12,6 +12,26 @@ Neat = require '../../neat'
 DoccoFile = require './docco_file'
 Processor = require './docco_file_processor'
 
+hashify = (files) ->
+  filesHash = {}
+  deepestLevel = 0
+  for file in files
+    path = file.relativePath.split '/'
+    end = path.pop()
+    o = filesHash[path.shift()] ||= {}
+    level = 1
+
+    while path.length
+      p = path.shift()
+      level += 1
+      o = o[p] ||= {}
+
+    o[end] = file
+    level += 1
+    deepestLevel = Math.max deepestLevel, level
+
+  [filesHash, deepestLevel]
+
 cmdgen = (name, desc, fn) -> (pr) ->
   return error "No program provided to #{name}" unless pr?
 
@@ -24,6 +44,18 @@ cmdgen = (name, desc, fn) -> (pr) ->
 
     ensureSync resolve Neat.root, 'docs'
     fn pr, callback
+
+name = 'docco:javascript'
+desc = 'Generates the documentation javascript'
+javascript = cmdgen name, desc, (pr, callback) ->
+  dirname = __dirname.replace '.cmd', ''
+  jsTplPath = resolve dirname, '_javascript'
+  render jsTplPath, {}, (err, js) ->
+    throw err if err?
+    fs.writeFile "#{Neat.root}/docs/docco.js", js, (err) ->
+      throw err if err?
+      info green 'Javascript successfully generated'
+      callback?()
 
 name = 'docco:stylesheet'
 desc = 'Generates the documentation stylesheet'
@@ -49,9 +81,13 @@ documentation = cmdgen name, desc, (pr, callback) ->
 
   files = (new DoccoFile path for path in paths)
 
-  render navTplPath, {files}, (err, nav) ->
+  [filesHash, deepestLevel] = hashify files
+
+  context = {files, filesHash, deepestLevel}
+
+  render navTplPath, context, (err, nav) ->
     throw err if err?
-    render headerTplPath, {files}, (err, header) ->
+    render headerTplPath, context, (err, header) ->
       throw err if err?
       processors = []
       for file in files
@@ -61,8 +97,15 @@ documentation = cmdgen name, desc, (pr, callback) ->
         info green 'Documentation successfully generated'
         callback?()
 
-index = cmdgen 'docco',
-               'Generates the documentation for a Neat project through docco',
-               (pr, cb) -> stylesheet(pr) -> documentation(pr) cb
+name = 'docco'
+desc = 'Generates the documentation for a Neat project through docco'
 
-module.exports = namespace 'docco', {index, stylesheet, documentation}
+index = cmdgen name, desc, (pr, cb) ->
+  javascript(pr) -> stylesheet(pr) -> documentation(pr) cb
+
+module.exports = namespace 'docco', {
+  index
+  javascript
+  stylesheet
+  documentation
+}
