@@ -12,8 +12,6 @@
     "<li class='leaf'>#{get_link '#', "#{label}/"}<ul class='menu'>#{c}</ul></li>"
 
 #jump_page
-  -# for file in @files
-    -# != get_link file.linkPath, file.basename
   %ul#menu.menu
     - for k,v of @filesHash
       != get_dir k, v
