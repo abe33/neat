@@ -32,9 +32,8 @@ body
   background: #BBC4C4
 
 
-h1, h2, h3, p, a, ul, li
+h1, h2, h3, h4, p, a, ul, li
   font-weight: 300
-
 
 a
   color: #261a3b
@@ -47,9 +46,6 @@ p
 
 h1, h2, h3, h4, h5, h6
   margin: 0 0 15px 0
-
-h1
-  margin-top: 40px
 
 .containerobj
   width: 100%
@@ -110,7 +106,7 @@ h1
     font-weight: bold
     text-transform: uppercase
     line-height: 1em
-
+    cursor: pointer
     top: 350px
     width: 56px
     left: 490px
@@ -178,10 +174,6 @@ pre, tt, code
   padding: 0
 
 table
-  td h1
-    padding-bottom: 20px
-    border-bottom: 1px solid #888888
-
   th
   td
     border: 0
@@ -401,3 +393,15 @@ table
       div .gd, div .gd .x, div .gi, div .gi .x
         display: inline-block
         width: 100%
+
+  th.docs
+    h1
+      margin-top: 0px
+    h3
+      font-size: 13px
+      margin-bottom: -10px
+      margin-top: 40px
+  td.docs
+    h1
+      padding-bottom: 20px
+      border-bottom: 1px solid #888888

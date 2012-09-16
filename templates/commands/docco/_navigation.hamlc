@@ -20,9 +20,3 @@
 
 #jump_show
   Jump To &hellip;
-
-:javascript
-  jQuery('#menu').columnview();
-  $('#jump_show').click(function(){
-    $('#jump_to').toggleClass('visible');
-  });
