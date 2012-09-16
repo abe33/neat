@@ -9,6 +9,8 @@
 #
 # @toc
 
+##### match
+
 # The match function either call `m` with `v` when `m` is a function
 # or compare `m` and `v` otherwise.
 #
