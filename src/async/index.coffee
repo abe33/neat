@@ -1,7 +1,7 @@
 # A bunch of functions to deals with asynchronous process.
 # @toc
 
-#### parallel
+##### parallel
 
 # Execute an array of functions `fns` in parallel. The passed-in `callback`
 # will only be called when the all functions have call back.
@@ -15,7 +15,7 @@ parallel = (fns, callback) ->
   cb = -> count += 1; if count is fns.length then callback?()
   if fns.empty() then callback() else fn cb for fn in fns
 
-#### queue
+##### queue
 
 # Execute an array of function `fns` one after the other.
 # The passed-in `callback` will only be called when the queue
@@ -29,7 +29,7 @@ queue = (fns, callback) ->
   next = -> if fns.empty() then callback() else fns.shift() next
   next()
 
-#### chain
+##### chain
 
 # Execute an array of function `fns` on after the other, like a `queue`,
 # but the different between them lies in the fact that a `chain` pass
