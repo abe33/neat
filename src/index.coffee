@@ -6,7 +6,7 @@ require './core/types'
 # The `Neat` class instance that provides access to the environment
 # is provided under the name `Neat` on the exposed module.
 #
-#     {Neat} = require 'neat'
+#     Neat = require 'neat'
 Neat = require './neat'
 
 module.exports = Neat
