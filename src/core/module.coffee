@@ -12,6 +12,11 @@
 #     Cloneable =
 #       clone: -> # ...
 #
+
+## Module
+
+# The `Module` class is a base class that you can extend
+# to create classes with polymorphism ability.
 class Module
   #### Class Members
 

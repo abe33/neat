@@ -1,3 +1,5 @@
+# This file contains some utility to create parameterized generators.
+
 fs = require 'fs'
 {resolve} = require 'path'
 Neat = require '../neat'
@@ -8,6 +10,18 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {render} = require resolve utils, "templates"
 {error, info, missing, notOutsideNeat} = require resolve utils, "logs"
 
+##### namedEntity
+
+# Creates a new generator that create a new file from a template.
+# This file can receive optional parameters using the command line
+# hash arguments syntax.
+#
+#  * `src`: The path to the template to use when generating the new file.
+#  * `dir`: The path to the root directory in which create the new file.
+#  * `ext`: The extension of the new file.
+#  * `ctx`: A base context object to use with the template.
+#  * `requireNeat`: A boolean that indicates if the generator must be run
+#    inside a Neat project.
 namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
   (generator, name, args..., cb) ->
     if requireNeat

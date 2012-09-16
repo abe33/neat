@@ -3,6 +3,8 @@
 # @toc
 {def} = require './utils'
 
+## Number
+
 ##### Number::ago
 
 # Returns a `Date` object that correspond to the time of the call

@@ -3,6 +3,8 @@
 # @toc
 {def} = require './utils'
 
+## String
+
 #### Instances Extensions
 
 ##### String::append

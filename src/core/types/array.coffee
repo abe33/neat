@@ -3,6 +3,8 @@
 # @toc
 {def} = require './utils'
 
+## Array
+
 #### Class Extensions
 
 ##### Array.isArray

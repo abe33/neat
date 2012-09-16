@@ -3,6 +3,8 @@
 # @toc
 {def} = require './utils'
 
+## Object
+
 #### Class Extensions
 
 ##### Object.new
