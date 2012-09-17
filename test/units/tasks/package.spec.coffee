@@ -15,11 +15,11 @@ describe 'Packager', ->
     beforeEach -> addFileMatchers this
     it 'should apply the operators on the file', ->
       path = "#{Neat.root}/packages/fixtures.coffee"
+      repl = (m,n) -> "#{files[parseInt n]}.coffee"
       expected = String(readFileSync expected)
         .squeeze('\n')
         .strip()
-        .replace /\#\{file\[(\d+)\]\}/g, (m,n) ->
-          "#{files[parseInt n]}.coffee"
+        .replace /\#\{file\[(\d+)\]\}/g, repl
 
       expect(@result[path].squeeze('\n').strip()).toEqual(expected)
 
