@@ -3,7 +3,7 @@
 - if @title?
   != "#{@title}\n"
 
-- for k,v of @list
+- for k,v of @list.sort()
   - description = if v.description? then v.description else ''
   != indent k.yellow, 2
   != indent description, 4
