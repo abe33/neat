@@ -1,4 +1,4 @@
-Neat = require 'neat'
+Neat = require '../neat'
 {run, neatTask} = Neat.require 'utils/commands'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
 {first, last, length, property} = Neat.require 'utils/mappers'

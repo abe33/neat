@@ -1,6 +1,6 @@
 {readFileSync} = require 'fs'
 
-Neat = require 'neat'
+Neat = require '../../neat'
 Packager = require './packager'
 op = require './operators'
 
