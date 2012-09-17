@@ -613,6 +613,13 @@ neatRootSync = (path=".") ->
 #     noExtension 'foo.bar.baz' # 'foo'
 noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
 
+##### readFiles
+
+# Reads an array of path and return a hash with the path
+# of the file as key and the content of the file as value.
+#
+#     readFiles ['foo.txt', 'bar.txt'], (docs) ->
+#       # docs = {'foo.txt': '...', 'bar.txt': '...'}
 readFiles = (files, callback) ->
   res = {}
   readIteration = (path) -> (callback) ->
@@ -625,11 +632,17 @@ readFiles = (files, callback) ->
   parallel (readIteration p for p in files), ->
     callback? null, res
 
+##### readFilesSync
+
+# Reads an array of path and return a hash with the path
+# of the file as key and the content of the file as value.
+#
+#     docs = readFiles ['foo.txt', 'bar.txt']
+#      # docs = {'foo.txt': '...', 'bar.txt': '...'}
 readFilesSync = (files) ->
   res = {}
   res[path] = fs.readFileSync path for path in files
   res
-
 
 ##### rm
 
