@@ -9,6 +9,19 @@ describe 'Object::merge', ->
 
     expect(target.bar).toBe("irrelevant")
 
+describe 'Object::sort', ->
+  it 'should return a new Object whose properties have been sorted', ->
+    source = foo: 1, bar: 2, baz: 3
+    target = source.sort()
+    expectedKeys = ['bar', 'baz', 'foo']
+    expectedValues = [2, 3, 1]
+    count = 0
+    expect(target).toBeDefined()
+    for k,v of target
+      expect(k).toBe(expectedKeys[count])
+      expect(v).toBe(expectedValues[count])
+      count++
+
 describe 'Object::keys', ->
   it 'should returns an array containing the keys', ->
 

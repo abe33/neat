@@ -161,6 +161,24 @@ def Object, select: (f) ->
 # `Object::length` alias.
 def Object, size: -> @length()
 
+##### Object::sort
+
+# Returns a new object whose properties have been sorted to
+# be iterated in the defined order.
+#
+#     source = foo: 10, bar: 20
+#     target = source.sort (a,b) ->
+#       if a > b then 1 else if b < a then -1 else 0
+#     # target = {bar: 20, foo: 10}
+#
+# If called without arguments the keys are sorted alphabetically.
+def Object, sort: (f) ->
+  if not f? or typeof f isnt 'function'
+    f = (a,b) ->
+      if a > b then 1 else if b < a then -1 else 0
+
+  o = {}; o[k] = @[k] for k in @keys().sort f; return o
+
 ##### Object::sortedKeys
 
 # Returns the enumerable keys sorted alphabetically.
