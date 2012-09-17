@@ -33,8 +33,10 @@ aliases = (aliases..., target) -> decorate target, 'aliases', aliases
 #
 #     fs.readFile "/path/to/file", asyncErrorTrap (content) ->
 #       # do something with content
-asyncErrorTrap = (callback) -> (err, args...) ->
-  return error "#{err.stack}\n" if err?
+asyncErrorTrap = (errCallback, callback) -> (err, args...) ->
+  [errCallback, callback] = [callback, errCallback] unless callback?
+  if err?
+    if errCallback? then return errCallback err else return err
   callback?.apply null, args
 
 ##### describe

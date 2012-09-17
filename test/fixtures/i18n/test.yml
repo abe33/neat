@@ -1,0 +1,11 @@
+en:
+  neat:
+    other_test: baz en
+
+fr:
+  neat:
+    other_test: baz fr
+
+de:
+  neat:
+    other_test: baz de
