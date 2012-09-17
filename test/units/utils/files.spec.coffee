@@ -242,7 +242,7 @@ describe 'find', ->
       expect(files).not.toContain("#{dir}/file.coffee")
       done()
 
-  it '''should all the files with the passed-in extension
+  it '''should find all the files with the passed-in extension
         in the given directories''', (done) ->
 
     dirs = [

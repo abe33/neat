@@ -210,6 +210,7 @@ findOnce = (pattern, ext, path, callback, output) ->
 
     # Reads the current directory.
     fs.readdir path, (err, content)->
+      throw err if err?
       output = []
 
       if content.empty()
