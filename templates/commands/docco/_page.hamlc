@@ -21,7 +21,7 @@
 
         $("#jump_page div a span.label").filter(function(){
           return $(this).text() == f
-        }).parent().toggleClass('active')
+        }).last().parent().toggleClass('active')
       })
 
   %body
