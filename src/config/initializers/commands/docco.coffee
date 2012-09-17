@@ -5,6 +5,7 @@ module.exports = (config) ->
   dirs = [
     'src/async',
     'src/core',
+    'src/i18n',
     'src/utils',
   ]
 
