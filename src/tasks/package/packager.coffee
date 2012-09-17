@@ -7,7 +7,7 @@ Neat = require '../../neat'
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
 PACKAGE_RE = -> ///^(#{LITERAL_RE})(\.#{LITERAL_RE})*$///
-NAME_RE = -> /^[a-zA-Z_$][a-zA-Z0-9_$-]*$/
+NAME_RE = -> /^[a-zA-Z_$][a-zA-Z0-9_$-.]*$/
 
 class Packager
   @asCommand: (conf) ->
@@ -25,6 +25,7 @@ class Packager
       throw new Error "Missing configuration #{key}" unless @conf[key]?
 
     preventMissingConf 'name'
+    preventMissingConf 'package'
     preventMissingConf 'includes'
     preventMissingConf 'operators'
     malformedConf 'includes', 'Array' unless Array.isArray @conf['includes']
