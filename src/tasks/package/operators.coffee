@@ -134,7 +134,7 @@ join = (buffer, conf, callback) ->
   newBuffer = {}
   newPath = "#{conf.dir}/#{conf.name}.coffee"
   newContent = ''
-  newContent += v for k,v of buffer
+  newContent += buffer[k] for k in conf.includes
   newBuffer[newPath] = newContent
 
   callback?(newBuffer, conf)
