@@ -37,8 +37,8 @@ class Packager
     @operators = (@conf.operatorsMap[k] for k in @conf.operators)
 
   process: (callback) ->
-    files = @conf.includes.map (p) -> "#{Neat.root}/#{p}.coffee"
-    readFiles files, (err, res) =>
+    @conf.includes = @conf.includes.map (p) -> "#{Neat.root}/#{p}.coffee"
+    readFiles @conf.includes, (err, res) =>
       chain.call null, @operators, res, @conf, (buffer) =>
         @result = buffer
         callback?()
