@@ -9,7 +9,11 @@ class I18n
   get: (language, path) ->
     [language, path] = ['en', language] unless path?
     lang = @locales[language]
-    lang = lang[v] for v in path.split('.')
+
+    throw new Error "Language #{language} not found" unless lang?
+    els = path.split('.')
+    lang = lang[v] for v in els
+    lang = els.last().replace(/[-_]/g, ' ').capitalizeAll() unless lang?
     lang
 
   load: ->
