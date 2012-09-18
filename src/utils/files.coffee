@@ -428,7 +428,7 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
                   matches[roots.indexOf root] ||= []
                   matches[roots.indexOf root].push p
                 cb?()
-          # Runs a verification on each path returned by `finBase`.
+          # Runs a verification on each path returned by `findBase`.
           parallel (entryMatch(p) for p in ps), ->
             found.push matches[i] for r,i in roots
             found = found.flatten().compact()
