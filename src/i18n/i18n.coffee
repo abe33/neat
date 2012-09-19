@@ -11,7 +11,7 @@ class I18n
 
     throw new Error "Language #{language} not found" unless lang?
     els = path.split('.')
-    lang = lang[v] for v in els
+    (lang = lang[v]; break unless lang?) for v in els
     lang = els.last().replace(/[-_]/g, ' ').capitalizeAll() unless lang?
     lang
 

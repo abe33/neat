@@ -34,6 +34,7 @@ describe 'I18n', ->
         it 'should return the last element in the path', ->
           expect(@i18n.get 'neat.foo_bar_baz').toBe('Foo Bar Baz')
           expect(@i18n.get 'neat.foo-bar-baz').toBe('Foo Bar Baz')
+          expect(@i18n.get 'neat.foo.bar-baz').toBe('Bar Baz')
 
       describe 'with an inexistant language it', ->
         it 'should throw an error', ->

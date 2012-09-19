@@ -5,8 +5,8 @@ en:
       broken_environment: Something went wrong with a configurator!!!
       no_modules: No node modules found, run neat install.
 
-    messages:
-      tasks:
-        compile:
-          compilation_done: Compilation done
-          compilation_failed: Compilation failed
+    tasks:
+      compile:
+        description: Compiles the sources
+        compilation_done: Compilation done
+        compilation_failed: Compilation failed

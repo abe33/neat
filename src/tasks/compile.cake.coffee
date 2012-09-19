@@ -6,7 +6,7 @@ _ = Neat.i18n.getHelper()
 
 exports.compile = neatTask
   name:'compile'
-  description: 'Compiles the sources'
+  description: _('neat.tasks.compile.description')
   action: (callback) ->
     Neat.beforeCompilation.dispatch ->
       {coffee, args, lib} = Neat.config.tasks.compile
@@ -14,9 +14,9 @@ exports.compile = neatTask
         run coffee, args, (status) ->
 
           if status is 0
-            info green _('neat.messages.tasks.compile.compilation_done')
+            info green _('neat.tasks.compile.compilation_done')
           else
-            error red _('neat.messages.tasks.compile.compilation_failed')
+            error red _('neat.tasks.compile.compilation_failed')
 
           Neat.afterCompilation.dispatch ->
             callback? status
