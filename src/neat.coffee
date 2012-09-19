@@ -14,6 +14,7 @@ NEAT_ROOT = resolve __dirname, '..'
 {findSync, neatRootSync, isNeatRootSync} = require "./utils/files"
 cup = require "./utils/cup"
 Signal = require "./core/signal"
+{I18n} = require "./i18n"
 
 ## Neat
 
@@ -46,25 +47,48 @@ class Neat
       # or `Neat.PROJECT`.
       @project = @PROJECT = @loadMeta @root
 
-    @initSignals()
+    @initI18n()
+    @initHooks()
 
-  ##### Neat::initSignals
-  initSignals: ->
+  ##### Neat::initHooks
 
+  # Initialize the hooks provided by Neat.
+  initHooks: ->
+
+    # The `beforeCommand` and `afterCommand` hooks are triggered
+    # respectively before and after the execution of a cli command.
     @beforeCommand = new Signal
     @afterCommand = new Signal
 
+    # The `beforeCompilation` and `afterCompilation` hooks are triggered
+    # respectively before and after the compilation task.
+    # The listeners to these signals can safely use asynchronous
+    # process, the compilation task will proceed accordingly.
     @beforeCompilation = new Signal
     @afterCompilation = new Signal
 
+    # The `beforeTask` and `afterTask` hooks are triggered
+    # respectively before and after the execution of a cake task.
     @beforeTask = new Signal
     @afterTask = new Signal
 
+    # The `beforeEnvironment` and `afterEnvironment` hooks are triggered
+    # respectively before and after the construction of the environment.
     @beforeEnvironment = new Signal
     @afterEnvironment = new Signal
 
+    # The `beforeInitialize` and `afterInitialize` hooks are triggered
+    # respectively before and after the execution of initializers.
     @beforeInitialize = new Signal
     @afterInitialize = new Signal
+
+  ##### Neat::initI18n
+
+  # Initialize the internationalization for the current Neat instance.
+  initI18n: ->
+    @i18n = new I18n @paths
+    @i18n.load()
+    puts "Available languages: #{@i18n.languages.join ', '}"
 
   ##### Neat::require
 

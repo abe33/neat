@@ -1,7 +1,6 @@
 
 yaml = require 'js-yaml'
-Neat = require '../neat'
-{findSync, readFilesSync} = Neat.require 'utils/files'
+{findSync, readFilesSync} = require '../utils/files'
 
 class I18n
   constructor: (@paths) ->
@@ -18,8 +17,8 @@ class I18n
 
   load: ->
     @locales = {}
-
-    docs = readFilesSync findSync 'yml', @paths
+    paths = @paths.map (s) -> "#{s}/src/config/locales"
+    docs = readFilesSync findSync 'yml', paths
 
     @deepMerge @locales, yaml.load content for path, content of docs
     @languages = @locales.sortedKeys()
