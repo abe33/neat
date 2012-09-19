@@ -189,7 +189,7 @@ class Neat
           setup? envObject
         catch e
           # However errors are reported to the console.
-          error """#{'Something went wrong with a configurator!!!'.red}
+          error """#{@i18n.get('neat.errors.broken_environment').red}
 
                    #{e.stack}"""
 
@@ -222,7 +222,7 @@ class Neat
               initialize = require initializer
               initialize? envObject
             catch e
-              error """#{'Something went wrong with an initializer!!!'.red}
+              error """#{@i18n.get('neat.errors.broken_initializer').red}
 
                        #{e.stack}"""
 
@@ -250,7 +250,7 @@ class Neat
       modules = (resolve modulesDir, m for m in modules when m isnt 'neat')
       @paths.push m for m in modules when isNeatRootSync m
 
-    else warn 'No node modules found, run neat install.'
+    else warn @i18n.get 'neat.errors.no_modules'
 
     # The current Neat project root is the last path in `PATHS`.
     @paths.push @root if @root not in @paths
