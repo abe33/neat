@@ -203,21 +203,30 @@ class Signal
       callback = null
 
     listeners = @listeners.concat()
-    next = (callback) =>
-      if listeners.length
-        [listener, context, once, priority] = listeners.shift()
+    # If at leat one listener is async, the whole dispatch process is async
+    # otherwise the fast route is used.
+    if listeners.some((a) => @isAsync a[0])
+      next = (callback) =>
+        if listeners.length
+          [listener, context, once, priority] = listeners.shift()
 
-        if @isAsync listener
-          listener.apply context, args.concat =>
+          if @isAsync listener
+            listener.apply context, args.concat =>
+              @remove listener, context if once
+              next callback
+          else
+            listener.apply context, args
             @remove listener, context if once
             next callback
         else
-          listener.apply context, args
-          @remove listener, context if once
-          next callback
-      else
-        callback?()
+          callback?()
 
-    next callback
+      next callback
+    else
+      for [listener, context, once, priority] in listeners
+        listener.apply context, arguments
+        @remove listener, context if once
+
+      callback?()
 
 module.exports = Signal
