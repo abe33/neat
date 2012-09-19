@@ -8,7 +8,6 @@ describe 'I18n', ->
     beforeEach ->
       paths = ["#{Neat.root}/test/fixtures/i18n"]
       @i18n = new I18n paths
-      ended = false
       @i18n.load()
 
     it 'should have detected all the languages present', ->
@@ -39,3 +38,10 @@ describe 'I18n', ->
       describe 'with an inexistant language it', ->
         it 'should throw an error', ->
           expect(-> @i18n.get 'it', 'neat.test').toThrow()
+
+    describe 'calling getHelper', ->
+      it 'should return a function bind to the I18n::get method', ->
+        _ = @i18n.getHelper()
+
+        expect(_('neat.test')).toBe('foo')
+        expect(_('neat.other_test')).toBe('baz en')

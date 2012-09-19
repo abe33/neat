@@ -13,6 +13,7 @@ NEAT_ROOT = resolve __dirname, '..'
 {logger, puts, warn, error, missing, neatBroken} = require "./utils/logs"
 {findSync, neatRootSync, isNeatRootSync} = require "./utils/files"
 cup = require "./utils/cup"
+require "./core"
 Signal = require "./core/signal"
 {I18n} = require "./i18n"
 
@@ -86,7 +87,7 @@ class Neat
 
   # Initialize the internationalization for the current Neat instance.
   initI18n: ->
-    @i18n = new I18n @paths
+    @i18n = new I18n @paths.map (s) -> "#{s}/src/config/locales"
     @i18n.load()
     puts "Available languages: #{@i18n.languages.join ', '}"
 

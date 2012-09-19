@@ -15,10 +15,11 @@ class I18n
     lang = els.last().replace(/[-_]/g, ' ').capitalizeAll() unless lang?
     lang
 
+  getHelper: -> @get.bind this
+
   load: ->
     @locales = {}
-    paths = @paths.map (s) -> "#{s}/src/config/locales"
-    docs = readFilesSync findSync 'yml', paths
+    docs = readFilesSync findSync 'yml', @paths
 
     @deepMerge @locales, yaml.load content for path, content of docs
     @languages = @locales.sortedKeys()
