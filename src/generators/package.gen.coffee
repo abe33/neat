@@ -49,10 +49,11 @@ index = (generator, args..., cb) ->
             pkg.devDependencies[p] = v or "*" for [p,v] in a
 
         ##### 3 - Main File
-        hasLibIndex = dirWithIndexSync resolve Neat.root, "lib"
-        hasSrcIndex = dirWithIndexSync resolve Neat.root, "src"
+        unless pkg.main?
+          hasLibIndex = dirWithIndexSync resolve Neat.root, "lib"
+          hasSrcIndex = dirWithIndexSync resolve Neat.root, "src"
 
-        pkg.main = './lib/index' if hasLibIndex or hasSrcIndex
+          pkg.main = './lib/index' if hasLibIndex or hasSrcIndex
 
         ##### 4 - Binaries
         if exists resolve Neat.root, "bin"
