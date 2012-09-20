@@ -2,14 +2,11 @@ fs = require 'fs'
 {resolve} = require 'path'
 Neat = require '../neat'
 
-utils = resolve Neat.neatRoot, "lib/utils"
-
 COFFEE = "#{Neat.neatRoot}/node_modules/.bin/coffee"
+{puts, error, info, green, red} = Neat.require "utils/logs"
+{run, aliases, describe} = Neat.require "utils/commands"
 {'package.json':generate} = Neat.require 'generators'
-
-{puts, error, info, green, red} = require "../utils/logs"
-{run, aliases, describe} = require resolve utils, "commands"
-{render} = require resolve utils, "templates"
+{render} = Neat.require "utils/templates"
 
 install = (pr) ->
   throw new Error "No program provided to install" unless pr?
