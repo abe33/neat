@@ -3,7 +3,6 @@ en:
     errors:
       broken_initializer: Something went wrong with an initializer!!!
       broken_environment: Something went wrong with a configurator!!!
-      no_modules: No node modules found, run neat install.
 
     tasks:
       compile:
