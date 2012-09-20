@@ -31,6 +31,7 @@ withProject 'foo', ->
         run 'node', [NEAT_BIN, 'install'], options, (status) ->
           expect(status).toBe(0)
           expect(inProject 'node_modules/neat').toExist()
+          expect(inProject 'package.json').toExist()
           ended = true
 
         waitsFor progress(-> ended), 'Timed out', 50000

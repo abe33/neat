@@ -5,6 +5,7 @@ Neat = require '../neat'
 utils = resolve Neat.neatRoot, "lib/utils"
 
 COFFEE = "#{Neat.neatRoot}/node_modules/.bin/coffee"
+{'package.json':generate} = Neat.require 'generators'
 
 {puts, error, info, green, red} = require "../utils/logs"
 {run, aliases, describe} = require resolve utils, "commands"
@@ -34,6 +35,8 @@ install = (pr) ->
             info green "Your bundle is complete."
           else
             error red "An error occured during the installation!"
-          callback?()
+
+          generate 'package.json', ->
+            callback?()
 
 module.exports = {install}
