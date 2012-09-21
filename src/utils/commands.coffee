@@ -5,6 +5,7 @@
 {resolve} = require 'path'
 {puts, print, error} = require './logs'
 Neat = require '../neat'
+_ = Neat.i18n.getHelper()
 
 #### Private
 
@@ -123,7 +124,9 @@ hashArguments = (ary...) ->
   for expr in ary
     (hash[k] = true; continue) unless ':' in expr
     [k,v] = expr.split ':'
-    throw new Error "Invalid syntax: #{expr}" if v.empty()
+    if v.empty()
+      throw new Error _('neat.commands.invalid_arguments', expression: expr)
+
     hash[k] = parse v
 
   hash
@@ -148,8 +151,8 @@ help = (help, target) -> decorate target, 'help', help
 neatTask = (options) ->
   {name, action, description, environment} = options
 
-  throw new Error "Tasks must have a name" unless name?
-  throw new Error "Tasks must have an action" unless action?
+  throw new Error _('neat.tasks.no_name') unless name?
+  throw new Error _('neat.tasks.no_action') unless action?
 
   action.environment = environment
   action.description = description
