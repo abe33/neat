@@ -7,18 +7,20 @@ COFFEE = "#{Neat.neatRoot}/node_modules/.bin/coffee"
 {run, aliases, describe} = Neat.require "utils/commands"
 {'package.json':generate} = Neat.require 'generators'
 {render} = Neat.require "utils/templates"
+_ = Neat.i18n.getHelper()
 
 install = (pr) ->
-  throw new Error "No program provided to install" unless pr?
+  unless pr?
+    throw new Error _('neat.commands.no_program', command:'install')
 
   aliases 'i', 'install',
-  describe 'Installs all the dependencies listed in the `Nemfile`',
+  describe _('neat.commands.install.description'),
   f = (args..., callback)->
     unless Neat.root?
-      throw new Error "Can't run neat install outside of a Neat project."
+      throw new Error _("neat.errors.outside_neat", expression: 'neat install')
 
     fs.readFile 'Nemfile', (err, nemfile) ->
-      throw new Error "No #{"Nemfile".red} in the current directory" if err
+      throw new Error _('neat.commands.install.no_nemfile') if err
 
       puts "Nemfile found"
       render __filename, (err, source) ->
@@ -29,9 +31,9 @@ install = (pr) ->
         # The produced source code is then executed by `coffee`.
         run COFFEE, ['-e', source], (status) ->
           if status is 0
-            info green "Your bundle is complete."
+            info green _('neat.commands.install.install_done')
           else
-            error red "An error occured during the installation!"
+            error red _('neat.commands.install.install_failed')
 
           generate 'package.json', ->
             callback?()

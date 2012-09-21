@@ -3,9 +3,19 @@ en:
     errors:
       broken_initializer: Something went wrong with an initializer!!!
       broken_environment: Something went wrong with a configurator!!!
+      outside_neat: "Can't run #{expression} outside of a Neat project."
 
     tasks:
       compile:
         description: Compiles the sources
         compilation_done: Compilation done
         compilation_failed: Compilation failed
+
+    commands:
+      no_program: "No program provided to #{command}"
+
+      install:
+        no_nemfile: No Nemfile in the current directory
+        description: Installs all the dependencies listed in the `Nemfile`
+        install_done: Your bundle is complete.
+        install_failed: An error occured during the installation!
