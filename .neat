@@ -3,3 +3,5 @@ version: "0.0.61"
 description: ""
 author: "Cédric Néhémie <cedric.nehemie@gmail.com>"
 keywords: ["neat", "coffee"]
+engine:
+  node: ">=0.6"

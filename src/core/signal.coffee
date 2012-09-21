@@ -28,7 +28,11 @@ class Signal
   #
   # In the case of an asynchronous listener, the callback argument
   # is not considered as being part of the signature.
-  constructor: (@signature...) -> @listeners = []
+  constructor: (@signature...) ->
+    @listeners = []
+    # The `asyncListeners` property stores the number of asynchronous
+    # listeners to use a synchronous dispatch when equal to 0.
+    @asyncListeners = 0
 
   #### Listeners management
   #
@@ -75,6 +79,7 @@ class Signal
     #     myObject.signal.add listener
     if not @registered listener, context
       @listeners.push [listener, context, false, priority]
+      @asyncListeners++ if @isAsync listener
 
       # Listeners are sorted according to their order each time
       # a new listener is added.
@@ -90,6 +95,7 @@ class Signal
     @validate listener
     if not @registered listener, context
       @listeners.push [listener, context, true, priority]
+      @asyncListeners++ if @isAsync listener
       @sortListeners()
 
   ##### Signal::remove
@@ -103,6 +109,7 @@ class Signal
   # without context will end up being removed.
   remove: (listener, context) ->
     if @registered listener, context
+      @asyncListeners-- if @isAsync listener
       @listeners.splice @indexOf(listener, context), 1
 
   ##### Signal::removeAll
@@ -112,6 +119,7 @@ class Signal
   #     signal.removeAll()
   removeAll: ->
     @listeners = []
+    @asyncListeners = 0
 
   ##### Signal::indexOf
 
@@ -203,21 +211,30 @@ class Signal
       callback = null
 
     listeners = @listeners.concat()
-    next = (callback) =>
-      if listeners.length
-        [listener, context, once, priority] = listeners.shift()
+    # If at leat one listener is async, the whole dispatch process is async
+    # otherwise the fast route is used.
+    if @asyncListeners > 0
+      next = (callback) =>
+        if listeners.length
+          [listener, context, once, priority] = listeners.shift()
 
-        if @isAsync listener
-          listener.apply context, args.concat =>
+          if @isAsync listener
+            listener.apply context, args.concat =>
+              @remove listener, context if once
+              next callback
+          else
+            listener.apply context, args
             @remove listener, context if once
             next callback
         else
-          listener.apply context, args
-          @remove listener, context if once
-          next callback
-      else
-        callback?()
+          callback?()
 
-    next callback
+      next callback
+    else
+      for [listener, context, once, priority] in listeners
+        listener.apply context, arguments
+        @remove listener, context if once
+
+      callback?()
 
 module.exports = Signal

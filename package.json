@@ -7,12 +7,16 @@
     "neat",
     "coffee"
   ],
+  "engine": {
+    "node": ">=0.6"
+  },
   "dependencies": {
     "colors": "*",
     "commander": "*",
     "coffee-script": ">= 1.3.0",
     "haml-coffee": ">= 0.6.3",
     "mustache": ">= 0.4.0",
+    "js-yaml": ">= 1.0.0",
     "docco": "git://github.com/abe33/docco.git#feature-exports",
     "uglify-js": "*",
     "coffeelint": "*",

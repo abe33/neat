@@ -251,7 +251,7 @@ class Neat
       modules = (resolve modulesDir, m for m in modules when m isnt 'neat')
       @paths.push m for m in modules when isNeatRootSync m
 
-    else warn @i18n.get 'neat.errors.no_modules'
+    else warn 'No node modules found, run neat install.'
 
     # The current Neat project root is the last path in `PATHS`.
     @paths.push @root if @root not in @paths

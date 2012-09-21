@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6
   position: fixed
   width: 100%
   margin-top: -350px
-  transition(margin-top 0.25s linear)
+  transition(margin-top 0.25s ease-in-out)
 
   &.visible
     margin-top: 0
@@ -174,8 +174,17 @@ pre, tt, code
   padding: 0
 
 table
+  tr:hover
+    td, th
+      transition(background-color 0.5s ease-in-out)
+      &.docs
+        background-color: #AEBCBC
+      &.code
+        background-color: #0B2C37
+
   th
   td
+    transition(background-color 2s ease-in-out)
     border: 0
     outline: 0
 
