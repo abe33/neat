@@ -174,8 +174,16 @@ pre, tt, code
   padding: 0
 
 table
+  tr:hover
+    td, th
+      &.docs
+        background-color: #AEBCBC
+      &.code
+        background-color: #0B2C37
+
   th
   td
+    transition(background-color 0.7s linear)
     border: 0
     outline: 0
 
