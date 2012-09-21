@@ -29,10 +29,26 @@ aliases = (aliases..., target) -> decorate target, 'aliases', aliases
 
 # Trap error returned by asynchronous function in the callback arguments
 # by generating a callback wrapper that will call the callback only if
-# no errors was received. The error arguments isn't passed to the callback.
+# no errors was received. The error argument is not passed to the callback.
 #
 #     fs.readFile "/path/to/file", asyncErrorTrap (content) ->
 #       # do something with content
+#
+# Optionally, a function can be passed as first argument to receive the error,
+# typically the final callback you'll trigger in your async process.
+#
+#     asyncFunction = (callback) ->
+#       path = "/path/to/file"
+#       fs.readFile path, asyncErrorTrap callback, (content) ->
+#         # do something with content
+#         callback? null, content
+#
+# If an error occurs, the callback is automatically triggered with the error
+# as the first argument, following in that regard the pattern of node's async
+# functions. You should take care to pass your results after a null argument,
+# allowing callback to use the following pattern:
+#
+#     asyncFunction asyncErrorTrap (results...) -> # etc...
 asyncErrorTrap = (errCallback, callback) -> (err, args...) ->
   [errCallback, callback] = [callback, errCallback] unless callback?
   if err?
