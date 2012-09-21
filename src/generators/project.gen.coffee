@@ -26,6 +26,7 @@ project = (generator, name, args..., callback) ->
   ensureSync path
 
   dirs = [
+    "config",
     "lib",
     "src",
     "src/commands",
@@ -44,6 +45,7 @@ project = (generator, name, args..., callback) ->
   ]
 
   files = [
+    ["config/.gitkeep"],
     ["lib/.gitkeep"],
     ["src/commands/.gitkeep"],
     ["src/config/environments/default.coffee", true]

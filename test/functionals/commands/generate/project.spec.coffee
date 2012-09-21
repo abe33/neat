@@ -62,6 +62,7 @@ withProject 'foo', 'when outside a project', ->
       expect(inProject ".npmignore").toExist()
       expect(inProject "Cakefile").toExist()
 
+      expect(inProject "config/.gitkeep").toExist()
       expect(inProject "src/tasks/.gitkeep").toExist()
       expect(inProject "src/commands/.gitkeep").toExist()
       expect(inProject "src/generators/.gitkeep").toExist()

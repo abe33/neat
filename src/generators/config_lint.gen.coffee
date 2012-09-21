@@ -10,12 +10,13 @@ Neat = require '../neat'
 usages 'neat generate config:lint {options}',
 describe 'Generates a lint.json configuration for the cake lint task',
 exports['config:lint'] = (generator, args..., cb) ->
+  throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
   context = if args.empty() then {} else hashArguments args
 
   render __filename, context, (err, data) ->
     throw err if err?
 
-    path = resolve Neat.root, 'src/config/tasks'
+    path = resolve Neat.root, 'config/tasks'
 
     ensurePath path, (err) ->
       path = "#{path}/lint.json"

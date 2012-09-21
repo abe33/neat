@@ -87,7 +87,7 @@ class Neat
 
   # Initialize the internationalization for the current Neat instance.
   initI18n: ->
-    @i18n = new I18n @paths.map (s) -> "#{s}/src/config/locales"
+    @i18n = new I18n @paths.map (s) -> "#{s}/config/locales"
     @i18n.load()
     puts "Available languages: #{@i18n.languages.join ', '}"
 

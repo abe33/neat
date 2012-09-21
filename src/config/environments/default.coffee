@@ -15,7 +15,7 @@ module.exports = (config) ->
         args: ['-c', '-o', "#{config.root}/lib", "#{config.root}/src"]
       package:
         dir: "#{config.root}/packages"
-        conf: "#{config.root}/src/config/packages"
+        conf: "#{config.root}/config/packages"
         tmp: "#{config.root}/.tmp"
 
     defaultLoggingEngine: 'console'

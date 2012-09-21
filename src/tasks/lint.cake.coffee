@@ -21,7 +21,7 @@ exports['lint'] = neatTask
       return callback?()
 
     path = __filename
-    dir = 'src/config'
+    dir = 'config'
     findSiblingFile path, Neat.paths, dir, 'json', asyncErrorTrap (conf) ->
       unless conf?
         error missing "lint configuration"

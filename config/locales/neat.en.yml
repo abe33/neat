@@ -6,6 +6,8 @@ en:
       outside_neat: "Can't run #{expression} outside of a Neat project."
 
     tasks:
+      no_name: Tasks must have a name
+      no_action: Tasks must have an action
       compile:
         description: Compiles the sources
         compilation_done: Compilation done
@@ -13,7 +15,7 @@ en:
 
     commands:
       no_program: "No program provided to #{command}"
-
+      invalid_arguments: "Invalid syntax: #{expression}"
       install:
         no_nemfile: No Nemfile in the current directory
         description: Installs all the dependencies listed in the `Nemfile`

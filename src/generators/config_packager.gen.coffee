@@ -5,6 +5,6 @@ fs = require 'fs'
 
 usages 'neat generate config:packager <name>',
 describe 'Generates a <name> packager config in the config/packages directory',
-generator = namedEntity __filename, 'src/config/packages', 'cup'
+generator = namedEntity __filename, 'config/packages', 'cup'
 
 exports['config:packager'] = generator
