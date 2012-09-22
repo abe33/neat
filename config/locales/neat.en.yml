@@ -18,6 +18,16 @@ en:
         compilation_done: Compilation done
         compilation_failed: Compilation failed
 
+      package:
+        invalid_string: "Malformed string for #{key}, expect #{expect}"
+        invalid_configuration: "Malformed configuration for #{key}, expect #{type}"
+        missing_configuration: "Missing configuration #{key}"
+        expected_name: a file name such foo_bar of foo-bar
+        expected_package: a path such com.exemple.foo
+
+        description: Generates packages for this projects
+        packages_done: All package processed
+
     commands:
       command: "Command '#{command}'"
       no_program: "No program provided to #{command}"

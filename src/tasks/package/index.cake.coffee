@@ -9,10 +9,11 @@ op = require './operators'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
 {ensure, rm, find, readFiles} = Neat.require 'utils/files'
 {read} = Neat.require 'utils/cup'
+_ = Neat.i18n.getHelper()
 
 exports['package'] = neatTask
   name: 'package'
-  description: 'Generates packages for this projects'
+  description: _('neat.tasks.package.description')
   environment: 'default'
   action: (callback) ->
     {dir, conf, tmp} = Neat.config.tasks.package
@@ -22,5 +23,5 @@ exports['package'] = neatTask
           readFiles files, (err, res) ->
             commands = (Packager.asCommand read(c) for p,c of res)
             parallel commands, ->
-              info green 'all package processed'
+              info green _('neat.tasks.package.packages_done')
               callback?()

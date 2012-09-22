@@ -4,6 +4,7 @@ Neat = require '../../neat'
 {compile} = require 'coffee-script'
 {chain} = Neat.require 'async'
 {readFiles, ensure} = Neat.require 'utils/files'
+_ = Neat.i18n.getHelper()
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
 PACKAGE_RE = -> ///^(#{LITERAL_RE})(\.#{LITERAL_RE})*$///
@@ -16,13 +17,14 @@ class Packager
   constructor: (@conf) ->
     validate = (key, re, expect) =>
       unless re.test @conf[key]
-        throw new Error "Malformed string for #{key}, expect #{expect}"
+        throw new Error _('neat.tasks.package.invalid_string', {key, expect})
 
     malformedConf = (key, type) =>
-      new Error "Malformed configuration for #{key}, expect #{type}"
+      new Error _('neat.tasks.package.invalid_configuration', {key, type})
 
     preventMissingConf = (key) =>
-      throw new Error "Missing configuration #{key}" unless @conf[key]?
+      throw new Error _('neat.tasks.package.missing_configuration',
+                        {key}) unless @conf[key]?
 
     preventMissingConf 'name'
     preventMissingConf 'package'
@@ -30,8 +32,8 @@ class Packager
     preventMissingConf 'operators'
     malformedConf 'includes', 'Array' unless Array.isArray @conf['includes']
     malformedConf 'operators', 'Array' unless Array.isArray @conf['operators']
-    validate 'name', NAME_RE(), 'a file name such foo_bar of foo-bar'
-    validate 'package', PACKAGE_RE(), 'a path such com.exemple.foo'
+    validate 'name', NAME_RE(), _('neat.tasks.package.expected_name')
+    validate 'package', PACKAGE_RE(), _('neat.tasks.package.expected_package')
 
     @conf.merge Neat.config.tasks.package
     @operators = (@conf.operatorsMap[k] for k in @conf.operators)
