@@ -31,9 +31,8 @@ render = (file, context, callback) ->
     return callback? e if e?
     unless tplfile?
       msg = _('neat.templates.no_template',
-              path: tplfile,
-              missing: _('neat.templates.template_for',
-                          paths: a.join "\n"))
+              paths: a.join("\n"),
+              missing: _('neat.templates.template_for', file: tplfile))
       return callback? new Error msg
 
     puts "template found: #{tplfile.yellow}"
@@ -76,14 +75,16 @@ renderSync = (file, context) ->
   # The `paths` array will stores the paths tested for a templates.
   # It will serve as message of the error in the case no file was found.
   paths = []
+
+  console.log ''
+
   # We first search for a template file.
   tplfile = findSiblingFileSync file, Neat.paths, "templates", "*", paths
   # If no sibling file can be found an error is raised.
   unless tplfile?
     msg = _('neat.templates.no_template',
-            path: tplfile,
-            missing: _('neat.templates.template_for',
-                        paths: a.join "\n"))
+            paths: paths.join("\n"),
+            missing: _('neat.templates.template_for', file: tplfile))
     throw new Error msg
 
   puts "template found: #{tplfile.yellow}"

@@ -363,7 +363,7 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
 
   # The specified `path` must be in a Neat project.
   neatRoot path, (pathRoot) ->
-    return callback? new Error '' unless pathRoot?
+    return callback? new Error(), undefined, [] unless pathRoot?
 
     # Prepares the path structure that will be used in the search.
     # Note that, unlike the `basename` function, all the extensions
@@ -472,6 +472,7 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
 findSiblingFileSync = (path, roots, dir, exts..., paths) ->
   # The specified `path` must be in a Neat project.
   pathRoot = neatRootSync path
+
   return unless pathRoot?
 
   # If `path` is a string, no array was passed to collect the paths
@@ -611,7 +612,11 @@ neatRootSync = (path=".") ->
 # Removes all the extensions from a file name.
 #
 #     noExtension 'foo.bar.baz' # 'foo'
-noExtension = (o) -> o.replace /([^/.]+)\..+$/, "$1"
+noExtension = (o) ->
+  p = o.split '/'
+  last = p.pop()
+  last = last.replace /([^/.]+)\..+$/, "$1"
+  p.concat(last).join('/')
 
 ##### readFiles
 

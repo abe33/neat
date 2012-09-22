@@ -77,7 +77,8 @@ project = (generator, name, args..., callback) ->
     puts green(_('neat.commands.generate.project.generation_done', path: p)), 1
 
   e = (d) ->
-    ensureSync resolve path, d
+    p = resolve path, d
+    ensureSync p
     puts green(_('neat.commands.generate.project.generation_done', path: p)), 1
 
   try

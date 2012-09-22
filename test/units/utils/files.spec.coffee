@@ -19,6 +19,9 @@ describe 'noExtension', ->
   it 'should preserve the path of an hidden file', ->
     expect(fu.noExtension "foo/.foo").toBe("foo/.foo")
 
+  it 'should preserve the dots in dir names', ->
+    expect(fu.noExtension "foo.bar/foo.js").toBe("foo.bar/foo")
+
   describe 'when there\'s no extension', ->
     it 'should leave the path unchanged', ->
       expect(fu.noExtension "/foo/bar/baz").toBe("/foo/bar/baz")
