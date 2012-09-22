@@ -2,10 +2,11 @@ Neat = require '../neat'
 {run, neatTask} = Neat.require 'utils/commands'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
 {first, last, length, property} = Neat.require 'utils/mappers'
+_ = Neat.i18n.getHelper()
 
 exports['list'] = neatTask
   name: 'list'
-  description: 'List all the tasks and provides details about them'
+  description: _('neat.tasts.list.description')
   environment: 'production'
   action: (callback) ->
     tasks = Neat.require('tasks')
@@ -13,8 +14,11 @@ exports['list'] = neatTask
     c1 = t.map(first length()).max() + 4
     c2 = t.map(last property 'environment', length()).compact().max() + 4
 
+    task = _('neat.tasks.list.task').left c1
+    environment = _('neat.tasks.list.environment').left c2
+
     puts """
-         #{'Task'.left c1}#{'Environment'.left c2}
+         #{task}#{environment}
          """.yellow, 5
 
     for k,v of tasks

@@ -1,8 +1,9 @@
 fs = require 'fs'
 path = require 'path'
 Neat = require '../neat'
-{run, neatTask, asyncErrorTrap} = require '../utils/commands'
-{error, info, green, red} = require '../utils/logs'
+{run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
+{error, info, green, red} = Neat.require 'utils/logs'
+_ = Neat.i18n.getHelper()
 
 recursiveWatch = (dir, watcher) ->
   fs.readdir dir, asyncErrorTrap (files)->
@@ -18,7 +19,7 @@ compiling = false
 
 exports.watch = neatTask
   name:'watch'
-  description: 'Watches for changes in the src directory and run compile'
+  description: _('neat.tasks.watch.description')
   action: (callback) ->
     recursiveWatch path.resolve('.', 'src'), (e, f) ->
       return if compiling

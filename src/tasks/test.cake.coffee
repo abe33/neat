@@ -1,9 +1,10 @@
 path = require 'path'
 Neat = require '../neat'
-{queue} = require '../async'
-{neatTask} = require '../utils/commands'
-{namespace} = require '../utils/exports'
-{error, info, green, red, yellow, puts} = require '../utils/logs'
+{queue} = Neat.require 'async'
+{neatTask} = Neat.require 'utils/commands'
+{namespace} = Neat.require 'utils/exports'
+{error, info, green, red, yellow, puts} = Neat.require 'utils/logs'
+_ = Neat.i18n.getHelper()
 
 test = (k,f,n,d) -> (callback) -> f n, d, -> callback?()
 
@@ -17,30 +18,30 @@ runTests = (name, dir) -> (callback) ->
 
 index = neatTask
   name:'test'
-  description: 'Run all tests'
+  description: _('neat.tasks.test.description')
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('unit', 'test/units') (status) ->
       runTests('functional', 'test/functionals') (status) ->
-        info green 'All tests complete'
+        info green _('neat.tasks.test.tests_done')
         callback?()
 
 unit = neatTask
   name:'test:unit'
-  description: 'Run unit tests'
+  description: _('neat.tasks.test.unit_description')
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('unit', 'test/units') ->
-      info green 'All tests complete'
+      info green _('neat.tasks.test.tests_done')
       callback?()
 
 functional = neatTask
   name:'test:functional'
-  description: 'Run functional tests'
+  description: _('neat.tasks.test.functional_description')
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('functional', 'test/functionals') ->
-      info green 'All tests complete'
+      info green _('neat.tasks.test.tests_done')
       callback?()
 
 module.exports = namespace 'test', {index, unit, functional}

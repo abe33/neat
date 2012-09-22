@@ -50,6 +50,24 @@ en:
         lint_error: "#{file} is not ok"
         files_linted: "All files linted (#{files})"
 
+      list:
+        description: List all the tasks and provides details about them
+        header:
+          task: Task
+          environment: Environment
+
+      test:
+        description: Run all tests
+        unit_description: Run unit tests
+        functional_description: Run functional tests
+        tests_done: All tests complete
+
+      version:
+        description: Print the project version
+        message: "#{name} version: #{version}"
+
+      watch:
+        description: Watches for changes in the src directory and run compile
 
     commands:
       command: "Command '#{command}'"

@@ -1,11 +1,13 @@
 Neat = require '../neat'
 {run, neatTask} = Neat.require 'utils/commands'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
+_ = Neat.i18n.getHelper()
 
 exports['version'] = neatTask
   name:'version'
-  description: 'Print the project version'
+  description: _('neat.tasks.desciption')
   environment: 'production'
   action: (callback) ->
-    info "#{Neat.project.name} version: #{green Neat.project.version}"
+    info _('neat.tasks.message:', name: Neat.project.name,
+                                  version: green Neat.project.version)
     callback?()
