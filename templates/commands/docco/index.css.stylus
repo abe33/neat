@@ -192,12 +192,13 @@ table
       max-width: 450px
       min-width: 450px
       min-height: 5px
-      padding: 10px 25px 1px 50px
+      padding: 14px 25px 16px 50px
       vertical-align: top
       text-align: left
       background: #bbc4c4
       font-size: 14px
       color: #3B4D52
+      line-height: 18px
 
       pre
         margin: 15px 0 15px
@@ -405,7 +406,7 @@ table
 
   th.docs
     h1
-      margin-top: 0px
+      margin-top: 6px
     h3
       font-size: 13px
       margin-bottom: -10px
