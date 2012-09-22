@@ -3,7 +3,7 @@ fs = require 'fs'
 Neat = require '../neat'
 
 COFFEE = "#{Neat.neatRoot}/node_modules/.bin/coffee"
-{puts, error, info, green, red} = Neat.require "utils/logs"
+{puts, error, info, green, red; notOutsideNeat} = Neat.require "utils/logs"
 {run, aliases, describe} = Neat.require "utils/commands"
 {'package.json':generate} = Neat.require 'generators'
 {render} = Neat.require "utils/templates"
@@ -17,10 +17,10 @@ install = (pr) ->
   describe _('neat.commands.install.description'),
   f = (args..., callback)->
     unless Neat.root?
-      throw new Error _("neat.errors.outside_neat", expression: 'neat install')
+      throw new Error notOutsideNeat 'neat install'
 
     fs.readFile 'Nemfile', (err, nemfile) ->
-      throw new Error _('neat.commands.install.no_nemfile') if err
+      throw new Error _('neat.errors.no_nemfile') if err
 
       puts "Nemfile found"
       render __filename, (err, source) ->

@@ -6,9 +6,10 @@ Neat = require '../neat'
 {puts, error, info} = Neat.require "utils/logs"
 {render} = Neat.require "utils/templates"
 {ensurePath} = Neat.require "utils/files"
+_ = Neat.i18n.getHelper()
 
 usages 'neat generate config:lint {options}',
-describe 'Generates a lint.json configuration for the cake lint task',
+describe _('neat.commands.generate.config_lint.description'),
 exports['config:lint'] = (generator, args..., cb) ->
   throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
   context = if args.empty() then {} else hashArguments args
@@ -25,7 +26,8 @@ exports['config:lint'] = (generator, args..., cb) ->
         return error("""#{"Can't write #{path}".red}
 
                         #{err.stack}""") and cb?() if err
-        info "#{path} generated".green
+        info _('neat.commands.generate.config_lint.config_generated',
+                config: path).green
         cb?()
 
 

@@ -3,20 +3,21 @@ fs = require "fs"
 Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
-{namespace} = require resolve utils, "exports"
-{describe, usages, environment} = require resolve utils, "commands"
-{puts, error, info} = require resolve utils, "logs"
-{render} = require resolve utils, "templates"
-{dirWithIndexSync} = require resolve utils, "files"
-cup = require resolve utils, "cup"
+{namespace} = Neat.require "utils/exports"
+{describe, usages, environment} = Neat.require "utils/commands"
+{puts, error, info, notOutsideNeat} = Neat.require "utils/logs"
+{render} = Neat.require "utils/templates"
+{dirWithIndexSync} = Neat.require "utils/files"
+cup = Neat.require "utils/cup"
+_ = Neat.i18n.getHelper()
 
 usages 'neat generate package.json',
 environment 'production',
-describe 'Generates the package.json file',
+describe _('neat.commands.generate.package.description'),
 index = (generator, args..., cb) ->
 
   unless Neat.root?
-    throw new Error "Can't run package generator outside of a Neat project."
+    throw new Error notOutsideNeat 'package generator'
 
   ##### 1 - Metadata
   pkg = {}
@@ -26,7 +27,7 @@ index = (generator, args..., cb) ->
 
     ##### 2 - Dependencies (Nemfile)
     fs.readFile 'Nemfile', (err, nemfile) ->
-      throw new Error "No #{"Nemfile".red} in the current directory" if err
+      throw new Error _('neat.error.no_nemfile') if err
 
       puts "Nemfile found"
 
@@ -66,8 +67,7 @@ index = (generator, args..., cb) ->
         pkgfile = resolve Neat.root, "package.json"
         fs.writeFile pkgfile, JSON.stringify(pkg, null, 2), (err) ->
           throw err if err?
-          info "package.json generated".green
+          info _('neat.commands.generate.package.package_generated').green
           cb?()
 
 module.exports = namespace "package.json", {index}
-

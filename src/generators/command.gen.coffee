@@ -1,12 +1,12 @@
 fs = require 'fs'
+Neat = require '../neat'
 
-{describe, usages} = require '../utils/commands'
-{namedEntity} = require '../utils/generators'
+{describe, usages} = Neat.require 'utils/commands'
+{namedEntity} = Neat.require 'utils/generators'
+_ = Neat.i18n.getHelper()
 
 usages 'neat generate command <name> {description, environment, usages}',
-describe '''Generates a <name> command in the commands directory.
-            Description, usages and environment can be defined with
-            the hash arguments syntax.''',
+describe _('neat.commands.generate.command.description'),
 command = namedEntity __filename, 'src/commands', 'cmd.coffee'
 
 module.exports = {command}

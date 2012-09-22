@@ -5,13 +5,12 @@ Neat = require '../neat'
 {namespace} = Neat.require "utils/exports"
 {renderSync:render} = Neat.require "utils/templates"
 {usages, describe, hashArguments} = Neat.require "utils/commands"
+_ = Neat.i18n.getHelper()
 
 usages 'neat generate project <name> {description, author, keywords}',
-describe '''Creates a <name> directory with the default neat project content
-            Description, author and keywords can be defined using the hash
-            arguments.''',
+describe _('neat.commands.generate.project.description'),
 project = (generator, name, args..., callback) ->
-  throw new Error "Missing name argument" unless name?
+  throw new Error _('neat.errors.missing_argument', {name}) unless name?
 
   args.push callback if args.length is 0 and typeof callback isnt 'function'
 
@@ -75,19 +74,18 @@ project = (generator, name, args..., callback) ->
       touchSync p, render resolve(tplpath, b), context
     else
       touchSync p
-    puts green("#{p} generated"), 1
+    puts green(_('neat.commands.generate.project.generation_done', path: p)), 1
 
   e = (d) ->
     ensureSync resolve path, d
-    puts green("#{d} generated"), 1
+    puts green(_('neat.commands.generate.project.generation_done', path: p)), 1
 
   try
     e d for d in dirs
     t a,b,c for [a,b,c] in files
   catch e
-    e.message = """Cannot proceed to the generation of the project
-
-                   #{e.message}"""
+    e.message = _('neat.commands.generate.project.generation_failed',
+                   message: e.message)
     throw e
 
     callback?()

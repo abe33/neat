@@ -1,12 +1,12 @@
 fs = require 'fs'
+Neat = require '../neat'
 
-{describe, usages} = require '../utils/commands'
-{namedEntity} = require '../utils/generators'
+{describe, usages} = Neat.require 'utils/commands'
+{namedEntity} = Neat.require 'utils/generators'
+_ = Neat.i18n.getHelper()
 
 usages 'neat generate tasks <name> {description, environment}',
-describe '''Generates a <name> task in the tasks directory.
-            Description and environment of the task can be defined
-            using hash arguments.''',
+describe _('neat.commands.generate.task.description'),
 task = namedEntity __filename, 'src/tasks', 'cake.coffee'
 
 module.exports = {task}
