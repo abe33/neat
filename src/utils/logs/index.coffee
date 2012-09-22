@@ -116,19 +116,17 @@ debug = (string) -> puts prefix(string, inverse blue " DEBUG "), Logger.DEBUG
 ##### missing
 
 # Generates a message for a missing resources.
-missing = (path) -> red "#{path} can't be found."
+missing = (path) ->
+  _ = require('../../neat').i18n.getHelper()
+  red _('neat.errors.missing', missing: path)
 
 ##### notOutsideNeat
 
 # Generates a messages for a neat command that can't run outside
 # of a Neat project.
-notOutsideNeat = (s) -> red "Can't run #{s} outside of a Neat project."
-
-##### neatBroken
-
-# The message used to notify a user that its Neat installation
-# have been broken.
-neatBroken = "Your Neat installation is probably broken."
+notOutsideNeat = (s) ->
+  _ = require('../../neat').i18n.getHelper()
+  red _('neat.errors.outside_neat', expression: s)
 
 module.exports = {
   blue,
@@ -141,7 +139,6 @@ module.exports = {
   logger,
   magenta,
   missing,
-  neatBroken,
   notOutsideNeat,
   prefix,
   print,

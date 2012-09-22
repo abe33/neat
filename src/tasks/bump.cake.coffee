@@ -1,9 +1,10 @@
 fs = require 'fs'
 path = require 'path'
 Neat = require '../neat'
-{namespace} = require '../utils/exports'
-{run, neatTask, asyncErrorTrap} = require '../utils/commands'
-{error, info, green, red, puts} = require '../utils/logs'
+{namespace} = Neat.require 'utils/exports'
+{run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
+{error, info, green, red, puts} = Neat.require 'utils/logs'
+_ = Neat.i18n.getHelper()
 
 bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
   # The RegExp that match the module version declaration in both
@@ -25,7 +26,7 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
   # That function generates a callback for a `readFile` call that
   # bump and then replace the version within the file's content.
   replaceVersion = (cb) -> (err, data) ->
-    return cb? new Error "Can't find .neat file" if err?
+    return cb? new Error _('neat.tasks.bump.no_neat') if err?
     replaceFunc = (match, key, majv, minv, build) ->
       build = parseInt(build) + buildBump
 
@@ -53,26 +54,26 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
     fs.writeFile ".neat", res, asyncErrorTrap ->
 
       unless path.existsSync 'package.json'
-        info green "Version bumped to #{newVersion}"
+        info green _('neat.tasks.bump.version_bumped', version: newVersion)
         return callback?()
 
       fs.readFile "package.json", asyncErrorTrap (data) ->
         output = data.toString().replace re, "\"version\": \"#{newVersion}\""
 
         fs.writeFile "package.json", output, asyncErrorTrap ->
-          info green "Version bumped to #{newVersion}"
+          info green _('neat.tasks.bump.version_bumped', version: newVersion)
           callback?()
 
 module.exports = namespace 'bump'
   index:  neatTask
     name:'bump'
-    description: 'Bump build version of the module'
+    description: _('neat.tasks.bump.description')
     action: (callback) -> bump 0, 0, 1, callback
   minor: neatTask
     name:'bump:minor'
-    description: 'Bump minor version of the module'
+    description: _('neat.tasks.bump.minor_description')
     action: (callback) -> bump 0, 1, 0, callback
   major: neatTask
     name:'bump:major'
-    description: 'Bump major version of the module'
+    description: _('neat.tasks.bump.major_description')
     action: (callback) -> bump 1, 0, 0, callback

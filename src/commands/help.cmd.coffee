@@ -3,7 +3,7 @@ fs = require 'fs'
 Neat = require '../neat'
 
 {render, renderSync} = Neat.require "utils/templates"
-{puts, error, warn, missing, neatBroken} = Neat.require "utils/logs"
+{puts, error, warn, missing} = Neat.require "utils/logs"
 {
   run, aliases, usages, describe, help:withHelp, environment
 } = Neat.require 'utils/commands'

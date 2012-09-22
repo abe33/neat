@@ -1,6 +1,6 @@
 {resolve, existsSync:exists, basename, extname} = require 'path'
 Neat = require '../neat'
-{puts, error, warn, missing, neatBroken, green} = Neat.require "utils/logs"
+{puts, error, warn, missing, green} = Neat.require "utils/logs"
 {ensureSync, touchSync} = Neat.require "utils/files"
 {namespace} = Neat.require "utils/exports"
 {renderSync:render} = Neat.require "utils/templates"

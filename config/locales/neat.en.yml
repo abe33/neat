@@ -2,10 +2,13 @@ en:
   neat:
     errors:
       error: "#{msg}\n\n#{stack}"
+      broken: Your Neat installation is probably broken.
       broken_initializer: Something went wrong with an initializer!!!
       broken_environment: Something went wrong with a configurator!!!
+      missing: "#{missing} can't be found"
       missing_argument: "Missing argument #{name}"
       missing_module: "#{missing}\n\nRun cake install to install the dependencies"
+      invalid_neat: "Invalid .neat file at: #{path}"
       file_access: "Can't access #{file}\n\n#{stack}"
       outside_neat: "Can't run #{expression} outside of a Neat project."
 
@@ -27,6 +30,26 @@ en:
 
         description: Generates packages for this projects
         packages_done: All package processed
+
+      bump:
+        no_neat: Can't find .neat file
+        version_bumped: "Version bumped to #{version}"
+        description: Bump build version of the module
+        minor_description: Bump minor version of the module
+        major_description: Bump major version of the module
+
+      deploy:
+        description: Installs the module globally through npm
+        deploy_done: Neat installed
+        deploy_failed: Something went wrong during installation
+        compile_failed: |
+          Compilation have failed, please fix it before deploying the module again
+
+      lint:
+        description: Lint the sources with coffee-lint
+        lint_error: "#{file} is not ok"
+        files_linted: "All files linted (#{files})"
+
 
     commands:
       command: "Command '#{command}'"

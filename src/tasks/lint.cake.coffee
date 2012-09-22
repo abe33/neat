@@ -6,25 +6,24 @@ Neat = require '../neat'
 } = Neat.require 'utils/logs'
 {find, findSiblingFile} = Neat.require 'utils/files'
 {queue} = Neat.require 'async'
+_ = Neat.i18n.getHelper()
 
 COFFEE_LINT = "#{Neat.neatRoot}/node_modules/.bin/coffeelint"
 
 exports['lint'] = neatTask
   name:'lint'
-  description: 'Lint the sources with coffee-lint'
+  description: _('neat.tasks.lint.description')
   environment: 'default'
   action: (callback) ->
     unless path.existsSync COFFEE_LINT
-      error """#{red "Can't find coffeelint module"}
-
-               Run #{yellow 'neat install'} to install the dependencies."""
+      error _('neat.errors.missing_module', missing: missing 'coffeelint')
       return callback?()
 
     path = __filename
     dir = 'config'
     findSiblingFile path, Neat.paths, dir, 'json', asyncErrorTrap (conf) ->
       unless conf?
-        error missing "lint configuration"
+        error missing "config/tasks/lint.json"
         return callback?()
 
       errors = []
@@ -50,7 +49,8 @@ exports['lint'] = neatTask
             print red 'F'
             failed += 1
             errors.push ->
-              puts red "#{file.replace "#{Neat.root}/", ''} is not ok"
+              puts red _('neat.tasks.lint.lint_error',
+                         file: file.replace "#{Neat.root}/", ''), 3
               allerrors += logs.length
               log() for log in logs
 
@@ -63,7 +63,7 @@ exports['lint'] = neatTask
           puts ''
 
           if errors.length is 0
-            info green "All files linted (#{allfiles})"
+            info green _('neat.tasks.lint.files_linted', files: allfiles)
           else
             error() for error in errors
 

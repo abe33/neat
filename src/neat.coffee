@@ -37,19 +37,21 @@ class Neat
     # the `initEnvironment` or the `setEnvironment` methods.
     @config = @config = null
     @env = @ENV = null
+
+    @discoverUserPaths() if @root?
+
+    @initI18n()
+    @initHooks()
+
     # The `.neat` file at the root of a project contains the metadata
     # for the project. In the case of Neat, the `.neat` file is loaded
     # and available in `Neat.meta`.
     @meta = @META = @loadMeta @neatRoot
 
-    if @root?
-      @discoverUserPaths()
-      # The current project meta are available through `Neat.project`
-      # or `Neat.PROJECT`.
-      @project = @PROJECT = @loadMeta @root
+    # The current project meta are available through `Neat.project`
+    # or `Neat.PROJECT`.
+    @project = @PROJECT = @loadMeta @root if @root?
 
-    @initI18n()
-    @initHooks()
 
   ##### Neat::initHooks
 
@@ -166,10 +168,11 @@ class Neat
       paths = @paths.map (p)=> "#{p}/#{@envPath}"
       configurators = findSync /^default$/, 'js', paths
 
-      return error """#{missing 'config/environments/default.js'}
+      unless configurators? and configurators.length isnt 0
+        return error """#{@i18n.getHelper()('neat.errors.missing',
+                          missing: 'config/environments/default.js')}
 
-                      #{neatBroken}""" unless configurators? and
-                                              configurators.length isnt 0
+                        #{@i18n.get('neat.errors.broken')}"""
 
       # Configurators for the given environment are searched in the
       # `environments` directory of each path.
@@ -262,17 +265,19 @@ class Neat
   loadMeta: (root) ->
     neatFilePath = "#{root}/.neat"
 
+    _ = @i18n.getHelper()
+
     try
       neatFile = fs.readFileSync neatFilePath
     catch e
-      return error """#{missing neatFilePath}
+      return error """#{_('neat.errors.missing', missing: neatFilePath.red)}
 
-                      #{neatBroken}"""
+                      #{_('neat.errors.broken')}"""
 
     meta = cup.read neatFile.toString()
-    meta or error """Invalid .neat file at:
-                    #{neatFilePath.red}
 
-                    #{neatBroken}"""
+    meta or error """#{_('neat.errors.invalid_neat', path: neatFilePath.red)}
+
+                     #{_('neat.errors.broken')}"""
 
 module.exports = new Neat neatRootSync()
