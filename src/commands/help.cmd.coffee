@@ -24,7 +24,7 @@ help = (pr, commands) ->
 
     if command? and typeof command is 'string'
       cmd = commands[command]
-      return error(missing "Command #{command}") and cb?() unless cmd?
+      return error( missing "Command #{command}") and cb?() unless cmd?
     else
       list = {}
       list[c.aliases.join ", "] = c for k,c of commands

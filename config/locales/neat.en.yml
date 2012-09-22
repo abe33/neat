@@ -4,20 +4,36 @@ en:
       broken_initializer: Something went wrong with an initializer!!!
       broken_environment: Something went wrong with a configurator!!!
       outside_neat: "Can't run #{expression} outside of a Neat project."
+      missing_argument: "Missing argument #{name}"
+      file_access: "Can't access #{file}\n\n#{stack}"
 
     tasks:
       no_name: Tasks must have a name
       no_action: Tasks must have an action
+
       compile:
         description: Compiles the sources
         compilation_done: Compilation done
         compilation_failed: Compilation failed
 
     commands:
+      command: "Command '#{command}'"
       no_program: "No program provided to #{command}"
+      no_register: "Can't register command #{command}"
       invalid_arguments: "Invalid syntax: #{expression}"
+      invalid_command: "#{command}\n\nA command must be function with an aliases."
+      missing_command: "#{missing}\n\nTry `neat help` for a list of the available commands."
+
       install:
         no_nemfile: No Nemfile in the current directory
         description: Installs all the dependencies listed in the `Nemfile`
         install_done: Your bundle is complete.
         install_failed: An error occured during the installation!
+
+      generate:
+        file_generated: "#{path} generated"
+
+    templates:
+      no_template: "#{missing}\n\nExplored paths:\n#{paths}"
+      template_for: "Template for #{file}"
+      backend_for: 'Backend for #{ext}'

@@ -6,6 +6,7 @@ Neat = require '../neat'
 
 {findSiblingFile, findSiblingFileSync} = require "../utils/files"
 {puts, error, missing} = require "../utils/logs"
+_ = Neat.i18n.getHelper()
 
 ##### render
 
@@ -29,10 +30,11 @@ render = (file, context, callback) ->
     # the function callback with an error.
     return callback? e if e?
     unless tplfile?
-      return callback? new Error """#{missing "Template for #{file}"}
-
-                                    Explored paths:
-                                    #{a.join "\n"}"""
+      msg = _('neat.templates.no_template',
+              path: tplfile,
+              missing: _('neat.templates.template_for',
+                          paths: a.join "\n"))
+      return callback? new Error msg
 
     puts "template found: #{tplfile.yellow}"
 
@@ -43,16 +45,18 @@ render = (file, context, callback) ->
 
     # The function callback with an error if no engine can be found
     # for the template file.
-    callback? new Error "#{missing "#{ext} template backend"}" unless render?
+    unless render?
+      return callback? new Error missing _('neat.templates.backend_for', {ext})
 
     puts "engine found for #{ext.cyan}"
 
     # The template file is then read asynchronoulsy.
     fs.readFile tplfile, (err, tpl) ->
       # The function callback if an error occured while reading the file.
-      if err then callback? new Error error """Can't access #{tplfile.red}
 
-                                               #{err.stack}"""
+      if err?
+        msg = _('neat.errors.file_access', file: tplfile.red, stack: err.stack)
+        callback? new Error msg
 
       # The function callback with the rendered content.
       callback? null, render tpl.toString(), context
@@ -76,10 +80,11 @@ renderSync = (file, context) ->
   tplfile = findSiblingFileSync file, Neat.paths, "templates", "*", paths
   # If no sibling file can be found an error is raised.
   unless tplfile?
-    return callback? new Error """#{missing "Template for #{file}"}
-
-                                  Explored paths:
-                                  #{a.join "\n"}"""
+    msg = _('neat.templates.no_template',
+            path: tplfile,
+            missing: _('neat.templates.template_for',
+                        paths: a.join "\n"))
+    throw new Error msg
 
   puts "template found: #{tplfile.yellow}"
   # The extension is extracted from the template file name.
@@ -90,7 +95,7 @@ renderSync = (file, context) ->
   # The function raise an error if no engine can be found
   # for the template file.
   unless render?
-    throw new Error "#{missing "#{ext} template backend"}"
+    throw new Error missing _('neat.templates.backend_for', {ext})
 
   puts "engine found for #{ext.cyan}"
 
@@ -98,8 +103,9 @@ renderSync = (file, context) ->
   try
     tpl = fs.readFileSync tplfile
   catch e
-    e.message = error """Can't access #{tplfile.red}
-                         #{e.message}"""
+    e.message = error _('neat.errors.file_access',
+                        path: tplfile.red,
+                        stack: e.message)
 
     throw e
   # The rendered content is then returned

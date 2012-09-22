@@ -8,7 +8,8 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {ensurePathSync} = require resolve utils, "files"
 {describe, usages, hashArguments} = require resolve utils, "commands"
 {render} = require resolve utils, "templates"
-{error, info, missing, notOutsideNeat} = require resolve utils, "logs"
+{error, info, green, missing, notOutsideNeat} = require resolve utils, "logs"
+_ = Neat.i18n.getHelper()
 
 ##### namedEntity
 
@@ -26,7 +27,7 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
   (generator, name, args..., cb) ->
     if requireNeat
       throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
-    throw new Error "Missing name argument" unless name?
+    throw new Error _('neat.errors.missing_argument', {name}) unless name?
 
     a = name.split '/'
     name = a.pop()
@@ -47,7 +48,9 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
         return error("""#{"Can't write #{path}".red}
 
                         #{err.stack}""") and cb?() if err
-        info "#{dir}/#{name}.#{ext} generated".green
+
+        path = "#{dir}/#{name}.#{ext}"
+        info green _('neat.commands.generate.file_generated', {path})
         cb?()
 
 module.exports = {namedEntity}

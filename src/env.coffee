@@ -16,6 +16,7 @@ core = require './core'
 {puts, print, error, missing} = require "./utils/logs"
 # The Neat environment is loaded.
 Neat = require './neat'
+_ = Neat.i18n.getHelper()
 
 #### Commands Registration
 
@@ -52,9 +53,9 @@ cmdMap = {}
 register = (k, c) ->
   # Passed-in commands are duck tested against the `CLICommand` interface.
   unless c.quacksLike CLICommand
-    return error """#{"Can't register command #{k}".red}
-
-                    A command must be function with an aliases."""
+    return error _('neat.commands.invalid_command',
+                   command: _('neat.commands.no_register',
+                              command: k).red)
 
   for alias in c.aliases
     pr.command(alias).description(c.description).action commandTrigger c
@@ -70,9 +71,9 @@ register(k, g pr, cmdMap) for k,g of commands
 
 # Handler for invalid commands.
 pr.command("*").action (command) ->
-  error """#{missing "Command #{command}"}
-
-           Try `neat help` for a list of the available commands."""
+  throw new Error _('neat.commands.missing_command',
+                    missing: missing _('neat.commands.command',
+                                       command: command))
 
 # Starts commander parsing.
 pr.parse(process.argv)
