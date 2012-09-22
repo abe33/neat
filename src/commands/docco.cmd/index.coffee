@@ -1,6 +1,8 @@
 fs = require 'fs'
 {resolve, existsSync, basename, extname, relative} = require 'path'
 Neat = require '../../neat'
+DoccoFile = require './docco_file'
+Processor = require './docco_file_processor'
 
 {error, info, warn, missing, green} = Neat.require 'utils/logs'
 {aliases, describe, environment} = Neat.require 'utils/commands'
@@ -8,9 +10,7 @@ Neat = require '../../neat'
 {render} = Neat.require 'utils/templates'
 {namespace} = Neat.require 'utils/exports'
 {parallel} = Neat.require 'async'
-
-DoccoFile = require './docco_file'
-Processor = require './docco_file_processor'
+_ = Neat.i18n.getHelper()
 
 hashify = (files) ->
   filesHash = {}
@@ -33,20 +33,21 @@ hashify = (files) ->
   [filesHash, deepestLevel]
 
 cmdgen = (name, desc, fn) -> (pr) ->
-  return error "No program provided to #{name}" unless pr?
+  unless pr?
+    throw new Error _('neat.commands.no_program', command: name)
 
   aliases name,
   describe desc,
   environment 'production',
   f = (callback) ->
     unless Neat.root?
-      return error "Can't run neat #{name} outside of a Neat project."
+      throw new Error _("neat.errors.outside_neat", expression: "neat #{name}")
 
     ensureSync resolve Neat.root, 'docs'
     fn pr, callback
 
 name = 'docco:javascript'
-desc = 'Generates the documentation javascript'
+desc = _('neat.commands.docco.javascript_description')
 javascript = cmdgen name, desc, (pr, callback) ->
   dirname = __dirname.replace '.cmd', ''
   jsTplPath = resolve dirname, '_javascript'
@@ -54,25 +55,25 @@ javascript = cmdgen name, desc, (pr, callback) ->
     throw err if err?
     fs.writeFile "#{Neat.root}/docs/docco.js", js, (err) ->
       throw err if err?
-      info green 'Javascript successfully generated'
+      info green _('neat.commands.docco.javascript_generated')
       callback?()
 
 name = 'docco:stylesheet'
-desc = 'Generates the documentation stylesheet'
+desc = _('neat.commands.docco.stylesheet_description')
 stylesheet = cmdgen name, desc, (pr, callback) ->
   render __dirname, (err, css) ->
     throw err if err?
     fs.writeFile "#{Neat.root}/docs/docco.css", css, (err) ->
       throw err if err?
-      info green 'Stylesheet successfully generated'
+      info green _('neat.commands.docco.stylesheet_generated')
       callback?()
 
 name = 'docco:documentation'
-desc = 'Generates the documentation throug docco'
+desc = _('neat.commands.docco.description')
 documentation = cmdgen name, desc, (pr, callback) ->
   paths = Neat.config.docco.paths.sources.concat()
   if not paths? or paths.empty()
-    return warn 'No paths specified for documentation generation.'
+    return warn _('neat.commands.docco.no_path')
 
   dirname = __dirname.replace '.cmd', ''
   navTplPath = resolve dirname, '_navigation'
@@ -94,11 +95,11 @@ documentation = cmdgen name, desc, (pr, callback) ->
         processors.push Processor.asCommand(file, header, nav)
 
       parallel processors, ->
-        info green 'Documentation successfully generated'
+        info green _('neat.commands.docco.documentation_generated')
         callback?()
 
 name = 'docco'
-desc = 'Generates the documentation for a Neat project through docco'
+desc = _('neat.commands.docco.description')
 
 index = cmdgen name, desc, (pr, cb) ->
   javascript(pr) -> stylesheet(pr) -> documentation(pr) cb

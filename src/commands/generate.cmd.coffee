@@ -2,18 +2,18 @@
 {help:helpCmd} = require './help.cmd'
 Neat = require '../neat'
 
-utils = resolve Neat.neatRoot, "lib/utils"
-
-{puts, error, warn, missing} = require resolve utils, "logs"
+{renderSync:render} = Neat.require "utils/templates"
+{puts, error, warn, missing} = Neat.require "utils/logs"
 {
   run, aliases, usages, describe, help, environment
-} = require resolve utils, "commands"
-{renderSync:render} = require resolve utils, "templates"
+} = Neat.require "utils/commands"
+_ = Neat.i18n.getHelper()
 
 generate = (pr, commands) ->
-  return error "No program provided to generate" unless pr?
+  unless pr?
+    throw new Error _('neat.commands.no_program', command: 'generate')
 
-  generators = require resolve Neat.neatRoot, "lib/generators"
+  generators = Neat.require "generators"
 
   listContext =
     list: generators.map (k,v) ->
@@ -21,7 +21,7 @@ generate = (pr, commands) ->
         [usage, v] for usage in v.usages
       else
         [k,v]
-    title: "Generators:"
+    title: _('neat.commands.generate.help_list_title')
 
   helpFunc = (target) -> (generator) ->
     helptpl = resolve __dirname, "help"
@@ -33,7 +33,8 @@ generate = (pr, commands) ->
         else
           console.log render helptpl, gen
       else
-        error missing "Generator #{generator}"
+        throw new Error missing _('neat.commands.generate.generator',
+                                  {generator})
     else
       context = {}
       context.merge target
@@ -43,7 +44,7 @@ generate = (pr, commands) ->
   aliases 'g', 'generate',
   environment 'production',
   usages 'neat generate [generator]',
-  describe 'Runs the specified [generator]',
+  describe _('neat.commands.generate.description'),
   f = (generator, args..., command, callback) ->
     # No generator displays the command help.
     return f.help.apply(null, arguments) and
@@ -58,14 +59,15 @@ generate = (pr, commands) ->
       args.push(command) and command = callback
 
     unless generator of generators
-      return callback? new Error missing "Generator #{generator}"
+      return callback? new Error missing _('neat.commands.generate.generator',
+                                           {generator})
       callback?()
 
     gen = generators[generator]
 
     unless typeof gen is "function"
-      return callback? new Error "Generators must be a function,
-                                  was #{typeof gen}".squeeze()
+      return callback? new Error _('neat.commands.generate.invalid_generator',
+                                   type: typeof gen)
 
     gen.apply null, [generator].concat(args).concat(callback)
 

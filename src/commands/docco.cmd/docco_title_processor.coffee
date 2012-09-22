@@ -1,6 +1,5 @@
 class DoccoTitleProcessor
 
-
   @asCommand = (p,c,t) -> (cb) -> new DoccoTitleProcessor(p,c,t).process cb
 
   constructor: (@path, @section, @titles) ->

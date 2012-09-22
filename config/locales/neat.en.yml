@@ -4,9 +4,10 @@ en:
       error: "#{msg}\n\n#{stack}"
       broken_initializer: Something went wrong with an initializer!!!
       broken_environment: Something went wrong with a configurator!!!
-      outside_neat: "Can't run #{expression} outside of a Neat project."
       missing_argument: "Missing argument #{name}"
+      missing_module: "#{missing}\n\nRun cake install to install the dependencies"
       file_access: "Can't access #{file}\n\n#{stack}"
+      outside_neat: "Can't run #{expression} outside of a Neat project."
 
     tasks:
       no_name: Tasks must have a name
@@ -20,10 +21,22 @@ en:
     commands:
       command: "Command '#{command}'"
       no_program: "No program provided to #{command}"
+      no_commands: No commands map provided
       no_register: "Can't register command #{command}"
       invalid_arguments: "Invalid syntax: #{expression}"
       invalid_command: "#{command}\n\nA command must be function with an aliases."
       missing_command: "#{missing}\n\nTry `neat help` for a list of the available commands."
+
+      help:
+        description: "Display the help of the specified [command]"
+        help_list_title: "Commands:"
+
+      list:
+        description: List all the commands and provides details about them
+        headers:
+          command: Command
+          environment: Environment
+          aliases: Aliases
 
       install:
         no_nemfile: No Nemfile in the current directory
@@ -32,7 +45,21 @@ en:
         install_failed: An error occured during the installation!
 
       generate:
+        generator: "Generator #{generator}"
+        description: "Runs the specified [generator]"
         file_generated: "#{path} generated"
+        help_list_title: "Generators:"
+        invalid_generator: "Generators must be a function, was #{type}"
+
+      docco:
+        no_path: No paths specified for documentation generation.
+        description: Generates the documentation through docco
+        documentation_generated: Documentation successfully generated
+        file_generated: "#{file} documentation processed"
+        stylesheet_description: Generates the documentation stylesheet
+        stylesheet_generated: Stylesheet successfully generated
+        javascript_description: Generates the documentation javascript
+        javascript_generated: Javascript successfully generated
 
     templates:
       no_template: "#{missing}\n\nExplored paths:\n#{paths}"

@@ -2,36 +2,36 @@ fs = require 'fs'
 {resolve} = require 'path'
 Neat = require '../neat'
 
-utils = resolve Neat.neatRoot, "lib/utils"
-
-{render, renderSync} = require resolve utils, "templates"
-{puts, error, warn, missing, neatBroken} = require resolve utils, "logs"
-
-cmds = resolve utils, "commands"
-{run, aliases, usages, describe, help:withHelp, environment} = require cmds
+{render, renderSync} = Neat.require "utils/templates"
+{puts, error, warn, missing, neatBroken} = Neat.require "utils/logs"
+{
+  run, aliases, usages, describe, help:withHelp, environment
+} = Neat.require 'utils/commands'
+_ = Neat.i18n.getHelper()
 
 help = (pr, commands) ->
-  return error "No program provided to help" unless pr?
-  return error "No commands map provided" unless commands?
+  throw new Error _('neat.commands.no_program', command: 'help') unless pr?
+  throw new Error _('neat.commands.no_commands') unless commands?
 
   aliases 'h', 'help',
   environment 'production',
   usages 'neat help [command]',
-  describe 'Display the help of the specified [command]',
-  withHelp """Display the help of the specified [command].""",
+  describe _('neat.commands.help.description'),
+  withHelp _('neat.commands.help.description'),
   f = (command, args..., cb) ->
     args.push cb if typeof cb isnt 'function'
 
     if command? and typeof command is 'string'
       cmd = commands[command]
-      return error( missing "Command #{command}") and cb?() unless cmd?
+      unless cmd?
+        return cb? new Error missing _('neat.commands.command',{command})
     else
       list = {}
       list[c.aliases.join ", "] = c for k,c of commands
 
       listContext =
         list: list
-        title: "Commands:"
+        title: _('neat.commands.help.help_list_title')
 
       cmd =
         usages: ['neat [command] [args]...']

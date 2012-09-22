@@ -1,13 +1,15 @@
 fs = require 'fs'
+Neat = require '../../neat'
+
 {resolve} = require 'path'
-{error} = require '../../utils/logs'
+{error} = Neat.require 'utils/logs'
+_ = Neat.i18n.getHelper()
 
 try
   {parse, highlight} = require 'docco'
 catch e
-  return error """#{'Can\'t find the docco module.'.red}
-
-                  Run cake install to install the dependencies"""
+  return error _('neat.commands.docco.missing_module',
+                  missing: missing 'docco')
 
 class DoccoPreProcessor
 

@@ -1,19 +1,20 @@
 fs = require 'fs'
 {resolve} = require 'path'
 
-{puts, error} = require '../../utils/logs'
-{render} = require '../../utils/templates'
-
+Neat = require '../../neat'
 DoccoPreProcessor = require './docco_pre_processor'
 DoccoTitleProcessor = require './docco_title_processor'
-{parallel} = require '../../async'
+
+{puts, error, missing} = Neat.require 'utils/logs'
+{render} = Neat.require 'utils/templates'
+{parallel} = Neat.require 'async'
+_ = Neat.i18n.getHelper()
 
 try
   {parse, highlight} = require 'docco'
 catch e
-  return error """#{'Can\'t find the docco module.'.red}
-
-                  Run cake install to install the dependencies"""
+  return error _('neat.commands.docco.missing_module',
+                  missing: missing 'docco')
 
 class DoccoFileProcessor
 
@@ -55,7 +56,8 @@ class DoccoFileProcessor
 
           fs.writeFile @file.outputPath, page, (err) =>
             throw err if err?
-            puts "#{@file.relativePath.yellow} documentation processed", 1
+            puts _('neat.commands.docco.file_generated',
+                    file: @file.relativePath.yellow), 1
             callback?()
 
 module.exports = DoccoFileProcessor

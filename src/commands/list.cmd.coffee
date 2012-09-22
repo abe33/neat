@@ -4,12 +4,14 @@ Neat = require '../neat'
 {aliases, describe, environment, usages} = Neat.require 'utils/commands'
 {namespace} = Neat.require 'utils/exports'
 {first, last, length, property} = Neat.require 'utils/mappers'
+_ = Neat.i18n.getHelper()
 
 list = (pr, commands) ->
-  return error "No program provided to list" unless pr?
+  unless pr?
+    throw new Error _('neat.commands.no_program', command: 'list')
 
   aliases 'list',
-  describe 'List all the commands and provides details about them',
+  describe _('neat.commands.list.description'),
   environment 'production',
   cmd = (cb)->
     t = commands.flatten().group(2)
@@ -20,8 +22,12 @@ list = (pr, commands) ->
           .compact()
           .max() + 4
 
+    command = _('neat.commands.list.headers.command').left c1
+    environment = _('neat.commands.list.headers.environment').left c2
+    aliases = _('neat.commands.list.headers.aliases').left c3
+
     puts """
-         #{'Command'.left c1}#{'Environment'.left c2}#{'Aliases'.left c3}
+         #{command}#{environment}#{aliases}
          """.yellow, 5
 
     for k,v of commands
