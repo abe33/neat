@@ -46,7 +46,10 @@ commandTrigger = (c) -> (args..., callback) ->
   Neat.defaultEnvironment = c.environment if c.environment?
   Neat.initEnvironment ->
     Neat.beforeCommand.dispatch ->
-      c.apply null, args.concat -> Neat.afterCommand.dispatch callback
+      c.apply null, args.concat (err) ->
+        if err?
+          error _('neat.errors.error', msg: err.message, stack: err.stack)
+        Neat.afterCommand.dispatch callback
 
 # The commands will be register in a hash with their aliases as keys.
 cmdMap = {}
@@ -71,9 +74,10 @@ register(k, g pr, cmdMap) for k,g of commands
 
 # Handler for invalid commands.
 pr.command("*").action (command) ->
-  throw new Error _('neat.commands.missing_command',
-                    missing: missing _('neat.commands.command',
-                                       command: command))
+  Neat.initEnvironment ->
+    error _('neat.commands.missing_command',
+            missing: missing _('neat.commands.command',
+                               command: command))
 
 # Starts commander parsing.
 pr.parse(process.argv)
