@@ -1,4 +1,5 @@
 src
+!templates/generators/project/src
 node_modules
 spec
 fixtures
@@ -6,5 +7,6 @@ docs
 Cakefile
 Nemfile
 .gitignore
+.git
 *.sublime-project
 *.sublime-workspace
