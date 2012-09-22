@@ -22,7 +22,13 @@ class I18n
   # Returns a string from the locales.
   # That function can be called either with or without a language:
   #
-  #     i18n
+  #     i18n.get (path.to.string')
+  #     i18n.get ('fr', 'path.to.string')
+  #
+  # If the path lead to a dead end, the function return the last element
+  # in the path as a capitalized sentence.
+  #
+  #     i18n.get (path.that.do_not_exist) # Do Not Exist
   get: (language, path) ->
     [language, path] = [@defaultLanguage, language] unless path?
     lang = @locales[language]
@@ -33,9 +39,22 @@ class I18n
     lang = els.last().replace(/[-_]/g, ' ').capitalizeAll() unless lang?
     lang
 
+  ##### I18n::getHelper
+
+  # Returns a helper function bound to the current instance that allow
+  # to retrieve localized string from the `I18n` instance as well as doing
+  # token substitution in the returned string.
+  #
+  #     _ = i18n.getHelper()
+  #     _('path.to.string')
+  #     _('path.to.string_with_token', token: 'token substitute')
   getHelper: -> (path, tokens) =>
     @get(path).replace /\#\{([^\}]+)\}/g, (token, key) -> tokens[key] or token
 
+  ##### I18n::load
+
+  # Search and loads locales files in the given paths, parse their content
+  # and fill the `locales` object with the resuts.
   load: ->
     @locales = {}
     docs = readFilesSync findSync 'yml', @paths
@@ -43,6 +62,18 @@ class I18n
     @deepMerge @locales, yaml.load content for path, content of docs
     @languages = @locales.sortedKeys()
 
+  ##### I18n::deepMerge
+
+  # Merge two tree structures formed by nested objects into one tree structure.
+  #
+  #     source =
+  #       foo:
+  #         bar: 10
+  #     target =
+  #       foo:
+  #         baz: 20
+  #     deepMerge target, source
+  #     # target = {foo: {bar: 10, baz: 20}}
   deepMerge: (target, source) ->
     for k,v of source
       switch typeof v
