@@ -130,11 +130,11 @@ withBundledProject 'foo', ->
 
         waitsFor progress(-> ended), 'Timed out', 50000
 
-    describe 'and running neat generate spec foo', ->
+    describe 'and running neat generate spec:unit foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'node', [NEAT_BIN, 'generate', 'spec', 'foo'], (status) ->
+          run 'node', [NEAT_BIN, 'generate', 'spec:unit', 'foo'], (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -144,11 +144,53 @@ withBundledProject 'foo', ->
 
         waitsFor progress(-> ended), 'Timed out', 50000
 
-    describe 'and running neat generate package', ->
+    describe 'and running neat generate spec:functional foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'node', [NEAT_BIN, 'generate', 'package'], (status) ->
+          run 'node',[NEAT_BIN,'generate','spec:functional','foo'], (status) ->
+            expect(status).toBe(0)
+            expect(inProject 'test.log')
+              .toContain("""hooks added
+                            beforeCommand called
+                            afterCommand called""")
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out', 50000
+
+    describe 'and running neat generate package.json', ->
+      it 'should trigger the hooks', ->
+        ended = false
+        runs ->
+          run 'node', [NEAT_BIN, 'generate', 'package.json'], (status) ->
+            expect(status).toBe(0)
+            expect(inProject 'test.log')
+              .toContain("""hooks added
+                            beforeCommand called
+                            afterCommand called""")
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out', 50000
+
+    describe 'and running neat generate config:lint foo', ->
+      it 'should trigger the hooks', ->
+        ended = false
+        runs ->
+          run 'node', [NEAT_BIN, 'generate', 'config:lint', 'foo'], (status) ->
+            expect(status).toBe(0)
+            expect(inProject 'test.log')
+              .toContain("""hooks added
+                            beforeCommand called
+                            afterCommand called""")
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out', 50000
+
+    describe 'and running neat generate config:packager foo', ->
+      it 'should trigger the hooks', ->
+        ended = false
+        runs ->
+          run 'node',[NEAT_BIN,'generate','config:packager','foo'], (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
