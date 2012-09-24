@@ -51,8 +51,8 @@ class Signal
   #
   # Signals listeners can be asynchronous, in that case the last
   # argument of the listener must be named `callback`. An async
-  # listener blocks the dispatch until the passed-in `callback`
-  # is triggered.
+  # listener blocks the dispatch loop until the callback function
+  # passed to the listener is triggered.
   #
   #     # sync listener
   #     signal.add (a, b, c) ->
@@ -200,11 +200,19 @@ class Signal
   # the call.
   #
   # Optionally you can pass a callback argument to the dispatch function.
-  # This function will be called at the end of the dispatch, allowing to
-  # execute code after all listeners, even asynchronous, have been triggered.
+  # In that case, the callback must be the last argument passed to the
+  # `dispatch` function.  This function will be called at the end
+  # of the dispatch, allowing to execute code after all listeners,
+  # even asynchronous, have been triggered.
   #
   #     signal.dispatch this, true, ->
   #       # all listeners have finish their execution
+  #
+  # **Note:** As the dispatch function will automatically consider
+  # the last argument as the callback if its type is `function`, you should
+  # avoid using function as the sole argument or as the last argument
+  # for a listener. If that case occurs, consider either re-arranging the
+  # arguments order or using a value object to carry the function.
   dispatch: (args..., callback)->
     unless typeof callback is 'function'
       args.push callback
@@ -231,6 +239,9 @@ class Signal
 
       next callback
     else
+      # The fast route is just a loop over the listeners.
+      # At that point, if your listener do async stuff, it will
+      # not prevent the dispatching until it's done.
       for [listener, context, once, priority] in listeners
         listener.apply context, arguments
         @remove listener, context if once

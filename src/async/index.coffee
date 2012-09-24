@@ -17,9 +17,9 @@ parallel = (fns, callback) ->
 
 ##### queue
 
-# Execute an array of function `fns` one after the other.
-# The passed-in `callback` will only be called when the queue
-# is empty.
+# Execute an array of functions `fns` one after the other.
+# The passed-in `callback` will only be called when the last
+# function have callback.
 #
 #     f1 = (cb) -> setTimeout cb, 100
 #     f2 = (cb) -> setTimeout cb, 200
@@ -31,9 +31,10 @@ queue = (fns, callback) ->
 
 ##### chain
 
-# Execute an array of function `fns` on after the other, like a `queue`,
-# but the different between them lies in the fact that a `chain` pass
-# the arguments receive from a function to the next.
+# Execute an array of functions `fns` one after the other, like a `queue`,
+# but the difference between them lies in the fact that a `chain` pass
+# the arguments receive as argument of the callback function to the next
+# function to execute.
 #
 #     f1 = (a, cb) -> setTimeout cb, 100, a+10
 #     f2 = (a, cb) -> setTimeout cb, 200, a+20
