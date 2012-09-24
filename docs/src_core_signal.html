@@ -1,0 +1,420 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/core/signal.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/core/signal.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/core/</h3>
+            <h1>signal.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>Use a <code>Signal</code> object wherever you need to dispatch an event.
+A <code>Signal</code> is a dispatcher that have only one channel.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#signal'>Signal</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalconstructor'>Signal::constructor</a>
+  </li>
+  <li class='level1'>
+    <a href='#listeners-management'>Listeners management</a>
+  </li>
+  <li class='level2'>
+    <a href='#signaladd'>Signal::add</a>
+  </li>
+  <li class='level2'>
+    <a href='#signaladdonce'>Signal::addOnce</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalremove'>Signal::remove</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalremoveall'>Signal::removeAll</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalindexof'>Signal::indexOf</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalregistered'>Signal::registered</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalhaslisteners'>Signal::hasListeners</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalsortlisteners'>Signal::sortListeners</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalvalidate'>Signal::validate</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalisasync'>Signal::isAsync</a>
+  </li>
+  <li class='level1'>
+    <a href='#signal-dispatch'>Signal Dispatch</a>
+  </li>
+  <li class='level2'>
+    <a href='#signaldispatch'>Signal::dispatch</a>
+  </li>
+</ul></p></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h1 id='signal'>Signal</h1></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Signals are generally defined as property of an object. And
+their name generally end with a past tense verb, such as in:</p>
+
+<div class="highlight"><pre><span class="nv">myObject.somethingChanged </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="k">class</span> <span class="nb">Signal</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalconstructor'>Signal::constructor</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Optionally, a signal can have a specific signature.
+A signature is a collection of argument names such:</p>
+
+<div class="highlight"><pre><span class="nv">positionChanged </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span> <span class="s">&#39;target&#39;</span><span class="p">,</span> <span class="s">&#39;position&#39;</span>
+</pre></div>
+
+<p>If a signature is passed to a signal, every listener
+added to the signal must then match the signature.</p>
+
+<div class="highlight"><pre><span class="nx">positionChanged</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">position</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># will be registered</span>
+<span class="nx">positionChanged</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">position</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># will be registered too</span>
+<span class="nx">positionChanged</span><span class="p">.</span><span class="nx">add</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="c1"># will throw an error</span>
+</pre></div>
+
+<p>In the case of an asynchronous listener, the callback argument
+is not considered as being part of the signature.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">constructor</span><span class="o">:</span> <span class="p">(</span><span class="py">@signature</span><span class="p">...)</span> <span class="o">-&gt;</span>
+    <span class="py">@listeners</span> <span class="o">=</span> <span class="p">[]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>asyncListeners</code> property stores the number of asynchronous
+listeners to use a synchronous dispatch when equal to 0.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@asyncListeners</span> <span class="o">=</span> <span class="mi">0</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='listeners-management'>Listeners management</h3>
+
+<p>Listeners are stored internally as an array with the form:</p>
+
+<div class="highlight"><pre><span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">calledOnce</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signaladd'>Signal::add</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>You can register a listener with or without a context.
+The context is the object that can be accessed through <code>this</code>
+inside the listener function body.</p>
+
+<p>An optional <code>priority</code> argument allow you to force
+an order of dispatch for a listener.</p>
+
+<p>Signals listeners can be asynchronous, in that case the last
+argument of the listener must be named <code>callback</code>. An async
+listener blocks the dispatch loop until the callback function
+passed to the listener is triggered.</p>
+
+<div class="highlight"><pre><span class="c1"># sync listener</span>
+<span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span>
+
+<span class="c1"># async listener</span>
+<span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">callback</span><span class="p">()</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">add</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nv">priority </span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="py">@validate</span> <span class="nx">listener</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A listener can be registered several times, but only
+if the context object is different each time.</p>
+
+<p>In other words, the following is possible:</p>
+
+<div class="highlight"><pre><span class="nv">listener </span><span class="o">=</span> <span class="o">-&gt;</span>
+<span class="nv">context </span><span class="o">=</span> <span class="p">{}</span>
+<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span>
+<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
+</pre></div>
+
+<p>When the following is not:</p>
+
+<div class="highlight"><pre><span class="nv">listener </span><span class="o">=</span> <span class="o">-&gt;</span>
+<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span>
+<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="o">not</span> <span class="py">@registered</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
+      <span class="py">@listeners</span><span class="p">.</span><span class="nx">push</span> <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span>
+      <span class="py">@asyncListeners</span><span class="o">++</span> <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Listeners are sorted according to their order each time
+a new listener is added.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="py">@sortListeners</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signaladdonce'>Signal::addOnce</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Listeners can be registered for only one call.</p>
+
+<p>All the others rules are the same. So you can't add
+the same listener/context couple twice through the two methods.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">addOnce</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nv">priority </span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="py">@validate</span> <span class="nx">listener</span>
+    <span class="k">if</span> <span class="o">not</span> <span class="py">@registered</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
+      <span class="py">@listeners</span><span class="p">.</span><span class="nx">push</span> <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span>
+      <span class="py">@asyncListeners</span><span class="o">++</span> <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span>
+      <span class="py">@sortListeners</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalremove'>Signal::remove</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Listeners can be removed, but only with the context with which
+they was added to the signal.</p>
+
+<p>In this regards, avoid to register listeners without a context.
+If later in the application a context is forgotten or invalid
+when removing a listener from this signal, the listener
+without context will end up being removed.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">remove</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="py">@registered</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
+      <span class="py">@asyncListeners</span><span class="o">--</span> <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span>
+      <span class="py">@listeners</span><span class="p">.</span><span class="nx">splice</span> <span class="py">@indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">),</span> <span class="mi">1</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalremoveall'>Signal::removeAll</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>All listeners can be removed at once if needed.</p>
+
+<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">()</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">removeAll</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="py">@listeners</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="py">@asyncListeners</span> <span class="o">=</span> <span class="mi">0</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalindexof'>Signal::indexOf</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p><code>indexOf</code> returns the position of the listener/context couple
+in the listeners array.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">indexOf</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="nx">i</span> <span class="k">for</span> <span class="p">[</span><span class="nx">l</span><span class="p">,</span><span class="nx">c</span><span class="p">],</span><span class="nx">i</span> <span class="k">in</span> <span class="py">@listeners</span> <span class="k">when</span> <span class="nx">listener</span> <span class="o">is</span> <span class="nx">l</span> <span class="o">and</span> <span class="nx">context</span> <span class="o">is</span> <span class="nx">c</span>
+    <span class="o">-</span><span class="mi">1</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalregistered'>Signal::registered</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Use the <code>registered</code> method to test whether a listener/context couple
+have been registered in this signal.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">registered</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="py">@indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalhaslisteners'>Signal::hasListeners</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns true if the signal has listeners.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">hasListeners</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@listeners</span><span class="p">.</span><span class="nx">length</span> <span class="o">isnt</span> <span class="mi">0</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalsortlisteners'>Signal::sortListeners</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The listeners are sorted according to their <code>priority</code>.
+The higher the priority the lower the listener will be
+in the call order.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">sortListeners</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="py">@listeners</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+    <span class="py">@listeners</span><span class="p">.</span><span class="nx">sort</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="p">[</span><span class="nx">pA</span><span class="p">,</span> <span class="nx">pB</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="nx">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+
+      <span class="k">if</span> <span class="nx">pA</span> <span class="o">&lt;</span> <span class="nx">pB</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">pB</span> <span class="o">&lt;</span> <span class="nx">pA</span> <span class="k">then</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalvalidate'>Signal::validate</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Throws an error if the passed-in listener's signature
+doesn't match the signal's one.</p>
+
+<div class="highlight"><pre><span class="nv">signal </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span>
+<span class="nx">signal</span><span class="p">.</span><span class="nx">validate</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="c1"># false</span>
+<span class="nx">signal</span><span class="p">.</span><span class="nx">validate</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># true</span>
+<span class="nx">signal</span><span class="p">.</span><span class="nx">validate</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># true</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">validate</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="py">@signature</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nv">re </span><span class="o">=</span> <span class="sr">/</span><span class="src">[^(]</span><span class="sro">+</span><span class="sr">\(</span><span class="sro">(</span><span class="src">[^)]</span><span class="sro">+)</span><span class="sr">\).</span><span class="sro">*$</span><span class="sr">/m</span>
+      <span class="nv">listenerSignature </span><span class="o">=</span> <span class="nb">Function</span><span class="o">::</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">listener</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">).</span><span class="nx">shift</span><span class="p">()</span>
+      <span class="nv">signature </span><span class="o">=</span> <span class="nx">listenerSignature</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">re</span><span class="p">,</span> <span class="s">&#39;$1&#39;</span><span class="p">)</span>
+      <span class="nv">args </span><span class="o">=</span> <span class="nx">signature</span><span class="p">.</span><span class="nx">split</span> <span class="sr">/</span><span class="sre">\s</span><span class="sro">*</span><span class="sr">,\s</span><span class="sro">*</span><span class="sr">/g</span>
+
+      <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span> <span class="k">if</span> <span class="nx">args</span><span class="p">.</span><span class="nx">first</span><span class="p">()</span> <span class="o">is</span> <span class="s">&#39;&#39;</span>
+      <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="k">if</span> <span class="nx">args</span><span class="p">.</span><span class="nx">last</span><span class="p">()</span> <span class="o">is</span> <span class="s">&#39;callback&#39;</span>
+
+      <span class="nv">s1 </span><span class="o">=</span> <span class="py">@signature</span><span class="p">.</span><span class="nx">join</span><span class="p">()</span>
+      <span class="nv">s2 </span><span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">()</span>
+
+      <span class="nv">m </span><span class="o">=</span> <span class="s">&quot;The listener </span><span class="si">#{</span><span class="nx">listener</span><span class="si">}</span><span class="s"> doesn&#39;t match the signal&#39;s signature </span><span class="si">#{</span><span class="nx">s1</span><span class="si">}</span><span class="s">&quot;</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">m</span> <span class="k">if</span> <span class="nx">s2</span> <span class="o">isnt</span> <span class="nx">s1</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalisasync'>Signal::isAsync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in <code>listener</code> is asynchronous.</p>
+
+<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">isAsync</span> <span class="o">-&gt;</span> <span class="c1"># false</span>
+<span class="nx">signal</span><span class="p">.</span><span class="nx">isAsync</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># true</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">isAsync</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nb">Function</span><span class="o">::</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">listener</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;callback)&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='signal-dispatch'>Signal Dispatch</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signaldispatch'>Signal::dispatch</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Signals are dispatched to all the listeners. All the arguments
+passed to the dispatch become the signal's message.</p>
+
+<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="kc">true</span>
+</pre></div>
+
+<p>Listeners registered for only one call will be removed after
+the call.</p>
+
+<p>Optionally you can pass a callback argument to the dispatch function.
+In that case, the callback must be the last argument passed to the
+<code>dispatch</code> function.  This function will be called at the end
+of the dispatch, allowing to execute code after all listeners,
+even asynchronous, have been triggered.</p>
+
+<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="o">-&gt;</span>
+  <span class="c1"># all listeners have finish their execution</span>
+</pre></div>
+
+<p><strong>Note:</strong> As the dispatch function will automatically consider
+the last argument as the callback if its type is <code>function</code>, you should
+avoid using function as the sole argument or as the last argument
+for a listener. If that case occurs, consider either re-arranging the
+arguments order or using a value object to carry the function.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">dispatch</span><span class="o">:</span> <span class="p">(</span><span class="nx">args</span><span class="p">...,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
+    <span class="k">unless</span> <span class="k">typeof</span> <span class="nx">callback</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+      <span class="nx">args</span><span class="p">.</span><span class="nx">push</span> <span class="nx">callback</span>
+      <span class="nv">callback </span><span class="o">=</span> <span class="kc">null</span>
+
+    <span class="nv">listeners </span><span class="o">=</span> <span class="py">@listeners</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If at leat one listener is async, the whole dispatch process is async
+otherwise the fast route is used.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="py">@asyncListeners</span> <span class="o">&gt;</span> <span class="mi">0</span>
+      <span class="nv">next </span><span class="o">=</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="k">if</span> <span class="nx">listeners</span><span class="p">.</span><span class="nx">length</span>
+          <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">once</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span> <span class="o">=</span> <span class="nx">listeners</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+
+          <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span>
+            <span class="nx">listener</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">context</span><span class="p">,</span> <span class="nv">args.concat </span><span class="o">=&gt;</span>
+              <span class="py">@remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span> <span class="k">if</span> <span class="nx">once</span>
+              <span class="nx">next</span> <span class="nx">callback</span>
+          <span class="k">else</span>
+            <span class="nx">listener</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">args</span>
+            <span class="py">@remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span> <span class="k">if</span> <span class="nx">once</span>
+            <span class="nx">next</span> <span class="nx">callback</span>
+        <span class="k">else</span>
+          <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+
+      <span class="nx">next</span> <span class="nx">callback</span>
+    <span class="k">else</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The fast route is just a loop over the listeners.
+At that point, if your listener do async stuff, it will
+not prevent the dispatching until it's done.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">for</span> <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">once</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span> <span class="k">in</span> <span class="nx">listeners</span>
+        <span class="nx">listener</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">arguments</span>
+        <span class="py">@remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span> <span class="k">if</span> <span class="nx">once</span>
+
+      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+
+<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">Signal</span>
+
+</pre></div></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

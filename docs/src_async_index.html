@@ -1,0 +1,134 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/async/index.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/async/index.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/async/</h3>
+            <h1>index.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>A bunch of functions to deals with asynchronous process.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#parallel'>parallel</a>
+  </li>
+  <li class='level0'>
+    <a href='#queue'>queue</a>
+  </li>
+  <li class='level0'>
+    <a href='#chain'>chain</a>
+  </li>
+</ul></p></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='parallel'>parallel</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Execute an array of functions <code>fns</code> in parallel. The passed-in <code>callback</code>
+will only be called when the all functions have call back.</p>
+
+<div class="highlight"><pre><span class="nv">f1 </span><span class="o">=</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">setTimeout</span> <span class="nx">cb</span><span class="p">,</span> <span class="mi">100</span>
+<span class="nv">f2 </span><span class="o">=</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">setTimeout</span> <span class="nx">cb</span><span class="p">,</span> <span class="mi">200</span>
+<span class="nx">parallel</span> <span class="p">[</span><span class="nx">f1</span><span class="p">,</span> <span class="nx">f2</span><span class="p">],</span> <span class="o">-&gt;</span>
+  <span class="c1"># called after both f1 and f2 have call back</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">parallel </span><span class="o">=</span> <span class="p">(</span><span class="nx">fns</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">count </span><span class="o">=</span> <span class="mi">0</span>
+  <span class="nv">cb </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="nx">count</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="k">if</span> <span class="nx">count</span> <span class="o">is</span> <span class="nx">fns</span><span class="p">.</span><span class="nx">length</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+  <span class="k">if</span> <span class="nx">fns</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span> <span class="k">then</span> <span class="nx">callback</span><span class="p">()</span> <span class="k">else</span> <span class="nx">fn</span> <span class="nx">cb</span> <span class="k">for</span> <span class="nx">fn</span> <span class="k">in</span> <span class="nx">fns</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='queue'>queue</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Execute an array of functions <code>fns</code> one after the other.
+The passed-in <code>callback</code> will only be called when the last
+function have callback.</p>
+
+<div class="highlight"><pre><span class="nv">f1 </span><span class="o">=</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">setTimeout</span> <span class="nx">cb</span><span class="p">,</span> <span class="mi">100</span>
+<span class="nv">f2 </span><span class="o">=</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">setTimeout</span> <span class="nx">cb</span><span class="p">,</span> <span class="mi">200</span>
+<span class="nx">queue</span> <span class="p">[</span><span class="nx">f1</span><span class="p">,</span> <span class="nx">f2</span><span class="p">],</span> <span class="o">-&gt;</span>
+  <span class="c1"># called after at least 300ms</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">queue </span><span class="o">=</span> <span class="p">(</span><span class="nx">fns</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">next </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="nx">fns</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span> <span class="k">then</span> <span class="nx">callback</span><span class="p">()</span> <span class="k">else</span> <span class="nx">fns</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span> <span class="nx">next</span>
+  <span class="nx">next</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='chain'>chain</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Execute an array of functions <code>fns</code> one after the other, like a <code>queue</code>,
+but the difference between them lies in the fact that a <code>chain</code> pass
+the arguments receive as argument of the callback function to the next
+function to execute.</p>
+
+<div class="highlight"><pre><span class="nv">f1 </span><span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">setTimeout</span> <span class="nx">cb</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">a</span><span class="o">+</span><span class="mi">10</span>
+<span class="nv">f2 </span><span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">setTimeout</span> <span class="nx">cb</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="nx">a</span><span class="o">+</span><span class="mi">20</span>
+<span class="nx">chain</span> <span class="p">[</span><span class="nx">f1</span><span class="p">,</span> <span class="nx">f2</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># a is 30</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">chain </span><span class="o">=</span> <span class="p">(</span><span class="nx">fns</span><span class="p">,</span> <span class="nx">args</span><span class="p">...,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">next </span><span class="o">=</span> <span class="p">(</span><span class="nx">args</span><span class="p">...)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">fns</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+      <span class="nx">callback</span><span class="p">.</span><span class="nx">apply</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">args</span>
+    <span class="k">else</span>
+      <span class="nx">fns</span><span class="p">.</span><span class="nx">shift</span><span class="p">().</span><span class="nx">apply</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">concat</span> <span class="nx">next</span>
+
+  <span class="nx">next</span><span class="p">.</span><span class="nx">apply</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">args</span>
+
+<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span><span class="nx">queue</span><span class="p">,</span> <span class="nx">parallel</span><span class="p">,</span> <span class="nx">chain</span><span class="p">}</span>
+
+</pre></div></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

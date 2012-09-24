@@ -1,0 +1,1065 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/utils/files.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/utils/files.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/utils/</h3>
+            <h1>files.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>This file contains the various utilities used to work with files
+within a Neat project.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#dirwithindex'>dirWithIndex</a>
+  </li>
+  <li class='level0'>
+    <a href='#dirwithindexsync'>dirWithIndexSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#ensure'>ensure</a>
+  </li>
+  <li class='level0'>
+    <a href='#ensuresync'>ensureSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#ensurepath'>ensurePath</a>
+  </li>
+  <li class='level0'>
+    <a href='#ensurepathsync'>ensurePathSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#find'>find</a>
+  </li>
+  <li class='level0'>
+    <a href='#findonce'>findOnce</a>
+  </li>
+  <li class='level0'>
+    <a href='#findsync'>findSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#findsynconce'>findSyncOnce</a>
+  </li>
+  <li class='level0'>
+    <a href='#findbase'>findBase</a>
+  </li>
+  <li class='level0'>
+    <a href='#findbasesync'>findBaseSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#findsiblingfile'>findSiblingFile</a>
+  </li>
+  <li class='level0'>
+    <a href='#findsiblingfilesync'>findSiblingFileSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#isneatroot'>isNeatRoot</a>
+  </li>
+  <li class='level0'>
+    <a href='#isneatrootsync'>isNeatRootSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#neatroot'>neatRoot</a>
+  </li>
+  <li class='level0'>
+    <a href='#neatrootsync'>neatRootSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#noextension'>noExtension</a>
+  </li>
+  <li class='level0'>
+    <a href='#readfiles'>readFiles</a>
+  </li>
+  <li class='level0'>
+    <a href='#readfilessync'>readFilesSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#rm'>rm</a>
+  </li>
+  <li class='level0'>
+    <a href='#rmsync'>rmSync</a>
+  </li>
+  <li class='level0'>
+    <a href='#touch'>touch</a>
+  </li>
+  <li class='level0'>
+    <a href='#touchsync'>touchSync</a>
+  </li>
+</ul></p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">fs </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;fs&#39;</span>
+<span class="p">{</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">existsSync</span><span class="p">,</span> <span class="nx">exists</span><span class="p">,</span> <span class="nx">basename</span><span class="p">,</span> <span class="nx">relative</span><span class="p">,</span> <span class="nx">extname</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;path&#39;</span>
+<span class="p">{</span><span class="nx">puts</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">warn</span><span class="p">,</span> <span class="nx">missing</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./logs&#39;</span>
+<span class="p">{</span><span class="nx">parallel</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;../async&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='dirwithindex'>dirWithIndex</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the path to the <code>index</code> present in the <code>dir</code> directory
+if this directory contains an index file which extension is <code>ext</code>.
+If no <code>ext</code> is provided any file with a basename of <code>index</code> is returned.</p>
+
+<div class="highlight"><pre><span class="nx">dirWithIndex</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
+    <span class="c1"># do something with the index</span>
+
+<span class="nx">dirWithIndex</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
+    <span class="c1"># do something with index.js</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">dirWithIndex </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nv">ext</span><span class="o">=</span><span class="kc">null</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="p">[</span><span class="nx">ext</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">ext</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">ext</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+  <span class="nx">exists</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span> <span class="k">unless</span> <span class="nx">b</span>
+
+    <span class="nv">index </span><span class="o">=</span> <span class="k">if</span> <span class="nx">ext</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;index&quot;</span>
+
+    <span class="nx">findBase</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="nx">callback</span> <span class="nx">res</span><span class="o">?</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='dirwithindexsync'>dirWithIndexSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the path to the <code>index</code> present in the <code>dir</code> directory
+if this directory contains an index file which extension is <code>ext</code>.
+If no <code>ext</code> is provided any file with a basename of <code>index</code> is returned.</p>
+
+<div class="highlight"><pre><span class="nv">index </span><span class="o">=</span> <span class="nx">dirWithIndexSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
+<span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
+  <span class="c1"># do something with the index</span>
+
+<span class="nv">index </span><span class="o">=</span> <span class="nx">dirWithIndexSync</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;js&#39;</span>
+<span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
+  <span class="c1"># do something with index.js</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">dirWithIndexSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nv">ext</span><span class="o">=</span><span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">dir</span>
+
+  <span class="nv">index </span><span class="o">=</span> <span class="k">if</span> <span class="nx">ext</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;index&quot;</span>
+
+  <span class="nx">findBaseSync</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span><span class="o">?</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='ensure'>ensure</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Ensures that the <code>dir</code> folder exists, and creates it otherwise.</p>
+
+<div class="highlight"><pre><span class="nx">ensure</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># handle errors</span>
+</pre></div>
+
+<p>The <code>created</code> argument of the callback function is a boolean
+value that indicates if the directory was created or not.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">ensure </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">exists</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">b</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">false</span>
+    <span class="k">else</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdir</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">err</span><span class="o">?</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">false</span>
+      <span class="k">else</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='ensuresync'>ensureSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Ensures that the <code>dir</code> folder exists, and creates it otherwise.</p>
+
+<div class="highlight"><pre><span class="nx">ensureSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
+</pre></div>
+
+<p>Note that the function will fail with an error in this
+context if <code>/path/to</code> don't exist.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">ensureSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span> <span class="nx">dir</span><span class="p">;</span> <span class="k">return</span> <span class="kc">true</span><span class="p">)</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">dir</span><span class="p">;</span> <span class="kc">false</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='ensurepath'>ensurePath</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Ensures that the path exists and creates the missing folders if needed.</p>
+
+<div class="highlight"><pre><span class="nx">ensurePath</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># handle error</span>
+</pre></div>
+
+<p>In that context, if the <code>path</code> and <code>to</code> folders don't exist
+they will be created and then the <code>dir</code> one.</p>
+
+<p>The <code>created</code> argument of the callback function is a boolean
+value that indicates if the directory was created or not.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">ensurePath </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">stack </span><span class="o">=</span> <span class="p">[]</span>
+  <span class="nv">generator </span><span class="o">=</span> <span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">ensure</span> <span class="nx">d</span><span class="p">,</span> <span class="nx">callback</span>
+  <span class="nv">next </span><span class="o">=</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">false</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+    <span class="k">if</span> <span class="nx">stack</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="nx">stack</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span><span class="o">?</span> <span class="nx">next</span> <span class="k">else</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">created</span>
+
+  <span class="nv">dirs </span><span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">..</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="nv">p </span><span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+  <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span> <span class="nx">generator</span> <span class="nv">p </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">d</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">d</span> <span class="k">in</span> <span class="nx">dirs</span>
+
+  <span class="nx">next</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='ensurepathsync'>ensurePathSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Ensures that the path exists and creates the missing folders if needed.</p>
+
+<div class="highlight"><pre><span class="nx">ensurePathSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
+</pre></div>
+
+<p>In that context, if the <code>path</code> and <code>to</code> folders don't exist
+they will be created and then the <code>dir</code> one.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">ensurePathSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">dirs </span><span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;/&#39;</span>
+  <span class="nx">dirs</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+  <span class="nv">p </span><span class="o">=</span> <span class="s">&#39;/&#39;</span>
+  <span class="k">while</span> <span class="nx">dirs</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="nv">d </span><span class="o">=</span> <span class="nx">dirs</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+    <span class="nv">p </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">p</span><span class="p">,</span> <span class="nx">d</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span> <span class="nx">p</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='find'>find</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns an array containing the paths to files in <code>paths</code> that match
+both the provided <code>pattern</code> and <code>ext</code>.</p>
+
+<p>For instance, the following call will returns the path to all the commands
+in the <code>lib/commands</code> directories of a Neat project.</p>
+
+<div class="highlight"><pre><span class="nv">paths </span><span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/lib/commands&quot;</span>
+<span class="nx">find</span> <span class="sr">/\.cmd</span><span class="sro">$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">commands</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># do something with commands</span>
+</pre></div>
+
+<p>The <code>pattern</code> argument is optional and match against the <code>basename</code>
+of the file.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">find </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Arguments are reorganized if no pattern is provided.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="p">[</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">pattern</span><span class="p">,</span>
+    <span class="nx">ext</span>
+    <span class="nx">paths</span>
+  <span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">pattern</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If <code>paths</code> is a string, the search is performed on this sole path.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="k">if</span> <span class="k">typeof</span> <span class="nx">paths</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span>
+    <span class="nx">findOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="nx">callback</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Otherwise, the search is performed on each path.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="k">else</span>
+    <span class="nv">output </span><span class="o">=</span> <span class="p">[]</span>
+    <span class="nv">lookup </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="nx">findOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">push</span> <span class="nx">file</span> <span class="k">for</span> <span class="nx">file</span> <span class="k">in</span> <span class="nx">files</span> <span class="k">if</span> <span class="nx">files</span><span class="o">?</span>
+        <span class="nx">cb</span><span class="o">?</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nx">paths</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+      <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span>
+    <span class="k">else</span>
+      <span class="nx">parallel</span> <span class="p">(</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">paths</span><span class="p">),</span> <span class="o">-&gt;</span>
+        <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findonce'>findOnce</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Performs the <code>find</code> search routine over a single path.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findOnce </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="o">-&gt;</span>
+
+  <span class="nx">exists</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">callback</span><span class="o">?</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&#39;&#39;</span> <span class="k">unless</span> <span class="nx">b</span><span class="o">?</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores the results of the search.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">out </span><span class="o">=</span> <span class="p">[]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Matchs the file extension.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">extRe </span><span class="o">=</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span>
+
+    <span class="nv">lookup </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="nv">p </span><span class="o">=</span> <span class="nx">basename</span> <span class="nx">path</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">lstat</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The search continue in the directory.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nx">find</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
+            <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+
+            <span class="nx">output</span><span class="p">.</span><span class="nx">push</span> <span class="nx">file</span> <span class="k">for</span> <span class="nx">file</span> <span class="k">in</span> <span class="nx">files</span> <span class="k">if</span> <span class="nx">files</span><span class="o">?</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>When a <code>pattern</code> is provided and the directory name match
+against it, the function will then look for the presence
+of an index file.</p></td>
+          <td class='code'><div class="highlight"><pre>            <span class="nv">index </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span>
+            <span class="nx">exists</span> <span class="nx">index</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+              <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span> <span class="o">and</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">)</span> <span class="o">and</span> <span class="nx">b</span>
+                <span class="nx">output</span><span class="p">.</span><span class="nx">push</span> <span class="nx">index</span>
+
+              <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a file that match the specified file extension.</p></td>
+          <td class='code'><div class="highlight"><pre>        <span class="k">else</span> <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span> <span class="nx">extRe</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If a <code>pattern</code> is provided and the file match against it,
+the path is set as a found.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span>
+            <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">extRe</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">).</span><span class="nx">match</span> <span class="nx">pattern</span>
+              <span class="nv">found </span><span class="o">=</span> <span class="nx">path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Otherwise the path is a found by default.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="k">else</span>
+            <span class="nv">found </span><span class="o">=</span> <span class="nx">path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The paths found in this directory are added to the output array.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nx">output</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="k">if</span> <span class="nx">found</span><span class="o">?</span>
+
+          <span class="nx">cb</span><span class="o">?</span><span class="p">()</span>
+        <span class="k">else</span> <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Reads the current directory.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span><span class="o">-&gt;</span>
+      <span class="k">throw</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+      <span class="nv">output </span><span class="o">=</span> <span class="p">[]</span>
+
+      <span class="k">if</span> <span class="nx">content</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+        <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span>
+      <span class="k">else</span>
+        <span class="nx">parallel</span> <span class="p">(</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">p</span><span class="p">),</span> <span class="nx">output</span><span class="p">)</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">content</span><span class="p">),</span> <span class="o">-&gt;</span>
+          <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findsync'>findSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns an array containing the paths to files in <code>paths</code> that match
+both the provided <code>pattern</code> and <code>ext</code>.</p>
+
+<p>For instance, the following call will returns the path to all the commands
+in the <code>lib/commands</code> directories of a Neat project.</p>
+
+<div class="highlight"><pre><span class="nv">paths </span><span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/lib/commands&quot;</span>
+<span class="nv">commands </span><span class="o">=</span> <span class="nx">find</span> <span class="sr">/\.cmd</span><span class="sro">$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="nx">paths</span>
+</pre></div>
+
+<p>The <code>pattern</code> argument is optional and match against the <code>basename</code>
+of the file.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Arguments are reorganized if no pattern is provided.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="p">[</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">pattern</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If <code>paths</code> is a string, the search is performed on this sole path.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="k">if</span> <span class="k">typeof</span> <span class="nx">paths</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span>
+    <span class="nx">findSyncOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Otherwise, the search is performed on each path.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="k">else</span>
+    <span class="nv">out </span><span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="nx">path</span> <span class="k">in</span> <span class="nx">paths</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Results from a search are concatened into the output array.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">founds </span><span class="o">=</span> <span class="nx">findSyncOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span>
+      <span class="nv">out </span><span class="o">=</span> <span class="nx">out</span><span class="p">.</span><span class="nx">concat</span> <span class="nx">founds</span> <span class="k">if</span> <span class="nx">founds</span><span class="o">?</span>
+    <span class="nx">out</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findsynconce'>findSyncOnce</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Performs the <code>findSync</code> search routine over a single path.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findSyncOnce </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores the results of the search.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">out </span><span class="o">=</span> <span class="p">[]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Matchs the file extension.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">extRe </span><span class="o">=</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Reads the current directory.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">content </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">path</span>
+  <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">content</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p><code>found</code> will stores the results of the searches.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">found </span><span class="o">=</span> <span class="kc">null</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Constructs the path to test.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nb">_path</span> <span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>And retreives information for this path.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">stats </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span> <span class="nb">_path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a directory.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The search continue in the directory.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">found </span><span class="o">=</span> <span class="nx">findSync</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nb">_path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>When a <code>pattern</code> is provided and the directory name match against it,
+the function will then look for the presence of an index file.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">index </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nb">_path</span><span class="p">,</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span>
+      <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span> <span class="o">and</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">)</span> <span class="o">and</span> <span class="nx">existsSync</span> <span class="nx">index</span>
+        <span class="nx">found</span> <span class="o">?=</span> <span class="p">[]</span>
+        <span class="nx">found</span><span class="p">.</span><span class="nx">push</span> <span class="nx">index</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a file that match the specified file extension.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="k">else</span> <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span> <span class="nx">extRe</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If a <code>pattern</code> is provided and the file match against it,
+the path is set as a found.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span>
+        <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">extRe</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">).</span><span class="nx">match</span> <span class="nx">pattern</span>
+          <span class="nv">found </span><span class="o">=</span> <span class="nb">_path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Otherwise the path is a found by default.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">else</span>
+        <span class="nv">found </span><span class="o">=</span> <span class="nb">_path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The paths found in this directory are added to the output array.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">out </span><span class="o">=</span> <span class="nx">out</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="k">if</span> <span class="nx">found</span><span class="o">?</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If the output array is not empty the array is returned, otherwise
+the function returns <code>null</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="k">if</span> <span class="nx">out</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="nx">out</span> <span class="k">else</span> <span class="kc">null</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findbase'>findBase</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns an array containing all the paths in <code>dir</code> whose name
+match <code>base</code>.</p>
+
+<div class="highlight"><pre><span class="nx">findBase</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># files = [</span>
+  <span class="c1">#   /path/to/dir/file.coffee</span>
+  <span class="c1">#   /path/to/dir/file.js</span>
+  <span class="c1">#   /path/to/dir/file.spec.coffee</span>
+  <span class="c1"># ]</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findBase </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">exists</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span> <span class="k">unless</span> <span class="nx">b</span>
+
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+
+      <span class="nv">res </span><span class="o">=</span> <span class="p">(</span><span class="nx">resolve</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">f</span> <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">content</span> <span class="k">when</span> <span class="nx">f</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///</span><span class="sro">^</span><span class="si">#{</span><span class="nx">base</span><span class="si">}</span><span class="sro">(</span><span class="sr">\.|</span><span class="sro">$)</span><span class="sr">///</span><span class="p">)</span>
+      <span class="nx">callback</span><span class="o">?</span> <span class="nx">res</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findbasesync'>findBaseSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns an array containing all the paths in <code>dir</code> whose name
+match <code>base</code>.</p>
+
+<div class="highlight"><pre><span class="nv">files </span><span class="o">=</span> <span class="nx">findBaseSync</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span>
+<span class="c1"># files = [</span>
+<span class="c1">#   /path/to/dir/file.coffee</span>
+<span class="c1">#   /path/to/dir/file.js</span>
+<span class="c1">#   /path/to/dir/file.spec.coffee</span>
+<span class="c1"># ]</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findBaseSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">base</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">return</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">dir</span>
+
+  <span class="nv">content </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">dir</span>
+  <span class="nx">resolve</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">f</span> <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">content</span> <span class="k">when</span> <span class="nx">f</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///</span><span class="sro">^</span><span class="si">#{</span><span class="nx">base</span><span class="si">}</span><span class="sro">(</span><span class="sr">\.|</span><span class="sro">$)</span><span class="sr">///</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findsiblingfile'>findSiblingFile</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Look for a file related to the provided <code>path</code> in a different
+directory structure.</p>
+
+<p>Lets say we have a file in <code>lib/commands/my_commands</code>, we want to find
+its sibling template file. We will call <code>findSiblingFile</code> like this:</p>
+
+<div class="highlight"><pre><span class="nv">path </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nb">Neat</span><span class="p">.</span><span class="nx">root</span><span class="si">}</span><span class="s">/lib/commands/my_commands/my_file.cmd.js&quot;</span>
+<span class="nx">findSiblingFile</span> <span class="nx">path</span><span class="p">,</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># file is either undefined</span>
+  <span class="c1"># or a string containing the found file path</span>
+</pre></div>
+
+<p>This basic exemple will return any file in <code>templates/commands/my_commands</code>
+with a base name that match the one of the original file. For instance, in
+our case, a file named <code>my_file.html.hamlc</code> could be returned if it exists
+in the corresponding folder.
+If a directory has the same name as the base name of the source file, and
+it contains an <code>index</code> file that match the criteria, the path to the index
+is returned.</p>
+
+<p>The <code>exts</code> splats allow to define a list of allowed extensions for the
+searched files. You can use <code>'*'</code> to allow any extension.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findSiblingFile </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">roots</span><span class="p">,</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">exts</span><span class="p">...,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">paths </span><span class="o">=</span> <span class="p">[]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The specified <code>path</code> must be in a Neat project.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nx">neatRoot</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">pathRoot</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(),</span> <span class="kc">undefined</span><span class="p">,</span> <span class="p">[]</span> <span class="k">unless</span> <span class="nx">pathRoot</span><span class="o">?</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Prepares the path structure that will be used in the search.
+Note that, unlike the <code>basename</code> function, all the extensions
+are removed from the path. It allow to use additional extensions
+in file names and at the same time to don't have to duplicate this
+additional extensions in the searched files.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">start </span><span class="o">=</span> <span class="nx">noExtension</span> <span class="nx">path</span>
+    <span class="nv">base </span><span class="o">=</span> <span class="nx">basename</span> <span class="nx">start</span>
+    <span class="nv">dif </span><span class="o">=</span> <span class="nx">relative</span> <span class="nx">pathRoot</span><span class="p">,</span> <span class="nx">resolve</span> <span class="nx">start</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
+    <span class="nv">newPath </span><span class="o">=</span> <span class="nx">dif</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^</span><span class="src">[^</span><span class="sr">\</span><span class="err">/]</span><span class="sro">+</span><span class="sr">/</span><span class="p">,</span> <span class="nx">dir</span>
+    <span class="nv">exts </span><span class="o">=</span> <span class="s">&#39;*&#39;</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">exts</span><span class="o">?</span> <span class="o">or</span>
+                  <span class="nx">exts</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span> <span class="o">or</span>
+                  <span class="p">(</span><span class="nx">exts</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">1</span> <span class="o">and</span> <span class="nx">exts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">is</span> <span class="s">&#39;*&#39;</span><span class="p">)</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Will hold the tested path.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The roots paths are reverted to prioritize the user and plugins
+directories over the Neat directory, allowing a user or a plugin
+to <em>override</em> that file.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">roots </span><span class="o">=</span> <span class="nx">roots</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span>
+    <span class="nx">roots</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+    <span class="nv">matches </span><span class="o">=</span> <span class="p">{}</span>
+    <span class="nv">found </span><span class="o">=</span> <span class="p">[]</span>
+    <span class="nv">matchExtensions </span><span class="o">=</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">extname</span><span class="p">(</span><span class="nx">p</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">in</span> <span class="nx">exts</span> <span class="o">or</span> <span class="nx">exts</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>lookup</code> function generates a command that perform the lookup
+for the given <code>root</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">lookup </span><span class="o">=</span> <span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Constructs a path to the directory that should contains
+the searched file.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">basepath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">newPath</span>
+
+      <span class="nx">paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">basepath</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Retrieves all the files or directories that match the base name.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nx">findBase</span> <span class="nx">basepath</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="p">(</span><span class="nx">ps</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If there's matches.</p></td>
+          <td class='code'><div class="highlight"><pre>        <span class="k">if</span> <span class="nx">ps</span><span class="o">?</span> <span class="o">and</span> <span class="o">not</span> <span class="nx">ps</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+          <span class="nx">ps</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>entryMatch</code> function generates a command that perform
+the lookup for a path whose base match the original file.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nv">entryMatch </span><span class="o">=</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span>
+            <span class="nx">fs</span><span class="p">.</span><span class="nx">lstat</span> <span class="nx">p</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="o">-&gt;</span>
+              <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">path</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+              <span class="nx">paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a directory.</p></td>
+          <td class='code'><div class="highlight"><pre>              <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores in <code>paths</code> the current searched path.</p></td>
+          <td class='code'><div class="highlight"><pre>                <span class="nx">paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">resolve</span> <span class="nx">p</span><span class="p">,</span> <span class="s">&#39;index.*&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Looks for an index file in the directory.</p></td>
+          <td class='code'><div class="highlight"><pre>                <span class="nx">dirWithIndex</span> <span class="nx">p</span><span class="p">,</span> <span class="p">(</span><span class="nx">ip</span><span class="p">)</span> <span class="o">-&gt;</span>
+                  <span class="k">if</span> <span class="nx">ip</span><span class="o">?</span> <span class="o">and</span> <span class="nx">matchExtensions</span> <span class="nx">ip</span>
+                    <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
+                    <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">].</span><span class="nx">push</span> <span class="nx">ip</span>
+                  <span class="nx">cb</span><span class="o">?</span><span class="p">()</span>
+              <span class="k">else</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a file, it'll ensure that the path match
+the extension if provided.</p></td>
+          <td class='code'><div class="highlight"><pre>                <span class="k">if</span> <span class="nx">matchExtensions</span> <span class="nx">p</span>
+                  <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
+                  <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">].</span><span class="nx">push</span> <span class="nx">p</span>
+                <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Runs a verification on each path returned by <code>findBase</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nx">parallel</span> <span class="p">(</span><span class="nx">entryMatch</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">ps</span><span class="p">),</span> <span class="o">-&gt;</span>
+            <span class="nx">found</span><span class="p">.</span><span class="nx">push</span> <span class="nx">matches</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="k">for</span> <span class="nx">r</span><span class="p">,</span><span class="nx">i</span> <span class="k">in</span> <span class="nx">roots</span>
+            <span class="nv">found </span><span class="o">=</span> <span class="nx">found</span><span class="p">.</span><span class="nx">flatten</span><span class="p">().</span><span class="nx">compact</span><span class="p">()</span>
+            <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Nothing was returned by <code>findBase</code>, the lookup callback.</p></td>
+          <td class='code'><div class="highlight"><pre>        <span class="k">else</span> <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>In the case <code>roots</code> is empty, the function callback.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="nx">roots</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
+      <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">paths</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Otherwise a lookup is perform for each root.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="k">else</span>
+      <span class="nx">parallel</span> <span class="p">(</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="k">for</span> <span class="nx">root</span> <span class="k">in</span> <span class="nx">roots</span><span class="p">),</span> <span class="o">-&gt;</span>
+        <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">found</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">paths</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='findsiblingfilesync'>findSiblingFileSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the path to a file related to the provided <code>path</code> in a different
+directory structure. If no file can't be found, the function return
+<code>undefined</code></p>
+
+<p>Lets say we have a file in <code>lib/commands/my_commands</code>, we want to find
+its sibling template file. We will call <code>findSiblingFileSync</code> like this:</p>
+
+<div class="highlight"><pre><span class="nv">path </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nb">Neat</span><span class="p">.</span><span class="nx">root</span><span class="si">}</span><span class="s">/lib/commands/my_commands/my_file.cmd.js&quot;</span>
+<span class="nx">findSiblingFileSync</span> <span class="nx">path</span><span class="p">,</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span>
+</pre></div>
+
+<p>This basic exemple will return any file in <code>templates/commands/my_commands</code>
+with a base name that match the one of the original file. For instance, in
+our case, a file named <code>my_file.html.hamlc</code> could be returned if it exists
+in the corresponding folder.
+If a directory has the same name as the base name of the source file, and
+it contains an <code>index</code> file that match the criteria, the path to the index
+is returned.</p>
+
+<p>The <code>exts</code> splats allow to define a list of allowed extensions for the
+searched files. You can use <code>'*'</code> to allow any extension.</p>
+
+<p>The <code>paths</code> argument is optional, pass an array and the function will
+collect in this array all the paths that was tried during the call.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">findSiblingFileSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">roots</span><span class="p">,</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">exts</span><span class="p">...,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The specified <code>path</code> must be in a Neat project.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">pathRoot </span><span class="o">=</span> <span class="nx">neatRootSync</span> <span class="nx">path</span>
+
+  <span class="k">return</span> <span class="k">unless</span> <span class="nx">pathRoot</span><span class="o">?</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If <code>path</code> is a string, no array was passed to collect the paths
+and then we add the string as an extension to match.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="p">[</span><span class="nx">exts</span><span class="p">,</span> <span class="nx">paths</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">exts</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">paths</span><span class="p">),</span> <span class="kc">null</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">paths</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Prepares the path structure that will be used in the search.
+Note that, unlike the <code>basename</code> function, all the extensions
+are removed from the path. It allow to use additional extensions
+in file names and at the same time to don't have to duplicate this
+additional extensions in the searched files.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">start </span><span class="o">=</span> <span class="nx">noExtension</span> <span class="nx">path</span>
+  <span class="nv">base </span><span class="o">=</span> <span class="nx">basename</span> <span class="nx">start</span>
+  <span class="nv">dif </span><span class="o">=</span> <span class="nx">relative</span> <span class="nx">pathRoot</span><span class="p">,</span> <span class="nx">resolve</span> <span class="nx">start</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
+  <span class="nv">newPath </span><span class="o">=</span> <span class="nx">dif</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^</span><span class="src">[^</span><span class="sr">\</span><span class="err">/]</span><span class="sro">+</span><span class="sr">/</span><span class="p">,</span> <span class="nx">dir</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Ensure that <code>exts</code> is an array containing at least one string.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">exts </span><span class="o">=</span> <span class="s">&quot;*&quot;</span> <span class="k">unless</span> <span class="nx">exts</span><span class="o">?</span>
+  <span class="nv">exts </span><span class="o">=</span> <span class="p">[</span><span class="nx">exts</span><span class="p">]</span> <span class="k">unless</span> <span class="k">typeof</span> <span class="nx">exts</span> <span class="o">is</span> <span class="s">&quot;object&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Will hold the tested path.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The roots paths are reverted to prioritize the user and plugins
+directories over the Neat directory, allowing a user or a plugin
+to <em>override</em> that file.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="nv">roots </span><span class="o">=</span> <span class="nx">roots</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span>
+  <span class="nx">roots</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+
+  <span class="k">for</span> <span class="nx">root</span> <span class="k">in</span> <span class="nx">roots</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Constructs a path to the directory that should contains
+the searched file.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">basepath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">newPath</span>
+
+    <span class="k">for</span> <span class="nx">ext</span> <span class="k">in</span> <span class="nx">exts</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores in <code>paths</code> the current searched path with the extension
+if provided.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nx">paths</span><span class="o">?</span><span class="p">.</span><span class="nx">push</span> <span class="nx">resolve</span> <span class="nx">basepath</span><span class="p">,</span>
+                          <span class="k">if</span> <span class="nx">ext</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span> <span class="k">then</span> <span class="nx">base</span> <span class="k">else</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">base</span><span class="si">}</span><span class="s">.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Retrieves all the files or directories that match the base name.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">ps </span><span class="o">=</span> <span class="nx">findBaseSync</span> <span class="nx">basepath</span><span class="p">,</span> <span class="nx">base</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If there's matches.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">if</span> <span class="nx">ps</span><span class="o">?</span>
+        <span class="nx">ps</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">ps</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>We don't have to protect the call to <code>lstatSync</code> since the
+<code>findPathWithBase</code> returns only existing paths.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nv">stats </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a directory.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores in <code>paths</code> the current searched path with the extension
+if provided.</p></td>
+          <td class='code'><div class="highlight"><pre>            <span class="nx">paths</span><span class="o">?</span><span class="p">.</span><span class="nx">push</span> <span class="nx">resolve</span> <span class="nx">p</span><span class="p">,</span> <span class="k">if</span> <span class="nx">ext</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span>
+              <span class="s">&quot;index&quot;</span>
+            <span class="k">else</span>
+              <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Looks for an index file in the directory.</p></td>
+          <td class='code'><div class="highlight"><pre>            <span class="nv">p </span><span class="o">=</span> <span class="nx">dirWithIndexSync</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Ensures that the index match the extension if provided.</p></td>
+          <td class='code'><div class="highlight"><pre>            <span class="k">if</span> <span class="nx">ext</span> <span class="o">isnt</span> <span class="s">&quot;*&quot;</span>
+              <span class="k">if</span> <span class="nx">p</span><span class="o">?</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">p</span> <span class="k">else</span> <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span>
+            <span class="k">else</span>
+              <span class="k">return</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The path is a file, it'll ensure that the path match
+the extension if provided.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="k">else</span> <span class="k">if</span> <span class="nx">ext</span> <span class="o">isnt</span> <span class="s">&quot;*&quot;</span>
+            <span class="k">if</span> <span class="nx">p</span><span class="o">?</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">p</span> <span class="k">else</span> <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span>
+          <span class="k">else</span>
+            <span class="k">return</span> <span class="nx">p</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Nothing was found, it returns undefined.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="kc">undefined</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='isneatroot'>isNeatRoot</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in <code>dir</code> is a Neat project root directory.</p>
+
+<div class="highlight"><pre><span class="nx">isNeatRoot</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">found</span>
+    <span class="c1"># &#39;/path/to/project&#39; is a neat project root</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">isNeatRoot </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">exists</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="s">&quot;.neat&quot;</span><span class="p">),</span> <span class="nx">callback</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='isneatrootsync'>isNeatRootSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in <code>dir</code> is a Neat project root directory.</p>
+
+<div class="highlight"><pre><span class="k">if</span> <span class="nx">isNeatRootSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
+  <span class="c1"># &#39;/path/to/project&#39; is a neat project root</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">isNeatRootSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nx">existsSync</span> <span class="nx">resolve</span> <span class="nx">dir</span><span class="p">,</span> <span class="s">&quot;.neat&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatroot'>neatRoot</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Finds the first Neat project root directory starting from <code>path</code>
+and then moving up along its lineage.</p>
+
+<div class="highlight"><pre><span class="nx">neatRoot</span> <span class="nb">__filename</span><span class="p">,</span> <span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">root</span><span class="o">?</span>
+    <span class="c1"># the current file is part of a neat project</span>
+    <span class="c1"># root = &#39;/path/to/project&#39;</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">neatRoot </span><span class="o">=</span> <span class="p">(</span><span class="nv">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">path </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span>
+
+  <span class="nx">isNeatRoot</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">bool</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">path</span>
+    <span class="k">else</span>
+      <span class="nv">parentPath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
+
+      <span class="k">if</span> <span class="nx">parentPath</span> <span class="o">is</span> <span class="nx">path</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+      <span class="nx">neatRoot</span> <span class="nx">parentPath</span><span class="p">,</span> <span class="nx">callback</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatrootsync'>neatRootSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Finds the first Neat project root directory starting from <code>path</code>
+and then moving up along its lineage.</p>
+
+<div class="highlight"><pre><span class="nv">root </span><span class="o">=</span> <span class="nx">neatRootSync</span> <span class="nb">__filename</span>
+<span class="k">if</span> <span class="nx">root</span><span class="o">?</span>
+  <span class="c1"># the current file is part of a neat project</span>
+  <span class="c1"># root = &#39;/path/to/project&#39;</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">neatRootSync </span><span class="o">=</span> <span class="p">(</span><span class="nv">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">path </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span>
+
+  <span class="k">if</span> <span class="nx">isNeatRootSync</span> <span class="nx">path</span> <span class="k">then</span> <span class="nx">path</span>
+  <span class="k">else</span>
+    <span class="nv">parentPath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
+    <span class="nx">neatRootSync</span> <span class="nx">parentPath</span> <span class="k">unless</span> <span class="nx">parentPath</span> <span class="o">is</span> <span class="nx">path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='noextension'>noExtension</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Removes all the extensions from a file name.</p>
+
+<div class="highlight"><pre><span class="nx">noExtension</span> <span class="s">&#39;foo.bar.baz&#39;</span> <span class="c1"># &#39;foo&#39;</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">noExtension </span><span class="o">=</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">p </span><span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;/&#39;</span>
+  <span class="nv">last </span><span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
+  <span class="nv">last </span><span class="o">=</span> <span class="nx">last</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">(</span><span class="src">[^/.]</span><span class="sro">+)</span><span class="sr">\..</span><span class="sro">+$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&quot;$1&quot;</span>
+  <span class="nx">p</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">last</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='readfiles'>readFiles</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Reads an array of path and return a hash with the path
+of the file as key and the content of the file as value.</p>
+
+<div class="highlight"><pre><span class="nx">readFiles</span> <span class="p">[</span><span class="s">&#39;foo.txt&#39;</span><span class="p">,</span> <span class="s">&#39;bar.txt&#39;</span><span class="p">],</span> <span class="p">(</span><span class="nx">docs</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># docs = {&#39;foo.txt&#39;: &#39;...&#39;, &#39;bar.txt&#39;: &#39;...&#39;}</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">readFiles </span><span class="o">=</span> <span class="p">(</span><span class="nx">files</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">res </span><span class="o">=</span> <span class="p">{}</span>
+  <span class="nv">readIteration </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="k">throw</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+
+      <span class="nx">res</span><span class="p">[</span><span class="nx">path</span><span class="p">]</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+
+  <span class="nx">parallel</span> <span class="p">(</span><span class="nx">readIteration</span> <span class="nx">p</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">files</span><span class="p">),</span> <span class="o">-&gt;</span>
+    <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">res</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='readfilessync'>readFilesSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Reads an array of path and return a hash with the path
+of the file as key and the content of the file as value.</p>
+
+<div class="highlight"><pre><span class="nv">docs </span><span class="o">=</span> <span class="nx">readFiles</span> <span class="p">[</span><span class="s">&#39;foo.txt&#39;</span><span class="p">,</span> <span class="s">&#39;bar.txt&#39;</span><span class="p">]</span>
+ <span class="c1"># docs = {&#39;foo.txt&#39;: &#39;...&#39;, &#39;bar.txt&#39;: &#39;...&#39;}</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">readFilesSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">res </span><span class="o">=</span> <span class="p">{}</span>
+  <span class="nx">res</span><span class="p">[</span><span class="nx">path</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span> <span class="nx">path</span> <span class="k">for</span> <span class="nx">path</span> <span class="k">in</span> <span class="nx">files</span>
+  <span class="nx">res</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='rm'>rm</h4></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">rm </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">rmIteration </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">rm</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span>
+
+  <span class="nx">exists</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">exist</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">exist</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">lstat</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+        <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span>
+          <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span>
+            <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+            <span class="nx">parallel</span> <span class="p">(</span><span class="nx">rmIteration</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">paths</span><span class="p">),</span> <span class="o">-&gt;</span>
+              <span class="nx">fs</span><span class="p">.</span><span class="nx">rmdir</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
+                <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span>
+        <span class="k">else</span>
+          <span class="nx">fs</span><span class="p">.</span><span class="nx">unlink</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
+            <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span>
+    <span class="k">else</span>
+      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='rmsync'>rmSync</h4></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">rmSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="k">if</span> <span class="nx">existsSync</span> <span class="nx">path</span>
+    <span class="nv">stats </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span> <span class="nx">path</span>
+    <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span>
+      <span class="nv">paths </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">path</span>
+      <span class="nx">rmSync</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">paths</span> <span class="k">if</span> <span class="nx">paths</span><span class="o">?</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">rmdirSync</span> <span class="nx">path</span>
+    <span class="k">else</span>
+      <span class="nx">fs</span><span class="p">.</span><span class="nx">unlinkSync</span> <span class="nx">path</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='touch'>touch</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Creates a file at path unless the file already exists.</p>
+
+<div class="highlight"><pre><span class="nx">touch</span> <span class="s">&#39;/path/to/file.ext&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># handle errors</span>
+
+<span class="nx">touch</span> <span class="s">&#39;/path/to/file.ext&#39;</span><span class="p">,</span> <span class="s">&#39;file content&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># handle errors</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">touch </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nv">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="p">[</span><span class="nx">content</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">content</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">content</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+  <span class="nx">exists</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">b</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">false</span>
+    <span class="k">else</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
+      <span class="k">if</span> <span class="nx">err</span><span class="o">?</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">false</span>
+      <span class="k">else</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='touchsync'>touchSync</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Creates a file at path unless the file already exists.
+A boolean value is returned and indicate if the file was created.</p>
+
+<div class="highlight"><pre><span class="nx">touchSync</span> <span class="s">&#39;/path/to/file.ext&#39;</span>
+
+<span class="nx">touchSync</span> <span class="s">&#39;/path/to/file.ext&#39;</span><span class="p">,</span> <span class="s">&#39;file content&#39;</span>
+</pre></div>
+
+<p>Note that the function will fail with an error in this
+context if <code>/path/to</code> don't exist.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">touchSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nv">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">content</span><span class="p">;</span> <span class="k">return</span> <span class="kc">true</span><span class="p">)</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">path</span>
+  <span class="kc">false</span>
+
+<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span>
+  <span class="nx">dirWithIndex</span><span class="p">,</span>
+  <span class="nx">dirWithIndexSync</span><span class="p">,</span>
+  <span class="nx">ensure</span><span class="p">,</span>
+  <span class="nx">ensureSync</span><span class="p">,</span>
+  <span class="nx">ensurePath</span><span class="p">,</span>
+  <span class="nx">ensurePathSync</span><span class="p">,</span>
+  <span class="nx">find</span><span class="p">,</span>
+  <span class="nx">findSync</span><span class="p">,</span>
+  <span class="nx">findBase</span><span class="p">,</span>
+  <span class="nx">findBaseSync</span><span class="p">,</span>
+  <span class="nx">findSiblingFile</span><span class="p">,</span>
+  <span class="nx">findSiblingFileSync</span><span class="p">,</span>
+  <span class="nx">isNeatRoot</span><span class="p">,</span>
+  <span class="nx">isNeatRootSync</span><span class="p">,</span>
+  <span class="nx">neatRoot</span><span class="p">,</span>
+  <span class="nx">neatRootSync</span><span class="p">,</span>
+  <span class="nx">noExtension</span><span class="p">,</span>
+  <span class="nx">readFiles</span><span class="p">,</span>
+  <span class="nx">readFilesSync</span><span class="p">,</span>
+  <span class="nx">rm</span><span class="p">,</span>
+  <span class="nx">rmSync</span><span class="p">,</span>
+  <span class="nx">touch</span><span class="p">,</span>
+  <span class="nx">touchSync</span><span class="p">,</span>
+<span class="p">}</span>
+
+</pre></div></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

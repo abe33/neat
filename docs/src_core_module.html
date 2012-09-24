@@ -1,0 +1,247 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/core/module.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/core/module.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/core/</h3>
+            <h1>module.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p><h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#module'>Module</a>
+  </li>
+  <li class='level1'>
+    <a href='#class-members'>Class Members</a>
+  </li>
+  <li class='level2'>
+    <a href='#moduleinclude'>Module.include</a>
+  </li>
+  <li class='level2'>
+    <a href='#modulehooks'>Module.__hooks__</a>
+  </li>
+  <li class='level2'>
+    <a href='#modulesuperof'>Module.__superOf__</a>
+  </li>
+  <li class='level1'>
+    <a href='#instance-members'>Instance Members</a>
+  </li>
+  <li class='level2'>
+    <a href='#modulepreventconstructorhooksinmodule'>Module::preventConstructorHooksInModule</a>
+  </li>
+  <li class='level2'>
+    <a href='#moduleconstructor'>Module::constructor</a>
+  </li>
+  <li class='level2'>
+    <a href='#moduletriggerconstructorhooks'>Module::triggerConstructorHooks</a>
+  </li>
+  <li class='level2'>
+    <a href='#modulesuper'>Module::super</a>
+  </li>
+</ul></p></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Modules allow polymorphism through mixins.</p>
+
+<p>A Mixin is an object whose properties will
+be used to decorate a class prototype.</p>
+
+<div class="highlight"><pre><span class="nb">Serializable</span> <span class="o">=</span>
+  <span class="py">toSource</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
+  <span class="py">fromSource</span><span class="o">:</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
+
+<span class="nb">Cloneable</span> <span class="o">=</span>
+  <span class="py">clone</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h1 id='module'>Module</h1></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>Module</code> class is a base class that you can extend
+to create classes with polymorphism ability.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="k">class</span> <span class="nb">Module</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='class-members'>Class Members</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='moduleinclude'>Module.include</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Call the static <code>@include</code> method in your class body
+to specify the mixins that the class will implement.</p>
+
+<div class="highlight"><pre><span class="k">class</span> <span class="nb">MyModule</span> <span class="k">extends</span> <span class="nb">Module</span>
+  <span class="py">@include</span> <span class="nb">Serializable</span><span class="p">,</span> <span class="nb">Cloneable</span><span class="p">,</span> <span class="nb">Suspendable</span>
+
+  <span class="c1"># rest of the class definition...</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">@include</span><span class="o">:</span> <span class="p">(</span><span class="nx">mixins</span><span class="p">...)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Calling <code>super</code> inside a mixin method that overides
+a inherited method will fail. To resolve it, a <code>@super</code>
+method is provided on instances. And to avoid issues
+when accessing the constructor of the overridden method
+in a subclass, the constructor of a mixin method (the class
+the method was originally mixed in) is registered in a hash
+stored on the prototype.</p>
+
+<p>A copy the hash is made each time the <code>mixins</code> method is called.
+It prevents the hash of a parent class to be affected by changes
+made in child class.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@__superOf__</span> <span class="o">=</span> <span class="py">@__superOf__</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span>
+
+    <span class="nb">__excluded__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;constructorHook&quot;</span><span class="p">,</span> <span class="s">&quot;included&quot;</span><span class="p">,</span> <span class="s">&quot;excluded&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="nx">mixin</span> <span class="k">in</span> <span class="nx">mixins</span>
+      <span class="nv">excluded </span><span class="o">=</span> <span class="k">if</span> <span class="nx">mixin</span><span class="p">.</span><span class="nx">excluded</span><span class="o">?</span>
+        <span class="nb">__excluded__</span><span class="p">.</span><span class="nx">concat</span> <span class="nx">mixin</span><span class="p">.</span><span class="nx">excluded</span>
+      <span class="k">else</span>
+        <span class="nb">__excluded__</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Each member of each mixin is added to the current class
+prototype, unless the member is part of the excluded array.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">mixin</span> <span class="k">when</span> <span class="nx">key</span> <span class="o">not</span> <span class="k">in</span> <span class="nx">excluded</span>
+        <span class="py">@</span><span class="o">::</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The current class is registered as constructor for
+for the mixed method.</p></td>
+          <td class='code'><div class="highlight"><pre>        <span class="py">@__superOf__</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="py">@__super__</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">value</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Mixins can provide a function called <code>constructorHook</code>.
+That function will be stored in a specific prototype
+property and then triggered at the end of the <code>Module</code>
+constructor.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">if</span> <span class="nx">mixin</span><span class="p">.</span><span class="nx">constructorHook</span><span class="o">?</span>
+        <span class="nv">hook </span><span class="o">=</span> <span class="nx">mixin</span><span class="p">.</span><span class="nx">constructorHook</span>
+        <span class="py">@__hooks__</span> <span class="o">=</span> <span class="py">@__hooks__</span><span class="p">.</span><span class="nx">concat</span> <span class="nx">hook</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The mixin is notified of its inclusion at the end of the process.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nx">mixin</span><span class="p">.</span><span class="nx">included</span><span class="o">?</span> <span class="py">this</span>
+    <span class="py">this</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='modulehooks'>Module.__hooks__</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores the mixins constructor hooks.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">@__hooks__</span><span class="o">:</span> <span class="p">[]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='modulesuperof'>Module.__superOf__</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Stores the respective super objects of mixed methods.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">@__superOf__</span><span class="o">:</span> <span class="p">{}</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='instance-members'>Instance Members</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='modulepreventconstructorhooksinmodule'>Module::preventConstructorHooksInModule</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>When <code>preventConstructorHooksInModule</code> is <code>true</code>, the <code>Module</code>
+constructor will not triggers the constructor hooks, allowing
+a subclass to handle the hooks in its own constructor.</p>
+
+<p>Subclasses that prevent the <code>Module</code> constructor to trigger
+the hooks should provide the same kind of guards in their
+constructor to allow their subclasses to do so.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">preventConstructorHooksInModule</span><span class="o">:</span> <span class="kc">false</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='moduleconstructor'>Module::constructor</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>Module</code> constructor behavior is to automatically
+triggers the constructor hooks.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">constructor</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="py">@triggerConstructorHooks</span><span class="p">()</span> <span class="k">unless</span> <span class="py">@preventConstructorHooksInModule</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='moduletriggerconstructorhooks'>Module::triggerConstructorHooks</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Loop through all the constructor hooks and call
+them with the current object as context.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">triggerConstructorHooks</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">hook</span><span class="p">.</span><span class="nx">call</span> <span class="py">this</span> <span class="k">for</span> <span class="nx">hook</span> <span class="k">in</span> <span class="py">@constructor</span><span class="p">.</span><span class="nb">__hooks__</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='modulesuper'>Module::super</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Use <code>@super "methodName"</code> in a mixin's function to call the
+super function of the specified method.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="k">super</span><span class="o">:</span> <span class="p">(</span><span class="nx">method</span><span class="p">,</span> <span class="nx">args</span><span class="p">...)</span> <span class="o">-&gt;</span>
+    <span class="py">@constructor</span><span class="p">.</span><span class="nb">__superOf__</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span><span class="o">?</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="nx">apply</span> <span class="py">this</span><span class="p">,</span> <span class="nx">args</span>
+
+<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">Module</span>
+
+</pre></div></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

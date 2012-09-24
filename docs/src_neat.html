@@ -1,0 +1,466 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/neat.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/neat.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/</h3>
+            <h1>neat.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>This file contains the creation process of the <code>Neat</code> object and the
+corresponding environment.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#neat'>Neat</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatconstructor'>Neat::constructor</a>
+  </li>
+  <li class='level3'>
+    <a href='#other-constructor-setup'>Other Constructor Setup</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatinithooks'>Neat::initHooks</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatiniti18n'>Neat::initI18n</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatrequire'>Neat::require</a>
+  </li>
+  <li class='level2'>
+    <a href='#neattask'>Neat::task</a>
+  </li>
+  <li class='level1'>
+    <a href='#environment-setup'>Environment Setup</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatinitlogging'>Neat::initLogging</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatinitenvironment'>Neat::initEnvironment</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatsetenvironment'>Neat::setEnvironment</a>
+  </li>
+  <li class='level3'>
+    <a href='#configurations'>Configurations</a>
+  </li>
+  <li class='level3'>
+    <a href='#initializations'>Initializations</a>
+  </li>
+  <li class='level1'>
+    <a href='#environment-setup-utilities'>Environment Setup Utilities</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatdiscoveruserpaths'>Neat::discoverUserPaths</a>
+  </li>
+  <li class='level2'>
+    <a href='#neatloadmeta'>Neat::loadMeta</a>
+  </li>
+</ul></p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">fs </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;fs&#39;</span>
+<span class="nv">pr </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;commander&#39;</span>
+<span class="p">{</span><span class="nx">resolve</span><span class="p">,</span> <span class="py">existsSync</span><span class="o">:</span><span class="nx">exists</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;path&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>We need a reference to the Neat module root directory for later use.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nb">NEAT_ROOT</span> <span class="o">=</span> <span class="nx">resolve</span> <span class="nb">__dirname</span><span class="p">,</span> <span class="s">&#39;..&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Requiring internal utilities.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">logger</span><span class="p">,</span> <span class="nx">puts</span><span class="p">,</span> <span class="nx">warn</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">missing</span><span class="p">,</span> <span class="nx">neatBroken</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./utils/logs&quot;</span>
+<span class="p">{</span><span class="nx">findSync</span><span class="p">,</span> <span class="nx">neatRootSync</span><span class="p">,</span> <span class="nx">isNeatRootSync</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./utils/files&quot;</span>
+<span class="nv">cup </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./utils/cup&quot;</span>
+<span class="nx">require</span> <span class="s">&quot;./core&quot;</span>
+<span class="nb">Signal</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./core/signal&quot;</span>
+<span class="p">{</span><span class="nb">I18n</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&quot;./i18n&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h1 id='neat'>Neat</h1></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A <code>Neat</code> instance provides information about Neat and the current project.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="k">class</span> <span class="nb">Neat</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatconstructor'>Neat::constructor</h4></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">constructor</span><span class="o">:</span> <span class="p">(</span><span class="py">@ROOT</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h5 id='other-constructor-setup'>Other Constructor Setup</h5></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@defaultEnvironment</span> <span class="o">=</span> <span class="s">&#39;default&#39;</span>
+    <span class="py">@root</span>     <span class="o">=</span> <span class="py">@ROOT</span>
+    <span class="py">@neatRoot</span> <span class="o">=</span> <span class="py">@NEAT_ROOT</span> <span class="o">=</span> <span class="nb">NEAT_ROOT</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Paths where environments and initializers can be found.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@envPath</span>  <span class="o">=</span> <span class="py">@ENV_PATH</span>  <span class="o">=</span> <span class="s">&#39;lib/config/environments&#39;</span>
+    <span class="py">@initPath</span> <span class="o">=</span> <span class="py">@INIT_PATH</span> <span class="o">=</span> <span class="s">&#39;lib/config/initializers&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p><code>PATHS</code> will stores the various paths into which Neat will look
+when searching files.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@paths</span> <span class="o">=</span> <span class="py">@PATHS</span> <span class="o">=</span> <span class="p">[</span><span class="py">@neatRoot</span><span class="p">]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The config object is defined asynchronously through
+the <code>initEnvironment</code> or the <code>setEnvironment</code> methods.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@config</span> <span class="o">=</span> <span class="py">@config</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="py">@env</span> <span class="o">=</span> <span class="py">@ENV</span> <span class="o">=</span> <span class="kc">null</span>
+
+    <span class="py">@discoverUserPaths</span><span class="p">()</span> <span class="k">if</span> <span class="py">@root</span><span class="o">?</span>
+
+    <span class="py">@initI18n</span><span class="p">()</span>
+    <span class="py">@initHooks</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>.neat</code> file at the root of a project contains the metadata
+for the project. In the case of Neat, the <code>.neat</code> file is loaded
+and available in <code>Neat.meta</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@meta</span> <span class="o">=</span> <span class="py">@META</span> <span class="o">=</span> <span class="py">@loadMeta</span> <span class="py">@neatRoot</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The current project meta are available through <code>Neat.project</code>
+or <code>Neat.PROJECT</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@project</span> <span class="o">=</span> <span class="py">@PROJECT</span> <span class="o">=</span> <span class="py">@loadMeta</span> <span class="py">@root</span> <span class="k">if</span> <span class="py">@root</span><span class="o">?</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatinithooks'>Neat::initHooks</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Initialize the hooks provided by Neat.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">initHooks</span><span class="o">:</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>beforeCommand</code> and <code>afterCommand</code> hooks are triggered
+respectively before and after the execution of a cli command.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@beforeCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
+    <span class="py">@afterCommand</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>beforeCompilation</code> and <code>afterCompilation</code> hooks are triggered
+respectively before and after the compilation task.
+The listeners to these signals can safely use asynchronous
+process, the compilation task will proceed accordingly.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@beforeCompilation</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
+    <span class="py">@afterCompilation</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>beforeTask</code> and <code>afterTask</code> hooks are triggered
+respectively before and after the execution of a cake task.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@beforeTask</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
+    <span class="py">@afterTask</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>beforeEnvironment</code> and <code>afterEnvironment</code> hooks are triggered
+respectively before and after the construction of the environment.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@beforeEnvironment</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
+    <span class="py">@afterEnvironment</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>beforeInitialize</code> and <code>afterInitialize</code> hooks are triggered
+respectively before and after the execution of initializers.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@beforeInitialize</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
+    <span class="py">@afterInitialize</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatiniti18n'>Neat::initI18n</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Initialize the internationalization for the current Neat instance.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">initI18n</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="py">@i18n</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">I18n</span> <span class="py">@paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">s</span><span class="si">}</span><span class="s">/config/locales&quot;</span>
+    <span class="py">@i18n</span><span class="p">.</span><span class="nx">load</span><span class="p">()</span>
+    <span class="nx">puts</span> <span class="s">&quot;Available languages: </span><span class="si">#{</span><span class="py">@i18n</span><span class="p">.</span><span class="nx">languages</span><span class="p">.</span><span class="nx">join</span> <span class="s">&#39;, &#39;</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatrequire'>Neat::require</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Loads a module from the Neat directory using the <code>require</code> function.</p>
+
+<div class="highlight"><pre><span class="nb">Neat</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;neat&#39;</span>
+<span class="p">{</span><span class="nx">parallel</span><span class="p">}</span> <span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">require</span> <span class="s">&#39;async&#39;</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">require</span><span class="o">:</span> <span class="p">(</span><span class="nx">module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">require</span> <span class="s">&quot;</span><span class="si">#{</span><span class="py">@neatRoot</span><span class="si">}</span><span class="s">/lib/</span><span class="si">#{</span><span class="nx">module</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neattask'>Neat::task</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the cake task whose name is <code>name</code>.</p>
+
+<div class="highlight"><pre><span class="nv">compile </span><span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">task</span> <span class="s">&#39;compile&#39;</span>
+<span class="nx">compile</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># do something after compilation</span>
+</pre></div></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">task</span><span class="o">:</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@require</span><span class="p">(</span><span class="s">&#39;tasks&#39;</span><span class="p">)[</span><span class="nx">name</span><span class="p">]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='environment-setup'>Environment Setup</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatinitlogging'>Neat::initLogging</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Setup the logging engine for this <code>Neat</code> instance.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">initLogging</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nx">logger</span><span class="p">.</span><span class="nx">add</span> <span class="py">@config</span><span class="p">.</span><span class="nx">engines</span><span class="p">.</span><span class="nx">logging</span><span class="p">[</span><span class="py">@config</span><span class="p">.</span><span class="nx">defaultLoggingEngine</span><span class="p">]</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatinitenvironment'>Neat::initEnvironment</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Initializes the <code>Neat</code> instance with the default environment.
+If the <code>NEAT_ENV</code> environment variable is set, the corresponding
+environment is loaded.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">initEnvironment</span><span class="o">:</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="py">@setEnvironment</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">[</span><span class="s">&#39;NEAT_ENV&#39;</span><span class="p">]</span> <span class="o">or</span> <span class="py">@defaultEnvironment</span><span class="p">,</span> <span class="o">=&gt;</span>
+      <span class="py">@initLogging</span><span class="p">()</span>
+      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatsetenvironment'>Neat::setEnvironment</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Changes the environment of the <code>Neat</code> instance. All the process
+of loading the environment configurators and the initializers
+are executed on a brand new environment object.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">setEnvironment</span><span class="o">:</span> <span class="p">(</span><span class="nx">env</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The environment object contains the paths defined in the <code>Neat</code> object.
+In that way, configurators and initializers can perform operations
+knowing the paths of the project.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="nv">envObject </span><span class="o">=</span> <span class="p">{</span>
+      <span class="py">@root</span><span class="p">,</span> <span class="py">@neatRoot</span><span class="p">,</span>  <span class="py">@paths</span><span class="p">,</span> <span class="py">@initPath</span><span class="p">,</span>  <span class="py">@envPath</span><span class="p">,</span>
+      <span class="py">@ROOT</span><span class="p">,</span> <span class="py">@NEAT_ROOT</span><span class="p">,</span> <span class="py">@PATHS</span><span class="p">,</span> <span class="py">@INIT_PATH</span><span class="p">,</span> <span class="py">@ENV_PATH</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="py">@beforeEnvironment</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="nx">envObject</span><span class="p">,</span> <span class="o">=&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h5 id='configurations'>Configurations</h5>
+
+<p>Configuration of the environment is done through <code>configurators</code>.</p>
+
+<p>A configurator is a function exposed as a module and that have
+the following form:</p>
+
+<div class="highlight"><pre><span class="nv">module.exports </span><span class="o">=</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># Setup your configuration here</span>
+</pre></div>
+
+<p>The <code>config</code> object contains the environment object which will
+be available through <code>Neat.config</code>.</p>
+
+<p>The name of the file is the name of the environment to configure.</p>
+
+<p>The default configurators are always called to ensure that
+the environment defaults are present if not overriden
+by the specified environment.</p></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>configurators</code> array initially contains the files which
+must be executed before any other configurator.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">paths </span><span class="o">=</span> <span class="py">@paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="o">=&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="py">@envPath</span><span class="si">}</span><span class="s">&quot;</span>
+      <span class="nv">configurators </span><span class="o">=</span> <span class="nx">findSync</span> <span class="sr">/</span><span class="sro">^</span><span class="sr">default</span><span class="sro">$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="nx">paths</span>
+
+      <span class="k">unless</span> <span class="nx">configurators</span><span class="o">?</span> <span class="o">and</span> <span class="nx">configurators</span><span class="p">.</span><span class="nx">length</span> <span class="o">isnt</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="nx">error</span> <span class="s">&quot;&quot;&quot;</span><span class="si">#{</span><span class="py">@i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()(</span><span class="s">&#39;neat.errors.missing&#39;</span><span class="p">,</span>
+                          <span class="py">missing</span><span class="o">:</span> <span class="s">&#39;config/environments/default.js&#39;</span><span class="p">)</span><span class="si">}</span><span class="s"></span>
+
+<span class="s">                        </span><span class="si">#{</span><span class="py">@i18n</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;neat.errors.broken&#39;</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;&quot;&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Configurators for the given environment are searched in the
+<code>environments</code> directory of each path.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">files </span><span class="o">=</span> <span class="nx">findSync</span> <span class="sr">///</span><span class="sro">^</span><span class="si">#{</span><span class="nx">env</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span><span class="p">,</span> <span class="s">&quot;js&quot;</span><span class="p">,</span> <span class="nx">paths</span>
+      <span class="nx">configurators</span><span class="p">.</span><span class="nx">push</span> <span class="nx">f</span> <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">files</span> <span class="k">when</span> <span class="nx">f</span> <span class="o">not</span> <span class="k">in</span> <span class="nx">configurators</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>All the configurators found are required and then executed.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="k">for</span> <span class="nx">configurator</span> <span class="k">in</span> <span class="nx">configurators</span>
+        <span class="nx">puts</span> <span class="s">&quot;Running </span><span class="si">#{</span><span class="nx">configurator</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The execution of a configurator is handled in a <code>try..catch</code> block
+in order to avoid a failing configurators to prevent <code>Neat</code>
+to be loaded.
+For instance this behavior is needed to run <code>neat install</code> in a fresh
+project where some dependencies cannot be satisfied yet because
+no modules have been installed.</p></td>
+          <td class='code'><div class="highlight"><pre>        <span class="k">try</span>
+          <span class="nv">setup </span><span class="o">=</span> <span class="nx">require</span> <span class="nx">configurator</span>
+          <span class="nx">setup</span><span class="o">?</span> <span class="nx">envObject</span>
+        <span class="k">catch</span> <span class="nx">e</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>However errors are reported to the console.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nx">error</span> <span class="s">&quot;&quot;&quot;</span><span class="si">#{</span><span class="py">@i18n</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;neat.errors.broken_environment&#39;</span><span class="p">).</span><span class="nx">red</span><span class="si">}</span><span class="s"></span>
+
+<span class="s">                   </span><span class="si">#{</span><span class="nx">e</span><span class="p">.</span><span class="nx">stack</span><span class="si">}</span><span class="s">&quot;&quot;&quot;</span>
+
+      <span class="py">@afterEnvironment</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="nx">envObject</span><span class="p">,</span> <span class="o">=&gt;</span>
+        <span class="py">@beforeInitialize</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="nx">envObject</span><span class="p">,</span> <span class="o">=&gt;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h5 id='initializations'>Initializations</h5>
+
+<p>Initializations of plugins or components are done through
+<code>initializers</code>.</p>
+
+<p>An initializer is basically a configurator that will be run after
+the environment configuration.</p>
+
+<div class="highlight"><pre><span class="nv">module.exports </span><span class="o">=</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="c1"># Setup for your module here</span>
+</pre></div>
+
+<p>Its purpose is to setup the configuration of a module, a command,
+or anything else that will run on top of Neat. The sole difference
+is that an initializer file can't have any name, it will be loaded
+anyway.</p></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Every initializers are executed whatever the environment.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="nv">initializers </span><span class="o">=</span> <span class="nx">findSync</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="py">@paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">o</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="py">@initPath</span><span class="si">}</span><span class="s">&quot;</span>
+
+          <span class="k">for</span> <span class="nx">initializer</span> <span class="k">in</span> <span class="nx">initializers</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The same precautions are taken towards initializers execution
+as for configurators.</p></td>
+          <td class='code'><div class="highlight"><pre>            <span class="k">try</span>
+              <span class="nv">initialize </span><span class="o">=</span> <span class="nx">require</span> <span class="nx">initializer</span>
+              <span class="nx">initialize</span><span class="o">?</span> <span class="nx">envObject</span>
+            <span class="k">catch</span> <span class="nx">e</span>
+              <span class="nx">error</span> <span class="s">&quot;&quot;&quot;</span><span class="si">#{</span><span class="py">@i18n</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s">&#39;neat.errors.broken_initializer&#39;</span><span class="p">).</span><span class="nx">red</span><span class="si">}</span><span class="s"></span>
+
+<span class="s">                       </span><span class="si">#{</span><span class="nx">e</span><span class="p">.</span><span class="nx">stack</span><span class="si">}</span><span class="s">&quot;&quot;&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>After configurators and initializers have been run,
+the new environment object is then stored in <code>Neat</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>          <span class="py">@CONFIG</span> <span class="o">=</span> <span class="py">@config</span> <span class="o">=</span> <span class="nx">envObject</span>
+          <span class="nv">o </span><span class="o">=</span> <span class="p">{}</span>
+          <span class="nx">o</span><span class="p">[</span><span class="nx">env</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span>
+          <span class="py">@ENV</span> <span class="o">=</span> <span class="py">@env</span> <span class="o">=</span> <span class="nb">Object</span><span class="o">::</span><span class="nx">merge</span><span class="p">.</span><span class="nx">call</span> <span class="nx">env</span><span class="p">,</span> <span class="nx">o</span>
+
+          <span class="py">@afterInitialize</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="nx">envObject</span><span class="p">,</span> <span class="nx">callback</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='environment-setup-utilities'>Environment Setup Utilities</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatdiscoveruserpaths'>Neat::discoverUserPaths</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Browses the user directory to find neat projects either at the
+root directory or in the node modules installed in the project.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">discoverUserPaths</span><span class="o">:</span> <span class="o">-&gt;</span>
+    <span class="nv">modulesDir </span><span class="o">=</span> <span class="nx">resolve</span> <span class="py">@root</span><span class="p">,</span> <span class="s">&#39;node_modules&#39;</span>
+    <span class="k">if</span> <span class="nx">exists</span> <span class="nx">modulesDir</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>All the node modules that contains a <code>.neat</code> file at their
+root will be appended to <code>PATHS</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>      <span class="nv">modules </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">modulesDir</span>
+      <span class="nv">modules </span><span class="o">=</span> <span class="p">(</span><span class="nx">resolve</span> <span class="nx">modulesDir</span><span class="p">,</span> <span class="nx">m</span> <span class="k">for</span> <span class="nx">m</span> <span class="k">in</span> <span class="nx">modules</span> <span class="k">when</span> <span class="nx">m</span> <span class="o">isnt</span> <span class="s">&#39;neat&#39;</span><span class="p">)</span>
+      <span class="py">@paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">m</span> <span class="k">for</span> <span class="nx">m</span> <span class="k">in</span> <span class="nx">modules</span> <span class="k">when</span> <span class="nx">isNeatRootSync</span> <span class="nx">m</span>
+
+    <span class="k">else</span> <span class="nx">warn</span> <span class="s">&#39;No node modules found, run neat install.&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The current Neat project root is the last path in <code>PATHS</code>.</p></td>
+          <td class='code'><div class="highlight"><pre>    <span class="py">@paths</span><span class="p">.</span><span class="nx">push</span> <span class="py">@root</span> <span class="k">if</span> <span class="py">@root</span> <span class="o">not</span> <span class="k">in</span> <span class="py">@paths</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='neatloadmeta'>Neat::loadMeta</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Loads and returns the meta contained in the <code>.neat</code> file.</p></td>
+          <td class='code'><div class="highlight"><pre>  <span class="py">loadMeta</span><span class="o">:</span> <span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="o">-&gt;</span>
+    <span class="nv">neatFilePath </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">root</span><span class="si">}</span><span class="s">/.neat&quot;</span>
+
+    <span class="nv">_ </span><span class="o">=</span> <span class="py">@i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span>
+
+    <span class="k">try</span>
+      <span class="nv">neatFile </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span> <span class="nx">neatFilePath</span>
+    <span class="k">catch</span> <span class="nx">e</span>
+      <span class="k">return</span> <span class="nx">error</span> <span class="s">&quot;&quot;&quot;</span><span class="si">#{</span><span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.missing&#39;</span><span class="p">,</span> <span class="py">missing</span><span class="o">:</span> <span class="nx">neatFilePath</span><span class="p">.</span><span class="nx">red</span><span class="p">)</span><span class="si">}</span><span class="s"></span>
+
+<span class="s">                      </span><span class="si">#{</span><span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.broken&#39;</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;&quot;&quot;</span>
+
+    <span class="nv">meta </span><span class="o">=</span> <span class="nx">cup</span><span class="p">.</span><span class="nx">read</span> <span class="nx">neatFile</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+
+    <span class="nx">meta</span> <span class="o">or</span> <span class="nx">error</span> <span class="s">&quot;&quot;&quot;</span><span class="si">#{</span><span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.invalid_neat&#39;</span><span class="p">,</span> <span class="py">path</span><span class="o">:</span> <span class="nx">neatFilePath</span><span class="p">.</span><span class="nx">red</span><span class="p">)</span><span class="si">}</span><span class="s"></span>
+
+<span class="s">                     </span><span class="si">#{</span><span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.broken&#39;</span><span class="p">)</span><span class="si">}</span><span class="s">&quot;&quot;&quot;</span>
+
+<span class="nv">module.exports </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Neat</span> <span class="nx">neatRootSync</span><span class="p">()</span>
+
+</pre></div></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

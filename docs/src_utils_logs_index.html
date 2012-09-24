@@ -1,0 +1,344 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/utils/logs/index.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/utils/logs/index.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/utils/logs/</h3>
+            <h1>index.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>This file contains the logging utilities used accross Neat.
+Use this methods rather than <code>console.log</code> if you want your
+messages to be filtered by the environment.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#logging-utilities'>Logging Utilities</a>
+  </li>
+  <li class='level1'>
+    <a href='#colorization'>Colorization</a>
+  </li>
+  <li class='level2'>
+    <a href='#color'>color</a>
+  </li>
+  <li class='level2'>
+    <a href='#blue'>blue</a>
+  </li>
+  <li class='level2'>
+    <a href='#cyan'>cyan</a>
+  </li>
+  <li class='level2'>
+    <a href='#green'>green</a>
+  </li>
+  <li class='level2'>
+    <a href='#inverse'>inverse</a>
+  </li>
+  <li class='level2'>
+    <a href='#magenta'>magenta</a>
+  </li>
+  <li class='level2'>
+    <a href='#red'>red</a>
+  </li>
+  <li class='level2'>
+    <a href='#yellow'>yellow</a>
+  </li>
+  <li class='level1'>
+    <a href='#logging'>Logging</a>
+  </li>
+  <li class='level2'>
+    <a href='#puts'>puts</a>
+  </li>
+  <li class='level2'>
+    <a href='#print'>print</a>
+  </li>
+  <li class='level2'>
+    <a href='#prefix'>prefix</a>
+  </li>
+  <li class='level2'>
+    <a href='#fatal'>fatal</a>
+  </li>
+  <li class='level2'>
+    <a href='#error'>error</a>
+  </li>
+  <li class='level2'>
+    <a href='#warn'>warn</a>
+  </li>
+  <li class='level2'>
+    <a href='#info'>info</a>
+  </li>
+  <li class='level2'>
+    <a href='#debug'>debug</a>
+  </li>
+  <li class='level1'>
+    <a href='#other-utilities'>Other Utilities</a>
+  </li>
+  <li class='level2'>
+    <a href='#missing'>missing</a>
+  </li>
+  <li class='level2'>
+    <a href='#notoutsideneat'>notOutsideNeat</a>
+  </li>
+</ul></p></td>
+          <td class='code'><div class="highlight"><pre><span class="nb">Logger</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./logger&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>In case the <code>colors</code> module can't be found - probably in the case
+you downloaded the neat repository and didn't run <code>cake install</code> yet -
+a message is displayed.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="k">try</span>
+  <span class="nv">colors </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;colors&#39;</span>
+<span class="k">catch</span> <span class="nx">e</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;&quot;&quot;Can&#39;t find colors module</span>
+
+<span class="s">                 Run cake install to install the dependencies.&quot;&quot;&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A logger instance is created at startup.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">logger </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Logger</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h1 id='logging-utilities'>Logging Utilities</h1></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='colorization'>Colorization</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='color'>color</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The color function is used to prevent the colorization of a string
+to fail when the <code>colors</code> module can't be found.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">color </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="o">-&gt;</span>  <span class="k">if</span> <span class="nx">str</span><span class="p">[</span><span class="nx">color</span><span class="p">]</span><span class="o">?</span> <span class="k">then</span> <span class="nx">str</span><span class="p">[</span><span class="nx">color</span><span class="p">]</span> <span class="k">else</span> <span class="nx">str</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='blue'>blue</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in blue, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">blue    </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='cyan'>cyan</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in cyan, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">cyan    </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;cyan&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='green'>green</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in green, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">green   </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;green&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='inverse'>inverse</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in inverse, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">inverse </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;inverse&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='magenta'>magenta</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in magenta, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">magenta </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;magenta&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='red'>red</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in red, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">red     </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;red&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='yellow'>yellow</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the passed-in string colorized in yellow, if the <code>colors</code> module
+can't be found the string is returned unchanged.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">yellow  </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;yellow&#39;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='logging'>Logging</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='puts'>puts</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message that automatically end with a new line character.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">puts </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nv">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">str</span><span class="si">}</span><span class="s">\n&quot;</span><span class="p">,</span> <span class="nx">level</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='print'>print</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message without automatic new line character at the end.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">print </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nv">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">log</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">level</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='prefix'>prefix</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Prefix the passed-in string with the passed-in prefix.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">prefix </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">prefix</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">string</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='fatal'>fatal</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
+corresponding to the <code>Logger.FATAL</code> level.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">fatal </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">red</span> <span class="s">&quot; FATAL &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">FATAL</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='error'>error</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
+corresponding to the <code>Logger.ERROR</code> level.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">error </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">red</span> <span class="s">&quot; ERROR &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">ERROR</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='warn'>warn</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
+corresponding to the <code>Logger.WARN</code> level.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">warn  </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">yellow</span> <span class="s">&quot; WARN &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">WARN</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='info'>info</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
+corresponding to the <code>Logger.INFO</code> level.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">info  </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">green</span> <span class="s">&quot; INFO &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">INFO</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='debug'>debug</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
+corresponding to the <code>Logger.DEBUG</code> level.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">debug </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">blue</span> <span class="s">&quot; DEBUG &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">DEBUG</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='other-utilities'>Other Utilities</h3></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='missing'>missing</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Generates a message for a missing resources.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">missing </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">_ </span><span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">&#39;../../neat&#39;</span><span class="p">).</span><span class="nx">i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span>
+  <span class="nx">red</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.missing&#39;</span><span class="p">,</span> <span class="py">missing</span><span class="o">:</span> <span class="nx">path</span><span class="p">)</span></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='notoutsideneat'>notOutsideNeat</h4></td>
+          <td class='code'><div class="highlight"><pre></pre></div></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Generates a messages for a neat command that can't run outside
+of a Neat project.</p></td>
+          <td class='code'><div class="highlight"><pre><span class="nv">notOutsideNeat </span><span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">-&gt;</span>
+  <span class="nv">_ </span><span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">&#39;../../neat&#39;</span><span class="p">).</span><span class="nx">i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span>
+  <span class="nx">red</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.outside_neat&#39;</span><span class="p">,</span> <span class="py">expression</span><span class="o">:</span> <span class="nx">s</span><span class="p">)</span>
+
+<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span>
+  <span class="nx">blue</span><span class="p">,</span>
+  <span class="nx">cyan</span><span class="p">,</span>
+  <span class="nx">debug</span><span class="p">,</span>
+  <span class="nx">error</span><span class="p">,</span>
+  <span class="nx">green</span><span class="p">,</span>
+  <span class="nx">info</span><span class="p">,</span>
+  <span class="nx">inverse</span><span class="p">,</span>
+  <span class="nx">logger</span><span class="p">,</span>
+  <span class="nx">magenta</span><span class="p">,</span>
+  <span class="nx">missing</span><span class="p">,</span>
+  <span class="nx">notOutsideNeat</span><span class="p">,</span>
+  <span class="nx">prefix</span><span class="p">,</span>
+  <span class="nx">print</span><span class="p">,</span>
+  <span class="nx">puts</span><span class="p">,</span>
+  <span class="nx">red</span><span class="p">,</span>
+  <span class="nx">warn</span><span class="p">,</span>
+  <span class="nx">yellow</span><span class="p">,</span>
+<span class="p">}</span>
+
+</pre></div></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
