@@ -25,5 +25,3 @@ exports.watch = neatTask
       return if compiling
       compiling = true
       Neat.task('compile') -> compiling = false
-
-    callback?()

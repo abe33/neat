@@ -49,20 +49,22 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
 
     cb? null, data.toString().replace(re, replaceFunc)
 
+  err = -> callback? 1
+
   # Here starts the bumping
-  fs.readFile ".neat", replaceVersion asyncErrorTrap (res) ->
-    fs.writeFile ".neat", res, asyncErrorTrap ->
+  fs.readFile ".neat", replaceVersion asyncErrorTrap err, (res) ->
+    fs.writeFile ".neat", res, asyncErrorTrap err, ->
 
       unless path.existsSync 'package.json'
         info green _('neat.tasks.bump.version_bumped', version: newVersion)
-        return callback?()
+        return callback? 0
 
-      fs.readFile "package.json", asyncErrorTrap (data) ->
+      fs.readFile "package.json", asyncErrorTrap err, (data) ->
         output = data.toString().replace re, "\"version\": \"#{newVersion}\""
 
-        fs.writeFile "package.json", output, asyncErrorTrap ->
+        fs.writeFile "package.json", output, asyncErrorTrap err, ->
           info green _('neat.tasks.bump.version_bumped', version: newVersion)
-          callback?()
+          callback? 0
 
 module.exports = namespace 'bump'
   index:  neatTask

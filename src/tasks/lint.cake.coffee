@@ -20,11 +20,13 @@ exports['lint'] = neatTask
       return callback?()
 
     path = __filename
+    paths = Neat.paths
     dir = 'config'
-    findSiblingFile path, Neat.paths, dir, 'json', asyncErrorTrap (conf) ->
+    err = -> callback? 1
+    findSiblingFile path, paths, dir, 'json', asyncErrorTrap, err, (conf) ->
       unless conf?
         error missing "config/tasks/lint.json"
-        return callback?()
+        return callback? 1
 
       errors = []
       allfiles = 0
@@ -64,6 +66,7 @@ exports['lint'] = neatTask
 
           if errors.length is 0
             info green _('neat.tasks.lint.files_linted', files: allfiles)
+            callback? 1
           else
             error() for error in errors
 
@@ -74,4 +77,5 @@ exports['lint'] = neatTask
                   #{red "#{allerrors} error#{'s' if allerrors > 0}"}
                  ".squeeze()
 
-          callback?()
+            callback? 0
+

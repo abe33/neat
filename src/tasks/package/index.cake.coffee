@@ -17,11 +17,13 @@ exports['package'] = neatTask
   environment: 'default'
   action: (callback) ->
     {dir, conf, tmp} = Neat.config.tasks.package
-    rm dir, asyncErrorTrap ->
-      ensure dir, asyncErrorTrap ->
-        find 'cup', conf, asyncErrorTrap (files) ->
+
+    err = -> callback? 1
+    rm dir, asyncErrorTrap err, ->
+      ensure dir, asyncErrorTrap err, ->
+        find 'cup', conf, asyncErrorTrap err, (files) ->
           readFiles files, (err, res) ->
             commands = (Packager.asCommand read(c) for p,c of res)
             parallel commands, ->
               info green _('neat.tasks.package.packages_done')
-              callback?()
+              callback? 0

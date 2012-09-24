@@ -27,4 +27,4 @@ exports['list'] = neatTask
 
       puts "#{k.left c1}#{env}", 5
 
-    callback?()
+    callback? 0

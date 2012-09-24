@@ -161,7 +161,8 @@ neatTask = (options) ->
     {action, environment} = options
     Neat.defaultEnvironment = environment if environment?
     Neat.initEnvironment ->
-      Neat.beforeTask.dispatch -> action -> Neat.afterTask.dispatch()
+      Neat.beforeTask.dispatch -> action (status) ->
+        Neat.afterTask.dispatch status
 
   task name, description, taskAction
   action

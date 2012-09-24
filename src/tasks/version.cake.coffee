@@ -10,4 +10,4 @@ exports['version'] = neatTask
   action: (callback) ->
     info _('neat.tasks.message:', name: Neat.project.name,
                                   version: green Neat.project.version)
-    callback?()
+    callback? 0
