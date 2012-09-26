@@ -4,7 +4,7 @@ Neat = require '../neat'
 
 COFFEE = "#{Neat.neatRoot}/node_modules/.bin/coffee"
 {puts, error, info, green, red; notOutsideNeat} = Neat.require "utils/logs"
-{run, aliases, describe} = Neat.require "utils/commands"
+{run, aliases, describe, environment} = Neat.require "utils/commands"
 {'package.json':generate} = Neat.require 'generators'
 {render} = Neat.require "utils/templates"
 _ = Neat.i18n.getHelper()
@@ -14,6 +14,7 @@ install = (pr) ->
     throw new Error _('neat.commands.no_program', command:'install')
 
   aliases 'i', 'install',
+  environment 'all',
   describe _('neat.commands.install.description'),
   f = (args..., callback)->
     unless Neat.root?
@@ -27,6 +28,7 @@ install = (pr) ->
         throw err if err?
 
         source = source.replace "###_NPM_DECLARATION_###", nemfile.toString()
+        source = source.replace "###_ENV_###", "env = '#{Neat.env}'"
 
         # The produced source code is then executed by `coffee`.
         run COFFEE, ['-e', source], (status) ->

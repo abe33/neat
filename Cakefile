@@ -13,6 +13,7 @@ catch e
     console.log 'Missing compiled files, run cake compile'
 
   NPM_TOKEN = '###_NPM_DECLARATION_###'
+  ENV_TOKEN = '###_ENV_###'
   NPM_TEMPLATE = 'templates/commands/install.plain'
   NEMFILE = 'Nemfile'
   COFFEE = 'coffee'
@@ -38,6 +39,8 @@ catch e
         return print err if err?
 
         source = nem.toString().replace NPM_TOKEN, nemfile.toString()
+        source = source.replace ENV_TOKEN,
+                                "env = '#{process.env['NEAT_ENV'] || 'all'}'"
 
         # The produced source code is then executed by `coffee`.
         run COFFEE, [ '-e', source ], (status) ->

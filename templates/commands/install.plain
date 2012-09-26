@@ -1,6 +1,8 @@
 {print} = require 'util'
 {spawn} = require 'child_process'
 
+###_ENV_###
+
 packages = []
 
 # Validates that `target` is a path or an url.
@@ -15,7 +17,8 @@ npm = (pkg, target) ->
   packages.push pkg
 
 # The group function allow to group required module by context.
-group = (name, body) -> body()
+group = (environments..., body) ->
+  body() if env is 'all' or env in environments
 
 # Packages declared for install in the Nemfile are inserted below
 # by the cake install file.
