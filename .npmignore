@@ -1,12 +1,13 @@
 src
 !templates/generators/project/src
 node_modules
-spec
-fixtures
+test
 docs
+experiments
 Cakefile
 Nemfile
 .gitignore
 .git
 *.sublime-project
 *.sublime-workspace
+
