@@ -99,7 +99,7 @@ global.withProject = (name, desc=null, block, opts) ->
           else
             ended = true
 
-      waitsFor progress(-> ended), 'Timed out', 1000
+      waitsFor progress(-> ended), 'Timed out on project creation', 5000
 
     afterEach ->
       process.chdir TEST_ROOT
