@@ -8,6 +8,7 @@ module.exports = (config) ->
       'join': op.join
       'compile': op.compile
       'uglify': op.uglify
+      'create:directory': op.createDirectory
       'strip:requires': op.stripRequires
       'exports:package': op.exportsToPackage
       'saveToFile': op.saveToFile

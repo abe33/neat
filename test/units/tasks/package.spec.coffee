@@ -1,7 +1,7 @@
 require '../../test_helper'
 require './package_helper'
 Neat = require '../../../lib/neat'
-Package = require '../../../lib/tasks/package/packager'
+Packager = require '../../../lib/tasks/package/packager'
 
 {readFileSync} = require 'fs'
 
@@ -11,18 +11,19 @@ describe 'Packager', ->
     "test/fixtures/tasks/package/exports"
     "test/fixtures/tasks/package/class"
   ]
-  expected = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
+  exp = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
   packagerWithFiles.call this, files, ->
     beforeEach -> addFileMatchers this
     it 'should apply the operators on the file', ->
-      path = "#{Neat.root}/packages/fixtures.coffee"
+      path = "#{Neat.root}/packages/directory/fixtures.coffee"
       repl = (m,n) -> "#{files[parseInt n]}.coffee"
-      expected = String(readFileSync expected)
+      exp = String(readFileSync exp)
         .squeeze('\n')
         .strip()
         .replace /\#\{file\[(\d+)\]\}/g, repl
 
-      expect(@result[path].squeeze('\n').strip()).toEqual(expected)
+      expect(@result[path].squeeze('\n').strip()).toEqual(exp)
+      expect(path).toExist()
 
 
   describe 'when instanciated', ->
@@ -31,23 +32,12 @@ describe 'Packager', ->
       conf =
         includes: []
         operators: []
-        package: 'foo'
 
       expect(-> new Packager conf).toThrow()
-
-    it 'without package should throw an error', ->
-      conf =
-        name: 'foo'
-        includes: []
-        operators: []
-
-      expect(-> new Packager conf).toThrow()
-
 
     it 'without includes should throw an error', ->
       conf =
         name: 'foo'
-        package: 'foo'
         operators: []
 
       expect(-> new Packager conf).toThrow()
@@ -56,23 +46,12 @@ describe 'Packager', ->
       conf =
         name: 'foo'
         includes: []
-        package: 'foo'
 
       expect(-> new Packager conf).toThrow()
 
     it 'with invalid name should throw an error', ->
       conf =
         name: "fo[of]"
-        package: 'foo'
-        includes: []
-        operators: []
-
-      expect(-> new Packager conf).toThrow()
-
-    it 'with invalid package should throw an error', ->
-      conf =
-        name: "foo"
-        package: 'foo-bar.baz'
         includes: []
         operators: []
 
@@ -81,7 +60,6 @@ describe 'Packager', ->
     it 'with invalid includes should throw an error', ->
       conf =
         name: "foo"
-        package: 'foo'
         includes: 10
         operators: []
 
@@ -90,8 +68,34 @@ describe 'Packager', ->
     it 'with invalid operators should throw an error', ->
       conf =
         name: "foo"
-        package: 'foo'
         includes: []
         operators: 10
 
       expect(-> new Packager conf).toThrow()
+
+describe 'exports:package operator', ->
+  it 'without package should throw an error', ->
+    conf =
+      name: 'foo'
+      includes: []
+      operators: ['exports:package']
+
+    expect(-> new Packager conf).toThrow()
+
+  it 'with invalid package should throw an error', ->
+    conf =
+      name: "foo"
+      package: 'foo-bar.baz'
+      includes: []
+      operators: ['exports:package']
+
+    expect(-> new Packager conf).toThrow()
+
+describe 'create:directory operator', ->
+  it 'without directory should throw an error', ->
+    conf =
+      name: 'foo'
+      includes: []
+      operators: ['create:directory']
+
+    expect(-> new Packager conf).toThrow()

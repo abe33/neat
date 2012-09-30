@@ -1,9 +1,11 @@
 Neat = require '../../neat'
 
 {parallel} = Neat.require 'async'
+{ensure} = Neat.require 'utils/files'
 {writeFile} = require 'fs'
 {compile:coffee} = require 'coffee-script'
 {parser, uglify:pro} = require 'uglify-js'
+_ = Neat.i18n.getHelper()
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
 STRING_RE = '["\'][^"\']+["\']'
@@ -15,10 +17,10 @@ EXPORTS_RE = ->
 SPLIT_MEMBER_RE = -> /\s*=\s*/g
 MEMBER_RE = -> ///\[\s*#{STRING_RE}\s*\]|\.#{LITERAL_RE}///
 
+PACKAGE_RE = -> ///^(#{LITERAL_RE})(\.#{LITERAL_RE})*$///
 HASH_VALUE_RE = '(\\s*:\\s*([^,}]+))*'
 HASH_RE = -> ///\{(#{HASH_KEY_RE}#{HASH_VALUE_RE},*\s*)+\}///
 REQUIRE_RE = -> ///require\s*(\(\s*)*#{STRING_RE}///gm
-
 CLASS_RE = -> ///^[^#]*class\s*(#{LITERAL_RE})///
 CLASS_MEMBER_RE = ->
   ///
@@ -37,6 +39,32 @@ STATIC_MEMBER_RE = ->
     \s*:\s*             # :
     (\([^)]+\)\s*)*->   # Function
   ///
+
+initValidate = (fn) ->
+  fn.validators ||= []
+  fn.validate ||= (conf) -> validate conf for validate in fn.validators
+
+validate = (key, regex, expect, fn) =>
+  initValidate fn
+  fn.validators.push (conf) ->
+    unless regex.test conf[key]
+      throw new Error _ 'neat.tasks.package.invalid_string', {key, expect}
+  fn
+
+malformedConf = (key, type, test, fn) =>
+  initValidate fn
+  fn.validators.push (conf) ->
+    unless test conf
+      throw new Error _('neat.tasks.package.invalid_configuration',
+                        {key, type})
+  fn
+
+preventMissingConf = (key, fn) =>
+  initValidate fn
+  fn.validators.push (conf) ->
+    throw new Error _('neat.tasks.package.missing_configuration',
+                      {key}) unless conf[key]?
+  fn
 
 analyze = (path, content) ->
   out = content.concat()
@@ -87,6 +115,18 @@ compile = (buffer, conf, callback) ->
 
   callback?(newBuffer, conf)
 
+preventMissingConf 'directory',
+createDirectory = (buffer, conf, callback) ->
+  newBuffer = {}
+  path = "#{conf.dir}/#{conf.directory}"
+  ensure path, (err) ->
+    for p,c of buffer
+      newBuffer[p.replace conf.dir, path] = c
+
+    callback?(newBuffer, conf)
+
+preventMissingConf 'package',
+validate 'package', PACKAGE_RE(), _('neat.tasks.package.expected_package'),
 exportsToPackage = (buffer, conf, callback) ->
   header = (conf) ->
     header = ''
@@ -166,6 +206,7 @@ stripRequires = (buffer, conf, callback) ->
 module.exports = {
   annotateClass
   annotateFile
+  createDirectory
   compile
   exportsToPackage
   join

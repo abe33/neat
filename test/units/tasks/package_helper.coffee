@@ -13,9 +13,10 @@ Neat.config =
         'annotate:file': op.annotateFile
         'join': op.join
         'compile': op.compile
+        'create:directory': op.createDirectory
         'strip:requires': op.stripRequires
         'exports:package': op.exportsToPackage
-        'saveToFile': op.saveToFile
+        'create:file': op.saveToFile
 
 global.packagerWithFiles = (files, bare=false, block) ->
   [bare, block] = [null, bare] if typeof bare is 'function'
@@ -25,6 +26,7 @@ global.packagerWithFiles = (files, bare=false, block) ->
       @packager = new Packager
         name: 'fixtures'
         package: 'neat.fixtures'
+        directory: 'directory'
         includes: files
         bare: bare
         operators: [
@@ -33,7 +35,8 @@ global.packagerWithFiles = (files, bare=false, block) ->
           'annotate:file'
           'join'
           'exports:package'
-          'saveToFile'
+          'create:directory'
+          'create:file'
         ]
 
       ended = false
