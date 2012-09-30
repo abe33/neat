@@ -48,7 +48,7 @@ Creating a new Neat task:
 
 Creating the `package.json` file for the project:
 
-    neat generate package
+    neat generate package.json
 
 #### Project Cake Tasks
 

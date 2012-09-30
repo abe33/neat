@@ -1,7 +1,12 @@
-name: "neat"
-version: "0.0.66"
-description: ""
-author: "Cédric Néhémie <cedric.nehemie@gmail.com>"
-keywords: ["neat", "coffee"]
+name: 'neat'
+version: '0.0.66'
+description: 'Neat is project structure for nodejs combined with a customizable command line tool'
+author: 'Cédric Néhémie <cedric.nehemie@gmail.com>'
+license: 'MIT'
+keywords: ['neat', 'coffee']
+bugs: 'http://github.com/abe33/neat/issues/'
+repository:
+  type: 'git'
+  url: 'https://github.com/abe33/neat.git'
 engine:
-  node: "~0.6.0"
+  node: '~0.6.0'

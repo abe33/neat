@@ -1,12 +1,19 @@
 {
   "name": "neat",
   "version": "0.0.66",
-  "description": "",
+  "description": "Neat is project structure for nodejs combined with a customizable command line tool",
   "author": "Cédric Néhémie <cedric.nehemie@gmail.com>",
+  "license": "MIT",
   "keywords": [
     "neat",
     "coffee"
   ],
+  "homepage": "https://github.com/abe33/neat",
+  "bugs": "https://github.com/abe33/neat/issues/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abe33/neat.git"
+  },
   "engine": {
     "node": "~0.6.0"
   },
