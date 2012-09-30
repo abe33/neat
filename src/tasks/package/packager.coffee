@@ -15,8 +15,8 @@ class Packager
       throw new Error _ 'neat.tasks.package.invalid_configuration', {key, type}
 
     preventMissingConf = (key) =>
-      throw new Error _('neat.tasks.package.missing_configuration',
-                        {key}) unless @conf[key]?
+      unless @conf[key]?
+        throw new Error _ 'neat.tasks.package.missing_configuration', {key}
 
     preventMissingConf 'includes'
     preventMissingConf 'operators'
