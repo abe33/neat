@@ -27,39 +27,21 @@ describe 'Packager', ->
 
 
   describe 'when instanciated', ->
-
-    it 'without name should throw an error', ->
-      conf =
-        includes: []
-        operators: []
-
-      expect(-> new Packager conf).toThrow()
-
     it 'without includes should throw an error', ->
       conf =
-        name: 'foo'
         operators: []
 
       expect(-> new Packager conf).toThrow()
 
     it 'without operators should throw an error', ->
       conf =
-        name: 'foo'
         includes: []
 
       expect(-> new Packager conf).toThrow()
 
-    it 'with invalid name should throw an error', ->
-      conf =
-        name: "fo[of]"
-        includes: []
-        operators: []
-
-      expect(-> new Packager conf).toThrow()
 
     it 'with invalid includes should throw an error', ->
       conf =
-        name: "foo"
         includes: 10
         operators: []
 
@@ -67,7 +49,6 @@ describe 'Packager', ->
 
     it 'with invalid operators should throw an error', ->
       conf =
-        name: "foo"
         includes: []
         operators: 10
 
@@ -76,7 +57,6 @@ describe 'Packager', ->
 describe 'exports:package operator', ->
   it 'without package should throw an error', ->
     conf =
-      name: 'foo'
       includes: []
       operators: ['exports:package']
 
@@ -84,7 +64,6 @@ describe 'exports:package operator', ->
 
   it 'with invalid package should throw an error', ->
     conf =
-      name: "foo"
       package: 'foo-bar.baz'
       includes: []
       operators: ['exports:package']
@@ -94,8 +73,23 @@ describe 'exports:package operator', ->
 describe 'create:directory operator', ->
   it 'without directory should throw an error', ->
     conf =
-      name: 'foo'
       includes: []
       operators: ['create:directory']
+
+    expect(-> new Packager conf).toThrow()
+
+describe 'join operator', ->
+  it 'without name should throw an error', ->
+    conf =
+      includes: []
+      operators: ['join']
+
+    expect(-> new Packager conf).toThrow()
+
+  it 'with invalid name should throw an error', ->
+    conf =
+      name: "fo[of]"
+      includes: []
+      operators: ['join']
 
     expect(-> new Packager conf).toThrow()

@@ -16,6 +16,7 @@ EXPORTS_RE = ->
   ///(?:\s|^)(module\.exports|exports)(\s*=\s*\n#{OBJECT_RE}|[=\[.\s].+\n)///gm
 SPLIT_MEMBER_RE = -> /\s*=\s*/g
 MEMBER_RE = -> ///\[\s*#{STRING_RE}\s*\]|\.#{LITERAL_RE}///
+NAME_RE = -> /^[a-zA-Z_$][a-zA-Z0-9_$-.]*$/
 
 PACKAGE_RE = -> ///^(#{LITERAL_RE})(\.#{LITERAL_RE})*$///
 HASH_VALUE_RE = '(\\s*:\\s*([^,}]+))*'
@@ -125,8 +126,8 @@ createDirectory = (buffer, conf, callback) ->
 
     callback?(newBuffer, conf)
 
-preventMissingConf 'package',
 validate 'package', PACKAGE_RE(), _('neat.tasks.package.expected_package'),
+preventMissingConf 'package',
 exportsToPackage = (buffer, conf, callback) ->
   header = (conf) ->
     header = ''
@@ -169,7 +170,8 @@ exportsToPackage = (buffer, conf, callback) ->
 
   callback?(buffer, conf)
 
-
+validate 'name', NAME_RE(), _('neat.tasks.package.expected_name'),
+preventMissingConf 'name',
 join = (buffer, conf, callback) ->
   newBuffer = {}
   newPath = "#{conf.dir}/#{conf.name}.coffee"
