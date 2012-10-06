@@ -5,10 +5,10 @@ module.exports = (config) ->
     operatorsMap:
       'annotate:class': op.annotateClass
       'annotate:file': op.annotateFile
-      'join': op.join
       'compile': op.compile
-      'uglify': op.uglify
       'create:directory': op.createDirectory
-      'strip:requires': op.stripRequires
+      'create:file': op.saveToFile
       'exports:package': op.exportsToPackage
-      'saveToFile': op.saveToFile
+      'join': op.join
+      'strip:requires': op.stripRequires
+      'uglify': op.uglify
