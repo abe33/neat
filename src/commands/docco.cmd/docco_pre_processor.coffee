@@ -12,7 +12,7 @@ catch e
                   missing: missing 'docco')
 
 try
-  {highlightAuto} = require 'highlight.js'
+  {highlight} = require 'highlight.js'
 catch e
   return error _('neat.commands.docco.missing_module',
                   missing: missing 'docco')
@@ -45,7 +45,7 @@ class DoccoPreProcessor
       docs_text: ''
       code_text: code.strip().replace(/&gt;/g, '>').replace(/&lt;/g, '<')
 
-    res = highlightAuto(pre.code_text)
+    res = highlight('coffeescript', pre.code_text)
     pre.code_html = res.value
 
     pre.code_html = "#{START_TAG}#{pre.code_html}#{END_TAG}"

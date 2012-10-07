@@ -222,7 +222,7 @@ value that indicates if the directory was created or not.</p></td>
         <tr>
           <td class='docs'><p>Ensures that the <code>dir</code> folder exists, and creates it otherwise.</p>
 
-<pre><code>ensureSync '/path/to/dir'</code></pre>
+<pre><code>ensureSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span></code></pre>
 
 <p>Note that the function will fail with an error in this
 context if <code>/path/to</code> don't exist.</p></td>
@@ -271,7 +271,7 @@ value that indicates if the directory was created or not.</p></td>
         <tr>
           <td class='docs'><p>Ensures that the path exists and creates the missing folders if needed.</p>
 
-<pre><code>ensurePathSync '/path/to/dir'</code></pre>
+<pre><code>ensurePathSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span></code></pre>
 
 <p>In that context, if the <code>path</code> and <code>to</code> folders don't exist
 they will be created and then the <code>dir</code> one.</p></td>
@@ -1168,9 +1168,9 @@ touch <span class="string"><span class="string_begin">'</span>/path/to/file.ext<
           <td class='docs'><p>Creates a file at path unless the file already exists.
 A boolean value is returned and indicate if the file was created.</p>
 
-<pre><code>touchSync '/path/to/file.ext'
+<pre><code>touchSync <span class="string"><span class="string_begin">'</span>/path/to/file.ext<span class="string_end">'</span></span>
 
-touchSync '/path/to/file.ext', 'file content'</code></pre>
+touchSync <span class="string"><span class="string_begin">'</span>/path/to/file.ext<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>file content<span class="string_end">'</span></span></code></pre>
 
 <p>Note that the function will fail with an error in this
 context if <code>/path/to</code> don't exist.</p></td>
