@@ -6,7 +6,13 @@ Neat = require '../../neat'
 _ = Neat.i18n.getHelper()
 
 try
-  {parse, highlight} = require 'docco'
+  {parse} = require 'docco'
+catch e
+  return error _('neat.commands.docco.missing_module',
+                  missing: missing 'docco')
+
+try
+  {highlightAuto} = require 'highlight.js'
 catch e
   return error _('neat.commands.docco.missing_module',
                   missing: missing 'docco')
@@ -39,14 +45,18 @@ class DoccoPreProcessor
       docs_text: ''
       code_text: code.strip().replace(/&gt;/g, '>').replace(/&lt;/g, '<')
 
-    highlight @path, [pre], =>
-      match = START_TAG + code + END_TAG
-      pre.code_html = pre.code_html.replace '\n</pre>', '</pre>'
-      @section.docs_html = @section.docs_html.replace match, pre.code_html
+    res = highlightAuto(pre.code_text)
+    pre.code_html = res.value
 
-      @cursor = startTagPos + pre.code_html.length
-      if @hasTags() then @processTag callback
-      else
-        callback?()
+    pre.code_html = "#{START_TAG}#{pre.code_html}#{END_TAG}"
+    match = "#{START_TAG}#{code}#{END_TAG}"
+    match = "#{START_TAG}#{code}#{END_TAG}"
+
+    @section.docs_html = @section.docs_html.replace match, pre.code_html
+
+    @cursor = startTagPos + pre.code_html.length
+    if @hasTags() then @processTag callback
+    else
+      callback?()
 
 module.exports = DoccoPreProcessor

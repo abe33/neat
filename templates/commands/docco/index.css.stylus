@@ -233,176 +233,74 @@ table
       width: 100%
       vertical-align: top
       border-left: 1px solid #e5e5ee
+      white-space: pre
 
     &.code, &.docs pre
       border-left: 2px solid #888
       background-color: #042029
       color: #93a1a1
 
-      .bp
-        color: #999999
-      .c1
-        color: #586e75 !important
-        font-style: italic !important
-      .cm
-        color: #586e75 !important
-        font-style: italic !important
-      .cp
-        color: #586e75 !important
-        font-style: italic !important
-      .cs
-        color: #586e75 !important
-        font-weight: bold !important
-        font-style: italic !important
-      .c
-        color: #586e75 !important
-        font-style: italic !important
-      .err
-        color: #dc322f !important
-        background: none !important
-      .gd .x
-        color: #93a1a1 !important
-        background-color: #4d2d33 !important
-        display: inline-block
-      .gd
-        color: #93a1a1 !important
-        background-color: #372c34 !important
-        display: inline-block
-      .ge
-        color: #93a1a1 !important
-        font-style: italic !important
-      .gh
-        color: #586e75 !important
-      .gi .x
-        color: #93a1a1 !important
-        background-color: #355720 !important
-        display: inline-block
-      .gi
-        color: #93a1a1 !important
-        background-color: #1a412b !important
-        display: inline-block
-      .go
-        color: #888888
-      .gp
-        color: #555555
-      .gr
-        color: #aa0000
-      .gs
-        color: #93a1a1 !important
-        font-weight: bold !important
-      .gt
-        color: #aa0000
-      .gu
-        color: #6c71c4 !important
-      .il
-        color: #009999
-      .kc
-        color: #b58900 !important
-      .kd
-        color: #268bd2 !important
-      .kp
-        color: #cb4b16 !important
-        font-weight: bold !important
-      .kr
-        color: #d33682 !important
-        font-weight: bold !important
-      .kt
-        color: #2aa198 !important
-      .k
-        color: #859900 !important
-      .mf
-        color: #2aa198 !important
-      .mh
-        color: #2aa198 !important
-      .mi
-        color: #2aa198 !important
-      .mo
-        color: #009999
-      .m
-        color: #2aa198 !important
-      .na
-        color: #268bd2 !important
-      .nb
-        color: #b58900 !important
-      .nc
-        color: #d33682 !important
-      .ne
-        color: #268bd2 !important
-        font-weight: bold !important
-      .nf
-        color: #268bd2 !important
-        font-weight: bold !important
-      .ni
-        color: #800080
-      .nl
-        color: #859900 !important
-      .nn
-        color: #b58900 !important
-      .no
-        color: #b58900 !important
-      .nt
-        color: #268bd2 !important
-        font-weight: bold !important
-      .nv
-        color: #93A1A1 !important
-      .nx
-        color: #93A1A1 !important
-      .n
-        color: #268bd2 !important
-      .ow
-        color: #2aa198 !important
-        font-weight: bold !important
-      .o
-        color: #859900 !important
-      .p
-        color: #859900 !important
-      .py
-        color: #268bd2 !important
-      .s1
-        color: #2aa198 !important
-      .s2
-        color: #2aa198 !important
-      .sb
-        color: #d14
-      .sc
-        color: #d14
-      .sd
-        color: #2aa198 !important
-      .se
-        color: #dc322f !important
-      .sh
-        color: #d14
-      .si
-        color: #cb4b16 !important
-        font-weight: normal !important
-      .sr
-        color: #ff0000 !important
-      .src
-        color: #cb4b16 !important
-      .sre
-        color: #aa2a08 !important
-      .sro
-        color: #b58900 !important
-      .sri
-        color: #2aa198 !important
-      .ss
-        color: #990073
-      .sx
-        color: #d14
-      .s
-        color: #2aa198 !important
-      .vc
-        color: #008080
-      .vg
-        color: #268bd2 !important
-      .vi
-        color: #268bd2 !important
-      .w
-        color: #bbbbbb
+      .native
+        color: #cb4b16
 
-      div .gd, div .gd .x, div .gi, div .gi .x
-        display: inline-block
-        width: 100%
+      .keyword
+      .operators
+      .punctuation
+      .hash_end
+      .function
+      .params_begin
+      .params_end
+      .class
+        color: #859900
+
+      .params, .subst
+        color: #93a1a1
+
+      .string, .heredocs
+        color: #2aa198
+
+      .string_begin
+      .string_end
+      .heredocs_begin
+      .heredocs_end
+      .embedded_begin
+      .embedded_end
+        color: #C60000
+
+      .number
+        color: #009999
+
+      .literal
+      .constant
+      .char_group_begin
+      .char_group_end
+      .range_begin
+      .range_end
+      .regexp_operators
+        color: #b58900
+
+      .title
+      .property
+      .class_end
+      .hash
+        color: #268bd2
+
+      .regexp
+      .hereregexp
+        color: #ff0000
+
+      .comment
+      .embedded
+        color: #586e75
+
+      .escaped
+      .subst_begin
+      .subst_end
+      .char_group
+        color: #cb4b16
+
+      .char_group>.escaped
+        color: #aa2a08
 
   th.docs
     h1

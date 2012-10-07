@@ -8,8 +8,7 @@
     "neat",
     "coffee"
   ],
-  "homepage": "https://github.com/abe33/neat",
-  "bugs": "https://github.com/abe33/neat/issues/",
+  "bugs": "http://github.com/abe33/neat/issues/",
   "repository": {
     "type": "git",
     "url": "https://github.com/abe33/neat.git"
@@ -26,6 +25,7 @@
     "js-yaml": ">= 1.0.0",
     "docco": "git://github.com/abe33/docco.git#feature-exports",
     "uglify-js": "*",
+    "highlight.js": "git://github.com/abe33/highlight.js.git",
     "coffeelint": "*",
     "jasmine-node": "git://github.com/abe33/jasmine-node.git#patch-1",
     "stylus": "*"

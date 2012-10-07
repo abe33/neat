@@ -11,7 +11,14 @@ DoccoTitleProcessor = require './docco_title_processor'
 _ = Neat.i18n.getHelper()
 
 try
-  {parse, highlight} = require 'docco'
+  {parse} = require 'docco'
+  {Showdown:showdown} = require "#{Neat.neatRoot}/node_modules/docco/vendor/showdown"
+catch e
+  return error _('neat.commands.docco.missing_module',
+                  missing: missing 'docco')
+
+try
+  {highlight} = require 'highlight.js'
 catch e
   return error _('neat.commands.docco.missing_module',
                   missing: missing 'docco')
@@ -26,20 +33,25 @@ class DoccoFileProcessor
   constructor: (@file, @header, @nav) ->
 
   highlightFile: (path, sections, callback) ->
-    highlight path, sections, =>
+    # highlight path, sections, =>
+    for o in sections
+      {code_text, docs_text} = o
+      res = highlight('coffeescript', code_text)
+      o.code_html = "<pre>#{res.value}</pre>"
+      o.docs_html = showdown.makeHtml docs_text
 
-      titles = []
-      presCmd = []
-      titlesCmd = []
-      for section in sections
-        presCmd.push DoccoPreProcessor.asCommand path, section
-        titlesCmd.push DoccoTitleProcessor.asCommand path, section, titles
+    titles = []
+    presCmd = []
+    titlesCmd = []
+    for section in sections
+      presCmd.push DoccoPreProcessor.asCommand path, section
+      titlesCmd.push DoccoTitleProcessor.asCommand path, section, titles
 
-      parallel presCmd, =>
-        parallel titlesCmd, =>
-          render TPL_TOC, {titles}, (err, toc) =>
-            throw err if err?
-            callback toc
+    parallel presCmd, =>
+      parallel titlesCmd, =>
+        render TPL_TOC, {titles}, (err, toc) =>
+          throw err if err?
+          callback toc
 
   process: (callback) ->
     fs.readFile @file.path, (err, code) =>
