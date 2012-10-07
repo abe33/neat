@@ -25,7 +25,7 @@
     "js-yaml": ">= 1.0.0",
     "docco": "git://github.com/abe33/docco.git#feature-exports",
     "uglify-js": "*",
-    "highlight.js": "git://github.com/abe33/highlight.js.git",
+    "highlight.js": "git://github.com/abe33/highlight.js.git#node_build",
     "coffeelint": "*",
     "jasmine-node": "git://github.com/abe33/jasmine-node.git#patch-1",
     "stylus": "*"
