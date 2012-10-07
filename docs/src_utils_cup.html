@@ -66,71 +66,82 @@ Cup is to coffee what JSON is to javascript.
     <a href='#getvalue'>getValue</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">resolve</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;path&#39;</span>
-<span class="p">{</span><span class="nx">spawn</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;child_process&#39;</span>
-<span class="p">{</span><span class="nx">compile</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;coffee-script&#39;</span>
-<span class="p">{</span><span class="nx">puts</span><span class="p">,</span> <span class="nx">error</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./logs&#39;</span></pre></div></td>
+          <td class='code'><pre>
+<span class="punctuation">{</span>resolve<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="punctuation">{</span>spawn<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
+<span class="punctuation">{</span>compile<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>coffee-script<span class="string_end">'</span></span>
+<span class="punctuation">{</span>puts, error<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='read'>read</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Evaluates a string of <code>cup</code> and returns the result of the evaluation.</p>
 
-<div class="highlight"><pre><span class="nx">read</span> <span class="s">&#39;foo: 10, bar: false&#39;</span> <span class="c1"># {foo: 10, bar: false}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">read </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">try</span> <span class="nb">eval</span> <span class="nx">compile</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">str</span><span class="si">}</span><span class="s">&quot;</span><span class="p">,</span> <span class="py">bare</span><span class="o">:</span><span class="kc">true</span> <span class="k">catch</span> <span class="nx">e</span> <span class="k">then</span> <span class="kc">null</span></pre></div></td>
+<pre><code>read <span class="string"><span class="string_begin">'</span>foo: 10, bar: false<span class="string_end">'</span></span> <span class="comment"># {foo: 10, bar: false}</span></code></pre></td>
+          <td class='code'><pre>read <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span>
+  <span class="keyword">try</span> eval compile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="string_end">"</span></span>, <span class="hash">bare<span class="hash_end">:</span></span><span class="literal">true</span> <span class="keyword">catch</span> e then <span class="literal">null</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='write'>write</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string that correspond to the <code>cup</code> translation of the given
 object.</p>
 
-<div class="highlight"><pre><span class="nx">write</span> <span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="kc">false</span><span class="p">}</span>
-<span class="c1"># foo: 10</span>
-<span class="c1"># bar: false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">write </span><span class="o">=</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">s </span><span class="o">=</span> <span class="s">&#39;&#39;</span>
-  <span class="nx">s</span> <span class="o">+=</span> <span class="nx">getMember</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">o</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nx">o</span>
-  <span class="nx">s</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="sre">\n\s</span><span class="sro">*</span><span class="sre">\n</span><span class="sro">|</span><span class="sre">\s</span><span class="sro">*</span><span class="sre">\n</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;\n&#39;</span><span class="p">).</span><span class="nx">strip</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="sre">\t</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&quot;*&quot;</span><span class="p">)</span></pre></div></td>
+<pre><code>write <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">}</span>
+<span class="comment"># foo: 10</span>
+<span class="comment"># bar: false</span></code></pre></td>
+          <td class='code'><pre>write <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
+  s <span class="operators">=</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+  s <span class="operators">+</span><span class="operators">=</span> getMember k, v, o <span class="keyword">for</span> k,v <span class="keyword">of</span> o
+  s.replace<span class="punctuation">(</span><span class="regexp">/<span class="escaped">\n</span><span class="escaped">\s</span><span class="regexp_operators">*</span><span class="escaped">\n</span>|<span class="escaped">\s</span><span class="regexp_operators">*</span><span class="escaped">\n</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="punctuation">)</span>.strip<span class="punctuation">(</span><span class="punctuation">)</span>.replace<span class="punctuation">(</span><span class="regexp">/<span class="escaped">\t</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='getmember'>getMember</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the string for a single member of an object.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">getMember </span><span class="o">=</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">o</span><span class="p">,</span> <span class="nv">i</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">k</span><span class="si">}</span><span class="s">: </span><span class="si">#{</span><span class="nx">getValue</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">i</span><span class="si">}</span><span class="s">\n&quot;</span></pre></div></td>
+          <td class='code'><pre>getMember <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>k, v, o, i<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>k<span class="subst_end">}</span></span>: <span class="subst"><span class="subst_begin">#{</span>getValue v, i<span class="subst_end">}</span></span><span class="escaped">\n</span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='getvalue'>getValue</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string corresponding to the cup translation of the passed-in
 value.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">getValue </span><span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="nv">i</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">switch</span> <span class="k">typeof</span> <span class="nx">v</span>
-    <span class="k">when</span> <span class="s">&#39;number&#39;</span> <span class="k">then</span> <span class="nx">v</span>
-    <span class="k">when</span> <span class="s">&#39;string&#39;</span> <span class="k">then</span> <span class="s">&quot;&#39;</span><span class="si">#{</span><span class="nx">v</span><span class="si">}</span><span class="s">&#39;&quot;</span>
-    <span class="k">when</span> <span class="s">&#39;boolean&#39;</span> <span class="k">then</span> <span class="nx">v</span>
-    <span class="k">when</span> <span class="s">&#39;object&#39;</span>
-      <span class="k">if</span> <span class="nb">RegExp</span><span class="o">::</span><span class="nx">isPrototypeOf</span> <span class="nx">v</span> <span class="k">then</span> <span class="nx">v</span>
-      <span class="k">else</span> <span class="k">if</span> <span class="nb">Array</span><span class="o">::</span><span class="nx">isPrototypeOf</span> <span class="nx">v</span>
-        <span class="s">&quot;[</span><span class="si">#{</span><span class="p">(</span><span class="s">&quot;\n</span><span class="si">#{</span><span class="nx">i</span><span class="si">}</span><span class="s">  </span><span class="si">#{</span><span class="nx">getValue</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">n</span> <span class="k">in</span> <span class="nx">v</span><span class="p">).</span><span class="nx">join</span> <span class="s">&#39;&#39;</span><span class="si">}</span><span class="s">\n]&quot;</span>
-      <span class="k">else</span>
-        <span class="p">(</span><span class="s">&quot;\n</span><span class="si">#{</span><span class="nx">i</span><span class="si">}</span><span class="s">  </span><span class="si">#{</span><span class="nx">getMember</span> <span class="nx">m</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">v</span><span class="p">,</span><span class="nx">i</span><span class="o">+</span><span class="s">&#39;  &#39;</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">m</span><span class="p">,</span><span class="nx">o</span> <span class="k">of</span> <span class="nx">v</span><span class="p">).</span><span class="nx">join</span> <span class="s">&#39;&#39;</span>
-    <span class="k">when</span> <span class="s">&#39;function&#39;</span> <span class="k">then</span> <span class="s">&quot;`</span><span class="si">#{</span><span class="nx">v</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span><span class="si">}</span><span class="s">`&quot;</span>
+          <td class='code'><pre>getValue <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>v, i<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+  <span class="keyword">switch</span> <span class="keyword">typeof</span> v
+    <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span> then v
+    <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span> then <span class="string"><span class="string_begin">"</span>'<span class="subst"><span class="subst_begin">#{</span>v<span class="subst_end">}</span></span>'<span class="string_end">"</span></span>
+    <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span> then v
+    <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>object<span class="string_end">'</span></span>
+      <span class="keyword">if</span> <span class="hash">RegExp<span class="hash_end">:</span></span><span class="punctuation">:</span>isPrototypeOf v then v
+      <span class="keyword">else</span> <span class="keyword">if</span> <span class="hash">Array<span class="hash_end">:</span></span><span class="punctuation">:</span>isPrototypeOf v
+        <span class="string"><span class="string_begin">"</span>[<span class="subst"><span class="subst_begin">#{</span><span class="punctuation">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span>#{i}  #{getValue n, i}<span class="string_end">"</span></span> <span class="keyword">for</span> n <span class="keyword">in</span> v<span class="punctuation">)</span>.join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="escaped">\n</span>]<span class="string_end">"</span></span>
+      <span class="keyword">else</span>
+        <span class="punctuation">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span>  <span class="subst"><span class="subst_begin">#{</span>getMember m,o,v,i<span class="operators">+</span><span class="string"><span class="string_begin">'</span>  <span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> m,o <span class="keyword">of</span> v<span class="punctuation">)</span>.join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+    <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> then <span class="string"><span class="string_begin">"</span>`<span class="subst"><span class="subst_begin">#{</span>v.toString<span class="punctuation">(</span><span class="punctuation">)</span><span class="subst_end">}</span></span>`<span class="string_end">"</span></span>
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span><span class="nx">read</span><span class="p">,</span> <span class="nx">write</span><span class="p">}</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>read, write<span class="punctuation">}</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

@@ -129,613 +129,662 @@ String methods.
     <a href='#stringdacriticsmap'>String.DACRITICS_MAP</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">def</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./utils&#39;</span></pre></div></td>
+          <td class='code'><pre><span class="punctuation">{</span>def<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='string'>String</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='instances-extensions'>Instances Extensions</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringappend'>String::append</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a new string where <code>str</code> have been appended to the original string.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">append</span><span class="o">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="py">this</span><span class="si">}#{</span><span class="nx">str</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">append<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="keyword">this</span><span class="subst_end">}</span></span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringcamelize'>String::camelize</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a <code>camelCase</code> version of the current string.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo bar&#39;</span><span class="p">.</span><span class="nx">camelize</span><span class="p">()</span> <span class="c1"># &#39;fooBar&#39;</span>
-<span class="s">&#39;foo-bar&#39;</span><span class="p">.</span><span class="nx">camelize</span><span class="p">()</span> <span class="c1"># &#39;fooBar&#39;</span>
-<span class="s">&#39;FOO_BAR&#39;</span><span class="p">.</span><span class="nx">camelize</span><span class="p">()</span> <span class="c1"># &#39;fooBar&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">camelize</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="nv">a </span><span class="o">=</span> <span class="py">@toLowerCase</span><span class="p">().</span><span class="nx">split</span> <span class="sr">/</span><span class="src">[_</span><span class="sre">\s</span><span class="src">-]</span><span class="sr">/</span>
-  <span class="nv">s </span><span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-  <span class="nv">s </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">s</span><span class="si">}#{</span><span class="nx">w</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">w</span> <span class="k">in</span> <span class="nx">a</span>
-  <span class="nx">s</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo bar<span class="string_end">'</span></span>.camelize<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'fooBar'</span>
+<span class="string"><span class="string_begin">'</span>foo-bar<span class="string_end">'</span></span>.camelize<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'fooBar'</span>
+<span class="string"><span class="string_begin">'</span>FOO_BAR<span class="string_end">'</span></span>.camelize<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'fooBar'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">camelize<span class="hash_end">:</span></span><span class="function"> -></span>
+  a <span class="operators">=</span> <span class="property">@toLowerCase</span><span class="punctuation">(</span><span class="punctuation">)</span>.split <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>_<span class="escaped">\s</span>-<span class="char_group_end">]</span></span><span class="regexp_end">/</span></span>
+  s <span class="operators">=</span> a.shift<span class="punctuation">(</span><span class="punctuation">)</span>
+  s <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>s<span class="subst_end">}</span></span><span class="subst"><span class="subst_begin">#{</span>w.capitalize<span class="punctuation">(</span><span class="punctuation">)</span><span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> w <span class="keyword">in</span> a
+  s
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringcapitalize'>String::capitalize</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string where the case of the first char of the first word was
 changed to upper case.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo bar&#39;</span><span class="p">.</span><span class="nx">capitalize</span><span class="p">()</span> <span class="c1"># &#39;Foo bar&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">capitalize</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="py">@toLowerCase</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^</span><span class="src">[a-z]</span><span class="sr">/</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo bar<span class="string_end">'</span></span>.capitalize<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'Foo bar'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">capitalize<span class="hash_end">:</span></span><span class="function"> -></span>
+  <span class="property">@toLowerCase</span><span class="punctuation">(</span><span class="punctuation">)</span>.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_group"><span class="char_group_begin">[</span>a-z<span class="char_group_end">]</span></span><span class="regexp_end">/,</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>m<span class="params_end">)</span></span> -></span> m.toUpperCase<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringcapitalizeall'>String::capitalizeAll</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string where the case of the first char of each word was
 changed to upper case.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo bar&#39;</span><span class="p">.</span><span class="nx">capitalizeAll</span><span class="p">()</span> <span class="c1"># &#39;Foo Bar&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">capitalizeAll</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="py">@toLowerCase</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">(^|</span><span class="sre">\s</span><span class="sro">)(</span><span class="src">[a-z]</span><span class="sro">)</span><span class="sr">/g</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">a</span><span class="si">}#{</span><span class="nx">b</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo bar<span class="string_end">'</span></span>.capitalizeAll<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'Foo Bar'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">capitalizeAll<span class="hash_end">:</span></span><span class="function"> -></span>
+  <span class="property">@toLowerCase</span><span class="punctuation">(</span><span class="punctuation">)</span>.replace <span class="regexp">/<span class="regexp_operators">(</span><span class="regexp_operators">^</span>|<span class="escaped">\s</span><span class="regexp_operators">)</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>a-z<span class="char_group_end">]</span></span><span class="regexp_operators">)</span><span class="regexp_end">/g</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>m,a,b<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>a<span class="subst_end">}</span></span><span class="subst"><span class="subst_begin">#{</span>b.toUpperCase<span class="punctuation">(</span><span class="punctuation">)</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringcenter'>String::center</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If <code>width</code> is greater than the length of this string, returns a string
 of length <code>width</code> with this string's value centered and padded with <code>pad</code>;
 otherwise, returns this string.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">center</span> <span class="mi">10</span> <span class="c1"># &#39;   foo    &#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">center</span><span class="o">:</span> <span class="p">(</span><span class="nv">width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">pad</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">width</span> <span class="o">&gt;</span> <span class="py">@length</span>
-    <span class="nv">padLeftLength </span><span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="nx">width</span> <span class="o">-</span> <span class="py">@length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="nv">padRightLength </span><span class="o">=</span> <span class="nx">width</span> <span class="o">-</span> <span class="py">@length</span> <span class="o">-</span> <span class="nx">padLeftLength</span>
-    <span class="py">@padLeft</span><span class="p">(</span><span class="nx">padLeftLength</span><span class="p">,</span> <span class="nx">pad</span><span class="p">).</span><span class="nx">padRight</span><span class="p">(</span><span class="nx">padRightLength</span><span class="p">,</span> <span class="nx">pad</span><span class="p">)</span>
-  <span class="k">else</span> <span class="py">@valueOf</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.center <span class="number">10</span> <span class="comment"># '   foo    '</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">center<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>width<span class="operators">=</span>0, pad<span class="operators">=</span><span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> width > <span class="property">@length</span>
+    padLeftLength <span class="operators">=</span> <span class="constant">Math</span>.floor<span class="punctuation">(</span><span class="punctuation">(</span>width <span class="operators">-</span> <span class="property">@length</span><span class="punctuation">)</span> <span class="operators">/</span> <span class="number">2</span><span class="punctuation">)</span>
+    padRightLength <span class="operators">=</span> width <span class="operators">-</span> <span class="property">@length</span> <span class="operators">-</span> padLeftLength
+    <span class="property">@padLeft</span><span class="punctuation">(</span>padLeftLength, pad<span class="punctuation">)</span>.padRight<span class="punctuation">(</span>padRightLength, pad<span class="punctuation">)</span>
+  <span class="keyword">else</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringcompact'>String::compact</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Removes all space characters in the string.</p>
 
-<div class="highlight"><pre><span class="s">&#39;aa bb     cc   dd&#39;</span><span class="p">.</span><span class="nx">compact</span><span class="p">()</span> <span class="c1"># &#39;aabbccdd&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">compact</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@replace</span> <span class="sr">/</span><span class="sre">\s</span><span class="sro">+</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;&#39;</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>aa bb     cc   dd<span class="string_end">'</span></span>.compact<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'aabbccdd'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">compact<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@replace</span> <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">+</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringempty'>String::empty</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the string is empty.</p>
 
-<div class="highlight"><pre><span class="s">&#39;&#39;</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>    <span class="c1"># true</span>
-<span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span> <span class="c1"># false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">empty</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@length</span> <span class="o">is</span> <span class="mi">0</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>.empty<span class="punctuation">(</span><span class="punctuation">)</span>    <span class="comment"># true</span>
+<span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">empty<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@length</span> <span class="keyword">is</span> <span class="number">0</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringleft'>String::left</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Align the current string to the left in the new string of length <code>l</code>.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">left</span> <span class="mi">10</span> <span class="c1"># &#39;foo       &#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">left</span><span class="o">:</span> <span class="p">(</span><span class="nx">l</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@padRight</span> <span class="nx">l</span> <span class="o">-</span> <span class="py">@length</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.left <span class="number">10</span> <span class="comment"># 'foo       '</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">left<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>l<span class="params_end">)</span></span> -></span> <span class="property">@padRight</span> l <span class="operators">-</span> <span class="property">@length</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringpadleft'>String::padLeft</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string padded on the left with <code>pad</code> of an amount equal to <code>left</code>.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">padLeft</span> <span class="mi">4</span>        <span class="c1"># &#39;    foo&#39;</span>
-<span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">padLeft</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&#39;123&#39;</span> <span class="c1"># &#39;1231foo&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">padLeft</span><span class="o">:</span> <span class="p">(</span><span class="nv">length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">pad</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@prepend</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">pad</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.padLeft <span class="number">4</span>        <span class="comment"># '    foo'</span>
+<span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.padLeft <span class="number">4</span>, <span class="string"><span class="string_begin">'</span>123<span class="string_end">'</span></span> <span class="comment"># '1231foo'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">padLeft<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>length<span class="operators">=</span>0, pad<span class="operators">=</span><span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="params_end">)</span></span> -></span> <span class="property">@prepend</span> <span class="constant">String</span>.fill length, pad
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringpadright'>String::padRight</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string padded on the right with <code>pad</code> of an amount equal to <code>left</code>.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">padRight</span> <span class="mi">4</span>        <span class="c1"># &#39;foo    &#39;</span>
-<span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">padRight</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&#39;123&#39;</span> <span class="c1"># &#39;foo1231&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">padRight</span><span class="o">:</span> <span class="p">(</span><span class="nv">length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nv">pad</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@append</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">pad</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.padRight <span class="number">4</span>        <span class="comment"># 'foo    '</span>
+<span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.padRight <span class="number">4</span>, <span class="string"><span class="string_begin">'</span>123<span class="string_end">'</span></span> <span class="comment"># 'foo1231'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">padRight<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>length<span class="operators">=</span>0, pad<span class="operators">=</span><span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="params_end">)</span></span> -></span> <span class="property">@append</span> <span class="constant">String</span>.fill length, pad
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringprepend'>String::prepend</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a new string where <code>str</code> have been prepended to the original string.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">prepend</span><span class="o">:</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">str</span><span class="si">}#{</span><span class="py">this</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">prepend<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="subst"><span class="subst_begin">#{</span><span class="keyword">this</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringparameterize'>String::parameterize</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a version of the current string that render nicely used in an url.</p>
 
-<div class="highlight"><pre><span class="s">&quot;Il était une fois...&quot;</span><span class="p">.</span><span class="nx">parameterize</span><span class="p">()</span>
-<span class="c1"># &#39;il-etait-une-fois&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">parameterize</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="py">@nopunctuation</span><span class="p">().</span><span class="nx">nodiacritics</span><span class="p">().</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">squeeze</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/</span><span class="sre">\s</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;-&#39;</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">"</span>Il était une fois...<span class="string_end">"</span></span>.parameterize<span class="punctuation">(</span><span class="punctuation">)</span>
+<span class="comment"># 'il-etait-une-fois'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">parameterize<span class="hash_end">:</span></span><span class="function"> -></span>
+  <span class="property">@nopunctuation</span><span class="punctuation">(</span><span class="punctuation">)</span>.nodiacritics<span class="punctuation">(</span><span class="punctuation">)</span>.toLowerCase<span class="punctuation">(</span><span class="punctuation">)</span>.squeeze<span class="punctuation">(</span><span class="punctuation">)</span>.replace <span class="regexp">/<span class="escaped">\s</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span>-<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringright'>String::right</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Align the current string to the right in the new string of length <code>l</code>.</p>
 
-<div class="highlight"><pre><span class="s">&#39;foo&#39;</span><span class="p">.</span><span class="nx">right</span> <span class="mi">10</span> <span class="c1"># &#39;       foo&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">right</span><span class="o">:</span> <span class="p">(</span><span class="nx">l</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@padLeft</span> <span class="nx">l</span> <span class="o">-</span> <span class="py">@length</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>.right <span class="number">10</span> <span class="comment"># '       foo'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">right<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>l<span class="params_end">)</span></span> -></span> <span class="property">@padLeft</span> l <span class="operators">-</span> <span class="property">@length</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringsqueeze'>String::squeeze</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a new string where all duplicates of the passed-in match are removed.
 The <code>squeeze</code> method support char range such as <code>A-z</code> or <code>a-f</code>.
 By default the <code>squeeze</code> method operates on spaces chars.</p>
 
-<div class="highlight"><pre><span class="s">&#39;hello   world&#39;</span><span class="p">.</span><span class="nx">squeeze</span><span class="p">()</span>      <span class="c1"># &#39;hello world&#39;</span>
-<span class="s">&#39;hello worllld&#39;</span><span class="p">.</span><span class="nx">squeeze</span><span class="p">(</span><span class="s">&#39;l&#39;</span><span class="p">)</span>   <span class="c1"># &#39;helo world&#39;</span>
-<span class="s">&#39;hello wwoorld&#39;</span><span class="p">.</span><span class="nx">squeeze</span><span class="p">(</span><span class="s">&#39;m-z&#39;</span><span class="p">)</span> <span class="c1"># &#39;hello world&#39;</span>
-<span class="s">&#39;foofoobarbar&#39;</span><span class="p">.</span><span class="nx">squeeze</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>  <span class="c1"># &#39;foobarbar&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">squeeze</span><span class="o">:</span> <span class="p">(</span><span class="nv">match</span><span class="o">=</span><span class="s">&#39;\\s&#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">rangeRe </span><span class="o">=</span> <span class="sr">/</span><span class="sro">^(</span><span class="src">[A-Za-z_]</span><span class="sro">)</span><span class="sr">-</span><span class="sro">(</span><span class="src">[A-Za-z]</span><span class="sro">)$</span><span class="sr">/</span>
-  <span class="nv">re </span><span class="o">=</span> <span class="kc">null</span>
+<pre><code><span class="string"><span class="string_begin">'</span>hello   world<span class="string_end">'</span></span>.squeeze<span class="punctuation">(</span><span class="punctuation">)</span>      <span class="comment"># 'hello world'</span>
+<span class="string"><span class="string_begin">'</span>hello worllld<span class="string_end">'</span></span>.squeeze<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>l<span class="string_end">'</span></span><span class="punctuation">)</span>   <span class="comment"># 'helo world'</span>
+<span class="string"><span class="string_begin">'</span>hello wwoorld<span class="string_end">'</span></span>.squeeze<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>m-z<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="comment"># 'hello world'</span>
+<span class="string"><span class="string_begin">'</span>foofoobarbar<span class="string_end">'</span></span>.squeeze<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">)</span>  <span class="comment"># 'foobarbar'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">squeeze<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>match<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="escaped">\\</span>s<span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+  rangeRe <span class="operators">=</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>A-Za-z_<span class="char_group_end">]</span></span><span class="regexp_operators">)</span>-<span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>A-Za-z<span class="char_group_end">]</span></span><span class="regexp_operators">)</span><span class="regexp_operators">$</span><span class="regexp_end">/</span></span>
+  re <span class="operators">=</span> <span class="literal">null</span>
 
-  <span class="k">if</span> <span class="nx">rangeRe</span><span class="p">.</span><span class="nx">test</span> <span class="nx">match</span>
-    <span class="p">[</span><span class="nx">m</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">e</span><span class="p">]</span> <span class="o">=</span> <span class="nx">rangeRe</span><span class="p">.</span><span class="nx">exec</span> <span class="nx">match</span>
-    <span class="nv">a </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="nx">s</span><span class="p">.</span><span class="nx">to</span> <span class="nx">e</span><span class="p">,</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">push</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">c</span><span class="si">}</span><span class="s">+&quot;</span>
+  <span class="keyword">if</span> rangeRe.test match
+    <span class="punctuation">[</span>m,s,e<span class="punctuation">]</span> <span class="operators">=</span> rangeRe.exec match
+    a <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    s.to e, <span class="function"><span class="params"><span class="params_begin">(</span>c<span class="params_end">)</span></span> -></span> a.push <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>c<span class="subst_end">}</span></span>+<span class="string_end">"</span></span>
 
-    <span class="nv">re </span><span class="o">=</span> <span class="sr">///</span><span class="si">#{</span><span class="nx">a</span><span class="p">.</span><span class="nx">join</span> <span class="s">&#39;|&#39;</span><span class="si">}</span><span class="sr">///g</span>
+    re <span class="operators">=</span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="subst"><span class="subst_begin">#{</span>a.join <span class="string"><span class="string_begin">'</span>|<span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="hereregexp_end">///g</span></span>
 
-  <span class="k">else</span> <span class="k">if</span> <span class="nx">match</span> <span class="o">is</span> <span class="s">&#39;\\s&#39;</span>
-    <span class="nv">re </span><span class="o">=</span> <span class="sr">/</span><span class="sre">\n</span><span class="sro">+|</span><span class="sr"> </span><span class="sro">+|</span><span class="sre">\t</span><span class="sro">+</span><span class="sr">/g</span>
+  <span class="keyword">else</span> <span class="keyword">if</span> match <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span><span class="escaped">\\</span>s<span class="string_end">'</span></span>
+    re <span class="operators">=</span> <span class="regexp">/<span class="escaped">\n</span><span class="regexp_operators">+</span>| <span class="regexp_operators">+</span>|<span class="escaped">\t</span><span class="regexp_operators">+</span><span class="regexp_end">/g</span></span>
 
-  <span class="k">else</span>
-    <span class="nv">re </span><span class="o">=</span> <span class="sr">///</span><span class="sro">(</span><span class="si">#{</span><span class="nx">match</span><span class="si">}</span><span class="sro">)+</span><span class="sr">///g</span>
-    <span class="k">return</span> <span class="py">@replace</span> <span class="nx">re</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">,</span> <span class="nx">w</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">w</span>
+  <span class="keyword">else</span>
+    re <span class="operators">=</span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="regexp_operators">(</span><span class="subst"><span class="subst_begin">#{</span>match<span class="subst_end">}</span></span><span class="regexp_operators">)</span><span class="regexp_operators">+</span><span class="hereregexp_end">///g</span></span>
+    <span class="keyword">return</span> <span class="property">@replace</span> re, <span class="function"><span class="params"><span class="params_begin">(</span>m, w<span class="params_end">)</span></span> -></span> w
 
-  <span class="py">@replace</span> <span class="nx">re</span><span class="p">,</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">substr</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span></pre></div></td>
+  <span class="property">@replace</span> re, <span class="function"><span class="params"><span class="params_begin">(</span>m<span class="params_end">)</span></span> -></span> m.substr <span class="number">0</span>, <span class="number">1</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringstrip'>String::strip</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Removes the spaces at both extremities of the string.</p>
 
-<div class="highlight"><pre><span class="s">&#39;   foo&#39;</span><span class="p">.</span><span class="nx">strip</span><span class="p">()</span> <span class="c1"># &#39;foo&#39;</span>
-<span class="s">&#39;foo   &#39;</span><span class="p">.</span><span class="nx">strip</span><span class="p">()</span> <span class="c1"># &#39;foo&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">strip</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@replace</span> <span class="sr">/</span><span class="sro">^</span><span class="sre">\s</span><span class="sro">+|</span><span class="sre">\s</span><span class="sro">+$</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;&#39;</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>   foo<span class="string_end">'</span></span>.strip<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'foo'</span>
+<span class="string"><span class="string_begin">'</span>foo   <span class="string_end">'</span></span>.strip<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'foo'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">strip<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@replace</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="escaped">\s</span><span class="regexp_operators">+</span>|<span class="escaped">\s</span><span class="regexp_operators">+</span><span class="regexp_operators">$</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringto'>String::to</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Iterates from the first char of this string to the first char of the <code>end</code>
 string using the Unicode of the characters.</p>
 
-<div class="highlight"><pre><span class="nv">str </span><span class="o">=</span> <span class="s">&#39;&#39;</span>
-<span class="s">&#39;A&#39;</span><span class="p">.</span><span class="nx">to</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">str</span> <span class="o">+=</span> <span class="nx">c</span>
-<span class="c1"># str = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">to</span><span class="o">:</span> <span class="p">(</span><span class="nx">end</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">start </span><span class="o">=</span> <span class="py">@charCodeAt</span> <span class="mi">0</span>
-  <span class="nv">end </span><span class="o">=</span> <span class="nx">end</span><span class="p">.</span><span class="nx">charCodeAt</span> <span class="mi">0</span>
-  <span class="nx">callback</span> <span class="nb">String</span><span class="p">.</span><span class="nx">fromCharCode</span> <span class="nx">i</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="nx">start</span><span class="p">..</span><span class="nx">end</span><span class="p">]</span></pre></div></td>
+<pre><code>str <span class="operators">=</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+<span class="string"><span class="string_begin">'</span>A<span class="string_end">'</span></span>.to <span class="string"><span class="string_begin">'</span>z<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>c<span class="params_end">)</span></span> -></span> str <span class="operators">+</span><span class="operators">=</span> c
+<span class="comment"># str = ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">to<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>end, callback<span class="params_end">)</span></span> -></span>
+  start <span class="operators">=</span> <span class="property">@charCodeAt</span> <span class="number">0</span>
+  end <span class="operators">=</span> end.charCodeAt <span class="number">0</span>
+  callback <span class="constant">String</span>.fromCharCode i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span>start..end<span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringunderscore'>String::underscore</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a <code>snake_case</code> version of the current string.</p>
 
-<div class="highlight"><pre><span class="s">&#39;fooBar&#39;</span><span class="p">.</span><span class="nx">underscore</span><span class="p">()</span>  <span class="c1"># &#39;foo_bar&#39;</span>
-<span class="s">&#39;Foo Bar&#39;</span><span class="p">.</span><span class="nx">underscore</span><span class="p">()</span> <span class="c1"># &#39;foo_bar&#39;</span>
-<span class="s">&#39;FOO-BAR&#39;</span><span class="p">.</span><span class="nx">underscore</span><span class="p">()</span> <span class="c1"># &#39;foo_bar&#39;</span>
-<span class="s">&#39;foo/BAR&#39;</span><span class="p">.</span><span class="nx">underscore</span><span class="p">()</span> <span class="c1"># &#39;foo_bar&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">underscore</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="py">@replace</span><span class="p">(</span><span class="sr">/</span><span class="sro">(</span><span class="src">[a-z]</span><span class="sro">)(</span><span class="src">[A-Z]</span><span class="sro">)</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&quot;$1_$2&quot;</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="sr">/</span><span class="src">[-/]</span><span class="sro">|</span><span class="sre">\s</span><span class="sr">/g</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s">&quot;_&quot;</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>fooBar<span class="string_end">'</span></span>.underscore<span class="punctuation">(</span><span class="punctuation">)</span>  <span class="comment"># 'foo_bar'</span>
+<span class="string"><span class="string_begin">'</span>Foo Bar<span class="string_end">'</span></span>.underscore<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'foo_bar'</span>
+<span class="string"><span class="string_begin">'</span>FOO-BAR<span class="string_end">'</span></span>.underscore<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'foo_bar'</span>
+<span class="string"><span class="string_begin">'</span>foo/BAR<span class="string_end">'</span></span>.underscore<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'foo_bar'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">underscore<span class="hash_end">:</span></span><span class="function"> -></span>
+  <span class="property">@replace</span><span class="punctuation">(</span><span class="regexp">/<span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>a-z<span class="char_group_end">]</span></span><span class="regexp_operators">)</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>A-Z<span class="char_group_end">]</span></span><span class="regexp_operators">)</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">"</span>$1_$2<span class="string_end">"</span></span><span class="punctuation">)</span>
+    .split<span class="punctuation">(</span><span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>-/<span class="char_group_end">]</span></span>|<span class="escaped">\s</span><span class="regexp_end">/g</span></span><span class="punctuation">)</span>
+    .join<span class="punctuation">(</span><span class="string"><span class="string_begin">"</span>_<span class="string_end">"</span></span><span class="punctuation">)</span>
+    .toLowerCase<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringnodiacritics'>String::nodiacritics</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Removes all the accented characters and ligatures from the string.</p>
 
-<div class="highlight"><pre><span class="s">&#39;ÉéÀàÈè&#39;</span><span class="p">.</span><span class="nx">nodiacritics</span><span class="p">()</span> <span class="c1"># &#39;EeAaEe&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">nodiacritics</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="nv">str </span><span class="o">=</span> <span class="py">this</span>
-  <span class="nv">str </span><span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">k</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nb">String</span><span class="p">.</span><span class="nb">DACRITICS_MAP</span>
-  <span class="nx">str</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>ÉéÀàÈè<span class="string_end">'</span></span>.nodiacritics<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 'EeAaEe'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">nodiacritics<span class="hash_end">:</span></span><span class="function"> -></span>
+  str <span class="operators">=</span> <span class="keyword">this</span>
+  str <span class="operators">=</span> str.replace v, k <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="constant">String</span>.<span class="constant">DACRITICS_MAP</span>
+  str
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringnopunctuation'>String::nopunctuation</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the current string without the punctuation.</p>
 
-<div class="highlight"><pre><span class="s">&#39;Something, is (wrong): in- this! !phrase?&#39;</span><span class="p">.</span><span class="nx">nopunctuation</span><span class="p">()</span>
-<span class="c1"># &#39;Something is wrong in this phrase&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">String</span><span class="p">,</span> <span class="py">nopunctuation</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="py">@replace</span> <span class="sr">/</span><span class="src">[,?;.:/!§*%=</span><span class="sr">\[\]</span><span class="sro">(){}</span><span class="sr">&#39;&quot;`\\_&lt;&gt;-</span><span class="err">]</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;&#39;</span></pre></div></td>
+<pre><code><span class="string"><span class="string_begin">'</span>Something, is (wrong): in- this! !phrase?<span class="string_end">'</span></span>.nopunctuation<span class="punctuation">(</span><span class="punctuation">)</span>
+<span class="comment"># 'Something is wrong in this phrase'</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">String</span>, <span class="hash">nopunctuation<span class="hash_end">:</span></span><span class="function"> -></span>
+  <span class="property">@replace</span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>,?;.:/!§*%=<span class="escaped">\[</span><span class="escaped">\]</span>(){}'"`<span class="escaped">\\</span>_&lt;>-<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='class-methods'>Class Methods</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringfill'>String.fill</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string of length <code>length</code> filled with the chars in <code>filler</code>.</p>
 
-<div class="highlight"><pre><span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="mi">3</span>        <span class="c1"># &#39;   &#39;</span>
-<span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&#39;123&#39;</span> <span class="c1"># &#39;1231&#39;</span>
-<span class="nb">String</span><span class="p">.</span><span class="nx">fill</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;ab&#39;</span>  <span class="c1"># &#39;ababa&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">String</span><span class="p">.</span><span class="nv">fill </span><span class="o">=</span> <span class="p">(</span><span class="nx">length</span><span class="p">,</span> <span class="nv">filler</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">s </span><span class="o">=</span> <span class="s">&#39;&#39;</span>
-  <span class="nv">fillerChar </span><span class="o">=</span> <span class="mi">0</span>
-  <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="nv">s </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">s</span><span class="si">}#{</span><span class="nx">filler</span><span class="p">[</span><span class="nx">fillerChar</span><span class="o">++</span><span class="p">]</span><span class="si">}</span><span class="s">&quot;</span>
-    <span class="nv">fillerChar </span><span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="nx">fillerChar</span> <span class="o">&gt;=</span> <span class="nx">filler</span><span class="p">.</span><span class="nx">length</span>
-  <span class="nx">s</span></pre></div></td>
+<pre><code><span class="constant">String</span>.fill <span class="number">3</span>        <span class="comment"># '   '</span>
+<span class="constant">String</span>.fill <span class="number">4</span>, <span class="string"><span class="string_begin">'</span>123<span class="string_end">'</span></span> <span class="comment"># '1231'</span>
+<span class="constant">String</span>.fill <span class="number">5</span>, <span class="string"><span class="string_begin">'</span>ab<span class="string_end">'</span></span>  <span class="comment"># 'ababa'</span></code></pre></td>
+          <td class='code'><pre><span class="constant">String</span>.fill <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>length, filler<span class="operators">=</span><span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+  s <span class="operators">=</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+  fillerChar <span class="operators">=</span> <span class="number">0</span>
+  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="number">0.</span>.length<span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span>
+    s <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>s<span class="subst_end">}</span></span><span class="subst"><span class="subst_begin">#{</span>filler<span class="punctuation">[</span>fillerChar<span class="operators">+</span><span class="operators">+</span><span class="punctuation">]</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+    fillerChar <span class="operators">=</span> <span class="number">0</span> <span class="keyword">if</span> fillerChar ><span class="operators">=</span> filler.length
+  s
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='class-properties'>Class Properties</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='stringdacriticsmap'>String.DACRITICS_MAP</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>An object that contains all the diacrictics mapped with their corresponding
 replacement char(s).</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">String</span><span class="p">.</span><span class="nb">DACRITICS_MAP</span> <span class="o">=</span>
-  <span class="py">A</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0041\u24B6\uFF21\u00C0\u00C1</span>
-<span class="sr">    \u00C2\u1EA6\u1EA4\u1EAA\u1EA8</span>
-<span class="sr">    \u00C3\u0100\u0102\u1EB0\u1EAE</span>
-<span class="sr">    \u1EB4\u1EB2\u0226\u01E0\u00C4</span>
-<span class="sr">    \u01DE\u1EA2\u00C5\u01FA\u01CD</span>
-<span class="sr">    \u0200\u0202\u1EA0\u1EAC\u1EB6</span>
-<span class="sr">    \u1E00\u0104\u023A\u2C6F</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="nb">AA</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA732</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">AE</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u00C6\u01FC\u01E2</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">AO</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA734</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">AU</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA736</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">AV</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA738\uA73A</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">AY</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA73C</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">B</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0042\u24B7\uFF22\u1E02\u1E04\u1E06\u0243\u0182\u0181</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">C</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0043\u24B8\uFF23\u0106\u0108</span>
-<span class="sr">    \u010A\u010C\u00C7\u1E08\u0187</span>
-<span class="sr">    \u023B\uA73E</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">D</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0044\u24B9\uFF24\u1E0A\u010E</span>
-<span class="sr">    \u1E0C\u1E10\u1E12\u1E0E\u0110</span>
-<span class="sr">    \u018B\u018A\u0189\uA779</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="nb">DZ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01F1\u01C4</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">Dz</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01F2\u01C5</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">E</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0045\u24BA\uFF25\u00C8\u00C9</span>
-<span class="sr">    \u00CA\u1EC0\u1EBE\u1EC4\u1EC2</span>
-<span class="sr">    \u1EBC\u0112\u1E14\u1E16\u0114</span>
-<span class="sr">    \u0116\u00CB\u1EBA\u011A\u0204</span>
-<span class="sr">    \u0206\u1EB8\u1EC6\u0228\u1E1C</span>
-<span class="sr">    \u0118\u1E18\u1E1A\u0190\u018E</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">F</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0046\u24BB\uFF26\u1E1E\u0191\uA77B</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">G</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0047\u24BC\uFF27\u01F4\u011C</span>
-<span class="sr">    \u1E20\u011E\u0120\u01E6\u0122</span>
-<span class="sr">    \u01E4\u0193\uA7A0\uA77D\uA77E</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">H</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0048\u24BD\uFF28\u0124\u1E22</span>
-<span class="sr">    \u1E26\u021E\u1E24\u1E28\u1E2A</span>
-<span class="sr">    \u0126\u2C67\u2C75\uA78D</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">I</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0049\u24BE\uFF29\u00CC\u00CD</span>
-<span class="sr">    \u00CE\u0128\u012A\u012C\u0130</span>
-<span class="sr">    \u00CF\u1E2E\u1EC8\u01CF\u0208</span>
-<span class="sr">    \u020A\u1ECA\u012E\u1E2C\u0197</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">J</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u004A\u24BF\uFF2A\u0134\u0248</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">K</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u004B\u24C0\uFF2B\u1E30\u01E8</span>
-<span class="sr">    \u1E32\u0136\u1E34\u0198\u2C69</span>
-<span class="sr">    \uA740\uA742\uA744\uA7A2</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">L</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u004C\u24C1\uFF2C\u013F\u0139</span>
-<span class="sr">    \u013D\u1E36\u1E38\u013B\u1E3C</span>
-<span class="sr">    \u1E3A\u0141\u023D\u2C62\u2C60</span>
-<span class="sr">    \uA748\uA746\uA780</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="nb">LJ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01C7</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">Lj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01C8</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">M</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u004D\u24C2\uFF2D\u1E3E\u1E40\u1E42\u2C6E\u019C</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">N</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u004E\u24C3\uFF2E\u01F8</span>
-<span class="sr">    \u0143\u00D1\u1E44\u0147</span>
-<span class="sr">    \u1E46\u0145\u1E4A\u1E48</span>
-<span class="sr">    \u0220\u019D\uA790\uA7A4</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="nb">NJ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01CA</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">Nj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01CB</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">O</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u004F\u24C4\uFF2F\u00D2</span>
-<span class="sr">    \u00D3\u00D4\u1ED2\u1ED0</span>
-<span class="sr">    \u1ED6\u1ED4\u00D5\u1E4C</span>
-<span class="sr">    \u022C\u1E4E\u014C\u1E50</span>
-<span class="sr">    \u1E52\u014E\u022E\u0230</span>
-<span class="sr">    \u00D6\u022A\u1ECE\u0150</span>
-<span class="sr">    \u01D1\u020C\u020E\u01A0</span>
-<span class="sr">    \u1EDC\u1EDA\u1EE0\u1EDE</span>
-<span class="sr">    \u1EE2\u1ECC\u1ED8\u01EA</span>
-<span class="sr">    \u01EC\u00D8\u01FE\u0186</span>
-<span class="sr">    \u019F\uA74A\uA74C</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="nb">OI</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01A2</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">OO</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA74E</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">OU</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0222</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">P</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0050\u24C5\uFF30\u1E54\u1E56\u01A4\u2C63\uA750\uA752\uA754</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">Q</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0051\u24C6\uFF31\uA756\uA758\u024A</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">R</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0052\u24C7\uFF32\u0154</span>
-<span class="sr">    \u1E58\u0158\u0210\u0212</span>
-<span class="sr">    \u1E5A\u1E5C\u0156\u1E5E</span>
-<span class="sr">    \u024C\u2C64\uA75A\uA7A6</span>
-<span class="sr">    \uA782</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">S</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0053\u24C8\uFF33\u1E9E</span>
-<span class="sr">    \u015A\u1E64\u015C\u1E60</span>
-<span class="sr">    \u0160\u1E66\u1E62\u1E68</span>
-<span class="sr">    \u0218\u015E\u2C7E\uA7A8</span>
-<span class="sr">    \uA784</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">T</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0054\u24C9\uFF34\u1E6A</span>
-<span class="sr">    \u0164\u1E6C\u021A\u0162</span>
-<span class="sr">    \u1E70\u1E6E\u0166\u01AC</span>
-<span class="sr">    \u01AE\u023E\uA786</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="nb">TZ</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA728</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">U</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0055\u24CA\uFF35\u00D9</span>
-<span class="sr">    \u00DA\u00DB\u0168\u1E78</span>
-<span class="sr">    \u016A\u1E7A\u016C\u00DC</span>
-<span class="sr">    \u01DB\u01D7\u01D5\u01D9</span>
-<span class="sr">    \u1EE6\u016E\u0170\u01D3</span>
-<span class="sr">    \u0214\u0216\u01AF\u1EEA</span>
-<span class="sr">    \u1EE8\u1EEE\u1EEC\u1EF0</span>
-<span class="sr">    \u1EE4\u1E72\u0172\u1E76</span>
-<span class="sr">    \u1E74\u0244</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">V</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0056\u24CB\uFF36\u1E7C\u1E7E\u01B2\uA75E\u0245</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="nb">VY</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA760</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">W</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0057\u24CC\uFF37\u1E80\u1E82\u0174\u1E86\u1E84\u1E88\u2C72</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">X</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0058\u24CD\uFF38\u1E8A\u1E8C</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">Y</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span><span class="sr">\u0059\u24CE\uFF39\u1EF2</span>
-<span class="sr">    \u00DD\u0176\u1EF8\u0232</span>
-<span class="sr">    \u1E8E\u0178\u1EF6\u1EF4</span>
-<span class="sr">    \u01B3\u024E\u1EFE</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">Z</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u005A\u24CF\uFF3A\u0179</span>
-<span class="sr">    \u1E90\u017B\u017D\u1E92</span>
-<span class="sr">    \u1E94\u01B5\u0224\u2C7F</span>
-<span class="sr">    \u2C6B\uA762</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">a</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0061\u24D0\uFF41\u1E9A</span>
-<span class="sr">    \u00E0\u00E1\u00E2\u1EA7</span>
-<span class="sr">    \u1EA5\u1EAB\u1EA9\u00E3</span>
-<span class="sr">    \u0101\u0103\u1EB1\u1EAF</span>
-<span class="sr">    \u1EB5\u1EB3\u0227\u01E1</span>
-<span class="sr">    \u00E4\u01DF\u1EA3\u00E5</span>
-<span class="sr">    \u01FB\u01CE\u0201\u0203</span>
-<span class="sr">    \u1EA1\u1EAD\u1EB7\u1E01</span>
-<span class="sr">    \u0105\u2C65\u0250</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">aa</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA733</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">ae</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u00E6\u01FD\u01E3</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">ao</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA735</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">au</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA737</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">av</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA739\uA73B</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">ay</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA73D</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">b</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0062\u24D1\uFF42\u1E03\u1E05\u1E07\u0180\u0183\u0253</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">c</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0063\u24D2\uFF43\u0107</span>
-<span class="sr">    \u0109\u010B\u010D\u00E7</span>
-<span class="sr">    \u1E09\u0188\u023C\uA73F</span>
-<span class="sr">    \u2184</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">d</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0064\u24D3\uFF44\u1E0B</span>
-<span class="sr">    \u010F\u1E0D\u1E11\u1E13</span>
-<span class="sr">    \u1E0F\u0111\u018C\u0256</span>
-<span class="sr">    \u0257\uA77A</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">dz</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01F3\u01C6</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">e</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0065\u24D4\uFF45\u00E8</span>
-<span class="sr">    \u00E9\u00EA\u1EC1\u1EBF</span>
-<span class="sr">    \u1EC5\u1EC3\u1EBD\u0113</span>
-<span class="sr">    \u1E15\u1E17\u0115\u0117</span>
-<span class="sr">    \u00EB\u1EBB\u011B\u0205</span>
-<span class="sr">    \u0207\u1EB9\u1EC7\u0229</span>
-<span class="sr">    \u1E1D\u0119\u1E19\u1E1B</span>
-<span class="sr">    \u0247\u025B\u01DD</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">f</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0066\u24D5\uFF46\u1E1F\u0192\uA77C</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">g</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0067\u24D6\uFF47\u01F5</span>
-<span class="sr">    \u011D\u1E21\u011F\u0121</span>
-<span class="sr">    \u01E7\u0123\u01E5\u0260</span>
-<span class="sr">    \uA7A1\u1D79\uA77F</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">h</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0068\u24D7\uFF48\u0125</span>
-<span class="sr">    \u1E23\u1E27\u021F\u1E25</span>
-<span class="sr">    \u1E29\u1E2B\u1E96\u0127</span>
-<span class="sr">    \u2C68\u2C76\u0265</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">hv</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0195</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">i</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0069\u24D8\uFF49\u00EC</span>
-<span class="sr">    \u00ED\u00EE\u0129\u012B</span>
-<span class="sr">    \u012D\u00EF\u1E2F\u1EC9</span>
-<span class="sr">    \u01D0\u0209\u020B\u1ECB</span>
-<span class="sr">    \u012F\u1E2D\u0268\u0131</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">j</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u006A\u24D9\uFF4A\u0135\u01F0\u0249</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">k</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u006B\u24DA\uFF4B\u1E31</span>
-<span class="sr">    \u01E9\u1E33\u0137\u1E35</span>
-<span class="sr">    \u0199\u2C6A\uA741\uA743</span>
-<span class="sr">    \uA745\uA7A3</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">l</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u006C\u24DB\uFF4C\u0140</span>
-<span class="sr">    \u013A\u013E\u1E37\u1E39</span>
-<span class="sr">    \u013C\u1E3D\u1E3B\u017F</span>
-<span class="sr">    \u0142\u019A\u026B\u2C61</span>
-<span class="sr">    \uA749\uA781\uA747</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">lj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01C9</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">m</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u006D\u24DC\uFF4D\u1E3F\u1E41\u1E43\u0271\u026F</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">n</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u006E\u24DD\uFF4E\u01F9</span>
-<span class="sr">    \u0144\u00F1\u1E45\u0148</span>
-<span class="sr">    \u1E47\u0146\u1E4B\u1E49</span>
-<span class="sr">    \u019E\u0272\u0149\uA791</span>
-<span class="sr">    \uA7A5</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">nj</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01CC</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">o</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u006F\u24DE\uFF4F\u00F2</span>
-<span class="sr">    \u00F3\u00F4\u1ED3\u1ED1</span>
-<span class="sr">    \u1ED7\u1ED5\u00F5\u1E4D</span>
-<span class="sr">    \u022D\u1E4F\u014D\u1E51</span>
-<span class="sr">    \u1E53\u014F\u022F\u0231</span>
-<span class="sr">    \u00F6\u022B\u1ECF\u0151</span>
-<span class="sr">    \u01D2\u020D\u020F\u01A1</span>
-<span class="sr">    \u1EDD\u1EDB\u1EE1\u1EDF</span>
-<span class="sr">    \u1EE3\u1ECD\u1ED9\u01EB</span>
-<span class="sr">    \u01ED\u00F8\u01FF\u0254</span>
-<span class="sr">    \uA74B\uA74D\u0275</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">oi</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u01A3</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">ou</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0223</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">oo</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA74F</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">p</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0070\u24DF\uFF50\u1E55\u1E57\u01A5\u1D7D\uA751\uA753\uA755</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">q</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0071\u24E0\uFF51\u024B\uA757\uA759</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">r</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0072\u24E1\uFF52\u0155</span>
-<span class="sr">    \u1E59\u0159\u0211\u0213</span>
-<span class="sr">    \u1E5B\u1E5D\u0157\u1E5F</span>
-<span class="sr">    \u024D\u027D\uA75B\uA7A7</span>
-<span class="sr">    \uA783</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">s</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0073\u24E2\uFF53\u00DF</span>
-<span class="sr">    \u015B\u1E65\u015D\u1E61</span>
-<span class="sr">    \u0161\u1E67\u1E63\u1E69</span>
-<span class="sr">    \u0219\u015F\u023F\uA7A9</span>
-<span class="sr">    \uA785\u1E9B</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">t</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0074\u24E3\uFF54\u1E6B</span>
-<span class="sr">    \u1E97\u0165\u1E6D\u021B</span>
-<span class="sr">    \u0163\u1E71\u1E6F\u0167</span>
-<span class="sr">    \u01AD\u0288\u2C66\uA787</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">tz</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA729</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">u</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0075\u24E4\uFF55\u00F9</span>
-<span class="sr">    \u00FA\u00FB\u0169\u1E79</span>
-<span class="sr">    \u016B\u1E7B\u016D\u00FC</span>
-<span class="sr">    \u01DC\u01D8\u01D6\u01DA</span>
-<span class="sr">    \u1EE7\u016F\u0171\u01D4</span>
-<span class="sr">    \u0215\u0217\u01B0\u1EEB</span>
-<span class="sr">    \u1EE9\u1EEF\u1EED\u1EF1</span>
-<span class="sr">    \u1EE5\u1E73\u0173\u1E77</span>
-<span class="sr">    \u1E75\u0289</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">v</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0076\u24E5\uFF56\u1E7D\u1E7F\u028B\uA75F\u028C</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">vy</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\uA761</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">w</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0077\u24E6\uFF57\u1E81\u1E83\u0175\u1E87\u1E85\u1E98\u1E89\u2C73</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">x</span><span class="o">:</span> <span class="sr">/</span><span class="src">[</span><span class="sr">\u0078\u24E7\uFF58\u1E8B\u1E8D</span><span class="err">]</span><span class="sr">/g</span>
-  <span class="py">y</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u0079\u24E8\uFF59\u1EF3</span>
-<span class="sr">    \u00FD\u0177\u1EF9\u0233</span>
-<span class="sr">    \u1E8F\u00FF\u1EF7\u1E99</span>
-<span class="sr">    \u1EF5\u01B4\u024F\u1EFF</span><span class="err">]</span>
-  <span class="sr">///g</span>
-  <span class="py">z</span><span class="o">:</span> <span class="sr">///</span><span class="src">[</span>
-<span class="src">    </span><span class="sr">\u007A\u24E9\uFF5A\u017A</span>
-<span class="sr">    \u1E91\u017C\u017E\u1E93</span>
-<span class="sr">    \u1E95\u01B6\u0225\u0240</span>
-<span class="sr">    \u2C6C\uA763</span><span class="err">]</span>
-  <span class="sr">///g</span>
+          <td class='code'><pre><span class="constant">String</span>.<span class="constant">DACRITICS_MAP</span> <span class="operators">=</span>
+  <span class="hash">A<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0041<span class="escaped">\u</span>24B6<span class="escaped">\u</span>FF21<span class="escaped">\u</span>00C0<span class="escaped">\u</span>00C1
+    <span class="escaped">\u</span>00C2<span class="escaped">\u</span>1EA6<span class="escaped">\u</span>1EA4<span class="escaped">\u</span>1EAA<span class="escaped">\u</span>1EA8
+    <span class="escaped">\u</span>00C3<span class="escaped">\u</span>0100<span class="escaped">\u</span>0102<span class="escaped">\u</span>1EB0<span class="escaped">\u</span>1EAE
+    <span class="escaped">\u</span>1EB4<span class="escaped">\u</span>1EB2<span class="escaped">\u</span>0226<span class="escaped">\u</span>01E0<span class="escaped">\u</span>00C4
+    <span class="escaped">\u</span>01DE<span class="escaped">\u</span>1EA2<span class="escaped">\u</span>00C5<span class="escaped">\u</span>01FA<span class="escaped">\u</span>01CD
+    <span class="escaped">\u</span>0200<span class="escaped">\u</span>0202<span class="escaped">\u</span>1EA0<span class="escaped">\u</span>1EAC<span class="escaped">\u</span>1EB6
+    <span class="escaped">\u</span>1E00<span class="escaped">\u</span>0104<span class="escaped">\u</span>023A<span class="escaped">\u</span>2C6F<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">AA<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A732<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">AE<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>00C6<span class="escaped">\u</span>01FC<span class="escaped">\u</span>01E2<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">AO<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A734<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">AU<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A736<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">AV<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A738<span class="escaped">\u</span>A73A<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">AY<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A73C<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">B<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0042<span class="escaped">\u</span>24B7<span class="escaped">\u</span>FF22<span class="escaped">\u</span>1E02<span class="escaped">\u</span>1E04<span class="escaped">\u</span>1E06<span class="escaped">\u</span>0243<span class="escaped">\u</span>0182<span class="escaped">\u</span>0181<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">C<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0043<span class="escaped">\u</span>24B8<span class="escaped">\u</span>FF23<span class="escaped">\u</span>0106<span class="escaped">\u</span>0108
+    <span class="escaped">\u</span>010A<span class="escaped">\u</span>010C<span class="escaped">\u</span>00C7<span class="escaped">\u</span>1E08<span class="escaped">\u</span>0187
+    <span class="escaped">\u</span>023B<span class="escaped">\u</span>A73E<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">D<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0044<span class="escaped">\u</span>24B9<span class="escaped">\u</span>FF24<span class="escaped">\u</span>1E0A<span class="escaped">\u</span>010E
+    <span class="escaped">\u</span>1E0C<span class="escaped">\u</span>1E10<span class="escaped">\u</span>1E12<span class="escaped">\u</span>1E0E<span class="escaped">\u</span>0110
+    <span class="escaped">\u</span>018B<span class="escaped">\u</span>018A<span class="escaped">\u</span>0189<span class="escaped">\u</span>A779<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">DZ<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01F1<span class="escaped">\u</span>01C4<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">Dz<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01F2<span class="escaped">\u</span>01C5<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">E<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0045<span class="escaped">\u</span>24BA<span class="escaped">\u</span>FF25<span class="escaped">\u</span>00C8<span class="escaped">\u</span>00C9
+    <span class="escaped">\u</span>00CA<span class="escaped">\u</span>1EC0<span class="escaped">\u</span>1EBE<span class="escaped">\u</span>1EC4<span class="escaped">\u</span>1EC2
+    <span class="escaped">\u</span>1EBC<span class="escaped">\u</span>0112<span class="escaped">\u</span>1E14<span class="escaped">\u</span>1E16<span class="escaped">\u</span>0114
+    <span class="escaped">\u</span>0116<span class="escaped">\u</span>00CB<span class="escaped">\u</span>1EBA<span class="escaped">\u</span>011A<span class="escaped">\u</span>0204
+    <span class="escaped">\u</span>0206<span class="escaped">\u</span>1EB8<span class="escaped">\u</span>1EC6<span class="escaped">\u</span>0228<span class="escaped">\u</span>1E1C
+    <span class="escaped">\u</span>0118<span class="escaped">\u</span>1E18<span class="escaped">\u</span>1E1A<span class="escaped">\u</span>0190<span class="escaped">\u</span>018E<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">F<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0046<span class="escaped">\u</span>24BB<span class="escaped">\u</span>FF26<span class="escaped">\u</span>1E1E<span class="escaped">\u</span>0191<span class="escaped">\u</span>A77B<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">G<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0047<span class="escaped">\u</span>24BC<span class="escaped">\u</span>FF27<span class="escaped">\u</span>01F4<span class="escaped">\u</span>011C
+    <span class="escaped">\u</span>1E20<span class="escaped">\u</span>011E<span class="escaped">\u</span>0120<span class="escaped">\u</span>01E6<span class="escaped">\u</span>0122
+    <span class="escaped">\u</span>01E4<span class="escaped">\u</span>0193<span class="escaped">\u</span>A7A0<span class="escaped">\u</span>A77D<span class="escaped">\u</span>A77E<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">H<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0048<span class="escaped">\u</span>24BD<span class="escaped">\u</span>FF28<span class="escaped">\u</span>0124<span class="escaped">\u</span>1E22
+    <span class="escaped">\u</span>1E26<span class="escaped">\u</span>021E<span class="escaped">\u</span>1E24<span class="escaped">\u</span>1E28<span class="escaped">\u</span>1E2A
+    <span class="escaped">\u</span>0126<span class="escaped">\u</span>2C67<span class="escaped">\u</span>2C75<span class="escaped">\u</span>A78D<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">I<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0049<span class="escaped">\u</span>24BE<span class="escaped">\u</span>FF29<span class="escaped">\u</span>00CC<span class="escaped">\u</span>00CD
+    <span class="escaped">\u</span>00CE<span class="escaped">\u</span>0128<span class="escaped">\u</span>012A<span class="escaped">\u</span>012C<span class="escaped">\u</span>0130
+    <span class="escaped">\u</span>00CF<span class="escaped">\u</span>1E2E<span class="escaped">\u</span>1EC8<span class="escaped">\u</span>01CF<span class="escaped">\u</span>0208
+    <span class="escaped">\u</span>020A<span class="escaped">\u</span>1ECA<span class="escaped">\u</span>012E<span class="escaped">\u</span>1E2C<span class="escaped">\u</span>0197<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">J<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>004A<span class="escaped">\u</span>24BF<span class="escaped">\u</span>FF2A<span class="escaped">\u</span>0134<span class="escaped">\u</span>0248<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">K<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>004B<span class="escaped">\u</span>24C0<span class="escaped">\u</span>FF2B<span class="escaped">\u</span>1E30<span class="escaped">\u</span>01E8
+    <span class="escaped">\u</span>1E32<span class="escaped">\u</span>0136<span class="escaped">\u</span>1E34<span class="escaped">\u</span>0198<span class="escaped">\u</span>2C69
+    <span class="escaped">\u</span>A740<span class="escaped">\u</span>A742<span class="escaped">\u</span>A744<span class="escaped">\u</span>A7A2<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">L<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>004C<span class="escaped">\u</span>24C1<span class="escaped">\u</span>FF2C<span class="escaped">\u</span>013F<span class="escaped">\u</span>0139
+    <span class="escaped">\u</span>013D<span class="escaped">\u</span>1E36<span class="escaped">\u</span>1E38<span class="escaped">\u</span>013B<span class="escaped">\u</span>1E3C
+    <span class="escaped">\u</span>1E3A<span class="escaped">\u</span>0141<span class="escaped">\u</span>023D<span class="escaped">\u</span>2C62<span class="escaped">\u</span>2C60
+    <span class="escaped">\u</span>A748<span class="escaped">\u</span>A746<span class="escaped">\u</span>A780<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">LJ<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01C7<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">Lj<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01C8<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">M<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>004D<span class="escaped">\u</span>24C2<span class="escaped">\u</span>FF2D<span class="escaped">\u</span>1E3E<span class="escaped">\u</span>1E40<span class="escaped">\u</span>1E42<span class="escaped">\u</span>2C6E<span class="escaped">\u</span>019C<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">N<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>004E<span class="escaped">\u</span>24C3<span class="escaped">\u</span>FF2E<span class="escaped">\u</span>01F8
+    <span class="escaped">\u</span>0143<span class="escaped">\u</span>00D1<span class="escaped">\u</span>1E44<span class="escaped">\u</span>0147
+    <span class="escaped">\u</span>1E46<span class="escaped">\u</span>0145<span class="escaped">\u</span>1E4A<span class="escaped">\u</span>1E48
+    <span class="escaped">\u</span>0220<span class="escaped">\u</span>019D<span class="escaped">\u</span>A790<span class="escaped">\u</span>A7A4<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">NJ<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01CA<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">Nj<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01CB<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">O<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>004F<span class="escaped">\u</span>24C4<span class="escaped">\u</span>FF2F<span class="escaped">\u</span>00D2
+    <span class="escaped">\u</span>00D3<span class="escaped">\u</span>00D4<span class="escaped">\u</span>1ED2<span class="escaped">\u</span>1ED0
+    <span class="escaped">\u</span>1ED6<span class="escaped">\u</span>1ED4<span class="escaped">\u</span>00D5<span class="escaped">\u</span>1E4C
+    <span class="escaped">\u</span>022C<span class="escaped">\u</span>1E4E<span class="escaped">\u</span>014C<span class="escaped">\u</span>1E50
+    <span class="escaped">\u</span>1E52<span class="escaped">\u</span>014E<span class="escaped">\u</span>022E<span class="escaped">\u</span>0230
+    <span class="escaped">\u</span>00D6<span class="escaped">\u</span>022A<span class="escaped">\u</span>1ECE<span class="escaped">\u</span>0150
+    <span class="escaped">\u</span>01D1<span class="escaped">\u</span>020C<span class="escaped">\u</span>020E<span class="escaped">\u</span>01A0
+    <span class="escaped">\u</span>1EDC<span class="escaped">\u</span>1EDA<span class="escaped">\u</span>1EE0<span class="escaped">\u</span>1EDE
+    <span class="escaped">\u</span>1EE2<span class="escaped">\u</span>1ECC<span class="escaped">\u</span>1ED8<span class="escaped">\u</span>01EA
+    <span class="escaped">\u</span>01EC<span class="escaped">\u</span>00D8<span class="escaped">\u</span>01FE<span class="escaped">\u</span>0186
+    <span class="escaped">\u</span>019F<span class="escaped">\u</span>A74A<span class="escaped">\u</span>A74C<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">OI<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01A2<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">OO<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A74E<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">OU<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0222<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">P<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0050<span class="escaped">\u</span>24C5<span class="escaped">\u</span>FF30<span class="escaped">\u</span>1E54<span class="escaped">\u</span>1E56<span class="escaped">\u</span>01A4<span class="escaped">\u</span>2C63<span class="escaped">\u</span>A750<span class="escaped">\u</span>A752<span class="escaped">\u</span>A754<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">Q<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0051<span class="escaped">\u</span>24C6<span class="escaped">\u</span>FF31<span class="escaped">\u</span>A756<span class="escaped">\u</span>A758<span class="escaped">\u</span>024A<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">R<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0052<span class="escaped">\u</span>24C7<span class="escaped">\u</span>FF32<span class="escaped">\u</span>0154
+    <span class="escaped">\u</span>1E58<span class="escaped">\u</span>0158<span class="escaped">\u</span>0210<span class="escaped">\u</span>0212
+    <span class="escaped">\u</span>1E5A<span class="escaped">\u</span>1E5C<span class="escaped">\u</span>0156<span class="escaped">\u</span>1E5E
+    <span class="escaped">\u</span>024C<span class="escaped">\u</span>2C64<span class="escaped">\u</span>A75A<span class="escaped">\u</span>A7A6
+    <span class="escaped">\u</span>A782<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">S<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0053<span class="escaped">\u</span>24C8<span class="escaped">\u</span>FF33<span class="escaped">\u</span>1E9E
+    <span class="escaped">\u</span>015A<span class="escaped">\u</span>1E64<span class="escaped">\u</span>015C<span class="escaped">\u</span>1E60
+    <span class="escaped">\u</span>0160<span class="escaped">\u</span>1E66<span class="escaped">\u</span>1E62<span class="escaped">\u</span>1E68
+    <span class="escaped">\u</span>0218<span class="escaped">\u</span>015E<span class="escaped">\u</span>2C7E<span class="escaped">\u</span>A7A8
+    <span class="escaped">\u</span>A784<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">T<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0054<span class="escaped">\u</span>24C9<span class="escaped">\u</span>FF34<span class="escaped">\u</span>1E6A
+    <span class="escaped">\u</span>0164<span class="escaped">\u</span>1E6C<span class="escaped">\u</span>021A<span class="escaped">\u</span>0162
+    <span class="escaped">\u</span>1E70<span class="escaped">\u</span>1E6E<span class="escaped">\u</span>0166<span class="escaped">\u</span>01AC
+    <span class="escaped">\u</span>01AE<span class="escaped">\u</span>023E<span class="escaped">\u</span>A786<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">TZ<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A728<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">U<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0055<span class="escaped">\u</span>24CA<span class="escaped">\u</span>FF35<span class="escaped">\u</span>00D9
+    <span class="escaped">\u</span>00DA<span class="escaped">\u</span>00DB<span class="escaped">\u</span>0168<span class="escaped">\u</span>1E78
+    <span class="escaped">\u</span>016A<span class="escaped">\u</span>1E7A<span class="escaped">\u</span>016C<span class="escaped">\u</span>00DC
+    <span class="escaped">\u</span>01DB<span class="escaped">\u</span>01D7<span class="escaped">\u</span>01D5<span class="escaped">\u</span>01D9
+    <span class="escaped">\u</span>1EE6<span class="escaped">\u</span>016E<span class="escaped">\u</span>0170<span class="escaped">\u</span>01D3
+    <span class="escaped">\u</span>0214<span class="escaped">\u</span>0216<span class="escaped">\u</span>01AF<span class="escaped">\u</span>1EEA
+    <span class="escaped">\u</span>1EE8<span class="escaped">\u</span>1EEE<span class="escaped">\u</span>1EEC<span class="escaped">\u</span>1EF0
+    <span class="escaped">\u</span>1EE4<span class="escaped">\u</span>1E72<span class="escaped">\u</span>0172<span class="escaped">\u</span>1E76
+    <span class="escaped">\u</span>1E74<span class="escaped">\u</span>0244<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">V<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0056<span class="escaped">\u</span>24CB<span class="escaped">\u</span>FF36<span class="escaped">\u</span>1E7C<span class="escaped">\u</span>1E7E<span class="escaped">\u</span>01B2<span class="escaped">\u</span>A75E<span class="escaped">\u</span>0245<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">VY<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A760<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">W<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0057<span class="escaped">\u</span>24CC<span class="escaped">\u</span>FF37<span class="escaped">\u</span>1E80<span class="escaped">\u</span>1E82<span class="escaped">\u</span>0174<span class="escaped">\u</span>1E86<span class="escaped">\u</span>1E84<span class="escaped">\u</span>1E88<span class="escaped">\u</span>2C72<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">X<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0058<span class="escaped">\u</span>24CD<span class="escaped">\u</span>FF38<span class="escaped">\u</span>1E8A<span class="escaped">\u</span>1E8C<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">Y<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0059<span class="escaped">\u</span>24CE<span class="escaped">\u</span>FF39<span class="escaped">\u</span>1EF2
+    <span class="escaped">\u</span>00DD<span class="escaped">\u</span>0176<span class="escaped">\u</span>1EF8<span class="escaped">\u</span>0232
+    <span class="escaped">\u</span>1E8E<span class="escaped">\u</span>0178<span class="escaped">\u</span>1EF6<span class="escaped">\u</span>1EF4
+    <span class="escaped">\u</span>01B3<span class="escaped">\u</span>024E<span class="escaped">\u</span>1EFE<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">Z<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>005A<span class="escaped">\u</span>24CF<span class="escaped">\u</span>FF3A<span class="escaped">\u</span>0179
+    <span class="escaped">\u</span>1E90<span class="escaped">\u</span>017B<span class="escaped">\u</span>017D<span class="escaped">\u</span>1E92
+    <span class="escaped">\u</span>1E94<span class="escaped">\u</span>01B5<span class="escaped">\u</span>0224<span class="escaped">\u</span>2C7F
+    <span class="escaped">\u</span>2C6B<span class="escaped">\u</span>A762<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">a<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0061<span class="escaped">\u</span>24D0<span class="escaped">\u</span>FF41<span class="escaped">\u</span>1E9A
+    <span class="escaped">\u</span>00E0<span class="escaped">\u</span>00E1<span class="escaped">\u</span>00E2<span class="escaped">\u</span>1EA7
+    <span class="escaped">\u</span>1EA5<span class="escaped">\u</span>1EAB<span class="escaped">\u</span>1EA9<span class="escaped">\u</span>00E3
+    <span class="escaped">\u</span>0101<span class="escaped">\u</span>0103<span class="escaped">\u</span>1EB1<span class="escaped">\u</span>1EAF
+    <span class="escaped">\u</span>1EB5<span class="escaped">\u</span>1EB3<span class="escaped">\u</span>0227<span class="escaped">\u</span>01E1
+    <span class="escaped">\u</span>00E4<span class="escaped">\u</span>01DF<span class="escaped">\u</span>1EA3<span class="escaped">\u</span>00E5
+    <span class="escaped">\u</span>01FB<span class="escaped">\u</span>01CE<span class="escaped">\u</span>0201<span class="escaped">\u</span>0203
+    <span class="escaped">\u</span>1EA1<span class="escaped">\u</span>1EAD<span class="escaped">\u</span>1EB7<span class="escaped">\u</span>1E01
+    <span class="escaped">\u</span>0105<span class="escaped">\u</span>2C65<span class="escaped">\u</span>0250<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">aa<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A733<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">ae<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>00E6<span class="escaped">\u</span>01FD<span class="escaped">\u</span>01E3<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">ao<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A735<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">au<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A737<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">av<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A739<span class="escaped">\u</span>A73B<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">ay<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A73D<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">b<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0062<span class="escaped">\u</span>24D1<span class="escaped">\u</span>FF42<span class="escaped">\u</span>1E03<span class="escaped">\u</span>1E05<span class="escaped">\u</span>1E07<span class="escaped">\u</span>0180<span class="escaped">\u</span>0183<span class="escaped">\u</span>0253<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">c<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0063<span class="escaped">\u</span>24D2<span class="escaped">\u</span>FF43<span class="escaped">\u</span>0107
+    <span class="escaped">\u</span>0109<span class="escaped">\u</span>010B<span class="escaped">\u</span>010D<span class="escaped">\u</span>00E7
+    <span class="escaped">\u</span>1E09<span class="escaped">\u</span>0188<span class="escaped">\u</span>023C<span class="escaped">\u</span>A73F
+    <span class="escaped">\u</span>2184<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">d<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0064<span class="escaped">\u</span>24D3<span class="escaped">\u</span>FF44<span class="escaped">\u</span>1E0B
+    <span class="escaped">\u</span>010F<span class="escaped">\u</span>1E0D<span class="escaped">\u</span>1E11<span class="escaped">\u</span>1E13
+    <span class="escaped">\u</span>1E0F<span class="escaped">\u</span>0111<span class="escaped">\u</span>018C<span class="escaped">\u</span>0256
+    <span class="escaped">\u</span>0257<span class="escaped">\u</span>A77A<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">dz<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01F3<span class="escaped">\u</span>01C6<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">e<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0065<span class="escaped">\u</span>24D4<span class="escaped">\u</span>FF45<span class="escaped">\u</span>00E8
+    <span class="escaped">\u</span>00E9<span class="escaped">\u</span>00EA<span class="escaped">\u</span>1EC1<span class="escaped">\u</span>1EBF
+    <span class="escaped">\u</span>1EC5<span class="escaped">\u</span>1EC3<span class="escaped">\u</span>1EBD<span class="escaped">\u</span>0113
+    <span class="escaped">\u</span>1E15<span class="escaped">\u</span>1E17<span class="escaped">\u</span>0115<span class="escaped">\u</span>0117
+    <span class="escaped">\u</span>00EB<span class="escaped">\u</span>1EBB<span class="escaped">\u</span>011B<span class="escaped">\u</span>0205
+    <span class="escaped">\u</span>0207<span class="escaped">\u</span>1EB9<span class="escaped">\u</span>1EC7<span class="escaped">\u</span>0229
+    <span class="escaped">\u</span>1E1D<span class="escaped">\u</span>0119<span class="escaped">\u</span>1E19<span class="escaped">\u</span>1E1B
+    <span class="escaped">\u</span>0247<span class="escaped">\u</span>025B<span class="escaped">\u</span>01DD<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">f<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0066<span class="escaped">\u</span>24D5<span class="escaped">\u</span>FF46<span class="escaped">\u</span>1E1F<span class="escaped">\u</span>0192<span class="escaped">\u</span>A77C<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">g<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0067<span class="escaped">\u</span>24D6<span class="escaped">\u</span>FF47<span class="escaped">\u</span>01F5
+    <span class="escaped">\u</span>011D<span class="escaped">\u</span>1E21<span class="escaped">\u</span>011F<span class="escaped">\u</span>0121
+    <span class="escaped">\u</span>01E7<span class="escaped">\u</span>0123<span class="escaped">\u</span>01E5<span class="escaped">\u</span>0260
+    <span class="escaped">\u</span>A7A1<span class="escaped">\u</span>1D79<span class="escaped">\u</span>A77F<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">h<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0068<span class="escaped">\u</span>24D7<span class="escaped">\u</span>FF48<span class="escaped">\u</span>0125
+    <span class="escaped">\u</span>1E23<span class="escaped">\u</span>1E27<span class="escaped">\u</span>021F<span class="escaped">\u</span>1E25
+    <span class="escaped">\u</span>1E29<span class="escaped">\u</span>1E2B<span class="escaped">\u</span>1E96<span class="escaped">\u</span>0127
+    <span class="escaped">\u</span>2C68<span class="escaped">\u</span>2C76<span class="escaped">\u</span>0265<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">hv<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0195<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">i<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0069<span class="escaped">\u</span>24D8<span class="escaped">\u</span>FF49<span class="escaped">\u</span>00EC
+    <span class="escaped">\u</span>00ED<span class="escaped">\u</span>00EE<span class="escaped">\u</span>0129<span class="escaped">\u</span>012B
+    <span class="escaped">\u</span>012D<span class="escaped">\u</span>00EF<span class="escaped">\u</span>1E2F<span class="escaped">\u</span>1EC9
+    <span class="escaped">\u</span>01D0<span class="escaped">\u</span>0209<span class="escaped">\u</span>020B<span class="escaped">\u</span>1ECB
+    <span class="escaped">\u</span>012F<span class="escaped">\u</span>1E2D<span class="escaped">\u</span>0268<span class="escaped">\u</span>0131<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">j<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>006A<span class="escaped">\u</span>24D9<span class="escaped">\u</span>FF4A<span class="escaped">\u</span>0135<span class="escaped">\u</span>01F0<span class="escaped">\u</span>0249<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">k<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>006B<span class="escaped">\u</span>24DA<span class="escaped">\u</span>FF4B<span class="escaped">\u</span>1E31
+    <span class="escaped">\u</span>01E9<span class="escaped">\u</span>1E33<span class="escaped">\u</span>0137<span class="escaped">\u</span>1E35
+    <span class="escaped">\u</span>0199<span class="escaped">\u</span>2C6A<span class="escaped">\u</span>A741<span class="escaped">\u</span>A743
+    <span class="escaped">\u</span>A745<span class="escaped">\u</span>A7A3<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">l<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>006C<span class="escaped">\u</span>24DB<span class="escaped">\u</span>FF4C<span class="escaped">\u</span>0140
+    <span class="escaped">\u</span>013A<span class="escaped">\u</span>013E<span class="escaped">\u</span>1E37<span class="escaped">\u</span>1E39
+    <span class="escaped">\u</span>013C<span class="escaped">\u</span>1E3D<span class="escaped">\u</span>1E3B<span class="escaped">\u</span>017F
+    <span class="escaped">\u</span>0142<span class="escaped">\u</span>019A<span class="escaped">\u</span>026B<span class="escaped">\u</span>2C61
+    <span class="escaped">\u</span>A749<span class="escaped">\u</span>A781<span class="escaped">\u</span>A747<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">lj<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01C9<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">m<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>006D<span class="escaped">\u</span>24DC<span class="escaped">\u</span>FF4D<span class="escaped">\u</span>1E3F<span class="escaped">\u</span>1E41<span class="escaped">\u</span>1E43<span class="escaped">\u</span>0271<span class="escaped">\u</span>026F<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">n<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>006E<span class="escaped">\u</span>24DD<span class="escaped">\u</span>FF4E<span class="escaped">\u</span>01F9
+    <span class="escaped">\u</span>0144<span class="escaped">\u</span>00F1<span class="escaped">\u</span>1E45<span class="escaped">\u</span>0148
+    <span class="escaped">\u</span>1E47<span class="escaped">\u</span>0146<span class="escaped">\u</span>1E4B<span class="escaped">\u</span>1E49
+    <span class="escaped">\u</span>019E<span class="escaped">\u</span>0272<span class="escaped">\u</span>0149<span class="escaped">\u</span>A791
+    <span class="escaped">\u</span>A7A5<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">nj<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01CC<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">o<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>006F<span class="escaped">\u</span>24DE<span class="escaped">\u</span>FF4F<span class="escaped">\u</span>00F2
+    <span class="escaped">\u</span>00F3<span class="escaped">\u</span>00F4<span class="escaped">\u</span>1ED3<span class="escaped">\u</span>1ED1
+    <span class="escaped">\u</span>1ED7<span class="escaped">\u</span>1ED5<span class="escaped">\u</span>00F5<span class="escaped">\u</span>1E4D
+    <span class="escaped">\u</span>022D<span class="escaped">\u</span>1E4F<span class="escaped">\u</span>014D<span class="escaped">\u</span>1E51
+    <span class="escaped">\u</span>1E53<span class="escaped">\u</span>014F<span class="escaped">\u</span>022F<span class="escaped">\u</span>0231
+    <span class="escaped">\u</span>00F6<span class="escaped">\u</span>022B<span class="escaped">\u</span>1ECF<span class="escaped">\u</span>0151
+    <span class="escaped">\u</span>01D2<span class="escaped">\u</span>020D<span class="escaped">\u</span>020F<span class="escaped">\u</span>01A1
+    <span class="escaped">\u</span>1EDD<span class="escaped">\u</span>1EDB<span class="escaped">\u</span>1EE1<span class="escaped">\u</span>1EDF
+    <span class="escaped">\u</span>1EE3<span class="escaped">\u</span>1ECD<span class="escaped">\u</span>1ED9<span class="escaped">\u</span>01EB
+    <span class="escaped">\u</span>01ED<span class="escaped">\u</span>00F8<span class="escaped">\u</span>01FF<span class="escaped">\u</span>0254
+    <span class="escaped">\u</span>A74B<span class="escaped">\u</span>A74D<span class="escaped">\u</span>0275<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">oi<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>01A3<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">ou<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0223<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">oo<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A74F<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">p<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0070<span class="escaped">\u</span>24DF<span class="escaped">\u</span>FF50<span class="escaped">\u</span>1E55<span class="escaped">\u</span>1E57<span class="escaped">\u</span>01A5<span class="escaped">\u</span>1D7D<span class="escaped">\u</span>A751<span class="escaped">\u</span>A753<span class="escaped">\u</span>A755<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">q<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0071<span class="escaped">\u</span>24E0<span class="escaped">\u</span>FF51<span class="escaped">\u</span>024B<span class="escaped">\u</span>A757<span class="escaped">\u</span>A759<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">r<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0072<span class="escaped">\u</span>24E1<span class="escaped">\u</span>FF52<span class="escaped">\u</span>0155
+    <span class="escaped">\u</span>1E59<span class="escaped">\u</span>0159<span class="escaped">\u</span>0211<span class="escaped">\u</span>0213
+    <span class="escaped">\u</span>1E5B<span class="escaped">\u</span>1E5D<span class="escaped">\u</span>0157<span class="escaped">\u</span>1E5F
+    <span class="escaped">\u</span>024D<span class="escaped">\u</span>027D<span class="escaped">\u</span>A75B<span class="escaped">\u</span>A7A7
+    <span class="escaped">\u</span>A783<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">s<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0073<span class="escaped">\u</span>24E2<span class="escaped">\u</span>FF53<span class="escaped">\u</span>00DF
+    <span class="escaped">\u</span>015B<span class="escaped">\u</span>1E65<span class="escaped">\u</span>015D<span class="escaped">\u</span>1E61
+    <span class="escaped">\u</span>0161<span class="escaped">\u</span>1E67<span class="escaped">\u</span>1E63<span class="escaped">\u</span>1E69
+    <span class="escaped">\u</span>0219<span class="escaped">\u</span>015F<span class="escaped">\u</span>023F<span class="escaped">\u</span>A7A9
+    <span class="escaped">\u</span>A785<span class="escaped">\u</span>1E9B<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">t<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0074<span class="escaped">\u</span>24E3<span class="escaped">\u</span>FF54<span class="escaped">\u</span>1E6B
+    <span class="escaped">\u</span>1E97<span class="escaped">\u</span>0165<span class="escaped">\u</span>1E6D<span class="escaped">\u</span>021B
+    <span class="escaped">\u</span>0163<span class="escaped">\u</span>1E71<span class="escaped">\u</span>1E6F<span class="escaped">\u</span>0167
+    <span class="escaped">\u</span>01AD<span class="escaped">\u</span>0288<span class="escaped">\u</span>2C66<span class="escaped">\u</span>A787<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">tz<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A729<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">u<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0075<span class="escaped">\u</span>24E4<span class="escaped">\u</span>FF55<span class="escaped">\u</span>00F9
+    <span class="escaped">\u</span>00FA<span class="escaped">\u</span>00FB<span class="escaped">\u</span>0169<span class="escaped">\u</span>1E79
+    <span class="escaped">\u</span>016B<span class="escaped">\u</span>1E7B<span class="escaped">\u</span>016D<span class="escaped">\u</span>00FC
+    <span class="escaped">\u</span>01DC<span class="escaped">\u</span>01D8<span class="escaped">\u</span>01D6<span class="escaped">\u</span>01DA
+    <span class="escaped">\u</span>1EE7<span class="escaped">\u</span>016F<span class="escaped">\u</span>0171<span class="escaped">\u</span>01D4
+    <span class="escaped">\u</span>0215<span class="escaped">\u</span>0217<span class="escaped">\u</span>01B0<span class="escaped">\u</span>1EEB
+    <span class="escaped">\u</span>1EE9<span class="escaped">\u</span>1EEF<span class="escaped">\u</span>1EED<span class="escaped">\u</span>1EF1
+    <span class="escaped">\u</span>1EE5<span class="escaped">\u</span>1E73<span class="escaped">\u</span>0173<span class="escaped">\u</span>1E77
+    <span class="escaped">\u</span>1E75<span class="escaped">\u</span>0289<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">v<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0076<span class="escaped">\u</span>24E5<span class="escaped">\u</span>FF56<span class="escaped">\u</span>1E7D<span class="escaped">\u</span>1E7F<span class="escaped">\u</span>028B<span class="escaped">\u</span>A75F<span class="escaped">\u</span>028C<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">vy<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>A761<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">w<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0077<span class="escaped">\u</span>24E6<span class="escaped">\u</span>FF57<span class="escaped">\u</span>1E81<span class="escaped">\u</span>1E83<span class="escaped">\u</span>0175<span class="escaped">\u</span>1E87<span class="escaped">\u</span>1E85<span class="escaped">\u</span>1E98<span class="escaped">\u</span>1E89<span class="escaped">\u</span>2C73<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">x<span class="hash_end">:</span></span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span><span class="escaped">\u</span>0078<span class="escaped">\u</span>24E7<span class="escaped">\u</span>FF58<span class="escaped">\u</span>1E8B<span class="escaped">\u</span>1E8D<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>
+  <span class="hash">y<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>0079<span class="escaped">\u</span>24E8<span class="escaped">\u</span>FF59<span class="escaped">\u</span>1EF3
+    <span class="escaped">\u</span>00FD<span class="escaped">\u</span>0177<span class="escaped">\u</span>1EF9<span class="escaped">\u</span>0233
+    <span class="escaped">\u</span>1E8F<span class="escaped">\u</span>00FF<span class="escaped">\u</span>1EF7<span class="escaped">\u</span>1E99
+    <span class="escaped">\u</span>1EF5<span class="escaped">\u</span>01B4<span class="escaped">\u</span>024F<span class="escaped">\u</span>1EFF<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
+  <span class="hash">z<span class="hash_end">:</span></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="char_group"><span class="char_group_begin">[</span>
+    <span class="escaped">\u</span>007A<span class="escaped">\u</span>24E9<span class="escaped">\u</span>FF5A<span class="escaped">\u</span>017A
+    <span class="escaped">\u</span>1E91<span class="escaped">\u</span>017C<span class="escaped">\u</span>017E<span class="escaped">\u</span>1E93
+    <span class="escaped">\u</span>1E95<span class="escaped">\u</span>01B6<span class="escaped">\u</span>0225<span class="escaped">\u</span>0240
+    <span class="escaped">\u</span>2C6C<span class="escaped">\u</span>A763<span class="char_group_end">]</span></span>
+  <span class="hereregexp_end">///g</span></span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

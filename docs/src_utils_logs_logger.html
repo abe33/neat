@@ -67,17 +67,23 @@
     <a href='#loggerremove'>Logger::remove</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">Signal</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;../../core/signal&#39;</span></pre></div></td>
+          <td class='code'><pre>
+<span class="constant">Signal</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../../core/signal<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='logger'>Logger</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>Logger</code> class handle logging within the Neat environment.
 Whenever you use one of the logging functions, it ultimately
 end up here.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="k">class</span> <span class="nb">Logger</span></pre></div></td>
+          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">Logger</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>Logger</code> class provides some <em>constants</em> to define
@@ -85,15 +91,18 @@ the priority of a log message.</p>
 
 <p>That priority is used to filter messages according to
 a given configuration verbosity.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">@DEBUG</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="py">@INFO</span> <span class="o">=</span> <span class="mi">1</span>
-  <span class="py">@WARN</span> <span class="o">=</span> <span class="mi">2</span>
-  <span class="py">@ERROR</span> <span class="o">=</span> <span class="mi">3</span>
-  <span class="py">@FATAL</span> <span class="o">=</span> <span class="mi">4</span></pre></div></td>
+          <td class='code'><pre>  <span class="property">@DEBUG</span> <span class="operators">=</span> <span class="number">0</span>
+  <span class="property">@INFO</span> <span class="operators">=</span> <span class="number">1</span>
+  <span class="property">@WARN</span> <span class="operators">=</span> <span class="number">2</span>
+  <span class="property">@ERROR</span> <span class="operators">=</span> <span class="number">3</span>
+  <span class="property">@FATAL</span> <span class="operators">=</span> <span class="number">4</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='loggerconstructor'>Logger::constructor</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>Logger</code> class provides a <code>logged</code> signal that backends
@@ -101,58 +110,68 @@ can register to.</p>
 
 <p>The <code>stack</code> property is used to store the messages received
 before a backend had been registered.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">constructor</span><span class="o">:</span> <span class="o">-&gt;</span>
-    <span class="py">@logged</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
-    <span class="py">@stack</span> <span class="o">=</span> <span class="p">[]</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">constructor<span class="hash_end">:</span></span><span class="function"> -></span>
+    <span class="property">@logged</span> <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span>
+    <span class="property">@stack</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='loggerlog'>Logger::log</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Register a <code>message</code> with the given level.
 If the logger instance has a backend registered, the message
 is automatically dispatched. Otherwise, the message is stored.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">log</span><span class="o">:</span> <span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nv">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nv">o </span><span class="o">=</span> <span class="p">{</span><span class="nx">message</span><span class="p">,</span> <span class="nx">level</span><span class="p">}</span>
-    <span class="k">if</span> <span class="py">@logged</span><span class="p">.</span><span class="nx">hasListeners</span><span class="p">()</span>
-      <span class="py">@logged</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="nx">o</span>
-    <span class="k">else</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">log<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>message, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span>
+    o <span class="operators">=</span> <span class="punctuation">{</span>message, level<span class="punctuation">}</span>
+    <span class="keyword">if</span> <span class="property">@logged</span>.hasListeners<span class="punctuation">(</span><span class="punctuation">)</span>
+      <span class="property">@logged</span>.dispatch <span class="keyword">this</span>, o
+    <span class="keyword">else</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>In order to prevent the stack to became too wide,
 messages with the same level of priority are
 concateneted.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="k">if</span> <span class="py">@stack</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span> <span class="o">or</span> <span class="py">@stack</span><span class="p">.</span><span class="nx">last</span><span class="p">().</span><span class="nx">level</span> <span class="o">isnt</span> <span class="nx">level</span>
-        <span class="py">@stack</span><span class="p">.</span><span class="nx">push</span> <span class="nx">o</span>
-      <span class="k">else</span>
-        <span class="py">@stack</span><span class="p">.</span><span class="nx">last</span><span class="p">().</span><span class="nx">message</span> <span class="o">+=</span> <span class="nx">message</span></pre></div></td>
+          <td class='code'><pre>      <span class="keyword">if</span> <span class="property">@stack</span>.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">or</span> <span class="property">@stack</span>.last<span class="punctuation">(</span><span class="punctuation">)</span>.level <span class="keyword">isnt</span> level
+        <span class="property">@stack</span>.push o
+      <span class="keyword">else</span>
+        <span class="property">@stack</span>.last<span class="punctuation">(</span><span class="punctuation">)</span>.message <span class="operators">+</span><span class="operators">=</span> message
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='loggeradd'>Logger::add</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Add a function to listen to the <code>logged</code> signal.
 Use this function rather than <code>logged.add</code>. This
 function will take care of dispatching the stack
 to the listeners when a listener is added.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">add</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nv">context</span><span class="o">=</span><span class="kc">null</span><span class="p">,</span> <span class="nv">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="py">@logged</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">priority</span>
-    <span class="py">@logged</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="nx">log</span> <span class="k">for</span> <span class="nx">log</span> <span class="k">in</span> <span class="py">@stack</span> <span class="k">if</span> <span class="py">@logged</span><span class="p">.</span><span class="nx">hasListeners</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">add<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="operators">=</span>null, priority<span class="operators">=</span>0<span class="params_end">)</span></span> -></span>
+    <span class="property">@logged</span>.add listener, context, priority
+    <span class="property">@logged</span>.dispatch <span class="keyword">this</span>, log <span class="keyword">for</span> log <span class="keyword">in</span> <span class="property">@stack</span> <span class="keyword">if</span> <span class="property">@logged</span>.hasListeners<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='loggerremove'>Logger::remove</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Removes a function for listening to the <code>logged</code> signal.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">remove</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="py">@logged</span><span class="p">.</span><span class="nx">remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
+          <td class='code'><pre>  <span class="hash">remove<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+    <span class="property">@logged</span>.remove listener, context
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">Logger</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Logger</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

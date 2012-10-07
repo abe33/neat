@@ -93,163 +93,189 @@ Number methods.
     <a href='#numberweeks'>Number::weeks</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">def</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./utils&#39;</span></pre></div></td>
+          <td class='code'><pre><span class="punctuation">{</span>def<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='number'>Number</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberago'>Number::ago</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a <code>Date</code> object that correspond to the time of the call
 minus the current number as milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">10</span><span class="p">.</span><span class="nx">hours</span><span class="p">().</span><span class="nx">ago</span><span class="p">()</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">ago</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nb">Date</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">-</span> <span class="py">@valueOf</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="number">10.</span>hours<span class="punctuation">(</span><span class="punctuation">)</span>.ago<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">ago<span class="hash_end">:</span></span><span class="function"> -></span> <span class="keyword">new</span> <span class="constant">Date</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="punctuation">(</span><span class="punctuation">)</span>.getTime<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">-</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberdays'>Number::days</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the current number as days converted in milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">10</span><span class="p">.</span><span class="nx">days</span><span class="p">()</span> <span class="c1"># 864000000</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">days</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@hours</span><span class="p">()</span> <span class="o">*</span> <span class="mi">24</span></pre></div></td>
+<pre><code><span class="number">10.</span>days<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 864000000</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">days<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@hours</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">24</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numbereven'>Number::even</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the current number is even.</p>
 
-<div class="highlight"><pre><span class="mi">4</span><span class="p">.</span><span class="nx">even</span><span class="p">()</span> <span class="c1"># true</span>
-<span class="mi">5</span><span class="p">.</span><span class="nx">even</span><span class="p">()</span> <span class="c1"># false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">even</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@valueOf</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">is</span> <span class="mi">0</span></pre></div></td>
+<pre><code><span class="number">4.</span>even<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># true</span>
+<span class="number">5.</span>even<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">even<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> % <span class="number">2</span> <span class="keyword">is</span> <span class="number">0</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberfromnow'>Number::fromNow</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a <code>Date</code> object that correspond to the time of the call
 plus the current number as milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">10</span><span class="p">.</span><span class="nx">hours</span><span class="p">().</span><span class="nx">fromNow</span><span class="p">()</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">fromNow</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="k">new</span> <span class="nb">Date</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">()</span> <span class="o">+</span> <span class="py">@valueOf</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="number">10.</span>hours<span class="punctuation">(</span><span class="punctuation">)</span>.fromNow<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">fromNow<span class="hash_end">:</span></span><span class="function"> -></span> <span class="keyword">new</span> <span class="constant">Date</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="punctuation">(</span><span class="punctuation">)</span>.getTime<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">+</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberhours'>Number::hours</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the current number as hours converted in milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">10</span><span class="p">.</span><span class="nx">hours</span><span class="p">()</span> <span class="c1"># 36000000</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">hours</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@minutes</span><span class="p">()</span> <span class="o">*</span> <span class="mi">60</span></pre></div></td>
+<pre><code><span class="number">10.</span>hours<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 36000000</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">hours<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@minutes</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">60</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberlater'>Number::later</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p><code>Number::fromNow</code> alias.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">Number</span><span class="p">.</span><span class="nv">later </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="py">@fromNow</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre><span class="constant">Number</span>.later <span class="operators">=</span><span class="function"> -></span> <span class="property">@fromNow</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberminutes'>Number::minutes</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the current number as minutes converted in milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">10</span><span class="p">.</span><span class="nx">minutes</span> <span class="c1"># 600000</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">minutes</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@seconds</span><span class="p">()</span> <span class="o">*</span> <span class="mi">60</span></pre></div></td>
+<pre><code><span class="number">10.</span>minutes <span class="comment"># 600000</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">minutes<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@seconds</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">60</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberodd'>Number::odd</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the current number is odd.</p>
 
-<div class="highlight"><pre><span class="mi">4</span><span class="p">.</span><span class="nx">odd</span><span class="p">()</span> <span class="c1"># false</span>
-<span class="mi">5</span><span class="p">.</span><span class="nx">odd</span><span class="p">()</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">odd</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@valueOf</span><span class="p">()</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">is</span> <span class="mi">1</span></pre></div></td>
+<pre><code><span class="number">4.</span>odd<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span>
+<span class="number">5.</span>odd<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">odd<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> % <span class="number">2</span> <span class="keyword">is</span> <span class="number">1</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberseconds'>Number::seconds</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the current number as seconds converted in milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">6</span><span class="p">.</span><span class="nx">seconds</span> <span class="c1"># 6000</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">seconds</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@valueOf</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span></pre></div></td>
+<pre><code><span class="number">6.</span>seconds <span class="comment"># 6000</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">seconds<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">1000</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numbertimes'>Number::times</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Iterates <code>n</code> times and call <code>callback</code> for each iteration where <code>n</code> is
 the current <code>Number</code> value.</p>
 
-<div class="highlight"><pre><span class="mi">5</span><span class="p">.</span><span class="nx">times</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">print</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">i</span><span class="si">}</span><span class="s"> &quot;</span> <span class="c1"># 0 1 2 3 4</span>
-</pre></div>
+<pre><code><span class="number">5.</span>times <span class="function"><span class="params"><span class="params_begin">(</span>i<span class="params_end">)</span></span> -></span> <span class="native">print</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span> <span class="string_end">"</span></span> <span class="comment"># 0 1 2 3 4</span></code></pre>
 
 <p>You can also multiply objects:</p>
 
-<div class="highlight"><pre><span class="mi">5</span><span class="p">.</span><span class="nx">times</span> <span class="s">&quot;*&quot;</span>        <span class="c1"># &#39;*****&#39;</span>
-<span class="mi">5</span><span class="p">.</span><span class="nx">times</span> <span class="mi">10</span>         <span class="c1"># 50</span>
-<span class="mi">2</span><span class="p">.</span><span class="nx">times</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># [&#39;foo&#39;, 1, &#39;foo&#39;, 1]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">times</span><span class="o">:</span> <span class="p">(</span><span class="nx">target</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="p">(</span><span class="nx">target</span> <span class="nx">i</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">..</span><span class="py">@valueOf</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">target</span> <span class="o">is</span> <span class="s">&quot;function&quot;</span>
-  <span class="nv">o </span><span class="o">=</span> <span class="nx">target</span>
+<pre><code><span class="number">5.</span>times <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>        <span class="comment"># '*****'</span>
+<span class="number">5.</span>times <span class="number">10</span>         <span class="comment"># 50</span>
+<span class="number">2.</span>times <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">1</span><span class="punctuation">]</span> <span class="comment"># ['foo', 1, 'foo', 1]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">times<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>target<span class="params_end">)</span></span> -></span>
+  <span class="keyword">return</span> <span class="punctuation">(</span>target i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="number">0.</span>.<span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="keyword">if</span> <span class="keyword">typeof</span> target <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span>
+  o <span class="operators">=</span> target
 
-  <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">..</span><span class="py">@valueOf</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span> <span class="nx">o</span>
-      <span class="nv">o </span><span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">concat</span> <span class="nx">target</span>
-    <span class="k">else</span>
-      <span class="nx">o</span> <span class="o">+=</span> <span class="nx">target</span>
-  <span class="nx">o</span></pre></div></td>
+  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="number">1.</span>.<span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span>
+    <span class="keyword">if</span> <span class="constant">Array</span>.isArray o
+      o <span class="operators">=</span> o.concat target
+    <span class="keyword">else</span>
+      o <span class="operators">+</span><span class="operators">=</span> target
+  o
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberto'>Number::to</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Iterates from the current value to the passed-in value.</p>
 
-<div class="highlight"><pre><span class="mi">5</span><span class="p">.</span><span class="nx">to</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">print</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">i</span><span class="si">}</span><span class="s"> &quot;</span> <span class="c1"># 5 6 7 8 9 10</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">to</span><span class="o">:</span> <span class="p">(</span><span class="nx">end</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">callback</span> <span class="nx">i</span> <span class="k">for</span> <span class="nx">i</span> <span class="k">in</span> <span class="p">[</span><span class="py">@valueOf</span><span class="p">()..</span><span class="nx">end</span><span class="p">]</span></pre></div></td>
+<pre><code><span class="number">5.</span>to <span class="number">10</span>, <span class="function"><span class="params"><span class="params_begin">(</span>i<span class="params_end">)</span></span> -></span> <span class="native">print</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span> <span class="string_end">"</span></span> <span class="comment"># 5 6 7 8 9 10</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">to<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>end, callback<span class="params_end">)</span></span> -></span> callback i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>..end<span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='numberweeks'>Number::weeks</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the current number as weeks converted in milliseconds.</p>
 
-<div class="highlight"><pre><span class="mi">1</span><span class="p">.</span><span class="nx">week</span> <span class="c1"># 604800000</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Number</span><span class="p">,</span> <span class="py">weeks</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@days</span><span class="p">()</span> <span class="o">*</span> <span class="mi">7</span>
+<pre><code><span class="number">1.</span>week <span class="comment"># 604800000</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">weeks<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@days</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">7</span>
 
-</pre></div></td>
+
+</pre></td>
         </tr>
       </table>
     </div>

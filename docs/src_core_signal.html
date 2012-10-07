@@ -99,63 +99,69 @@ A <code>Signal</code> is a dispatcher that have only one channel.
     <a href='#signaldispatch'>Signal::dispatch</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='signal'>Signal</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Signals are generally defined as property of an object. And
 their name generally end with a past tense verb, such as in:</p>
 
-<div class="highlight"><pre><span class="nv">myObject.somethingChanged </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="k">class</span> <span class="nb">Signal</span></pre></div></td>
+<pre><code>myObject.somethingChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span></code></pre></td>
+          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">Signal</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalconstructor'>Signal::constructor</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Optionally, a signal can have a specific signature.
 A signature is a collection of argument names such:</p>
 
-<div class="highlight"><pre><span class="nv">positionChanged </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span> <span class="s">&#39;target&#39;</span><span class="p">,</span> <span class="s">&#39;position&#39;</span>
-</pre></div>
+<pre><code>positionChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>target<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>position<span class="string_end">'</span></span></code></pre>
 
 <p>If a signature is passed to a signal, every listener
 added to the signal must then match the signature.</p>
 
-<div class="highlight"><pre><span class="nx">positionChanged</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">position</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># will be registered</span>
-<span class="nx">positionChanged</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">position</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># will be registered too</span>
-<span class="nx">positionChanged</span><span class="p">.</span><span class="nx">add</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="c1"># will throw an error</span>
-</pre></div>
+<pre><code>positionChanged.add <span class="function"><span class="params"><span class="params_begin">(</span>target, position<span class="params_end">)</span></span> -></span>
+  <span class="comment"># will be registered</span>
+positionChanged.add <span class="function"><span class="params"><span class="params_begin">(</span>target, position, callback<span class="params_end">)</span></span> -></span>
+  <span class="comment"># will be registered too</span>
+positionChanged.add <span class="punctuation">(</span><span class="punctuation">)</span><span class="function"> -></span> <span class="comment"># will throw an error</span></code></pre>
 
 <p>In the case of an asynchronous listener, the callback argument
 is not considered as being part of the signature.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">constructor</span><span class="o">:</span> <span class="p">(</span><span class="py">@signature</span><span class="p">...)</span> <span class="o">-&gt;</span>
-    <span class="py">@listeners</span> <span class="o">=</span> <span class="p">[]</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">constructor<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@signature</span>...<span class="params_end">)</span></span> -></span>
+    <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>asyncListeners</code> property stores the number of asynchronous
 listeners to use a synchronous dispatch when equal to 0.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="py">@asyncListeners</span> <span class="o">=</span> <span class="mi">0</span></pre></div></td>
+          <td class='code'><pre>    <span class="property">@asyncListeners</span> <span class="operators">=</span> <span class="number">0</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='listeners-management'>Listeners management</h3>
 
 <p>Listeners are stored internally as an array with the form:</p>
 
-<div class="highlight"><pre><span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">calledOnce</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+<pre><code><span class="punctuation">[</span>listener, context, calledOnce, priority<span class="punctuation">]</span></code></pre></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signaladd'>Signal::add</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>You can register a listener with or without a context.
@@ -170,14 +176,15 @@ argument of the listener must be named <code>callback</code>. An async
 listener blocks the dispatch loop until the callback function
 passed to the listener is triggered.</p>
 
-<div class="highlight"><pre><span class="c1"># sync listener</span>
-<span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span>
+<pre><code><span class="comment"># sync listener</span>
+signal.add <span class="function"><span class="params"><span class="params_begin">(</span>a, b, c<span class="params_end">)</span></span> -></span>
 
-<span class="c1"># async listener</span>
-<span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">callback</span><span class="p">()</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">add</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nv">priority </span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="py">@validate</span> <span class="nx">listener</span></pre></div></td>
+<span class="comment"># async listener</span>
+signal.add <span class="function"><span class="params"><span class="params_begin">(</span>a, b, c, callback<span class="params_end">)</span></span> -></span> callback<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">add<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
+    <span class="property">@validate</span> listener
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>A listener can be registered several times, but only
@@ -185,46 +192,52 @@ if the context object is different each time.</p>
 
 <p>In other words, the following is possible:</p>
 
-<div class="highlight"><pre><span class="nv">listener </span><span class="o">=</span> <span class="o">-&gt;</span>
-<span class="nv">context </span><span class="o">=</span> <span class="p">{}</span>
-<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span>
-<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
-</pre></div>
+<pre><code>listener <span class="operators">=</span><span class="function"> -></span>
+context <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+myObject.signal.add listener
+myObject.signal.add listener, context</code></pre>
 
 <p>When the following is not:</p>
 
-<div class="highlight"><pre><span class="nv">listener </span><span class="o">=</span> <span class="o">-&gt;</span>
-<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span>
-<span class="nx">myObject</span><span class="p">.</span><span class="nx">signal</span><span class="p">.</span><span class="nx">add</span> <span class="nx">listener</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="o">not</span> <span class="py">@registered</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
-      <span class="py">@listeners</span><span class="p">.</span><span class="nx">push</span> <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span>
-      <span class="py">@asyncListeners</span><span class="o">++</span> <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span></pre></div></td>
+<pre><code>listener <span class="operators">=</span><span class="function"> -></span>
+myObject.signal.add listener
+myObject.signal.add listener</code></pre></td>
+          <td class='code'><pre>    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener, context
+      <span class="property">@listeners</span>.push <span class="punctuation">[</span>listener, context, <span class="literal">false</span>, priority<span class="punctuation">]</span>
+      <span class="property">@asyncListeners</span><span class="operators">+</span><span class="operators">+</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Listeners are sorted according to their order each time
 a new listener is added.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="py">@sortListeners</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>      <span class="property">@sortListeners</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signaladdonce'>Signal::addOnce</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Listeners can be registered for only one call.</p>
 
 <p>All the others rules are the same. So you can't add
 the same listener/context couple twice through the two methods.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">addOnce</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nv">priority </span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="py">@validate</span> <span class="nx">listener</span>
-    <span class="k">if</span> <span class="o">not</span> <span class="py">@registered</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
-      <span class="py">@listeners</span><span class="p">.</span><span class="nx">push</span> <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span>
-      <span class="py">@asyncListeners</span><span class="o">++</span> <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span>
-      <span class="py">@sortListeners</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">addOnce<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
+    <span class="property">@validate</span> listener
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener, context
+      <span class="property">@listeners</span>.push <span class="punctuation">[</span>listener, context, <span class="literal">true</span>, priority<span class="punctuation">]</span>
+      <span class="property">@asyncListeners</span><span class="operators">+</span><span class="operators">+</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+      <span class="property">@sortListeners</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalremove'>Signal::remove</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Listeners can be removed, but only with the context with which
@@ -234,124 +247,145 @@ they was added to the signal.</p>
 If later in the application a context is forgotten or invalid
 when removing a listener from this signal, the listener
 without context will end up being removed.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">remove</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="py">@registered</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span>
-      <span class="py">@asyncListeners</span><span class="o">--</span> <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span>
-      <span class="py">@listeners</span><span class="p">.</span><span class="nx">splice</span> <span class="py">@indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">),</span> <span class="mi">1</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">remove<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+    <span class="keyword">if</span> <span class="property">@registered</span> listener, context
+      <span class="property">@asyncListeners</span><span class="operators">-</span><span class="operators">-</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+      <span class="property">@listeners</span>.splice <span class="property">@indexOf</span><span class="punctuation">(</span>listener, context<span class="punctuation">)</span>, <span class="number">1</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalremoveall'>Signal::removeAll</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>All listeners can be removed at once if needed.</p>
 
-<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">()</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">removeAll</span><span class="o">:</span> <span class="o">-&gt;</span>
-    <span class="py">@listeners</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="py">@asyncListeners</span> <span class="o">=</span> <span class="mi">0</span></pre></div></td>
+<pre><code>signal.removeAll<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">removeAll<span class="hash_end">:</span></span><span class="function"> -></span>
+    <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    <span class="property">@asyncListeners</span> <span class="operators">=</span> <span class="number">0</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalindexof'>Signal::indexOf</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p><code>indexOf</code> returns the position of the listener/context couple
 in the listeners array.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">indexOf</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">i</span> <span class="k">for</span> <span class="p">[</span><span class="nx">l</span><span class="p">,</span><span class="nx">c</span><span class="p">],</span><span class="nx">i</span> <span class="k">in</span> <span class="py">@listeners</span> <span class="k">when</span> <span class="nx">listener</span> <span class="o">is</span> <span class="nx">l</span> <span class="o">and</span> <span class="nx">context</span> <span class="o">is</span> <span class="nx">c</span>
-    <span class="o">-</span><span class="mi">1</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">indexOf<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+    <span class="keyword">return</span> i <span class="keyword">for</span> <span class="punctuation">[</span>l,c<span class="punctuation">]</span>,i <span class="keyword">in</span> <span class="property">@listeners</span> <span class="keyword">when</span> listener <span class="keyword">is</span> l <span class="keyword">and</span> context <span class="keyword">is</span> c
+    <span class="operators">-</span><span class="number">1</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalregistered'>Signal::registered</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Use the <code>registered</code> method to test whether a listener/context couple
 have been registered in this signal.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">registered</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="py">@indexOf</span><span class="p">(</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="o">isnt</span> <span class="o">-</span><span class="mi">1</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">registered<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+    <span class="property">@indexOf</span><span class="punctuation">(</span>listener, context<span class="punctuation">)</span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalhaslisteners'>Signal::hasListeners</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns true if the signal has listeners.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">hasListeners</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@listeners</span><span class="p">.</span><span class="nx">length</span> <span class="o">isnt</span> <span class="mi">0</span></pre></div></td>
+          <td class='code'><pre>  <span class="hash">hasListeners<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@listeners</span>.length <span class="keyword">isnt</span> <span class="number">0</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalsortlisteners'>Signal::sortListeners</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The listeners are sorted according to their <code>priority</code>.
 The higher the priority the lower the listener will be
 in the call order.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">sortListeners</span><span class="o">:</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="k">if</span> <span class="py">@listeners</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">1</span>
-    <span class="py">@listeners</span><span class="p">.</span><span class="nx">sort</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="p">[</span><span class="nx">pA</span><span class="p">,</span> <span class="nx">pB</span> <span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="nx">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span>
+          <td class='code'><pre>  <span class="hash">sortListeners<span class="hash_end">:</span></span><span class="function"> -></span>
+    <span class="keyword">return</span> <span class="keyword">if</span> <span class="property">@listeners</span>.length &lt;<span class="operators">=</span> <span class="number">1</span>
+    <span class="property">@listeners</span>.sort <span class="function"><span class="params"><span class="params_begin">(</span>a, b<span class="params_end">)</span></span> -></span>
+      <span class="punctuation">[</span>pA, pB <span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span> a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span>, b<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">]</span>
 
-      <span class="k">if</span> <span class="nx">pA</span> <span class="o">&lt;</span> <span class="nx">pB</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">pB</span> <span class="o">&lt;</span> <span class="nx">pA</span> <span class="k">then</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span></pre></div></td>
+      <span class="keyword">if</span> pA &lt; pB then <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> pB &lt; pA then <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalvalidate'>Signal::validate</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Throws an error if the passed-in listener's signature
 doesn't match the signal's one.</p>
 
-<div class="highlight"><pre><span class="nv">signal </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Signal</span> <span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span>
-<span class="nx">signal</span><span class="p">.</span><span class="nx">validate</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="c1"># false</span>
-<span class="nx">signal</span><span class="p">.</span><span class="nx">validate</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># true</span>
-<span class="nx">signal</span><span class="p">.</span><span class="nx">validate</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">,</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">validate</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="py">@signature</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="nv">re </span><span class="o">=</span> <span class="sr">/</span><span class="src">[^(]</span><span class="sro">+</span><span class="sr">\(</span><span class="sro">(</span><span class="src">[^)]</span><span class="sro">+)</span><span class="sr">\).</span><span class="sro">*$</span><span class="sr">/m</span>
-      <span class="nv">listenerSignature </span><span class="o">=</span> <span class="nb">Function</span><span class="o">::</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">listener</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;\n&#39;</span><span class="p">).</span><span class="nx">shift</span><span class="p">()</span>
-      <span class="nv">signature </span><span class="o">=</span> <span class="nx">listenerSignature</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">re</span><span class="p">,</span> <span class="s">&#39;$1&#39;</span><span class="p">)</span>
-      <span class="nv">args </span><span class="o">=</span> <span class="nx">signature</span><span class="p">.</span><span class="nx">split</span> <span class="sr">/</span><span class="sre">\s</span><span class="sro">*</span><span class="sr">,\s</span><span class="sro">*</span><span class="sr">/g</span>
+<pre><code>signal <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span>
+signal.validate <span class="punctuation">(</span><span class="punctuation">)</span><span class="function"> -></span> <span class="comment"># false</span>
+signal.validate <span class="function"><span class="params"><span class="params_begin">(</span>a,b,c<span class="params_end">)</span></span> -></span> <span class="comment"># true</span>
+signal.validate <span class="function"><span class="params"><span class="params_begin">(</span>a,b,c,callback<span class="params_end">)</span></span> -></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">validate<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
+    <span class="keyword">if</span> <span class="property">@signature</span>.length > <span class="number">0</span>
+      re <span class="operators">=</span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>^(<span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>^)<span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\)</span>.<span class="regexp_operators">*</span><span class="regexp_operators">$</span><span class="regexp_end">/m</span></span>
+      listenerSignature <span class="operators">=</span> <span class="hash">Function<span class="hash_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="punctuation">)</span>.shift<span class="punctuation">(</span><span class="punctuation">)</span>
+      signature <span class="operators">=</span> listenerSignature.replace<span class="punctuation">(</span>re, <span class="string"><span class="string_begin">'</span>$1<span class="string_end">'</span></span><span class="punctuation">)</span>
+      args <span class="operators">=</span> signature.split <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">*</span>,<span class="escaped">\s</span><span class="regexp_operators">*</span><span class="regexp_end">/g</span></span>
 
-      <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span> <span class="k">if</span> <span class="nx">args</span><span class="p">.</span><span class="nx">first</span><span class="p">()</span> <span class="o">is</span> <span class="s">&#39;&#39;</span>
-      <span class="nx">args</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="k">if</span> <span class="nx">args</span><span class="p">.</span><span class="nx">last</span><span class="p">()</span> <span class="o">is</span> <span class="s">&#39;callback&#39;</span>
+      args.shift<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> args.first<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+      args.pop<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> args.last<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>callback<span class="string_end">'</span></span>
 
-      <span class="nv">s1 </span><span class="o">=</span> <span class="py">@signature</span><span class="p">.</span><span class="nx">join</span><span class="p">()</span>
-      <span class="nv">s2 </span><span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">()</span>
+      s1 <span class="operators">=</span> <span class="property">@signature</span>.join<span class="punctuation">(</span><span class="punctuation">)</span>
+      s2 <span class="operators">=</span> args.join<span class="punctuation">(</span><span class="punctuation">)</span>
 
-      <span class="nv">m </span><span class="o">=</span> <span class="s">&quot;The listener </span><span class="si">#{</span><span class="nx">listener</span><span class="si">}</span><span class="s"> doesn&#39;t match the signal&#39;s signature </span><span class="si">#{</span><span class="nx">s1</span><span class="si">}</span><span class="s">&quot;</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">m</span> <span class="k">if</span> <span class="nx">s2</span> <span class="o">isnt</span> <span class="nx">s1</span></pre></div></td>
+      m <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>The listener <span class="subst"><span class="subst_begin">#{</span>listener<span class="subst_end">}</span></span> doesn't match the signal's signature <span class="subst"><span class="subst_begin">#{</span>s1<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> m <span class="keyword">if</span> s2 <span class="keyword">isnt</span> s1
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signalisasync'>Signal::isAsync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the passed-in <code>listener</code> is asynchronous.</p>
 
-<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">isAsync</span> <span class="o">-&gt;</span> <span class="c1"># false</span>
-<span class="nx">signal</span><span class="p">.</span><span class="nx">isAsync</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">isAsync</span><span class="o">:</span> <span class="p">(</span><span class="nx">listener</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nb">Function</span><span class="o">::</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">listener</span><span class="p">).</span><span class="nx">indexOf</span><span class="p">(</span><span class="s">&#39;callback)&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span></pre></div></td>
+<pre><code>signal.isAsync<span class="function"> -></span> <span class="comment"># false</span>
+signal.isAsync <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">isAsync<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
+    <span class="hash">Function<span class="hash_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.indexOf<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>callback)<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="operators">!=</span> <span class="operators">-</span><span class="number">1</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='signal-dispatch'>Signal Dispatch</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='signaldispatch'>Signal::dispatch</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Signals are dispatched to all the listeners. All the arguments
 passed to the dispatch become the signal's message.</p>
 
-<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="kc">true</span>
-</pre></div>
+<pre><code>signal.dispatch <span class="keyword">this</span>, <span class="literal">true</span></code></pre>
 
 <p>Listeners registered for only one call will be removed after
 the call.</p>
@@ -362,57 +396,58 @@ In that case, the callback must be the last argument passed to the
 of the dispatch, allowing to execute code after all listeners,
 even asynchronous, have been triggered.</p>
 
-<div class="highlight"><pre><span class="nx">signal</span><span class="p">.</span><span class="nx">dispatch</span> <span class="py">this</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="o">-&gt;</span>
-  <span class="c1"># all listeners have finish their execution</span>
-</pre></div>
+<pre><code>signal.dispatch <span class="keyword">this</span>, <span class="literal">true</span>,<span class="function"> -></span>
+  <span class="comment"># all listeners have finish their execution</span></code></pre>
 
 <p><strong>Note:</strong> As the dispatch function will automatically consider
 the last argument as the callback if its type is <code>function</code>, you should
 avoid using function as the sole argument or as the last argument
 for a listener. If that case occurs, consider either re-arranging the
 arguments order or using a value object to carry the function.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">dispatch</span><span class="o">:</span> <span class="p">(</span><span class="nx">args</span><span class="p">...,</span> <span class="nx">callback</span><span class="p">)</span><span class="o">-&gt;</span>
-    <span class="k">unless</span> <span class="k">typeof</span> <span class="nx">callback</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
-      <span class="nx">args</span><span class="p">.</span><span class="nx">push</span> <span class="nx">callback</span>
-      <span class="nv">callback </span><span class="o">=</span> <span class="kc">null</span>
+          <td class='code'><pre>  <span class="hash">dispatch<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>args..., callback<span class="params_end">)</span></span>-></span>
+    <span class="keyword">unless</span> <span class="keyword">typeof</span> callback <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+      args.push callback
+      callback <span class="operators">=</span> <span class="literal">null</span>
 
-    <span class="nv">listeners </span><span class="o">=</span> <span class="py">@listeners</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span></pre></div></td>
+    listeners <span class="operators">=</span> <span class="property">@listeners</span>.concat<span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If at leat one listener is async, the whole dispatch process is async
 otherwise the fast route is used.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="py">@asyncListeners</span> <span class="o">&gt;</span> <span class="mi">0</span>
-      <span class="nv">next </span><span class="o">=</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">=&gt;</span>
-        <span class="k">if</span> <span class="nx">listeners</span><span class="p">.</span><span class="nx">length</span>
-          <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">once</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span> <span class="o">=</span> <span class="nx">listeners</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+          <td class='code'><pre>    <span class="keyword">if</span> <span class="property">@asyncListeners</span> > <span class="number">0</span>
+      next <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> =></span>
+        <span class="keyword">if</span> listeners.length
+          <span class="punctuation">[</span>listener, context, once, priority<span class="punctuation">]</span> <span class="operators">=</span> listeners.shift<span class="punctuation">(</span><span class="punctuation">)</span>
 
-          <span class="k">if</span> <span class="py">@isAsync</span> <span class="nx">listener</span>
-            <span class="nx">listener</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">context</span><span class="p">,</span> <span class="nv">args.concat </span><span class="o">=&gt;</span>
-              <span class="py">@remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span> <span class="k">if</span> <span class="nx">once</span>
-              <span class="nx">next</span> <span class="nx">callback</span>
-          <span class="k">else</span>
-            <span class="nx">listener</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">args</span>
-            <span class="py">@remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span> <span class="k">if</span> <span class="nx">once</span>
-            <span class="nx">next</span> <span class="nx">callback</span>
-        <span class="k">else</span>
-          <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+          <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+            listener.apply context, args.concat<span class="function"> =></span>
+              <span class="property">@remove</span> listener, context <span class="keyword">if</span> once
+              next callback
+          <span class="keyword">else</span>
+            listener.apply context, args
+            <span class="property">@remove</span> listener, context <span class="keyword">if</span> once
+            next callback
+        <span class="keyword">else</span>
+          callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
-      <span class="nx">next</span> <span class="nx">callback</span>
-    <span class="k">else</span></pre></div></td>
+      next callback
+    <span class="keyword">else</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The fast route is just a loop over the listeners.
 At that point, if your listener do async stuff, it will
 not prevent the dispatching until it's done.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="k">for</span> <span class="p">[</span><span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">once</span><span class="p">,</span> <span class="nx">priority</span><span class="p">]</span> <span class="k">in</span> <span class="nx">listeners</span>
-        <span class="nx">listener</span><span class="p">.</span><span class="nx">apply</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">arguments</span>
-        <span class="py">@remove</span> <span class="nx">listener</span><span class="p">,</span> <span class="nx">context</span> <span class="k">if</span> <span class="nx">once</span>
+          <td class='code'><pre>      <span class="keyword">for</span> <span class="punctuation">[</span>listener, context, once, priority<span class="punctuation">]</span> <span class="keyword">in</span> listeners
+        listener.apply context, arguments
+        <span class="property">@remove</span> listener, context <span class="keyword">if</span> once
 
-      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+      callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">Signal</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Signal</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

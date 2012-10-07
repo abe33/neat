@@ -121,222 +121,279 @@ messages to be filtered by the environment.
     <a href='#notoutsideneat'>notOutsideNeat</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">Logger</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./logger&#39;</span></pre></div></td>
+          <td class='code'><pre>
+<span class="constant">Logger</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logger<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>In case the <code>colors</code> module can't be found - probably in the case
 you downloaded the neat repository and didn't run <code>cake install</code> yet -
 a message is displayed.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="k">try</span>
-  <span class="nv">colors </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;colors&#39;</span>
-<span class="k">catch</span> <span class="nx">e</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;&quot;&quot;Can&#39;t find colors module</span>
+          <td class='code'><pre><span class="keyword">try</span>
+  colors <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>colors<span class="string_end">'</span></span>
+<span class="keyword">catch</span> e
+  <span class="native">console</span>.log <span class="heredocs"><span class="heredocs_begin">"""</span>Can't find colors module
 
-<span class="s">                 Run cake install to install the dependencies.&quot;&quot;&quot;</span></pre></div></td>
+                 Run cake install to install the dependencies.<span class="heredocs_end">"""</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>A logger instance is created at startup.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">logger </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Logger</span></pre></div></td>
+          <td class='code'><pre>logger <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Logger</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='logging-utilities'>Logging Utilities</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='colorization'>Colorization</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='color'>color</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The color function is used to prevent the colorization of a string
 to fail when the <code>colors</code> module can't be found.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">color </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">color</span><span class="p">)</span> <span class="o">-&gt;</span>  <span class="k">if</span> <span class="nx">str</span><span class="p">[</span><span class="nx">color</span><span class="p">]</span><span class="o">?</span> <span class="k">then</span> <span class="nx">str</span><span class="p">[</span><span class="nx">color</span><span class="p">]</span> <span class="k">else</span> <span class="nx">str</span></pre></div></td>
+          <td class='code'><pre>color <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, color<span class="params_end">)</span></span> -></span>  <span class="keyword">if</span> str<span class="punctuation">[</span>color<span class="punctuation">]</span><span class="operators">?</span> then str<span class="punctuation">[</span>color<span class="punctuation">]</span> <span class="keyword">else</span> str
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='blue'>blue</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in blue, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">blue    </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span></pre></div></td>
+          <td class='code'><pre>blue    <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>blue<span class="string_end">'</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='cyan'>cyan</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in cyan, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">cyan    </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;cyan&#39;</span></pre></div></td>
+          <td class='code'><pre>cyan    <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>cyan<span class="string_end">'</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='green'>green</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in green, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">green   </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;green&#39;</span></pre></div></td>
+          <td class='code'><pre>green   <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>green<span class="string_end">'</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='inverse'>inverse</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in inverse, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">inverse </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;inverse&#39;</span></pre></div></td>
+          <td class='code'><pre>inverse <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>inverse<span class="string_end">'</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='magenta'>magenta</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in magenta, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">magenta </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;magenta&#39;</span></pre></div></td>
+          <td class='code'><pre>magenta <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>magenta<span class="string_end">'</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='red'>red</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in red, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">red     </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;red&#39;</span></pre></div></td>
+          <td class='code'><pre>red     <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>red<span class="string_end">'</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='yellow'>yellow</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in yellow, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">yellow  </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">color</span> <span class="nx">str</span><span class="p">,</span> <span class="s">&#39;yellow&#39;</span></pre></div></td>
+          <td class='code'><pre>yellow  <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>yellow<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='logging'>Logging</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='puts'>puts</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message that automatically end with a new line character.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">puts </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nv">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">str</span><span class="si">}</span><span class="s">\n&quot;</span><span class="p">,</span> <span class="nx">level</span></pre></div></td>
+          <td class='code'><pre>puts <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span> logger.log <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="escaped">\n</span><span class="string_end">"</span></span>, level
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='print'>print</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message without automatic new line character at the end.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">print </span><span class="o">=</span> <span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nv">level</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">log</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">level</span></pre></div></td>
+          <td class='code'><pre><span class="native">print</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span> logger.log str, level
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='prefix'>prefix</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Prefix the passed-in string with the passed-in prefix.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">prefix </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">prefix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">prefix</span><span class="si">}</span><span class="s"> </span><span class="si">#{</span><span class="nx">string</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+          <td class='code'><pre>prefix <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string, prefix<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>prefix<span class="subst_end">}</span></span> <span class="subst"><span class="subst_begin">#{</span>string<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='fatal'>fatal</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.FATAL</code> level.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">fatal </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">red</span> <span class="s">&quot; FATAL &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">FATAL</span></pre></div></td>
+          <td class='code'><pre>fatal <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse red <span class="string"><span class="string_begin">"</span> FATAL <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">FATAL</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='error'>error</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.ERROR</code> level.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">error </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">red</span> <span class="s">&quot; ERROR &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">ERROR</span></pre></div></td>
+          <td class='code'><pre>error <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse red <span class="string"><span class="string_begin">"</span> ERROR <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">ERROR</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='warn'>warn</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.WARN</code> level.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">warn  </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">yellow</span> <span class="s">&quot; WARN &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">WARN</span></pre></div></td>
+          <td class='code'><pre>warn  <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse yellow <span class="string"><span class="string_begin">"</span> WARN <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">WARN</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='info'>info</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.INFO</code> level.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">info  </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">green</span> <span class="s">&quot; INFO &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">INFO</span></pre></div></td>
+          <td class='code'><pre>info  <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse green <span class="string"><span class="string_begin">"</span> INFO <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">INFO</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='debug'>debug</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.DEBUG</code> level.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">debug </span><span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">puts</span> <span class="nx">prefix</span><span class="p">(</span><span class="nx">string</span><span class="p">,</span> <span class="nx">inverse</span> <span class="nx">blue</span> <span class="s">&quot; DEBUG &quot;</span><span class="p">),</span> <span class="nb">Logger</span><span class="p">.</span><span class="nb">DEBUG</span></pre></div></td>
+          <td class='code'><pre>debug <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse blue <span class="string"><span class="string_begin">"</span> DEBUG <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">DEBUG</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='other-utilities'>Other Utilities</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='missing'>missing</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Generates a message for a missing resources.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">missing </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">_ </span><span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">&#39;../../neat&#39;</span><span class="p">).</span><span class="nx">i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span>
-  <span class="nx">red</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.missing&#39;</span><span class="p">,</span> <span class="py">missing</span><span class="o">:</span> <span class="nx">path</span><span class="p">)</span></pre></div></td>
+          <td class='code'><pre>missing <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span>
+  _ <span class="operators">=</span> <span class="native">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span>, <span class="hash">missing<span class="hash_end">:</span></span> path<span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='notoutsideneat'>notOutsideNeat</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Generates a messages for a neat command that can't run outside
 of a Neat project.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">notOutsideNeat </span><span class="o">=</span> <span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">_ </span><span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s">&#39;../../neat&#39;</span><span class="p">).</span><span class="nx">i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span>
-  <span class="nx">red</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.errors.outside_neat&#39;</span><span class="p">,</span> <span class="py">expression</span><span class="o">:</span> <span class="nx">s</span><span class="p">)</span>
+          <td class='code'><pre>notOutsideNeat <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>s<span class="params_end">)</span></span> -></span>
+  _ <span class="operators">=</span> <span class="native">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span>, <span class="hash">expression<span class="hash_end">:</span></span> s<span class="punctuation">)</span>
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span>
-  <span class="nx">blue</span><span class="p">,</span>
-  <span class="nx">cyan</span><span class="p">,</span>
-  <span class="nx">debug</span><span class="p">,</span>
-  <span class="nx">error</span><span class="p">,</span>
-  <span class="nx">green</span><span class="p">,</span>
-  <span class="nx">info</span><span class="p">,</span>
-  <span class="nx">inverse</span><span class="p">,</span>
-  <span class="nx">logger</span><span class="p">,</span>
-  <span class="nx">magenta</span><span class="p">,</span>
-  <span class="nx">missing</span><span class="p">,</span>
-  <span class="nx">notOutsideNeat</span><span class="p">,</span>
-  <span class="nx">prefix</span><span class="p">,</span>
-  <span class="nx">print</span><span class="p">,</span>
-  <span class="nx">puts</span><span class="p">,</span>
-  <span class="nx">red</span><span class="p">,</span>
-  <span class="nx">warn</span><span class="p">,</span>
-  <span class="nx">yellow</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+  blue,
+  cyan,
+  debug,
+  error,
+  green,
+  info,
+  inverse,
+  logger,
+  magenta,
+  missing,
+  notOutsideNeat,
+  prefix,
+  <span class="native">print</span>,
+  puts,
+  red,
+  warn,
+  yellow,
+<span class="punctuation">}</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

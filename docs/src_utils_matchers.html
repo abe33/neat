@@ -55,9 +55,8 @@ such as array filters or duck tests.</p>
 <p>Matchers are curried functions that generates testing functions based
 on the arguments passed to the generator.</p>
 
-<div class="highlight"><pre><span class="nv">testFunction </span><span class="o">=</span> <span class="nx">equalTo</span> <span class="mi">10</span>
-<span class="nx">testFunction</span> <span class="mi">10</span> <span class="c1"># true</span>
-</pre></div>
+<pre><code>testFunction <span class="operators">=</span> equalTo <span class="number">10</span>
+testFunction <span class="number">10</span> <span class="comment"># true</span></code></pre>
 
 <p><h3>Table Of Content</h3>
 <ul class='toc'>
@@ -107,102 +106,119 @@ on the arguments passed to the generator.</p>
     <a href='#quackslike'>quacksLike</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='match'>match</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The match function either call <code>m</code> with <code>v</code> when <code>m</code> is a function
 or compare <code>m</code> and <code>v</code> otherwise.</p>
 
 <p>Match is used whenever a matcher function allow matchers as arguments.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">match </span><span class="o">=</span> <span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">m</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span> <span class="k">then</span> <span class="nx">m</span> <span class="nx">v</span> <span class="k">else</span> <span class="nx">m</span> <span class="o">is</span> <span class="nx">v</span></pre></div></td>
+          <td class='code'><pre>match <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>m,v<span class="params_end">)</span></span> -></span> <span class="keyword">if</span> <span class="keyword">typeof</span> m <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> then m v <span class="keyword">else</span> m <span class="keyword">is</span> v
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='anyof'>anyOf</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if any of the <code>matchers</code> match <code>el</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">anyOf</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">isType</span><span class="p">(</span><span class="s">&#39;string&#39;</span><span class="p">)</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">anyOf </span><span class="o">=</span> <span class="p">(</span><span class="nx">matchers</span><span class="p">...)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="kc">true</span> <span class="k">for</span> <span class="nx">m</span> <span class="k">in</span> <span class="nx">matchers</span> <span class="k">when</span> <span class="nx">match</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">el</span>
-  <span class="kc">false</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some anyOf <span class="number">10</span>, isType<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>anyOf <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>matchers...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+  <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">for</span> m <span class="keyword">in</span> matchers <span class="keyword">when</span> match m, el
+  <span class="literal">false</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='allof'>allOf</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if all of the <code>matchers</code> match <code>el</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">allOf</span> <span class="mi">10</span><span class="p">,</span> <span class="nx">isType</span><span class="p">(</span><span class="s">&#39;string&#39;</span><span class="p">)</span> <span class="c1"># false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">allOf </span><span class="o">=</span> <span class="p">(</span><span class="nx">matchers</span><span class="p">...)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="kc">false</span> <span class="k">for</span> <span class="nx">m</span> <span class="k">in</span> <span class="nx">matchers</span> <span class="k">when</span> <span class="o">not</span> <span class="nx">match</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">el</span>
-  <span class="kc">true</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some allOf <span class="number">10</span>, isType<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>allOf <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>matchers...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+  <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">for</span> m <span class="keyword">in</span> matchers <span class="keyword">when</span> <span class="keyword">not</span> match m, el
+  <span class="literal">true</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='equalto'>equalTo</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Compares <code>el</code> with <code>val</code> using the <code>===</code> operator.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">equalTo</span> <span class="s">&#39;foo&#39;</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">equalTo </span><span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span> <span class="o">is</span> <span class="nx">val</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some equalTo <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>equalTo <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el <span class="keyword">is</span> val
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='greaterthan'>greaterThan</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is greater than <code>val</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">greaterThan</span> <span class="mi">5</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">greaterThan </span><span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span> <span class="o">&gt;</span> <span class="nx">val</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some greaterThan <span class="number">5</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>greaterThan <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el > val
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='greaterthanorequalto'>greaterThanOrEqualTo</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is greater than or equal to <code>val</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">greaterThanOrEqualTo</span> <span class="mi">10</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">greaterThanOrEqualTo </span><span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span> <span class="o">&gt;=</span> <span class="nx">val</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some greaterThanOrEqualTo <span class="number">10</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>greaterThanOrEqualTo <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el ><span class="operators">=</span> val
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='hasproperty'>hasProperty</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>hasProperty</code> allow to both test the existence of a property
 and test the content of the property.</p>
 
-<div class="highlight"><pre><span class="nv">obj </span><span class="o">=</span> <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-<span class="nx">hasProperty</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)(</span><span class="nx">obj</span><span class="p">)</span>                  <span class="c1"># true</span>
-<span class="nx">hasProperty</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)(</span><span class="nx">obj</span><span class="p">)</span>              <span class="c1"># true</span>
-<span class="nx">hasProperty</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="nx">isType</span> <span class="s">&#39;number&#39;</span><span class="p">)(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">hasProperty </span><span class="o">=</span> <span class="p">(</span><span class="nx">prop</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">el</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="o">isnt</span> <span class="kc">undefined</span> <span class="o">and</span> <span class="k">if</span> <span class="nx">val</span><span class="o">?</span> <span class="k">then</span> <span class="nx">match</span> <span class="nx">val</span><span class="p">,</span> <span class="nx">el</span><span class="p">[</span><span class="nx">prop</span><span class="p">]</span> <span class="k">else</span> <span class="kc">true</span></pre></div></td>
+<pre><code>obj <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>                  <span class="comment"># true</span>
+hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span>
+hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, isType <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>hasProperty <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>prop, val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+  el<span class="punctuation">[</span>prop<span class="punctuation">]</span> <span class="keyword">isnt</span> <span class="literal">undefined</span> <span class="keyword">and</span> <span class="keyword">if</span> val<span class="operators">?</span> then match val, el<span class="punctuation">[</span>prop<span class="punctuation">]</span> <span class="keyword">else</span> <span class="literal">true</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='hasproperties'>hasProperties</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>hasProperty</code> allow to both test the existence of properties
@@ -214,126 +230,141 @@ object will test for each property defined in the object, the values
 of the argument properties being the matchers to use against the tested
 objet properties.</p>
 
-<div class="highlight"><pre><span class="nv">obj </span><span class="o">=</span> <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="kc">false</span>
+<pre><code>obj <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span>
 
-<span class="nx">hasProperties</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">)(</span><span class="nx">obj</span><span class="p">)</span>                   <span class="c1"># true</span>
-<span class="nx">hasProperties</span><span class="p">(</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="nx">isType</span> <span class="s">&#39;boolean&#39;</span><span class="p">)(</span><span class="nx">obj</span><span class="p">)</span> <span class="c1"># true</span>
-<span class="nx">hasProperties</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="kc">false</span><span class="p">)(</span><span class="nx">obj</span><span class="p">)</span>              <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">hasProperties </span><span class="o">=</span> <span class="p">(</span><span class="nx">propsets</span><span class="p">...)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span>
+hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>                   <span class="comment"># true</span>
+hasProperties<span class="punctuation">(</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> isType <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span>
+hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>hasProperties <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>propsets...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
 
-  <span class="nv">results </span><span class="o">=</span> <span class="kc">true</span>
-  <span class="k">for</span> <span class="nx">propset</span> <span class="k">in</span> <span class="nx">propsets</span>
-    <span class="k">if</span> <span class="k">typeof</span> <span class="nx">propset</span> <span class="o">is</span> <span class="s">&#39;string&#39;</span>
-      <span class="nx">results</span> <span class="o">&amp;&amp;=</span> <span class="nx">el</span><span class="p">[</span><span class="nx">propset</span><span class="p">]</span> <span class="o">isnt</span> <span class="kc">undefined</span>
-    <span class="k">else</span>
-      <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nx">propset</span>
-        <span class="nx">results</span> <span class="o">&amp;&amp;=</span> <span class="nx">hasProperty</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)(</span><span class="nx">el</span><span class="p">)</span>
-  <span class="nx">results</span></pre></div></td>
+  results <span class="operators">=</span> <span class="literal">true</span>
+  <span class="keyword">for</span> propset <span class="keyword">in</span> propsets
+    <span class="keyword">if</span> <span class="keyword">typeof</span> propset <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span>
+      results <span class="operators">&amp;</span><span class="operators">&amp;</span><span class="operators">=</span> el<span class="punctuation">[</span>propset<span class="punctuation">]</span> <span class="keyword">isnt</span> <span class="literal">undefined</span>
+    <span class="keyword">else</span>
+      <span class="keyword">for</span> k,v <span class="keyword">of</span> propset
+        results <span class="operators">&amp;</span><span class="operators">&amp;</span><span class="operators">=</span> hasProperty<span class="punctuation">(</span>k,v<span class="punctuation">)</span><span class="punctuation">(</span>el<span class="punctuation">)</span>
+  results
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='isnot'>isNot</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Inverse the boolean value returned by a matcher, or test the difference
 with <code>m</code> if it's not a function.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">isNot</span> <span class="nx">equalTo</span> <span class="s">&#39;foo&#39;</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">isNot </span><span class="o">=</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">not</span> <span class="nx">match</span> <span class="nx">m</span><span class="p">,</span> <span class="nx">el</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some isNot equalTo <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>isNot <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>m<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">not</span> match m, el
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='isnotnull'>isNotNull</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if <code>el</code> is not null.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">isNotNull </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span><span class="o">?</span></pre></div></td>
+          <td class='code'><pre>isNotNull <span class="operators">=</span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el<span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='isnull'>isNull</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if <code>el</code> is null.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">isNull </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">not</span> <span class="nx">el</span><span class="o">?</span></pre></div></td>
+          <td class='code'><pre>isNull <span class="operators">=</span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">not</span> el<span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='istype'>isType</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the product of <code>typeof el</code> is equal
 to <code>type</code>.</p>
 
-<div class="highlight"><pre><span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">].</span><span class="nx">every</span> <span class="nx">isType</span> <span class="s">&#39;string&#39;</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">isType </span><span class="o">=</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">typeof</span> <span class="nx">el</span> <span class="o">is</span> <span class="nx">type</span></pre></div></td>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">]</span>.every isType <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>isType <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>type<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">typeof</span> el <span class="keyword">is</span> type
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='lowerthan'>lowerThan</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is lower than <code>val</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">lowerThan</span> <span class="mi">15</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">lowerThan </span><span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span> <span class="o">&lt;</span> <span class="nx">val</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some lowerThan <span class="number">15</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>lowerThan <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el &lt; val
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='lowerthanorequalto'>lowerThanOrEqualTo</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is lower than or equal to <code>val</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span>
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">lowerThanOrEqualTo</span> <span class="mi">10</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">lowerThanOrEqualTo </span><span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span> <span class="o">&lt;=</span> <span class="nx">val</span></pre></div></td>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
+ary.some lowerThanOrEqualTo <span class="number">10</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>lowerThanOrEqualTo <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el &lt;<span class="operators">=</span> val
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='quackslike'>quacksLike</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Performs a duck test with <code>def</code> definition against <code>el</code>.</p>
 
-<div class="highlight"><pre><span class="nv">ary </span><span class="o">=</span> <span class="p">[</span>
-  <span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="s">&#39;baz&#39;</span><span class="p">},</span>
-  <span class="p">{},</span>
-  <span class="p">{</span><span class="py">baz</span><span class="o">:</span> <span class="s">&#39;bar&#39;</span><span class="p">},</span>
-<span class="p">]</span>
-<span class="nv">def </span><span class="o">=</span> <span class="nb">__definition__</span><span class="o">:</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="s">&#39;number&#39;</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">v</span> <span class="o">is</span> <span class="s">&#39;baz&#39;</span>
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span>
+  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">}</span>,
+  <span class="punctuation">{</span><span class="punctuation">}</span>,
+  <span class="punctuation">{</span><span class="hash">baz<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">}</span>,
+<span class="punctuation">]</span>
+def <span class="operators">=</span> <span class="hash">__definition__<span class="hash_end">:</span></span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>v<span class="params_end">)</span></span> -></span> v <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
 
-<span class="nx">ary</span><span class="p">.</span><span class="nx">some</span> <span class="nx">quacksLike</span> <span class="nx">def</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">quacksLike </span><span class="o">=</span> <span class="p">(</span><span class="nx">def</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">el</span><span class="o">?</span><span class="p">.</span><span class="nx">quacksLike</span> <span class="nx">def</span>
+ary.some quacksLike def <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>quacksLike <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>def<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el<span class="operators">?</span>.quacksLike def
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span>
-  <span class="nx">allOf</span><span class="p">,</span>
-  <span class="nx">anyOf</span><span class="p">,</span>
-  <span class="nx">equalTo</span><span class="p">,</span>
-  <span class="nx">greaterThan</span><span class="p">,</span>
-  <span class="nx">greaterThanOrEqualTo</span><span class="p">,</span>
-  <span class="nx">hasProperties</span><span class="p">,</span>
-  <span class="nx">hasProperty</span><span class="p">,</span>
-  <span class="nx">isNot</span><span class="p">,</span>
-  <span class="nx">isNotNull</span><span class="p">,</span>
-  <span class="nx">isNull</span><span class="p">,</span>
-  <span class="nx">isType</span><span class="p">,</span>
-  <span class="nx">lowerThan</span><span class="p">,</span>
-  <span class="nx">lowerThanOrEqualTo</span><span class="p">,</span>
-  <span class="nx">quacksLike</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+  allOf,
+  anyOf,
+  equalTo,
+  greaterThan,
+  greaterThanOrEqualTo,
+  hasProperties,
+  hasProperty,
+  isNot,
+  isNotNull,
+  isNull,
+  isType,
+  lowerThan,
+  lowerThanOrEqualTo,
+  quacksLike,
+<span class="punctuation">}</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

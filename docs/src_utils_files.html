@@ -129,151 +129,168 @@ within a Neat project.
     <a href='#touchsync'>touchSync</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">fs </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;fs&#39;</span>
-<span class="p">{</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">existsSync</span><span class="p">,</span> <span class="nx">exists</span><span class="p">,</span> <span class="nx">basename</span><span class="p">,</span> <span class="nx">relative</span><span class="p">,</span> <span class="nx">extname</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;path&#39;</span>
-<span class="p">{</span><span class="nx">puts</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span> <span class="nx">warn</span><span class="p">,</span> <span class="nx">missing</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./logs&#39;</span>
-<span class="p">{</span><span class="nx">parallel</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;../async&#39;</span></pre></div></td>
+          <td class='code'><pre>
+fs <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+<span class="punctuation">{</span>resolve, existsSync, exists, basename, relative, extname<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="punctuation">{</span>puts, error, warn, missing<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
+<span class="punctuation">{</span>parallel<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../async<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='dirwithindex'>dirWithIndex</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the path to the <code>index</code> present in the <code>dir</code> directory
 if this directory contains an index file which extension is <code>ext</code>.
 If no <code>ext</code> is provided any file with a basename of <code>index</code> is returned.</p>
 
-<div class="highlight"><pre><span class="nx">dirWithIndex</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
-    <span class="c1"># do something with the index</span>
+<pre><code>dirWithIndex <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>index<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> index<span class="operators">?</span>
+    <span class="comment"># do something with the index</span>
 
-<span class="nx">dirWithIndex</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">index</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
-    <span class="c1"># do something with index.js</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">dirWithIndex </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nv">ext</span><span class="o">=</span><span class="kc">null</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="p">[</span><span class="nx">ext</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">ext</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">ext</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
-  <span class="nx">exists</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span> <span class="k">unless</span> <span class="nx">b</span>
+dirWithIndex <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>index<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> index<span class="operators">?</span>
+    <span class="comment"># do something with index.js</span></code></pre></td>
+          <td class='code'><pre>dirWithIndex <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir, ext<span class="operators">=</span>null, callback<span class="params_end">)</span></span> -></span>
+  <span class="punctuation">[</span>ext, callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>callback, ext<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> ext <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+  exists dir, <span class="function"><span class="params"><span class="params_begin">(</span>b<span class="params_end">)</span></span> -></span>
+    <span class="keyword">return</span> callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">unless</span> b
 
-    <span class="nv">index </span><span class="o">=</span> <span class="k">if</span> <span class="nx">ext</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;index&quot;</span>
+    index <span class="operators">=</span> <span class="keyword">if</span> ext<span class="operators">?</span> then <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">else</span> <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
 
-    <span class="nx">findBase</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="nx">callback</span> <span class="nx">res</span><span class="o">?</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></pre></div></td>
+    findBase dir, index, <span class="function"><span class="params"><span class="params_begin">(</span>res<span class="params_end">)</span></span> -></span>
+      callback res<span class="operators">?</span><span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='dirwithindexsync'>dirWithIndexSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the path to the <code>index</code> present in the <code>dir</code> directory
 if this directory contains an index file which extension is <code>ext</code>.
 If no <code>ext</code> is provided any file with a basename of <code>index</code> is returned.</p>
 
-<div class="highlight"><pre><span class="nv">index </span><span class="o">=</span> <span class="nx">dirWithIndexSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
-<span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
-  <span class="c1"># do something with the index</span>
+<pre><code>index <span class="operators">=</span> dirWithIndexSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>
+<span class="keyword">if</span> index<span class="operators">?</span>
+  <span class="comment"># do something with the index</span>
 
-<span class="nv">index </span><span class="o">=</span> <span class="nx">dirWithIndexSync</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;js&#39;</span>
-<span class="k">if</span> <span class="nx">index</span><span class="o">?</span>
-  <span class="c1"># do something with index.js</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">dirWithIndexSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nv">ext</span><span class="o">=</span><span class="kc">null</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">dir</span>
+index <span class="operators">=</span> dirWithIndexSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>
+<span class="keyword">if</span> index<span class="operators">?</span>
+  <span class="comment"># do something with index.js</span></code></pre></td>
+          <td class='code'><pre>dirWithIndexSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir, ext<span class="operators">=</span>null<span class="params_end">)</span></span> -></span>
+  <span class="keyword">return</span> <span class="keyword">unless</span> existsSync dir
 
-  <span class="nv">index </span><span class="o">=</span> <span class="k">if</span> <span class="nx">ext</span><span class="o">?</span> <span class="k">then</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">else</span> <span class="s">&quot;index&quot;</span>
+  index <span class="operators">=</span> <span class="keyword">if</span> ext<span class="operators">?</span> then <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">else</span> <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
 
-  <span class="nx">findBaseSync</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span><span class="o">?</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></pre></div></td>
+  findBaseSync<span class="punctuation">(</span>dir, index<span class="punctuation">)</span><span class="operators">?</span><span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='ensure'>ensure</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Ensures that the <code>dir</code> folder exists, and creates it otherwise.</p>
 
-<div class="highlight"><pre><span class="nx">ensure</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># handle errors</span>
-</pre></div>
+<pre><code>ensure <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>err, created<span class="params_end">)</span></span> -></span>
+  <span class="comment"># handle errors</span></code></pre>
 
 <p>The <code>created</code> argument of the callback function is a boolean
 value that indicates if the directory was created or not.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">ensure </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">exists</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">b</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">false</span>
-    <span class="k">else</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdir</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">if</span> <span class="nx">err</span><span class="o">?</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">false</span>
-      <span class="k">else</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span></pre></div></td>
+          <td class='code'><pre>ensure <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir, callback<span class="params_end">)</span></span> -></span>
+  exists dir, <span class="function"><span class="params"><span class="params_begin">(</span>b<span class="params_end">)</span></span> -></span>
+    <span class="keyword">if</span> b then callback<span class="operators">?</span> <span class="literal">null</span>, <span class="literal">false</span>
+    <span class="keyword">else</span> fs.mkdir dir, <span class="function"><span class="params"><span class="params_begin">(</span>err<span class="params_end">)</span></span> -></span>
+      <span class="keyword">if</span> err<span class="operators">?</span> then callback<span class="operators">?</span> err, <span class="literal">false</span>
+      <span class="keyword">else</span> callback<span class="operators">?</span> <span class="literal">null</span>, <span class="literal">true</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='ensuresync'>ensureSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Ensures that the <code>dir</code> folder exists, and creates it otherwise.</p>
 
-<div class="highlight"><pre><span class="nx">ensureSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
-</pre></div>
+<pre><code>ensureSync '/path/to/dir'</code></pre>
 
 <p>Note that the function will fail with an error in this
 context if <code>/path/to</code> don't exist.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">ensureSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span> <span class="nx">dir</span><span class="p">;</span> <span class="k">return</span> <span class="kc">true</span><span class="p">)</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">dir</span><span class="p">;</span> <span class="kc">false</span></pre></div></td>
+          <td class='code'><pre>ensureSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir<span class="params_end">)</span></span> -></span>
+  <span class="punctuation">(</span>fs.mkdirSync dir; <span class="keyword">return</span> <span class="literal">true</span><span class="punctuation">)</span> <span class="keyword">unless</span> existsSync dir; <span class="literal">false</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='ensurepath'>ensurePath</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Ensures that the path exists and creates the missing folders if needed.</p>
 
-<div class="highlight"><pre><span class="nx">ensurePath</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># handle error</span>
-</pre></div>
+<pre><code>ensurePath <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>err, created<span class="params_end">)</span></span> -></span>
+  <span class="comment"># handle error</span></code></pre>
 
 <p>In that context, if the <code>path</code> and <code>to</code> folders don't exist
 they will be created and then the <code>dir</code> one.</p>
 
 <p>The <code>created</code> argument of the callback function is a boolean
 value that indicates if the directory was created or not.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">ensurePath </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">stack </span><span class="o">=</span> <span class="p">[]</span>
-  <span class="nv">generator </span><span class="o">=</span> <span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">ensure</span> <span class="nx">d</span><span class="p">,</span> <span class="nx">callback</span>
-  <span class="nv">next </span><span class="o">=</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">false</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
-    <span class="k">if</span> <span class="nx">stack</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="nx">stack</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span><span class="o">?</span> <span class="nx">next</span> <span class="k">else</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">created</span>
+          <td class='code'><pre>ensurePath <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, callback<span class="params_end">)</span></span> -></span>
+  stack <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+  generator <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>d<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span> ensure d, callback
+  next <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>err, created<span class="params_end">)</span></span> -></span>
+    callback<span class="operators">?</span> err, <span class="literal">false</span> <span class="keyword">if</span> err<span class="operators">?</span>
+    <span class="keyword">if</span> stack.length > <span class="number">0</span> then stack.shift<span class="punctuation">(</span><span class="punctuation">)</span><span class="operators">?</span> next <span class="keyword">else</span> callback<span class="operators">?</span> <span class="literal">null</span>, created
 
-  <span class="nv">dirs </span><span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">..</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-  <span class="nv">p </span><span class="o">=</span> <span class="s">&#39;&#39;</span>
+  dirs <span class="operators">=</span> path.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">[</span><span class="number">1.</span>.<span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span>
+  p <span class="operators">=</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
 
-  <span class="nx">stack</span><span class="p">.</span><span class="nx">push</span> <span class="nx">generator</span> <span class="nv">p </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">d</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">d</span> <span class="k">in</span> <span class="nx">dirs</span>
+  stack.push generator p <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span>d<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> d <span class="keyword">in</span> dirs
 
-  <span class="nx">next</span><span class="p">()</span></pre></div></td>
+  next<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='ensurepathsync'>ensurePathSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Ensures that the path exists and creates the missing folders if needed.</p>
 
-<div class="highlight"><pre><span class="nx">ensurePathSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
-</pre></div>
+<pre><code>ensurePathSync '/path/to/dir'</code></pre>
 
 <p>In that context, if the <code>path</code> and <code>to</code> folders don't exist
 they will be created and then the <code>dir</code> one.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">ensurePathSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">dirs </span><span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;/&#39;</span>
-  <span class="nx">dirs</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-  <span class="nv">p </span><span class="o">=</span> <span class="s">&#39;/&#39;</span>
-  <span class="k">while</span> <span class="nx">dirs</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="nv">d </span><span class="o">=</span> <span class="nx">dirs</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
-    <span class="nv">p </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">p</span><span class="p">,</span> <span class="nx">d</span>
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span> <span class="nx">p</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>ensurePathSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span>
+  dirs <span class="operators">=</span> path.split <span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span>
+  dirs.shift<span class="punctuation">(</span><span class="punctuation">)</span>
+  p <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span>
+  <span class="keyword">while</span> dirs.length > <span class="number">0</span>
+    d <span class="operators">=</span> dirs.shift<span class="punctuation">(</span><span class="punctuation">)</span>
+    p <span class="operators">=</span> resolve p, d
+    fs.mkdirSync p <span class="keyword">unless</span> existsSync p
+
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='find'>find</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an array containing the paths to files in <code>paths</code> that match
@@ -282,124 +299,144 @@ both the provided <code>pattern</code> and <code>ext</code>.</p>
 <p>For instance, the following call will returns the path to all the commands
 in the <code>lib/commands</code> directories of a Neat project.</p>
 
-<div class="highlight"><pre><span class="nv">paths </span><span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/lib/commands&quot;</span>
-<span class="nx">find</span> <span class="sr">/\.cmd</span><span class="sro">$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">commands</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># do something with commands</span>
-</pre></div>
+<pre><code>paths <span class="operators">=</span> <span class="constant">Neat</span>.paths.map <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span>-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/lib/commands<span class="string_end">"</span></span>
+find <span class="regexp">/<span class="escaped">\.</span>cmd<span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>, paths, <span class="function"><span class="params"><span class="params_begin">(</span>err, commands<span class="params_end">)</span></span> -></span>
+  <span class="comment"># do something with commands</span></code></pre>
 
 <p>The <code>pattern</code> argument is optional and match against the <code>basename</code>
 of the file.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">find </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+          <td class='code'><pre>find <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>pattern, ext, paths, callback<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Arguments are reorganized if no pattern is provided.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="p">[</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">pattern</span><span class="p">,</span>
-    <span class="nx">ext</span>
-    <span class="nx">paths</span>
-  <span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">pattern</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span></pre></div></td>
+          <td class='code'><pre>  <span class="punctuation">[</span>pattern, ext, paths, callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>
+    <span class="literal">null</span>,
+    pattern,
+    ext
+    paths
+  <span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> pattern <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>string<span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If <code>paths</code> is a string, the search is performed on this sole path.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="k">if</span> <span class="k">typeof</span> <span class="nx">paths</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span>
-    <span class="nx">findOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="nx">callback</span></pre></div></td>
+          <td class='code'><pre>  <span class="keyword">if</span> <span class="keyword">typeof</span> paths <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>string<span class="string_end">"</span></span>
+    findOnce pattern, ext, paths, callback
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Otherwise, the search is performed on each path.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="k">else</span>
-    <span class="nv">output </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="nv">lookup </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="nx">findOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
-        <span class="nx">output</span><span class="p">.</span><span class="nx">push</span> <span class="nx">file</span> <span class="k">for</span> <span class="nx">file</span> <span class="k">in</span> <span class="nx">files</span> <span class="k">if</span> <span class="nx">files</span><span class="o">?</span>
-        <span class="nx">cb</span><span class="o">?</span><span class="p">()</span>
+          <td class='code'><pre>  <span class="keyword">else</span>
+    output <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    lookup <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>pattern, ext, paths<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span>
+      findOnce pattern, ext, paths, <span class="function"><span class="params"><span class="params_begin">(</span>err, files<span class="params_end">)</span></span> -></span>
+        output.push file <span class="keyword">for</span> file <span class="keyword">in</span> files <span class="keyword">if</span> files<span class="operators">?</span>
+        cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
-    <span class="k">if</span> <span class="nx">paths</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
-      <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span>
-    <span class="k">else</span>
-      <span class="nx">parallel</span> <span class="p">(</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">p</span><span class="p">)</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">paths</span><span class="p">),</span> <span class="o">-&gt;</span>
-        <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span></pre></div></td>
+    <span class="keyword">if</span> paths.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+      callback<span class="operators">?</span> <span class="literal">null</span>, output
+    <span class="keyword">else</span>
+      parallel <span class="punctuation">(</span>lookup<span class="punctuation">(</span>pattern, ext, p<span class="punctuation">)</span> <span class="keyword">for</span> p <span class="keyword">in</span> paths<span class="punctuation">)</span>,<span class="function"> -></span>
+        callback<span class="operators">?</span> <span class="literal">null</span>, output
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findonce'>findOnce</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Performs the <code>find</code> search routine over a single path.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findOnce </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="o">-&gt;</span>
+          <td class='code'><pre>findOnce <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>pattern, ext, path, callback, output<span class="params_end">)</span></span> -></span>
 
-  <span class="nx">exists</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">callback</span><span class="o">?</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&#39;&#39;</span> <span class="k">unless</span> <span class="nx">b</span><span class="o">?</span></pre></div></td>
+  exists path, <span class="function"><span class="params"><span class="params_begin">(</span>b<span class="params_end">)</span></span> -></span>
+    callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span> <span class="keyword">unless</span> b<span class="operators">?</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores the results of the search.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">out </span><span class="o">=</span> <span class="p">[]</span></pre></div></td>
+          <td class='code'><pre>    out <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Matchs the file extension.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">extRe </span><span class="o">=</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span>
+          <td class='code'><pre>    extRe <span class="operators">=</span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="escaped">\.</span><span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="regexp_operators">$</span><span class="hereregexp_end">///</span></span>
 
-    <span class="nv">lookup </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="nv">p </span><span class="o">=</span> <span class="nx">basename</span> <span class="nx">path</span>
-      <span class="nx">fs</span><span class="p">.</span><span class="nx">lstat</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="o">-&gt;</span>
-        <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+    lookup <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, output<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span>
+      p <span class="operators">=</span> basename path
+      fs.lstat path, <span class="function"><span class="params"><span class="params_begin">(</span>err, stats<span class="params_end">)</span></span> -></span>
+        <span class="keyword">if</span> stats.isDirectory<span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The search continue in the directory.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="nx">find</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
-            <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+          <td class='code'><pre>          find pattern, ext, path, <span class="function"><span class="params"><span class="params_begin">(</span>err, files<span class="params_end">)</span></span> -></span>
+            <span class="keyword">return</span> callback<span class="operators">?</span> err <span class="keyword">if</span> err<span class="operators">?</span>
 
-            <span class="nx">output</span><span class="p">.</span><span class="nx">push</span> <span class="nx">file</span> <span class="k">for</span> <span class="nx">file</span> <span class="k">in</span> <span class="nx">files</span> <span class="k">if</span> <span class="nx">files</span><span class="o">?</span></pre></div></td>
+            output.push file <span class="keyword">for</span> file <span class="keyword">in</span> files <span class="keyword">if</span> files<span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>When a <code>pattern</code> is provided and the directory name match
 against it, the function will then look for the presence
 of an index file.</p></td>
-          <td class='code'><div class="highlight"><pre>            <span class="nv">index </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span>
-            <span class="nx">exists</span> <span class="nx">index</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-              <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span> <span class="o">and</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">)</span> <span class="o">and</span> <span class="nx">b</span>
-                <span class="nx">output</span><span class="p">.</span><span class="nx">push</span> <span class="nx">index</span>
+          <td class='code'><pre>            index <span class="operators">=</span> resolve path, <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+            exists index, <span class="function"><span class="params"><span class="params_begin">(</span>b<span class="params_end">)</span></span> -></span>
+              <span class="keyword">if</span> pattern<span class="operators">?</span> <span class="keyword">and</span> p.match<span class="punctuation">(</span>pattern<span class="punctuation">)</span> <span class="keyword">and</span> b
+                output.push index
 
-              <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+              cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a file that match the specified file extension.</p></td>
-          <td class='code'><div class="highlight"><pre>        <span class="k">else</span> <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span> <span class="nx">extRe</span></pre></div></td>
+          <td class='code'><pre>        <span class="keyword">else</span> <span class="keyword">if</span> p.match extRe
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If a <code>pattern</code> is provided and the file match against it,
 the path is set as a found.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span>
-            <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">extRe</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">).</span><span class="nx">match</span> <span class="nx">pattern</span>
-              <span class="nv">found </span><span class="o">=</span> <span class="nx">path</span></pre></div></td>
+          <td class='code'><pre>          <span class="keyword">if</span> pattern<span class="operators">?</span>
+            <span class="keyword">if</span> p.replace<span class="punctuation">(</span>extRe,<span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="punctuation">)</span>.match pattern
+              found <span class="operators">=</span> path
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Otherwise the path is a found by default.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="k">else</span>
-            <span class="nv">found </span><span class="o">=</span> <span class="nx">path</span></pre></div></td>
+          <td class='code'><pre>          <span class="keyword">else</span>
+            found <span class="operators">=</span> path
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The paths found in this directory are added to the output array.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="nx">output</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="k">if</span> <span class="nx">found</span><span class="o">?</span>
+          <td class='code'><pre>          output.push<span class="punctuation">(</span>found<span class="punctuation">)</span> <span class="keyword">if</span> found<span class="operators">?</span>
 
-          <span class="nx">cb</span><span class="o">?</span><span class="p">()</span>
-        <span class="k">else</span> <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+          cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+        <span class="keyword">else</span> cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Reads the current directory.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span><span class="o">-&gt;</span>
-      <span class="k">throw</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
-      <span class="nv">output </span><span class="o">=</span> <span class="p">[]</span>
+          <td class='code'><pre>    fs.readdir path, <span class="function"><span class="params"><span class="params_begin">(</span>err, content<span class="params_end">)</span></span>-></span>
+      <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+      output <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
 
-      <span class="k">if</span> <span class="nx">content</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
-        <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span>
-      <span class="k">else</span>
-        <span class="nx">parallel</span> <span class="p">(</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">p</span><span class="p">),</span> <span class="nx">output</span><span class="p">)</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">content</span><span class="p">),</span> <span class="o">-&gt;</span>
-          <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">output</span></pre></div></td>
+      <span class="keyword">if</span> content.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+        callback<span class="operators">?</span> <span class="literal">null</span>, output
+      <span class="keyword">else</span>
+        parallel <span class="punctuation">(</span>lookup<span class="punctuation">(</span>resolve<span class="punctuation">(</span>path, p<span class="punctuation">)</span>, output<span class="punctuation">)</span> <span class="keyword">for</span> p <span class="keyword">in</span> content<span class="punctuation">)</span>,<span class="function"> -></span>
+          callback<span class="operators">?</span> <span class="literal">null</span>, output
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findsync'>findSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an array containing the paths to files in <code>paths</code> that match
@@ -408,159 +445,192 @@ both the provided <code>pattern</code> and <code>ext</code>.</p>
 <p>For instance, the following call will returns the path to all the commands
 in the <code>lib/commands</code> directories of a Neat project.</p>
 
-<div class="highlight"><pre><span class="nv">paths </span><span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span><span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/lib/commands&quot;</span>
-<span class="nv">commands </span><span class="o">=</span> <span class="nx">find</span> <span class="sr">/\.cmd</span><span class="sro">$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&#39;js&#39;</span><span class="p">,</span> <span class="nx">paths</span>
-</pre></div>
+<pre><code>paths <span class="operators">=</span> <span class="constant">Neat</span>.paths.map <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span>-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/lib/commands<span class="string_end">"</span></span>
+commands <span class="operators">=</span> find <span class="regexp">/<span class="escaped">\.</span>cmd<span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>, paths</code></pre>
 
 <p>The <code>pattern</code> argument is optional and match against the <code>basename</code>
 of the file.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+          <td class='code'><pre>findSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>pattern, ext, paths<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Arguments are reorganized if no pattern is provided.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="p">[</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">pattern</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span></pre></div></td>
+          <td class='code'><pre>  <span class="punctuation">[</span>pattern, ext, paths<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="literal">null</span>, pattern, ext<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> pattern <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>string<span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If <code>paths</code> is a string, the search is performed on this sole path.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="k">if</span> <span class="k">typeof</span> <span class="nx">paths</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span>
-    <span class="nx">findSyncOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">paths</span></pre></div></td>
+          <td class='code'><pre>  <span class="keyword">if</span> <span class="keyword">typeof</span> paths <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>string<span class="string_end">"</span></span>
+    findSyncOnce pattern, ext, paths
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Otherwise, the search is performed on each path.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="k">else</span>
-    <span class="nv">out </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="nx">path</span> <span class="k">in</span> <span class="nx">paths</span></pre></div></td>
+          <td class='code'><pre>  <span class="keyword">else</span>
+    out <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    <span class="keyword">for</span> path <span class="keyword">in</span> paths
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Results from a search are concatened into the output array.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nv">founds </span><span class="o">=</span> <span class="nx">findSyncOnce</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span>
-      <span class="nv">out </span><span class="o">=</span> <span class="nx">out</span><span class="p">.</span><span class="nx">concat</span> <span class="nx">founds</span> <span class="k">if</span> <span class="nx">founds</span><span class="o">?</span>
-    <span class="nx">out</span></pre></div></td>
+          <td class='code'><pre>      founds <span class="operators">=</span> findSyncOnce pattern, ext, path
+      out <span class="operators">=</span> out.concat founds <span class="keyword">if</span> founds<span class="operators">?</span>
+    out
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findsynconce'>findSyncOnce</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Performs the <code>findSync</code> search routine over a single path.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findSyncOnce </span><span class="o">=</span> <span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">path</span></pre></div></td>
+          <td class='code'><pre>findSyncOnce <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>pattern, ext, path<span class="params_end">)</span></span> -></span>
+  <span class="keyword">return</span> <span class="keyword">unless</span> existsSync path
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores the results of the search.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">out </span><span class="o">=</span> <span class="p">[]</span></pre></div></td>
+          <td class='code'><pre>  out <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Matchs the file extension.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">extRe </span><span class="o">=</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span></pre></div></td>
+          <td class='code'><pre>  extRe <span class="operators">=</span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="escaped">\.</span><span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="regexp_operators">$</span><span class="hereregexp_end">///</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Reads the current directory.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">content </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">path</span>
-  <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">content</span></pre></div></td>
+          <td class='code'><pre>  content <span class="operators">=</span> fs.readdirSync path
+  <span class="keyword">for</span> p <span class="keyword">in</span> content
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p><code>found</code> will stores the results of the searches.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">found </span><span class="o">=</span> <span class="kc">null</span></pre></div></td>
+          <td class='code'><pre>    found <span class="operators">=</span> <span class="literal">null</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Constructs the path to test.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nb">_path</span> <span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>    _path <span class="operators">=</span> resolve path, p
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>And retreives information for this path.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">stats </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span> <span class="nb">_path</span></pre></div></td>
+          <td class='code'><pre>    stats <span class="operators">=</span> fs.lstatSync _path
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a directory.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>    <span class="keyword">if</span> stats.isDirectory<span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The search continue in the directory.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nv">found </span><span class="o">=</span> <span class="nx">findSync</span> <span class="nx">pattern</span><span class="p">,</span> <span class="nx">ext</span><span class="p">,</span> <span class="nb">_path</span></pre></div></td>
+          <td class='code'><pre>      found <span class="operators">=</span> findSync pattern, ext, _path
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>When a <code>pattern</code> is provided and the directory name match against it,
 the function will then look for the presence of an index file.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nv">index </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nb">_path</span><span class="p">,</span> <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span>
-      <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span> <span class="o">and</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">)</span> <span class="o">and</span> <span class="nx">existsSync</span> <span class="nx">index</span>
-        <span class="nx">found</span> <span class="o">?=</span> <span class="p">[]</span>
-        <span class="nx">found</span><span class="p">.</span><span class="nx">push</span> <span class="nx">index</span></pre></div></td>
+          <td class='code'><pre>      index <span class="operators">=</span> resolve _path, <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+      <span class="keyword">if</span> pattern<span class="operators">?</span> <span class="keyword">and</span> p.match<span class="punctuation">(</span>pattern<span class="punctuation">)</span> <span class="keyword">and</span> existsSync index
+        found <span class="operators">?</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+        found.push index
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a file that match the specified file extension.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="k">else</span> <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">match</span> <span class="nx">extRe</span></pre></div></td>
+          <td class='code'><pre>    <span class="keyword">else</span> <span class="keyword">if</span> p.match extRe
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If a <code>pattern</code> is provided and the file match against it,
 the path is set as a found.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="k">if</span> <span class="nx">pattern</span><span class="o">?</span>
-        <span class="k">if</span> <span class="nx">p</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">extRe</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">).</span><span class="nx">match</span> <span class="nx">pattern</span>
-          <span class="nv">found </span><span class="o">=</span> <span class="nb">_path</span></pre></div></td>
+          <td class='code'><pre>      <span class="keyword">if</span> pattern<span class="operators">?</span>
+        <span class="keyword">if</span> p.replace<span class="punctuation">(</span>extRe,<span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="punctuation">)</span>.match pattern
+          found <span class="operators">=</span> _path
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Otherwise the path is a found by default.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="k">else</span>
-        <span class="nv">found </span><span class="o">=</span> <span class="nb">_path</span></pre></div></td>
+          <td class='code'><pre>      <span class="keyword">else</span>
+        found <span class="operators">=</span> _path
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The paths found in this directory are added to the output array.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">out </span><span class="o">=</span> <span class="nx">out</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="k">if</span> <span class="nx">found</span><span class="o">?</span></pre></div></td>
+          <td class='code'><pre>    out <span class="operators">=</span> out.concat<span class="punctuation">(</span>found<span class="punctuation">)</span> <span class="keyword">if</span> found<span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If the output array is not empty the array is returned, otherwise
 the function returns <code>null</code>.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="k">if</span> <span class="nx">out</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="nx">out</span> <span class="k">else</span> <span class="kc">null</span></pre></div></td>
+          <td class='code'><pre>  <span class="keyword">if</span> out.length > <span class="number">0</span> then out <span class="keyword">else</span> <span class="literal">null</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findbase'>findBase</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an array containing all the paths in <code>dir</code> whose name
 match <code>base</code>.</p>
 
-<div class="highlight"><pre><span class="nx">findBase</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># files = [</span>
-  <span class="c1">#   /path/to/dir/file.coffee</span>
-  <span class="c1">#   /path/to/dir/file.js</span>
-  <span class="c1">#   /path/to/dir/file.spec.coffee</span>
-  <span class="c1"># ]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findBase </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">exists</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span> <span class="k">unless</span> <span class="nx">b</span>
+<pre><code>findBase <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>file<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>files<span class="params_end">)</span></span> -></span>
+  <span class="comment"># files = [</span>
+  <span class="comment">#   /path/to/dir/file.coffee</span>
+  <span class="comment">#   /path/to/dir/file.js</span>
+  <span class="comment">#   /path/to/dir/file.spec.coffee</span>
+  <span class="comment"># ]</span></code></pre></td>
+          <td class='code'><pre>findBase <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir, base, callback<span class="params_end">)</span></span> -></span>
+  exists dir, <span class="function"><span class="params"><span class="params_begin">(</span>b<span class="params_end">)</span></span> -></span>
+    <span class="keyword">return</span> callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">unless</span> b
 
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span> <span class="nx">dir</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+    fs.readdir dir, <span class="function"><span class="params"><span class="params_begin">(</span>err, content<span class="params_end">)</span></span> -></span>
+      <span class="keyword">return</span> callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> err<span class="operators">?</span>
 
-      <span class="nv">res </span><span class="o">=</span> <span class="p">(</span><span class="nx">resolve</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">f</span> <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">content</span> <span class="k">when</span> <span class="nx">f</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///</span><span class="sro">^</span><span class="si">#{</span><span class="nx">base</span><span class="si">}</span><span class="sro">(</span><span class="sr">\.|</span><span class="sro">$)</span><span class="sr">///</span><span class="p">)</span>
-      <span class="nx">callback</span><span class="o">?</span> <span class="nx">res</span></pre></div></td>
+      res <span class="operators">=</span> <span class="punctuation">(</span>resolve dir, f <span class="keyword">for</span> f <span class="keyword">in</span> content <span class="keyword">when</span> f.match <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="regexp_operators">^</span><span class="subst"><span class="subst_begin">#{</span>base<span class="subst_end">}</span></span><span class="regexp_operators">(</span><span class="escaped">\.</span>|<span class="regexp_operators">$</span><span class="regexp_operators">)</span><span class="hereregexp_end">///</span></span><span class="punctuation">)</span>
+      callback<span class="operators">?</span> res
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findbasesync'>findBaseSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an array containing all the paths in <code>dir</code> whose name
 match <code>base</code>.</p>
 
-<div class="highlight"><pre><span class="nv">files </span><span class="o">=</span> <span class="nx">findBaseSync</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="s">&#39;file&#39;</span>
-<span class="c1"># files = [</span>
-<span class="c1">#   /path/to/dir/file.coffee</span>
-<span class="c1">#   /path/to/dir/file.js</span>
-<span class="c1">#   /path/to/dir/file.spec.coffee</span>
-<span class="c1"># ]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findBaseSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">base</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">return</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">dir</span>
+<pre><code>files <span class="operators">=</span> findBaseSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>file<span class="string_end">'</span></span>
+<span class="comment"># files = [</span>
+<span class="comment">#   /path/to/dir/file.coffee</span>
+<span class="comment">#   /path/to/dir/file.js</span>
+<span class="comment">#   /path/to/dir/file.spec.coffee</span>
+<span class="comment"># ]</span></code></pre></td>
+          <td class='code'><pre>findBaseSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir, base<span class="params_end">)</span></span> -></span>
+  <span class="keyword">return</span> <span class="keyword">unless</span> existsSync dir
 
-  <span class="nv">content </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">dir</span>
-  <span class="nx">resolve</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">f</span> <span class="k">for</span> <span class="nx">f</span> <span class="k">in</span> <span class="nx">content</span> <span class="k">when</span> <span class="nx">f</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///</span><span class="sro">^</span><span class="si">#{</span><span class="nx">base</span><span class="si">}</span><span class="sro">(</span><span class="sr">\.|</span><span class="sro">$)</span><span class="sr">///</span></pre></div></td>
+  content <span class="operators">=</span> fs.readdirSync dir
+  resolve dir, f <span class="keyword">for</span> f <span class="keyword">in</span> content <span class="keyword">when</span> f.match <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="regexp_operators">^</span><span class="subst"><span class="subst_begin">#{</span>base<span class="subst_end">}</span></span><span class="regexp_operators">(</span><span class="escaped">\.</span>|<span class="regexp_operators">$</span><span class="regexp_operators">)</span><span class="hereregexp_end">///</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findsiblingfile'>findSiblingFile</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Look for a file related to the provided <code>path</code> in a different
@@ -569,11 +639,10 @@ directory structure.</p>
 <p>Lets say we have a file in <code>lib/commands/my_commands</code>, we want to find
 its sibling template file. We will call <code>findSiblingFile</code> like this:</p>
 
-<div class="highlight"><pre><span class="nv">path </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nb">Neat</span><span class="p">.</span><span class="nx">root</span><span class="si">}</span><span class="s">/lib/commands/my_commands/my_file.cmd.js&quot;</span>
-<span class="nx">findSiblingFile</span> <span class="nx">path</span><span class="p">,</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">file</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># file is either undefined</span>
-  <span class="c1"># or a string containing the found file path</span>
-</pre></div>
+<pre><code>path <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span>.root<span class="subst_end">}</span></span>/lib/commands/my_commands/my_file.cmd.js<span class="string_end">"</span></span>
+findSiblingFile path, <span class="constant">Neat</span>.paths, <span class="string"><span class="string_begin">'</span>templates<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>err, file<span class="params_end">)</span></span> -></span>
+  <span class="comment"># file is either undefined</span>
+  <span class="comment"># or a string containing the found file path</span></code></pre>
 
 <p>This basic exemple will return any file in <code>templates/commands/my_commands</code>
 with a base name that match the one of the original file. For instance, in
@@ -585,13 +654,17 @@ is returned.</p>
 
 <p>The <code>exts</code> splats allow to define a list of allowed extensions for the
 searched files. You can use <code>'*'</code> to allow any extension.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findSiblingFile </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">roots</span><span class="p">,</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">exts</span><span class="p">...,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">paths </span><span class="o">=</span> <span class="p">[]</span></pre></div></td>
+          <td class='code'><pre>findSiblingFile <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, roots, dir, exts..., callback<span class="params_end">)</span></span> -></span>
+  paths <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The specified <code>path</code> must be in a Neat project.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nx">neatRoot</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">pathRoot</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(),</span> <span class="kc">undefined</span><span class="p">,</span> <span class="p">[]</span> <span class="k">unless</span> <span class="nx">pathRoot</span><span class="o">?</span></pre></div></td>
+          <td class='code'><pre>  neatRoot path, <span class="function"><span class="params"><span class="params_begin">(</span>pathRoot<span class="params_end">)</span></span> -></span>
+    <span class="keyword">return</span> callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span><span class="punctuation">(</span><span class="punctuation">)</span>, <span class="literal">undefined</span>, <span class="punctuation">[</span><span class="punctuation">]</span> <span class="keyword">unless</span> pathRoot<span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Prepares the path structure that will be used in the search.
@@ -599,107 +672,131 @@ Note that, unlike the <code>basename</code> function, all the extensions
 are removed from the path. It allow to use additional extensions
 in file names and at the same time to don't have to duplicate this
 additional extensions in the searched files.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">start </span><span class="o">=</span> <span class="nx">noExtension</span> <span class="nx">path</span>
-    <span class="nv">base </span><span class="o">=</span> <span class="nx">basename</span> <span class="nx">start</span>
-    <span class="nv">dif </span><span class="o">=</span> <span class="nx">relative</span> <span class="nx">pathRoot</span><span class="p">,</span> <span class="nx">resolve</span> <span class="nx">start</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
-    <span class="nv">newPath </span><span class="o">=</span> <span class="nx">dif</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^</span><span class="src">[^</span><span class="sr">\</span><span class="err">/]</span><span class="sro">+</span><span class="sr">/</span><span class="p">,</span> <span class="nx">dir</span>
-    <span class="nv">exts </span><span class="o">=</span> <span class="s">&#39;*&#39;</span> <span class="k">if</span> <span class="o">not</span> <span class="nx">exts</span><span class="o">?</span> <span class="o">or</span>
-                  <span class="nx">exts</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span> <span class="o">or</span>
-                  <span class="p">(</span><span class="nx">exts</span><span class="p">.</span><span class="nx">length</span> <span class="o">is</span> <span class="mi">1</span> <span class="o">and</span> <span class="nx">exts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">is</span> <span class="s">&#39;*&#39;</span><span class="p">)</span></pre></div></td>
+          <td class='code'><pre>    start <span class="operators">=</span> noExtension path
+    base <span class="operators">=</span> basename start
+    dif <span class="operators">=</span> relative pathRoot, resolve start, <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
+    newPath <span class="operators">=</span> dif.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_group"><span class="char_group_begin">[</span>^<span class="escaped">\/</span><span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_end">/,</span></span> dir
+    exts <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>*<span class="string_end">'</span></span> <span class="keyword">if</span> <span class="keyword">not</span> exts<span class="operators">?</span> <span class="keyword">or</span>
+                  exts.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">or</span>
+                  <span class="punctuation">(</span>exts.length <span class="keyword">is</span> <span class="number">1</span> <span class="keyword">and</span> exts<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>*<span class="string_end">'</span></span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Will hold the tested path.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span></pre></div></td>
+          <td class='code'><pre>    p <span class="operators">=</span> <span class="literal">undefined</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The roots paths are reverted to prioritize the user and plugins
 directories over the Neat directory, allowing a user or a plugin
 to <em>override</em> that file.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">roots </span><span class="o">=</span> <span class="nx">roots</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span>
-    <span class="nx">roots</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
-    <span class="nv">matches </span><span class="o">=</span> <span class="p">{}</span>
-    <span class="nv">found </span><span class="o">=</span> <span class="p">[]</span>
-    <span class="nv">matchExtensions </span><span class="o">=</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">extname</span><span class="p">(</span><span class="nx">p</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">in</span> <span class="nx">exts</span> <span class="o">or</span> <span class="nx">exts</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span></pre></div></td>
+          <td class='code'><pre>    roots <span class="operators">=</span> roots.concat<span class="punctuation">(</span><span class="punctuation">)</span>
+    roots.reverse<span class="punctuation">(</span><span class="punctuation">)</span>
+    matches <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+    found <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    matchExtensions <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span> -></span> extname<span class="punctuation">(</span>p<span class="punctuation">)</span>.substr<span class="punctuation">(</span><span class="number">1</span><span class="punctuation">)</span> <span class="keyword">in</span> exts <span class="keyword">or</span> exts <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>lookup</code> function generates a command that perform the lookup
 for the given <code>root</code>.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">lookup </span><span class="o">=</span> <span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+          <td class='code'><pre>    lookup <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>root<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Constructs a path to the directory that should contains
 the searched file.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nv">basepath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">newPath</span>
+          <td class='code'><pre>      basepath <span class="operators">=</span> resolve root, newPath
 
-      <span class="nx">paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">basepath</span></pre></div></td>
+      paths.push basepath
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Retrieves all the files or directories that match the base name.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nx">findBase</span> <span class="nx">basepath</span><span class="p">,</span> <span class="nx">base</span><span class="p">,</span> <span class="p">(</span><span class="nx">ps</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+          <td class='code'><pre>      findBase basepath, base, <span class="function"><span class="params"><span class="params_begin">(</span>ps<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If there's matches.</p></td>
-          <td class='code'><div class="highlight"><pre>        <span class="k">if</span> <span class="nx">ps</span><span class="o">?</span> <span class="o">and</span> <span class="o">not</span> <span class="nx">ps</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
-          <span class="nx">ps</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>        <span class="keyword">if</span> ps<span class="operators">?</span> <span class="keyword">and</span> <span class="keyword">not</span> ps.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+          ps.sort<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>entryMatch</code> function generates a command that perform
 the lookup for a path whose base match the original file.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="nv">entryMatch </span><span class="o">=</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="o">-&gt;</span>
-            <span class="nx">fs</span><span class="p">.</span><span class="nx">lstat</span> <span class="nx">p</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="o">-&gt;</span>
-              <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">path</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
-              <span class="nx">paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>          entryMatch <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span>
+            fs.lstat p, <span class="function"><span class="params"><span class="params_begin">(</span>err, stats<span class="params_end">)</span></span> -></span>
+              <span class="keyword">return</span> callback<span class="operators">?</span> err, <span class="literal">null</span>, path <span class="keyword">if</span> err<span class="operators">?</span>
+              paths.push p
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a directory.</p></td>
-          <td class='code'><div class="highlight"><pre>              <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>              <span class="keyword">if</span> stats.isDirectory<span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores in <code>paths</code> the current searched path.</p></td>
-          <td class='code'><div class="highlight"><pre>                <span class="nx">paths</span><span class="p">.</span><span class="nx">push</span> <span class="nx">resolve</span> <span class="nx">p</span><span class="p">,</span> <span class="s">&#39;index.*&#39;</span></pre></div></td>
+          <td class='code'><pre>                paths.push resolve p, <span class="string"><span class="string_begin">'</span>index.*<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Looks for an index file in the directory.</p></td>
-          <td class='code'><div class="highlight"><pre>                <span class="nx">dirWithIndex</span> <span class="nx">p</span><span class="p">,</span> <span class="p">(</span><span class="nx">ip</span><span class="p">)</span> <span class="o">-&gt;</span>
-                  <span class="k">if</span> <span class="nx">ip</span><span class="o">?</span> <span class="o">and</span> <span class="nx">matchExtensions</span> <span class="nx">ip</span>
-                    <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
-                    <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">].</span><span class="nx">push</span> <span class="nx">ip</span>
-                  <span class="nx">cb</span><span class="o">?</span><span class="p">()</span>
-              <span class="k">else</span></pre></div></td>
+          <td class='code'><pre>                dirWithIndex p, <span class="function"><span class="params"><span class="params_begin">(</span>ip<span class="params_end">)</span></span> -></span>
+                  <span class="keyword">if</span> ip<span class="operators">?</span> <span class="keyword">and</span> matchExtensions ip
+                    matches<span class="punctuation">[</span>roots.indexOf root<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+                    matches<span class="punctuation">[</span>roots.indexOf root<span class="punctuation">]</span>.push ip
+                  cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+              <span class="keyword">else</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a file, it'll ensure that the path match
 the extension if provided.</p></td>
-          <td class='code'><div class="highlight"><pre>                <span class="k">if</span> <span class="nx">matchExtensions</span> <span class="nx">p</span>
-                  <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
-                  <span class="nx">matches</span><span class="p">[</span><span class="nx">roots</span><span class="p">.</span><span class="nx">indexOf</span> <span class="nx">root</span><span class="p">].</span><span class="nx">push</span> <span class="nx">p</span>
-                <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>                <span class="keyword">if</span> matchExtensions p
+                  matches<span class="punctuation">[</span>roots.indexOf root<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+                  matches<span class="punctuation">[</span>roots.indexOf root<span class="punctuation">]</span>.push p
+                cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Runs a verification on each path returned by <code>findBase</code>.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="nx">parallel</span> <span class="p">(</span><span class="nx">entryMatch</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">ps</span><span class="p">),</span> <span class="o">-&gt;</span>
-            <span class="nx">found</span><span class="p">.</span><span class="nx">push</span> <span class="nx">matches</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="k">for</span> <span class="nx">r</span><span class="p">,</span><span class="nx">i</span> <span class="k">in</span> <span class="nx">roots</span>
-            <span class="nv">found </span><span class="o">=</span> <span class="nx">found</span><span class="p">.</span><span class="nx">flatten</span><span class="p">().</span><span class="nx">compact</span><span class="p">()</span>
-            <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>          parallel <span class="punctuation">(</span>entryMatch<span class="punctuation">(</span>p<span class="punctuation">)</span> <span class="keyword">for</span> p <span class="keyword">in</span> ps<span class="punctuation">)</span>,<span class="function"> -></span>
+            found.push matches<span class="punctuation">[</span>i<span class="punctuation">]</span> <span class="keyword">for</span> r,i <span class="keyword">in</span> roots
+            found <span class="operators">=</span> found.flatten<span class="punctuation">(</span><span class="punctuation">)</span>.compact<span class="punctuation">(</span><span class="punctuation">)</span>
+            cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Nothing was returned by <code>findBase</code>, the lookup callback.</p></td>
-          <td class='code'><div class="highlight"><pre>        <span class="k">else</span> <span class="nx">cb</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>        <span class="keyword">else</span> cb<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>In the case <code>roots</code> is empty, the function callback.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="k">if</span> <span class="nx">roots</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
-      <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">paths</span></pre></div></td>
+          <td class='code'><pre>    <span class="keyword">if</span> roots.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+      callback<span class="operators">?</span> <span class="literal">null</span>, <span class="literal">null</span>, paths
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Otherwise a lookup is perform for each root.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="k">else</span>
-      <span class="nx">parallel</span> <span class="p">(</span><span class="nx">lookup</span><span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="k">for</span> <span class="nx">root</span> <span class="k">in</span> <span class="nx">roots</span><span class="p">),</span> <span class="o">-&gt;</span>
-        <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">found</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nx">paths</span></pre></div></td>
+          <td class='code'><pre>    <span class="keyword">else</span>
+      parallel <span class="punctuation">(</span>lookup<span class="punctuation">(</span>root<span class="punctuation">)</span> <span class="keyword">for</span> root <span class="keyword">in</span> roots<span class="punctuation">)</span>,<span class="function"> -></span>
+        callback<span class="operators">?</span> <span class="literal">null</span>, found<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span>, paths
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='findsiblingfilesync'>findSiblingFileSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the path to a file related to the provided <code>path</code> in a different
@@ -709,9 +806,8 @@ directory structure. If no file can't be found, the function return
 <p>Lets say we have a file in <code>lib/commands/my_commands</code>, we want to find
 its sibling template file. We will call <code>findSiblingFileSync</code> like this:</p>
 
-<div class="highlight"><pre><span class="nv">path </span><span class="o">=</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nb">Neat</span><span class="p">.</span><span class="nx">root</span><span class="si">}</span><span class="s">/lib/commands/my_commands/my_file.cmd.js&quot;</span>
-<span class="nx">findSiblingFileSync</span> <span class="nx">path</span><span class="p">,</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span>
-</pre></div>
+<pre><code>path <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span>.root<span class="subst_end">}</span></span>/lib/commands/my_commands/my_file.cmd.js<span class="string_end">"</span></span>
+findSiblingFileSync path, <span class="constant">Neat</span>.paths, <span class="string"><span class="string_begin">'</span>templates<span class="string_end">'</span></span></code></pre>
 
 <p>This basic exemple will return any file in <code>templates/commands/my_commands</code>
 with a base name that match the one of the original file. For instance, in
@@ -726,18 +822,23 @@ searched files. You can use <code>'*'</code> to allow any extension.</p>
 
 <p>The <code>paths</code> argument is optional, pass an array and the function will
 collect in this array all the paths that was tried during the call.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">findSiblingFileSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">roots</span><span class="p">,</span> <span class="nx">dir</span><span class="p">,</span> <span class="nx">exts</span><span class="p">...,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+          <td class='code'><pre>findSiblingFileSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, roots, dir, exts..., paths<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The specified <code>path</code> must be in a Neat project.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">pathRoot </span><span class="o">=</span> <span class="nx">neatRootSync</span> <span class="nx">path</span>
+          <td class='code'><pre>  pathRoot <span class="operators">=</span> neatRootSync path
 
-  <span class="k">return</span> <span class="k">unless</span> <span class="nx">pathRoot</span><span class="o">?</span></pre></div></td>
+  <span class="keyword">return</span> <span class="keyword">unless</span> pathRoot<span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If <code>path</code> is a string, no array was passed to collect the paths
 and then we add the string as an extension to match.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="p">[</span><span class="nx">exts</span><span class="p">,</span> <span class="nx">paths</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">exts</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">paths</span><span class="p">),</span> <span class="kc">null</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">paths</span> <span class="o">is</span> <span class="s">&quot;string&quot;</span></pre></div></td>
+          <td class='code'><pre>  <span class="punctuation">[</span>exts, paths<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>exts.concat<span class="punctuation">(</span>paths<span class="punctuation">)</span>, <span class="literal">null</span><span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> paths <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>string<span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Prepares the path structure that will be used in the search.
@@ -745,319 +846,365 @@ Note that, unlike the <code>basename</code> function, all the extensions
 are removed from the path. It allow to use additional extensions
 in file names and at the same time to don't have to duplicate this
 additional extensions in the searched files.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">start </span><span class="o">=</span> <span class="nx">noExtension</span> <span class="nx">path</span>
-  <span class="nv">base </span><span class="o">=</span> <span class="nx">basename</span> <span class="nx">start</span>
-  <span class="nv">dif </span><span class="o">=</span> <span class="nx">relative</span> <span class="nx">pathRoot</span><span class="p">,</span> <span class="nx">resolve</span> <span class="nx">start</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
-  <span class="nv">newPath </span><span class="o">=</span> <span class="nx">dif</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^</span><span class="src">[^</span><span class="sr">\</span><span class="err">/]</span><span class="sro">+</span><span class="sr">/</span><span class="p">,</span> <span class="nx">dir</span></pre></div></td>
+          <td class='code'><pre>  start <span class="operators">=</span> noExtension path
+  base <span class="operators">=</span> basename start
+  dif <span class="operators">=</span> relative pathRoot, resolve start, <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
+  newPath <span class="operators">=</span> dif.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_group"><span class="char_group_begin">[</span>^<span class="escaped">\/</span><span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_end">/,</span></span> dir
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Ensure that <code>exts</code> is an array containing at least one string.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">exts </span><span class="o">=</span> <span class="s">&quot;*&quot;</span> <span class="k">unless</span> <span class="nx">exts</span><span class="o">?</span>
-  <span class="nv">exts </span><span class="o">=</span> <span class="p">[</span><span class="nx">exts</span><span class="p">]</span> <span class="k">unless</span> <span class="k">typeof</span> <span class="nx">exts</span> <span class="o">is</span> <span class="s">&quot;object&quot;</span></pre></div></td>
+          <td class='code'><pre>  exts <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span> <span class="keyword">unless</span> exts<span class="operators">?</span>
+  exts <span class="operators">=</span> <span class="punctuation">[</span>exts<span class="punctuation">]</span> <span class="keyword">unless</span> <span class="keyword">typeof</span> exts <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>object<span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Will hold the tested path.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span></pre></div></td>
+          <td class='code'><pre>  p <span class="operators">=</span> <span class="literal">undefined</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The roots paths are reverted to prioritize the user and plugins
 directories over the Neat directory, allowing a user or a plugin
 to <em>override</em> that file.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">roots </span><span class="o">=</span> <span class="nx">roots</span><span class="p">.</span><span class="nx">concat</span><span class="p">()</span>
-  <span class="nx">roots</span><span class="p">.</span><span class="nx">reverse</span><span class="p">()</span>
+          <td class='code'><pre>  roots <span class="operators">=</span> roots.concat<span class="punctuation">(</span><span class="punctuation">)</span>
+  roots.reverse<span class="punctuation">(</span><span class="punctuation">)</span>
 
-  <span class="k">for</span> <span class="nx">root</span> <span class="k">in</span> <span class="nx">roots</span></pre></div></td>
+  <span class="keyword">for</span> root <span class="keyword">in</span> roots
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Constructs a path to the directory that should contains
 the searched file.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nv">basepath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">root</span><span class="p">,</span> <span class="nx">newPath</span>
+          <td class='code'><pre>    basepath <span class="operators">=</span> resolve root, newPath
 
-    <span class="k">for</span> <span class="nx">ext</span> <span class="k">in</span> <span class="nx">exts</span></pre></div></td>
+    <span class="keyword">for</span> ext <span class="keyword">in</span> exts
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores in <code>paths</code> the current searched path with the extension
 if provided.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nx">paths</span><span class="o">?</span><span class="p">.</span><span class="nx">push</span> <span class="nx">resolve</span> <span class="nx">basepath</span><span class="p">,</span>
-                          <span class="k">if</span> <span class="nx">ext</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span> <span class="k">then</span> <span class="nx">base</span> <span class="k">else</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">base</span><span class="si">}</span><span class="s">.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+          <td class='code'><pre>      paths<span class="operators">?</span>.push resolve basepath,
+                          <span class="keyword">if</span> ext <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span> then base <span class="keyword">else</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>base<span class="subst_end">}</span></span>.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Retrieves all the files or directories that match the base name.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="nv">ps </span><span class="o">=</span> <span class="nx">findBaseSync</span> <span class="nx">basepath</span><span class="p">,</span> <span class="nx">base</span></pre></div></td>
+          <td class='code'><pre>      ps <span class="operators">=</span> findBaseSync basepath, base
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If there's matches.</p></td>
-          <td class='code'><div class="highlight"><pre>      <span class="k">if</span> <span class="nx">ps</span><span class="o">?</span>
-        <span class="nx">ps</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
+          <td class='code'><pre>      <span class="keyword">if</span> ps<span class="operators">?</span>
+        ps.sort<span class="punctuation">(</span><span class="punctuation">)</span>
 
-        <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">ps</span></pre></div></td>
+        <span class="keyword">for</span> p <span class="keyword">in</span> ps
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>We don't have to protect the call to <code>lstatSync</code> since the
 <code>findPathWithBase</code> returns only existing paths.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="nv">stats </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>          stats <span class="operators">=</span> fs.lstatSync p
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a directory.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>          <span class="keyword">if</span> stats.isDirectory<span class="punctuation">(</span><span class="punctuation">)</span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores in <code>paths</code> the current searched path with the extension
 if provided.</p></td>
-          <td class='code'><div class="highlight"><pre>            <span class="nx">paths</span><span class="o">?</span><span class="p">.</span><span class="nx">push</span> <span class="nx">resolve</span> <span class="nx">p</span><span class="p">,</span> <span class="k">if</span> <span class="nx">ext</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span>
-              <span class="s">&quot;index&quot;</span>
-            <span class="k">else</span>
-              <span class="s">&quot;index.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="s">&quot;</span></pre></div></td>
+          <td class='code'><pre>            paths<span class="operators">?</span>.push resolve p, <span class="keyword">if</span> ext <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>
+              <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
+            <span class="keyword">else</span>
+              <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Looks for an index file in the directory.</p></td>
-          <td class='code'><div class="highlight"><pre>            <span class="nv">p </span><span class="o">=</span> <span class="nx">dirWithIndexSync</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>            p <span class="operators">=</span> dirWithIndexSync p
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Ensures that the index match the extension if provided.</p></td>
-          <td class='code'><div class="highlight"><pre>            <span class="k">if</span> <span class="nx">ext</span> <span class="o">isnt</span> <span class="s">&quot;*&quot;</span>
-              <span class="k">if</span> <span class="nx">p</span><span class="o">?</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">p</span> <span class="k">else</span> <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span>
-            <span class="k">else</span>
-              <span class="k">return</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>            <span class="keyword">if</span> ext <span class="keyword">isnt</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>
+              <span class="keyword">if</span> p<span class="operators">?</span>.match <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="escaped">\.</span><span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="regexp_operators">$</span><span class="hereregexp_end">///</span></span> then <span class="keyword">return</span> p <span class="keyword">else</span> p <span class="operators">=</span> <span class="literal">undefined</span>
+            <span class="keyword">else</span>
+              <span class="keyword">return</span> p
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The path is a file, it'll ensure that the path match
 the extension if provided.</p></td>
-          <td class='code'><div class="highlight"><pre>          <span class="k">else</span> <span class="k">if</span> <span class="nx">ext</span> <span class="o">isnt</span> <span class="s">&quot;*&quot;</span>
-            <span class="k">if</span> <span class="nx">p</span><span class="o">?</span><span class="p">.</span><span class="nx">match</span> <span class="sr">///\.</span><span class="si">#{</span><span class="nx">ext</span><span class="si">}</span><span class="sro">$</span><span class="sr">///</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">p</span> <span class="k">else</span> <span class="nv">p </span><span class="o">=</span> <span class="kc">undefined</span>
-          <span class="k">else</span>
-            <span class="k">return</span> <span class="nx">p</span></pre></div></td>
+          <td class='code'><pre>          <span class="keyword">else</span> <span class="keyword">if</span> ext <span class="keyword">isnt</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>
+            <span class="keyword">if</span> p<span class="operators">?</span>.match <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="escaped">\.</span><span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="regexp_operators">$</span><span class="hereregexp_end">///</span></span> then <span class="keyword">return</span> p <span class="keyword">else</span> p <span class="operators">=</span> <span class="literal">undefined</span>
+          <span class="keyword">else</span>
+            <span class="keyword">return</span> p
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Nothing was found, it returns undefined.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="kc">undefined</span></pre></div></td>
+          <td class='code'><pre>  <span class="literal">undefined</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='isneatroot'>isNeatRoot</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the passed-in <code>dir</code> is a Neat project root directory.</p>
 
-<div class="highlight"><pre><span class="nx">isNeatRoot</span> <span class="s">&#39;/path/to/dir&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">found</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">found</span>
-    <span class="c1"># &#39;/path/to/project&#39; is a neat project root</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">isNeatRoot </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">exists</span> <span class="nx">resolve</span><span class="p">(</span><span class="nx">dir</span><span class="p">,</span> <span class="s">&quot;.neat&quot;</span><span class="p">),</span> <span class="nx">callback</span></pre></div></td>
+<pre><code>isNeatRoot <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>found<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> found
+    <span class="comment"># '/path/to/project' is a neat project root</span></code></pre></td>
+          <td class='code'><pre>isNeatRoot <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir, callback<span class="params_end">)</span></span> -></span>
+  exists resolve<span class="punctuation">(</span>dir, <span class="string"><span class="string_begin">"</span>.neat<span class="string_end">"</span></span><span class="punctuation">)</span>, callback
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='isneatrootsync'>isNeatRootSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the passed-in <code>dir</code> is a Neat project root directory.</p>
 
-<div class="highlight"><pre><span class="k">if</span> <span class="nx">isNeatRootSync</span> <span class="s">&#39;/path/to/dir&#39;</span>
-  <span class="c1"># &#39;/path/to/project&#39; is a neat project root</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">isNeatRootSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">existsSync</span> <span class="nx">resolve</span> <span class="nx">dir</span><span class="p">,</span> <span class="s">&quot;.neat&quot;</span></pre></div></td>
+<pre><code><span class="keyword">if</span> isNeatRootSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>
+  <span class="comment"># '/path/to/project' is a neat project root</span></code></pre></td>
+          <td class='code'><pre>isNeatRootSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>dir<span class="params_end">)</span></span> -></span>
+  existsSync resolve dir, <span class="string"><span class="string_begin">"</span>.neat<span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='neatroot'>neatRoot</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Finds the first Neat project root directory starting from <code>path</code>
 and then moving up along its lineage.</p>
 
-<div class="highlight"><pre><span class="nx">neatRoot</span> <span class="nb">__filename</span><span class="p">,</span> <span class="p">(</span><span class="nx">root</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">root</span><span class="o">?</span>
-    <span class="c1"># the current file is part of a neat project</span>
-    <span class="c1"># root = &#39;/path/to/project&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">neatRoot </span><span class="o">=</span> <span class="p">(</span><span class="nv">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">path </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span>
+<pre><code>neatRoot __filename, <span class="function"><span class="params"><span class="params_begin">(</span>root<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> root<span class="operators">?</span>
+    <span class="comment"># the current file is part of a neat project</span>
+    <span class="comment"># root = '/path/to/project'</span></code></pre></td>
+          <td class='code'><pre>neatRoot <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="operators">=</span><span class="string"><span class="string_begin">"</span>.<span class="string_end">"</span></span>, callback<span class="params_end">)</span></span> -></span>
+  path <span class="operators">=</span> resolve path
 
-  <span class="nx">isNeatRoot</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">bool</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">bool</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">path</span>
-    <span class="k">else</span>
-      <span class="nv">parentPath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
+  isNeatRoot path, <span class="function"><span class="params"><span class="params_begin">(</span>bool<span class="params_end">)</span></span> -></span>
+    <span class="keyword">if</span> bool then <span class="keyword">return</span> callback<span class="operators">?</span> path
+    <span class="keyword">else</span>
+      parentPath <span class="operators">=</span> resolve path, <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
 
-      <span class="k">if</span> <span class="nx">parentPath</span> <span class="o">is</span> <span class="nx">path</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
-      <span class="nx">neatRoot</span> <span class="nx">parentPath</span><span class="p">,</span> <span class="nx">callback</span></pre></div></td>
+      <span class="keyword">if</span> parentPath <span class="keyword">is</span> path then <span class="keyword">return</span> callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+      neatRoot parentPath, callback
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='neatrootsync'>neatRootSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Finds the first Neat project root directory starting from <code>path</code>
 and then moving up along its lineage.</p>
 
-<div class="highlight"><pre><span class="nv">root </span><span class="o">=</span> <span class="nx">neatRootSync</span> <span class="nb">__filename</span>
-<span class="k">if</span> <span class="nx">root</span><span class="o">?</span>
-  <span class="c1"># the current file is part of a neat project</span>
-  <span class="c1"># root = &#39;/path/to/project&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">neatRootSync </span><span class="o">=</span> <span class="p">(</span><span class="nv">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">path </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span>
+<pre><code>root <span class="operators">=</span> neatRootSync __filename
+<span class="keyword">if</span> root<span class="operators">?</span>
+  <span class="comment"># the current file is part of a neat project</span>
+  <span class="comment"># root = '/path/to/project'</span></code></pre></td>
+          <td class='code'><pre>neatRootSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="operators">=</span><span class="string"><span class="string_begin">"</span>.<span class="string_end">"</span></span><span class="params_end">)</span></span> -></span>
+  path <span class="operators">=</span> resolve path
 
-  <span class="k">if</span> <span class="nx">isNeatRootSync</span> <span class="nx">path</span> <span class="k">then</span> <span class="nx">path</span>
-  <span class="k">else</span>
-    <span class="nv">parentPath </span><span class="o">=</span> <span class="nx">resolve</span> <span class="nx">path</span><span class="p">,</span> <span class="s">&quot;..&quot;</span>
-    <span class="nx">neatRootSync</span> <span class="nx">parentPath</span> <span class="k">unless</span> <span class="nx">parentPath</span> <span class="o">is</span> <span class="nx">path</span></pre></div></td>
+  <span class="keyword">if</span> isNeatRootSync path then path
+  <span class="keyword">else</span>
+    parentPath <span class="operators">=</span> resolve path, <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
+    neatRootSync parentPath <span class="keyword">unless</span> parentPath <span class="keyword">is</span> path
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='noextension'>noExtension</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Removes all the extensions from a file name.</p>
 
-<div class="highlight"><pre><span class="nx">noExtension</span> <span class="s">&#39;foo.bar.baz&#39;</span> <span class="c1"># &#39;foo&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">noExtension </span><span class="o">=</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">p </span><span class="o">=</span> <span class="nx">o</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;/&#39;</span>
-  <span class="nv">last </span><span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span>
-  <span class="nv">last </span><span class="o">=</span> <span class="nx">last</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">(</span><span class="src">[^/.]</span><span class="sro">+)</span><span class="sr">\..</span><span class="sro">+$</span><span class="sr">/</span><span class="p">,</span> <span class="s">&quot;$1&quot;</span>
-  <span class="nx">p</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">last</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)</span></pre></div></td>
+<pre><code>noExtension <span class="string"><span class="string_begin">'</span>foo.bar.baz<span class="string_end">'</span></span> <span class="comment"># 'foo'</span></code></pre></td>
+          <td class='code'><pre>noExtension <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
+  p <span class="operators">=</span> o.split <span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span>
+  last <span class="operators">=</span> p.pop<span class="punctuation">(</span><span class="punctuation">)</span>
+  last <span class="operators">=</span> last.replace <span class="regexp">/<span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>^/.<span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\.</span>.<span class="regexp_operators">+</span><span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
+  p.concat<span class="punctuation">(</span>last<span class="punctuation">)</span>.join<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='readfiles'>readFiles</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Reads an array of path and return a hash with the path
 of the file as key and the content of the file as value.</p>
 
-<div class="highlight"><pre><span class="nx">readFiles</span> <span class="p">[</span><span class="s">&#39;foo.txt&#39;</span><span class="p">,</span> <span class="s">&#39;bar.txt&#39;</span><span class="p">],</span> <span class="p">(</span><span class="nx">docs</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># docs = {&#39;foo.txt&#39;: &#39;...&#39;, &#39;bar.txt&#39;: &#39;...&#39;}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">readFiles </span><span class="o">=</span> <span class="p">(</span><span class="nx">files</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">res </span><span class="o">=</span> <span class="p">{}</span>
-  <span class="nv">readIteration </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">throw</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
+<pre><code>readFiles <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo.txt<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar.txt<span class="string_end">'</span></span><span class="punctuation">]</span>, <span class="function"><span class="params"><span class="params_begin">(</span>docs<span class="params_end">)</span></span> -></span>
+  <span class="comment"># docs = {'foo.txt': '...', 'bar.txt': '...'}</span></code></pre></td>
+          <td class='code'><pre>readFiles <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>files, callback<span class="params_end">)</span></span> -></span>
+  res <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+  readIteration <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span>
+    fs.readFile path, <span class="function"><span class="params"><span class="params_begin">(</span>err, content<span class="params_end">)</span></span> -></span>
+      <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
 
-      <span class="nx">res</span><span class="p">[</span><span class="nx">path</span><span class="p">]</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
-      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span>
+      res<span class="punctuation">[</span>path<span class="punctuation">]</span> <span class="operators">=</span> <span class="constant">String</span><span class="punctuation">(</span>content<span class="punctuation">)</span>
+      callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
-  <span class="nx">parallel</span> <span class="p">(</span><span class="nx">readIteration</span> <span class="nx">p</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">files</span><span class="p">),</span> <span class="o">-&gt;</span>
-    <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">res</span></pre></div></td>
+  parallel <span class="punctuation">(</span>readIteration p <span class="keyword">for</span> p <span class="keyword">in</span> files<span class="punctuation">)</span>,<span class="function"> -></span>
+    callback<span class="operators">?</span> <span class="literal">null</span>, res
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='readfilessync'>readFilesSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Reads an array of path and return a hash with the path
 of the file as key and the content of the file as value.</p>
 
-<div class="highlight"><pre><span class="nv">docs </span><span class="o">=</span> <span class="nx">readFiles</span> <span class="p">[</span><span class="s">&#39;foo.txt&#39;</span><span class="p">,</span> <span class="s">&#39;bar.txt&#39;</span><span class="p">]</span>
- <span class="c1"># docs = {&#39;foo.txt&#39;: &#39;...&#39;, &#39;bar.txt&#39;: &#39;...&#39;}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">readFilesSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">files</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">res </span><span class="o">=</span> <span class="p">{}</span>
-  <span class="nx">res</span><span class="p">[</span><span class="nx">path</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span> <span class="nx">path</span> <span class="k">for</span> <span class="nx">path</span> <span class="k">in</span> <span class="nx">files</span>
-  <span class="nx">res</span></pre></div></td>
+<pre><code>docs <span class="operators">=</span> readFiles <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo.txt<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar.txt<span class="string_end">'</span></span><span class="punctuation">]</span>
+ <span class="comment"># docs = {'foo.txt': '...', 'bar.txt': '...'}</span></code></pre></td>
+          <td class='code'><pre>readFilesSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>files<span class="params_end">)</span></span> -></span>
+  res <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+  res<span class="punctuation">[</span>path<span class="punctuation">]</span> <span class="operators">=</span> fs.readFileSync path <span class="keyword">for</span> path <span class="keyword">in</span> files
+  res
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='rm'>rm</h4></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">rm </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">rmIteration </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">rm</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">callback</span>
+          <td class='code'><pre>
+rm <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, callback<span class="params_end">)</span></span> -></span>
+  rmIteration <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span> rm path, callback
 
-  <span class="nx">exists</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">exist</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">exist</span>
-      <span class="nx">fs</span><span class="p">.</span><span class="nx">lstat</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="o">-&gt;</span>
-        <span class="k">return</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
-        <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span>
-          <span class="nx">fs</span><span class="p">.</span><span class="nx">readdir</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">paths</span><span class="p">)</span> <span class="o">-&gt;</span>
-            <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span> <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
-            <span class="nx">parallel</span> <span class="p">(</span><span class="nx">rmIteration</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">paths</span><span class="p">),</span> <span class="o">-&gt;</span>
-              <span class="nx">fs</span><span class="p">.</span><span class="nx">rmdir</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
-                <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span>
-        <span class="k">else</span>
-          <span class="nx">fs</span><span class="p">.</span><span class="nx">unlink</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
-            <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span>
-    <span class="k">else</span>
-      <span class="nx">callback</span><span class="o">?</span><span class="p">()</span></pre></div></td>
+  exists path, <span class="function"><span class="params"><span class="params_begin">(</span>exist<span class="params_end">)</span></span> -></span>
+    <span class="keyword">if</span> exist
+      fs.lstat path, <span class="function"><span class="params"><span class="params_begin">(</span>err, stats<span class="params_end">)</span></span> -></span>
+        <span class="keyword">return</span> callback<span class="operators">?</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+        <span class="keyword">if</span> stats.isDirectory<span class="punctuation">(</span><span class="punctuation">)</span>
+          fs.readdir path, <span class="function"><span class="params"><span class="params_begin">(</span>err, paths<span class="params_end">)</span></span> -></span>
+            callback<span class="operators">?</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+            parallel <span class="punctuation">(</span>rmIteration <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>path<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> p <span class="keyword">in</span> paths<span class="punctuation">)</span>,<span class="function"> -></span>
+              fs.rmdir path, <span class="function"><span class="params"><span class="params_begin">(</span>err<span class="params_end">)</span></span> -></span>
+                callback<span class="operators">?</span> err
+        <span class="keyword">else</span>
+          fs.unlink path, <span class="function"><span class="params"><span class="params_begin">(</span>err<span class="params_end">)</span></span> -></span>
+            callback<span class="operators">?</span> err
+    <span class="keyword">else</span>
+      callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='rmsync'>rmSync</h4></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">rmSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">existsSync</span> <span class="nx">path</span>
-    <span class="nv">stats </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">lstatSync</span> <span class="nx">path</span>
-    <span class="k">if</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">isDirectory</span><span class="p">()</span>
-      <span class="nv">paths </span><span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readdirSync</span> <span class="nx">path</span>
-      <span class="nx">rmSync</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">path</span><span class="si">}</span><span class="s">/</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">&quot;</span> <span class="k">for</span> <span class="nx">p</span> <span class="k">in</span> <span class="nx">paths</span> <span class="k">if</span> <span class="nx">paths</span><span class="o">?</span>
-      <span class="nx">fs</span><span class="p">.</span><span class="nx">rmdirSync</span> <span class="nx">path</span>
-    <span class="k">else</span>
-      <span class="nx">fs</span><span class="p">.</span><span class="nx">unlinkSync</span> <span class="nx">path</span></pre></div></td>
+          <td class='code'><pre>
+rmSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> existsSync path
+    stats <span class="operators">=</span> fs.lstatSync path
+    <span class="keyword">if</span> stats.isDirectory<span class="punctuation">(</span><span class="punctuation">)</span>
+      paths <span class="operators">=</span> fs.readdirSync path
+      rmSync <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>path<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> p <span class="keyword">in</span> paths <span class="keyword">if</span> paths<span class="operators">?</span>
+      fs.rmdirSync path
+    <span class="keyword">else</span>
+      fs.unlinkSync path
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='touch'>touch</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Creates a file at path unless the file already exists.</p>
 
-<div class="highlight"><pre><span class="nx">touch</span> <span class="s">&#39;/path/to/file.ext&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># handle errors</span>
+<pre><code>touch <span class="string"><span class="string_begin">'</span>/path/to/file.ext<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>err, created<span class="params_end">)</span></span> -></span>
+  <span class="comment"># handle errors</span>
 
-<span class="nx">touch</span> <span class="s">&#39;/path/to/file.ext&#39;</span><span class="p">,</span> <span class="s">&#39;file content&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">created</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># handle errors</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">touch </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nv">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="p">[</span><span class="nx">content</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">content</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">content</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
-  <span class="nx">exists</span> <span class="nx">path</span><span class="p">,</span> <span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">if</span> <span class="nx">b</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">false</span>
-    <span class="k">else</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFile</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">content</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">if</span> <span class="nx">err</span><span class="o">?</span> <span class="k">then</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">err</span><span class="p">,</span> <span class="kc">false</span>
-      <span class="k">else</span> <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">true</span></pre></div></td>
+touch <span class="string"><span class="string_begin">'</span>/path/to/file.ext<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>file content<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>err, created<span class="params_end">)</span></span> -></span>
+  <span class="comment"># handle errors</span></code></pre></td>
+          <td class='code'><pre>touch <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, content<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>, callback<span class="params_end">)</span></span> -></span>
+  <span class="punctuation">[</span>content, callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>callback, content<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> content <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+  exists path, <span class="function"><span class="params"><span class="params_begin">(</span>b<span class="params_end">)</span></span> -></span>
+    <span class="keyword">if</span> b then callback<span class="operators">?</span> <span class="literal">null</span>, <span class="literal">false</span>
+    <span class="keyword">else</span> fs.writeFile path, content, <span class="function"><span class="params"><span class="params_begin">(</span>err<span class="params_end">)</span></span> -></span>
+      <span class="keyword">if</span> err<span class="operators">?</span> then callback<span class="operators">?</span> err, <span class="literal">false</span>
+      <span class="keyword">else</span> callback<span class="operators">?</span> <span class="literal">null</span>, <span class="literal">true</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='touchsync'>touchSync</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Creates a file at path unless the file already exists.
 A boolean value is returned and indicate if the file was created.</p>
 
-<div class="highlight"><pre><span class="nx">touchSync</span> <span class="s">&#39;/path/to/file.ext&#39;</span>
+<pre><code>touchSync '/path/to/file.ext'
 
-<span class="nx">touchSync</span> <span class="s">&#39;/path/to/file.ext&#39;</span><span class="p">,</span> <span class="s">&#39;file content&#39;</span>
-</pre></div>
+touchSync '/path/to/file.ext', 'file content'</code></pre>
 
 <p>Note that the function will fail with an error in this
 context if <code>/path/to</code> don't exist.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">touchSync </span><span class="o">=</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nv">content</span><span class="o">=</span><span class="s">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">content</span><span class="p">;</span> <span class="k">return</span> <span class="kc">true</span><span class="p">)</span> <span class="k">unless</span> <span class="nx">existsSync</span> <span class="nx">path</span>
-  <span class="kc">false</span>
+          <td class='code'><pre>touchSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path, content<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+  <span class="punctuation">(</span>fs.writeFileSync path, content; <span class="keyword">return</span> <span class="literal">true</span><span class="punctuation">)</span> <span class="keyword">unless</span> existsSync path
+  <span class="literal">false</span>
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span>
-  <span class="nx">dirWithIndex</span><span class="p">,</span>
-  <span class="nx">dirWithIndexSync</span><span class="p">,</span>
-  <span class="nx">ensure</span><span class="p">,</span>
-  <span class="nx">ensureSync</span><span class="p">,</span>
-  <span class="nx">ensurePath</span><span class="p">,</span>
-  <span class="nx">ensurePathSync</span><span class="p">,</span>
-  <span class="nx">find</span><span class="p">,</span>
-  <span class="nx">findSync</span><span class="p">,</span>
-  <span class="nx">findBase</span><span class="p">,</span>
-  <span class="nx">findBaseSync</span><span class="p">,</span>
-  <span class="nx">findSiblingFile</span><span class="p">,</span>
-  <span class="nx">findSiblingFileSync</span><span class="p">,</span>
-  <span class="nx">isNeatRoot</span><span class="p">,</span>
-  <span class="nx">isNeatRootSync</span><span class="p">,</span>
-  <span class="nx">neatRoot</span><span class="p">,</span>
-  <span class="nx">neatRootSync</span><span class="p">,</span>
-  <span class="nx">noExtension</span><span class="p">,</span>
-  <span class="nx">readFiles</span><span class="p">,</span>
-  <span class="nx">readFilesSync</span><span class="p">,</span>
-  <span class="nx">rm</span><span class="p">,</span>
-  <span class="nx">rmSync</span><span class="p">,</span>
-  <span class="nx">touch</span><span class="p">,</span>
-  <span class="nx">touchSync</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+  dirWithIndex,
+  dirWithIndexSync,
+  ensure,
+  ensureSync,
+  ensurePath,
+  ensurePathSync,
+  find,
+  findSync,
+  findBase,
+  findBaseSync,
+  findSiblingFile,
+  findSiblingFileSync,
+  isNeatRoot,
+  isNeatRootSync,
+  neatRoot,
+  neatRootSync,
+  noExtension,
+  readFiles,
+  readFilesSync,
+  rm,
+  rmSync,
+  touch,
+  touchSync,
+<span class="punctuation">}</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>
