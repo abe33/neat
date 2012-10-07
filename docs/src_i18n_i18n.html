@@ -72,118 +72,130 @@ of the localized strings.
     <a href='#i18ndeepmerge'>I18n::deepMerge</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">yaml </span><span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;js-yaml&#39;</span>
-<span class="p">{</span><span class="nx">findSync</span><span class="p">,</span> <span class="nx">readFilesSync</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;../utils/files&#39;</span></pre></div></td>
+          <td class='code'><pre>yaml <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>js-yaml<span class="string_end">'</span></span>
+<span class="punctuation">{</span>findSync, readFilesSync<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../utils/files<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='i18n'>I18n</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>I18n</code> class is a small utility that search for <code>yml</code> files
 in the given paths and gather the results in a single <code>locales</code>
 object.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="k">class</span> <span class="nb">I18n</span></pre></div></td>
+          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">I18n</span></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='i18nconstructor'>I18n::constructor</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The paths into which looking for files are provided in the constructor.</p>
 
-<div class="highlight"><pre><span class="nv">i18n </span><span class="o">=</span> <span class="k">new</span> <span class="nb">I18n</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="si">#{</span><span class="nx">p</span><span class="si">}</span><span class="s">/src/config/locales&quot;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">constructor</span><span class="o">:</span> <span class="p">(</span><span class="py">@paths</span><span class="o">=</span><span class="p">[],</span> <span class="py">@defaultLanguage</span><span class="o">=</span><span class="s">&#39;en&#39;</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+<pre><code>i18n <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">I18n</span> <span class="constant">Neat</span>.paths.map <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/src/config/locales<span class="string_end">"</span></span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">constructor<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@paths</span><span class="operators">=</span>[], <span class="property">@defaultLanguage</span><span class="operators">=</span><span class="string"><span class="string_begin">'</span>en<span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='i18nget'>I18n::get</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a string from the locales.
 That function can be called either with or without a language:</p>
 
-<div class="highlight"><pre><span class="nx">i18n</span><span class="p">.</span><span class="nx">get</span> <span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">string</span><span class="s">&#39;)</span>
-<span class="s">i18n.get (&#39;</span><span class="nx">fr</span><span class="s">&#39;, &#39;</span><span class="nx">path</span><span class="p">.</span><span class="nx">to</span><span class="p">.</span><span class="nx">string</span><span class="s">&#39;)</span>
-</pre></div>
+<pre><code>i18n.get <span class="punctuation">(</span>path.to.string<span class="string"><span class="string_begin">'</span>)
+i18n.get (<span class="string_end">'</span></span>fr<span class="string"><span class="string_begin">'</span>, <span class="string_end">'</span></span>path.to.string<span class="string"><span class="string_begin">'</span>)</code></pre>
 
 <p>If the path lead to a dead end, the function return the last element
 in the path as a capitalized sentence.</p>
 
-<div class="highlight"><pre><span class="nx">i18n</span><span class="p">.</span><span class="nx">get</span> <span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">that</span><span class="p">.</span><span class="nx">do_not_exist</span><span class="p">)</span> <span class="c1"># Do Not Exist</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">get</span><span class="o">:</span> <span class="p">(</span><span class="nx">language</span><span class="p">,</span> <span class="nx">path</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="p">[</span><span class="nx">language</span><span class="p">,</span> <span class="nx">path</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="py">@defaultLanguage</span><span class="p">,</span> <span class="nx">language</span><span class="p">]</span> <span class="k">unless</span> <span class="nx">path</span><span class="o">?</span>
-    <span class="nv">lang </span><span class="o">=</span> <span class="py">@locales</span><span class="p">[</span><span class="nx">language</span><span class="p">]</span>
+<pre><code>i18n.get <span class="punctuation">(</span>path.that.do_not_exist<span class="punctuation">)</span> <span class="comment"># Do Not Exist</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">get<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>language, path<span class="params_end">)</span></span> -></span>
+    <span class="punctuation">[</span>language, path<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="property">@defaultLanguage</span>, language<span class="punctuation">]</span> <span class="keyword">unless</span> path<span class="operators">?</span>
+    lang <span class="operators">=</span> <span class="property">@locales</span><span class="punctuation">[</span>language<span class="punctuation">]</span>
 
-    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s">&quot;Language </span><span class="si">#{</span><span class="nx">language</span><span class="si">}</span><span class="s"> not found&quot;</span> <span class="k">unless</span> <span class="nx">lang</span><span class="o">?</span>
-    <span class="nv">els </span><span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)</span>
-    <span class="p">(</span><span class="nv">lang </span><span class="o">=</span> <span class="nx">lang</span><span class="p">[</span><span class="nx">v</span><span class="p">];</span> <span class="k">break</span> <span class="k">unless</span> <span class="nx">lang</span><span class="o">?</span><span class="p">)</span> <span class="k">for</span> <span class="nx">v</span> <span class="k">in</span> <span class="nx">els</span>
-    <span class="nv">lang </span><span class="o">=</span> <span class="nx">els</span><span class="p">.</span><span class="nx">last</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="src">[-_]</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39; &#39;</span><span class="p">).</span><span class="nx">capitalizeAll</span><span class="p">()</span> <span class="k">unless</span> <span class="nx">lang</span><span class="o">?</span>
-    <span class="nx">lang</span></pre></div></td>
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> <span class="string"><span class="string_begin">"</span>Language <span class="subst"><span class="subst_begin">#{</span>language<span class="subst_end">}</span></span> not found<span class="string_end">"</span></span> <span class="keyword">unless</span> lang<span class="operators">?</span>
+    els <span class="operators">=</span> path.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>.<span class="string_end">'</span></span><span class="punctuation">)</span>
+    <span class="punctuation">(</span>lang <span class="operators">=</span> lang<span class="punctuation">[</span>v<span class="punctuation">]</span>; <span class="keyword">break</span> <span class="keyword">unless</span> lang<span class="operators">?</span><span class="punctuation">)</span> <span class="keyword">for</span> v <span class="keyword">in</span> els
+    lang <span class="operators">=</span> els.last<span class="punctuation">(</span><span class="punctuation">)</span>.replace<span class="punctuation">(</span><span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>-_<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="punctuation">)</span>.capitalizeAll<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">unless</span> lang<span class="operators">?</span>
+    lang
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='i18ngethelper'>I18n::getHelper</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a helper function bound to the current instance that allow
 to retrieve localized string from the <code>I18n</code> instance as well as doing
 token substitution in the returned string.</p>
 
-<div class="highlight"><pre><span class="nv">_ </span><span class="o">=</span> <span class="nx">i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span>
-<span class="nx">_</span><span class="p">(</span><span class="s">&#39;path.to.string&#39;</span><span class="p">)</span>
-<span class="nx">_</span><span class="p">(</span><span class="s">&#39;path.to.string_with_token&#39;</span><span class="p">,</span> <span class="py">token</span><span class="o">:</span> <span class="s">&#39;token substitute&#39;</span><span class="p">)</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">getHelper</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">path</span><span class="p">,</span> <span class="nx">tokens</span><span class="p">)</span> <span class="o">=&gt;</span>
-    <span class="py">@get</span><span class="p">(</span><span class="nx">path</span><span class="p">).</span><span class="nx">replace</span> <span class="sr">/\</span><span class="err">#</span><span class="sr">\{</span><span class="sro">(</span><span class="src">[^</span><span class="sr">\}</span><span class="err">]</span><span class="sro">+)</span><span class="sr">\}/g</span><span class="p">,</span> <span class="p">(</span><span class="nx">token</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">tokens</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">or</span> <span class="nx">token</span></pre></div></td>
+<pre><code>_ <span class="operators">=</span> i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>path.to.string<span class="string_end">'</span></span><span class="punctuation">)</span>
+_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>path.to.string_with_token<span class="string_end">'</span></span>, <span class="hash">token<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>token substitute<span class="string_end">'</span></span><span class="punctuation">)</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">getHelper<span class="hash_end">:</span></span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>path, tokens<span class="params_end">)</span></span> =></span>
+    <span class="property">@get</span><span class="punctuation">(</span>path<span class="punctuation">)</span>.replace <span class="regexp">/<span class="escaped">\#</span><span class="escaped">\{</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>^<span class="escaped">\}</span><span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\}</span><span class="regexp_end">/g</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>token, key<span class="params_end">)</span></span> -></span> tokens<span class="punctuation">[</span>key<span class="punctuation">]</span> <span class="keyword">or</span> token
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='i18nload'>I18n::load</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Search and loads locales files in the given paths, parse their content
 and fill the <code>locales</code> object with the resuts.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">load</span><span class="o">:</span> <span class="o">-&gt;</span>
-    <span class="py">@locales</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="nv">docs </span><span class="o">=</span> <span class="nx">readFilesSync</span> <span class="nx">findSync</span> <span class="s">&#39;yml&#39;</span><span class="p">,</span> <span class="py">@paths</span>
+          <td class='code'><pre>  <span class="hash">load<span class="hash_end">:</span></span><span class="function"> -></span>
+    <span class="property">@locales</span> <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+    docs <span class="operators">=</span> readFilesSync findSync <span class="string"><span class="string_begin">'</span>yml<span class="string_end">'</span></span>, <span class="property">@paths</span>
 
-    <span class="py">@deepMerge</span> <span class="py">@locales</span><span class="p">,</span> <span class="nx">yaml</span><span class="p">.</span><span class="nx">load</span> <span class="nx">content</span> <span class="k">for</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">content</span> <span class="k">of</span> <span class="nx">docs</span>
-    <span class="py">@languages</span> <span class="o">=</span> <span class="py">@locales</span><span class="p">.</span><span class="nx">sortedKeys</span><span class="p">()</span></pre></div></td>
+    <span class="property">@deepMerge</span> <span class="property">@locales</span>, yaml.load content <span class="keyword">for</span> path, content <span class="keyword">of</span> docs
+    <span class="property">@languages</span> <span class="operators">=</span> <span class="property">@locales</span>.sortedKeys<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='i18ndeepmerge'>I18n::deepMerge</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Merge two tree structures formed by nested objects into one tree structure.</p>
 
-<div class="highlight"><pre><span class="nv">source </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span>
-    <span class="py">bar</span><span class="o">:</span> <span class="mi">10</span>
-<span class="nv">target </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span>
-    <span class="py">baz</span><span class="o">:</span> <span class="mi">20</span>
-<span class="nx">deepMerge</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">source</span>
-<span class="c1"># target = {foo: {bar: 10, baz: 20}}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="py">deepMerge</span><span class="o">:</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">source</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nx">source</span>
-      <span class="k">switch</span> <span class="k">typeof</span> <span class="nx">v</span>
-        <span class="k">when</span> <span class="s">&#39;object&#39;</span>
-          <span class="k">if</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span> <span class="nx">v</span>
-            <span class="nx">target</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">||=</span> <span class="p">[]</span>
-            <span class="nx">target</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">target</span><span class="p">[</span><span class="nx">k</span><span class="p">].</span><span class="nx">concat</span> <span class="nx">v</span>
-          <span class="k">else</span>
-            <span class="nx">target</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">||=</span> <span class="p">{}</span>
-            <span class="py">@deepMerge</span> <span class="nx">target</span><span class="p">[</span><span class="nx">k</span><span class="p">],</span> <span class="nx">v</span>
-        <span class="k">else</span> <span class="nx">target</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span>
+<pre><code>source <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span>
+    <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">10</span>
+target <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span>
+    <span class="hash">baz<span class="hash_end">:</span></span> <span class="number">20</span>
+deepMerge target, source
+<span class="comment"># target = {foo: {bar: 10, baz: 20}}</span></code></pre></td>
+          <td class='code'><pre>  <span class="hash">deepMerge<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>target, source<span class="params_end">)</span></span> -></span>
+    <span class="keyword">for</span> k,v <span class="keyword">of</span> source
+      <span class="keyword">switch</span> <span class="keyword">typeof</span> v
+        <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>object<span class="string_end">'</span></span>
+          <span class="keyword">if</span> <span class="constant">Array</span>.isArray v
+            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span>.concat v
+          <span class="keyword">else</span>
+            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+            <span class="property">@deepMerge</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span>, v
+        <span class="keyword">else</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">I18n</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">I18n</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

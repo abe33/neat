@@ -135,127 +135,150 @@ Object and Hash methods.
     <a href='#objectquackslike'>Object::quacksLike</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">def</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./utils&#39;</span></pre></div></td>
+          <td class='code'><pre><span class="punctuation">{</span>def<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='object'>Object</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='class-extensions'>Class Extensions</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectnew'>Object.new</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Creates a new object from an array such as <code>[key, value, key, value, ...]</code>.</p>
 
-<div class="highlight"><pre><span class="nv">o </span><span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="k">new</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="s">&#39;baz&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-<span class="c1"># {foo: 10, bar: 20, baz: 30}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">Object</span><span class="p">.</span><span class="k">new</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">o </span><span class="o">=</span> <span class="p">{};</span> <span class="nx">a</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span><span class="p">);</span> <span class="k">return</span> <span class="nx">o</span></pre></div></td>
+<pre><code>o <span class="operators">=</span> <span class="constant">Object</span>.<span class="keyword">new</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span>, <span class="number">20</span>, <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>, <span class="number">30</span><span class="punctuation">]</span>
+<span class="comment"># {foo: 10, bar: 20, baz: 30}</span></code></pre></td>
+          <td class='code'><pre><span class="constant">Object</span>.<span class="keyword">new</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>a<span class="params_end">)</span></span> -></span> o <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>; a.step<span class="function"><span class="params"><span class="params_begin">(</span>2, (k,v<span class="params_end">)</span></span> -></span> o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v<span class="punctuation">)</span>; <span class="keyword">return</span> o
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='instances-extensions'>Instances Extensions</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectconcat'>Object::concat</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a new object that is the result of the merge of the current
 object with the passed-in argument. If no argument is provided,
 the return a copy of the current object.</p>
 
-<div class="highlight"><pre><span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="s">&#39;bar&#39;</span><span class="p">}.</span><span class="nx">concat</span> <span class="py">baz</span><span class="o">:</span> <span class="s">&#39;baz&#39;</span>
-<span class="c1"># {foo: &#39;foo&#39;, bar: &#39;bar&#39;, baz: &#39;baz&#39;}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">concat</span><span class="o">:</span> <span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">o </span><span class="o">=</span> <span class="p">{};</span> <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="py">this</span><span class="p">;</span> <span class="k">return</span> <span class="nx">o</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">m</span> <span class="o">||</span> <span class="p">{})</span></pre></div></td>
+<pre><code><span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">}</span>.concat <span class="hash">baz<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
+<span class="comment"># {foo: 'foo', bar: 'bar', baz: 'baz'}</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">concat<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>m<span class="params_end">)</span></span> -></span>
+  o <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span>; <span class="keyword">return</span> o.merge<span class="punctuation">(</span>m <span class="operators">|</span><span class="operators">|</span> <span class="punctuation">{</span><span class="punctuation">}</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectcontains'>Object::contains</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
-          <td class='docs'><p><code>Object::has</code> alias.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">contains</span><span class="o">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@has</span> <span class="nx">value</span></pre></div></td>
+          <td class='docs'><p><code>Object::has</code> alias.
+def Object, contains: (value) -> @has value</p></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectempty'>Object::empty</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns true if the current object don't contains any enumerable properties.</p>
 
-<div class="highlight"><pre><span class="p">{}.</span><span class="nx">empty</span><span class="p">()</span>        <span class="c1"># true</span>
-<span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">}.</span><span class="nx">empty</span><span class="p">()</span> <span class="c1"># false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">empty</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@keys</span><span class="p">().</span><span class="nx">empty</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="punctuation">{</span><span class="punctuation">}</span>.empty<span class="punctuation">(</span><span class="punctuation">)</span>        <span class="comment"># true</span>
+<span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span><span class="punctuation">}</span>.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">empty<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectfirst'>Object::first</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the first pair of key and value of the current object as a tuple.</p>
 
-<div class="highlight"><pre><span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">}.</span><span class="nx">first</span><span class="p">()</span> <span class="c1"># [&#39;foo&#39;, 10]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">first</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="py">@empty</span><span class="p">()</span> <span class="k">then</span> <span class="kc">null</span> <span class="k">else</span> <span class="py">@flatten</span><span class="p">().</span><span class="nx">group</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">first</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span><span class="punctuation">}</span>.first<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['foo', 10]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">first<span class="hash_end">:</span></span><span class="function"> -></span> <span class="keyword">if</span> <span class="property">@empty</span><span class="punctuation">(</span><span class="punctuation">)</span> then <span class="literal">null</span> <span class="keyword">else</span> <span class="property">@flatten</span><span class="punctuation">(</span><span class="punctuation">)</span>.group<span class="punctuation">(</span><span class="number">2</span><span class="punctuation">)</span>.first<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectflatten'>Object::flatten</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an array such as <code>[key, value, key, value]</code> with the name
 and the content of the enumerable properties of this object.</p>
 
-<div class="highlight"><pre><span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="py">baz</span><span class="o">:</span> <span class="mi">30</span><span class="p">}.</span><span class="nx">flatten</span><span class="p">()</span>
-<span class="c1"># [&#39;foo&#39;, 10, &#39;bar&#39;, 20, &#39;baz&#39;, 30]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">flatten</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="nv">a </span><span class="o">=</span> <span class="p">[];</span> <span class="nv">a </span><span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">concat</span> <span class="p">[</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">]</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="py">this</span><span class="p">;</span> <span class="k">return</span> <span class="nx">a</span></pre></div></td>
+<pre><code><span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>, <span class="hash">baz<span class="hash_end">:</span></span> <span class="number">30</span><span class="punctuation">}</span>.flatten<span class="punctuation">(</span><span class="punctuation">)</span>
+<span class="comment"># ['foo', 10, 'bar', 20, 'baz', 30]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">flatten<span class="hash_end">:</span></span><span class="function"> -></span> a <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>; a <span class="operators">=</span> a.concat <span class="punctuation">[</span>k,v<span class="punctuation">]</span> <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span>; <span class="keyword">return</span> a
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objecthas'>Object::has</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Retuns <code>true</code> if the specified values is contained in one of the object
 enumerable properties.</p>
 
-<div class="highlight"><pre><span class="nv">object </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
+<pre><code>object <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
 
-<span class="nx">object</span><span class="p">.</span><span class="nx">has</span> <span class="mi">20</span> <span class="c1"># true</span>
-<span class="nx">object</span><span class="p">.</span><span class="nx">has</span> <span class="mi">30</span> <span class="c1"># false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">has</span><span class="o">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">value</span> <span class="k">in</span> <span class="py">@values</span><span class="p">()</span></pre></div></td>
+object.has <span class="number">20</span> <span class="comment"># true</span>
+object.has <span class="number">30</span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">has<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>value<span class="params_end">)</span></span> -></span> value <span class="keyword">in</span> <span class="property">@values</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objecthaskey'>Object::hasKey</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the specified key is defined on this object.</p>
 
-<div class="highlight"><pre><span class="nv">object </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
+<pre><code>object <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
 
-<span class="nx">object</span><span class="p">.</span><span class="nx">hasKey</span> <span class="s">&#39;foo&#39;</span> <span class="c1"># true</span>
-<span class="nx">object</span><span class="p">.</span><span class="nx">hasKey</span> <span class="s">&#39;baz&#39;</span> <span class="c1"># false</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">hasKey</span><span class="o">:</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span><span class="o">?</span></pre></div></td>
+object.hasKey <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span>
+object.hasKey <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">hasKey<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>key<span class="params_end">)</span></span> -></span> <span class="property">@</span><span class="punctuation">[</span>key<span class="punctuation">]</span><span class="operators">?</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectkeys'>Object::keys</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an array of the keys enumerable on this object.</p>
@@ -263,55 +286,63 @@ enumerable properties.</p>
 <p>The keys are returned as the <code>for..in</code> construct iterates on them.
 Use <code>sortedKeys</code> to retreive the keys sorted alphabetically.</p>
 
-<div class="highlight"><pre><span class="nv">object </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
+<pre><code>object <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
 
-<span class="nx">object</span><span class="p">.</span><span class="nx">keys</span><span class="p">()</span> <span class="c1"># [&#39;foo&#39;, &#39;bar&#39;]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">keys</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="nx">k</span> <span class="k">for</span> <span class="nx">k</span> <span class="k">of</span> <span class="py">this</span></pre></div></td>
+object.keys<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['foo', 'bar']</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">keys<span class="hash_end">:</span></span><span class="function"> -></span> k <span class="keyword">for</span> k <span class="keyword">of</span> <span class="keyword">this</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectlength'>Object::length</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the count of enumerable properties on this object.</p>
 
-<div class="highlight"><pre><span class="p">{}.</span><span class="nx">length</span><span class="p">()</span>                 <span class="c1"># 0</span>
-<span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">}.</span><span class="nx">length</span><span class="p">()</span>          <span class="c1"># 1</span>
-<span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">}.</span><span class="nx">length</span><span class="p">()</span> <span class="c1"># 2</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">length</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@keys</span><span class="p">().</span><span class="nx">length</span></pre></div></td>
+<pre><code><span class="punctuation">{</span><span class="punctuation">}</span>.length<span class="punctuation">(</span><span class="punctuation">)</span>                 <span class="comment"># 0</span>
+<span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span><span class="punctuation">}</span>.length<span class="punctuation">(</span><span class="punctuation">)</span>          <span class="comment"># 1</span>
+<span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span><span class="punctuation">}</span>.length<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 2</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">length<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.length
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectlast'>Object::last</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the last pair of key and value of the current object as a tuple.</p>
 
-<div class="highlight"><pre><span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">}.</span><span class="nx">last</span><span class="p">()</span> <span class="c1"># [&#39;bar&#39;, 20]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">last</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="k">if</span> <span class="py">@empty</span><span class="p">()</span> <span class="k">then</span> <span class="kc">null</span> <span class="k">else</span> <span class="py">@flatten</span><span class="p">().</span><span class="nx">group</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="nx">last</span><span class="p">()</span></pre></div></td>
+<pre><code><span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span><span class="punctuation">}</span>.last<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['bar', 20]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">last<span class="hash_end">:</span></span><span class="function"> -></span> <span class="keyword">if</span> <span class="property">@empty</span><span class="punctuation">(</span><span class="punctuation">)</span> then <span class="literal">null</span> <span class="keyword">else</span> <span class="property">@flatten</span><span class="punctuation">(</span><span class="punctuation">)</span>.group<span class="punctuation">(</span><span class="number">2</span><span class="punctuation">)</span>.last<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectmap'>Object::map</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Iterates over the current object enumerable properties and
 creates a new object with the mapping function's return.</p>
 
-<div class="highlight"><pre><span class="nv">source </span><span class="o">=</span> <span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">50</span><span class="p">}</span>
-<span class="nv">result </span><span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">map</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="s">&quot;_</span><span class="si">#{</span><span class="nx">k</span><span class="si">}</span><span class="s">_&quot;</span><span class="p">,</span> <span class="nx">v</span> <span class="o">*</span> <span class="mi">100</span><span class="p">]</span>
-<span class="c1"># {_foo_: 1000, _bar_: 5000}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">map</span><span class="o">:</span> <span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">Object</span><span class="p">.</span><span class="k">new</span> <span class="p">(</span><span class="nx">f</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="py">this</span><span class="p">).</span><span class="nx">flatten</span><span class="p">()</span></pre></div></td>
+<pre><code>source <span class="operators">=</span> <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">50</span><span class="punctuation">}</span>
+result <span class="operators">=</span> source.map <span class="function"><span class="params"><span class="params_begin">(</span>k,v<span class="params_end">)</span></span> -></span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>_<span class="subst"><span class="subst_begin">#{</span>k<span class="subst_end">}</span></span>_<span class="string_end">"</span></span>, v <span class="operators">*</span> <span class="number">100</span><span class="punctuation">]</span>
+<span class="comment"># {_foo_: 1000, _bar_: 5000}</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">map<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span> <span class="constant">Object</span>.<span class="keyword">new</span> <span class="punctuation">(</span>f<span class="punctuation">(</span>k,v<span class="punctuation">)</span> <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span><span class="punctuation">)</span>.flatten<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectmerge'>Object::merge</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Merge the enumerable properties of <code>o</code> into this object.</p>
@@ -319,125 +350,146 @@ creates a new object with the mapping function's return.</p>
 <p>A target object property is overriden by the source property
 if both hold the same property.</p>
 
-<div class="highlight"><pre><span class="nv">target </span><span class="o">=</span> <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-<span class="nx">target</span><span class="p">.</span><span class="nx">merge</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="py">baz</span><span class="o">:</span> <span class="mi">30</span>
-<span class="c1"># target = {foo: 10, bar: 20, baz: 30}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">merge</span><span class="o">:</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nx">o</span><span class="p">;</span> <span class="py">this</span></pre></div></td>
+<pre><code>target <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+target.merge <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>, <span class="hash">baz<span class="hash_end">:</span></span> <span class="number">30</span>
+<span class="comment"># target = {foo: 10, bar: 20, baz: 30}</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">merge<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> o; <span class="keyword">this</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectreject'>Object::reject</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an object without the properties that are evaluated as <code>true</code>
 in the passed-in filter function.</p>
 
-<div class="highlight"><pre><span class="nv">source </span><span class="o">=</span> <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="py">baz</span><span class="o">:</span> <span class="mi">30</span>
-<span class="nv">target </span><span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">reject</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">v</span> <span class="o">&gt;</span> <span class="mi">10</span>
-<span class="c1"># target = {foo: 10}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">reject</span><span class="o">:</span> <span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">o </span><span class="o">=</span> <span class="p">{};</span> <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="py">this</span> <span class="k">when</span> <span class="o">not</span> <span class="nx">f</span><span class="o">?</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">;</span> <span class="k">return</span> <span class="nx">o</span></pre></div></td>
+<pre><code>source <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>, <span class="hash">baz<span class="hash_end">:</span></span> <span class="number">30</span>
+target <span class="operators">=</span> source.reject <span class="function"><span class="params"><span class="params_begin">(</span>k,v<span class="params_end">)</span></span> -></span> v > <span class="number">10</span>
+<span class="comment"># target = {foo: 10}</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">reject<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span>
+  o <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span> <span class="keyword">when</span> <span class="keyword">not</span> f<span class="operators">?</span> k, v; <span class="keyword">return</span> o
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectselect'>Object::select</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns an object with the properties that are evaluated as <code>true</code>
 in the passed-in filter function.</p>
 
-<div class="highlight"><pre><span class="nv">source </span><span class="o">=</span> <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span> <span class="py">baz</span><span class="o">:</span> <span class="mi">30</span>
-<span class="nv">target </span><span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">select</span> <span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">v</span> <span class="o">&gt;</span> <span class="mi">10</span>
-<span class="c1"># target = {bar: 20, baz: 30}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">select</span><span class="o">:</span> <span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">o </span><span class="o">=</span> <span class="p">{};</span> <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">v</span> <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="py">this</span> <span class="k">when</span> <span class="nx">f</span><span class="o">?</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">;</span> <span class="k">return</span> <span class="nx">o</span></pre></div></td>
+<pre><code>source <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>, <span class="hash">baz<span class="hash_end">:</span></span> <span class="number">30</span>
+target <span class="operators">=</span> source.select <span class="function"><span class="params"><span class="params_begin">(</span>k,v<span class="params_end">)</span></span> -></span> v > <span class="number">10</span>
+<span class="comment"># target = {bar: 20, baz: 30}</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">select<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span>
+  o <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span> <span class="keyword">when</span> f<span class="operators">?</span> k, v; <span class="keyword">return</span> o
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectsize'>Object::size</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p><code>Object::length</code> alias.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">size</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@length</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">size<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@length</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectsort'>Object::sort</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns a new object whose properties have been sorted to
 be iterated in the defined order.</p>
 
-<div class="highlight"><pre><span class="nv">source </span><span class="o">=</span> <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
-<span class="nv">target </span><span class="o">=</span> <span class="nx">source</span><span class="p">.</span><span class="nx">sort</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">a</span> <span class="o">&gt;</span> <span class="nx">b</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">a</span> <span class="k">then</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
-<span class="c1"># target = {bar: 20, foo: 10}</span>
-</pre></div>
+<pre><code>source <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
+target <span class="operators">=</span> source.sort <span class="function"><span class="params"><span class="params_begin">(</span>a,b<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> a > b then <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> b &lt; a then <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+<span class="comment"># target = {bar: 20, foo: 10}</span></code></pre>
 
 <p>If called without arguments the keys are sorted alphabetically.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">sort</span><span class="o">:</span> <span class="p">(</span><span class="nx">f</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="o">not</span> <span class="nx">f</span><span class="o">?</span> <span class="o">or</span> <span class="k">typeof</span> <span class="nx">f</span> <span class="o">isnt</span> <span class="s">&#39;function&#39;</span>
-    <span class="nv">f </span><span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">)</span> <span class="o">-&gt;</span>
-      <span class="k">if</span> <span class="nx">a</span> <span class="o">&gt;</span> <span class="nx">b</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">b</span> <span class="o">&lt;</span> <span class="nx">a</span> <span class="k">then</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">sort<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> <span class="keyword">not</span> f<span class="operators">?</span> <span class="keyword">or</span> <span class="keyword">typeof</span> f <span class="keyword">isnt</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+    f <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>a,b<span class="params_end">)</span></span> -></span>
+      <span class="keyword">if</span> a > b then <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> b &lt; a then <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
 
-  <span class="nv">o </span><span class="o">=</span> <span class="p">{};</span> <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="py">@</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="k">for</span> <span class="nx">k</span> <span class="k">in</span> <span class="py">@keys</span><span class="p">().</span><span class="nx">sort</span> <span class="nx">f</span><span class="p">;</span> <span class="k">return</span> <span class="nx">o</span></pre></div></td>
+  o <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.sort f; <span class="keyword">return</span> o
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectsortedkeys'>Object::sortedKeys</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the enumerable keys sorted alphabetically.</p>
 
-<div class="highlight"><pre><span class="nv">object </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
+<pre><code>object <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
 
-<span class="nx">object</span><span class="p">.</span><span class="nx">sortedKeys</span><span class="p">()</span> <span class="c1"># [&#39;bar&#39;, &#39;foo&#39;]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">sortedKeys</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@keys</span><span class="p">().</span><span class="nx">sort</span><span class="p">()</span></pre></div></td>
+object.sortedKeys<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['bar', 'foo']</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">sortedKeys<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.sort<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectsortedvalues'>Object::sortedValues</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the values of the enumerable properties of this object.
 The values are ordered such as each key in <code>sortedKeys</code> correspond
 to the value at the same index in <code>sortedValues</code>.</p>
 
-<div class="highlight"><pre><span class="nv">object </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
+<pre><code>object <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
 
-<span class="nx">object</span><span class="p">.</span><span class="nx">sortedValues</span><span class="p">()</span> <span class="c1"># [20, 10]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">sortedValues</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="k">for</span> <span class="nx">k</span> <span class="k">in</span> <span class="py">@sortedKeys</span><span class="p">()</span></pre></div></td>
+object.sortedValues<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># [20, 10]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">sortedValues<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@sortedKeys</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objecttype'>Object::type</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the results of calling <code>Object::toString</code> on the current object
 and extracting the class name to lower case.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">type</span><span class="o">:</span> <span class="o">-&gt;</span>
-  <span class="nb">Object</span><span class="o">::</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="py">@</span><span class="p">).</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">replace</span> <span class="sr">/\[object </span><span class="sro">(</span><span class="sre">\w</span><span class="sro">+)</span><span class="sr">\]/</span><span class="p">,</span> <span class="s">&quot;$1&quot;</span></pre></div></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">type<span class="hash_end">:</span></span><span class="function"> -></span>
+  <span class="hash">Object<span class="hash_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span><span class="property">@</span><span class="punctuation">)</span>.toLowerCase<span class="punctuation">(</span><span class="punctuation">)</span>.replace <span class="regexp">/<span class="escaped">\[</span>object <span class="regexp_operators">(</span><span class="escaped">\w</span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\]</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectupdate'>Object::update</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p><code>Object::merge</code> alias.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">update</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="py">@merge</span> <span class="nx">o</span></pre></div></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">update<span class="hash_end">:</span></span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span> <span class="property">@merge</span> o
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectvalues'>Object::values</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns the values of the enumerable properties of this object.
@@ -445,21 +497,24 @@ The values are returned as the <code>for..in</code> construct iterates on this o
 Use <code>sortedValues</code> to retreive the values based on the alphabetically
 sorted keys.</p>
 
-<div class="highlight"><pre><span class="nv">object </span><span class="o">=</span>
-  <span class="py">foo</span><span class="o">:</span> <span class="mi">10</span>
-  <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span>
+<pre><code>object <span class="operators">=</span>
+  <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span>
 
-<span class="nx">object</span><span class="p">.</span><span class="nx">values</span><span class="p">()</span> <span class="c1"># [10, 20]</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">values</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="py">@</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="k">for</span> <span class="nx">k</span> <span class="k">in</span> <span class="py">@keys</span><span class="p">()</span></pre></div></td>
+object.values<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># [10, 20]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">values<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='duck-typing'>Duck Typing</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='objectquackslike'>Object::quacksLike</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>Object::quacksLike</code> method allow to perform a duck test
@@ -477,58 +532,57 @@ value as argument.</p>
 <p>Below an example of how <code>quacksLike</code> can be used with custom
 type definitions:</p>
 
-<div class="highlight"><pre><span class="nb">Point</span> <span class="o">=</span>
-  <span class="nb">__definition__</span><span class="o">:</span>
-    <span class="py">x</span><span class="o">:</span> <span class="s">&#39;number&#39;</span>
-    <span class="py">y</span><span class="o">:</span> <span class="s">&#39;number&#39;</span>
+<pre><code><span class="constant">Point</span> <span class="operators">=</span>
+  <span class="hash">__definition__<span class="hash_end">:</span></span>
+    <span class="hash">x<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+    <span class="hash">y<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
 
-<span class="k">class</span> <span class="nb">ConcretPoint</span>
-  <span class="py">constructor</span><span class="o">:</span> <span class="p">(</span><span class="py">@x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="py">@y</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span>
+<span class="class"><span class="class_begin">class </span><span class="class_end">ConcretPoint</span></span>
+  <span class="hash">constructor<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@x</span><span class="operators">=</span>0, <span class="property">@y</span><span class="operators">=</span>0<span class="params_end">)</span></span> -></span>
 
-<span class="nv">point </span><span class="o">=</span> <span class="k">new</span> <span class="nb">ConcretPoint</span>
-<span class="nx">point</span><span class="p">.</span><span class="nx">quacksLike</span> <span class="nb">Point</span>  <span class="c1"># true</span>
+point <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">ConcretPoint</span>
+point.quacksLike <span class="constant">Point</span>  <span class="comment"># true</span>
 
-<span class="nv">point.x </span><span class="o">=</span> <span class="s">&quot;foo&quot;</span>
-<span class="nx">point</span><span class="p">.</span><span class="nx">quacksLike</span> <span class="nb">Point</span>  <span class="c1"># false</span>
+point.x <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>foo<span class="string_end">"</span></span>
+point.quacksLike <span class="constant">Point</span>  <span class="comment"># false</span>
 
-<span class="nv">object </span><span class="o">=</span> <span class="p">{</span><span class="py">x</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span> <span class="py">y</span><span class="o">:</span> <span class="mi">20</span><span class="p">}</span>
-<span class="nx">object</span><span class="p">.</span><span class="nx">quacksLike</span> <span class="nb">Point</span> <span class="c1"># true</span>
-</pre></div>
+object <span class="operators">=</span> <span class="punctuation">{</span><span class="hash">x<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">y<span class="hash_end">:</span></span> <span class="number">20</span><span class="punctuation">}</span>
+object.quacksLike <span class="constant">Point</span> <span class="comment"># true</span></code></pre>
 
 <p>An example demonstrating the use of function as definition:</p>
 
-<div class="highlight"><pre><span class="nb">Command</span> <span class="o">=</span>
-  <span class="nb">__definition__</span><span class="o">:</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">typeof</span> <span class="nx">o</span> <span class="o">is</span> <span class="s">&quot;function&quot;</span> <span class="o">and</span> <span class="nx">o</span><span class="p">.</span><span class="nx">aliases</span><span class="o">?</span>
+<pre><code><span class="constant">Command</span> <span class="operators">=</span>
+  <span class="hash">__definition__<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
+    <span class="keyword">typeof</span> o <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span> <span class="keyword">and</span> o.aliases<span class="operators">?</span>
 
-<span class="nv">command </span><span class="o">=</span> <span class="o">-&gt;</span> <span class="c1"># do something</span>
-<span class="nv">command.aliases </span><span class="o">=</span> <span class="p">[</span><span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="s">&#39;command&#39;</span><span class="p">]</span>
+command <span class="operators">=</span><span class="function"> -></span> <span class="comment"># do something</span>
+command.aliases <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>command<span class="string_end">'</span></span><span class="punctuation">]</span>
 
-<span class="nx">command</span><span class="p">.</span><span class="nx">quacksLike</span> <span class="nb">Command</span> <span class="c1"># true</span>
-</pre></div>
+command.quacksLike <span class="constant">Command</span> <span class="comment"># true</span></code></pre>
 
 <p>Of course, a class can describe itself in its body:</p>
 
-<div class="highlight"><pre><span class="k">class</span> <span class="nb">Point</span>
-  <span class="py">@__definition__</span><span class="o">:</span>
-    <span class="py">x</span><span class="o">:</span> <span class="s">&#39;number&#39;</span>
-    <span class="py">y</span><span class="o">:</span> <span class="s">&#39;number&#39;</span>
+<pre><code><span class="class"><span class="class_begin">class </span><span class="class_end">Point</span></span>
+  <span class="hash">@__definition__<span class="hash_end">:</span></span>
+    <span class="hash">x<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+    <span class="hash">y<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
 
-  <span class="py">constructor</span><span class="o">:</span> <span class="p">(</span><span class="py">@x</span><span class="p">,</span> <span class="py">@y</span><span class="p">)</span> <span class="o">-&gt;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">quacksLike</span><span class="o">:</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">if</span> <span class="nx">type</span><span class="p">.</span><span class="nb">__definition__</span><span class="o">?</span>
-    <span class="nv">definition </span><span class="o">=</span> <span class="nx">type</span><span class="p">.</span><span class="nb">__definition__</span>
-    <span class="k">return</span> <span class="nx">definition</span> <span class="py">this</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">definition</span> <span class="o">is</span> <span class="s">&quot;function&quot;</span>
-    <span class="k">for</span> <span class="nx">k</span><span class="p">,</span><span class="nx">v</span> <span class="k">of</span> <span class="nx">definition</span>
-      <span class="k">switch</span> <span class="k">typeof</span> <span class="nx">v</span>
-        <span class="k">when</span> <span class="s">&quot;function&quot;</span> <span class="k">then</span> <span class="k">return</span> <span class="kc">false</span> <span class="k">unless</span> <span class="nx">v</span> <span class="py">@</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span>
-        <span class="k">else</span> <span class="k">return</span> <span class="kc">false</span> <span class="k">unless</span> <span class="p">(</span><span class="nx">v</span> <span class="o">is</span> <span class="s">&quot;*&quot;</span> <span class="o">or</span> <span class="py">@</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span><span class="o">?</span><span class="p">.</span><span class="nx">type</span><span class="p">()</span> <span class="o">is</span> <span class="nx">v</span><span class="p">)</span>
-    <span class="kc">true</span>
-  <span class="k">else</span>
-    <span class="kc">false</span>
+  <span class="hash">constructor<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@x</span>, <span class="property">@y</span><span class="params_end">)</span></span> -></span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span>, <span class="hash">quacksLike<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>type<span class="params_end">)</span></span> -></span>
+  <span class="keyword">if</span> type.__definition__<span class="operators">?</span>
+    definition <span class="operators">=</span> type.__definition__
+    <span class="keyword">return</span> definition <span class="keyword">this</span> <span class="keyword">if</span> <span class="keyword">typeof</span> definition <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span>
+    <span class="keyword">for</span> k,v <span class="keyword">of</span> definition
+      <span class="keyword">switch</span> <span class="keyword">typeof</span> v
+        <span class="keyword">when</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span> then <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">unless</span> v <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span>
+        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">unless</span> <span class="punctuation">(</span>v <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span> <span class="keyword">or</span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span><span class="operators">?</span>.type<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">is</span> v<span class="punctuation">)</span>
+    <span class="literal">true</span>
+  <span class="keyword">else</span>
+    <span class="literal">false</span>
 
-</pre></div></td>
+
+
+</pre></td>
         </tr>
       </table>
     </div>

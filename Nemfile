@@ -6,6 +6,7 @@ npm 'mustache', '>= 0.4.0'
 npm 'js-yaml', '>= 1.0.0'
 npm 'docco', 'git://github.com/abe33/docco.git#feature-exports'
 npm 'uglify-js'
+npm 'highlight.js', 'git://github.com/abe33/highlight.js.git#node_build'
 
 # These are required to provides the default `cake test` and `cake lint`
 # tasks to the user projects.

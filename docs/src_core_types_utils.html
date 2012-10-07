@@ -50,29 +50,30 @@
         </tr>
         <tr>
           <td class='docs'><p>This file contains utilities to deal with prototype extensions.</p></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='def'>def</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Defines a non-enumerable property on the specified constructor's <code>prototype</code>.</p>
 
-<div class="highlight"><pre><span class="nx">def</span> <span class="nb">Object</span><span class="p">,</span> <span class="py">merge</span><span class="o">:</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># merge implementation</span>
+<pre><code>def <span class="constant">Object</span>, <span class="hash">merge<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
+  <span class="comment"># merge implementation</span>
 
-<span class="p">{</span><span class="py">foo</span><span class="o">:</span> <span class="mi">10</span><span class="p">}.</span><span class="nx">merge</span> <span class="py">bar</span><span class="o">:</span> <span class="mi">20</span> <span class="c1"># {foo: 10, bar: 20}</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">def </span><span class="o">=</span> <span class="p">(</span><span class="nx">ctor</span><span class="p">,</span> <span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="k">for</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="k">of</span> <span class="nx">o</span>
-    <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="o">?</span> <span class="nx">ctor</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span>
-                           <span class="nx">name</span><span class="p">,</span>
-                           <span class="py">enumerable</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="py">value</span><span class="o">:</span> <span class="nx">value</span><span class="p">,</span> <span class="py">writable</span><span class="o">:</span> <span class="kc">true</span>
+<span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span><span class="punctuation">}</span>.merge <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span> <span class="comment"># {foo: 10, bar: 20}</span></code></pre></td>
+          <td class='code'><pre>def <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>ctor, o<span class="params_end">)</span></span> -></span>
+  <span class="keyword">for</span> name, value <span class="keyword">of</span> o
+    <span class="constant">Object</span>.defineProperty<span class="operators">?</span> ctor.prototype,
+                           name,
+                           <span class="hash">enumerable<span class="hash_end">:</span></span> <span class="literal">false</span>, <span class="hash">value<span class="hash_end">:</span></span> value, <span class="hash">writable<span class="hash_end">:</span></span> <span class="literal">true</span>
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span><span class="nx">def</span><span class="p">}</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>def<span class="punctuation">}</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

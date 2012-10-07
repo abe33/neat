@@ -50,11 +50,14 @@
         </tr>
         <tr>
           <td class='docs'></td>
-          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">isType</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;../../utils/matchers&#39;</span></pre></div></td>
+          <td class='code'><pre><span class="punctuation">{</span>isType<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../../utils/matchers<span class="string_end">'</span></span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h1 id='clicommand'>CLICommand</h1></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The <code>CLICommand</code> interface defines the rules that a function should match
@@ -62,14 +65,14 @@ to be used as a <code>neat</code> command.</p>
 
 <p>The rules are simple, the function must have a property named <code>aliases</code>
 which contains an array of strings.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">CLICommand</span> <span class="o">=</span>
-  <span class="nb">__definition__</span><span class="o">:</span> <span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">typeof</span> <span class="nx">o</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span> <span class="o">and</span> <span class="nx">o</span><span class="p">.</span><span class="nx">aliases</span><span class="o">?</span> <span class="o">and</span>
-    <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">aliases</span><span class="p">)</span> <span class="o">and</span> <span class="nx">o</span><span class="p">.</span><span class="nx">aliases</span><span class="p">.</span><span class="nx">every</span> <span class="nx">isType</span> <span class="s">&#39;string&#39;</span>
+          <td class='code'><pre><span class="constant">CLICommand</span> <span class="operators">=</span>
+  <span class="hash">__definition__<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
+    <span class="keyword">typeof</span> o <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> <span class="keyword">and</span> o.aliases<span class="operators">?</span> <span class="keyword">and</span>
+    <span class="constant">Array</span>.isArray<span class="punctuation">(</span>o.aliases<span class="punctuation">)</span> <span class="keyword">and</span> o.aliases.every isType <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span>
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">CLICommand</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">CLICommand</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

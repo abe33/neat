@@ -89,106 +89,121 @@
     <a href='#usages'>usages</a>
   </li>
 </ul></p></td>
-          <td class='code'><div class="highlight"><pre><span class="p">{</span><span class="nx">spawn</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;child_process&#39;</span>
-<span class="p">{</span><span class="nx">resolve</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;path&#39;</span>
-<span class="p">{</span><span class="nx">puts</span><span class="p">,</span> <span class="nx">print</span><span class="p">,</span> <span class="nx">error</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;./logs&#39;</span>
-<span class="nb">Neat</span> <span class="o">=</span> <span class="nx">require</span> <span class="s">&#39;../neat&#39;</span>
-<span class="nv">_ </span><span class="o">=</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">i18n</span><span class="p">.</span><span class="nx">getHelper</span><span class="p">()</span></pre></div></td>
+          <td class='code'><pre>
+<span class="punctuation">{</span>spawn<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
+<span class="punctuation">{</span>resolve<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="punctuation">{</span>puts, <span class="native">print</span>, error<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
+_ <span class="operators">=</span> <span class="constant">Neat</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='private'>Private</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='decorate'>decorate</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Decorates an object with the specified property and value.</p></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">decorate </span><span class="o">=</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">target</span><span class="p">[</span><span class="nx">property</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span>
-  <span class="nx">target</span></pre></div></td>
+          <td class='code'><pre>decorate <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>target, property, value<span class="params_end">)</span></span> -></span>
+  target<span class="punctuation">[</span>property<span class="punctuation">]</span> <span class="operators">=</span> value
+  target
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h3 id='public'>Public</h3></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='aliases'>aliases</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Defines the aliases of the <code>target</code>. Aliases are used to defined
 the keywords for which the command respond.</p>
 
-<div class="highlight"><pre><span class="nx">aliases</span> <span class="s">&#39;f&#39;</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;command was called&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">aliases </span><span class="o">=</span> <span class="p">(</span><span class="nx">aliases</span><span class="p">...,</span> <span class="nx">target</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">decorate</span> <span class="nx">target</span><span class="p">,</span> <span class="s">&#39;aliases&#39;</span><span class="p">,</span> <span class="nx">aliases</span></pre></div></td>
+<pre><code>aliases <span class="string"><span class="string_begin">'</span>f<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>,<span class="function"> -></span> <span class="native">console</span>.log <span class="string"><span class="string_begin">'</span>command was called<span class="string_end">'</span></span></code></pre></td>
+          <td class='code'><pre>aliases <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>aliases..., target<span class="params_end">)</span></span> -></span> decorate target, <span class="string"><span class="string_begin">'</span>aliases<span class="string_end">'</span></span>, aliases
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='asyncerrortrap'>asyncErrorTrap</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Trap error returned by asynchronous function in the callback arguments
 by generating a callback wrapper that will call the callback only if
 no errors was received. The error argument is not passed to the callback.</p>
 
-<div class="highlight"><pre><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="s">&quot;/path/to/file&quot;</span><span class="p">,</span> <span class="nx">asyncErrorTrap</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="c1"># do something with content</span>
-</pre></div>
+<pre><code>fs.readFile <span class="string"><span class="string_begin">"</span>/path/to/file<span class="string_end">"</span></span>, asyncErrorTrap <span class="function"><span class="params"><span class="params_begin">(</span>content<span class="params_end">)</span></span> -></span>
+  <span class="comment"># do something with content</span></code></pre>
 
 <p>Optionally, a function can be passed as first argument to receive the error,
 typically the final callback you'll trigger in your async process.</p>
 
-<div class="highlight"><pre><span class="nv">asyncFunction </span><span class="o">=</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nv">path </span><span class="o">=</span> <span class="s">&quot;/path/to/file&quot;</span>
-  <span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span> <span class="nx">path</span><span class="p">,</span> <span class="nx">asyncErrorTrap</span> <span class="nx">callback</span><span class="p">,</span> <span class="p">(</span><span class="nx">content</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="c1"># do something with content</span>
-    <span class="nx">callback</span><span class="o">?</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">content</span>
-</pre></div>
+<pre><code>asyncFunction <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span>
+  path <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>/path/to/file<span class="string_end">"</span></span>
+  fs.readFile path, asyncErrorTrap callback, <span class="function"><span class="params"><span class="params_begin">(</span>content<span class="params_end">)</span></span> -></span>
+    <span class="comment"># do something with content</span>
+    callback<span class="operators">?</span> <span class="literal">null</span>, content</code></pre>
 
 <p>If an error occurs, the callback is automatically triggered with the error
 as the first argument, following in that regard the pattern of node's async
 functions. You should take care to pass your results after a null argument,
 allowing callback to use the following pattern:</p>
 
-<div class="highlight"><pre><span class="nx">asyncFunction</span> <span class="nx">asyncErrorTrap</span> <span class="p">(</span><span class="nx">results</span><span class="p">...)</span> <span class="o">-&gt;</span> <span class="c1"># etc...</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">asyncErrorTrap </span><span class="o">=</span> <span class="p">(</span><span class="nx">errCallback</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">args</span><span class="p">...)</span> <span class="o">-&gt;</span>
-  <span class="p">[</span><span class="nx">errCallback</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">errCallback</span><span class="p">]</span> <span class="k">unless</span> <span class="nx">callback</span><span class="o">?</span>
-  <span class="k">if</span> <span class="nx">err</span><span class="o">?</span>
-    <span class="k">if</span> <span class="nx">errCallback</span><span class="o">?</span> <span class="k">then</span> <span class="k">return</span> <span class="nx">errCallback</span> <span class="nx">err</span> <span class="k">else</span> <span class="k">return</span> <span class="nx">err</span>
-  <span class="nx">callback</span><span class="o">?</span><span class="p">.</span><span class="nx">apply</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">args</span></pre></div></td>
+<pre><code>asyncFunction asyncErrorTrap <span class="function"><span class="params"><span class="params_begin">(</span>results...<span class="params_end">)</span></span> -></span> <span class="comment"># etc...</span></code></pre></td>
+          <td class='code'><pre>asyncErrorTrap <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>errCallback, callback<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>err, args...<span class="params_end">)</span></span> -></span>
+  <span class="punctuation">[</span>errCallback, callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>callback, errCallback<span class="punctuation">]</span> <span class="keyword">unless</span> callback<span class="operators">?</span>
+  <span class="keyword">if</span> err<span class="operators">?</span>
+    <span class="keyword">if</span> errCallback<span class="operators">?</span> then <span class="keyword">return</span> errCallback err <span class="keyword">else</span> <span class="keyword">return</span> err
+  callback<span class="operators">?</span>.apply <span class="literal">null</span>, args
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='describe'>describe</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Defines the description of the <code>target</code>.</p>
 
-<div class="highlight"><pre><span class="nx">describe</span> <span class="s">&#39;This is a description&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;command was called&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">describe </span><span class="o">=</span> <span class="p">(</span><span class="nx">description</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">decorate</span> <span class="nx">target</span><span class="p">,</span> <span class="s">&#39;description&#39;</span><span class="p">,</span> <span class="nx">description</span></pre></div></td>
+<pre><code>describe <span class="string"><span class="string_begin">'</span>This is a description<span class="string_end">'</span></span>,<span class="function"> -></span>
+  <span class="native">console</span>.log <span class="string"><span class="string_begin">'</span>command was called<span class="string_end">'</span></span></code></pre></td>
+          <td class='code'><pre>describe <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>description, target<span class="params_end">)</span></span> -></span> decorate target, <span class="string"><span class="string_begin">'</span>description<span class="string_end">'</span></span>, description
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='environment'>environment</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Loads automatically the specified environment before triggering
 the <code>target</code>.</p>
 
-<div class="highlight"><pre><span class="nx">environment</span> <span class="s">&#39;test&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nb">Neat</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">test</span><span class="o">?</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">environment </span><span class="o">=</span> <span class="p">(</span><span class="nx">env</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">decorate</span> <span class="nx">target</span><span class="p">,</span> <span class="s">&#39;environment&#39;</span><span class="p">,</span> <span class="nx">env</span></pre></div></td>
+<pre><code>environment <span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span>,<span class="function"> -></span>
+  <span class="native">console</span>.log <span class="constant">Neat</span>.env.test<span class="operators">?</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>environment <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>env, target<span class="params_end">)</span></span> -></span> decorate target, <span class="string"><span class="string_begin">'</span>environment<span class="string_end">'</span></span>, env
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='hasharguments'>hashArguments</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Converts an array of strings with a form such as <code>key:value</code>
@@ -206,25 +221,22 @@ some limitations occurs:</p>
 
 <p>For instance, in the following command line input:</p>
 
-<div class="highlight"><pre><span class="nx">neat</span> <span class="nx">g</span> <span class="nx">project</span> <span class="nx">dummy</span> <span class="py">author</span><span class="o">:</span><span class="s">&quot;John Doe&quot;</span> <span class="py">keywords</span><span class="o">:</span><span class="nx">foo</span><span class="p">,</span><span class="nx">bar</span>
-</pre></div>
+<pre><code>neat g project dummy <span class="hash">author<span class="hash_end">:</span></span><span class="string"><span class="string_begin">"</span>John Doe<span class="string_end">"</span></span> <span class="hash">keywords<span class="hash_end">:</span></span>foo,bar</code></pre>
 
 <p>The hash arguments, once parsed by the <code>hashArguments</code> function,
 will look like:</p>
 
-<div class="highlight"><pre><span class="p">{</span><span class="py">author</span><span class="o">:</span> <span class="s">&#39;John Doe&#39;</span><span class="p">,</span> <span class="py">keywords</span><span class="o">:</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">]}</span>
-</pre></div>
+<pre><code><span class="punctuation">{</span><span class="hash">author<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>John Doe<span class="string_end">'</span></span>, <span class="hash">keywords<span class="hash_end">:</span></span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">}</span></code></pre>
 
 <p>Basic types such <code>String</code>, <code>Number</code>, <code>Boolean</code> and <code>Array</code> are supported
 as arguments value:</p>
 
-<div class="highlight"><pre><span class="py">integer</span><span class="o">:</span><span class="mi">0</span>                  <span class="c1"># 0</span>
-<span class="py">float</span><span class="o">:</span><span class="mf">0.5</span>                  <span class="c1"># 0.5</span>
-<span class="py">string</span><span class="o">:</span><span class="nx">foo</span>                 <span class="c1"># &#39;foo&#39;</span>
-<span class="py">stringWithSpace</span><span class="o">:</span><span class="s">&quot;foo bar&quot;</span>  <span class="c1"># &#39;foo bar&#39;</span>
-<span class="py">booleans</span><span class="o">:</span><span class="kc">yes</span>               <span class="c1"># true</span>
-<span class="py">arrays</span><span class="o">:</span><span class="nx">foo</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="kc">false</span>        <span class="c1"># [&#39;foo&#39;, 10, false]</span>
-</pre></div>
+<pre><code><span class="hash">integer<span class="hash_end">:</span></span><span class="number">0</span>                  <span class="comment"># 0</span>
+<span class="hash">float<span class="hash_end">:</span></span><span class="number">0.5</span>                  <span class="comment"># 0.5</span>
+<span class="hash">string<span class="hash_end">:</span></span>foo                 <span class="comment"># 'foo'</span>
+<span class="hash">stringWithSpace<span class="hash_end">:</span></span><span class="string"><span class="string_begin">"</span>foo bar<span class="string_end">"</span></span>  <span class="comment"># 'foo bar'</span>
+<span class="hash">booleans<span class="hash_end">:</span></span><span class="literal">yes</span>               <span class="comment"># true</span>
+<span class="hash">arrays<span class="hash_end">:</span></span>foo,<span class="number">10</span>,<span class="literal">false</span>        <span class="comment"># ['foo', 10, false]</span></code></pre>
 
 <p>As you may have notice, booleans are available with various aliases:</p>
 
@@ -232,131 +244,138 @@ as arguments value:</p>
 <li><code>true</code>: <code>true</code>, <code>on</code>, <code>yes</code></li>
 <li><code>false</code>: <code>false</code>, <code>off</code>, <code>no</code></li>
 </ul></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">hashArguments </span><span class="o">=</span> <span class="p">(</span><span class="nx">ary</span><span class="p">...)</span> <span class="o">-&gt;</span>
-  <span class="nv">ary </span><span class="o">=</span> <span class="nx">ary</span><span class="p">.</span><span class="nx">flatten</span><span class="p">()</span>
-  <span class="nv">hash </span><span class="o">=</span> <span class="p">{}</span>
-  <span class="nv">parse </span><span class="o">=</span> <span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="k">switch</span> <span class="kc">true</span>
-      <span class="k">when</span> <span class="sr">/</span><span class="sro">^(</span><span class="sr">false|no|off</span><span class="sro">)$</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span> <span class="nx">v</span> <span class="k">then</span> <span class="kc">false</span>
-      <span class="k">when</span> <span class="sr">/</span><span class="sro">^(</span><span class="sr">true|yes|on</span><span class="sro">)$</span><span class="sr">/</span><span class="p">.</span><span class="nx">test</span> <span class="nx">v</span> <span class="k">then</span> <span class="kc">true</span>
-      <span class="k">when</span> <span class="sr">/</span><span class="sro">^(</span><span class="sr">-</span><span class="sro">*)</span><span class="sre">\d</span><span class="sro">+$</span><span class="sr">/g</span><span class="p">.</span><span class="nx">test</span> <span class="nx">v</span> <span class="k">then</span> <span class="nb">parseInt</span> <span class="nx">v</span>
-      <span class="k">when</span> <span class="sr">/</span><span class="sro">^(</span><span class="sr">-</span><span class="sro">*)</span><span class="sre">\d</span><span class="sro">+</span><span class="sr">\.\d</span><span class="sro">+$</span><span class="sr">/g</span><span class="p">.</span><span class="nx">test</span> <span class="nx">v</span> <span class="k">then</span> <span class="nb">parseFloat</span> <span class="nx">v</span>
-      <span class="k">when</span> <span class="s">&#39;,&#39;</span> <span class="k">in</span> <span class="nb">String</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="k">then</span> <span class="nx">parse</span> <span class="nx">sub</span> <span class="k">for</span> <span class="nx">sub</span> <span class="k">in</span> <span class="nx">v</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;,&#39;</span>
-      <span class="k">else</span> <span class="nx">v</span><span class="p">.</span><span class="nx">replace</span> <span class="sr">/</span><span class="sro">^(</span><span class="sr">&#39;|&quot;</span><span class="sro">)|(</span><span class="sr">&#39;|&quot;</span><span class="sro">)$</span><span class="sr">/g</span><span class="p">,</span> <span class="s">&#39;&#39;</span>
+          <td class='code'><pre>hashArguments <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>ary...<span class="params_end">)</span></span> -></span>
+  ary <span class="operators">=</span> ary.flatten<span class="punctuation">(</span><span class="punctuation">)</span>
+  hash <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+  parse <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>v<span class="params_end">)</span></span> -></span>
+    <span class="keyword">switch</span> <span class="literal">true</span>
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>false|no|off<span class="regexp_operators">)</span><span class="regexp_operators">$</span><span class="regexp_end">/.</span></span>test v then <span class="literal">false</span>
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>true|yes|on<span class="regexp_operators">)</span><span class="regexp_operators">$</span><span class="regexp_end">/.</span></span>test v then <span class="literal">true</span>
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>-<span class="regexp_operators">*</span><span class="regexp_operators">)</span><span class="escaped">\d</span><span class="regexp_operators">+</span><span class="regexp_operators">$</span><span class="regexp_end">/g</span></span>.test v then parseInt v
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>-<span class="regexp_operators">*</span><span class="regexp_operators">)</span><span class="escaped">\d</span><span class="regexp_operators">+</span><span class="escaped">\.</span><span class="escaped">\d</span><span class="regexp_operators">+</span><span class="regexp_operators">$</span><span class="regexp_end">/g</span></span>.test v then parseFloat v
+      <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>,<span class="string_end">'</span></span> <span class="keyword">in</span> <span class="constant">String</span><span class="punctuation">(</span>v<span class="punctuation">)</span> then parse sub <span class="keyword">for</span> sub <span class="keyword">in</span> v.split <span class="string"><span class="string_begin">'</span>,<span class="string_end">'</span></span>
+      <span class="keyword">else</span> v.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>'|"<span class="regexp_operators">)</span>|<span class="regexp_operators">(</span>'|"<span class="regexp_operators">)</span><span class="regexp_operators">$</span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
 
-  <span class="k">for</span> <span class="nx">expr</span> <span class="k">in</span> <span class="nx">ary</span>
-    <span class="p">(</span><span class="nx">hash</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> <span class="k">continue</span><span class="p">)</span> <span class="k">unless</span> <span class="s">&#39;:&#39;</span> <span class="k">in</span> <span class="nx">expr</span>
-    <span class="p">[</span><span class="nx">k</span><span class="p">,</span><span class="nx">v</span><span class="p">]</span> <span class="o">=</span> <span class="nx">expr</span><span class="p">.</span><span class="nx">split</span> <span class="s">&#39;:&#39;</span>
-    <span class="k">if</span> <span class="nx">v</span><span class="p">.</span><span class="nx">empty</span><span class="p">()</span>
-      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.commands.invalid_arguments&#39;</span><span class="p">,</span> <span class="py">expression</span><span class="o">:</span> <span class="nx">expr</span><span class="p">)</span>
+  <span class="keyword">for</span> expr <span class="keyword">in</span> ary
+    <span class="punctuation">(</span>hash<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> <span class="literal">true</span>; <span class="keyword">continue</span><span class="punctuation">)</span> <span class="keyword">unless</span> <span class="string"><span class="string_begin">'</span>:<span class="string_end">'</span></span> <span class="keyword">in</span> expr
+    <span class="punctuation">[</span>k,v<span class="punctuation">]</span> <span class="operators">=</span> expr.split <span class="string"><span class="string_begin">'</span>:<span class="string_end">'</span></span>
+    <span class="keyword">if</span> v.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.invalid_arguments<span class="string_end">'</span></span>, <span class="hash">expression<span class="hash_end">:</span></span> expr<span class="punctuation">)</span>
 
-    <span class="nx">hash</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">parse</span> <span class="nx">v</span>
+    hash<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> parse v
 
-  <span class="nx">hash</span></pre></div></td>
+  hash
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='help'>help</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Defines the help of the <code>target</code>.</p>
 
-<div class="highlight"><pre><span class="nx">help</span> <span class="s">&#39;This is the help&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;command was called&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">help </span><span class="o">=</span> <span class="p">(</span><span class="nx">help</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">decorate</span> <span class="nx">target</span><span class="p">,</span> <span class="s">&#39;help&#39;</span><span class="p">,</span> <span class="nx">help</span></pre></div></td>
+<pre><code>help <span class="string"><span class="string_begin">'</span>This is the help<span class="string_end">'</span></span>,<span class="function"> -></span>
+  <span class="native">console</span>.log <span class="string"><span class="string_begin">'</span>command was called<span class="string_end">'</span></span></code></pre></td>
+          <td class='code'><pre>help <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>help, target<span class="params_end">)</span></span> -></span> decorate target, <span class="string"><span class="string_begin">'</span>help<span class="string_end">'</span></span>, help
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='neattask'>neatTask</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Register a cake task that will run through Neat.</p>
 
-<div class="highlight"><pre><span class="nv">exports.taskName </span><span class="o">=</span> <span class="nx">neatTask</span>
-  <span class="py">name</span><span class="o">:</span> <span class="s">&#39;taskName&#39;</span>                <span class="c1"># required</span>
-  <span class="py">description</span><span class="o">:</span> <span class="s">&#39;task description&#39;</span> <span class="c1"># optional</span>
-  <span class="py">environment</span><span class="o">:</span> <span class="s">&#39;production&#39;</span>       <span class="c1"># optional</span>
-  <span class="py">action</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="p">...</span>                  <span class="c1"># required</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">neatTask </span><span class="o">=</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="p">{</span><span class="nx">name</span><span class="p">,</span> <span class="nx">action</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">environment</span><span class="p">}</span> <span class="o">=</span> <span class="nx">options</span>
+<pre><code><span class="native">exports</span>.taskName <span class="operators">=</span> neatTask
+  <span class="hash">name<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>taskName<span class="string_end">'</span></span>                <span class="comment"># required</span>
+  <span class="hash">description<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>task description<span class="string_end">'</span></span> <span class="comment"># optional</span>
+  <span class="hash">environment<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>production<span class="string_end">'</span></span>       <span class="comment"># optional</span>
+  <span class="hash">action<span class="hash_end">:</span></span><span class="function"> -></span> ...                  <span class="comment"># required</span></code></pre></td>
+          <td class='code'><pre>neatTask <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>options<span class="params_end">)</span></span> -></span>
+  <span class="punctuation">{</span>name, action, description, environment<span class="punctuation">}</span> <span class="operators">=</span> options
 
-  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.tasks.no_name&#39;</span><span class="p">)</span> <span class="k">unless</span> <span class="nx">name</span><span class="o">?</span>
-  <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="nx">_</span><span class="p">(</span><span class="s">&#39;neat.tasks.no_action&#39;</span><span class="p">)</span> <span class="k">unless</span> <span class="nx">action</span><span class="o">?</span>
+  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.no_name<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="keyword">unless</span> name<span class="operators">?</span>
+  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.no_action<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="keyword">unless</span> action<span class="operators">?</span>
 
-  <span class="nv">action.environment </span><span class="o">=</span> <span class="nx">environment</span>
-  <span class="nv">action.description </span><span class="o">=</span> <span class="nx">description</span>
+  action.environment <span class="operators">=</span> environment
+  action.description <span class="operators">=</span> description
 
-  <span class="nv">taskAction </span><span class="o">=</span> <span class="o">-&gt;</span>
-    <span class="p">{</span><span class="nx">action</span><span class="p">,</span> <span class="nx">environment</span><span class="p">}</span> <span class="o">=</span> <span class="nx">options</span>
-    <span class="nb">Neat</span><span class="p">.</span><span class="nv">defaultEnvironment </span><span class="o">=</span> <span class="nx">environment</span> <span class="k">if</span> <span class="nx">environment</span><span class="o">?</span>
-    <span class="nb">Neat</span><span class="p">.</span><span class="nx">initEnvironment</span> <span class="o">-&gt;</span>
-      <span class="nb">Neat</span><span class="p">.</span><span class="nx">beforeTask</span><span class="p">.</span><span class="nx">dispatch</span> <span class="o">-&gt;</span> <span class="nx">action</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="o">-&gt;</span>
-        <span class="nb">Neat</span><span class="p">.</span><span class="nx">afterTask</span><span class="p">.</span><span class="nx">dispatch</span> <span class="nx">status</span>
+  taskAction <span class="operators">=</span><span class="function"> -></span>
+    <span class="punctuation">{</span>action, environment<span class="punctuation">}</span> <span class="operators">=</span> options
+    <span class="constant">Neat</span>.defaultEnvironment <span class="operators">=</span> environment <span class="keyword">if</span> environment<span class="operators">?</span>
+    <span class="constant">Neat</span>.initEnvironment<span class="function"> -></span>
+      <span class="constant">Neat</span>.beforeTask.dispatch<span class="function"> -></span> action <span class="function"><span class="params"><span class="params_begin">(</span>status<span class="params_end">)</span></span> -></span>
+        <span class="constant">Neat</span>.afterTask.dispatch status
 
-  <span class="nx">task</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">description</span><span class="p">,</span> <span class="nx">taskAction</span>
-  <span class="nx">action</span></pre></div></td>
+  task name, description, taskAction
+  action
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='run'>run</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Runs the specified <code>command</code> with the passed-in <code>params</code>.
 The <code>callback</code> is called on the command exit if provided.</p>
 
-<div class="highlight"><pre><span class="nx">run</span> <span class="s">&#39;coffee&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;-pcb&#39;</span><span class="p">,</span> <span class="s">&#39;console.log &quot;foo&quot;&#39;</span><span class="p">],</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;command exited with status </span><span class="si">#{</span><span class="nx">status</span><span class="si">}</span><span class="s">&quot;</span>
-</pre></div>
+<pre><code>run <span class="string"><span class="string_begin">'</span>coffee<span class="string_end">'</span></span>, <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>-pcb<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>console.log "foo"<span class="string_end">'</span></span><span class="punctuation">]</span>, <span class="function"><span class="params"><span class="params_begin">(</span>status<span class="params_end">)</span></span> -></span>
+  <span class="native">console</span>.log <span class="string"><span class="string_begin">"</span>command exited with status <span class="subst"><span class="subst_begin">#{</span>status<span class="subst_end">}</span></span><span class="string_end">"</span></span></code></pre>
 
 <p>You can also prevent the function to print the command output
 or register your own output listeners using the <code>options</code> hash.</p>
 
-<div class="highlight"><pre><span class="nv">options </span><span class="o">=</span>
-  <span class="py">noStdout</span><span class="o">:</span> <span class="kc">true</span>
-  <span class="py">stdError</span><span class="o">:</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># Do something with data</span>
+<pre><code>options <span class="operators">=</span>
+  <span class="hash">noStdout<span class="hash_end">:</span></span> <span class="literal">true</span>
+  <span class="hash">stdError<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>data<span class="params_end">)</span></span> -></span> <span class="comment"># Do something with data</span>
 
-<span class="nx">run</span> <span class="s">&#39;coffee&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;src/*&#39;</span><span class="p">],</span> <span class="nx">options</span><span class="p">,</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&quot;command exited with status </span><span class="si">#{</span><span class="nx">status</span><span class="si">}</span><span class="s">&quot;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">run </span><span class="o">=</span> <span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">params</span><span class="p">,</span> <span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="o">-&gt;</span>
-  <span class="p">[</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">options</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">options</span><span class="p">,</span> <span class="nx">callback</span><span class="p">]</span> <span class="k">if</span> <span class="k">typeof</span> <span class="nx">options</span> <span class="o">is</span> <span class="s">&#39;function&#39;</span>
+run <span class="string"><span class="string_begin">'</span>coffee<span class="string_end">'</span></span>, <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>src/*<span class="string_end">'</span></span><span class="punctuation">]</span>, options, <span class="function"><span class="params"><span class="params_begin">(</span>status<span class="params_end">)</span></span> -></span>
+  <span class="native">console</span>.log <span class="string"><span class="string_begin">"</span>command exited with status <span class="subst"><span class="subst_begin">#{</span>status<span class="subst_end">}</span></span><span class="string_end">"</span></span></code></pre></td>
+          <td class='code'><pre>run <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>command, params, options, callback<span class="params_end">)</span></span> -></span>
+  <span class="punctuation">[</span>callback, options<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>options, callback<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> options <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
 
-  <span class="nv">exe </span><span class="o">=</span> <span class="nx">spawn</span> <span class="nx">command</span><span class="p">,</span> <span class="nx">params</span>
+  exe <span class="operators">=</span> spawn command, params
 
-  <span class="k">unless</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">noStdout</span><span class="o">?</span>
-    <span class="nx">exe</span><span class="p">.</span><span class="nx">stdout</span><span class="p">.</span><span class="kc">on</span> <span class="s">&#39;data&#39;</span><span class="p">,</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">stdout</span> <span class="o">||</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">print</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
-  <span class="k">unless</span> <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">noStderr</span><span class="o">?</span>
-    <span class="nx">exe</span><span class="p">.</span><span class="nx">stderr</span><span class="p">.</span><span class="kc">on</span> <span class="s">&#39;data&#39;</span><span class="p">,</span>  <span class="nx">options</span><span class="o">?</span><span class="p">.</span><span class="nx">stderr</span> <span class="o">||</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">print</span> <span class="nx">data</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+  <span class="keyword">unless</span> options<span class="operators">?</span>.noStdout<span class="operators">?</span>
+    exe.stdout.<span class="literal">on</span> <span class="string"><span class="string_begin">'</span>data<span class="string_end">'</span></span>, options<span class="operators">?</span>.stdout <span class="operators">|</span><span class="operators">|</span> <span class="function"><span class="params"><span class="params_begin">(</span>data<span class="params_end">)</span></span> -></span> <span class="native">print</span> data.toString<span class="punctuation">(</span><span class="punctuation">)</span>
+  <span class="keyword">unless</span> options<span class="operators">?</span>.noStderr<span class="operators">?</span>
+    exe.stderr.<span class="literal">on</span> <span class="string"><span class="string_begin">'</span>data<span class="string_end">'</span></span>,  options<span class="operators">?</span>.stderr <span class="operators">|</span><span class="operators">|</span> <span class="function"><span class="params"><span class="params_begin">(</span>data<span class="params_end">)</span></span> -></span> <span class="native">print</span> data.toString<span class="punctuation">(</span><span class="punctuation">)</span>
 
-  <span class="nx">exe</span><span class="p">.</span><span class="kc">on</span> <span class="s">&#39;exit&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">status</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">callback</span><span class="o">?</span> <span class="nx">status</span></pre></div></td>
+  exe.<span class="literal">on</span> <span class="string"><span class="string_begin">'</span>exit<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>status<span class="params_end">)</span></span> -></span> callback<span class="operators">?</span> status
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='usages'>usages</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Defines the usages of the <code>target</code>.</p>
 
-<div class="highlight"><pre><span class="nx">usages</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;foo [arg]&#39;</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s">&#39;command called&#39;</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nv">usages </span><span class="o">=</span> <span class="p">(</span><span class="nx">usages</span><span class="p">...,</span> <span class="nx">target</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nx">decorate</span> <span class="nx">target</span><span class="p">,</span> <span class="s">&#39;usages&#39;</span><span class="p">,</span> <span class="nx">usages</span>
+<pre><code>usages <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>foo [arg]<span class="string_end">'</span></span>,<span class="function"> -></span> <span class="native">console</span>.log <span class="string"><span class="string_begin">'</span>command called<span class="string_end">'</span></span></code></pre></td>
+          <td class='code'><pre>usages <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>usages..., target<span class="params_end">)</span></span> -></span> decorate target, <span class="string"><span class="string_begin">'</span>usages<span class="string_end">'</span></span>, usages
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="p">{</span>
-  <span class="nx">aliases</span><span class="p">,</span>
-  <span class="nx">asyncErrorTrap</span><span class="p">,</span>
-  <span class="nx">decorate</span><span class="p">,</span>
-  <span class="nx">describe</span><span class="p">,</span>
-  <span class="nx">environment</span><span class="p">,</span>
-  <span class="nx">hashArguments</span><span class="p">,</span>
-  <span class="nx">help</span><span class="p">,</span>
-  <span class="nx">neatTask</span><span class="p">,</span>
-  <span class="nx">run</span><span class="p">,</span>
-  <span class="nx">usages</span><span class="p">,</span>
-<span class="p">}</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+  aliases,
+  asyncErrorTrap,
+  decorate,
+  describe,
+  environment,
+  hashArguments,
+  help,
+  neatTask,
+  run,
+  usages,
+<span class="punctuation">}</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

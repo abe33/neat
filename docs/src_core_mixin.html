@@ -52,72 +52,80 @@
           <td class='docs'><p>The <code>Mixin</code> function takes an object and decorates it with
 the mixins functionalities.</p>
 
-<div class="highlight"><pre><span class="nb">Serializable</span> <span class="o">=</span> <span class="nb">Mixin</span>
-  <span class="py">toSource</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
-  <span class="py">fromSource</span><span class="o">:</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
+<pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
+  <span class="hash">toSource<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="hash">fromSource<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
 
-<span class="k">class</span> <span class="nb">Dummy</span>
-  <span class="py">@include</span> <span class="nb">Serializable</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre><span class="nb">Mixin</span> <span class="o">=</span> <span class="p">(</span><span class="nx">mixin</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+<span class="class"><span class="class_begin">class </span><span class="class_end">Dummy</span></span>
+  <span class="property">@include</span> <span class="constant">Serializable</span></code></pre></td>
+          <td class='code'><pre><span class="constant">Mixin</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>mixin<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Keep a reference to the original mixin <code>included</code> hook.
 The mixin <code>included</code> hook is called whenever the mixin
 is used to decorate a class.</p>
 
-<div class="highlight"><pre><span class="nb">Serializable</span> <span class="o">=</span> <span class="nb">Mixin</span>
-  <span class="py">included</span><span class="o">:</span> <span class="p">(</span><span class="nx">ctor</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="c1"># Do something with ctor</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">included </span><span class="o">=</span> <span class="nx">mixin</span><span class="p">.</span><span class="nx">included</span></pre></div></td>
+<pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
+  <span class="hash">included<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>ctor<span class="params_end">)</span></span> -></span>
+    <span class="comment"># Do something with ctor</span></code></pre></td>
+          <td class='code'><pre>  included <span class="operators">=</span> mixin.included
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The mixin <code>included</code> hook is redefine to handle the insertion
 of the mixin in the <code>__mixins__</code> array of the decorated constructor.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">mixin.included </span><span class="o">=</span> <span class="p">(</span><span class="nx">base</span><span class="p">)</span> <span class="o">-&gt;</span></pre></div></td>
+          <td class='code'><pre>  mixin.included <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>base<span class="params_end">)</span></span> -></span>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The original mixin <code>included</code> hook is triggered.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nx">included</span><span class="o">?</span> <span class="nx">base</span></pre></div></td>
+          <td class='code'><pre>    included<span class="operators">?</span> base
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Register this mixin in the <code>__mixins__</code> array of the decorated
 class.</p></td>
-          <td class='code'><div class="highlight"><pre>    <span class="nx">base</span><span class="p">.</span><span class="nb">__mixins__</span> <span class="o">?=</span> <span class="p">[]</span>
-    <span class="nx">base</span><span class="p">.</span><span class="nb">__mixins__</span><span class="p">.</span><span class="nx">push</span> <span class="nx">mixin</span> <span class="k">unless</span> <span class="nx">mixin</span> <span class="k">in</span> <span class="nx">base</span><span class="p">.</span><span class="nb">__mixins__</span></pre></div></td>
+          <td class='code'><pre>    base.__mixins__ <span class="operators">?</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    base.__mixins__.push mixin <span class="keyword">unless</span> mixin <span class="keyword">in</span> base.__mixins__
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Features added to the mixin by the <code>Mixin</code> function are excluded
 of the decoration process of the <code>Module.include</code> method.</p></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">mixin.excluded </span><span class="o">=</span> <span class="p">[</span><span class="s">&quot;isMixinOf&quot;</span><span class="p">,</span> <span class="s">&quot;__definition__&quot;</span><span class="p">]</span></pre></div></td>
+          <td class='code'><pre>  mixin.excluded <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>isMixinOf<span class="string_end">"</span></span>, <span class="string"><span class="string_begin">"</span>__definition__<span class="string_end">"</span></span><span class="punctuation">]</span>
+
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='mixinismixinof'>Mixin.isMixinOf</h4></td>
-          <td class='code'><div class="highlight"><pre></pre></div></td>
+          <td class='code'><pre>
+</pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the passed-in object's constructor have been
 decorated with the current mixin.</p>
 
-<div class="highlight"><pre><span class="nb">Serializable</span> <span class="o">=</span> <span class="nb">Mixin</span>
-  <span class="py">toSource</span><span class="o">:</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
-  <span class="py">fromSource</span><span class="o">:</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="c1"># ...</span>
+<pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
+  <span class="hash">toSource<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="hash">fromSource<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
 
-<span class="k">class</span> <span class="nb">Dummy</span>
-  <span class="py">@include</span> <span class="nb">Serializable</span>
+<span class="class"><span class="class_begin">class </span><span class="class_end">Dummy</span></span>
+  <span class="property">@include</span> <span class="constant">Serializable</span>
 
-<span class="nv">dummy </span><span class="o">=</span> <span class="k">new</span> <span class="nb">Dummy</span>
-<span class="nb">Serializable</span><span class="p">.</span><span class="nx">isMixinOf</span> <span class="nx">dummy</span> <span class="c1"># true</span>
-</pre></div></td>
-          <td class='code'><div class="highlight"><pre>  <span class="nv">mixin.isMixinOf </span><span class="o">=</span> <span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="o">-&gt;</span>
-    <span class="nx">mixin</span> <span class="k">in</span> <span class="nx">object</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nb">__mixins__</span> <span class="k">if</span> <span class="nx">object</span><span class="p">.</span><span class="nx">constructor</span><span class="p">.</span><span class="nb">__mixins__</span><span class="o">?</span>
+dummy <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Dummy</span>
+<span class="constant">Serializable</span>.isMixinOf dummy <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>  mixin.isMixinOf <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>object<span class="params_end">)</span></span> -></span>
+    mixin <span class="keyword">in</span> object.constructor.__mixins__ <span class="keyword">if</span> object.constructor.__mixins__<span class="operators">?</span>
 
-  <span class="nx">mixin</span>
+  mixin
 
-<span class="nv">module.exports </span><span class="o">=</span> <span class="nb">Mixin</span>
+<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Mixin</span>
 
-</pre></div></td>
+</pre></td>
         </tr>
       </table>
     </div>

@@ -3,16 +3,16 @@
 module.exports = (config) ->
 
   dirs = [
-    'src/async',
-    'src/core',
-    'src/i18n',
-    'src/utils',
+    'src/async'
+    'src/core'
+    'src/i18n'
+    'src/utils'
   ]
 
   sources = [
-    'src/neat.coffee',
-    'src/env.coffee',
-    'src/index.coffee',
+    'src/neat.coffee'
+    'src/env.coffee'
+    'src/index.coffee'
   ]
   sources = sources.concat findSync('coffee', d)?.sort() for d in dirs
 

@@ -31,7 +31,7 @@ def Object, concat: (m) ->
 ##### Object::contains
 
 # `Object::has` alias.
-def Object, contains: (value) -> @has value
+# def Object, contains: (value) -> @has value
 
 ##### Object::empty
 
