@@ -61,17 +61,17 @@
         <tr>
           <td class='docs'><p>Defines a non-enumerable property on the specified constructor's <code>prototype</code>.</p>
 
-<pre><code>def <span class="constant">Object</span>, <span class="hash">merge<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
+<pre><code>def <span class="constant">Object</span>, <span class="property">merge<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
   <span class="comment"># merge implementation</span>
 
-<span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span><span class="punctuation">}</span>.merge <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">20</span> <span class="comment"># {foo: 10, bar: 20}</span></code></pre></td>
+<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span><span class="hash_end">}</span></span>.merge <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span> <span class="comment"># {foo: 10, bar: 20}</span></code></pre></td>
           <td class='code'><pre>def <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>ctor, o<span class="params_end">)</span></span> -></span>
   <span class="keyword">for</span> name, value <span class="keyword">of</span> o
     <span class="constant">Object</span>.defineProperty<span class="operators">?</span> ctor.prototype,
                            name,
-                           <span class="hash">enumerable<span class="hash_end">:</span></span> <span class="literal">false</span>, <span class="hash">value<span class="hash_end">:</span></span> value, <span class="hash">writable<span class="hash_end">:</span></span> <span class="literal">true</span>
+                           <span class="property">enumerable<span class="property_end">:</span></span> <span class="literal">false</span>, <span class="property">value<span class="property_end">:</span></span> value, <span class="property">writable<span class="property_end">:</span></span> <span class="literal">true</span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>def<span class="punctuation">}</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>def<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

@@ -130,10 +130,10 @@ within a Neat project.
   </li>
 </ul></p></td>
           <td class='code'><pre>
-fs <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
-<span class="punctuation">{</span>resolve, existsSync, exists, basename, relative, extname<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
-<span class="punctuation">{</span>puts, error, warn, missing<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
-<span class="punctuation">{</span>parallel<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../async<span class="string_end">'</span></span>
+fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve, existsSync, exists, basename, relative, extname<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>puts, error, warn, missing<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../async<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -675,7 +675,7 @@ additional extensions in the searched files.</p></td>
           <td class='code'><pre>    start <span class="operators">=</span> noExtension path
     base <span class="operators">=</span> basename start
     dif <span class="operators">=</span> relative pathRoot, resolve start, <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
-    newPath <span class="operators">=</span> dif.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_group"><span class="char_group_begin">[</span>^<span class="escaped">\/</span><span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_end">/,</span></span> dir
+    newPath <span class="operators">=</span> dif.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_range"><span class="char_range_begin">[</span>^<span class="escaped">\/</span><span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_end">/,</span></span> dir
     exts <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>*<span class="string_end">'</span></span> <span class="keyword">if</span> <span class="keyword">not</span> exts<span class="operators">?</span> <span class="keyword">or</span>
                   exts.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">or</span>
                   <span class="punctuation">(</span>exts.length <span class="keyword">is</span> <span class="number">1</span> <span class="keyword">and</span> exts<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>*<span class="string_end">'</span></span><span class="punctuation">)</span>
@@ -694,7 +694,7 @@ directories over the Neat directory, allowing a user or a plugin
 to <em>override</em> that file.</p></td>
           <td class='code'><pre>    roots <span class="operators">=</span> roots.concat<span class="punctuation">(</span><span class="punctuation">)</span>
     roots.reverse<span class="punctuation">(</span><span class="punctuation">)</span>
-    matches <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+    matches <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
     found <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
     matchExtensions <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span> -></span> extname<span class="punctuation">(</span>p<span class="punctuation">)</span>.substr<span class="punctuation">(</span><span class="number">1</span><span class="punctuation">)</span> <span class="keyword">in</span> exts <span class="keyword">or</span> exts <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>
 </pre></td>
@@ -849,7 +849,7 @@ additional extensions in the searched files.</p></td>
           <td class='code'><pre>  start <span class="operators">=</span> noExtension path
   base <span class="operators">=</span> basename start
   dif <span class="operators">=</span> relative pathRoot, resolve start, <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
-  newPath <span class="operators">=</span> dif.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_group"><span class="char_group_begin">[</span>^<span class="escaped">\/</span><span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_end">/,</span></span> dir
+  newPath <span class="operators">=</span> dif.replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_range"><span class="char_range_begin">[</span>^<span class="escaped">\/</span><span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_end">/,</span></span> dir
 
 </pre></td>
         </tr>
@@ -1049,7 +1049,7 @@ and then moving up along its lineage.</p>
           <td class='code'><pre>noExtension <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
   p <span class="operators">=</span> o.split <span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span>
   last <span class="operators">=</span> p.pop<span class="punctuation">(</span><span class="punctuation">)</span>
-  last <span class="operators">=</span> last.replace <span class="regexp">/<span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>^/.<span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\.</span>.<span class="regexp_operators">+</span><span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
+  last <span class="operators">=</span> last.replace <span class="regexp">/<span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^/.<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\.</span>.<span class="regexp_operators">+</span><span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
   p.concat<span class="punctuation">(</span>last<span class="punctuation">)</span>.join<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span><span class="punctuation">)</span>
 
 </pre></td>
@@ -1066,7 +1066,7 @@ of the file as key and the content of the file as value.</p>
 <pre><code>readFiles <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo.txt<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar.txt<span class="string_end">'</span></span><span class="punctuation">]</span>, <span class="function"><span class="params"><span class="params_begin">(</span>docs<span class="params_end">)</span></span> -></span>
   <span class="comment"># docs = {'foo.txt': '...', 'bar.txt': '...'}</span></code></pre></td>
           <td class='code'><pre>readFiles <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>files, callback<span class="params_end">)</span></span> -></span>
-  res <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+  res <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
   readIteration <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span>
     fs.readFile path, <span class="function"><span class="params"><span class="params_begin">(</span>err, content<span class="params_end">)</span></span> -></span>
       <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
@@ -1091,7 +1091,7 @@ of the file as key and the content of the file as value.</p>
 <pre><code>docs <span class="operators">=</span> readFiles <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo.txt<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar.txt<span class="string_end">'</span></span><span class="punctuation">]</span>
  <span class="comment"># docs = {'foo.txt': '...', 'bar.txt': '...'}</span></code></pre></td>
           <td class='code'><pre>readFilesSync <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>files<span class="params_end">)</span></span> -></span>
-  res <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+  res <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
   res<span class="punctuation">[</span>path<span class="punctuation">]</span> <span class="operators">=</span> fs.readFileSync path <span class="keyword">for</span> path <span class="keyword">in</span> files
   res
 
@@ -1178,7 +1178,7 @@ context if <code>/path/to</code> don't exist.</p></td>
   <span class="punctuation">(</span>fs.writeFileSync path, content; <span class="keyword">return</span> <span class="literal">true</span><span class="punctuation">)</span> <span class="keyword">unless</span> existsSync path
   <span class="literal">false</span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
   dirWithIndex,
   dirWithIndexSync,
   ensure,
@@ -1202,7 +1202,7 @@ context if <code>/path/to</code> don't exist.</p></td>
   rmSync,
   touch,
   touchSync,
-<span class="punctuation">}</span>
+<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

@@ -93,7 +93,7 @@ Number methods.
     <a href='#numberweeks'>Number::weeks</a>
   </li>
 </ul></p></td>
-          <td class='code'><pre><span class="punctuation">{</span>def<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
+          <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>def<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -112,7 +112,7 @@ Number methods.
 minus the current number as milliseconds.</p>
 
 <pre><code><span class="number">10.</span>hours<span class="punctuation">(</span><span class="punctuation">)</span>.ago<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">ago<span class="hash_end">:</span></span><span class="function"> -></span> <span class="keyword">new</span> <span class="constant">Date</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="punctuation">(</span><span class="punctuation">)</span>.getTime<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">-</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">ago<span class="property_end">:</span></span><span class="function"> -></span> <span class="keyword">new</span> <span class="constant">Date</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="punctuation">(</span><span class="punctuation">)</span>.getTime<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">-</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
 </pre></td>
         </tr>
@@ -125,7 +125,7 @@ minus the current number as milliseconds.</p>
           <td class='docs'><p>Returns the current number as days converted in milliseconds.</p>
 
 <pre><code><span class="number">10.</span>days<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 864000000</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">days<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@hours</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">24</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">days<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@hours</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">24</span>
 
 </pre></td>
         </tr>
@@ -139,7 +139,7 @@ minus the current number as milliseconds.</p>
 
 <pre><code><span class="number">4.</span>even<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># true</span>
 <span class="number">5.</span>even<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">even<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> % <span class="number">2</span> <span class="keyword">is</span> <span class="number">0</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">even<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> % <span class="number">2</span> <span class="keyword">is</span> <span class="number">0</span>
 
 </pre></td>
         </tr>
@@ -153,7 +153,7 @@ minus the current number as milliseconds.</p>
 plus the current number as milliseconds.</p>
 
 <pre><code><span class="number">10.</span>hours<span class="punctuation">(</span><span class="punctuation">)</span>.fromNow<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">fromNow<span class="hash_end">:</span></span><span class="function"> -></span> <span class="keyword">new</span> <span class="constant">Date</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="punctuation">(</span><span class="punctuation">)</span>.getTime<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">+</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">fromNow<span class="property_end">:</span></span><span class="function"> -></span> <span class="keyword">new</span> <span class="constant">Date</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="punctuation">(</span><span class="punctuation">)</span>.getTime<span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">+</span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
 </pre></td>
         </tr>
@@ -166,7 +166,7 @@ plus the current number as milliseconds.</p>
           <td class='docs'><p>Returns the current number as hours converted in milliseconds.</p>
 
 <pre><code><span class="number">10.</span>hours<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 36000000</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">hours<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@minutes</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">60</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">hours<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@minutes</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">60</span>
 
 </pre></td>
         </tr>
@@ -190,7 +190,7 @@ plus the current number as milliseconds.</p>
           <td class='docs'><p>Returns the current number as minutes converted in milliseconds.</p>
 
 <pre><code><span class="number">10.</span>minutes <span class="comment"># 600000</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">minutes<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@seconds</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">60</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">minutes<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@seconds</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">60</span>
 
 </pre></td>
         </tr>
@@ -204,7 +204,7 @@ plus the current number as milliseconds.</p>
 
 <pre><code><span class="number">4.</span>odd<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span>
 <span class="number">5.</span>odd<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">odd<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> % <span class="number">2</span> <span class="keyword">is</span> <span class="number">1</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">odd<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> % <span class="number">2</span> <span class="keyword">is</span> <span class="number">1</span>
 
 </pre></td>
         </tr>
@@ -217,7 +217,7 @@ plus the current number as milliseconds.</p>
           <td class='docs'><p>Returns the current number as seconds converted in milliseconds.</p>
 
 <pre><code><span class="number">6.</span>seconds <span class="comment"># 6000</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">seconds<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">1000</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">seconds<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">1000</span>
 
 </pre></td>
         </tr>
@@ -230,14 +230,14 @@ plus the current number as milliseconds.</p>
           <td class='docs'><p>Iterates <code>n</code> times and call <code>callback</code> for each iteration where <code>n</code> is
 the current <code>Number</code> value.</p>
 
-<pre><code><span class="number">5.</span>times <span class="function"><span class="params"><span class="params_begin">(</span>i<span class="params_end">)</span></span> -></span> <span class="native">print</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span> <span class="string_end">"</span></span> <span class="comment"># 0 1 2 3 4</span></code></pre>
+<pre><code><span class="number">5.</span>times <span class="function"><span class="params"><span class="params_begin">(</span>i<span class="params_end">)</span></span> -></span> <span class="global">print</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span> <span class="string_end">"</span></span> <span class="comment"># 0 1 2 3 4</span></code></pre>
 
 <p>You can also multiply objects:</p>
 
 <pre><code><span class="number">5.</span>times <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span>        <span class="comment"># '*****'</span>
 <span class="number">5.</span>times <span class="number">10</span>         <span class="comment"># 50</span>
 <span class="number">2.</span>times <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">1</span><span class="punctuation">]</span> <span class="comment"># ['foo', 1, 'foo', 1]</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">times<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>target<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">times<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>target<span class="params_end">)</span></span> -></span>
   <span class="keyword">return</span> <span class="punctuation">(</span>target i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="number">0.</span>.<span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="keyword">if</span> <span class="keyword">typeof</span> target <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span>
   o <span class="operators">=</span> target
 
@@ -258,8 +258,8 @@ the current <code>Number</code> value.</p>
         <tr>
           <td class='docs'><p>Iterates from the current value to the passed-in value.</p>
 
-<pre><code><span class="number">5.</span>to <span class="number">10</span>, <span class="function"><span class="params"><span class="params_begin">(</span>i<span class="params_end">)</span></span> -></span> <span class="native">print</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span> <span class="string_end">"</span></span> <span class="comment"># 5 6 7 8 9 10</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">to<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>end, callback<span class="params_end">)</span></span> -></span> callback i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span>..end<span class="punctuation">]</span>
+<pre><code><span class="number">5.</span>to <span class="number">10</span>, <span class="function"><span class="params"><span class="params_begin">(</span>i<span class="params_end">)</span></span> -></span> <span class="global">print</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span> <span class="string_end">"</span></span> <span class="comment"># 5 6 7 8 9 10</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">to<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>end, callback<span class="params_end">)</span></span> -></span> callback i <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="property">@valueOf</span><span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">..</span>end<span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -272,7 +272,7 @@ the current <code>Number</code> value.</p>
           <td class='docs'><p>Returns the current number as weeks converted in milliseconds.</p>
 
 <pre><code><span class="number">1.</span>week <span class="comment"># 604800000</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Number</span>, <span class="hash">weeks<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@days</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">7</span>
+          <td class='code'><pre>def <span class="constant">Number</span>, <span class="property">weeks<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@days</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="operators">*</span> <span class="number">7</span>
 
 
 </pre></td>

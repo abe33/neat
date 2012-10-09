@@ -180,7 +180,7 @@ table
       &.docs
         background-color: #AEBCBC
       &.code
-        background-color: #0B2C37
+        background-color: #001A22
 
   th
   td
@@ -240,23 +240,27 @@ table
       background-color: #042029
       color: #93a1a1
 
-      .native
-        color: #cb4b16
+
 
       .keyword
       .operators
       .punctuation
+      .hash_begin
       .hash_end
       .function
       .params_begin
       .params_end
+      .property_end
       .class
         color: #859900
 
-      .params, .subst
+      .params
+      .subst
+      .hash
         color: #93a1a1
 
-      .string, .heredocs
+      .string
+      .heredocs
         color: #2aa198
 
       .string_begin
@@ -272,8 +276,8 @@ table
 
       .literal
       .constant
-      .char_group_begin
-      .char_group_end
+      .char_range_begin
+      .char_range_end
       .range_begin
       .range_end
       .regexp_operators
@@ -282,7 +286,6 @@ table
       .title
       .property
       .class_end
-      .hash
         color: #268bd2
 
       .regexp
@@ -291,15 +294,17 @@ table
 
       .comment
       .embedded
+      .string_quote
         color: #586e75
 
+      .global
       .escaped
       .subst_begin
       .subst_end
-      .char_group
+      .char_range
         color: #cb4b16
 
-      .char_group>.escaped
+      .char_range > .escaped
         color: #aa2a08
 
   th.docs

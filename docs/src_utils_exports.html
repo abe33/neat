@@ -60,10 +60,10 @@
   </li>
 </ul></p></td>
           <td class='code'><pre>
-<span class="punctuation">{</span>resolve, basename<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve, basename<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
 
-<span class="punctuation">{</span>puts, error, warn, missing<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
-<span class="punctuation">{</span>findSync<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">"</span>../utils/files<span class="string_end">"</span></span>
+<span class="hash"><span class="hash_begin">{</span>puts, error, warn, missing<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>findSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>../utils/files<span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -81,14 +81,14 @@ the resulting object will contains a property named <code>json:parse</code>.</p>
 be available in the resulting object with the namespace alone.</p>
 
 <pre><code>namespace <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>,
-  <span class="hash">index<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="hash">bar<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="property">index<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="property">bar<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
 
 <span class="comment"># { foo: [Function], 'foo:bar': [Function] }</span></code></pre></td>
           <td class='code'><pre>namespace <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>namespace, exports<span class="params_end">)</span></span> -></span>
-  packaged <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
-  packaged<span class="punctuation">[</span>namespace<span class="punctuation">]</span> <span class="operators">=</span> <span class="native">exports</span><span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span><span class="punctuation">]</span> <span class="keyword">if</span> <span class="native">exports</span><span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span><span class="punctuation">]</span><span class="operators">?</span>
-  packaged<span class="punctuation">[</span><span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>namespace<span class="subst_end">}</span></span>:<span class="subst"><span class="subst_begin">#{</span>k<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="native">exports</span> <span class="keyword">when</span> k <span class="keyword">isnt</span> <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
+  packaged <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+  packaged<span class="punctuation">[</span>namespace<span class="punctuation">]</span> <span class="operators">=</span> <span class="global">exports</span><span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span><span class="punctuation">]</span> <span class="keyword">if</span> <span class="global">exports</span><span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span><span class="punctuation">]</span><span class="operators">?</span>
+  packaged<span class="punctuation">[</span><span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>namespace<span class="subst_end">}</span></span>:<span class="subst"><span class="subst_begin">#{</span>k<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="global">exports</span> <span class="keyword">when</span> k <span class="keyword">isnt</span> <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
   packaged
 
 </pre></td>
@@ -108,15 +108,15 @@ in a project and initialize the Neat command line tool with them.</p>
 
 <p>Below is a real world example from the generators index file.</p>
 
-<pre><code><span class="constant">Neat</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
-<span class="punctuation">{</span>combine<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">"</span>../utils/exports<span class="string_end">"</span></span>
+<pre><code><span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>combine<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>../utils/exports<span class="string_end">"</span></span>
 
 paths <span class="operators">=</span> <span class="constant">Neat</span>.paths.map <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/lib/generators<span class="string_end">"</span></span>
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> combine <span class="regexp">/<span class="escaped">\.</span>gen<span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> paths</code></pre></td>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> combine <span class="regexp">/<span class="escaped">\.</span>gen<span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> paths</code></pre></td>
           <td class='code'><pre>combine <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>filePattern, paths<span class="params_end">)</span></span> -></span>
   files <span class="operators">=</span> findSync filePattern, <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>, paths
 
-  packaged <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+  packaged <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
   <span class="keyword">for</span> file <span class="keyword">in</span> files
 </pre></td>
         </tr>
@@ -124,17 +124,17 @@ paths <span class="operators">=</span> <span class="constant">Neat</span>.paths.
           <td class='docs'><p>The <code>require</code> calls are protected against errors to prevent
 the Neat command line tool to be broken by a failing commands.</p></td>
           <td class='code'><pre>    <span class="keyword">try</span>
-      required <span class="operators">=</span> <span class="native">require</span> file
+      required <span class="operators">=</span> <span class="global">require</span> file
       packaged<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> required
     <span class="keyword">catch</span> e
-      s <span class="operators">=</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="string"><span class="string_begin">"</span>Broken file #{file}<span class="string_end">"</span></span>.red<span class="subst_end">}</span></span>
+      s <span class="operators">=</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="string"><span class="string_begin">"</span>Broken file <span class="subst"><span class="subst_begin">#{</span>file<span class="subst_end">}</span></span><span class="string_end">"</span></span>.red<span class="subst_end">}</span></span>
 
                    <span class="subst"><span class="subst_begin">#{</span>e.stack<span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
       error s.red
 
   packaged
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>namespace, combine<span class="punctuation">}</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>namespace, combine<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

@@ -201,7 +201,7 @@ table tr:hover th.docs {
 }
 table tr:hover td.code,
 table tr:hover th.code {
-  background-color: #0b2c37;
+  background-color: #001a22;
 }
 table th,
 table td {
@@ -285,12 +285,6 @@ table td.docs pre {
   background-color: #042029;
   color: #93a1a1;
 }
-table th.code .native,
-table td.code .native,
-table th.docs pre .native,
-table td.docs pre .native {
-  color: #cb4b16;
-}
 table th.code .keyword,
 table td.code .keyword,
 table th.docs pre .keyword,
@@ -303,6 +297,10 @@ table th.code .punctuation,
 table td.code .punctuation,
 table th.docs pre .punctuation,
 table td.docs pre .punctuation,
+table th.code .hash_begin,
+table td.code .hash_begin,
+table th.docs pre .hash_begin,
+table td.docs pre .hash_begin,
 table th.code .hash_end,
 table td.code .hash_end,
 table th.docs pre .hash_end,
@@ -319,6 +317,10 @@ table th.code .params_end,
 table td.code .params_end,
 table th.docs pre .params_end,
 table td.docs pre .params_end,
+table th.code .property_end,
+table td.code .property_end,
+table th.docs pre .property_end,
+table td.docs pre .property_end,
 table th.code .class,
 table td.code .class,
 table th.docs pre .class,
@@ -332,7 +334,11 @@ table td.docs pre .params,
 table th.code .subst,
 table td.code .subst,
 table th.docs pre .subst,
-table td.docs pre .subst {
+table td.docs pre .subst,
+table th.code .hash,
+table td.code .hash,
+table th.docs pre .hash,
+table td.docs pre .hash {
   color: #93a1a1;
 }
 table th.code .string,
@@ -385,14 +391,14 @@ table th.code .constant,
 table td.code .constant,
 table th.docs pre .constant,
 table td.docs pre .constant,
-table th.code .char_group_begin,
-table td.code .char_group_begin,
-table th.docs pre .char_group_begin,
-table td.docs pre .char_group_begin,
-table th.code .char_group_end,
-table td.code .char_group_end,
-table th.docs pre .char_group_end,
-table td.docs pre .char_group_end,
+table th.code .char_range_begin,
+table td.code .char_range_begin,
+table th.docs pre .char_range_begin,
+table td.docs pre .char_range_begin,
+table th.code .char_range_end,
+table td.code .char_range_end,
+table th.docs pre .char_range_end,
+table td.docs pre .char_range_end,
 table th.code .range_begin,
 table td.code .range_begin,
 table th.docs pre .range_begin,
@@ -418,11 +424,7 @@ table td.docs pre .property,
 table th.code .class_end,
 table td.code .class_end,
 table th.docs pre .class_end,
-table td.docs pre .class_end,
-table th.code .hash,
-table td.code .hash,
-table th.docs pre .hash,
-table td.docs pre .hash {
+table td.docs pre .class_end {
   color: #268bd2;
 }
 table th.code .regexp,
@@ -442,9 +444,17 @@ table td.docs pre .comment,
 table th.code .embedded,
 table td.code .embedded,
 table th.docs pre .embedded,
-table td.docs pre .embedded {
+table td.docs pre .embedded,
+table th.code .string_quote,
+table td.code .string_quote,
+table th.docs pre .string_quote,
+table td.docs pre .string_quote {
   color: #586e75;
 }
+table th.code .global,
+table td.code .global,
+table th.docs pre .global,
+table td.docs pre .global,
 table th.code .escaped,
 table td.code .escaped,
 table th.docs pre .escaped,
@@ -457,16 +467,16 @@ table th.code .subst_end,
 table td.code .subst_end,
 table th.docs pre .subst_end,
 table td.docs pre .subst_end,
-table th.code .char_group,
-table td.code .char_group,
-table th.docs pre .char_group,
-table td.docs pre .char_group {
+table th.code .char_range,
+table td.code .char_range,
+table th.docs pre .char_range,
+table td.docs pre .char_range {
   color: #cb4b16;
 }
-table th.code .char_group>.escaped,
-table td.code .char_group>.escaped,
-table th.docs pre .char_group>.escaped,
-table td.docs pre .char_group>.escaped {
+table th.code .char_range > .escaped,
+table td.code .char_range > .escaped,
+table th.docs pre .char_range > .escaped,
+table td.docs pre .char_range > .escaped {
   color: #aa2a08;
 }
 table th.docs h1 {

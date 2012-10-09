@@ -122,7 +122,7 @@ messages to be filtered by the environment.
   </li>
 </ul></p></td>
           <td class='code'><pre>
-<span class="constant">Logger</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logger<span class="string_end">'</span></span>
+<span class="constant">Logger</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./logger<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -131,9 +131,9 @@ messages to be filtered by the environment.
 you downloaded the neat repository and didn't run <code>cake install</code> yet -
 a message is displayed.</p></td>
           <td class='code'><pre><span class="keyword">try</span>
-  colors <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>colors<span class="string_end">'</span></span>
+  colors <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>colors<span class="string_end">'</span></span>
 <span class="keyword">catch</span> e
-  <span class="native">console</span>.log <span class="heredocs"><span class="heredocs_begin">"""</span>Can't find colors module
+  <span class="global">console</span>.log <span class="heredocs"><span class="heredocs_begin">"""</span>Can't find colors module
 
                  Run cake install to install the dependencies.<span class="heredocs_end">"""</span></span>
 
@@ -268,7 +268,7 @@ can't be found the string is returned unchanged.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message without automatic new line character at the end.</p></td>
-          <td class='code'><pre><span class="native">print</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span> logger.log str, level
+          <td class='code'><pre><span class="global">print</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span> logger.log str, level
 
 </pre></td>
         </tr>
@@ -356,8 +356,8 @@ corresponding to the <code>Logger.DEBUG</code> level.</p></td>
         <tr>
           <td class='docs'><p>Generates a message for a missing resources.</p></td>
           <td class='code'><pre>missing <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span>
-  _ <span class="operators">=</span> <span class="native">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
-  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span>, <span class="hash">missing<span class="hash_end">:</span></span> path<span class="punctuation">)</span>
+  _ <span class="operators">=</span> <span class="global">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span>, <span class="property">missing<span class="property_end">:</span></span> path<span class="punctuation">)</span>
 
 </pre></td>
         </tr>
@@ -370,10 +370,10 @@ corresponding to the <code>Logger.DEBUG</code> level.</p></td>
           <td class='docs'><p>Generates a messages for a neat command that can't run outside
 of a Neat project.</p></td>
           <td class='code'><pre>notOutsideNeat <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>s<span class="params_end">)</span></span> -></span>
-  _ <span class="operators">=</span> <span class="native">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
-  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span>, <span class="hash">expression<span class="hash_end">:</span></span> s<span class="punctuation">)</span>
+  _ <span class="operators">=</span> <span class="global">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span>, <span class="property">expression<span class="property_end">:</span></span> s<span class="punctuation">)</span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
   blue,
   cyan,
   debug,
@@ -386,12 +386,12 @@ of a Neat project.</p></td>
   missing,
   notOutsideNeat,
   prefix,
-  <span class="native">print</span>,
+  print,
   puts,
   red,
   warn,
   yellow,
-<span class="punctuation">}</span>
+<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

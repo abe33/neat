@@ -206,7 +206,7 @@ ary.some greaterThanOrEqualTo <span class="number">10</span> <span class="commen
           <td class='docs'><p>The <code>hasProperty</code> allow to both test the existence of a property
 and test the content of the property.</p>
 
-<pre><code>obj <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
+<pre><code>obj <span class="operators">=</span> <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
 hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>                  <span class="comment"># true</span>
 hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span>
 hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, isType <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
@@ -230,11 +230,11 @@ object will test for each property defined in the object, the values
 of the argument properties being the matchers to use against the tested
 objet properties.</p>
 
-<pre><code>obj <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span>
+<pre><code>obj <span class="operators">=</span> <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="literal">false</span>
 
 hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>                   <span class="comment"># true</span>
-hasProperties<span class="punctuation">(</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> isType <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span>
-hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span></code></pre></td>
+hasProperties<span class="punctuation">(</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> isType <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span>
+hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="property">bar<span class="property_end">:</span></span> <span class="literal">false</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span></code></pre></td>
           <td class='code'><pre>hasProperties <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>propsets...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
 
   results <span class="operators">=</span> <span class="literal">true</span>
@@ -336,18 +336,18 @@ ary.some lowerThanOrEqualTo <span class="number">10</span> <span class="comment"
           <td class='docs'><p>Performs a duck test with <code>def</code> definition against <code>el</code>.</p>
 
 <pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="hash">baz<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">}</span>,
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="hash_end">}</span></span>,
+  <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>,
+  <span class="hash"><span class="hash_begin">{</span><span class="property">baz<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span>,
 <span class="punctuation">]</span>
-def <span class="operators">=</span> <span class="hash">__definition__<span class="hash_end">:</span></span>
-  <span class="hash">foo<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
-  <span class="hash">bar<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>v<span class="params_end">)</span></span> -></span> v <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
+def <span class="operators">=</span> <span class="property">__definition__<span class="property_end">:</span></span>
+  <span class="property">foo<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+  <span class="property">bar<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>v<span class="params_end">)</span></span> -></span> v <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
 
 ary.some quacksLike def <span class="comment"># true</span></code></pre></td>
           <td class='code'><pre>quacksLike <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>def<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el<span class="operators">?</span>.quacksLike def
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
   allOf,
   anyOf,
   equalTo,
@@ -362,7 +362,7 @@ ary.some quacksLike def <span class="comment"># true</span></code></pre></td>
   lowerThan,
   lowerThanOrEqualTo,
   quacksLike,
-<span class="punctuation">}</span>
+<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

@@ -138,7 +138,7 @@ positionChanged.add <span class="punctuation">(</span><span class="punctuation">
 
 <p>In the case of an asynchronous listener, the callback argument
 is not considered as being part of the signature.</p></td>
-          <td class='code'><pre>  <span class="hash">constructor<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@signature</span>...<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">constructor<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@signature</span>...<span class="params_end">)</span></span> -></span>
     <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
 </pre></td>
         </tr>
@@ -181,7 +181,7 @@ signal.add <span class="function"><span class="params"><span class="params_begin
 
 <span class="comment"># async listener</span>
 signal.add <span class="function"><span class="params"><span class="params_begin">(</span>a, b, c, callback<span class="params_end">)</span></span> -></span> callback<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">add<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">add<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
     <span class="property">@validate</span> listener
 
 </pre></td>
@@ -193,7 +193,7 @@ if the context object is different each time.</p>
 <p>In other words, the following is possible:</p>
 
 <pre><code>listener <span class="operators">=</span><span class="function"> -></span>
-context <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+context <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
 myObject.signal.add listener
 myObject.signal.add listener, context</code></pre>
 
@@ -225,7 +225,7 @@ a new listener is added.</p></td>
 
 <p>All the others rules are the same. So you can't add
 the same listener/context couple twice through the two methods.</p></td>
-          <td class='code'><pre>  <span class="hash">addOnce<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">addOnce<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
     <span class="property">@validate</span> listener
     <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener, context
       <span class="property">@listeners</span>.push <span class="punctuation">[</span>listener, context, <span class="literal">true</span>, priority<span class="punctuation">]</span>
@@ -247,7 +247,7 @@ they was added to the signal.</p>
 If later in the application a context is forgotten or invalid
 when removing a listener from this signal, the listener
 without context will end up being removed.</p></td>
-          <td class='code'><pre>  <span class="hash">remove<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">remove<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
     <span class="keyword">if</span> <span class="property">@registered</span> listener, context
       <span class="property">@asyncListeners</span><span class="operators">-</span><span class="operators">-</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
       <span class="property">@listeners</span>.splice <span class="property">@indexOf</span><span class="punctuation">(</span>listener, context<span class="punctuation">)</span>, <span class="number">1</span>
@@ -263,7 +263,7 @@ without context will end up being removed.</p></td>
           <td class='docs'><p>All listeners can be removed at once if needed.</p>
 
 <pre><code>signal.removeAll<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">removeAll<span class="hash_end">:</span></span><span class="function"> -></span>
+          <td class='code'><pre>  <span class="property">removeAll<span class="property_end">:</span></span><span class="function"> -></span>
     <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
     <span class="property">@asyncListeners</span> <span class="operators">=</span> <span class="number">0</span>
 
@@ -277,7 +277,7 @@ without context will end up being removed.</p></td>
         <tr>
           <td class='docs'><p><code>indexOf</code> returns the position of the listener/context couple
 in the listeners array.</p></td>
-          <td class='code'><pre>  <span class="hash">indexOf<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">indexOf<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
     <span class="keyword">return</span> i <span class="keyword">for</span> <span class="punctuation">[</span>l,c<span class="punctuation">]</span>,i <span class="keyword">in</span> <span class="property">@listeners</span> <span class="keyword">when</span> listener <span class="keyword">is</span> l <span class="keyword">and</span> context <span class="keyword">is</span> c
     <span class="operators">-</span><span class="number">1</span>
 
@@ -291,7 +291,7 @@ in the listeners array.</p></td>
         <tr>
           <td class='docs'><p>Use the <code>registered</code> method to test whether a listener/context couple
 have been registered in this signal.</p></td>
-          <td class='code'><pre>  <span class="hash">registered<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">registered<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
     <span class="property">@indexOf</span><span class="punctuation">(</span>listener, context<span class="punctuation">)</span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
 
 </pre></td>
@@ -303,7 +303,7 @@ have been registered in this signal.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns true if the signal has listeners.</p></td>
-          <td class='code'><pre>  <span class="hash">hasListeners<span class="hash_end">:</span></span><span class="function"> -></span> <span class="property">@listeners</span>.length <span class="keyword">isnt</span> <span class="number">0</span>
+          <td class='code'><pre>  <span class="property">hasListeners<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@listeners</span>.length <span class="keyword">isnt</span> <span class="number">0</span>
 
 </pre></td>
         </tr>
@@ -316,7 +316,7 @@ have been registered in this signal.</p></td>
           <td class='docs'><p>The listeners are sorted according to their <code>priority</code>.
 The higher the priority the lower the listener will be
 in the call order.</p></td>
-          <td class='code'><pre>  <span class="hash">sortListeners<span class="hash_end">:</span></span><span class="function"> -></span>
+          <td class='code'><pre>  <span class="property">sortListeners<span class="property_end">:</span></span><span class="function"> -></span>
     <span class="keyword">return</span> <span class="keyword">if</span> <span class="property">@listeners</span>.length &lt;<span class="operators">=</span> <span class="number">1</span>
     <span class="property">@listeners</span>.sort <span class="function"><span class="params"><span class="params_begin">(</span>a, b<span class="params_end">)</span></span> -></span>
       <span class="punctuation">[</span>pA, pB <span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span> a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span>, b<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">]</span>
@@ -338,10 +338,10 @@ doesn't match the signal's one.</p>
 signal.validate <span class="punctuation">(</span><span class="punctuation">)</span><span class="function"> -></span> <span class="comment"># false</span>
 signal.validate <span class="function"><span class="params"><span class="params_begin">(</span>a,b,c<span class="params_end">)</span></span> -></span> <span class="comment"># true</span>
 signal.validate <span class="function"><span class="params"><span class="params_begin">(</span>a,b,c,callback<span class="params_end">)</span></span> -></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">validate<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">validate<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
     <span class="keyword">if</span> <span class="property">@signature</span>.length > <span class="number">0</span>
-      re <span class="operators">=</span> <span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>^(<span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>^)<span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\)</span>.<span class="regexp_operators">*</span><span class="regexp_operators">$</span><span class="regexp_end">/m</span></span>
-      listenerSignature <span class="operators">=</span> <span class="hash">Function<span class="hash_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="punctuation">)</span>.shift<span class="punctuation">(</span><span class="punctuation">)</span>
+      re <span class="operators">=</span> <span class="regexp">/<span class="char_range"><span class="char_range_begin">[</span>^(<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^)<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\)</span>.<span class="regexp_operators">*</span><span class="regexp_operators">$</span><span class="regexp_end">/m</span></span>
+      listenerSignature <span class="operators">=</span> <span class="property">Function<span class="property_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="punctuation">)</span>.shift<span class="punctuation">(</span><span class="punctuation">)</span>
       signature <span class="operators">=</span> listenerSignature.replace<span class="punctuation">(</span>re, <span class="string"><span class="string_begin">'</span>$1<span class="string_end">'</span></span><span class="punctuation">)</span>
       args <span class="operators">=</span> signature.split <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">*</span>,<span class="escaped">\s</span><span class="regexp_operators">*</span><span class="regexp_end">/g</span></span>
 
@@ -366,8 +366,8 @@ signal.validate <span class="function"><span class="params"><span class="params_
 
 <pre><code>signal.isAsync<span class="function"> -></span> <span class="comment"># false</span>
 signal.isAsync <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">isAsync<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
-    <span class="hash">Function<span class="hash_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.indexOf<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>callback)<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="operators">!=</span> <span class="operators">-</span><span class="number">1</span>
+          <td class='code'><pre>  <span class="property">isAsync<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
+    <span class="property">Function<span class="property_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.indexOf<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>callback)<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="operators">!=</span> <span class="operators">-</span><span class="number">1</span>
 
 </pre></td>
         </tr>
@@ -404,7 +404,7 @@ the last argument as the callback if its type is <code>function</code>, you shou
 avoid using function as the sole argument or as the last argument
 for a listener. If that case occurs, consider either re-arranging the
 arguments order or using a value object to carry the function.</p></td>
-          <td class='code'><pre>  <span class="hash">dispatch<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>args..., callback<span class="params_end">)</span></span>-></span>
+          <td class='code'><pre>  <span class="property">dispatch<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>args..., callback<span class="params_end">)</span></span>-></span>
     <span class="keyword">unless</span> <span class="keyword">typeof</span> callback <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
       args.push callback
       callback <span class="operators">=</span> <span class="literal">null</span>
@@ -445,7 +445,7 @@ not prevent the dispatching until it's done.</p></td>
 
       callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Signal</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Signal</span>
 
 </pre></td>
         </tr>

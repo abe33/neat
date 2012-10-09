@@ -53,8 +53,8 @@
 the mixins functionalities.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="hash">toSource<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="hash">fromSource<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
 
 <span class="class"><span class="class_begin">class </span><span class="class_end">Dummy</span></span>
   <span class="property">@include</span> <span class="constant">Serializable</span></code></pre></td>
@@ -67,7 +67,7 @@ The mixin <code>included</code> hook is called whenever the mixin
 is used to decorate a class.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="hash">included<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>ctor<span class="params_end">)</span></span> -></span>
+  <span class="property">included<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>ctor<span class="params_end">)</span></span> -></span>
     <span class="comment"># Do something with ctor</span></code></pre></td>
           <td class='code'><pre>  included <span class="operators">=</span> mixin.included
 
@@ -110,8 +110,8 @@ of the decoration process of the <code>Module.include</code> method.</p></td>
 decorated with the current mixin.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="hash">toSource<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="hash">fromSource<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
 
 <span class="class"><span class="class_begin">class </span><span class="class_end">Dummy</span></span>
   <span class="property">@include</span> <span class="constant">Serializable</span>
@@ -123,7 +123,7 @@ dummy <span class="operators">=</span> <span class="keyword">new</span> <span cl
 
   mixin
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Mixin</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Mixin</span>
 
 </pre></td>
         </tr>

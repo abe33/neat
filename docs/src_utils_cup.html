@@ -67,10 +67,10 @@ Cup is to coffee what JSON is to javascript.
   </li>
 </ul></p></td>
           <td class='code'><pre>
-<span class="punctuation">{</span>resolve<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
-<span class="punctuation">{</span>spawn<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
-<span class="punctuation">{</span>compile<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>coffee-script<span class="string_end">'</span></span>
-<span class="punctuation">{</span>puts, error<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>spawn<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>compile<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>coffee-script<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>puts, error<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -84,7 +84,7 @@ Cup is to coffee what JSON is to javascript.
 
 <pre><code>read <span class="string"><span class="string_begin">'</span>foo: 10, bar: false<span class="string_end">'</span></span> <span class="comment"># {foo: 10, bar: false}</span></code></pre></td>
           <td class='code'><pre>read <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span>
-  <span class="keyword">try</span> eval compile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="string_end">"</span></span>, <span class="hash">bare<span class="hash_end">:</span></span><span class="literal">true</span> <span class="keyword">catch</span> e then <span class="literal">null</span>
+  <span class="keyword">try</span> eval compile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="string_end">"</span></span>, <span class="property">bare<span class="property_end">:</span></span><span class="literal">true</span> <span class="keyword">catch</span> e then <span class="literal">null</span>
 
 </pre></td>
         </tr>
@@ -97,7 +97,7 @@ Cup is to coffee what JSON is to javascript.
           <td class='docs'><p>Returns a string that correspond to the <code>cup</code> translation of the given
 object.</p>
 
-<pre><code>write <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">}</span>
+<pre><code>write <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> false<span class="hash_end">}</span></span>
 <span class="comment"># foo: 10</span>
 <span class="comment"># bar: false</span></code></pre></td>
           <td class='code'><pre>write <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
@@ -132,14 +132,14 @@ value.</p></td>
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span> then <span class="string"><span class="string_begin">"</span>'<span class="subst"><span class="subst_begin">#{</span>v<span class="subst_end">}</span></span>'<span class="string_end">"</span></span>
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span> then v
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>object<span class="string_end">'</span></span>
-      <span class="keyword">if</span> <span class="hash">RegExp<span class="hash_end">:</span></span><span class="punctuation">:</span>isPrototypeOf v then v
-      <span class="keyword">else</span> <span class="keyword">if</span> <span class="hash">Array<span class="hash_end">:</span></span><span class="punctuation">:</span>isPrototypeOf v
-        <span class="string"><span class="string_begin">"</span>[<span class="subst"><span class="subst_begin">#{</span><span class="punctuation">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span>#{i}  #{getValue n, i}<span class="string_end">"</span></span> <span class="keyword">for</span> n <span class="keyword">in</span> v<span class="punctuation">)</span>.join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="escaped">\n</span>]<span class="string_end">"</span></span>
+      <span class="keyword">if</span> <span class="property">RegExp<span class="property_end">:</span></span><span class="punctuation">:</span>isPrototypeOf v then v
+      <span class="keyword">else</span> <span class="keyword">if</span> <span class="property">Array<span class="property_end">:</span></span><span class="punctuation">:</span>isPrototypeOf v
+        <span class="string"><span class="string_begin">"</span>[<span class="subst"><span class="subst_begin">#{</span><span class="punctuation">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span>  <span class="subst"><span class="subst_begin">#{</span>getValue n, i<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> n <span class="keyword">in</span> v<span class="punctuation">)</span>.join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="escaped">\n</span>]<span class="string_end">"</span></span>
       <span class="keyword">else</span>
         <span class="punctuation">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span>  <span class="subst"><span class="subst_begin">#{</span>getMember m,o,v,i<span class="operators">+</span><span class="string"><span class="string_begin">'</span>  <span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> m,o <span class="keyword">of</span> v<span class="punctuation">)</span>.join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> then <span class="string"><span class="string_begin">"</span>`<span class="subst"><span class="subst_begin">#{</span>v.toString<span class="punctuation">(</span><span class="punctuation">)</span><span class="subst_end">}</span></span>`<span class="string_end">"</span></span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>read, write<span class="punctuation">}</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>read, write<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

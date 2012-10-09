@@ -92,11 +92,11 @@
 be used to decorate a class prototype.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span>
-  <span class="hash">toSource<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="hash">fromSource<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
 
 <span class="constant">Cloneable</span> <span class="operators">=</span>
-  <span class="hash">clone<span class="hash_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span></code></pre></td>
+  <span class="property">clone<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span></code></pre></td>
           <td class='code'><pre>
 </pre></td>
         </tr>
@@ -129,7 +129,7 @@ to specify the mixins that the class will implement.</p>
   <span class="property">@include</span> <span class="constant">Serializable</span>, <span class="constant">Cloneable</span>, <span class="constant">Suspendable</span>
 
   <span class="comment"># rest of the class definition...</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">@include<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>mixins...<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">@include<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>mixins...<span class="params_end">)</span></span> -></span>
 
 </pre></td>
         </tr>
@@ -196,7 +196,7 @@ constructor.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores the mixins constructor hooks.</p></td>
-          <td class='code'><pre>  <span class="hash">@__hooks__<span class="hash_end">:</span></span> <span class="punctuation">[</span><span class="punctuation">]</span>
+          <td class='code'><pre>  <span class="property">@__hooks__<span class="property_end">:</span></span> <span class="punctuation">[</span><span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -207,7 +207,7 @@ constructor.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores the respective super objects of mixed methods.</p></td>
-          <td class='code'><pre>  <span class="hash">@__superOf__<span class="hash_end">:</span></span> <span class="punctuation">{</span><span class="punctuation">}</span>
+          <td class='code'><pre>  <span class="property">@__superOf__<span class="property_end">:</span></span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>
@@ -229,7 +229,7 @@ a subclass to handle the hooks in its own constructor.</p>
 <p>Subclasses that prevent the <code>Module</code> constructor to trigger
 the hooks should provide the same kind of guards in their
 constructor to allow their subclasses to do so.</p></td>
-          <td class='code'><pre>  <span class="hash">preventConstructorHooksInModule<span class="hash_end">:</span></span> <span class="literal">false</span>
+          <td class='code'><pre>  <span class="property">preventConstructorHooksInModule<span class="property_end">:</span></span> <span class="literal">false</span>
 
 </pre></td>
         </tr>
@@ -241,7 +241,7 @@ constructor to allow their subclasses to do so.</p></td>
         <tr>
           <td class='docs'><p>The <code>Module</code> constructor behavior is to automatically
 triggers the constructor hooks.</p></td>
-          <td class='code'><pre>  <span class="hash">constructor<span class="hash_end">:</span></span><span class="function"> -></span>
+          <td class='code'><pre>  <span class="property">constructor<span class="property_end">:</span></span><span class="function"> -></span>
     <span class="property">@triggerConstructorHooks</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">unless</span> <span class="property">@preventConstructorHooksInModule</span>
 
 </pre></td>
@@ -254,7 +254,7 @@ triggers the constructor hooks.</p></td>
         <tr>
           <td class='docs'><p>Loop through all the constructor hooks and call
 them with the current object as context.</p></td>
-          <td class='code'><pre>  <span class="hash">triggerConstructorHooks<span class="hash_end">:</span></span><span class="function"> -></span>
+          <td class='code'><pre>  <span class="property">triggerConstructorHooks<span class="property_end">:</span></span><span class="function"> -></span>
     hook.call <span class="keyword">this</span> <span class="keyword">for</span> hook <span class="keyword">in</span> <span class="property">@constructor</span>.__hooks__
 
 </pre></td>
@@ -267,10 +267,10 @@ them with the current object as context.</p></td>
         <tr>
           <td class='docs'><p>Use <code>@super "methodName"</code> in a mixin's function to call the
 super function of the specified method.</p></td>
-          <td class='code'><pre>  <span class="hash">super<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>method, args...<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">super<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>method, args...<span class="params_end">)</span></span> -></span>
     <span class="property">@constructor</span>.__superOf__<span class="punctuation">[</span>method<span class="punctuation">]</span><span class="operators">?</span><span class="punctuation">[</span>method<span class="punctuation">]</span><span class="operators">?</span>.apply <span class="keyword">this</span>, args
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Module</span>
+<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Module</span>
 
 </pre></td>
         </tr>

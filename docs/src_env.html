@@ -71,22 +71,22 @@ if they are available.
         </tr>
         <tr>
           <td class='docs'><h3 id='global-requires'>Global Requires</h3></td>
-          <td class='code'><pre>fs <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
-pr <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>commander<span class="string_end">'</span></span>
-<span class="punctuation">{</span>spawn<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
-<span class="punctuation">{</span>resolve<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+          <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+pr <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>commander<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>spawn<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The core module is loaded before any other <em>local</em> modules.</p></td>
-          <td class='code'><pre>core <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./core<span class="string_end">'</span></span>
-<span class="punctuation">{</span>puts, <span class="native">print</span>, error, missing<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">"</span>./utils/logs<span class="string_end">"</span></span>
+          <td class='code'><pre>core <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./core<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>puts, print, error, missing<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./utils/logs<span class="string_end">"</span></span>
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The Neat environment is loaded.</p></td>
-          <td class='code'><pre><span class="constant">Neat</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./neat<span class="string_end">'</span></span>
+          <td class='code'><pre><span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./neat<span class="string_end">'</span></span>
 _ <span class="operators">=</span> <span class="constant">Neat</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
 
 </pre></td>
@@ -101,7 +101,7 @@ _ <span class="operators">=</span> <span class="constant">Neat</span>.i18n.getHe
 
 <p>Commands are functions with a property <code>aliases</code> which
 is an array of strings.</p></td>
-          <td class='code'><pre><span class="constant">CLICommand</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./core/interfaces/cli_command<span class="string_end">'</span></span>
+          <td class='code'><pre><span class="constant">CLICommand</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./core/interfaces/cli_command<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -116,7 +116,7 @@ merge all the commands defined in all of the following places:</p>
 <li>All the Neat projects in installed modules.</li>
 <li>The project <code>commands</code> directory.</li>
 </ol></td>
-          <td class='code'><pre>commands  <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">"</span>./commands<span class="string_end">"</span></span>
+          <td class='code'><pre>commands  <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./commands<span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -133,14 +133,14 @@ the Neat environment.</p></td>
     <span class="constant">Neat</span>.beforeCommand.dispatch<span class="function"> -></span>
       c.apply <span class="literal">null</span>, args.concat <span class="function"><span class="params"><span class="params_begin">(</span>err<span class="params_end">)</span></span> -></span>
         <span class="keyword">if</span> err<span class="operators">?</span>
-          error _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.error<span class="string_end">'</span></span>, <span class="hash">msg<span class="hash_end">:</span></span> err.message, <span class="hash">stack<span class="hash_end">:</span></span> err.stack<span class="punctuation">)</span>
+          error _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.error<span class="string_end">'</span></span>, <span class="property">msg<span class="property_end">:</span></span> err.message, <span class="property">stack<span class="property_end">:</span></span> err.stack<span class="punctuation">)</span>
         <span class="constant">Neat</span>.afterCommand.dispatch callback
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The commands will be register in a hash with their aliases as keys.</p></td>
-          <td class='code'><pre>cmdMap <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
+          <td class='code'><pre>cmdMap <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
 register <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>k, c<span class="params_end">)</span></span> -></span>
 </pre></td>
         </tr>
@@ -148,8 +148,8 @@ register <span class="operators">=</span> <span class="function"><span class="pa
           <td class='docs'><p>Passed-in commands are duck tested against the <code>CLICommand</code> interface.</p></td>
           <td class='code'><pre>  <span class="keyword">unless</span> c.quacksLike <span class="constant">CLICommand</span>
     <span class="keyword">return</span> error _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.invalid_command<span class="string_end">'</span></span>,
-                   <span class="hash">command<span class="hash_end">:</span></span> _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.no_register<span class="string_end">'</span></span>,
-                              <span class="hash">command<span class="hash_end">:</span></span> k<span class="punctuation">)</span>.red<span class="punctuation">)</span>
+                   <span class="property">command<span class="property_end">:</span></span> _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.no_register<span class="string_end">'</span></span>,
+                              <span class="property">command<span class="property_end">:</span></span> k<span class="punctuation">)</span>.red<span class="punctuation">)</span>
 
   <span class="keyword">for</span> alias <span class="keyword">in</span> c.aliases
     pr.command<span class="punctuation">(</span>alias<span class="punctuation">)</span>.description<span class="punctuation">(</span>c.description<span class="punctuation">)</span>.action commandTrigger c
@@ -179,8 +179,8 @@ register <span class="operators">=</span> <span class="function"><span class="pa
           <td class='code'><pre>pr.command<span class="punctuation">(</span><span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span><span class="punctuation">)</span>.action <span class="function"><span class="params"><span class="params_begin">(</span>command<span class="params_end">)</span></span> -></span>
   <span class="constant">Neat</span>.initEnvironment<span class="function"> -></span>
     error _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.missing_command<span class="string_end">'</span></span>,
-            <span class="hash">missing<span class="hash_end">:</span></span> missing _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.command<span class="string_end">'</span></span>,
-                               <span class="hash">command<span class="hash_end">:</span></span> command<span class="punctuation">)</span><span class="punctuation">)</span>
+            <span class="property">missing<span class="property_end">:</span></span> missing _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.commands.command<span class="string_end">'</span></span>,
+                               <span class="property">command<span class="property_end">:</span></span> command<span class="punctuation">)</span><span class="punctuation">)</span>
 
 </pre></td>
         </tr>
@@ -192,7 +192,7 @@ register <span class="operators">=</span> <span class="function"><span class="pa
         </tr>
         <tr>
           <td class='docs'><p>Nothing was triggered by commander, the help is displayed.</p></td>
-          <td class='code'><pre><span class="punctuation">{</span>help<span class="punctuation">}</span> <span class="operators">=</span> cmdMap
+          <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>help<span class="hash_end">}</span></span> <span class="operators">=</span> cmdMap
 commandTrigger<span class="punctuation">(</span>help<span class="punctuation">)</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> pr.args.length <span class="keyword">is</span> <span class="number">0</span> <span class="keyword">and</span> help<span class="operators">?</span>
 
 </pre></td>
