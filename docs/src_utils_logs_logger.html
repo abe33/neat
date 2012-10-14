@@ -81,7 +81,7 @@
           <td class='docs'><p>The <code>Logger</code> class handle logging within the Neat environment.
 Whenever you use one of the logging functions, it ultimately
 end up here.</p></td>
-          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">Logger</span></span>
+          <td class='code'><pre><span class="class"><span class="keyword">class</span> <span class='title'>Logger</span></span>
 
 </pre></td>
         </tr>
@@ -110,7 +110,7 @@ can register to.</p>
 
 <p>The <code>stack</code> property is used to store the messages received
 before a backend had been registered.</p></td>
-          <td class='code'><pre>  <span class="property">constructor<span class="property_end">:</span></span><span class="function"> -></span>
+          <td class='code'><pre>  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="function">-></span>
     <span class="property">@logged</span> <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span>
     <span class="property">@stack</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
 
@@ -125,10 +125,10 @@ before a backend had been registered.</p></td>
           <td class='docs'><p>Register a <code>message</code> with the given level.
 If the logger instance has a backend registered, the message
 is automatically dispatched. Otherwise, the message is stored.</p></td>
-          <td class='code'><pre>  <span class="property">log<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>message, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span>
-    o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>message, level<span class="hash_end">}</span></span>
-    <span class="keyword">if</span> <span class="property">@logged</span>.hasListeners<span class="punctuation">(</span><span class="punctuation">)</span>
-      <span class="property">@logged</span>.dispatch <span class="keyword">this</span>, o
+          <td class='code'><pre>  <span class="property">log<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>message<span class="punctuation">,</span> level<span class="operators">=</span><span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
+    o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>message<span class="punctuation">,</span> level<span class="hash_end">}</span></span>
+    <span class="keyword">if</span> <span class="property">@logged</span><span class="punctuation">.</span>hasListeners<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      <span class="property">@logged</span><span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> o
     <span class="keyword">else</span>
 </pre></td>
         </tr>
@@ -136,10 +136,10 @@ is automatically dispatched. Otherwise, the message is stored.</p></td>
           <td class='docs'><p>In order to prevent the stack to became too wide,
 messages with the same level of priority are
 concateneted.</p></td>
-          <td class='code'><pre>      <span class="keyword">if</span> <span class="property">@stack</span>.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">or</span> <span class="property">@stack</span>.last<span class="punctuation">(</span><span class="punctuation">)</span>.level <span class="keyword">isnt</span> level
-        <span class="property">@stack</span>.push o
+          <td class='code'><pre>      <span class="keyword">if</span> <span class="property">@stack</span><span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">or</span> <span class="property">@stack</span><span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>level <span class="keyword">isnt</span> level
+        <span class="property">@stack</span><span class="punctuation">.</span>push o
       <span class="keyword">else</span>
-        <span class="property">@stack</span>.last<span class="punctuation">(</span><span class="punctuation">)</span>.message <span class="operators">+</span><span class="operators">=</span> message
+        <span class="property">@stack</span><span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>message <span class="operators">+</span><span class="operators">=</span> message
 
 </pre></td>
         </tr>
@@ -153,9 +153,9 @@ concateneted.</p></td>
 Use this function rather than <code>logged.add</code>. This
 function will take care of dispatching the stack
 to the listeners when a listener is added.</p></td>
-          <td class='code'><pre>  <span class="property">add<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="operators">=</span>null, priority<span class="operators">=</span>0<span class="params_end">)</span></span> -></span>
-    <span class="property">@logged</span>.add listener, context, priority
-    <span class="property">@logged</span>.dispatch <span class="keyword">this</span>, log <span class="keyword">for</span> log <span class="keyword">in</span> <span class="property">@stack</span> <span class="keyword">if</span> <span class="property">@logged</span>.hasListeners<span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>  <span class="property">add<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="operators">=</span><span class="literal">null</span><span class="punctuation">,</span> priority<span class="operators">=</span><span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@logged</span><span class="punctuation">.</span>add listener<span class="punctuation">,</span> context<span class="punctuation">,</span> priority
+    <span class="property">@logged</span><span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> log <span class="keyword">for</span> log <span class="keyword">in</span> <span class="property">@stack</span> <span class="keyword">if</span> <span class="property">@logged</span><span class="punctuation">.</span>hasListeners<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -166,10 +166,10 @@ to the listeners when a listener is added.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Removes a function for listening to the <code>logged</code> signal.</p></td>
-          <td class='code'><pre>  <span class="property">remove<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
-    <span class="property">@logged</span>.remove listener, context
+          <td class='code'><pre>  <span class="property">remove<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@logged</span><span class="punctuation">.</span>remove listener<span class="punctuation">,</span> context
 
-<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Logger</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Logger</span>
 
 </pre></td>
         </tr>

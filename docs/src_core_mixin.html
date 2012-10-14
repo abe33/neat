@@ -53,12 +53,12 @@
 the mixins functionalities.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="property">toSource<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="property">fromSource<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
 
-<span class="class"><span class="class_begin">class </span><span class="class_end">Dummy</span></span>
+<span class="class"><span class="keyword">class</span> <span class='title'>Dummy</span></span>
   <span class="property">@include</span> <span class="constant">Serializable</span></code></pre></td>
-          <td class='code'><pre><span class="constant">Mixin</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>mixin<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre><span class="constant">Mixin</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>mixin<span class="group_end">)</span></span> <span class="function">-></span>
 </pre></td>
         </tr>
         <tr>
@@ -67,16 +67,16 @@ The mixin <code>included</code> hook is called whenever the mixin
 is used to decorate a class.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="property">included<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>ctor<span class="params_end">)</span></span> -></span>
+  <span class="property">included<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>ctor<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="comment"># Do something with ctor</span></code></pre></td>
-          <td class='code'><pre>  included <span class="operators">=</span> mixin.included
+          <td class='code'><pre>  included <span class="operators">=</span> mixin<span class="punctuation">.</span>included
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The mixin <code>included</code> hook is redefine to handle the insertion
 of the mixin in the <code>__mixins__</code> array of the decorated constructor.</p></td>
-          <td class='code'><pre>  mixin.included <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>base<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  mixin<span class="punctuation">.</span>included <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>base<span class="group_end">)</span></span> <span class="function">-></span>
 </pre></td>
         </tr>
         <tr>
@@ -88,15 +88,15 @@ of the mixin in the <code>__mixins__</code> array of the decorated constructor.<
         <tr>
           <td class='docs'><p>Register this mixin in the <code>__mixins__</code> array of the decorated
 class.</p></td>
-          <td class='code'><pre>    base.__mixins__ <span class="operators">?</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
-    base.__mixins__.push mixin <span class="keyword">unless</span> mixin <span class="keyword">in</span> base.__mixins__
+          <td class='code'><pre>    base<span class="punctuation">.</span>__mixins__ <span class="operators">?</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    base<span class="punctuation">.</span>__mixins__<span class="punctuation">.</span>push mixin <span class="keyword">unless</span> mixin <span class="keyword">in</span> base<span class="punctuation">.</span>__mixins__
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Features added to the mixin by the <code>Mixin</code> function are excluded
 of the decoration process of the <code>Module.include</code> method.</p></td>
-          <td class='code'><pre>  mixin.excluded <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>isMixinOf<span class="string_end">"</span></span>, <span class="string"><span class="string_begin">"</span>__definition__<span class="string_end">"</span></span><span class="punctuation">]</span>
+          <td class='code'><pre>  mixin<span class="punctuation">.</span>excluded <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>isMixinOf<span class="string_end">"</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>__definition__<span class="string_end">"</span></span><span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -110,20 +110,20 @@ of the decoration process of the <code>Module.include</code> method.</p></td>
 decorated with the current mixin.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="property">toSource<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="property">fromSource<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
 
-<span class="class"><span class="class_begin">class </span><span class="class_end">Dummy</span></span>
+<span class="class"><span class="keyword">class</span> <span class='title'>Dummy</span></span>
   <span class="property">@include</span> <span class="constant">Serializable</span>
 
 dummy <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Dummy</span>
-<span class="constant">Serializable</span>.isMixinOf dummy <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>  mixin.isMixinOf <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>object<span class="params_end">)</span></span> -></span>
-    mixin <span class="keyword">in</span> object.constructor.__mixins__ <span class="keyword">if</span> object.constructor.__mixins__<span class="operators">?</span>
+<span class="constant">Serializable</span><span class="punctuation">.</span>isMixinOf dummy <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>  mixin<span class="punctuation">.</span>isMixinOf <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>object<span class="group_end">)</span></span> <span class="function">-></span>
+    mixin <span class="keyword">in</span> object<span class="punctuation">.</span>constructor<span class="punctuation">.</span>__mixins__ <span class="keyword">if</span> object<span class="punctuation">.</span>constructor<span class="punctuation">.</span>__mixins__<span class="operators">?</span>
 
   mixin
 
-<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Mixin</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Mixin</span>
 
 </pre></td>
         </tr>

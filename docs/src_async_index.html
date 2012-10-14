@@ -74,14 +74,14 @@
           <td class='docs'><p>Execute an array of functions <code>fns</code> in parallel. The passed-in <code>callback</code>
 will only be called when the all functions have call back.</p>
 
-<pre><code>f1 <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span> setTimeout cb, <span class="number">100</span>
-f2 <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span> setTimeout cb, <span class="number">200</span>
-parallel <span class="punctuation">[</span>f1, f2<span class="punctuation">]</span>,<span class="function"> -></span>
+<pre><code>f1 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>cb<span class="group_end">)</span></span> <span class="function">-></span> setTimeout cb<span class="punctuation">,</span> <span class="number">100</span>
+f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>cb<span class="group_end">)</span></span> <span class="function">-></span> setTimeout cb<span class="punctuation">,</span> <span class="number">200</span>
+parallel <span class="punctuation">[</span>f1<span class="punctuation">,</span> f2<span class="punctuation">]</span><span class="punctuation">,</span> <span class="function">-></span>
   <span class="comment"># called after both f1 and f2 have call back</span></code></pre></td>
-          <td class='code'><pre>parallel <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>fns, callback<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>parallel <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>fns<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
   count <span class="operators">=</span> <span class="number">0</span>
-  cb <span class="operators">=</span><span class="function"> -></span> count <span class="operators">+</span><span class="operators">=</span> <span class="number">1</span>; <span class="keyword">if</span> count <span class="keyword">is</span> fns.length then callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
-  <span class="keyword">if</span> fns.empty<span class="punctuation">(</span><span class="punctuation">)</span> then callback<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">else</span> fn cb <span class="keyword">for</span> fn <span class="keyword">in</span> fns
+  cb <span class="operators">=</span> <span class="function">-></span> count <span class="operators">+</span><span class="operators">=</span> <span class="number">1</span>; <span class="keyword">if</span> count <span class="keyword">is</span> fns<span class="punctuation">.</span>length <span class="keyword">then</span> callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  <span class="keyword">if</span> fns<span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">then</span> callback<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">else</span> fn cb <span class="keyword">for</span> fn <span class="keyword">in</span> fns
 
 </pre></td>
         </tr>
@@ -95,13 +95,13 @@ parallel <span class="punctuation">[</span>f1, f2<span class="punctuation">]</sp
 The passed-in <code>callback</code> will only be called when the last
 function have callback.</p>
 
-<pre><code>f1 <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span> setTimeout cb, <span class="number">100</span>
-f2 <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>cb<span class="params_end">)</span></span> -></span> setTimeout cb, <span class="number">200</span>
-queue <span class="punctuation">[</span>f1, f2<span class="punctuation">]</span>,<span class="function"> -></span>
+<pre><code>f1 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>cb<span class="group_end">)</span></span> <span class="function">-></span> setTimeout cb<span class="punctuation">,</span> <span class="number">100</span>
+f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>cb<span class="group_end">)</span></span> <span class="function">-></span> setTimeout cb<span class="punctuation">,</span> <span class="number">200</span>
+queue <span class="punctuation">[</span>f1<span class="punctuation">,</span> f2<span class="punctuation">]</span><span class="punctuation">,</span> <span class="function">-></span>
   <span class="comment"># called after at least 300ms</span></code></pre></td>
-          <td class='code'><pre>queue <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>fns, callback<span class="params_end">)</span></span> -></span>
-  next <span class="operators">=</span><span class="function"> -></span> <span class="keyword">if</span> fns.empty<span class="punctuation">(</span><span class="punctuation">)</span> then callback<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">else</span> fns.shift<span class="punctuation">(</span><span class="punctuation">)</span> next
-  next<span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>queue <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>fns<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  next <span class="operators">=</span> <span class="function">-></span> <span class="keyword">if</span> fns<span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">then</span> callback<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">else</span> fns<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> next
+  next<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -116,20 +116,20 @@ but the difference between them lies in the fact that a <code>chain</code> pass
 the arguments receive as argument of the callback function to the next
 function to execute.</p>
 
-<pre><code>f1 <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>a, cb<span class="params_end">)</span></span> -></span> setTimeout cb, <span class="number">100</span>, a<span class="operators">+</span><span class="number">10</span>
-f2 <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>a, cb<span class="params_end">)</span></span> -></span> setTimeout cb, <span class="number">200</span>, a<span class="operators">+</span><span class="number">20</span>
-chain <span class="punctuation">[</span>f1, f2<span class="punctuation">]</span>, <span class="number">0</span>, <span class="function"><span class="params"><span class="params_begin">(</span>a<span class="params_end">)</span></span> -></span>
+<pre><code>f1 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> cb<span class="group_end">)</span></span> <span class="function">-></span> setTimeout cb<span class="punctuation">,</span> <span class="number">100</span><span class="punctuation">,</span> a<span class="operators">+</span><span class="number">10</span>
+f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> cb<span class="group_end">)</span></span> <span class="function">-></span> setTimeout cb<span class="punctuation">,</span> <span class="number">200</span><span class="punctuation">,</span> a<span class="operators">+</span><span class="number">20</span>
+chain <span class="punctuation">[</span>f1<span class="punctuation">,</span> f2<span class="punctuation">]</span><span class="punctuation">,</span> <span class="number">0</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>a<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># a is 30</span></code></pre></td>
-          <td class='code'><pre>chain <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>fns, args..., callback<span class="params_end">)</span></span> -></span>
-  next <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>args...<span class="params_end">)</span></span> -></span>
-    <span class="keyword">if</span> fns.empty<span class="punctuation">(</span><span class="punctuation">)</span>
-      callback.apply <span class="literal">null</span>, args
+          <td class='code'><pre>chain <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>fns<span class="punctuation">,</span> args<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  next <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>args<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> fns<span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      callback<span class="punctuation">.</span>apply <span class="literal">null</span><span class="punctuation">,</span> args
     <span class="keyword">else</span>
-      fns.shift<span class="punctuation">(</span><span class="punctuation">)</span>.apply <span class="literal">null</span>, args.concat next
+      fns<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>apply <span class="literal">null</span><span class="punctuation">,</span> args<span class="punctuation">.</span>concat next
 
-  next.apply <span class="literal">null</span>, args
+  next<span class="punctuation">.</span>apply <span class="literal">null</span><span class="punctuation">,</span> args
 
-<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>queue, parallel, chain<span class="hash_end">}</span></span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>queue<span class="punctuation">,</span> parallel<span class="punctuation">,</span> chain<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

@@ -252,11 +252,14 @@ table
       .params_end
       .property_end
       .class
+      .group_begin
+      .group_end
         color: #859900
 
       .params
       .subst
       .hash
+      .text
         color: #93a1a1
 
       .string
@@ -305,7 +308,7 @@ table
         color: #cb4b16
 
       .char_range > .escaped
-        color: #aa2a08
+        color: #d33682
 
   th.docs
     h1

@@ -111,8 +111,8 @@ A <code>Signal</code> is a dispatcher that have only one channel.
           <td class='docs'><p>Signals are generally defined as property of an object. And
 their name generally end with a past tense verb, such as in:</p>
 
-<pre><code>myObject.somethingChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span></code></pre></td>
-          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">Signal</span></span>
+<pre><code>myObject<span class="punctuation">.</span>somethingChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span></code></pre></td>
+          <td class='code'><pre><span class="class"><span class="keyword">class</span> <span class='title'>Signal</span></span>
 
 </pre></td>
         </tr>
@@ -125,20 +125,20 @@ their name generally end with a past tense verb, such as in:</p>
           <td class='docs'><p>Optionally, a signal can have a specific signature.
 A signature is a collection of argument names such:</p>
 
-<pre><code>positionChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>target<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>position<span class="string_end">'</span></span></code></pre>
+<pre><code>positionChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>target<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>position<span class="string_end">'</span></span></code></pre>
 
 <p>If a signature is passed to a signal, every listener
 added to the signal must then match the signature.</p>
 
-<pre><code>positionChanged.add <span class="function"><span class="params"><span class="params_begin">(</span>target, position<span class="params_end">)</span></span> -></span>
+<pre><code>positionChanged<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>target<span class="punctuation">,</span> position<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># will be registered</span>
-positionChanged.add <span class="function"><span class="params"><span class="params_begin">(</span>target, position, callback<span class="params_end">)</span></span> -></span>
+positionChanged<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>target<span class="punctuation">,</span> position<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># will be registered too</span>
-positionChanged.add <span class="punctuation">(</span><span class="punctuation">)</span><span class="function"> -></span> <span class="comment"># will throw an error</span></code></pre>
+positionChanged<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># will throw an error</span></code></pre>
 
 <p>In the case of an asynchronous listener, the callback argument
 is not considered as being part of the signature.</p></td>
-          <td class='code'><pre>  <span class="property">constructor<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@signature</span>...<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@signature</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span>
     <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
 </pre></td>
         </tr>
@@ -154,7 +154,7 @@ listeners to use a synchronous dispatch when equal to 0.</p></td>
 
 <p>Listeners are stored internally as an array with the form:</p>
 
-<pre><code><span class="punctuation">[</span>listener, context, calledOnce, priority<span class="punctuation">]</span></code></pre></td>
+<pre><code><span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> calledOnce<span class="punctuation">,</span> priority<span class="punctuation">]</span></code></pre></td>
           <td class='code'><pre>
 </pre></td>
         </tr>
@@ -177,11 +177,11 @@ listener blocks the dispatch loop until the callback function
 passed to the listener is triggered.</p>
 
 <pre><code><span class="comment"># sync listener</span>
-signal.add <span class="function"><span class="params"><span class="params_begin">(</span>a, b, c<span class="params_end">)</span></span> -></span>
+signal<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="group_end">)</span></span> <span class="function">-></span>
 
 <span class="comment"># async listener</span>
-signal.add <span class="function"><span class="params"><span class="params_begin">(</span>a, b, c, callback<span class="params_end">)</span></span> -></span> callback<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>  <span class="property">add<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
+signal<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span> callback<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span></code></pre></td>
+          <td class='code'><pre>  <span class="property">add<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> priority <span class="operators">=</span> <span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
     <span class="property">@validate</span> listener
 
 </pre></td>
@@ -192,18 +192,18 @@ if the context object is different each time.</p>
 
 <p>In other words, the following is possible:</p>
 
-<pre><code>listener <span class="operators">=</span><span class="function"> -></span>
+<pre><code>listener <span class="operators">=</span> <span class="function">-></span>
 context <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
-myObject.signal.add listener
-myObject.signal.add listener, context</code></pre>
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener<span class="punctuation">,</span> context</code></pre>
 
 <p>When the following is not:</p>
 
-<pre><code>listener <span class="operators">=</span><span class="function"> -></span>
-myObject.signal.add listener
-myObject.signal.add listener</code></pre></td>
-          <td class='code'><pre>    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener, context
-      <span class="property">@listeners</span>.push <span class="punctuation">[</span>listener, context, <span class="literal">false</span>, priority<span class="punctuation">]</span>
+<pre><code>listener <span class="operators">=</span> <span class="function">-></span>
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener</code></pre></td>
+          <td class='code'><pre>    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener<span class="punctuation">,</span> context
+      <span class="property">@listeners</span><span class="punctuation">.</span>push <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">,</span> priority<span class="punctuation">]</span>
       <span class="property">@asyncListeners</span><span class="operators">+</span><span class="operators">+</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
 
 </pre></td>
@@ -211,7 +211,7 @@ myObject.signal.add listener</code></pre></td>
         <tr>
           <td class='docs'><p>Listeners are sorted according to their order each time
 a new listener is added.</p></td>
-          <td class='code'><pre>      <span class="property">@sortListeners</span><span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>      <span class="property">@sortListeners</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -225,12 +225,12 @@ a new listener is added.</p></td>
 
 <p>All the others rules are the same. So you can't add
 the same listener/context couple twice through the two methods.</p></td>
-          <td class='code'><pre>  <span class="property">addOnce<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context, priority <span class="operators">=</span> 0<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">addOnce<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> priority <span class="operators">=</span> <span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
     <span class="property">@validate</span> listener
-    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener, context
-      <span class="property">@listeners</span>.push <span class="punctuation">[</span>listener, context, <span class="literal">true</span>, priority<span class="punctuation">]</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener<span class="punctuation">,</span> context
+      <span class="property">@listeners</span><span class="punctuation">.</span>push <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="literal">true</span><span class="punctuation">,</span> priority<span class="punctuation">]</span>
       <span class="property">@asyncListeners</span><span class="operators">+</span><span class="operators">+</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
-      <span class="property">@sortListeners</span><span class="punctuation">(</span><span class="punctuation">)</span>
+      <span class="property">@sortListeners</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -247,10 +247,10 @@ they was added to the signal.</p>
 If later in the application a context is forgotten or invalid
 when removing a listener from this signal, the listener
 without context will end up being removed.</p></td>
-          <td class='code'><pre>  <span class="property">remove<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
-    <span class="keyword">if</span> <span class="property">@registered</span> listener, context
+          <td class='code'><pre>  <span class="property">remove<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> <span class="property">@registered</span> listener<span class="punctuation">,</span> context
       <span class="property">@asyncListeners</span><span class="operators">-</span><span class="operators">-</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
-      <span class="property">@listeners</span>.splice <span class="property">@indexOf</span><span class="punctuation">(</span>listener, context<span class="punctuation">)</span>, <span class="number">1</span>
+      <span class="property">@listeners</span><span class="punctuation">.</span>splice <span class="property">@indexOf</span><span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span><span class="punctuation">,</span> <span class="number">1</span>
 
 </pre></td>
         </tr>
@@ -262,8 +262,8 @@ without context will end up being removed.</p></td>
         <tr>
           <td class='docs'><p>All listeners can be removed at once if needed.</p>
 
-<pre><code>signal.removeAll<span class="punctuation">(</span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>  <span class="property">removeAll<span class="property_end">:</span></span><span class="function"> -></span>
+<pre><code>signal<span class="punctuation">.</span>removeAll<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span></code></pre></td>
+          <td class='code'><pre>  <span class="property">removeAll<span class='punctuation'>:</span></span> <span class="function">-></span>
     <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
     <span class="property">@asyncListeners</span> <span class="operators">=</span> <span class="number">0</span>
 
@@ -277,8 +277,8 @@ without context will end up being removed.</p></td>
         <tr>
           <td class='docs'><p><code>indexOf</code> returns the position of the listener/context couple
 in the listeners array.</p></td>
-          <td class='code'><pre>  <span class="property">indexOf<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
-    <span class="keyword">return</span> i <span class="keyword">for</span> <span class="punctuation">[</span>l,c<span class="punctuation">]</span>,i <span class="keyword">in</span> <span class="property">@listeners</span> <span class="keyword">when</span> listener <span class="keyword">is</span> l <span class="keyword">and</span> context <span class="keyword">is</span> c
+          <td class='code'><pre>  <span class="property">indexOf<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">return</span> i <span class="keyword">for</span> <span class="punctuation">[</span>l<span class="punctuation">,</span>c<span class="punctuation">]</span><span class="punctuation">,</span>i <span class="keyword">in</span> <span class="property">@listeners</span> <span class="keyword">when</span> listener <span class="keyword">is</span> l <span class="keyword">and</span> context <span class="keyword">is</span> c
     <span class="operators">-</span><span class="number">1</span>
 
 </pre></td>
@@ -291,8 +291,8 @@ in the listeners array.</p></td>
         <tr>
           <td class='docs'><p>Use the <code>registered</code> method to test whether a listener/context couple
 have been registered in this signal.</p></td>
-          <td class='code'><pre>  <span class="property">registered<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener, context<span class="params_end">)</span></span> -></span>
-    <span class="property">@indexOf</span><span class="punctuation">(</span>listener, context<span class="punctuation">)</span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
+          <td class='code'><pre>  <span class="property">registered<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@indexOf</span><span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
 
 </pre></td>
         </tr>
@@ -303,7 +303,7 @@ have been registered in this signal.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Returns true if the signal has listeners.</p></td>
-          <td class='code'><pre>  <span class="property">hasListeners<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@listeners</span>.length <span class="keyword">isnt</span> <span class="number">0</span>
+          <td class='code'><pre>  <span class="property">hasListeners<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@listeners</span><span class="punctuation">.</span>length <span class="keyword">isnt</span> <span class="number">0</span>
 
 </pre></td>
         </tr>
@@ -316,12 +316,12 @@ have been registered in this signal.</p></td>
           <td class='docs'><p>The listeners are sorted according to their <code>priority</code>.
 The higher the priority the lower the listener will be
 in the call order.</p></td>
-          <td class='code'><pre>  <span class="property">sortListeners<span class="property_end">:</span></span><span class="function"> -></span>
-    <span class="keyword">return</span> <span class="keyword">if</span> <span class="property">@listeners</span>.length &lt;<span class="operators">=</span> <span class="number">1</span>
-    <span class="property">@listeners</span>.sort <span class="function"><span class="params"><span class="params_begin">(</span>a, b<span class="params_end">)</span></span> -></span>
-      <span class="punctuation">[</span>pA, pB <span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span> a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span>, b<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">]</span>
+          <td class='code'><pre>  <span class="property">sortListeners<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="keyword">return</span> <span class="keyword">if</span> <span class="property">@listeners</span><span class="punctuation">.</span>length &lt;<span class="operators">=</span> <span class="number">1</span>
+    <span class="property">@listeners</span><span class="punctuation">.</span>sort <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="punctuation">[</span>pA<span class="punctuation">,</span> pB <span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span> a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">,</span> b<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">]</span>
 
-      <span class="keyword">if</span> pA &lt; pB then <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> pB &lt; pA then <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+      <span class="keyword">if</span> pA &lt; pB <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> pB &lt; pA <span class="keyword">then</span> <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
 
 </pre></td>
         </tr>
@@ -334,22 +334,22 @@ in the call order.</p></td>
           <td class='docs'><p>Throws an error if the passed-in listener's signature
 doesn't match the signal's one.</p>
 
-<pre><code>signal <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span>
-signal.validate <span class="punctuation">(</span><span class="punctuation">)</span><span class="function"> -></span> <span class="comment"># false</span>
-signal.validate <span class="function"><span class="params"><span class="params_begin">(</span>a,b,c<span class="params_end">)</span></span> -></span> <span class="comment"># true</span>
-signal.validate <span class="function"><span class="params"><span class="params_begin">(</span>a,b,c,callback<span class="params_end">)</span></span> -></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>  <span class="property">validate<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
-    <span class="keyword">if</span> <span class="property">@signature</span>.length > <span class="number">0</span>
-      re <span class="operators">=</span> <span class="regexp">/<span class="char_range"><span class="char_range_begin">[</span>^(<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^)<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\)</span>.<span class="regexp_operators">*</span><span class="regexp_operators">$</span><span class="regexp_end">/m</span></span>
-      listenerSignature <span class="operators">=</span> <span class="property">Function<span class="property_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="punctuation">)</span>.shift<span class="punctuation">(</span><span class="punctuation">)</span>
-      signature <span class="operators">=</span> listenerSignature.replace<span class="punctuation">(</span>re, <span class="string"><span class="string_begin">'</span>$1<span class="string_end">'</span></span><span class="punctuation">)</span>
-      args <span class="operators">=</span> signature.split <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">*</span>,<span class="escaped">\s</span><span class="regexp_operators">*</span><span class="regexp_end">/g</span></span>
+<pre><code>signal <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span>
+signal<span class="punctuation">.</span>validate <span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># false</span>
+signal<span class="punctuation">.</span>validate <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span>b<span class="punctuation">,</span>c<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># true</span>
+signal<span class="punctuation">.</span>validate <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span>b<span class="punctuation">,</span>c<span class="punctuation">,</span>callback<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>  <span class="property">validate<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> <span class="property">@signature</span><span class="punctuation">.</span>length > <span class="number">0</span>
+      re <span class="operators">=</span> <span class="regexp">/<span class="char_range"><span class="char_range_begin">[</span>^(<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^)<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\)</span>.<span class="regexp_operators">*</span><span class="regexp_operators">$</span>/m</span>
+      listenerSignature <span class="operators">=</span> <span class="property">Function<span class='punctuation'>:</span></span><span class="punctuation">:</span>toString<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span><span class="punctuation">.</span>split<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      signature <span class="operators">=</span> listenerSignature<span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span>re<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>$1<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      args <span class="operators">=</span> signature<span class="punctuation">.</span>split <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">*</span>,<span class="escaped">\s</span><span class="regexp_operators">*</span>/g</span>
 
-      args.shift<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> args.first<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
-      args.pop<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> args.last<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>callback<span class="string_end">'</span></span>
+      args<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> args<span class="punctuation">.</span>first<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+      args<span class="punctuation">.</span>pop<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> args<span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>callback<span class="string_end">'</span></span>
 
-      s1 <span class="operators">=</span> <span class="property">@signature</span>.join<span class="punctuation">(</span><span class="punctuation">)</span>
-      s2 <span class="operators">=</span> args.join<span class="punctuation">(</span><span class="punctuation">)</span>
+      s1 <span class="operators">=</span> <span class="property">@signature</span><span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      s2 <span class="operators">=</span> args<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
       m <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>The listener <span class="subst"><span class="subst_begin">#{</span>listener<span class="subst_end">}</span></span> doesn't match the signal's signature <span class="subst"><span class="subst_begin">#{</span>s1<span class="subst_end">}</span></span><span class="string_end">"</span></span>
       <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> m <span class="keyword">if</span> s2 <span class="keyword">isnt</span> s1
@@ -364,10 +364,10 @@ signal.validate <span class="function"><span class="params"><span class="params_
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the passed-in <code>listener</code> is asynchronous.</p>
 
-<pre><code>signal.isAsync<span class="function"> -></span> <span class="comment"># false</span>
-signal.isAsync <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>  <span class="property">isAsync<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>listener<span class="params_end">)</span></span> -></span>
-    <span class="property">Function<span class="property_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span>listener<span class="punctuation">)</span>.indexOf<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>callback)<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="operators">!=</span> <span class="operators">-</span><span class="number">1</span>
+<pre><code>signal<span class="punctuation">.</span>isAsync <span class="function">-></span> <span class="comment"># false</span>
+signal<span class="punctuation">.</span>isAsync <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>  <span class="property">isAsync<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">Function<span class='punctuation'>:</span></span><span class="punctuation">:</span>toString<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span><span class="punctuation">.</span>indexOf<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>callback)<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="operators">!=</span> <span class="operators">-</span><span class="number">1</span>
 
 </pre></td>
         </tr>
@@ -385,7 +385,7 @@ signal.isAsync <span class="function"><span class="params"><span class="params_b
           <td class='docs'><p>Signals are dispatched to all the listeners. All the arguments
 passed to the dispatch become the signal's message.</p>
 
-<pre><code>signal.dispatch <span class="keyword">this</span>, <span class="literal">true</span></code></pre>
+<pre><code>signal<span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> <span class="literal">true</span></code></pre>
 
 <p>Listeners registered for only one call will be removed after
 the call.</p>
@@ -396,7 +396,7 @@ In that case, the callback must be the last argument passed to the
 of the dispatch, allowing to execute code after all listeners,
 even asynchronous, have been triggered.</p>
 
-<pre><code>signal.dispatch <span class="keyword">this</span>, <span class="literal">true</span>,<span class="function"> -></span>
+<pre><code>signal<span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> <span class="literal">true</span><span class="punctuation">,</span> <span class="function">-></span>
   <span class="comment"># all listeners have finish their execution</span></code></pre>
 
 <p><strong>Note:</strong> As the dispatch function will automatically consider
@@ -404,32 +404,32 @@ the last argument as the callback if its type is <code>function</code>, you shou
 avoid using function as the sole argument or as the last argument
 for a listener. If that case occurs, consider either re-arranging the
 arguments order or using a value object to carry the function.</p></td>
-          <td class='code'><pre>  <span class="property">dispatch<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>args..., callback<span class="params_end">)</span></span>-></span>
+          <td class='code'><pre>  <span class="property">dispatch<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>args<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">,</span> callback<span class="group_end">)</span></span><span class="function">-></span>
     <span class="keyword">unless</span> <span class="keyword">typeof</span> callback <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
-      args.push callback
+      args<span class="punctuation">.</span>push callback
       callback <span class="operators">=</span> <span class="literal">null</span>
 
-    listeners <span class="operators">=</span> <span class="property">@listeners</span>.concat<span class="punctuation">(</span><span class="punctuation">)</span>
+    listeners <span class="operators">=</span> <span class="property">@listeners</span><span class="punctuation">.</span>concat<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>If at leat one listener is async, the whole dispatch process is async
 otherwise the fast route is used.</p></td>
           <td class='code'><pre>    <span class="keyword">if</span> <span class="property">@asyncListeners</span> > <span class="number">0</span>
-      next <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> =></span>
-        <span class="keyword">if</span> listeners.length
-          <span class="punctuation">[</span>listener, context, once, priority<span class="punctuation">]</span> <span class="operators">=</span> listeners.shift<span class="punctuation">(</span><span class="punctuation">)</span>
+      next <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">=></span>
+        <span class="keyword">if</span> listeners<span class="punctuation">.</span>length
+          <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> once<span class="punctuation">,</span> priority<span class="punctuation">]</span> <span class="operators">=</span> listeners<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
           <span class="keyword">if</span> <span class="property">@isAsync</span> listener
-            listener.apply context, args.concat<span class="function"> =></span>
-              <span class="property">@remove</span> listener, context <span class="keyword">if</span> once
+            listener<span class="punctuation">.</span>apply context<span class="punctuation">,</span> args<span class="punctuation">.</span>concat <span class="function">=></span>
+              <span class="property">@remove</span> listener<span class="punctuation">,</span> context <span class="keyword">if</span> once
               next callback
           <span class="keyword">else</span>
-            listener.apply context, args
-            <span class="property">@remove</span> listener, context <span class="keyword">if</span> once
+            listener<span class="punctuation">.</span>apply context<span class="punctuation">,</span> args
+            <span class="property">@remove</span> listener<span class="punctuation">,</span> context <span class="keyword">if</span> once
             next callback
         <span class="keyword">else</span>
-          callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+          callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
       next callback
     <span class="keyword">else</span>
@@ -439,13 +439,13 @@ otherwise the fast route is used.</p></td>
           <td class='docs'><p>The fast route is just a loop over the listeners.
 At that point, if your listener do async stuff, it will
 not prevent the dispatching until it's done.</p></td>
-          <td class='code'><pre>      <span class="keyword">for</span> <span class="punctuation">[</span>listener, context, once, priority<span class="punctuation">]</span> <span class="keyword">in</span> listeners
-        listener.apply context, arguments
-        <span class="property">@remove</span> listener, context <span class="keyword">if</span> once
+          <td class='code'><pre>      <span class="keyword">for</span> <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> once<span class="punctuation">,</span> priority<span class="punctuation">]</span> <span class="keyword">in</span> listeners
+        listener<span class="punctuation">.</span>apply context<span class="punctuation">,</span> arguments
+        <span class="property">@remove</span> listener<span class="punctuation">,</span> context <span class="keyword">if</span> once
 
-      callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+      callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
-<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Signal</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Signal</span>
 
 </pre></td>
         </tr>

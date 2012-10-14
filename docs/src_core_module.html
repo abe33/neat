@@ -92,11 +92,11 @@
 be used to decorate a class prototype.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span>
-  <span class="property">toSource<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span>
-  <span class="property">fromSource<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
 
 <span class="constant">Cloneable</span> <span class="operators">=</span>
-  <span class="property">clone<span class="property_end">:</span></span><span class="function"> -></span> <span class="comment"># ...</span></code></pre></td>
+  <span class="property">clone<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span></code></pre></td>
           <td class='code'><pre>
 </pre></td>
         </tr>
@@ -108,7 +108,7 @@ be used to decorate a class prototype.</p>
         <tr>
           <td class='docs'><p>The <code>Module</code> class is a base class that you can extend
 to create classes with polymorphism ability.</p></td>
-          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">Module</span></span>
+          <td class='code'><pre><span class="class"><span class="keyword">class</span> <span class='title'>Module</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -125,11 +125,11 @@ to create classes with polymorphism ability.</p></td>
           <td class='docs'><p>Call the static <code>@include</code> method in your class body
 to specify the mixins that the class will implement.</p>
 
-<pre><code><span class="class"><span class="class_begin">class </span><span class="class_end">MyModule</span></span> <span class="keyword">extends</span> <span class="constant">Module</span>
-  <span class="property">@include</span> <span class="constant">Serializable</span>, <span class="constant">Cloneable</span>, <span class="constant">Suspendable</span>
+<pre><code><span class="class"><span class="keyword">class</span> <span class='title'>MyModule</span></span> <span class="keyword">extends</span> <span class="constant">Module</span>
+  <span class="property">@include</span> <span class="constant">Serializable</span><span class="punctuation">,</span> <span class="constant">Cloneable</span><span class="punctuation">,</span> <span class="constant">Suspendable</span>
 
   <span class="comment"># rest of the class definition...</span></code></pre></td>
-          <td class='code'><pre>  <span class="property">@include<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>mixins...<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">@include<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>mixins<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span>
 
 </pre></td>
         </tr>
@@ -145,21 +145,21 @@ stored on the prototype.</p>
 <p>A copy the hash is made each time the <code>mixins</code> method is called.
 It prevents the hash of a parent class to be affected by changes
 made in child class.</p></td>
-          <td class='code'><pre>    <span class="property">@__superOf__</span> <span class="operators">=</span> <span class="property">@__superOf__</span>.concat<span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>    <span class="property">@__superOf__</span> <span class="operators">=</span> <span class="property">@__superOf__</span><span class="punctuation">.</span>concat<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
-    __excluded__ <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>constructorHook<span class="string_end">"</span></span>, <span class="string"><span class="string_begin">"</span>included<span class="string_end">"</span></span>, <span class="string"><span class="string_begin">"</span>excluded<span class="string_end">"</span></span><span class="punctuation">]</span>
+    __excluded__ <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>constructorHook<span class="string_end">"</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>included<span class="string_end">"</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>excluded<span class="string_end">"</span></span><span class="punctuation">]</span>
     <span class="keyword">for</span> mixin <span class="keyword">in</span> mixins
-      excluded <span class="operators">=</span> <span class="keyword">if</span> mixin.excluded<span class="operators">?</span>
-        __excluded__.concat mixin.excluded
+      excluded <span class="operators">=</span> <span class="keyword">if</span> mixin<span class="punctuation">.</span>excluded<span class="operators">?</span>
+        __excluded__<span class="punctuation">.</span>concat mixin<span class="punctuation">.</span>excluded
       <span class="keyword">else</span>
-        __excluded__.concat<span class="punctuation">(</span><span class="punctuation">)</span>
+        __excluded__<span class="punctuation">.</span>concat<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Each member of each mixin is added to the current class
 prototype, unless the member is part of the excluded array.</p></td>
-          <td class='code'><pre>      <span class="keyword">for</span> key, value <span class="keyword">of</span> mixin <span class="keyword">when</span> key <span class="keyword">not</span> <span class="keyword">in</span> excluded
+          <td class='code'><pre>      <span class="keyword">for</span> key<span class="punctuation">,</span> value <span class="keyword">of</span> mixin <span class="keyword">when</span> key <span class="keyword">not</span> <span class="keyword">in</span> excluded
         <span class="property">@</span><span class="punctuation">:</span><span class="punctuation">:</span><span class="punctuation">[</span>key<span class="punctuation">]</span> <span class="operators">=</span> value
 
 </pre></td>
@@ -176,15 +176,15 @@ for the mixed method.</p></td>
 That function will be stored in a specific prototype
 property and then triggered at the end of the <code>Module</code>
 constructor.</p></td>
-          <td class='code'><pre>      <span class="keyword">if</span> mixin.constructorHook<span class="operators">?</span>
-        hook <span class="operators">=</span> mixin.constructorHook
-        <span class="property">@__hooks__</span> <span class="operators">=</span> <span class="property">@__hooks__</span>.concat hook
+          <td class='code'><pre>      <span class="keyword">if</span> mixin<span class="punctuation">.</span>constructorHook<span class="operators">?</span>
+        hook <span class="operators">=</span> mixin<span class="punctuation">.</span>constructorHook
+        <span class="property">@__hooks__</span> <span class="operators">=</span> <span class="property">@__hooks__</span><span class="punctuation">.</span>concat hook
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The mixin is notified of its inclusion at the end of the process.</p></td>
-          <td class='code'><pre>    mixin.included<span class="operators">?</span> <span class="keyword">this</span>
+          <td class='code'><pre>    mixin<span class="punctuation">.</span>included<span class="operators">?</span> <span class="keyword">this</span>
     <span class="keyword">this</span>
 
 </pre></td>
@@ -196,7 +196,7 @@ constructor.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores the mixins constructor hooks.</p></td>
-          <td class='code'><pre>  <span class="property">@__hooks__<span class="property_end">:</span></span> <span class="punctuation">[</span><span class="punctuation">]</span>
+          <td class='code'><pre>  <span class="property">@__hooks__<span class='punctuation'>:</span></span> <span class="punctuation">[</span><span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -207,7 +207,7 @@ constructor.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Stores the respective super objects of mixed methods.</p></td>
-          <td class='code'><pre>  <span class="property">@__superOf__<span class="property_end">:</span></span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+          <td class='code'><pre>  <span class="property">@__superOf__<span class='punctuation'>:</span></span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>
@@ -229,7 +229,7 @@ a subclass to handle the hooks in its own constructor.</p>
 <p>Subclasses that prevent the <code>Module</code> constructor to trigger
 the hooks should provide the same kind of guards in their
 constructor to allow their subclasses to do so.</p></td>
-          <td class='code'><pre>  <span class="property">preventConstructorHooksInModule<span class="property_end">:</span></span> <span class="literal">false</span>
+          <td class='code'><pre>  <span class="property">preventConstructorHooksInModule<span class='punctuation'>:</span></span> <span class="literal">false</span>
 
 </pre></td>
         </tr>
@@ -241,8 +241,8 @@ constructor to allow their subclasses to do so.</p></td>
         <tr>
           <td class='docs'><p>The <code>Module</code> constructor behavior is to automatically
 triggers the constructor hooks.</p></td>
-          <td class='code'><pre>  <span class="property">constructor<span class="property_end">:</span></span><span class="function"> -></span>
-    <span class="property">@triggerConstructorHooks</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">unless</span> <span class="property">@preventConstructorHooksInModule</span>
+          <td class='code'><pre>  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="property">@triggerConstructorHooks</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">unless</span> <span class="property">@preventConstructorHooksInModule</span>
 
 </pre></td>
         </tr>
@@ -254,8 +254,8 @@ triggers the constructor hooks.</p></td>
         <tr>
           <td class='docs'><p>Loop through all the constructor hooks and call
 them with the current object as context.</p></td>
-          <td class='code'><pre>  <span class="property">triggerConstructorHooks<span class="property_end">:</span></span><span class="function"> -></span>
-    hook.call <span class="keyword">this</span> <span class="keyword">for</span> hook <span class="keyword">in</span> <span class="property">@constructor</span>.__hooks__
+          <td class='code'><pre>  <span class="property">triggerConstructorHooks<span class='punctuation'>:</span></span> <span class="function">-></span>
+    hook<span class="punctuation">.</span>call <span class="keyword">this</span> <span class="keyword">for</span> hook <span class="keyword">in</span> <span class="property">@constructor</span><span class="punctuation">.</span>__hooks__
 
 </pre></td>
         </tr>
@@ -267,10 +267,10 @@ them with the current object as context.</p></td>
         <tr>
           <td class='docs'><p>Use <code>@super "methodName"</code> in a mixin's function to call the
 super function of the specified method.</p></td>
-          <td class='code'><pre>  <span class="property">super<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>method, args...<span class="params_end">)</span></span> -></span>
-    <span class="property">@constructor</span>.__superOf__<span class="punctuation">[</span>method<span class="punctuation">]</span><span class="operators">?</span><span class="punctuation">[</span>method<span class="punctuation">]</span><span class="operators">?</span>.apply <span class="keyword">this</span>, args
+          <td class='code'><pre>  <span class="property">super<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>method<span class="punctuation">,</span> args<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@constructor</span><span class="punctuation">.</span>__superOf__<span class="punctuation">[</span>method<span class="punctuation">]</span><span class="operators">?</span><span class="punctuation">[</span>method<span class="punctuation">]</span><span class="operators">?</span><span class="punctuation">.</span>apply <span class="keyword">this</span><span class="punctuation">,</span> args
 
-<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="constant">Module</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Module</span>
 
 </pre></td>
         </tr>

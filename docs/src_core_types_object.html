@@ -157,9 +157,9 @@ Object and Hash methods.
         <tr>
           <td class='docs'><p>Creates a new object from an array such as <code>[key, value, key, value, ...]</code>.</p>
 
-<pre><code>o <span class="operators">=</span> <span class="constant">Object</span>.<span class="keyword">new</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span>, <span class="number">20</span>, <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>, <span class="number">30</span><span class="punctuation">]</span>
+<pre><code>o <span class="operators">=</span> <span class="constant">Object</span><span class="punctuation">.</span><span class="keyword">new</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">20</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">30</span><span class="punctuation">]</span>
 <span class="comment"># {foo: 10, bar: 20, baz: 30}</span></code></pre></td>
-          <td class='code'><pre><span class="constant">Object</span>.<span class="keyword">new</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>a<span class="params_end">)</span></span> -></span> o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; a.step<span class="function"><span class="params"><span class="params_begin">(</span>2, (k,v<span class="params_end">)</span></span> -></span> o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v<span class="punctuation">)</span>; <span class="keyword">return</span> o
+          <td class='code'><pre><span class="constant">Object</span><span class="punctuation">.</span><span class="keyword">new</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="group_end">)</span></span> <span class="function">-></span> o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; a<span class="punctuation">.</span>step<span class="group"><span class="group_begin">(</span><span class="number">2</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>v<span class="group_end">)</span></span> <span class="function">-></span> o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v<span class="group_end">)</span></span>; <span class="keyword">return</span> o
 
 </pre></td>
         </tr>
@@ -178,10 +178,10 @@ Object and Hash methods.
 object with the passed-in argument. If no argument is provided,
 the return a copy of the current object.</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="property">bar<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span>.concat <span class="property">baz<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">.</span>concat <span class="property">baz<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
 <span class="comment"># {foo: 'foo', bar: 'bar', baz: 'baz'}</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">concat<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>m<span class="params_end">)</span></span> -></span>
-  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span>; <span class="keyword">return</span> o.merge<span class="punctuation">(</span>m <span class="operators">|</span><span class="operators">|</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">)</span>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">concat<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>m<span class="group_end">)</span></span> <span class="function">-></span>
+  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> <span class="keyword">this</span>; <span class="keyword">return</span> o<span class="punctuation">.</span>merge<span class="group"><span class="group_begin">(</span>m <span class="operators">|</span><span class="operators">|</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -204,9 +204,9 @@ def Object, contains: (value) -> @has value</p></td>
         <tr>
           <td class='docs'><p>Returns true if the current object don't contains any enumerable properties.</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>.empty<span class="punctuation">(</span><span class="punctuation">)</span>        <span class="comment"># true</span>
-<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span><span class="hash_end">}</span></span>.empty<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">empty<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.empty<span class="punctuation">(</span><span class="punctuation">)</span>
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>        <span class="comment"># true</span>
+<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">empty<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@keys</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -218,8 +218,8 @@ def Object, contains: (value) -> @has value</p></td>
         <tr>
           <td class='docs'><p>Returns the first pair of key and value of the current object as a tuple.</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span><span class="hash_end">}</span></span>.first<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['foo', 10]</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">first<span class="property_end">:</span></span><span class="function"> -></span> <span class="keyword">if</span> <span class="property">@empty</span><span class="punctuation">(</span><span class="punctuation">)</span> then <span class="literal">null</span> <span class="keyword">else</span> <span class="property">@flatten</span><span class="punctuation">(</span><span class="punctuation">)</span>.group<span class="punctuation">(</span><span class="number">2</span><span class="punctuation">)</span>.first<span class="punctuation">(</span><span class="punctuation">)</span>
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="hash_end">}</span></span><span class="punctuation">.</span>first<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['foo', 10]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">first<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="keyword">if</span> <span class="property">@empty</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">then</span> <span class="literal">null</span> <span class="keyword">else</span> <span class="property">@flatten</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>group<span class="group"><span class="group_begin">(</span><span class="number">2</span><span class="group_end">)</span></span><span class="punctuation">.</span>first<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -232,9 +232,9 @@ def Object, contains: (value) -> @has value</p></td>
           <td class='docs'><p>Returns an array such as <code>[key, value, key, value]</code> with the name
 and the content of the enumerable properties of this object.</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>, <span class="property">baz<span class="property_end">:</span></span> <span class="number">30</span><span class="hash_end">}</span></span>.flatten<span class="punctuation">(</span><span class="punctuation">)</span>
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="punctuation">,</span> <span class="property">baz<span class='punctuation'>:</span></span> <span class="number">30</span><span class="hash_end">}</span></span><span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 <span class="comment"># ['foo', 10, 'bar', 20, 'baz', 30]</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">flatten<span class="property_end">:</span></span><span class="function"> -></span> a <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>; a <span class="operators">=</span> a.concat <span class="punctuation">[</span>k,v<span class="punctuation">]</span> <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span>; <span class="keyword">return</span> a
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">flatten<span class='punctuation'>:</span></span> <span class="function">-></span> a <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>; a <span class="operators">=</span> a<span class="punctuation">.</span>concat <span class="punctuation">[</span>k<span class="punctuation">,</span>v<span class="punctuation">]</span> <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> <span class="keyword">this</span>; <span class="keyword">return</span> a
 
 </pre></td>
         </tr>
@@ -248,12 +248,12 @@ and the content of the enumerable properties of this object.</p>
 enumerable properties.</p>
 
 <pre><code>object <span class="operators">=</span>
-  <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-  <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
 
-object.has <span class="number">20</span> <span class="comment"># true</span>
-object.has <span class="number">30</span> <span class="comment"># false</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">has<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>value<span class="params_end">)</span></span> -></span> value <span class="keyword">in</span> <span class="property">@values</span><span class="punctuation">(</span><span class="punctuation">)</span>
+object<span class="punctuation">.</span>has <span class="number">20</span> <span class="comment"># true</span>
+object<span class="punctuation">.</span>has <span class="number">30</span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">has<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>value<span class="group_end">)</span></span> <span class="function">-></span> value <span class="keyword">in</span> <span class="property">@values</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -266,12 +266,12 @@ object.has <span class="number">30</span> <span class="comment"># false</span></
           <td class='docs'><p>Returns <code>true</code> if the specified key is defined on this object.</p>
 
 <pre><code>object <span class="operators">=</span>
-  <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-  <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
 
-object.hasKey <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span>
-object.hasKey <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span> <span class="comment"># false</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">hasKey<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>key<span class="params_end">)</span></span> -></span> <span class="property">@</span><span class="punctuation">[</span>key<span class="punctuation">]</span><span class="operators">?</span>
+object<span class="punctuation">.</span>hasKey <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span>
+object<span class="punctuation">.</span>hasKey <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">hasKey<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>key<span class="group_end">)</span></span> <span class="function">-></span> <span class="property">@</span><span class="punctuation">[</span>key<span class="punctuation">]</span><span class="operators">?</span>
 
 </pre></td>
         </tr>
@@ -287,11 +287,11 @@ object.hasKey <span class="string"><span class="string_begin">'</span>baz<span c
 Use <code>sortedKeys</code> to retreive the keys sorted alphabetically.</p>
 
 <pre><code>object <span class="operators">=</span>
-  <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-  <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
 
-object.keys<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['foo', 'bar']</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">keys<span class="property_end">:</span></span><span class="function"> -></span> k <span class="keyword">for</span> k <span class="keyword">of</span> <span class="keyword">this</span>
+object<span class="punctuation">.</span>keys<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['foo', 'bar']</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">keys<span class='punctuation'>:</span></span> <span class="function">-></span> k <span class="keyword">for</span> k <span class="keyword">of</span> <span class="keyword">this</span>
 
 </pre></td>
         </tr>
@@ -303,10 +303,10 @@ object.keys<span class="punctuation">(</span><span class="punctuation">)</span> 
         <tr>
           <td class='docs'><p>Returns the count of enumerable properties on this object.</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>.length<span class="punctuation">(</span><span class="punctuation">)</span>                 <span class="comment"># 0</span>
-<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span><span class="hash_end">}</span></span>.length<span class="punctuation">(</span><span class="punctuation">)</span>          <span class="comment"># 1</span>
-<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span><span class="hash_end">}</span></span>.length<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># 2</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">length<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.length
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">.</span>length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>                 <span class="comment"># 0</span>
+<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">.</span>length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>          <span class="comment"># 1</span>
+<span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="hash_end">}</span></span><span class="punctuation">.</span>length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># 2</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">length<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@keys</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>length
 
 </pre></td>
         </tr>
@@ -318,8 +318,8 @@ object.keys<span class="punctuation">(</span><span class="punctuation">)</span> 
         <tr>
           <td class='docs'><p>Returns the last pair of key and value of the current object as a tuple.</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span><span class="hash_end">}</span></span>.last<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['bar', 20]</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">last<span class="property_end">:</span></span><span class="function"> -></span> <span class="keyword">if</span> <span class="property">@empty</span><span class="punctuation">(</span><span class="punctuation">)</span> then <span class="literal">null</span> <span class="keyword">else</span> <span class="property">@flatten</span><span class="punctuation">(</span><span class="punctuation">)</span>.group<span class="punctuation">(</span><span class="number">2</span><span class="punctuation">)</span>.last<span class="punctuation">(</span><span class="punctuation">)</span>
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="hash_end">}</span></span><span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['bar', 20]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">last<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="keyword">if</span> <span class="property">@empty</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">then</span> <span class="literal">null</span> <span class="keyword">else</span> <span class="property">@flatten</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>group<span class="group"><span class="group_begin">(</span><span class="number">2</span><span class="group_end">)</span></span><span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -332,10 +332,10 @@ object.keys<span class="punctuation">(</span><span class="punctuation">)</span> 
           <td class='docs'><p>Iterates over the current object enumerable properties and
 creates a new object with the mapping function's return.</p>
 
-<pre><code>source <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">50</span><span class="hash_end">}</span></span>
-result <span class="operators">=</span> source.map <span class="function"><span class="params"><span class="params_begin">(</span>k,v<span class="params_end">)</span></span> -></span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>_<span class="subst"><span class="subst_begin">#{</span>k<span class="subst_end">}</span></span>_<span class="string_end">"</span></span>, v <span class="operators">*</span> <span class="number">100</span><span class="punctuation">]</span>
+<pre><code>source <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">50</span><span class="hash_end">}</span></span>
+result <span class="operators">=</span> source<span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>v<span class="group_end">)</span></span> <span class="function">-></span> <span class="punctuation">[</span><span class="string"><span class="string_begin">"</span>_<span class="subst"><span class="subst_begin">#{</span>k<span class="subst_end">}</span></span>_<span class="string_end">"</span></span><span class="punctuation">,</span> v <span class="operators">*</span> <span class="number">100</span><span class="punctuation">]</span>
 <span class="comment"># {_foo_: 1000, _bar_: 5000}</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">map<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span> <span class="constant">Object</span>.<span class="keyword">new</span> <span class="punctuation">(</span>f<span class="punctuation">(</span>k,v<span class="punctuation">)</span> <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span><span class="punctuation">)</span>.flatten<span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">map<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span> <span class="constant">Object</span><span class="punctuation">.</span><span class="keyword">new</span> <span class="group"><span class="group_begin">(</span>f<span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>v<span class="group_end">)</span></span> <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> <span class="keyword">this</span><span class="group_end">)</span></span><span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -350,10 +350,10 @@ result <span class="operators">=</span> source.map <span class="function"><span 
 <p>A target object property is overriden by the source property
 if both hold the same property.</p>
 
-<pre><code>target <span class="operators">=</span> <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-target.merge <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>, <span class="property">baz<span class="property_end">:</span></span> <span class="number">30</span>
+<pre><code>target <span class="operators">=</span> <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+target<span class="punctuation">.</span>merge <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="punctuation">,</span> <span class="property">baz<span class='punctuation'>:</span></span> <span class="number">30</span>
 <span class="comment"># target = {foo: 10, bar: 20, baz: 30}</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">merge<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> o; <span class="keyword">this</span>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">merge<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> o; <span class="keyword">this</span>
 
 </pre></td>
         </tr>
@@ -366,11 +366,11 @@ target.merge <span class="property">bar<span class="property_end">:</span></span
           <td class='docs'><p>Returns an object without the properties that are evaluated as <code>true</code>
 in the passed-in filter function.</p>
 
-<pre><code>source <span class="operators">=</span> <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>, <span class="property">baz<span class="property_end">:</span></span> <span class="number">30</span>
-target <span class="operators">=</span> source.reject <span class="function"><span class="params"><span class="params_begin">(</span>k,v<span class="params_end">)</span></span> -></span> v > <span class="number">10</span>
+<pre><code>source <span class="operators">=</span> <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="punctuation">,</span> <span class="property">baz<span class='punctuation'>:</span></span> <span class="number">30</span>
+target <span class="operators">=</span> source<span class="punctuation">.</span>reject <span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>v<span class="group_end">)</span></span> <span class="function">-></span> v > <span class="number">10</span>
 <span class="comment"># target = {foo: 10}</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">reject<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span>
-  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span> <span class="keyword">when</span> <span class="keyword">not</span> f<span class="operators">?</span> k, v; <span class="keyword">return</span> o
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">reject<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span>
+  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> <span class="keyword">this</span> <span class="keyword">when</span> <span class="keyword">not</span> f<span class="operators">?</span> k<span class="punctuation">,</span> v; <span class="keyword">return</span> o
 
 </pre></td>
         </tr>
@@ -383,11 +383,11 @@ target <span class="operators">=</span> source.reject <span class="function"><sp
           <td class='docs'><p>Returns an object with the properties that are evaluated as <code>true</code>
 in the passed-in filter function.</p>
 
-<pre><code>source <span class="operators">=</span> <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>, <span class="property">baz<span class="property_end">:</span></span> <span class="number">30</span>
-target <span class="operators">=</span> source.select <span class="function"><span class="params"><span class="params_begin">(</span>k,v<span class="params_end">)</span></span> -></span> v > <span class="number">10</span>
+<pre><code>source <span class="operators">=</span> <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span><span class="punctuation">,</span> <span class="property">baz<span class='punctuation'>:</span></span> <span class="number">30</span>
+target <span class="operators">=</span> source<span class="punctuation">.</span>select <span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>v<span class="group_end">)</span></span> <span class="function">-></span> v > <span class="number">10</span>
 <span class="comment"># target = {bar: 20, baz: 30}</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">select<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span>
-  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k,v <span class="keyword">of</span> <span class="keyword">this</span> <span class="keyword">when</span> f<span class="operators">?</span> k, v; <span class="keyword">return</span> o
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">select<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span>
+  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> <span class="keyword">this</span> <span class="keyword">when</span> f<span class="operators">?</span> k<span class="punctuation">,</span> v; <span class="keyword">return</span> o
 
 </pre></td>
         </tr>
@@ -398,7 +398,7 @@ target <span class="operators">=</span> source.select <span class="function"><sp
         </tr>
         <tr>
           <td class='docs'><p><code>Object::length</code> alias.</p></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">size<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@length</span><span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">size<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@length</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -411,18 +411,18 @@ target <span class="operators">=</span> source.select <span class="function"><sp
           <td class='docs'><p>Returns a new object whose properties have been sorted to
 be iterated in the defined order.</p>
 
-<pre><code>source <span class="operators">=</span> <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
-target <span class="operators">=</span> source.sort <span class="function"><span class="params"><span class="params_begin">(</span>a,b<span class="params_end">)</span></span> -></span>
-  <span class="keyword">if</span> a > b then <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> b &lt; a then <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+<pre><code>source <span class="operators">=</span> <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
+target <span class="operators">=</span> source<span class="punctuation">.</span>sort <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">if</span> a > b <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> b &lt; a <span class="keyword">then</span> <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
 <span class="comment"># target = {bar: 20, foo: 10}</span></code></pre>
 
 <p>If called without arguments the keys are sorted alphabetically.</p></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">sort<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>f<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">sort<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">if</span> <span class="keyword">not</span> f<span class="operators">?</span> <span class="keyword">or</span> <span class="keyword">typeof</span> f <span class="keyword">isnt</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
-    f <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>a,b<span class="params_end">)</span></span> -></span>
-      <span class="keyword">if</span> a > b then <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> b &lt; a then <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+    f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">if</span> a > b <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> b &lt; a <span class="keyword">then</span> <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
 
-  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.sort f; <span class="keyword">return</span> o
+  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>; o<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@keys</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>sort f; <span class="keyword">return</span> o
 
 </pre></td>
         </tr>
@@ -435,11 +435,11 @@ target <span class="operators">=</span> source.sort <span class="function"><span
           <td class='docs'><p>Returns the enumerable keys sorted alphabetically.</p>
 
 <pre><code>object <span class="operators">=</span>
-  <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-  <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
 
-object.sortedKeys<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># ['bar', 'foo']</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">sortedKeys<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>.sort<span class="punctuation">(</span><span class="punctuation">)</span>
+object<span class="punctuation">.</span>sortedKeys<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['bar', 'foo']</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">sortedKeys<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@keys</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>sort<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -454,11 +454,11 @@ The values are ordered such as each key in <code>sortedKeys</code> correspond
 to the value at the same index in <code>sortedValues</code>.</p>
 
 <pre><code>object <span class="operators">=</span>
-  <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-  <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
 
-object.sortedValues<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># [20, 10]</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">sortedValues<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@sortedKeys</span><span class="punctuation">(</span><span class="punctuation">)</span>
+object<span class="punctuation">.</span>sortedValues<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># [20, 10]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">sortedValues<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@sortedKeys</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -470,8 +470,8 @@ object.sortedValues<span class="punctuation">(</span><span class="punctuation">)
         <tr>
           <td class='docs'><p>Returns the results of calling <code>Object::toString</code> on the current object
 and extracting the class name to lower case.</p></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">type<span class="property_end">:</span></span><span class="function"> -></span>
-  <span class="property">Object<span class="property_end">:</span></span><span class="punctuation">:</span>toString.call<span class="punctuation">(</span><span class="property">@</span><span class="punctuation">)</span>.toLowerCase<span class="punctuation">(</span><span class="punctuation">)</span>.replace <span class="regexp">/<span class="escaped">\[</span>object <span class="regexp_operators">(</span><span class="escaped">\w</span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\]</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">type<span class='punctuation'>:</span></span> <span class="function">-></span>
+  <span class="property">Object<span class='punctuation'>:</span></span><span class="punctuation">:</span>toString<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span><span class="property">@</span><span class="group_end">)</span></span><span class="punctuation">.</span>toLowerCase<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>replace <span class="regexp">/<span class="escaped">\[</span>object <span class="regexp_operators">(</span><span class="escaped">\w</span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\]</span>/</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -482,7 +482,7 @@ and extracting the class name to lower case.</p></td>
         </tr>
         <tr>
           <td class='docs'><p><code>Object::merge</code> alias.</p></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">update<span class="property_end">:</span></span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span> <span class="property">@merge</span> o
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">update<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span> <span class="property">@merge</span> o
 
 </pre></td>
         </tr>
@@ -498,11 +498,11 @@ Use <code>sortedValues</code> to retreive the values based on the alphabetically
 sorted keys.</p>
 
 <pre><code>object <span class="operators">=</span>
-  <span class="property">foo<span class="property_end">:</span></span> <span class="number">10</span>
-  <span class="property">bar<span class="property_end">:</span></span> <span class="number">20</span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">20</span>
 
-object.values<span class="punctuation">(</span><span class="punctuation">)</span> <span class="comment"># [10, 20]</span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">values<span class="property_end">:</span></span><span class="function"> -></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@keys</span><span class="punctuation">(</span><span class="punctuation">)</span>
+object<span class="punctuation">.</span>values<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># [10, 20]</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">values<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@keys</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -533,49 +533,49 @@ value as argument.</p>
 type definitions:</p>
 
 <pre><code><span class="constant">Point</span> <span class="operators">=</span>
-  <span class="property">__definition__<span class="property_end">:</span></span>
-    <span class="property">x<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
-    <span class="property">y<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+  <span class="property">__definition__<span class='punctuation'>:</span></span>
+    <span class="property">x<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+    <span class="property">y<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
 
-<span class="class"><span class="class_begin">class </span><span class="class_end">ConcretPoint</span></span>
-  <span class="property">constructor<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@x</span><span class="operators">=</span>0, <span class="property">@y</span><span class="operators">=</span>0<span class="params_end">)</span></span> -></span>
+<span class="class"><span class="keyword">class</span> <span class='title'>ConcretPoint</span></span>
+  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@x</span><span class="operators">=</span><span class="number">0</span><span class="punctuation">,</span> <span class="property">@y</span><span class="operators">=</span><span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
 
 point <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">ConcretPoint</span>
-point.quacksLike <span class="constant">Point</span>  <span class="comment"># true</span>
+point<span class="punctuation">.</span>quacksLike <span class="constant">Point</span>  <span class="comment"># true</span>
 
-point.x <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>foo<span class="string_end">"</span></span>
-point.quacksLike <span class="constant">Point</span>  <span class="comment"># false</span>
+point<span class="punctuation">.</span>x <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>foo<span class="string_end">"</span></span>
+point<span class="punctuation">.</span>quacksLike <span class="constant">Point</span>  <span class="comment"># false</span>
 
-object <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="property">x<span class="property_end">:</span></span> <span class="number">10</span>, <span class="property">y<span class="property_end">:</span></span> <span class="number">20</span><span class="hash_end">}</span></span>
-object.quacksLike <span class="constant">Point</span> <span class="comment"># true</span></code></pre>
+object <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="property">x<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">y<span class='punctuation'>:</span></span> <span class="number">20</span><span class="hash_end">}</span></span>
+object<span class="punctuation">.</span>quacksLike <span class="constant">Point</span> <span class="comment"># true</span></code></pre>
 
 <p>An example demonstrating the use of function as definition:</p>
 
 <pre><code><span class="constant">Command</span> <span class="operators">=</span>
-  <span class="property">__definition__<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> -></span>
-    <span class="keyword">typeof</span> o <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span> <span class="keyword">and</span> o.aliases<span class="operators">?</span>
+  <span class="property">__definition__<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">typeof</span> o <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span> <span class="keyword">and</span> o<span class="punctuation">.</span>aliases<span class="operators">?</span>
 
-command <span class="operators">=</span><span class="function"> -></span> <span class="comment"># do something</span>
-command.aliases <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>command<span class="string_end">'</span></span><span class="punctuation">]</span>
+command <span class="operators">=</span> <span class="function">-></span> <span class="comment"># do something</span>
+command<span class="punctuation">.</span>aliases <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>command<span class="string_end">'</span></span><span class="punctuation">]</span>
 
-command.quacksLike <span class="constant">Command</span> <span class="comment"># true</span></code></pre>
+command<span class="punctuation">.</span>quacksLike <span class="constant">Command</span> <span class="comment"># true</span></code></pre>
 
 <p>Of course, a class can describe itself in its body:</p>
 
-<pre><code><span class="class"><span class="class_begin">class </span><span class="class_end">Point</span></span>
-  <span class="property">@__definition__<span class="property_end">:</span></span>
-    <span class="property">x<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
-    <span class="property">y<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+<pre><code><span class="class"><span class="keyword">class</span> <span class='title'>Point</span></span>
+  <span class="property">@__definition__<span class='punctuation'>:</span></span>
+    <span class="property">x<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+    <span class="property">y<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
 
-  <span class="property">constructor<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@x</span>, <span class="property">@y</span><span class="params_end">)</span></span> -></span></code></pre></td>
-          <td class='code'><pre>def <span class="constant">Object</span>, <span class="property">quacksLike<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>type<span class="params_end">)</span></span> -></span>
-  <span class="keyword">if</span> type.__definition__<span class="operators">?</span>
-    definition <span class="operators">=</span> type.__definition__
+  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@x</span><span class="punctuation">,</span> <span class="property">@y</span><span class="group_end">)</span></span> <span class="function">-></span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Object</span><span class="punctuation">,</span> <span class="property">quacksLike<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>type<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">if</span> type<span class="punctuation">.</span>__definition__<span class="operators">?</span>
+    definition <span class="operators">=</span> type<span class="punctuation">.</span>__definition__
     <span class="keyword">return</span> definition <span class="keyword">this</span> <span class="keyword">if</span> <span class="keyword">typeof</span> definition <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span>
-    <span class="keyword">for</span> k,v <span class="keyword">of</span> definition
+    <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> definition
       <span class="keyword">switch</span> <span class="keyword">typeof</span> v
-        <span class="keyword">when</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span> then <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">unless</span> v <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span>
-        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">unless</span> <span class="punctuation">(</span>v <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span> <span class="keyword">or</span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span><span class="operators">?</span>.type<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">is</span> v<span class="punctuation">)</span>
+        <span class="keyword">when</span> <span class="string"><span class="string_begin">"</span>function<span class="string_end">"</span></span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">unless</span> v <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span>
+        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">unless</span> <span class="group"><span class="group_begin">(</span>v <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span> <span class="keyword">or</span> <span class="property">@</span><span class="punctuation">[</span>k<span class="punctuation">]</span><span class="operators">?</span><span class="punctuation">.</span>type<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">is</span> v<span class="group_end">)</span></span>
     <span class="literal">true</span>
   <span class="keyword">else</span>
     <span class="literal">false</span>

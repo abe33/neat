@@ -103,26 +103,30 @@ corresponding environment.
   </li>
 </ul></p></td>
           <td class='code'><pre>
-fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'></td>
+          <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
 pr <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>commander<span class="string_end">'</span></span>
-<span class="hash"><span class="hash_begin">{</span>resolve, <span class="property">existsSync<span class="property_end">:</span></span>exists<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="punctuation">,</span> <span class="property">existsSync<span class='punctuation'>:</span></span>exists<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>We need a reference to the Neat module root directory for later use.</p></td>
-          <td class='code'><pre><span class="constant">NEAT_ROOT</span> <span class="operators">=</span> resolve __dirname, <span class="string"><span class="string_begin">'</span>..<span class="string_end">'</span></span>
+          <td class='code'><pre><span class="constant">NEAT_ROOT</span> <span class="operators">=</span> resolve __dirname<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>..<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Requiring internal utilities.</p></td>
-          <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>logger, puts, warn, error, missing, neatBroken<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./utils/logs<span class="string_end">"</span></span>
-<span class="hash"><span class="hash_begin">{</span>findSync, neatRootSync, isNeatRootSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./utils/files<span class="string_end">"</span></span>
+          <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>logger<span class="punctuation">,</span> puts<span class="punctuation">,</span> warn<span class="punctuation">,</span> error<span class="punctuation">,</span> missing<span class="punctuation">,</span> neatBroken<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./utils/logs<span class="string_end">"</span></span>
+<span class="hash"><span class="hash_begin">{</span>findSync<span class="punctuation">,</span> neatRootSync<span class="punctuation">,</span> isNeatRootSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./utils/files<span class="string_end">"</span></span>
 cup <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./utils/cup<span class="string_end">"</span></span>
 <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./core<span class="string_end">"</span></span>
 <span class="constant">Signal</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./core/signal<span class="string_end">"</span></span>
-<span class="hash"><span class="hash_begin">{</span>I18n<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./i18n<span class="string_end">"</span></span>
+<span class="hash"><span class="hash_begin">{</span><span class="constant">I18n</span><span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>./i18n<span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -133,12 +137,12 @@ cup <span class="operators">=</span> <span class="global">require</span> <span c
         </tr>
         <tr>
           <td class='docs'><p>A <code>Neat</code> instance provides information about Neat and the current project.</p></td>
-          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">Neat</span></span>
+          <td class='code'><pre><span class="class"><span class="keyword">class</span> <span class='title'>Neat</span></span>
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><h4 id='neatconstructor'>Neat::constructor</h4></td>
-          <td class='code'><pre>  <span class="property">constructor<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@ROOT</span><span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@ROOT</span><span class="group_end">)</span></span> <span class="function">-></span>
 </pre></td>
         </tr>
         <tr>
@@ -166,10 +170,10 @@ the <code>initEnvironment</code> or the <code>setEnvironment</code> methods.</p>
           <td class='code'><pre>    <span class="property">@config</span> <span class="operators">=</span> <span class="property">@config</span> <span class="operators">=</span> <span class="literal">null</span>
     <span class="property">@env</span> <span class="operators">=</span> <span class="property">@ENV</span> <span class="operators">=</span> <span class="literal">null</span>
 
-    <span class="property">@discoverUserPaths</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">if</span> <span class="property">@root</span><span class="operators">?</span>
+    <span class="property">@discoverUserPaths</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> <span class="property">@root</span><span class="operators">?</span>
 
-    <span class="property">@initI18n</span><span class="punctuation">(</span><span class="punctuation">)</span>
-    <span class="property">@initHooks</span><span class="punctuation">(</span><span class="punctuation">)</span>
+    <span class="property">@initI18n</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="property">@initHooks</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -196,7 +200,7 @@ or <code>Neat.PROJECT</code>.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Initialize the hooks provided by Neat.</p></td>
-          <td class='code'><pre>  <span class="property">initHooks<span class="property_end">:</span></span><span class="function"> -></span>
+          <td class='code'><pre>  <span class="property">initHooks<span class='punctuation'>:</span></span> <span class="function">-></span>
 
 </pre></td>
         </tr>
@@ -249,10 +253,10 @@ respectively before and after the execution of initializers.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Initialize the internationalization for the current Neat instance.</p></td>
-          <td class='code'><pre>  <span class="property">initI18n<span class="property_end">:</span></span><span class="function"> -></span>
-    <span class="property">@i18n</span> <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">I18n</span> <span class="property">@paths</span>.map <span class="function"><span class="params"><span class="params_begin">(</span>s<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>s<span class="subst_end">}</span></span>/config/locales<span class="string_end">"</span></span>
-    <span class="property">@i18n</span>.load<span class="punctuation">(</span><span class="punctuation">)</span>
-    puts <span class="string"><span class="string_begin">"</span>Available languages: <span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span>.languages.join <span class="string"><span class="string_begin">'</span>, <span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+          <td class='code'><pre>  <span class="property">initI18n<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="property">@i18n</span> <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">I18n</span> <span class="property">@paths</span><span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>s<span class="group_end">)</span></span> <span class="function">-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>s<span class="subst_end">}</span></span>/config/locales<span class="string_end">"</span></span>
+    <span class="property">@i18n</span><span class="punctuation">.</span>load<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    puts <span class="string"><span class="string_begin">"</span>Available languages: <span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span><span class="punctuation">.</span>languages<span class="punctuation">.</span>join <span class="string"><span class="string_begin">'</span>, <span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -265,8 +269,8 @@ respectively before and after the execution of initializers.</p></td>
           <td class='docs'><p>Loads a module from the Neat directory using the <code>require</code> function.</p>
 
 <pre><code><span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>neat<span class="string_end">'</span></span>
-<span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span>.<span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span></code></pre></td>
-          <td class='code'><pre>  <span class="property">require<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>module<span class="params_end">)</span></span> -></span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@neatRoot</span><span class="subst_end">}</span></span>/lib/<span class="subst"><span class="subst_begin">#{</span><span class="global">module</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+<span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span></code></pre></td>
+          <td class='code'><pre>  <span class="property">require<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="global">module</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@neatRoot</span><span class="subst_end">}</span></span>/lib/<span class="subst"><span class="subst_begin">#{</span><span class="global">module</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -278,10 +282,10 @@ respectively before and after the execution of initializers.</p></td>
         <tr>
           <td class='docs'><p>Returns the cake task whose name is <code>name</code>.</p>
 
-<pre><code>compile <span class="operators">=</span> <span class="constant">Neat</span>.task <span class="string"><span class="string_begin">'</span>compile<span class="string_end">'</span></span>
-compile <span class="function"><span class="params"><span class="params_begin">(</span>status<span class="params_end">)</span></span> -></span>
+<pre><code>compile <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>task <span class="string"><span class="string_begin">'</span>compile<span class="string_end">'</span></span>
+compile <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># do something after compilation</span></code></pre></td>
-          <td class='code'><pre>  <span class="property">task<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>name<span class="params_end">)</span></span> -></span> <span class="property">@require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>tasks<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">[</span>name<span class="punctuation">]</span>
+          <td class='code'><pre>  <span class="property">task<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>name<span class="group_end">)</span></span> <span class="function">-></span> <span class="property">@require</span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>tasks<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">[</span>name<span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -297,8 +301,8 @@ compile <span class="function"><span class="params"><span class="params_begin">(
         </tr>
         <tr>
           <td class='docs'><p>Setup the logging engine for this <code>Neat</code> instance.</p></td>
-          <td class='code'><pre>  <span class="property">initLogging<span class="property_end">:</span></span><span class="function"> -></span>
-    logger.add <span class="property">@config</span>.engines.logging<span class="punctuation">[</span><span class="property">@config</span>.defaultLoggingEngine<span class="punctuation">]</span>
+          <td class='code'><pre>  <span class="property">initLogging<span class='punctuation'>:</span></span> <span class="function">-></span>
+    logger<span class="punctuation">.</span>add <span class="property">@config</span><span class="punctuation">.</span>engines<span class="punctuation">.</span>logging<span class="punctuation">[</span><span class="property">@config</span><span class="punctuation">.</span>defaultLoggingEngine<span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -311,10 +315,10 @@ compile <span class="function"><span class="params"><span class="params_begin">(
           <td class='docs'><p>Initializes the <code>Neat</code> instance with the default environment.
 If the <code>NEAT_ENV</code> environment variable is set, the corresponding
 environment is loaded.</p></td>
-          <td class='code'><pre>  <span class="property">initEnvironment<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>callback<span class="params_end">)</span></span> -></span>
-    <span class="property">@setEnvironment</span> process.env<span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>NEAT_ENV<span class="string_end">'</span></span><span class="punctuation">]</span> <span class="keyword">or</span> <span class="property">@defaultEnvironment</span>,<span class="function"> =></span>
-      <span class="property">@initLogging</span><span class="punctuation">(</span><span class="punctuation">)</span>
-      callback<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+          <td class='code'><pre>  <span class="property">initEnvironment<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@setEnvironment</span> process<span class="punctuation">.</span>env<span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>NEAT_ENV<span class="string_end">'</span></span><span class="punctuation">]</span> <span class="keyword">or</span> <span class="property">@defaultEnvironment</span><span class="punctuation">,</span> <span class="function">=></span>
+      <span class="property">@initLogging</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -327,7 +331,7 @@ environment is loaded.</p></td>
           <td class='docs'><p>Changes the environment of the <code>Neat</code> instance. All the process
 of loading the environment configurators and the initializers
 are executed on a brand new environment object.</p></td>
-          <td class='code'><pre>  <span class="property">setEnvironment<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>env, callback<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">setEnvironment<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>env<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
 </pre></td>
         </tr>
         <tr>
@@ -335,11 +339,11 @@ are executed on a brand new environment object.</p></td>
 In that way, configurators and initializers can perform operations
 knowing the paths of the project.</p></td>
           <td class='code'><pre>    envObject <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
-      @root, @neatRoot,  @paths, @initPath,  @envPath,
-      @ROOT, @NEAT_ROOT, @PATHS, @INIT_PATH, @ENV_PATH,
+      <span class="property">@root</span><span class="punctuation">,</span> <span class="property">@neatRoot</span><span class="punctuation">,</span>  <span class="property">@paths</span><span class="punctuation">,</span> <span class="property">@initPath</span><span class="punctuation">,</span>  <span class="property">@envPath</span><span class="punctuation">,</span>
+      <span class="property">@ROOT</span><span class="punctuation">,</span> <span class="property">@NEAT_ROOT</span><span class="punctuation">,</span> <span class="property">@PATHS</span><span class="punctuation">,</span> <span class="property">@INIT_PATH</span><span class="punctuation">,</span> <span class="property">@ENV_PATH</span><span class="punctuation">,</span>
     <span class="hash_end">}</span></span>
 
-    <span class="property">@beforeEnvironment</span>.dispatch <span class="keyword">this</span>, envObject,<span class="function"> =></span>
+    <span class="property">@beforeEnvironment</span><span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> envObject<span class="punctuation">,</span> <span class="function">=></span>
 
 </pre></td>
         </tr>
@@ -351,7 +355,7 @@ knowing the paths of the project.</p></td>
 <p>A configurator is a function exposed as a module and that have
 the following form:</p>
 
-<pre><code><span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>config<span class="params_end">)</span></span> -></span>
+<pre><code><span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>config<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># Setup your configuration here</span></code></pre>
 
 <p>The <code>config</code> object contains the environment object which will
@@ -368,22 +372,22 @@ by the specified environment.</p></td>
         <tr>
           <td class='docs'><p>The <code>configurators</code> array initially contains the files which
 must be executed before any other configurator.</p></td>
-          <td class='code'><pre>      paths <span class="operators">=</span> <span class="property">@paths</span>.map <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span>=></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span><span class="property">@envPath</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
-      configurators <span class="operators">=</span> findSync <span class="regexp">/<span class="regexp_operators">^</span>default<span class="regexp_operators">$</span><span class="regexp_end">/,</span></span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>, paths
+          <td class='code'><pre>      paths <span class="operators">=</span> <span class="property">@paths</span><span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span><span class="function">=></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span><span class="property">@envPath</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+      configurators <span class="operators">=</span> findSync <span class="regexp">/<span class="regexp_operators">^</span>default<span class="regexp_operators">$</span>/</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span><span class="punctuation">,</span> paths
 
-      <span class="keyword">unless</span> configurators<span class="operators">?</span> <span class="keyword">and</span> configurators.length <span class="keyword">isnt</span> <span class="number">0</span>
-        <span class="keyword">return</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span>.getHelper<span class="punctuation">(</span><span class="punctuation">)</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span>,
-                          <span class="property">missing<span class="property_end">:</span></span> <span class="string"><span class="string_begin">'</span>config/environments/default.js<span class="string_end">'</span></span><span class="punctuation">)</span><span class="subst_end">}</span></span>
+      <span class="keyword">unless</span> configurators<span class="operators">?</span> <span class="keyword">and</span> configurators<span class="punctuation">.</span>length <span class="keyword">isnt</span> <span class="number">0</span>
+        <span class="keyword">return</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span><span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span><span class="punctuation">,</span>
+                          <span class="property">missing<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>config/environments/default.js<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="subst_end">}</span></span>
 
-                        <span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span>.get<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken<span class="string_end">'</span></span><span class="punctuation">)</span><span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
+                        <span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span><span class="punctuation">.</span>get<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>Configurators for the given environment are searched in the
 <code>environments</code> directory of each path.</p></td>
-          <td class='code'><pre>      files <span class="operators">=</span> findSync <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="regexp_operators">^</span><span class="subst"><span class="subst_begin">#{</span>env<span class="subst_end">}</span></span><span class="regexp_operators">$</span><span class="hereregexp_end">///</span></span>, <span class="string"><span class="string_begin">"</span>js<span class="string_end">"</span></span>, paths
-      configurators.push f <span class="keyword">for</span> f <span class="keyword">in</span> files <span class="keyword">when</span> f <span class="keyword">not</span> <span class="keyword">in</span> configurators
+          <td class='code'><pre>      files <span class="operators">=</span> findSync <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="regexp_operators">^</span><span class="subst"><span class="subst_begin">#{</span>env<span class="subst_end">}</span></span><span class="regexp_operators">$</span><span class="hereregexp_end">///</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>js<span class="string_end">"</span></span><span class="punctuation">,</span> paths
+      configurators<span class="punctuation">.</span>push f <span class="keyword">for</span> f <span class="keyword">in</span> files <span class="keyword">when</span> f <span class="keyword">not</span> <span class="keyword">in</span> configurators
 
 </pre></td>
         </tr>
@@ -408,12 +412,12 @@ no modules have been installed.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>However errors are reported to the console.</p></td>
-          <td class='code'><pre>          error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span>.get<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken_environment<span class="string_end">'</span></span><span class="punctuation">)</span>.red<span class="subst_end">}</span></span>
+          <td class='code'><pre>          error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span><span class="punctuation">.</span>get<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken_environment<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>red<span class="subst_end">}</span></span>
 
-                   <span class="subst"><span class="subst_begin">#{</span>e.stack<span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
+                   <span class="subst"><span class="subst_begin">#{</span>e<span class="punctuation">.</span>stack<span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
 
-      <span class="property">@afterEnvironment</span>.dispatch <span class="keyword">this</span>, envObject,<span class="function"> =></span>
-        <span class="property">@beforeInitialize</span>.dispatch <span class="keyword">this</span>, envObject,<span class="function"> =></span>
+      <span class="property">@afterEnvironment</span><span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> envObject<span class="punctuation">,</span> <span class="function">=></span>
+        <span class="property">@beforeInitialize</span><span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> envObject<span class="punctuation">,</span> <span class="function">=></span>
 
 </pre></td>
         </tr>
@@ -426,7 +430,7 @@ no modules have been installed.</p></td>
 <p>An initializer is basically a configurator that will be run after
 the environment configuration.</p>
 
-<pre><code><span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>config<span class="params_end">)</span></span> -></span>
+<pre><code><span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>config<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># Setup for your module here</span></code></pre>
 
 <p>Its purpose is to setup the configuration of a module, a command,
@@ -438,7 +442,7 @@ anyway.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Every initializers are executed whatever the environment.</p></td>
-          <td class='code'><pre>          initializers <span class="operators">=</span> findSync <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span>, <span class="property">@paths</span>.map <span class="function"><span class="params"><span class="params_begin">(</span>o<span class="params_end">)</span></span> =></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>o<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span><span class="property">@initPath</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
+          <td class='code'><pre>          initializers <span class="operators">=</span> findSync <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@paths</span><span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">=></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>o<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span><span class="property">@initPath</span><span class="subst_end">}</span></span><span class="string_end">"</span></span>
 
           <span class="keyword">for</span> initializer <span class="keyword">in</span> initializers
 </pre></td>
@@ -450,9 +454,9 @@ as for configurators.</p></td>
               initialize <span class="operators">=</span> <span class="global">require</span> initializer
               initialize<span class="operators">?</span> envObject
             <span class="keyword">catch</span> e
-              error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span>.get<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken_initializer<span class="string_end">'</span></span><span class="punctuation">)</span>.red<span class="subst_end">}</span></span>
+              error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@i18n</span><span class="punctuation">.</span>get<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken_initializer<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>red<span class="subst_end">}</span></span>
 
-                       <span class="subst"><span class="subst_begin">#{</span>e.stack<span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
+                       <span class="subst"><span class="subst_begin">#{</span>e<span class="punctuation">.</span>stack<span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
 
 </pre></td>
         </tr>
@@ -462,9 +466,9 @@ the new environment object is then stored in <code>Neat</code>.</p></td>
           <td class='code'><pre>          <span class="property">@CONFIG</span> <span class="operators">=</span> <span class="property">@config</span> <span class="operators">=</span> envObject
           o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
           o<span class="punctuation">[</span>env<span class="punctuation">]</span> <span class="operators">=</span> <span class="literal">true</span>
-          <span class="property">@ENV</span> <span class="operators">=</span> <span class="property">@env</span> <span class="operators">=</span> <span class="property">Object<span class="property_end">:</span></span><span class="punctuation">:</span>merge.call env, o
+          <span class="property">@ENV</span> <span class="operators">=</span> <span class="property">@env</span> <span class="operators">=</span> <span class="property">Object<span class='punctuation'>:</span></span><span class="punctuation">:</span>merge<span class="punctuation">.</span>call env<span class="punctuation">,</span> o
 
-          <span class="property">@afterInitialize</span>.dispatch <span class="keyword">this</span>, envObject, callback
+          <span class="property">@afterInitialize</span><span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> envObject<span class="punctuation">,</span> callback
 
 </pre></td>
         </tr>
@@ -481,17 +485,17 @@ the new environment object is then stored in <code>Neat</code>.</p></td>
         <tr>
           <td class='docs'><p>Browses the user directory to find neat projects either at the
 root directory or in the node modules installed in the project.</p></td>
-          <td class='code'><pre>  <span class="property">discoverUserPaths<span class="property_end">:</span></span><span class="function"> -></span>
-    modulesDir <span class="operators">=</span> resolve <span class="property">@root</span>, <span class="string"><span class="string_begin">'</span>node_modules<span class="string_end">'</span></span>
+          <td class='code'><pre>  <span class="property">discoverUserPaths<span class='punctuation'>:</span></span> <span class="function">-></span>
+    modulesDir <span class="operators">=</span> resolve <span class="property">@root</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>node_modules<span class="string_end">'</span></span>
     <span class="keyword">if</span> exists modulesDir
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>All the node modules that contains a <code>.neat</code> file at their
 root will be appended to <code>PATHS</code>.</p></td>
-          <td class='code'><pre>      modules <span class="operators">=</span> fs.readdirSync modulesDir
-      modules <span class="operators">=</span> <span class="punctuation">(</span>resolve modulesDir, m <span class="keyword">for</span> m <span class="keyword">in</span> modules <span class="keyword">when</span> m <span class="keyword">isnt</span> <span class="string"><span class="string_begin">'</span>neat<span class="string_end">'</span></span><span class="punctuation">)</span>
-      <span class="property">@paths</span>.push m <span class="keyword">for</span> m <span class="keyword">in</span> modules <span class="keyword">when</span> isNeatRootSync m
+          <td class='code'><pre>      modules <span class="operators">=</span> fs<span class="punctuation">.</span>readdirSync modulesDir
+      modules <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>resolve modulesDir<span class="punctuation">,</span> m <span class="keyword">for</span> m <span class="keyword">in</span> modules <span class="keyword">when</span> m <span class="keyword">isnt</span> <span class="string"><span class="string_begin">'</span>neat<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      <span class="property">@paths</span><span class="punctuation">.</span>push m <span class="keyword">for</span> m <span class="keyword">in</span> modules <span class="keyword">when</span> isNeatRootSync m
 
     <span class="keyword">else</span> warn <span class="string"><span class="string_begin">'</span>No node modules found, run neat install.<span class="string_end">'</span></span>
 
@@ -499,7 +503,7 @@ root will be appended to <code>PATHS</code>.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>The current Neat project root is the last path in <code>PATHS</code>.</p></td>
-          <td class='code'><pre>    <span class="property">@paths</span>.push <span class="property">@root</span> <span class="keyword">if</span> <span class="property">@root</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="property">@paths</span>
+          <td class='code'><pre>    <span class="property">@paths</span><span class="punctuation">.</span>push <span class="property">@root</span> <span class="keyword">if</span> <span class="property">@root</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="property">@paths</span>
 
 </pre></td>
         </tr>
@@ -510,25 +514,25 @@ root will be appended to <code>PATHS</code>.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Loads and returns the meta contained in the <code>.neat</code> file.</p></td>
-          <td class='code'><pre>  <span class="property">loadMeta<span class="property_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>root<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>  <span class="property">loadMeta<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>root<span class="group_end">)</span></span> <span class="function">-></span>
     neatFilePath <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>root<span class="subst_end">}</span></span>/.neat<span class="string_end">"</span></span>
 
-    _ <span class="operators">=</span> <span class="property">@i18n</span>.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
+    _ <span class="operators">=</span> <span class="property">@i18n</span><span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
     <span class="keyword">try</span>
-      neatFile <span class="operators">=</span> fs.readFileSync neatFilePath
+      neatFile <span class="operators">=</span> fs<span class="punctuation">.</span>readFileSync neatFilePath
     <span class="keyword">catch</span> e
-      <span class="keyword">return</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span>_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span>, <span class="property">missing<span class="property_end">:</span></span> neatFilePath.red<span class="punctuation">)</span><span class="subst_end">}</span></span>
+      <span class="keyword">return</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span>_<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">missing<span class='punctuation'>:</span></span> neatFilePath<span class="punctuation">.</span>red<span class="group_end">)</span></span><span class="subst_end">}</span></span>
 
-                      <span class="subst"><span class="subst_begin">#{</span>_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken<span class="string_end">'</span></span><span class="punctuation">)</span><span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
+                      <span class="subst"><span class="subst_begin">#{</span>_<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
 
-    meta <span class="operators">=</span> cup.read neatFile.toString<span class="punctuation">(</span><span class="punctuation">)</span>
+    meta <span class="operators">=</span> cup<span class="punctuation">.</span>read neatFile<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
-    meta <span class="keyword">or</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span>_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.invalid_neat<span class="string_end">'</span></span>, <span class="property">path<span class="property_end">:</span></span> neatFilePath.red<span class="punctuation">)</span><span class="subst_end">}</span></span>
+    meta <span class="keyword">or</span> error <span class="heredocs"><span class="heredocs_begin">"""</span><span class="subst"><span class="subst_begin">#{</span>_<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.invalid_neat<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">path<span class='punctuation'>:</span></span> neatFilePath<span class="punctuation">.</span>red<span class="group_end">)</span></span><span class="subst_end">}</span></span>
 
-                     <span class="subst"><span class="subst_begin">#{</span>_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken<span class="string_end">'</span></span><span class="punctuation">)</span><span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
+                     <span class="subst"><span class="subst_begin">#{</span>_<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.broken<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="subst_end">}</span></span><span class="heredocs_end">"""</span></span>
 
-<span class="global">module</span>.<span class="global">exports</span> <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Neat</span> neatRootSync<span class="punctuation">(</span><span class="punctuation">)</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Neat</span> neatRootSync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
