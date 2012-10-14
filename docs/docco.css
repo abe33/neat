@@ -322,7 +322,15 @@ table td.docs pre .params_end,
 table th.code .class,
 table td.code .class,
 table th.docs pre .class,
-table td.docs pre .class {
+table td.docs pre .class,
+table th.code .group_begin,
+table td.code .group_begin,
+table th.docs pre .group_begin,
+table td.docs pre .group_begin,
+table th.code .group_end,
+table td.code .group_end,
+table th.docs pre .group_end,
+table td.docs pre .group_end {
   color: #859900;
 }
 table th.code .params,
@@ -332,7 +340,15 @@ table td.docs pre .params,
 table th.code .subst,
 table td.code .subst,
 table th.docs pre .subst,
-table td.docs pre .subst {
+table td.docs pre .subst,
+table th.code .hash,
+table td.code .hash,
+table th.docs pre .hash,
+table td.docs pre .hash,
+table th.code .text,
+table td.code .text,
+table th.docs pre .text,
+table td.docs pre .text {
   color: #93a1a1;
 }
 table th.code .string,
@@ -463,11 +479,11 @@ table th.docs pre .char_group,
 table td.docs pre .char_group {
   color: #cb4b16;
 }
-table th.code .char_group>.escaped,
-table td.code .char_group>.escaped,
-table th.docs pre .char_group>.escaped,
-table td.docs pre .char_group>.escaped {
-  color: #aa2a08;
+table th.code .char_range > .escaped,
+table td.code .char_range > .escaped,
+table th.docs pre .char_range > .escaped,
+table td.docs pre .char_range > .escaped {
+  color: #d33682;
 }
 table th.docs h1 {
   margin-top: 6px;

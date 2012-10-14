@@ -251,9 +251,14 @@ table
       .params_begin
       .params_end
       .class
+      .group_begin
+      .group_end
         color: #859900
 
-      .params, .subst
+      .params
+      .subst
+      .hash
+      .text
         color: #93a1a1
 
       .string, .heredocs
@@ -299,8 +304,8 @@ table
       .char_group
         color: #cb4b16
 
-      .char_group>.escaped
-        color: #aa2a08
+      .char_range > .escaped
+        color: #d33682
 
   th.docs
     h1

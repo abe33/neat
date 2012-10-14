@@ -33,7 +33,6 @@ class DoccoFileProcessor
   constructor: (@file, @header, @nav) ->
 
   highlightFile: (path, sections, callback) ->
-    # highlight path, sections, =>
     for o in sections
       {code_text, docs_text} = o
       res = highlight('coffeescript', code_text)

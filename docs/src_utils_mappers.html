@@ -74,7 +74,7 @@ when used in combination with the <code>Array::map</code> function.</p>
 <p>A mapper is a function that takes the element to map as argument.
 The function is generated through currying.</p>
 
-<pre><code>mapper <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>setup<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+<pre><code>mapper <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>setup<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="comment"># do something with el according to setup</span></code></pre></td>
           <td class='code'><pre>
 </pre></td>
@@ -88,22 +88,22 @@ The function is generated through currying.</p>
           <td class='docs'><p>Returns the value at the specified index in the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">[</span><span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span><span class="punctuation">]</span>,
-  <span class="punctuation">[</span><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span><span class="punctuation">]</span>
-<span class="punctuation">]</span>.map at <span class="number">2</span>
+  <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span>
+  <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span><span class="number">6</span><span class="punctuation">,</span><span class="number">7</span><span class="punctuation">,</span><span class="number">8</span><span class="punctuation">,</span><span class="number">9</span><span class="punctuation">]</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map at <span class="number">2</span>
 <span class="comment"># [2, 7]</span></code></pre>
 
 <p>Optionally the <code>at</code> mapper accept another mapper as argument.
 This mapper will be used against the value extracted from the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">[</span><span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span><span class="punctuation">]</span>,
-  <span class="punctuation">[</span><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span><span class="punctuation">]</span>
-<span class="punctuation">]</span>.map at <span class="number">2</span>, <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el <span class="operators">*</span> <span class="number">2</span>
+  <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span>
+  <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span><span class="number">6</span><span class="punctuation">,</span><span class="number">7</span><span class="punctuation">,</span><span class="number">8</span><span class="punctuation">,</span><span class="number">9</span><span class="punctuation">]</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map at <span class="number">2</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el <span class="operators">*</span> <span class="number">2</span>
 <span class="comment"># [4, 14]</span></code></pre></td>
-          <td class='code'><pre>at <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>index<span class="operators">=</span>0, mapper<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>at <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>index<span class="operators">=</span><span class="number">0</span><span class="punctuation">,</span> mapper<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">return</span> <span class="literal">undefined</span> <span class="keyword">unless</span> el<span class="operators">?</span>
-  <span class="keyword">if</span> mapper<span class="operators">?</span> then mapper el<span class="punctuation">[</span>index<span class="punctuation">]</span> <span class="keyword">else</span> el<span class="punctuation">[</span>index<span class="punctuation">]</span>
+  <span class="keyword">if</span> mapper<span class="operators">?</span> <span class="keyword">then</span> mapper el<span class="punctuation">[</span>index<span class="punctuation">]</span> <span class="keyword">else</span> el<span class="punctuation">[</span>index<span class="punctuation">]</span>
 
 </pre></td>
         </tr>
@@ -116,22 +116,22 @@ This mapper will be used against the value extracted from the element.</p>
           <td class='docs'><p>Returns the first value in the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">[</span><span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span><span class="punctuation">]</span>,
-  <span class="punctuation">[</span><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span><span class="punctuation">]</span>
-<span class="punctuation">]</span>.map first<span class="punctuation">(</span><span class="punctuation">)</span>
+  <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span>
+  <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span><span class="number">6</span><span class="punctuation">,</span><span class="number">7</span><span class="punctuation">,</span><span class="number">8</span><span class="punctuation">,</span><span class="number">9</span><span class="punctuation">]</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map first<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 <span class="comment"># [0, 5]</span></code></pre>
 
 <p>Optionally the <code>first</code> mapper accept another mapper as argument.
 This mapper will be used against the value extracted from the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">[</span><span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span><span class="punctuation">]</span>,
-  <span class="punctuation">[</span><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span><span class="punctuation">]</span>
-<span class="punctuation">]</span>.map first <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el <span class="operators">*</span> <span class="number">2</span>
+  <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span>
+  <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span><span class="number">6</span><span class="punctuation">,</span><span class="number">7</span><span class="punctuation">,</span><span class="number">8</span><span class="punctuation">,</span><span class="number">9</span><span class="punctuation">]</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map first <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el <span class="operators">*</span> <span class="number">2</span>
 <span class="comment"># [0, 10]</span></code></pre></td>
-          <td class='code'><pre>first <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>mapper<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>first <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>mapper<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">return</span> <span class="literal">undefined</span> <span class="keyword">unless</span> el<span class="operators">?</span>
-  <span class="keyword">if</span> mapper<span class="operators">?</span> then mapper el.first<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">else</span> el.first<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+  <span class="keyword">if</span> mapper<span class="operators">?</span> <span class="keyword">then</span> mapper el<span class="punctuation">.</span>first<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">else</span> el<span class="punctuation">.</span>first<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -144,22 +144,22 @@ This mapper will be used against the value extracted from the element.</p>
           <td class='docs'><p>Returns the last value in the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">[</span><span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span><span class="punctuation">]</span>,
-  <span class="punctuation">[</span><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span><span class="punctuation">]</span>
-<span class="punctuation">]</span>.map last<span class="punctuation">(</span><span class="punctuation">)</span>
+  <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span>
+  <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span><span class="number">6</span><span class="punctuation">,</span><span class="number">7</span><span class="punctuation">,</span><span class="number">8</span><span class="punctuation">,</span><span class="number">9</span><span class="punctuation">]</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 <span class="comment"># [4, 9]</span></code></pre>
 
 <p>Optionally the <code>last</code> mapper accept another mapper as argument.
 This mapper will be used against the value extracted from the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">[</span><span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span><span class="punctuation">]</span>,
-  <span class="punctuation">[</span><span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span><span class="punctuation">]</span>
-<span class="punctuation">]</span>.map last <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el <span class="operators">*</span> <span class="number">2</span>
+  <span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span><span class="number">1</span><span class="punctuation">,</span><span class="number">2</span><span class="punctuation">,</span><span class="number">3</span><span class="punctuation">,</span><span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span>
+  <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">,</span><span class="number">6</span><span class="punctuation">,</span><span class="number">7</span><span class="punctuation">,</span><span class="number">8</span><span class="punctuation">,</span><span class="number">9</span><span class="punctuation">]</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map last <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el <span class="operators">*</span> <span class="number">2</span>
 <span class="comment"># [8, 18]</span></code></pre></td>
-          <td class='code'><pre>last <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>mapper<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>last <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>mapper<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">return</span> <span class="literal">undefined</span> <span class="keyword">unless</span> el<span class="operators">?</span>
-  <span class="keyword">if</span> mapper<span class="operators">?</span> then mapper el.last<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">else</span> el.last<span class="operators">?</span><span class="punctuation">(</span><span class="punctuation">)</span>
+  <span class="keyword">if</span> mapper<span class="operators">?</span> <span class="keyword">then</span> mapper el<span class="punctuation">.</span>last<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">else</span> el<span class="punctuation">.</span>last<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -172,11 +172,11 @@ This mapper will be used against the value extracted from the element.</p>
           <td class='docs'><p>Returns the length of the element if this element provides either
 a property or a function named <code>length</code>.</p>
 
-<pre><code>a <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>world<span class="string_end">'</span></span><span class="punctuation">]</span>, <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">0</span><span class="punctuation">}</span><span class="punctuation">]</span>.map length<span class="punctuation">(</span><span class="punctuation">)</span>
+<pre><code>a <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>world<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">0</span><span class="hash_end">}</span></span><span class="punctuation">]</span><span class="punctuation">.</span>map length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 <span class="comment"># [3, 2, 1]</span></code></pre></td>
-          <td class='code'><pre>length <span class="operators">=</span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>length <span class="operators">=</span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">return</span> <span class="literal">undefined</span> <span class="keyword">unless</span> el<span class="operators">?</span>
-  <span class="keyword">if</span> <span class="keyword">typeof</span> el.length <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> then el.length<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">else</span> el.length
+  <span class="keyword">if</span> <span class="keyword">typeof</span> el<span class="punctuation">.</span>length <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> <span class="keyword">then</span> el<span class="punctuation">.</span>length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">else</span> el<span class="punctuation">.</span>length
 
 </pre></td>
         </tr>
@@ -189,32 +189,32 @@ a property or a function named <code>length</code>.</p>
           <td class='docs'><p>Returns the value of the property named <code>key</code> of the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">}</span>,
-<span class="punctuation">]</span>.map property <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> false<span class="hash_end">}</span></span><span class="punctuation">,</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map property <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>
 <span class="comment"># [10, 'bar', false]</span></code></pre>
 
 <p>Optionally the <code>property</code> mapper accept another mapper that will
 be used to map the value of the element's property.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">}</span>,
-<span class="punctuation">]</span>.map property <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">typeof</span> el
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> false<span class="hash_end">}</span></span><span class="punctuation">,</span>
+<span class="punctuation">]</span><span class="punctuation">.</span>map property <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">typeof</span> el
 <span class="comment"># ['number', 'string', 'boolean']</span></code></pre></td>
-          <td class='code'><pre>property <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>key, mapper<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+          <td class='code'><pre>property <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>key<span class="punctuation">,</span> mapper<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">return</span> <span class="literal">undefined</span> <span class="keyword">unless</span> el<span class="operators">?</span>
-  <span class="keyword">if</span> mapper<span class="operators">?</span> then mapper el<span class="punctuation">[</span>key<span class="punctuation">]</span> <span class="keyword">else</span> el<span class="punctuation">[</span>key<span class="punctuation">]</span>
+  <span class="keyword">if</span> mapper<span class="operators">?</span> <span class="keyword">then</span> mapper el<span class="punctuation">[</span>key<span class="punctuation">]</span> <span class="keyword">else</span> el<span class="punctuation">[</span>key<span class="punctuation">]</span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
-  at,
-  first,
-  last,
-  length,
-  property,
-<span class="punctuation">}</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
+  at<span class="punctuation">,</span>
+  first<span class="punctuation">,</span>
+  last<span class="punctuation">,</span>
+  length<span class="punctuation">,</span>
+  property<span class="punctuation">,</span>
+<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

@@ -72,8 +72,8 @@ of the localized strings.
     <a href='#i18ndeepmerge'>I18n::deepMerge</a>
   </li>
 </ul></p></td>
-          <td class='code'><pre>yaml <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>js-yaml<span class="string_end">'</span></span>
-<span class="punctuation">{</span>findSync, readFilesSync<span class="punctuation">}</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>../utils/files<span class="string_end">'</span></span>
+          <td class='code'><pre>yaml <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>js-yaml<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>findSync<span class="punctuation">,</span> readFilesSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../utils/files<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -86,7 +86,7 @@ of the localized strings.
           <td class='docs'><p>The <code>I18n</code> class is a small utility that search for <code>yml</code> files
 in the given paths and gather the results in a single <code>locales</code>
 object.</p></td>
-          <td class='code'><pre><span class="class"><span class="class_begin">class </span><span class="class_end">I18n</span></span>
+          <td class='code'><pre><span class="class"><span class="keyword">class</span> <span class='title'>I18n</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -97,8 +97,8 @@ object.</p></td>
         <tr>
           <td class='docs'><p>The paths into which looking for files are provided in the constructor.</p>
 
-<pre><code>i18n <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">I18n</span> <span class="constant">Neat</span>.paths.map <span class="function"><span class="params"><span class="params_begin">(</span>p<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/src/config/locales<span class="string_end">"</span></span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">constructor<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span><span class="property">@paths</span><span class="operators">=</span>[], <span class="property">@defaultLanguage</span><span class="operators">=</span><span class="string"><span class="string_begin">'</span>en<span class="string_end">'</span></span><span class="params_end">)</span></span> -></span>
+<pre><code>i18n <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">I18n</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span> <span class="function">-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/src/config/locales<span class="string_end">"</span></span></code></pre></td>
+          <td class='code'><pre>  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@paths</span><span class="operators">=</span><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="property">@defaultLanguage</span><span class="operators">=</span><span class="string"><span class="string_begin">'</span>en<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="function">-></span>
 
 </pre></td>
         </tr>
@@ -111,21 +111,21 @@ object.</p></td>
           <td class='docs'><p>Returns a string from the locales.
 That function can be called either with or without a language:</p>
 
-<pre><code>i18n.get <span class="punctuation">(</span>path.to.string<span class="string"><span class="string_begin">'</span>)
-i18n.get (<span class="string_end">'</span></span>fr<span class="string"><span class="string_begin">'</span>, <span class="string_end">'</span></span>path.to.string<span class="string"><span class="string_begin">'</span>)</code></pre>
+<pre><code>i18n<span class="punctuation">.</span>get <span class="group"><span class="group_begin">(</span>path<span class="punctuation">.</span>to<span class="punctuation">.</span>string<span class="string"><span class="string_begin">'</span>)
+i18n.get (<span class="string_end">'</span></span>fr<span class="string"><span class="string_begin">'</span>, <span class="string_end">'</span></span>path<span class="punctuation">.</span>to<span class="punctuation">.</span>string<span class="string"><span class="string_begin">'</span>)</code></pre>
 
 <p>If the path lead to a dead end, the function return the last element
 in the path as a capitalized sentence.</p>
 
-<pre><code>i18n.get <span class="punctuation">(</span>path.that.do_not_exist<span class="punctuation">)</span> <span class="comment"># Do Not Exist</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">get<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>language, path<span class="params_end">)</span></span> -></span>
-    <span class="punctuation">[</span>language, path<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="property">@defaultLanguage</span>, language<span class="punctuation">]</span> <span class="keyword">unless</span> path<span class="operators">?</span>
+<pre><code>i18n<span class="punctuation">.</span>get <span class="group"><span class="group_begin">(</span>path<span class="punctuation">.</span>that<span class="punctuation">.</span>do_not_exist<span class="group_end">)</span></span> <span class="comment"># Do Not Exist</span></code></pre></td>
+          <td class='code'><pre>  <span class="property">get<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>language<span class="punctuation">,</span> path<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="punctuation">[</span>language<span class="punctuation">,</span> path<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="property">@defaultLanguage</span><span class="punctuation">,</span> language<span class="punctuation">]</span> <span class="keyword">unless</span> path<span class="operators">?</span>
     lang <span class="operators">=</span> <span class="property">@locales</span><span class="punctuation">[</span>language<span class="punctuation">]</span>
 
     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> <span class="string"><span class="string_begin">"</span>Language <span class="subst"><span class="subst_begin">#{</span>language<span class="subst_end">}</span></span> not found<span class="string_end">"</span></span> <span class="keyword">unless</span> lang<span class="operators">?</span>
-    els <span class="operators">=</span> path.split<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>.<span class="string_end">'</span></span><span class="punctuation">)</span>
-    <span class="punctuation">(</span>lang <span class="operators">=</span> lang<span class="punctuation">[</span>v<span class="punctuation">]</span>; <span class="keyword">break</span> <span class="keyword">unless</span> lang<span class="operators">?</span><span class="punctuation">)</span> <span class="keyword">for</span> v <span class="keyword">in</span> els
-    lang <span class="operators">=</span> els.last<span class="punctuation">(</span><span class="punctuation">)</span>.replace<span class="punctuation">(</span><span class="regexp">/<span class="char_group"><span class="char_group_begin">[</span>-_<span class="char_group_end">]</span></span><span class="regexp_end">/g</span></span>, <span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="punctuation">)</span>.capitalizeAll<span class="punctuation">(</span><span class="punctuation">)</span> <span class="keyword">unless</span> lang<span class="operators">?</span>
+    els <span class="operators">=</span> path<span class="punctuation">.</span>split<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>.<span class="string_end">'</span></span><span class="group_end">)</span></span>
+    <span class="group"><span class="group_begin">(</span>lang <span class="operators">=</span> lang<span class="punctuation">[</span>v<span class="punctuation">]</span>; <span class="keyword">break</span> <span class="keyword">unless</span> lang<span class="operators">?</span><span class="group_end">)</span></span> <span class="keyword">for</span> v <span class="keyword">in</span> els
+    lang <span class="operators">=</span> els<span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span><span class="regexp">/<span class="char_range"><span class="char_range_begin">[</span>-_<span class="char_range_end">]</span></span>/g</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span> <span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>capitalizeAll<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">unless</span> lang<span class="operators">?</span>
     lang
 
 </pre></td>
@@ -140,11 +140,11 @@ in the path as a capitalized sentence.</p>
 to retrieve localized string from the <code>I18n</code> instance as well as doing
 token substitution in the returned string.</p>
 
-<pre><code>_ <span class="operators">=</span> i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
-_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>path.to.string<span class="string_end">'</span></span><span class="punctuation">)</span>
-_<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>path.to.string_with_token<span class="string_end">'</span></span>, <span class="hash">token<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>token substitute<span class="string_end">'</span></span><span class="punctuation">)</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">getHelper<span class="hash_end">:</span></span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>path, tokens<span class="params_end">)</span></span> =></span>
-    <span class="property">@get</span><span class="punctuation">(</span>path<span class="punctuation">)</span>.replace <span class="regexp">/<span class="escaped">\#</span><span class="escaped">\{</span><span class="regexp_operators">(</span><span class="char_group"><span class="char_group_begin">[</span>^<span class="escaped">\}</span><span class="char_group_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\}</span><span class="regexp_end">/g</span></span>, <span class="function"><span class="params"><span class="params_begin">(</span>token, key<span class="params_end">)</span></span> -></span> tokens<span class="punctuation">[</span>key<span class="punctuation">]</span> <span class="keyword">or</span> token
+<pre><code>_ <span class="operators">=</span> i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+_<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>path.to.string<span class="string_end">'</span></span><span class="group_end">)</span></span>
+_<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>path.to.string_with_token<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">token<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>token substitute<span class="string_end">'</span></span><span class="group_end">)</span></span></code></pre></td>
+          <td class='code'><pre>  <span class="property">getHelper<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> tokens<span class="group_end">)</span></span> <span class="function">=></span>
+    <span class="property">@get</span><span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span><span class="punctuation">.</span>replace <span class="regexp">/<span class="escaped">\#</span><span class="escaped">\{</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^<span class="escaped">\}</span><span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\}</span>/g</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>token<span class="punctuation">,</span> key<span class="group_end">)</span></span> <span class="function">-></span> tokens<span class="punctuation">[</span>key<span class="punctuation">]</span> <span class="keyword">or</span> token
 
 </pre></td>
         </tr>
@@ -156,12 +156,12 @@ _<span class="punctuation">(</span><span class="string"><span class="string_begi
         <tr>
           <td class='docs'><p>Search and loads locales files in the given paths, parse their content
 and fill the <code>locales</code> object with the resuts.</p></td>
-          <td class='code'><pre>  <span class="hash">load<span class="hash_end">:</span></span><span class="function"> -></span>
-    <span class="property">@locales</span> <span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
-    docs <span class="operators">=</span> readFilesSync findSync <span class="string"><span class="string_begin">'</span>yml<span class="string_end">'</span></span>, <span class="property">@paths</span>
+          <td class='code'><pre>  <span class="property">load<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="property">@locales</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    docs <span class="operators">=</span> readFilesSync findSync <span class="string"><span class="string_begin">'</span>yml<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@paths</span>
 
-    <span class="property">@deepMerge</span> <span class="property">@locales</span>, yaml.load content <span class="keyword">for</span> path, content <span class="keyword">of</span> docs
-    <span class="property">@languages</span> <span class="operators">=</span> <span class="property">@locales</span>.sortedKeys<span class="punctuation">(</span><span class="punctuation">)</span>
+    <span class="property">@deepMerge</span> <span class="property">@locales</span><span class="punctuation">,</span> yaml<span class="punctuation">.</span>load content <span class="keyword">for</span> path<span class="punctuation">,</span> content <span class="keyword">of</span> docs
+    <span class="property">@languages</span> <span class="operators">=</span> <span class="property">@locales</span><span class="punctuation">.</span>sortedKeys<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -174,26 +174,26 @@ and fill the <code>locales</code> object with the resuts.</p></td>
           <td class='docs'><p>Merge two tree structures formed by nested objects into one tree structure.</p>
 
 <pre><code>source <span class="operators">=</span>
-  <span class="hash">foo<span class="hash_end">:</span></span>
-    <span class="hash">bar<span class="hash_end">:</span></span> <span class="number">10</span>
+  <span class="property">foo<span class='punctuation'>:</span></span>
+    <span class="property">bar<span class='punctuation'>:</span></span> <span class="number">10</span>
 target <span class="operators">=</span>
-  <span class="hash">foo<span class="hash_end">:</span></span>
-    <span class="hash">baz<span class="hash_end">:</span></span> <span class="number">20</span>
-deepMerge target, source
+  <span class="property">foo<span class='punctuation'>:</span></span>
+    <span class="property">baz<span class='punctuation'>:</span></span> <span class="number">20</span>
+deepMerge target<span class="punctuation">,</span> source
 <span class="comment"># target = {foo: {bar: 10, baz: 20}}</span></code></pre></td>
-          <td class='code'><pre>  <span class="hash">deepMerge<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>target, source<span class="params_end">)</span></span> -></span>
-    <span class="keyword">for</span> k,v <span class="keyword">of</span> source
+          <td class='code'><pre>  <span class="property">deepMerge<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>target<span class="punctuation">,</span> source<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> source
       <span class="keyword">switch</span> <span class="keyword">typeof</span> v
         <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>object<span class="string_end">'</span></span>
-          <span class="keyword">if</span> <span class="constant">Array</span>.isArray v
+          <span class="keyword">if</span> <span class="constant">Array</span><span class="punctuation">.</span>isArray v
             target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
-            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span>.concat v
+            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span><span class="punctuation">.</span>concat v
           <span class="keyword">else</span>
-            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="punctuation">{</span><span class="punctuation">}</span>
-            <span class="property">@deepMerge</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span>, v
+            target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+            <span class="property">@deepMerge</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span><span class="punctuation">,</span> v
         <span class="keyword">else</span> target<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> v
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">I18n</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">I18n</span>
 
 </pre></td>
         </tr>

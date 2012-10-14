@@ -87,15 +87,15 @@ libraries with file concatenation and minification.</p>
 <code>npm</code> (having a global installation of Coffeescript is a good practice if you
 plan to work on Neat itself):</p>
 
-<pre><code><span class="native">npm</span> install <span class="operators">-</span>g coffee<span class="operators">-</span>script</code></pre>
+<pre><code>npm install <span class="operators">-</span>g coffee<span class="operators">-</span>script</code></pre>
 
 <p>Installing Neat through <code>npm</code>:</p>
 
-<pre><code><span class="native">npm</span> install <span class="operators">-</span>g neat</code></pre>
+<pre><code>npm install <span class="operators">-</span>g neat</code></pre>
 
 <p>Installing Neat from sources:</p>
 
-<pre><code>git clone <span class="hash">git<span class="hash_end">:</span></span><span class="regexp">/<span class="regexp_end">/</span></span>github.com<span class="regexp"><span class="regexp_end">/</span></span>abe33<span class="regexp"><span class="regexp_end">/</span></span>neat.git
+<pre><code>git clone <span class="property">git<span class='punctuation'>:</span></span><span class="operators">/</span><span class="operators">/</span>github<span class="punctuation">.</span>com<span class="operators">/</span>abe33<span class="operators">/</span>neat<span class="punctuation">.</span>git
 cd neat
 cake install
 cake deploy</code></pre></td>
@@ -115,7 +115,7 @@ cake deploy</code></pre></td>
         </tr>
         <tr>
           <td class='docs'><p>The core classes extensions are required at startup.</p></td>
-          <td class='code'><pre><span class="native">require</span> <span class="string"><span class="string_begin">'</span>./core/types<span class="string_end">'</span></span>
+          <td class='code'><pre><span class="global">require</span> <span class="string"><span class="string_begin">'</span>./core/types<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -123,10 +123,10 @@ cake deploy</code></pre></td>
           <td class='docs'><p>The <code>Neat</code> class instance that provides access to the environment
 is provided under the name <code>Neat</code> on the exposed module.</p>
 
-<pre><code><span class="constant">Neat</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>neat<span class="string_end">'</span></span></code></pre></td>
-          <td class='code'><pre><span class="constant">Neat</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./neat<span class="string_end">'</span></span>
+<pre><code><span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>neat<span class="string_end">'</span></span></code></pre></td>
+          <td class='code'><pre><span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./neat<span class="string_end">'</span></span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="constant">Neat</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Neat</span>
 
 </pre></td>
         </tr>

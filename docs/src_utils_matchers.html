@@ -119,7 +119,7 @@ testFunction <span class="number">10</span> <span class="comment"># true</span><
 or compare <code>m</code> and <code>v</code> otherwise.</p>
 
 <p>Match is used whenever a matcher function allow matchers as arguments.</p></td>
-          <td class='code'><pre>match <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>m,v<span class="params_end">)</span></span> -></span> <span class="keyword">if</span> <span class="keyword">typeof</span> m <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> then m v <span class="keyword">else</span> m <span class="keyword">is</span> v
+          <td class='code'><pre>match <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>m<span class="punctuation">,</span>v<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">if</span> <span class="keyword">typeof</span> m <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> <span class="keyword">then</span> m v <span class="keyword">else</span> m <span class="keyword">is</span> v
 
 </pre></td>
         </tr>
@@ -131,10 +131,10 @@ or compare <code>m</code> and <code>v</code> otherwise.</p>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if any of the <code>matchers</code> match <code>el</code>.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some anyOf <span class="number">10</span>, isType<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>anyOf <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>matchers...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
-  <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">for</span> m <span class="keyword">in</span> matchers <span class="keyword">when</span> match m, el
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some anyOf <span class="number">10</span><span class="punctuation">,</span> isType<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>anyOf <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>matchers<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">for</span> m <span class="keyword">in</span> matchers <span class="keyword">when</span> match m<span class="punctuation">,</span> el
   <span class="literal">false</span>
 
 </pre></td>
@@ -147,10 +147,10 @@ ary.some anyOf <span class="number">10</span>, isType<span class="punctuation">(
         <tr>
           <td class='docs'><p>Returns <code>true</code> if all of the <code>matchers</code> match <code>el</code>.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some allOf <span class="number">10</span>, isType<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span><span class="punctuation">)</span> <span class="comment"># false</span></code></pre></td>
-          <td class='code'><pre>allOf <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>matchers...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
-  <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">for</span> m <span class="keyword">in</span> matchers <span class="keyword">when</span> <span class="keyword">not</span> match m, el
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some allOf <span class="number">10</span><span class="punctuation">,</span> isType<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="comment"># false</span></code></pre></td>
+          <td class='code'><pre>allOf <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>matchers<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">for</span> m <span class="keyword">in</span> matchers <span class="keyword">when</span> <span class="keyword">not</span> match m<span class="punctuation">,</span> el
   <span class="literal">true</span>
 
 </pre></td>
@@ -163,9 +163,9 @@ ary.some allOf <span class="number">10</span>, isType<span class="punctuation">(
         <tr>
           <td class='docs'><p>Compares <code>el</code> with <code>val</code> using the <code>===</code> operator.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some equalTo <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>equalTo <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el <span class="keyword">is</span> val
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some equalTo <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>equalTo <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>val<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el <span class="keyword">is</span> val
 
 </pre></td>
         </tr>
@@ -177,9 +177,9 @@ ary.some equalTo <span class="string"><span class="string_begin">'</span>foo<spa
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is greater than <code>val</code>.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some greaterThan <span class="number">5</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>greaterThan <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el > val
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some greaterThan <span class="number">5</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>greaterThan <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>val<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el > val
 
 </pre></td>
         </tr>
@@ -191,9 +191,9 @@ ary.some greaterThan <span class="number">5</span> <span class="comment"># true<
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is greater than or equal to <code>val</code>.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some greaterThanOrEqualTo <span class="number">10</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>greaterThanOrEqualTo <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el ><span class="operators">=</span> val
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some greaterThanOrEqualTo <span class="number">10</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>greaterThanOrEqualTo <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>val<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el ><span class="operators">=</span> val
 
 </pre></td>
         </tr>
@@ -206,12 +206,12 @@ ary.some greaterThanOrEqualTo <span class="number">10</span> <span class="commen
           <td class='docs'><p>The <code>hasProperty</code> allow to both test the existence of a property
 and test the content of the property.</p>
 
-<pre><code>obj <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>
-hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>                  <span class="comment"># true</span>
-hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span>
-hasProperty<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, isType <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>hasProperty <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>prop, val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
-  el<span class="punctuation">[</span>prop<span class="punctuation">]</span> <span class="keyword">isnt</span> <span class="literal">undefined</span> <span class="keyword">and</span> <span class="keyword">if</span> val<span class="operators">?</span> then match val, el<span class="punctuation">[</span>prop<span class="punctuation">]</span> <span class="keyword">else</span> <span class="literal">true</span>
+<pre><code>obj <span class="operators">=</span> <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span>
+hasProperty<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>obj<span class="group_end">)</span></span>                  <span class="comment"># true</span>
+hasProperty<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>obj<span class="group_end">)</span></span>              <span class="comment"># true</span>
+hasProperty<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> isType <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>obj<span class="group_end">)</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>hasProperty <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>prop<span class="punctuation">,</span> val<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
+  el<span class="punctuation">[</span>prop<span class="punctuation">]</span> <span class="keyword">isnt</span> <span class="literal">undefined</span> <span class="keyword">and</span> <span class="keyword">if</span> val<span class="operators">?</span> <span class="keyword">then</span> match val<span class="punctuation">,</span> el<span class="punctuation">[</span>prop<span class="punctuation">]</span> <span class="keyword">else</span> <span class="literal">true</span>
 
 </pre></td>
         </tr>
@@ -230,20 +230,20 @@ object will test for each property defined in the object, the values
 of the argument properties being the matchers to use against the tested
 objet properties.</p>
 
-<pre><code>obj <span class="operators">=</span> <span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span>
+<pre><code>obj <span class="operators">=</span> <span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="literal">false</span>
 
-hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>                   <span class="comment"># true</span>
-hasProperties<span class="punctuation">(</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> isType <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span> <span class="comment"># true</span>
-hasProperties<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="literal">false</span><span class="punctuation">)</span><span class="punctuation">(</span>obj<span class="punctuation">)</span>              <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>hasProperties <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>propsets...<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span>
+hasProperties<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>obj<span class="group_end">)</span></span>                   <span class="comment"># true</span>
+hasProperties<span class="group"><span class="group_begin">(</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> isType <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>obj<span class="group_end">)</span></span> <span class="comment"># true</span>
+hasProperties<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="literal">false</span><span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>obj<span class="group_end">)</span></span>              <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>hasProperties <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>propsets<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
 
   results <span class="operators">=</span> <span class="literal">true</span>
   <span class="keyword">for</span> propset <span class="keyword">in</span> propsets
     <span class="keyword">if</span> <span class="keyword">typeof</span> propset <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span>
-      results <span class="operators">&amp;</span><span class="operators">&amp;</span><span class="operators">=</span> el<span class="punctuation">[</span>propset<span class="punctuation">]</span> <span class="keyword">isnt</span> <span class="literal">undefined</span>
+      results <span class="operators">&</span><span class="operators">&</span><span class="operators">=</span> el<span class="punctuation">[</span>propset<span class="punctuation">]</span> <span class="keyword">isnt</span> <span class="literal">undefined</span>
     <span class="keyword">else</span>
-      <span class="keyword">for</span> k,v <span class="keyword">of</span> propset
-        results <span class="operators">&amp;</span><span class="operators">&amp;</span><span class="operators">=</span> hasProperty<span class="punctuation">(</span>k,v<span class="punctuation">)</span><span class="punctuation">(</span>el<span class="punctuation">)</span>
+      <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> propset
+        results <span class="operators">&</span><span class="operators">&</span><span class="operators">=</span> hasProperty<span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>v<span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span>
   results
 
 </pre></td>
@@ -257,9 +257,9 @@ hasProperties<span class="punctuation">(</span><span class="string"><span class=
           <td class='docs'><p>Inverse the boolean value returned by a matcher, or test the difference
 with <code>m</code> if it's not a function.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some isNot equalTo <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>isNot <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>m<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">not</span> match m, el
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some isNot equalTo <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>isNot <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>m<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">not</span> match m<span class="punctuation">,</span> el
 
 </pre></td>
         </tr>
@@ -270,7 +270,7 @@ ary.some isNot equalTo <span class="string"><span class="string_begin">'</span>f
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if <code>el</code> is not null.</p></td>
-          <td class='code'><pre>isNotNull <span class="operators">=</span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el<span class="operators">?</span>
+          <td class='code'><pre>isNotNull <span class="operators">=</span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el<span class="operators">?</span>
 
 </pre></td>
         </tr>
@@ -281,7 +281,7 @@ ary.some isNot equalTo <span class="string"><span class="string_begin">'</span>f
         </tr>
         <tr>
           <td class='docs'><p>Returns <code>true</code> if <code>el</code> is null.</p></td>
-          <td class='code'><pre>isNull <span class="operators">=</span><span class="function"> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">not</span> el<span class="operators">?</span>
+          <td class='code'><pre>isNull <span class="operators">=</span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">not</span> el<span class="operators">?</span>
 
 </pre></td>
         </tr>
@@ -294,8 +294,8 @@ ary.some isNot equalTo <span class="string"><span class="string_begin">'</span>f
           <td class='docs'><p>Returns <code>true</code> if the product of <code>typeof el</code> is equal
 to <code>type</code>.</p>
 
-<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">]</span>.every isType <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>isType <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>type<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> <span class="keyword">typeof</span> el <span class="keyword">is</span> type
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>every isType <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>isType <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>type<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">typeof</span> el <span class="keyword">is</span> type
 
 </pre></td>
         </tr>
@@ -307,9 +307,9 @@ to <code>type</code>.</p>
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is lower than <code>val</code>.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some lowerThan <span class="number">15</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>lowerThan <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el &lt; val
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some lowerThan <span class="number">15</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>lowerThan <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>val<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el &lt; val
 
 </pre></td>
         </tr>
@@ -321,9 +321,9 @@ ary.some lowerThan <span class="number">15</span> <span class="comment"># true</
         <tr>
           <td class='docs'><p>Returns <code>true</code> when <code>el</code> is lower than or equal to <code>val</code>.</p>
 
-<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>, <span class="number">10</span>, <span class="literal">false</span><span class="punctuation">]</span>
-ary.some lowerThanOrEqualTo <span class="number">10</span> <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>lowerThanOrEqualTo <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>val<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el &lt;<span class="operators">=</span> val
+<pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">]</span>
+ary<span class="punctuation">.</span>some lowerThanOrEqualTo <span class="number">10</span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>lowerThanOrEqualTo <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>val<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el &lt;<span class="operators">=</span> val
 
 </pre></td>
         </tr>
@@ -336,33 +336,33 @@ ary.some lowerThanOrEqualTo <span class="number">10</span> <span class="comment"
           <td class='docs'><p>Performs a duck test with <code>def</code> definition against <code>el</code>.</p>
 
 <pre><code>ary <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="punctuation">{</span><span class="hash">foo<span class="hash_end">:</span></span> <span class="number">10</span>, <span class="hash">bar<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="punctuation">}</span>,
-  <span class="punctuation">{</span><span class="hash">baz<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">}</span>,
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">baz<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
 <span class="punctuation">]</span>
-def <span class="operators">=</span> <span class="hash">__definition__<span class="hash_end">:</span></span>
-  <span class="hash">foo<span class="hash_end">:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
-  <span class="hash">bar<span class="hash_end">:</span></span> <span class="function"><span class="params"><span class="params_begin">(</span>v<span class="params_end">)</span></span> -></span> v <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
+def <span class="operators">=</span> <span class="property">__definition__<span class='punctuation'>:</span></span>
+  <span class="property">foo<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>number<span class="string_end">'</span></span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>v<span class="group_end">)</span></span> <span class="function">-></span> v <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span>
 
-ary.some quacksLike def <span class="comment"># true</span></code></pre></td>
-          <td class='code'><pre>quacksLike <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>def<span class="params_end">)</span></span> -></span> <span class="function"><span class="params"><span class="params_begin">(</span>el<span class="params_end">)</span></span> -></span> el<span class="operators">?</span>.quacksLike def
+ary<span class="punctuation">.</span>some quacksLike def <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>quacksLike <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>def<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el<span class="operators">?</span><span class="punctuation">.</span>quacksLike def
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
-  allOf,
-  anyOf,
-  equalTo,
-  greaterThan,
-  greaterThanOrEqualTo,
-  hasProperties,
-  hasProperty,
-  isNot,
-  isNotNull,
-  isNull,
-  isType,
-  lowerThan,
-  lowerThanOrEqualTo,
-  quacksLike,
-<span class="punctuation">}</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
+  allOf<span class="punctuation">,</span>
+  anyOf<span class="punctuation">,</span>
+  equalTo<span class="punctuation">,</span>
+  greaterThan<span class="punctuation">,</span>
+  greaterThanOrEqualTo<span class="punctuation">,</span>
+  hasProperties<span class="punctuation">,</span>
+  hasProperty<span class="punctuation">,</span>
+  isNot<span class="punctuation">,</span>
+  isNotNull<span class="punctuation">,</span>
+  isNull<span class="punctuation">,</span>
+  isType<span class="punctuation">,</span>
+  lowerThan<span class="punctuation">,</span>
+  lowerThanOrEqualTo<span class="punctuation">,</span>
+  quacksLike<span class="punctuation">,</span>
+<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>

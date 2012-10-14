@@ -122,7 +122,7 @@ messages to be filtered by the environment.
   </li>
 </ul></p></td>
           <td class='code'><pre>
-<span class="constant">Logger</span> <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>./logger<span class="string_end">'</span></span>
+<span class="constant">Logger</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./logger<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -131,9 +131,9 @@ messages to be filtered by the environment.
 you downloaded the neat repository and didn't run <code>cake install</code> yet -
 a message is displayed.</p></td>
           <td class='code'><pre><span class="keyword">try</span>
-  colors <span class="operators">=</span> <span class="native">require</span> <span class="string"><span class="string_begin">'</span>colors<span class="string_end">'</span></span>
+  colors <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>colors<span class="string_end">'</span></span>
 <span class="keyword">catch</span> e
-  <span class="native">console</span>.log <span class="heredocs"><span class="heredocs_begin">"""</span>Can't find colors module
+  <span class="global">console</span><span class="punctuation">.</span>log <span class="heredocs"><span class="heredocs_begin">"""</span>Can't find colors module
 
                  Run cake install to install the dependencies.<span class="heredocs_end">"""</span></span>
 
@@ -163,7 +163,7 @@ a message is displayed.</p></td>
         <tr>
           <td class='docs'><p>The color function is used to prevent the colorization of a string
 to fail when the <code>colors</code> module can't be found.</p></td>
-          <td class='code'><pre>color <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, color<span class="params_end">)</span></span> -></span>  <span class="keyword">if</span> str<span class="punctuation">[</span>color<span class="punctuation">]</span><span class="operators">?</span> then str<span class="punctuation">[</span>color<span class="punctuation">]</span> <span class="keyword">else</span> str
+          <td class='code'><pre>color <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="punctuation">,</span> color<span class="group_end">)</span></span> <span class="function">-></span>  <span class="keyword">if</span> str<span class="punctuation">[</span>color<span class="punctuation">]</span><span class="operators">?</span> <span class="keyword">then</span> str<span class="punctuation">[</span>color<span class="punctuation">]</span> <span class="keyword">else</span> str
 
 </pre></td>
         </tr>
@@ -175,7 +175,7 @@ to fail when the <code>colors</code> module can't be found.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in blue, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>blue    <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>blue<span class="string_end">'</span></span>
+          <td class='code'><pre>blue    <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>blue<span class="string_end">'</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -186,7 +186,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in cyan, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>cyan    <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>cyan<span class="string_end">'</span></span>
+          <td class='code'><pre>cyan    <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>cyan<span class="string_end">'</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -197,7 +197,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in green, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>green   <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>green<span class="string_end">'</span></span>
+          <td class='code'><pre>green   <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>green<span class="string_end">'</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -208,7 +208,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in inverse, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>inverse <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>inverse<span class="string_end">'</span></span>
+          <td class='code'><pre>inverse <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>inverse<span class="string_end">'</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -219,7 +219,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in magenta, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>magenta <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>magenta<span class="string_end">'</span></span>
+          <td class='code'><pre>magenta <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>magenta<span class="string_end">'</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -230,7 +230,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in red, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>red     <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>red<span class="string_end">'</span></span>
+          <td class='code'><pre>red     <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>red<span class="string_end">'</span></span>
 </pre></td>
         </tr>
         <tr>
@@ -241,7 +241,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Returns the passed-in string colorized in yellow, if the <code>colors</code> module
 can't be found the string is returned unchanged.</p></td>
-          <td class='code'><pre>yellow  <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str<span class="params_end">)</span></span> -></span> color str, <span class="string"><span class="string_begin">'</span>yellow<span class="string_end">'</span></span>
+          <td class='code'><pre>yellow  <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span> color str<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>yellow<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -257,7 +257,7 @@ can't be found the string is returned unchanged.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message that automatically end with a new line character.</p></td>
-          <td class='code'><pre>puts <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span> logger.log <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="escaped">\n</span><span class="string_end">"</span></span>, level
+          <td class='code'><pre>puts <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="punctuation">,</span> level<span class="operators">=</span><span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span> logger<span class="punctuation">.</span>log <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="punctuation">,</span> level
 
 </pre></td>
         </tr>
@@ -268,7 +268,7 @@ can't be found the string is returned unchanged.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Log a message without automatic new line character at the end.</p></td>
-          <td class='code'><pre><span class="native">print</span> <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>str, level<span class="operators">=</span>0<span class="params_end">)</span></span> -></span> logger.log str, level
+          <td class='code'><pre><span class="global">print</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="punctuation">,</span> level<span class="operators">=</span><span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span> logger<span class="punctuation">.</span>log str<span class="punctuation">,</span> level
 
 </pre></td>
         </tr>
@@ -279,7 +279,7 @@ can't be found the string is returned unchanged.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Prefix the passed-in string with the passed-in prefix.</p></td>
-          <td class='code'><pre>prefix <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string, prefix<span class="params_end">)</span></span> -></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>prefix<span class="subst_end">}</span></span> <span class="subst"><span class="subst_begin">#{</span>string<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+          <td class='code'><pre>prefix <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>string<span class="punctuation">,</span> prefix<span class="group_end">)</span></span> <span class="function">-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>prefix<span class="subst_end">}</span></span> <span class="subst"><span class="subst_begin">#{</span>string<span class="subst_end">}</span></span><span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -291,7 +291,7 @@ can't be found the string is returned unchanged.</p></td>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.FATAL</code> level.</p></td>
-          <td class='code'><pre>fatal <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse red <span class="string"><span class="string_begin">"</span> FATAL <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">FATAL</span>
+          <td class='code'><pre>fatal <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> puts prefix<span class="group"><span class="group_begin">(</span>string<span class="punctuation">,</span> inverse red <span class="string"><span class="string_begin">"</span> FATAL <span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="constant">Logger</span><span class="punctuation">.</span><span class="constant">FATAL</span>
 
 </pre></td>
         </tr>
@@ -303,7 +303,7 @@ corresponding to the <code>Logger.FATAL</code> level.</p></td>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.ERROR</code> level.</p></td>
-          <td class='code'><pre>error <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse red <span class="string"><span class="string_begin">"</span> ERROR <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">ERROR</span>
+          <td class='code'><pre>error <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> puts prefix<span class="group"><span class="group_begin">(</span>string<span class="punctuation">,</span> inverse red <span class="string"><span class="string_begin">"</span> ERROR <span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="constant">Logger</span><span class="punctuation">.</span><span class="constant">ERROR</span>
 
 </pre></td>
         </tr>
@@ -315,7 +315,7 @@ corresponding to the <code>Logger.ERROR</code> level.</p></td>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.WARN</code> level.</p></td>
-          <td class='code'><pre>warn  <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse yellow <span class="string"><span class="string_begin">"</span> WARN <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">WARN</span>
+          <td class='code'><pre>warn  <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> puts prefix<span class="group"><span class="group_begin">(</span>string<span class="punctuation">,</span> inverse yellow <span class="string"><span class="string_begin">"</span> WARN <span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="constant">Logger</span><span class="punctuation">.</span><span class="constant">WARN</span>
 
 </pre></td>
         </tr>
@@ -327,7 +327,7 @@ corresponding to the <code>Logger.WARN</code> level.</p></td>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.INFO</code> level.</p></td>
-          <td class='code'><pre>info  <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse green <span class="string"><span class="string_begin">"</span> INFO <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">INFO</span>
+          <td class='code'><pre>info  <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> puts prefix<span class="group"><span class="group_begin">(</span>string<span class="punctuation">,</span> inverse green <span class="string"><span class="string_begin">"</span> INFO <span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="constant">Logger</span><span class="punctuation">.</span><span class="constant">INFO</span>
 
 </pre></td>
         </tr>
@@ -339,7 +339,7 @@ corresponding to the <code>Logger.INFO</code> level.</p></td>
         <tr>
           <td class='docs'><p>Log a message using the <code>puts</code> function and with a priority
 corresponding to the <code>Logger.DEBUG</code> level.</p></td>
-          <td class='code'><pre>debug <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>string<span class="params_end">)</span></span> -></span> puts prefix<span class="punctuation">(</span>string, inverse blue <span class="string"><span class="string_begin">"</span> DEBUG <span class="string_end">"</span></span><span class="punctuation">)</span>, <span class="constant">Logger</span>.<span class="constant">DEBUG</span>
+          <td class='code'><pre>debug <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> puts prefix<span class="group"><span class="group_begin">(</span>string<span class="punctuation">,</span> inverse blue <span class="string"><span class="string_begin">"</span> DEBUG <span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="constant">Logger</span><span class="punctuation">.</span><span class="constant">DEBUG</span>
 
 </pre></td>
         </tr>
@@ -355,9 +355,9 @@ corresponding to the <code>Logger.DEBUG</code> level.</p></td>
         </tr>
         <tr>
           <td class='docs'><p>Generates a message for a missing resources.</p></td>
-          <td class='code'><pre>missing <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>path<span class="params_end">)</span></span> -></span>
-  _ <span class="operators">=</span> <span class="native">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
-  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span>, <span class="hash">missing<span class="hash_end">:</span></span> path<span class="punctuation">)</span>
+          <td class='code'><pre>missing <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span> <span class="function">-></span>
+  _ <span class="operators">=</span> <span class="global">require</span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">missing<span class='punctuation'>:</span></span> path<span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -369,29 +369,29 @@ corresponding to the <code>Logger.DEBUG</code> level.</p></td>
         <tr>
           <td class='docs'><p>Generates a messages for a neat command that can't run outside
 of a Neat project.</p></td>
-          <td class='code'><pre>notOutsideNeat <span class="operators">=</span> <span class="function"><span class="params"><span class="params_begin">(</span>s<span class="params_end">)</span></span> -></span>
-  _ <span class="operators">=</span> <span class="native">require</span><span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="punctuation">)</span>.i18n.getHelper<span class="punctuation">(</span><span class="punctuation">)</span>
-  red _<span class="punctuation">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span>, <span class="hash">expression<span class="hash_end">:</span></span> s<span class="punctuation">)</span>
+          <td class='code'><pre>notOutsideNeat <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>s<span class="group_end">)</span></span> <span class="function">-></span>
+  _ <span class="operators">=</span> <span class="global">require</span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">expression<span class='punctuation'>:</span></span> s<span class="group_end">)</span></span>
 
-<span class="native">module</span>.<span class="native">exports</span> <span class="operators">=</span> <span class="punctuation">{</span>
-  blue,
-  cyan,
-  debug,
-  error,
-  green,
-  info,
-  inverse,
-  logger,
-  magenta,
-  missing,
-  notOutsideNeat,
-  prefix,
-  <span class="native">print</span>,
-  puts,
-  red,
-  warn,
-  yellow,
-<span class="punctuation">}</span>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
+  blue<span class="punctuation">,</span>
+  cyan<span class="punctuation">,</span>
+  debug<span class="punctuation">,</span>
+  error<span class="punctuation">,</span>
+  green<span class="punctuation">,</span>
+  info<span class="punctuation">,</span>
+  inverse<span class="punctuation">,</span>
+  logger<span class="punctuation">,</span>
+  magenta<span class="punctuation">,</span>
+  missing<span class="punctuation">,</span>
+  notOutsideNeat<span class="punctuation">,</span>
+  prefix<span class="punctuation">,</span>
+  print<span class="punctuation">,</span>
+  puts<span class="punctuation">,</span>
+  red<span class="punctuation">,</span>
+  warn<span class="punctuation">,</span>
+  yellow<span class="punctuation">,</span>
+<span class="hash_end">}</span></span>
 
 </pre></td>
         </tr>
