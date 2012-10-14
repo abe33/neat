@@ -74,11 +74,11 @@ withBundledProject 'foo', ->
 
         waitsFor progress(-> ended), 'Timed out', 50000
 
-    describe 'and running neat generate command foo', ->
+    describe 'and running neat generate command bar', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'node', [NEAT_BIN, 'generate', 'command', 'foo'], (status) ->
+          run 'node', [NEAT_BIN, 'generate', 'command', 'bar'], (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
