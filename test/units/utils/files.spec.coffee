@@ -1,6 +1,6 @@
 require '../../test_helper'
 fs = require 'fs'
-{resolve, existsSync} = require "path"
+{resolve} = require "path"
 
 root = resolve __dirname, '../../../'
 
@@ -419,13 +419,13 @@ describe 'ensureSync', ->
   deep = "#{base}/bar"
 
   afterEach ->
-    fs.rmdirSync deep if existsSync deep
-    fs.rmdirSync base if existsSync base
+    fs.rmdirSync deep if fs.existsSync deep
+    fs.rmdirSync base if fs.existsSync base
 
   describe 'when called with a valid path to the dir to create', ->
     it 'should create the directory', ->
       fu.ensureSync base
-      expect(existsSync base).toBeTruthy()
+      expect(fs.existsSync base).toBeTruthy()
 
     it 'should return true', ->
       res = fu.ensureSync base
@@ -446,14 +446,14 @@ describe 'ensure', ->
   deep = "#{base}/bar"
 
   afterEach ->
-    fs.rmdirSync deep if existsSync deep
-    fs.rmdirSync base if existsSync base
+    fs.rmdirSync deep if fs.existsSync deep
+    fs.rmdirSync base if fs.existsSync base
 
   describe 'when called with a valid path to the dir to create', ->
 
     it 'should create the directory', (done) ->
       fu.ensure base, (err, created) ->
-        expect(existsSync base).toBeTruthy()
+        expect(fs.existsSync base).toBeTruthy()
         expect(created).toBeTruthy()
         done()
 
@@ -469,26 +469,26 @@ describe 'ensurePathSync', ->
   deep = "#{base}/bar"
 
   afterEach ->
-    fs.rmdirSync deep if existsSync deep
-    fs.rmdirSync base if existsSync base
+    fs.rmdirSync deep if fs.existsSync deep
+    fs.rmdirSync base if fs.existsSync base
 
   describe 'when called with a valid path to the dir to create', ->
     it 'should create the directory', ->
       fu.ensurePathSync deep
-      expect(existsSync deep).toBeTruthy()
+      expect(fs.existsSync deep).toBeTruthy()
 
 describe 'ensurePath', ->
   base = "#{root}/test/fixtures/utils/files/foo"
   deep = "#{base}/bar"
 
   afterEach ->
-    fs.rmdirSync deep if existsSync deep
-    fs.rmdirSync base if existsSync base
+    fs.rmdirSync deep if fs.existsSync deep
+    fs.rmdirSync base if fs.existsSync base
 
   describe 'when called with a valid path to the dir to create', ->
     it 'should create the directory', (done) ->
       fu.ensurePath deep, (err, created) ->
-        expect(existsSync deep).toBeTruthy()
+        expect(fs.existsSync deep).toBeTruthy()
         expect(err).toBeNull()
         expect(created).toBeTruthy()
         done()
@@ -498,13 +498,13 @@ describe 'touchSync', ->
   deep = "#{root}/test/fixtures/utils/files/foo/bar.coffee"
 
   afterEach ->
-    fs.unlinkSync deep if existsSync deep
-    fs.unlinkSync base if existsSync base
+    fs.unlinkSync deep if fs.existsSync deep
+    fs.unlinkSync base if fs.existsSync base
 
   describe 'when called with a valid path to the file to create', ->
     it 'should create the directory', ->
       res = fu.touchSync base
-      expect(existsSync base).toBeTruthy()
+      expect(fs.existsSync base).toBeTruthy()
 
     it 'should create return true', ->
       res = fu.touchSync base
@@ -526,14 +526,14 @@ describe 'touch', ->
   deep = "#{root}/test/fixtures/utils/files/foo/bar.coffee"
 
   afterEach ->
-    fs.unlinkSync deep if existsSync deep
-    fs.unlinkSync base if existsSync base
+    fs.unlinkSync deep if fs.existsSync deep
+    fs.unlinkSync base if fs.existsSync base
 
   describe 'when called with a valid path to the file to create', ->
 
     it 'should create the directory', (done) ->
       fu.touch base, (err, created) ->
-        expect(existsSync base).toBeTruthy()
+        expect(fs.existsSync base).toBeTruthy()
         expect(created).toBeTruthy()
         done()
 
@@ -555,7 +555,7 @@ describe 'rmSync', ->
   it 'should remove all the files and directories recursively', ->
     fu.rmSync "#{root}/test/fixtures/utils/files/rm"
 
-    expect(existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
+    expect(fs.existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
 
 describe 'rm', ->
   beforeEach ->
@@ -568,7 +568,7 @@ describe 'rm', ->
   it 'should remove all the files and directories recursively', (done) ->
     fu.rm "#{root}/test/fixtures/utils/files/rm", (err) ->
 
-      expect(existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
+      expect(fs.existsSync "#{root}/test/fixtures/utils/files/rm").toBeFalsy()
       done()
 
 describe 'readFiles', ->
