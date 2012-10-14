@@ -1,4 +1,4 @@
-path = require 'path'
+fs = require 'fs'
 Neat = require '../../../neat'
 {queue} = require '../../../async'
 {run} = require '../../../utils/commands'
@@ -8,7 +8,7 @@ JASMINE = "#{Neat.neatRoot}/node_modules/.bin/jasmine-node"
 
 module.exports = (config) ->
   config.engines.tests.jasmine = (name, test, callback) ->
-    unless path.existsSync JASMINE
+    unless fs.existsSync JASMINE
       error """#{red "Can't find jasmine-node module"}
 
                Run #{yellow 'neat install'} to install the dependencies."""

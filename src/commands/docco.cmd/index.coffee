@@ -1,5 +1,5 @@
 fs = require 'fs'
-{resolve, existsSync, basename, extname, relative} = require 'path'
+{resolve} = require 'path'
 Neat = require '../../neat'
 DoccoFile = require './docco_file'
 Processor = require './docco_file_processor'

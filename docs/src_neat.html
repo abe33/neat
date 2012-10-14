@@ -109,7 +109,7 @@ corresponding environment.
           <td class='docs'></td>
           <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
 pr <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>commander<span class="string_end">'</span></span>
-<span class="hash"><span class="hash_begin">{</span>resolve<span class="punctuation">,</span> <span class="property">existsSync<span class='punctuation'>:</span></span>exists<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
 
 </pre></td>
         </tr>
@@ -487,7 +487,7 @@ the new environment object is then stored in <code>Neat</code>.</p></td>
 root directory or in the node modules installed in the project.</p></td>
           <td class='code'><pre>  <span class="property">discoverUserPaths<span class='punctuation'>:</span></span> <span class="function">-></span>
     modulesDir <span class="operators">=</span> resolve <span class="property">@root</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>node_modules<span class="string_end">'</span></span>
-    <span class="keyword">if</span> exists modulesDir
+    <span class="keyword">if</span> fs<span class="punctuation">.</span>existsSync modulesDir
 </pre></td>
         </tr>
         <tr>

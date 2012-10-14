@@ -3,7 +3,7 @@
 # @toc
 
 fs = require 'fs'
-{resolve, existsSync, exists, basename, relative, extname} = require 'path'
+{resolve, basename, relative, extname} = require 'path'
 {puts, error, warn, missing} = require './logs'
 {parallel} = require '../async'
 
@@ -22,7 +22,7 @@ fs = require 'fs'
 #         # do something with index.js
 dirWithIndex = (dir, ext=null, callback) ->
   [ext, callback] = [callback, ext] if typeof ext is 'function'
-  exists dir, (b) ->
+  fs.exists dir, (b) ->
     return callback?() unless b
 
     index = if ext? then "index.#{ext}" else "index"
@@ -44,7 +44,7 @@ dirWithIndex = (dir, ext=null, callback) ->
 #     if index?
 #       # do something with index.js
 dirWithIndexSync = (dir, ext=null) ->
-  return unless existsSync dir
+  return unless fs.existsSync dir
 
   index = if ext? then "index.#{ext}" else "index"
 
@@ -60,7 +60,7 @@ dirWithIndexSync = (dir, ext=null) ->
 # The `created` argument of the callback function is a boolean
 # value that indicates if the directory was created or not.
 ensure = (dir, callback) ->
-  exists dir, (b) ->
+  fs.exists dir, (b) ->
     if b then callback? null, false
     else fs.mkdir dir, (err) ->
       if err? then callback? err, false
@@ -75,7 +75,7 @@ ensure = (dir, callback) ->
 # Note that the function will fail with an error in this
 # context if `/path/to` don't exist.
 ensureSync = (dir) ->
-  (fs.mkdirSync dir; return true) unless existsSync dir; false
+  (fs.mkdirSync dir; return true) unless fs.existsSync dir; false
 
 ##### ensurePath
 
@@ -118,7 +118,7 @@ ensurePathSync = (path) ->
   while dirs.length > 0
     d = dirs.shift()
     p = resolve p, d
-    fs.mkdirSync p unless existsSync p
+    fs.mkdirSync p unless fs.existsSync p
 
 
 ##### find
@@ -166,7 +166,7 @@ find = (pattern, ext, paths, callback) ->
 # Performs the `find` search routine over a single path.
 findOnce = (pattern, ext, path, callback, output) ->
 
-  exists path, (b) ->
+  fs.exists path, (b) ->
     callback? new Error '' unless b?
     # Stores the results of the search.
     out = []
@@ -187,7 +187,7 @@ findOnce = (pattern, ext, path, callback, output) ->
             # against it, the function will then look for the presence
             # of an index file.
             index = resolve path, "index.#{ext}"
-            exists index, (b) ->
+            fs.exists index, (b) ->
               if pattern? and p.match(pattern) and b
                 output.push index
 
@@ -252,7 +252,7 @@ findSync = (pattern, ext, paths) ->
 
 # Performs the `findSync` search routine over a single path.
 findSyncOnce = (pattern, ext, path) ->
-  return unless existsSync path
+  return unless fs.existsSync path
 
   # Stores the results of the search.
   out = []
@@ -277,7 +277,7 @@ findSyncOnce = (pattern, ext, path) ->
       # When a `pattern` is provided and the directory name match against it,
       # the function will then look for the presence of an index file.
       index = resolve _path, "index.#{ext}"
-      if pattern? and p.match(pattern) and existsSync index
+      if pattern? and p.match(pattern) and fs.existsSync index
         found ?= []
         found.push index
     # The path is a file that match the specified file extension.
@@ -309,7 +309,7 @@ findSyncOnce = (pattern, ext, path) ->
 #       #   /path/to/dir/file.spec.coffee
 #       # ]
 findBase = (dir, base, callback) ->
-  exists dir, (b) ->
+  fs.exists dir, (b) ->
     return callback?() unless b
 
     fs.readdir dir, (err, content) ->
@@ -330,7 +330,7 @@ findBase = (dir, base, callback) ->
 #     #   /path/to/dir/file.spec.coffee
 #     # ]
 findBaseSync = (dir, base) ->
-  return unless existsSync dir
+  return unless fs.existsSync dir
 
   content = fs.readdirSync dir
   resolve dir, f for f in content when f.match ///^#{base}(\.|$)///
@@ -559,7 +559,7 @@ findSiblingFileSync = (path, roots, dir, exts..., paths) ->
 #       if found
 #         # '/path/to/project' is a neat project root
 isNeatRoot = (dir, callback) ->
-  exists resolve(dir, ".neat"), callback
+  fs.exists resolve(dir, ".neat"), callback
 
 ##### isNeatRootSync
 
@@ -568,7 +568,7 @@ isNeatRoot = (dir, callback) ->
 #     if isNeatRootSync '/path/to/dir'
 #       # '/path/to/project' is a neat project root
 isNeatRootSync = (dir) ->
-  existsSync resolve dir, ".neat"
+  fs.existsSync resolve dir, ".neat"
 
 ##### neatRoot
 
@@ -654,7 +654,7 @@ readFilesSync = (files) ->
 rm = (path, callback) ->
   rmIteration = (path) -> (callback) -> rm path, callback
 
-  exists path, (exist) ->
+  fs.exists path, (exist) ->
     if exist
       fs.lstat path, (err, stats) ->
         return callback? err if err?
@@ -673,7 +673,7 @@ rm = (path, callback) ->
 ##### rmSync
 
 rmSync = (path) ->
-  if existsSync path
+  if fs.existsSync path
     stats = fs.lstatSync path
     if stats.isDirectory()
       paths = fs.readdirSync path
@@ -693,7 +693,7 @@ rmSync = (path) ->
 #       # handle errors
 touch = (path, content='', callback) ->
   [content, callback] = [callback, content] if typeof content is 'function'
-  exists path, (b) ->
+  fs.exists path, (b) ->
     if b then callback? null, false
     else fs.writeFile path, content, (err) ->
       if err? then callback? err, false
@@ -711,7 +711,7 @@ touch = (path, content='', callback) ->
 # Note that the function will fail with an error in this
 # context if `/path/to` don't exist.
 touchSync = (path, content='') ->
-  (fs.writeFileSync path, content; return true) unless existsSync path
+  (fs.writeFileSync path, content; return true) unless fs.existsSync path
   false
 
 module.exports = {

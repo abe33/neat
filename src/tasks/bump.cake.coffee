@@ -1,5 +1,5 @@
 fs = require 'fs'
-path = require 'path'
+fs = require 'fs'
 Neat = require '../neat'
 {namespace} = Neat.require 'utils/exports'
 {run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
@@ -55,7 +55,7 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
   fs.readFile ".neat", replaceVersion asyncErrorTrap err, (res) ->
     fs.writeFile ".neat", res, asyncErrorTrap err, ->
 
-      unless path.existsSync 'package.json'
+      unless fs.existsSync 'package.json'
         info green _('neat.tasks.bump.version_bumped', version: newVersion)
         return callback? 0
 

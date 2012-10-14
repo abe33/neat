@@ -131,7 +131,7 @@ within a Neat project.
 </ul></p></td>
           <td class='code'><pre>
 fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
-<span class="hash"><span class="hash_begin">{</span>resolve<span class="punctuation">,</span> existsSync<span class="punctuation">,</span> exists<span class="punctuation">,</span> basename<span class="punctuation">,</span> relative<span class="punctuation">,</span> extname<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="punctuation">,</span> basename<span class="punctuation">,</span> relative<span class="punctuation">,</span> extname<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
 <span class="hash"><span class="hash_begin">{</span>puts<span class="punctuation">,</span> error<span class="punctuation">,</span> warn<span class="punctuation">,</span> missing<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./logs<span class="string_end">'</span></span>
 <span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../async<span class="string_end">'</span></span>
 
@@ -156,7 +156,7 @@ dirWithIndex <span class="string"><span class="string_begin">'</span>/path/to/di
     <span class="comment"># do something with index.js</span></code></pre></td>
           <td class='code'><pre>dirWithIndex <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> ext<span class="operators">=</span><span class="literal">null</span><span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="punctuation">[</span>ext<span class="punctuation">,</span> callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>callback<span class="punctuation">,</span> ext<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> ext <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
-  exists dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+  fs<span class="punctuation">.</span>exists dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="keyword">return</span> callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">unless</span> b
 
     index <span class="operators">=</span> <span class="keyword">if</span> ext<span class="operators">?</span> <span class="keyword">then</span> <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">else</span> <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
@@ -184,7 +184,7 @@ index <span class="operators">=</span> dirWithIndexSync <span class="string"><sp
 <span class="keyword">if</span> index<span class="operators">?</span>
   <span class="comment"># do something with index.js</span></code></pre></td>
           <td class='code'><pre>dirWithIndexSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> ext<span class="operators">=</span><span class="literal">null</span><span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="keyword">return</span> <span class="keyword">unless</span> existsSync dir
+  <span class="keyword">return</span> <span class="keyword">unless</span> fs<span class="punctuation">.</span>existsSync dir
 
   index <span class="operators">=</span> <span class="keyword">if</span> ext<span class="operators">?</span> <span class="keyword">then</span> <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">else</span> <span class="string"><span class="string_begin">"</span>index<span class="string_end">"</span></span>
 
@@ -206,7 +206,7 @@ index <span class="operators">=</span> dirWithIndexSync <span class="string"><sp
 <p>The <code>created</code> argument of the callback function is a boolean
 value that indicates if the directory was created or not.</p></td>
           <td class='code'><pre>ensure <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
-  exists dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+  fs<span class="punctuation">.</span>exists dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="keyword">if</span> b <span class="keyword">then</span> callback<span class="operators">?</span> <span class="literal">null</span><span class="punctuation">,</span> <span class="literal">false</span>
     <span class="keyword">else</span> fs<span class="punctuation">.</span>mkdir dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
       <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> callback<span class="operators">?</span> err<span class="punctuation">,</span> <span class="literal">false</span>
@@ -227,7 +227,7 @@ value that indicates if the directory was created or not.</p></td>
 <p>Note that the function will fail with an error in this
 context if <code>/path/to</code> don't exist.</p></td>
           <td class='code'><pre>ensureSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="group"><span class="group_begin">(</span>fs<span class="punctuation">.</span>mkdirSync dir; <span class="keyword">return</span> <span class="literal">true</span><span class="group_end">)</span></span> <span class="keyword">unless</span> existsSync dir; <span class="literal">false</span>
+  <span class="group"><span class="group_begin">(</span>fs<span class="punctuation">.</span>mkdirSync dir; <span class="keyword">return</span> <span class="literal">true</span><span class="group_end">)</span></span> <span class="keyword">unless</span> fs<span class="punctuation">.</span>existsSync dir; <span class="literal">false</span>
 
 </pre></td>
         </tr>
@@ -282,7 +282,7 @@ they will be created and then the <code>dir</code> one.</p></td>
   <span class="keyword">while</span> dirs<span class="punctuation">.</span>length > <span class="number">0</span>
     d <span class="operators">=</span> dirs<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
     p <span class="operators">=</span> resolve p<span class="punctuation">,</span> d
-    fs<span class="punctuation">.</span>mkdirSync p <span class="keyword">unless</span> existsSync p
+    fs<span class="punctuation">.</span>mkdirSync p <span class="keyword">unless</span> fs<span class="punctuation">.</span>existsSync p
 
 
 </pre></td>
@@ -351,7 +351,7 @@ of the file.</p></td>
           <td class='docs'><p>Performs the <code>find</code> search routine over a single path.</p></td>
           <td class='code'><pre>findOnce <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>pattern<span class="punctuation">,</span> ext<span class="punctuation">,</span> path<span class="punctuation">,</span> callback<span class="punctuation">,</span> output<span class="group_end">)</span></span> <span class="function">-></span>
 
-  exists path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+  fs<span class="punctuation">.</span>exists path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
     callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span> <span class="keyword">unless</span> b<span class="operators">?</span>
 </pre></td>
         </tr>
@@ -384,7 +384,7 @@ of the file.</p></td>
 against it, the function will then look for the presence
 of an index file.</p></td>
           <td class='code'><pre>            index <span class="operators">=</span> resolve path<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span>
-            exists index<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+            fs<span class="punctuation">.</span>exists index<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
               <span class="keyword">if</span> pattern<span class="operators">?</span> <span class="keyword">and</span> p<span class="punctuation">.</span>match<span class="group"><span class="group_begin">(</span>pattern<span class="group_end">)</span></span> <span class="keyword">and</span> b
                 output<span class="punctuation">.</span>push index
 
@@ -488,7 +488,7 @@ of the file.</p></td>
         <tr>
           <td class='docs'><p>Performs the <code>findSync</code> search routine over a single path.</p></td>
           <td class='code'><pre>findSyncOnce <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>pattern<span class="punctuation">,</span> ext<span class="punctuation">,</span> path<span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="keyword">return</span> <span class="keyword">unless</span> existsSync path
+  <span class="keyword">return</span> <span class="keyword">unless</span> fs<span class="punctuation">.</span>existsSync path
 
 </pre></td>
         </tr>
@@ -540,7 +540,7 @@ of the file.</p></td>
           <td class='docs'><p>When a <code>pattern</code> is provided and the directory name match against it,
 the function will then look for the presence of an index file.</p></td>
           <td class='code'><pre>      index <span class="operators">=</span> resolve _path<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>index.<span class="subst"><span class="subst_begin">#{</span>ext<span class="subst_end">}</span></span><span class="string_end">"</span></span>
-      <span class="keyword">if</span> pattern<span class="operators">?</span> <span class="keyword">and</span> p<span class="punctuation">.</span>match<span class="group"><span class="group_begin">(</span>pattern<span class="group_end">)</span></span> <span class="keyword">and</span> existsSync index
+      <span class="keyword">if</span> pattern<span class="operators">?</span> <span class="keyword">and</span> p<span class="punctuation">.</span>match<span class="group"><span class="group_begin">(</span>pattern<span class="group_end">)</span></span> <span class="keyword">and</span> fs<span class="punctuation">.</span>existsSync index
         found <span class="operators">?</span><span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
         found<span class="punctuation">.</span>push index
 </pre></td>
@@ -593,7 +593,7 @@ match <code>base</code>.</p>
   <span class="comment">#   /path/to/dir/file.spec.coffee</span>
   <span class="comment"># ]</span></code></pre></td>
           <td class='code'><pre>findBase <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> base<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
-  exists dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+  fs<span class="punctuation">.</span>exists dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="keyword">return</span> callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">unless</span> b
 
     fs<span class="punctuation">.</span>readdir dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> content<span class="group_end">)</span></span> <span class="function">-></span>
@@ -620,7 +620,7 @@ match <code>base</code>.</p>
 <span class="comment">#   /path/to/dir/file.spec.coffee</span>
 <span class="comment"># ]</span></code></pre></td>
           <td class='code'><pre>findBaseSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> base<span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="keyword">return</span> <span class="keyword">unless</span> existsSync dir
+  <span class="keyword">return</span> <span class="keyword">unless</span> fs<span class="punctuation">.</span>existsSync dir
 
   content <span class="operators">=</span> fs<span class="punctuation">.</span>readdirSync dir
   resolve dir<span class="punctuation">,</span> f <span class="keyword">for</span> f <span class="keyword">in</span> content <span class="keyword">when</span> f<span class="punctuation">.</span>match <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="regexp_operators">^</span><span class="subst"><span class="subst_begin">#{</span>base<span class="subst_end">}</span></span><span class="regexp_operators">(</span><span class="escaped">\.</span>|<span class="regexp_operators">$</span><span class="regexp_operators">)</span><span class="hereregexp_end">///</span></span>
@@ -969,7 +969,7 @@ the extension if provided.</p></td>
   <span class="keyword">if</span> found
     <span class="comment"># '/path/to/project' is a neat project root</span></code></pre></td>
           <td class='code'><pre>isNeatRoot <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
-  exists resolve<span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>.neat<span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> callback
+  fs<span class="punctuation">.</span>exists resolve<span class="group"><span class="group_begin">(</span>dir<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>.neat<span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> callback
 
 </pre></td>
         </tr>
@@ -984,7 +984,7 @@ the extension if provided.</p></td>
 <pre><code><span class="keyword">if</span> isNeatRootSync <span class="string"><span class="string_begin">'</span>/path/to/dir<span class="string_end">'</span></span>
   <span class="comment"># '/path/to/project' is a neat project root</span></code></pre></td>
           <td class='code'><pre>isNeatRootSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>dir<span class="group_end">)</span></span> <span class="function">-></span>
-  existsSync resolve dir<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>.neat<span class="string_end">"</span></span>
+  fs<span class="punctuation">.</span>existsSync resolve dir<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>.neat<span class="string_end">"</span></span>
 
 </pre></td>
         </tr>
@@ -1103,7 +1103,7 @@ of the file as key and the content of the file as value.</p>
 rm <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
   rmIteration <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span> rm path<span class="punctuation">,</span> callback
 
-  exists path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>exist<span class="group_end">)</span></span> <span class="function">-></span>
+  fs<span class="punctuation">.</span>exists path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>exist<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="keyword">if</span> exist
       fs<span class="punctuation">.</span>lstat path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> stats<span class="group_end">)</span></span> <span class="function">-></span>
         <span class="keyword">return</span> callback<span class="operators">?</span> err <span class="keyword">if</span> err<span class="operators">?</span>
@@ -1125,7 +1125,7 @@ rm <span class="operators">=</span> <span class="group"><span class="group_begin
           <td class='docs'><h4 id='rmsync'>rmSync</h4></td>
           <td class='code'><pre>
 rmSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="keyword">if</span> existsSync path
+  <span class="keyword">if</span> fs<span class="punctuation">.</span>existsSync path
     stats <span class="operators">=</span> fs<span class="punctuation">.</span>lstatSync path
     <span class="keyword">if</span> stats<span class="punctuation">.</span>isDirectory<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
       paths <span class="operators">=</span> fs<span class="punctuation">.</span>readdirSync path
@@ -1151,7 +1151,7 @@ touch <span class="string"><span class="string_begin">'</span>/path/to/file.ext<
   <span class="comment"># handle errors</span></code></pre></td>
           <td class='code'><pre>touch <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> content<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="punctuation">[</span>content<span class="punctuation">,</span> callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>callback<span class="punctuation">,</span> content<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> content <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
-  exists path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
+  fs<span class="punctuation">.</span>exists path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="keyword">if</span> b <span class="keyword">then</span> callback<span class="operators">?</span> <span class="literal">null</span><span class="punctuation">,</span> <span class="literal">false</span>
     <span class="keyword">else</span> fs<span class="punctuation">.</span>writeFile path<span class="punctuation">,</span> content<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
       <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> callback<span class="operators">?</span> err<span class="punctuation">,</span> <span class="literal">false</span>
@@ -1175,7 +1175,7 @@ touchSync <span class="string"><span class="string_begin">'</span>/path/to/file.
 <p>Note that the function will fail with an error in this
 context if <code>/path/to</code> don't exist.</p></td>
           <td class='code'><pre>touchSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> content<span class="operators">=</span><span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="group"><span class="group_begin">(</span>fs<span class="punctuation">.</span>writeFileSync path<span class="punctuation">,</span> content; <span class="keyword">return</span> <span class="literal">true</span><span class="group_end">)</span></span> <span class="keyword">unless</span> existsSync path
+  <span class="group"><span class="group_begin">(</span>fs<span class="punctuation">.</span>writeFileSync path<span class="punctuation">,</span> content; <span class="keyword">return</span> <span class="literal">true</span><span class="group_end">)</span></span> <span class="keyword">unless</span> fs<span class="punctuation">.</span>existsSync path
   <span class="literal">false</span>
 
 <span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
