@@ -17,6 +17,7 @@ en:
       outside_neat: "Can't run #{expression} outside of a Neat project."
 
       file_access: "Can't access #{file}\n\n#{stack}"
+      file_write: "Can't write #{file}\n\n#{stack}"
 
     tasks:
       no_name: Tasks must have a name
@@ -105,6 +106,7 @@ en:
         file_generated: "#{path} generated"
         help_list_title: "Generators:"
         invalid_generator: "Generators must be a function, was #{type}"
+        file_exists: "File #{file} already exists"
 
         command:
           description: |

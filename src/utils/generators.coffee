@@ -27,7 +27,9 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
   (generator, name, args..., cb) ->
     if requireNeat
       throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
-    throw new Error _('neat.errors.missing_argument', {name}) unless name?
+
+    if typeof name isnt 'string'
+      throw new Error _('neat.errors.missing_argument', {name:'name'})
 
     a = name.split '/'
     name = a.pop()
@@ -37,21 +39,25 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
     context = if args.empty() then {} else hashArguments args
     context.merge ctx
     context.merge {name, path, dir}
+    fs.exists path, (exists) ->
+      if exists
+        throw new Error _('neat.commands.generate.file_exists',
+                               file: path)
 
-    render src, context, (err, data) ->
-      return error """#{missing "Template for #{src}"}
+      render src, context, (err, data) ->
+        throw new Error """#{missing _('neat.templates.template_for',
+                                  file: src)}
 
-                      #{err.stack}""" if err?
+                        #{err.stack}""" if err?
 
-      ensurePathSync dir
-      fs.writeFile path, data, (err) ->
-        return error("""#{"Can't write #{path}".red}
+        ensurePathSync dir
+        fs.writeFile path, data, (err) ->
+          throw new Error(_('neat.errors.file_write',
+                                  file: path, stack: e.stack)) if err
 
-                        #{err.stack}""") and cb?() if err
-
-        path = "#{dir}/#{name}.#{ext}"
-        info green _('neat.commands.generate.file_generated', {path})
-        cb?()
+          path = "#{dir}/#{name}.#{ext}"
+          info green _('neat.commands.generate.file_generated', {path})
+          cb?()
 
 module.exports = {namedEntity}
 
