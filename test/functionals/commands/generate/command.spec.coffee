@@ -7,44 +7,10 @@ options = {}
   # stderr: (data)-> print data
   # stdout: (data)-> print data
 
-describe 'when outside a project', ->
-  beforeEach -> process.chdir FIXTURES_ROOT
-
-  describe 'running `neat generate command foo`', ->
-    it "should return a status of 1 and don't generate anything", ->
-      ended = false
-      runs ->
-        args = [NEAT_BIN, 'generate', 'command', 'foo']
-        run 'node', args, options, (status) ->
-          expect(status).toBe(1)
-          ended = true
-
-      waitsFor progress(-> ended), 'Timed out', 10000
+testSimpleGenerator 'command', 'src/commands', '.cmd.coffee'
 
 withProject 'foo', ->
-  describe 'running `neat generate command`', ->
-    it "should return a status of 1 and don't generate anything", ->
-      ended = false
-      runs ->
-        run 'node', [NEAT_BIN, 'generate', 'command'], options, (status) ->
-          expect(status).toBe(1)
-          ended = true
-
-      waitsFor progress(-> ended), 'Timed out', 10000
-
   describe 'running `neat generate command foo`', ->
-    it 'should generate a new command foo in the project', (done) ->
-      args = [
-        NEAT_BIN,
-        'generate',
-        'command',
-        'foo',
-      ]
-      run 'node', args, (status) ->
-        expect(inProject "src/commands/foo.cmd.coffee").toExist()
-
-        done()
-
     it 'should defines the properties of the command according
         to the hash arguments provided'.squeeze(), (done) ->
       args = [
@@ -79,11 +45,4 @@ withProject 'foo', ->
       run 'node', args, (status) ->
         expect(inProject "src/commands/foo.cmd.coffee")
           .toContain("usages 'foo',")
-        done()
-
-  describe 'running `neat generate command bar/foo`', ->
-    it 'should generate a new command foo in the project', (done) ->
-      run 'node', [NEAT_BIN, 'generate', 'command', 'bar/foo'], (status) =>
-        expect(inProject "src/commands/bar/foo.cmd.coffee").toExist()
-
         done()
