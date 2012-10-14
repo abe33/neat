@@ -14,20 +14,21 @@ exports['config:lint'] = (generator, args..., cb) ->
   throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
   context = if args.empty() then {} else hashArguments args
 
-  render __filename, context, (err, data) ->
-    throw err if err?
+  dir = resolve Neat.root, 'config/tasks'
+  path = "#{dir}/lint.json"
+  fs.exists path, (exists) ->
+    if exists
+      throw new Error _('neat.commands.generate.file_exists', file: path)
 
-    path = resolve Neat.root, 'config/tasks'
+    render __filename, context, (err, data) ->
+      throw err if err?
 
-    ensurePath path, (err) ->
-      path = "#{path}/lint.json"
-
-      fs.writeFile path, data, (err) ->
-        return error("""#{"Can't write #{path}".red}
-
-                        #{err.stack}""") and cb?() if err
-        info _('neat.commands.generate.config_lint.config_generated',
-                config: path).green
-        cb?()
+      ensurePath dir, (err) ->
+        fs.writeFile path, data, (err) ->
+          throw new Error _('neat.errors.file_write',
+                            file: path, stack: e.stack) if err?
+          info _('neat.commands.generate.config_lint.config_generated',
+                  config: path).green
+          cb?()
 
 

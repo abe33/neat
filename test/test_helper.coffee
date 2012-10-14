@@ -178,7 +178,7 @@ global.testSimpleGenerator= (name, dir, ext) ->
       it "should return a status of 1 and don't generate anything", ->
         ended = false
         runs ->
-          withSourceFile "#{dir}/foo#{ext}", 'original_content', ->
+          withSourceFile inProject("#{dir}/foo#{ext}"), 'original_content', ->
             args = [NEAT_BIN, 'generate', name, 'foo']
             run 'node', args, options, (status) ->
               expect(status).toBe(1)

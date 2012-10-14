@@ -37,3 +37,18 @@ withProject 'foo', ->
         path = inProject "config/tasks/lint.json"
         expect(path).toExist()
         done()
+
+  describe 'when a config file already exists', ->
+    it "should return a status of 1 and don't generate anything", ->
+      ended = false
+      runs ->
+        configPath = inProject "config/tasks/lint.json"
+        withSourceFile configPath, 'config', ->
+          args = [NEAT_BIN, 'generate', 'config:lint']
+          run 'node', args, options, (status) ->
+            expect(status).toBe(1)
+            expect(configPath).toExist()
+            expect(configPath).toContain('config')
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out', 10000
