@@ -4,13 +4,15 @@ Neat = require '../lib/neat'
 Neat.require 'core'
 
 {run} = require '../lib/utils/commands'
-{resolve, existsSync:eS} = require 'path'
+{resolve} = require 'path'
 {rmSync:rm, ensurePath, touch} = Neat.require 'utils/files'
 {print} = require 'util'
 
 global.TEST_ROOT = resolve '.'
 global.FIXTURES_ROOT = '/tmp'
 global.NEAT_BIN = resolve __dirname, '../bin/neat'
+
+eS = fs.existsSync
 
 options = {}
   # stderr: (data)-> print data
@@ -130,3 +132,58 @@ global.withBundledProject = (name, desc=null, block, opts) ->
           callback?()
 
   withProject name, desc, block, opts
+
+global.testSimpleGenerator= (name, dir, ext) ->
+  describe 'when outside a project', ->
+    beforeEach -> process.chdir FIXTURES_ROOT
+
+    describe "running `neat generate #{name} 'foo'`", ->
+      it "should return a status of 1 and don't generate anything", ->
+        ended = false
+        runs ->
+          args = [NEAT_BIN, 'generate', name, 'foo']
+          run 'node', args, options, (status) ->
+            expect(status).toBe(1)
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out', 10000
+
+  withProject 'foo', ->
+    describe "running `neat generate #{name}`", ->
+      it "should return a status of 1 and don't generate anything", ->
+        ended = false
+        runs ->
+          run 'node', [NEAT_BIN, 'generate', name], options, (status) ->
+            expect(status).toBe(1)
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out', 10000
+
+    describe "running `neat generate #{name} foo`", ->
+      it "should generate a new #{name} foo in the project", (done) ->
+        run 'node', [NEAT_BIN, 'generate', name, 'foo'], (status) ->
+          expect(inProject "#{dir}/foo#{ext}").toExist()
+
+          done()
+
+    describe "running `neat generate #{name} bar/foo`", ->
+      it "should generate a new #{name} foo in the project", (done) ->
+        run 'node', [NEAT_BIN, 'generate', name, 'bar/foo'], (status) ->
+          expect(inProject "#{dir}/bar/foo#{ext}")
+            .toExist()
+
+          done()
+
+    describe "with a file already existing at the same path", ->
+      it "should return a status of 1 and don't generate anything", ->
+        ended = false
+        runs ->
+          withSourceFile "#{dir}/foo#{ext}", 'original_content', ->
+            args = [NEAT_BIN, 'generate', name, 'foo']
+            run 'node', args, options, (status) ->
+              expect(status).toBe(1)
+              expect("#{dir}/foo#{ext}").toExist()
+              expect("#{dir}/foo#{ext}").toContain('original_content')
+              ended = true
+
+          waitsFor progress(-> ended), 'Timed out', 10000
