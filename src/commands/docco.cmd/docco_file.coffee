@@ -1,5 +1,4 @@
-fs = require 'fs'
-{resolve, existsSync, basename, extname, relative} = require 'path'
+{basename, extname, relative} = require 'path'
 Neat = require '../../neat'
 
 class DoccoFile

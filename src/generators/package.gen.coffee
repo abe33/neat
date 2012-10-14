@@ -1,5 +1,5 @@
 fs = require "fs"
-{resolve, existsSync:exists} = require 'path'
+{resolve} = require 'path'
 Neat = require '../neat'
 
 utils = resolve Neat.neatRoot, "lib/utils"
@@ -57,7 +57,7 @@ index = (generator, args..., cb) ->
           pkg.main = './lib/index' if hasLibIndex or hasSrcIndex
 
         ##### 4 - Binaries
-        if exists resolve Neat.root, "bin"
+        if fs.existsSync resolve Neat.root, "bin"
           binaries = fs.readdirSync resolve Neat.root, "bin"
           if binaries?
             pkg.bin = {}
