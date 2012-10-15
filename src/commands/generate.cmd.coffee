@@ -33,7 +33,7 @@ generate = (pr, commands) ->
         else
           console.log render helptpl, gen
       else
-        throw new Error missing _('neat.commands.generate.generator',
+        throw new Error missing _('neat.commands.generate.generator.name',
                                   {generator})
     else
       context = {}

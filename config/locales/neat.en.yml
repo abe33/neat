@@ -101,7 +101,6 @@ en:
         install_failed: An error occured during the installation!
 
       generate:
-        generator: "Generator #{generator}"
         description: "Runs the specified [generator]"
         file_generated: "#{path} generated"
         help_list_title: "Generators:"
@@ -122,6 +121,7 @@ en:
           description: Generates a packager config in the config/packages directory
 
         generator:
+          name: "Generator #{generator}"
           description: Generates a generator in the generators directory
 
         initializer:
