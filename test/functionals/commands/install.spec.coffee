@@ -20,7 +20,7 @@ describe 'when outside a project', ->
 
       waitsFor progress(-> ended), 'Timed out', 10000
 
-withProject 'foo', ->
+withProject 'neat_project', ->
   afterEach ->
     run 'rm', ['-rf', @projectPath]
 

@@ -16,7 +16,7 @@ describe 'when outside a project', ->
         expect(status).toBe(1)
         done()
 
-withProject 'foo', 'when outside a project', ->
+withProject 'neat_project', 'when outside a project', ->
   describe 'running `neat generate project foo`', ->
     beforeEach -> process.chdir FIXTURES_ROOT
 

@@ -9,7 +9,7 @@ options = {}
 
 testSimpleGenerator 'command', 'src/commands', '.cmd.coffee'
 
-withProject 'foo', ->
+withProject 'neat_project', ->
   describe 'running `neat generate command foo`', ->
     it 'should defines the properties of the command according
         to the hash arguments provided'.squeeze(), (done) ->

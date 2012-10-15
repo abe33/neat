@@ -25,7 +25,7 @@ describe 'when outside a project', ->
 
       waitsFor progress(-> ended), 'Timed out', 10000
 
-withProject 'foo', ->
+withProject 'neat_project', ->
   describe 'running `neat generate package.json`', ->
     args = [
       NEAT_BIN,

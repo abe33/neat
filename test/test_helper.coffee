@@ -1,4 +1,3 @@
-# TODO: Place your helpers definition here.
 fs = require 'fs'
 Neat = require '../lib/neat'
 Neat.require 'core'
@@ -148,7 +147,7 @@ global.testSimpleGenerator= (name, dir, ext) ->
 
         waitsFor progress(-> ended), 'Timed out', 10000
 
-  withProject 'foo', ->
+  withProject 'neat_project', ->
     describe "running `neat generate #{name}`", ->
       it "should return a status of 1 and don't generate anything", ->
         ended = false
