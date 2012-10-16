@@ -28,25 +28,37 @@ Function.isAsync = (fn) -> fn.signature().last() is 'callback'
 
 # Returns `true` if the passed-in function accept a callback as last argument.
 #
-#     f1 = ->
-#     f2 = (callback) ->
-#     f1.isAsync() # false
-#     f2.isAsync() # true
+#     f = ->
+#     f.isAsync() # false
+#
+#     f = (callback) ->
+#     f.isAsync() # true
 def Function, isAsync: -> Function.isAsync this
 
 ##### Function::signature
 
 # Returns an array that contains the signature of the function.
 #
-#     f1 = ->
-#     f2 = (a, b, c) ->
-#     f1.signature() # []
-#     f1.signature() # ['a', 'b', 'c']
+#     f = ->
+#     f.signature() # []
+#
+#     f = (a, b, c) ->
+#     f.signature() # ['a', 'b', 'c']
 def Function, signature: ->
   sign = Function.signRE.exec(@toString())[SIGN_POSITION]
   if sign is EMPTY_SIGNATURE then [] else sign.split Function.commaRE
 
+##### Function::callAsync
 
+# Realize the call of the function in the given `context` asynchronously.
+# It means that the `callback` function will be called either if the function
+# is asynchronous or not.
+#
+#     f = (a, b) -> a + b
+#     f.callAsync null, 2, 4, (res) -> # res = 6
+#
+#     f = (callback) -> callback? a + b
+#     f.callAsync null, 2, 4, (res) -> # res = 6
 def Function, callAsync: (context, args..., callback) ->
   if @isAsync()
     @apply context, args.concat callback
@@ -54,6 +66,17 @@ def Function, callAsync: (context, args..., callback) ->
     res = @apply context, args
     callback? res
 
+##### Function::applyAsync
+
+# Realize the call of the function in the given `context` asynchronously.
+# It means that the `callback` function will be called either if the function
+# is asynchronous or not.
+#
+#     f = (a, b) -> a + b
+#     f.applyAsync null, [2, 4], (res) -> # res = 6
+#
+#     f = (callback) -> callback? a + b
+#     f.applyAsync null, [2, 4], (res) -> # res = 6
 def Function, applyAsync: (context, args, callback) ->
   if @isAsync()
     @apply context, args.concat callback

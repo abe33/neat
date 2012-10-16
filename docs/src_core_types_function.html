@@ -67,10 +67,14 @@
   <li class='level0'>
     <a href='#functionsignature'>Function::signature</a>
   </li>
+  <li class='level0'>
+    <a href='#functioncallasync'>Function::callAsync</a>
+  </li>
+  <li class='level0'>
+    <a href='#functionapplyasync'>Function::applyAsync</a>
+  </li>
 </ul></p></td>
           <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>def<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
-
-
 
 </pre></td>
         </tr>
@@ -128,10 +132,11 @@
         <tr>
           <td class='docs'><p>Returns <code>true</code> if the passed-in function accept a callback as last argument.</p>
 
-<pre><code>f1 <span class="operators">=</span> <span class="function">-></span>
-f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
-f1<span class="punctuation">.</span>isAsync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># false</span>
-f2<span class="punctuation">.</span>isAsync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># true</span></code></pre></td>
+<pre><code>f <span class="operators">=</span> <span class="function">-></span>
+f<span class="punctuation">.</span>isAsync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># false</span>
+
+f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+f<span class="punctuation">.</span>isAsync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># true</span></code></pre></td>
           <td class='code'><pre>def <span class="constant">Function</span><span class="punctuation">,</span> <span class="property">isAsync<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="constant">Function</span><span class="punctuation">.</span>isAsync <span class="keyword">this</span>
 
 </pre></td>
@@ -144,14 +149,62 @@ f2<span class="punctuation">.</span>isAsync<span class="group"><span class="grou
         <tr>
           <td class='docs'><p>Returns an array that contains the signature of the function.</p>
 
-<pre><code>f1 <span class="operators">=</span> <span class="function">-></span>
-f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="group_end">)</span></span> <span class="function">-></span>
-f1<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># []</span>
-f1<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['a', 'b', 'c']</span></code></pre></td>
+<pre><code>f <span class="operators">=</span> <span class="function">-></span>
+f<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># []</span>
+
+f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="group_end">)</span></span> <span class="function">-></span>
+f<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['a', 'b', 'c']</span></code></pre></td>
           <td class='code'><pre>def <span class="constant">Function</span><span class="punctuation">,</span> <span class="property">signature<span class='punctuation'>:</span></span> <span class="function">-></span>
   sign <span class="operators">=</span> <span class="constant">Function</span><span class="punctuation">.</span>signRE<span class="punctuation">.</span>exec<span class="group"><span class="group_begin">(</span><span class="property">@toString</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span><span class="punctuation">[</span><span class="constant">SIGN_POSITION</span><span class="punctuation">]</span>
   <span class="keyword">if</span> sign <span class="keyword">is</span> <span class="constant">EMPTY_SIGNATURE</span> <span class="keyword">then</span> <span class="punctuation">[</span><span class="punctuation">]</span> <span class="keyword">else</span> sign<span class="punctuation">.</span>split <span class="constant">Function</span><span class="punctuation">.</span>commaRE
 
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functioncallasync'>Function::callAsync</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Realize the call of the function in the given <code>context</code> asynchronously.
+It means that the <code>callback</code> function will be called either if the function
+is asynchronous or not.</p>
+
+<pre><code>f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="group_end">)</span></span> <span class="function">-></span> a <span class="operators">+</span> b
+f<span class="punctuation">.</span>callAsync <span class="literal">null</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>res<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># res = 6</span>
+
+f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span> callback<span class="operators">?</span> a <span class="operators">+</span> b
+f<span class="punctuation">.</span>callAsync <span class="literal">null</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>res<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># res = 6</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Function</span><span class="punctuation">,</span> <span class="property">callAsync<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>context<span class="punctuation">,</span> args<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">if</span> <span class="property">@isAsync</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="property">@apply</span> context<span class="punctuation">,</span> args<span class="punctuation">.</span>concat callback
+  <span class="keyword">else</span>
+    res <span class="operators">=</span> <span class="property">@apply</span> context<span class="punctuation">,</span> args
+    callback<span class="operators">?</span> res
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functionapplyasync'>Function::applyAsync</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Realize the call of the function in the given <code>context</code> asynchronously.
+It means that the <code>callback</code> function will be called either if the function
+is asynchronous or not.</p>
+
+<pre><code>f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="group_end">)</span></span> <span class="function">-></span> a <span class="operators">+</span> b
+f<span class="punctuation">.</span>applyAsync <span class="literal">null</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>res<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># res = 6</span>
+
+f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span> callback<span class="operators">?</span> a <span class="operators">+</span> b
+f<span class="punctuation">.</span>applyAsync <span class="literal">null</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">2</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>res<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># res = 6</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Function</span><span class="punctuation">,</span> <span class="property">applyAsync<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>context<span class="punctuation">,</span> args<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">if</span> <span class="property">@isAsync</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="property">@apply</span> context<span class="punctuation">,</span> args<span class="punctuation">.</span>concat callback
+  <span class="keyword">else</span>
+    res <span class="operators">=</span> <span class="property">@apply</span> context<span class="punctuation">,</span> args
+    callback<span class="operators">?</span> res
 
 </pre></td>
         </tr>
