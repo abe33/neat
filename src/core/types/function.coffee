@@ -10,6 +10,9 @@ EMPTY_SIGNATURE = ''
 
 Function.isAsync = (fn) -> Function.asyncRE.test Function::toString.call fn
 
+def Function, isAsync: -> Function.isAsync this
+
 def Function, signature: ->
   sign = Function.signRE.exec(@toString())[SIGN_POSITION]
   if sign is EMPTY_SIGNATURE then [] else sign.split Function.commaRE
+
