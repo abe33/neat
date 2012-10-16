@@ -36,7 +36,7 @@ withProject 'neat_project', ->
       run 'node', args, (status) ->
         path = inProject "package.json"
         expect(path).toExist()
-        expect(path).toContain('"name": "foo"')
+        expect(path).toContain('"name": "neat_project"')
         expect(path).toContain('"version": "0.0.1"')
         expect(path).toContain('"author": "John Doe"')
         expect(path).toContain('"description": "a description"')
