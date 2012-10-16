@@ -442,7 +442,7 @@ findSiblingFile = (path, roots, dir, exts..., callback) ->
     # Otherwise a lookup is perform for each root.
     else
       parallel (lookup(root) for root in roots), ->
-        callback? null, found[0], paths
+        callback? null, found.sort()[0], paths
 
 ##### findSiblingFileSync
 
