@@ -1,0 +1,161 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/core/types/function.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/core/types/function.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_mixin.html'>mixin.coffee</a></li><li class='leaf'><a href='src_core_module.html'>module.coffee</a></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/core/types/</h3>
+            <h1>function.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>This file contains the extensions to the <code>Function</code> class.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#functioncommare'>Function.commaRE</a>
+  </li>
+  <li class='level0'>
+    <a href='#functionsignre'>Function.signRE</a>
+  </li>
+  <li class='level0'>
+    <a href='#functionisasync'>Function.isAsync</a>
+  </li>
+  <li class='level0'>
+    <a href='#functionisasync'>Function::isAsync</a>
+  </li>
+  <li class='level0'>
+    <a href='#functionsignature'>Function::signature</a>
+  </li>
+</ul></p></td>
+          <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>def<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
+
+
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functioncommare'>Function.commaRE</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A <code>Regexp</code> that matches the comma in a function signature.</p></td>
+          <td class='code'><pre><span class="constant">Function</span><span class="punctuation">.</span>commaRE <span class="operators">=</span> <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">*</span>,<span class="escaped">\s</span><span class="regexp_operators">*</span>/g</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functionsignre'>Function.signRE</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A <code>Regexp</code> that matches the signature of a function.</p></td>
+          <td class='code'><pre><span class="constant">Function</span><span class="punctuation">.</span>signRE <span class="operators">=</span> <span class="regexp">/<span class="regexp_operators">^</span>function<span class="escaped">\s</span><span class="regexp_operators">+</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>a-zA-Z_$<span class="char_range_end">]</span></span><span class="char_range"><span class="char_range_begin">[</span>a-zA-Z0-9_$<span class="char_range_end">]</span></span><span class="regexp_operators">*</span><span class="regexp_operators">)</span><span class="regexp_operators">*</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^)<span class="char_range_end">]</span></span><span class="regexp_operators">*</span><span class="regexp_operators">)</span><span class="escaped">\)</span>/</span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The position of the function signature capture group.</p></td>
+          <td class='code'><pre><span class="constant">SIGN_POSITION</span> <span class="operators">=</span> <span class="number">2</span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A string to match empty function signature.</p></td>
+          <td class='code'><pre><span class="constant">EMPTY_SIGNATURE</span> <span class="operators">=</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functionisasync'>Function.isAsync</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in function accept a callback as last argument.</p>
+
+<pre><code><span class="constant">Function</span><span class="punctuation">.</span>isAsync <span class="function">-></span>             <span class="comment"># false</span>
+<span class="constant">Function</span><span class="punctuation">.</span>isAsync <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>  <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre><span class="constant">Function</span><span class="punctuation">.</span>isAsync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>fn<span class="group_end">)</span></span> <span class="function">-></span> fn<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>callback<span class="string_end">'</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functionisasync'>Function::isAsync</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in function accept a callback as last argument.</p>
+
+<pre><code>f1 <span class="operators">=</span> <span class="function">-></span>
+f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+f1<span class="punctuation">.</span>isAsync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># false</span>
+f2<span class="punctuation">.</span>isAsync<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># true</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Function</span><span class="punctuation">,</span> <span class="property">isAsync<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="constant">Function</span><span class="punctuation">.</span>isAsync <span class="keyword">this</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='functionsignature'>Function::signature</h4></td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns an array that contains the signature of the function.</p>
+
+<pre><code>f1 <span class="operators">=</span> <span class="function">-></span>
+f2 <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="group_end">)</span></span> <span class="function">-></span>
+f1<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># []</span>
+f1<span class="punctuation">.</span>signature<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['a', 'b', 'c']</span></code></pre></td>
+          <td class='code'><pre>def <span class="constant">Function</span><span class="punctuation">,</span> <span class="property">signature<span class='punctuation'>:</span></span> <span class="function">-></span>
+  sign <span class="operators">=</span> <span class="constant">Function</span><span class="punctuation">.</span>signRE<span class="punctuation">.</span>exec<span class="group"><span class="group_begin">(</span><span class="property">@toString</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span><span class="punctuation">[</span><span class="constant">SIGN_POSITION</span><span class="punctuation">]</span>
+  <span class="keyword">if</span> sign <span class="keyword">is</span> <span class="constant">EMPTY_SIGNATURE</span> <span class="keyword">then</span> <span class="punctuation">[</span><span class="punctuation">]</span> <span class="keyword">else</span> sign<span class="punctuation">.</span>split <span class="constant">Function</span><span class="punctuation">.</span>commaRE
+
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
