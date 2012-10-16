@@ -157,7 +157,7 @@ describe Signal, ->
   describe 'with an asynchronous listener', ->
 
     it 'should wait until the callback was called
-        before doing to the next listener'.squeeze(), (done) ->
+        before doing to the next listener'.squeeze(), ->
 
       listener1Called = false
       listener1Args = null
@@ -165,7 +165,6 @@ describe Signal, ->
       ended = false
 
       listener1 = (a,b,c,callback) ->
-
         setTimeout ->
           listener1Args = [a,b,c]
           listener1Called = true
@@ -176,18 +175,22 @@ describe Signal, ->
         listener2Args = [a,b,c]
         expect(listener1Called).toBeTruthy()
         expect(listener1Args).toEqual(listener2Args)
-        done()
+        ended = true
 
       signal = new Signal
 
       signal.add listener1
       signal.add listener2
 
-      signal.dispatch(1,2,3)
+      runs ->
+        signal.dispatch(1,2,3)
+
+      waitsFor progress(-> ended), 'Signal timed out', 1000
 
     it 'should call back the passed-in function
-        at the end of the dispatch'.squeeze(), (done) ->
+        at the end of the dispatch'.squeeze(), ->
 
+      ended = false
       listener1 = (a, b, c, callback) -> setTimeout (-> callback()), 100
       listener2 = (a, b, c, callback) -> setTimeout (-> callback()), 100
 
@@ -196,11 +199,15 @@ describe Signal, ->
       signal.add listener1
       signal.add listener2
       ms = new Date().valueOf()
-      signal.dispatch 1, 2, 3, ->
-        ms = new Date().valueOf() - ms
 
-        expect(ms >= 200).toBeTruthy()
-        done()
+      runs ->
+        signal.dispatch 1, 2, 3, ->
+          ms = new Date().valueOf() - ms
+
+          expect(ms >= 200).toBeTruthy()
+          ended = true
+
+      waitsFor progress(-> ended), 'Signal timed out', 1000
 
   describe 'when a listener signature have been specified', ->
     it 'should prevent invalid listener to be passed', ->
