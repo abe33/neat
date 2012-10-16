@@ -51,12 +51,12 @@ def Function, callAsync: (context, args..., callback) ->
   if @isAsync()
     @apply context, args.concat callback
   else
-    @apply context, args
-    callback?()
+    res = @apply context, args
+    callback? res
 
 def Function, applyAsync: (context, args, callback) ->
   if @isAsync()
     @apply context, args.concat callback
   else
-    @apply context, args
-    callback?()
+    res = @apply context, args
+    callback? res

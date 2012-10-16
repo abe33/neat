@@ -63,34 +63,31 @@ describe 'Function', ->
   describe '::callAsync', ->
     describe 'on a function that is not asynchronous', ->
       it 'should call the function and then the callback', (done) ->
-        fnResult = false
-        fn = (a,b) -> fnResult = a + b
+        fn = (a,b) -> a + b
 
-        fn.callAsync null, 5, 10, ->
-          expect(fnResult).toBe(15)
+        fn.callAsync null, 5, 10, (res) ->
+          expect(res).toBe(15)
           done()
 
     describe 'on a function that is asynchronous', ->
       it 'should call the function and then the callback', (done) ->
-        fnResult = false
         fn = (a,b,callback) ->
           setTimeout ->
-            fnResult = a + b
-            callback?()
+            callback? a + b
           , 100
 
-        fn.callAsync null, 5, 10, ->
-          expect(fnResult).toBe(15)
+        fn.callAsync null, 5, 10, (res) ->
+          expect(res).toBe(15)
           done()
 
   describe '::applyAsync', ->
     describe 'on a function that is not asynchronous', ->
       it 'should call the function and then the callback', (done) ->
         fnResult = false
-        fn = (a,b) -> fnResult = a + b
+        fn = (a,b) -> a + b
 
-        fn.applyAsync null, [5, 10], ->
-          expect(fnResult).toBe(15)
+        fn.applyAsync null, [5, 10], (res) ->
+          expect(res).toBe(15)
           done()
 
     describe 'on a function that is asynchronous', ->
@@ -98,10 +95,9 @@ describe 'Function', ->
         fnResult = false
         fn = (a,b,callback) ->
           setTimeout ->
-            fnResult = a + b
-            callback?()
+            callback? a + b
           , 100
 
-        fn.applyAsync null, [5, 10], ->
-          expect(fnResult).toBe(15)
+        fn.applyAsync null, [5, 10], (res) ->
+          expect(res).toBe(15)
           done()
