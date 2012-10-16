@@ -59,3 +59,49 @@ describe 'Function', ->
             f = (callback) ->
               foo(callback)
           expect(fn).not.toBeAsync()
+
+  describe '::callAsync', ->
+    describe 'on a function that is not asynchronous', ->
+      it 'should call the function and then the callback', (done) ->
+        fnResult = false
+        fn = (a,b) -> fnResult = a + b
+
+        fn.callAsync 5, 10, ->
+          expect(fnResult).toBe(15)
+          done()
+
+    describe 'on a function that is asynchronous', ->
+      it 'should call the function and then the callback', (done) ->
+        fnResult = false
+        fn = (a,b,callback) ->
+          setTimeout ->
+            fnResult = a + b
+            callback?()
+          , 100
+
+        fn.callAsync 5, 10, ->
+          expect(fnResult).toBe(15)
+          done()
+
+  describe '::applyAsync', ->
+    describe 'on a function that is not asynchronous', ->
+      it 'should call the function and then the callback', (done) ->
+        fnResult = false
+        fn = (a,b) -> fnResult = a + b
+
+        fn.applyAsync [5, 10], ->
+          expect(fnResult).toBe(15)
+          done()
+
+    describe 'on a function that is asynchronous', ->
+      it 'should call the function and then the callback', (done) ->
+        fnResult = false
+        fn = (a,b,callback) ->
+          setTimeout ->
+            fnResult = a + b
+            callback?()
+          , 100
+
+        fn.applyAsync [5, 10], ->
+          expect(fnResult).toBe(15)
+          done()

@@ -2,8 +2,6 @@
 # @toc
 {def} = require './utils'
 
-
-
 ##### Function.commaRE
 
 # A `Regexp` that matches the comma in a function signature.
@@ -48,3 +46,16 @@ def Function, signature: ->
   sign = Function.signRE.exec(@toString())[SIGN_POSITION]
   if sign is EMPTY_SIGNATURE then [] else sign.split Function.commaRE
 
+def Function, callAsync: (args..., callback) ->
+  if @isAsync()
+    @apply null, args.concat callback
+  else
+    @apply null, args
+    callback?()
+
+def Function, applyAsync: (args, callback) ->
+  if @isAsync()
+    @apply null, args.concat callback
+  else
+    @apply null, args
+    callback?()
