@@ -46,16 +46,17 @@ def Function, signature: ->
   sign = Function.signRE.exec(@toString())[SIGN_POSITION]
   if sign is EMPTY_SIGNATURE then [] else sign.split Function.commaRE
 
-def Function, callAsync: (args..., callback) ->
+
+def Function, callAsync: (context, args..., callback) ->
   if @isAsync()
-    @apply null, args.concat callback
+    @apply context, args.concat callback
   else
-    @apply null, args
+    @apply context, args
     callback?()
 
-def Function, applyAsync: (args, callback) ->
+def Function, applyAsync: (context, args, callback) ->
   if @isAsync()
-    @apply null, args.concat callback
+    @apply context, args.concat callback
   else
-    @apply null, args
+    @apply context, args
     callback?()

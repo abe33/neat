@@ -66,7 +66,7 @@ describe 'Function', ->
         fnResult = false
         fn = (a,b) -> fnResult = a + b
 
-        fn.callAsync 5, 10, ->
+        fn.callAsync null, 5, 10, ->
           expect(fnResult).toBe(15)
           done()
 
@@ -79,7 +79,7 @@ describe 'Function', ->
             callback?()
           , 100
 
-        fn.callAsync 5, 10, ->
+        fn.callAsync null, 5, 10, ->
           expect(fnResult).toBe(15)
           done()
 
@@ -89,7 +89,7 @@ describe 'Function', ->
         fnResult = false
         fn = (a,b) -> fnResult = a + b
 
-        fn.applyAsync [5, 10], ->
+        fn.applyAsync null, [5, 10], ->
           expect(fnResult).toBe(15)
           done()
 
@@ -102,6 +102,6 @@ describe 'Function', ->
             callback?()
           , 100
 
-        fn.applyAsync [5, 10], ->
+        fn.applyAsync null, [5, 10], ->
           expect(fnResult).toBe(15)
           done()
