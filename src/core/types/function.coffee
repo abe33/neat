@@ -15,6 +15,8 @@ Function.signRE = /^function\s+([a-zA-Z_$][a-zA-Z0-9_$]*)*\(([^)]*)\)/
 SIGN_POSITION = 2
 # A string to match empty function signature.
 EMPTY_SIGNATURE = ''
+# A string to match the callback argument
+CALLBACK = 'callback'
 
 ##### Function.isAsync
 
@@ -22,7 +24,7 @@ EMPTY_SIGNATURE = ''
 #
 #     Function.isAsync ->             # false
 #     Function.isAsync (callback) ->  # true
-Function.isAsync = (fn) -> fn.signature().last() is 'callback'
+Function.isAsync = (fn) -> fn.signature().last() is CALLBACK
 
 ##### Function::isAsync
 
