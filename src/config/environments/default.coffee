@@ -18,4 +18,6 @@ module.exports = (config) ->
         conf: "#{config.root}/config/packages"
         tmp: "#{config.root}/.tmp"
 
+    templatesDirectoryName: 'templates'
+
     defaultLoggingEngine: 'console'

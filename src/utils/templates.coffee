@@ -23,9 +23,10 @@ _ = Neat.i18n.getHelper()
 render = (file, context, callback) ->
   # Arguments are reorganized when a context is not provided.
   [context, callback] = [{}, context] if typeof context is 'function'
+  dir = Neat.config.templatesDirectoryName
 
   # We first search for a template file.
-  findSiblingFile file, Neat.paths, "templates", (e, tplfile, a) ->
+  findSiblingFile file, Neat.paths, dir, (e, tplfile, a) ->
     # If either an error is raised or no sibling file can be found,
     # the function callback with an error.
     return callback? e if e?
