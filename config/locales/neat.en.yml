@@ -162,6 +162,6 @@ en:
         javascript_generated: Javascript successfully generated
 
     templates:
-      no_template: "#{missing}\n\nExplored paths:\n#{paths}"
+      no_template: "#{missing} can't be found\n\nExplored paths:\n#{paths}"
       template_for: "Template for #{file}"
       backend_for: 'Backend for #{ext}'

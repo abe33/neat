@@ -32,7 +32,7 @@ render = (file, context, callback) ->
     unless tplfile?
       msg = _('neat.templates.no_template',
               paths: a.join("\n"),
-              missing: _('neat.templates.template_for', file: tplfile))
+              missing: _('neat.templates.template_for', {file}))
       return callback? new Error msg
 
     puts "template found: #{tplfile.yellow}"
