@@ -321,3 +321,14 @@ describe 'Object::map', ->
     result = source.map (k,v) -> ["_#{k}_", v]
 
     expect(result).toEqual(_foo_: 10, _bar_: "foo")
+
+describe 'Object::each', ->
+  it 'should iterate over the object properties', ->
+    a = []
+    source =
+      foo: 10
+      bar: 20
+
+    source.each (k,v) -> a.push k
+
+    expect(a).toEqual(['foo', 'bar'])

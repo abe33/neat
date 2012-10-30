@@ -33,6 +33,15 @@ def Object, concat: (m) ->
 # `Object::has` alias.
 # def Object, contains: (value) -> @has value
 
+##### Object::each
+#
+# Iterates over the object enumerable properties and call
+# the passed-in function with the key-value pair.
+#
+#     {foo: 10, bar: 20}.each (k,v) ->
+#       # do something with k and v
+def Object, each: (f) -> f k,v for k,v of this if f?; this
+
 ##### Object::empty
 
 # Returns true if the current object don't contains any enumerable properties.
