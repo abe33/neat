@@ -17,7 +17,7 @@
     "node": "~0.8.0"
   },
   "scripts": {
-    "test": "cake compile; jasmine-node --coffee test"
+    "test": "cake compile; jasmine-node --coffee test/units"
   },
   "dependencies": {
     "colors": "*",
