@@ -1,5 +1,5 @@
 require '../../test_helper'
-require './package_helper'
+require '../../helpers/tasks/package_helper'
 Neat = require '../../../lib/neat'
 Packager = require '../../../lib/tasks/package/packager'
 
@@ -17,7 +17,7 @@ describe 'Packager', ->
   packagerWithFiles.call this, files, ->
     beforeEach -> addFileMatchers this
     it 'should apply the operators on the file', ->
-      path = "#{Neat.root}/packages/directory/fixtures.coffee"
+      path = "#{Neat.root}/.tests/packages/directory/fixtures.coffee"
       repl = (m,n) -> "#{files[parseInt n]}.coffee"
       exp = String(readFileSync exp)
         .squeeze('\n')

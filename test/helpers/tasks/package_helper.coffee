@@ -7,7 +7,7 @@ Neat.config =
   tasks:
     package:
       conf: "#{Neat.root}/src/config/packages"
-      dir: "#{Neat.root}/packages"
+      dir: "#{Neat.root}/.tests/packages"
       tmp: "#{Neat.root}/.tmp"
       operatorsMap:
         'annotate:class': op.annotateClass
