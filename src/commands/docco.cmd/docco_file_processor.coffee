@@ -4,6 +4,7 @@ fs = require 'fs'
 Neat = require '../../neat'
 DoccoPreProcessor = require './docco_pre_processor'
 DoccoTitleProcessor = require './docco_title_processor'
+SHOWDOWN = "#{Neat.neatRoot}/node_modules/docco/vendor/showdown"
 
 {puts, error, missing} = Neat.require 'utils/logs'
 {render} = Neat.require 'utils/templates'
@@ -12,7 +13,7 @@ _ = Neat.i18n.getHelper()
 
 try
   {parse} = require 'docco'
-  {Showdown:showdown} = require "#{Neat.neatRoot}/node_modules/docco/vendor/showdown"
+  {Showdown:showdown} = require SHOWDOWN
 catch e
   return error _('neat.commands.docco.missing_module',
                   missing: missing 'docco')

@@ -23,7 +23,7 @@ exports['lint'] = neatTask
     paths = Neat.paths
     dir = 'config'
     err = -> callback? 1
-    findSiblingFile path, paths, dir, 'json', asyncErrorTrap, err, (conf) ->
+    findSiblingFile path, paths, dir, 'json', asyncErrorTrap err, (conf, p) ->
       unless conf?
         error missing "config/tasks/lint.json"
         return callback? 1
@@ -43,7 +43,7 @@ exports['lint'] = neatTask
           noStdout: true
           stderr: (data) -> logs.push -> print data
 
-        run 'coffeelint', params, opts, (status) ->
+        run COFFEE_LINT, params, opts, (status) ->
           if status is 0
             print green '.'
             linted += 1
@@ -74,7 +74,7 @@ exports['lint'] = neatTask
                   #{allfiles} files,
                   #{green "#{linted} linted"},
                   #{red "#{failed} failed"},
-                  #{red "#{allerrors} error#{'s' if allerrors > 0}"}
+                  #{red "#{allerrors} error#{if allerrors>0 then 's' else ''}"}
                  ".squeeze()
 
             callback? 0
