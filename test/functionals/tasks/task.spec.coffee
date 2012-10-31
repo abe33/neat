@@ -45,7 +45,7 @@ withBundledProject 'foo', ->
           withCompiledFile hooksPath, hooksContent, ->
             ended = true
 
-      waitsFor progress(-> ended), 'Timed out', 1000
+      waitsFor progress(-> ended), 'hooks compilation', 5000
 
     describe 'and running cake test', ->
       it 'should trigger the hooks', (done) ->
