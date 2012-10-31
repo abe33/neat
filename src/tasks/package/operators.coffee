@@ -1,7 +1,7 @@
 Neat = require '../../neat'
 
 {parallel} = Neat.require 'async'
-{ensure} = Neat.require 'utils/files'
+{ensurePath} = Neat.require 'utils/files'
 {writeFile} = require 'fs'
 {compile:coffee} = require 'coffee-script'
 {parser, uglify:pro} = require 'uglify-js'
@@ -120,7 +120,7 @@ preventMissingConf 'directory',
 createDirectory = (buffer, conf, callback) ->
   newBuffer = {}
   path = "#{conf.dir}/#{conf.directory}"
-  ensure path, (err) ->
+  ensurePath path, (err) ->
     for p,c of buffer
       newBuffer[p.replace conf.dir, path] = c
 
@@ -192,7 +192,7 @@ uglify = (buffer, conf, callback) ->
 
 saveToFile = (buffer, conf, callback) ->
   gen = (path, content) -> (callback) ->
-    writeFile path, content, ->
+    writeFile path, content, (err) ->
       callback?()
 
   parallel (gen k,v for k,v of buffer), ->
