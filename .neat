@@ -10,3 +10,5 @@ repository:
   url: 'https://github.com/abe33/neat.git'
 engine:
   node: '~0.8.0'
+scripts:
+  test: 'jasmine-node --coffee test'

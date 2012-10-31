@@ -16,6 +16,9 @@
   "engine": {
     "node": "~0.8.0"
   },
+  "scripts": {
+    "test": "jasmine-node --coffee test"
+  },
   "dependencies": {
     "colors": "*",
     "commander": "*",
