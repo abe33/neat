@@ -6,6 +6,8 @@ Packager = require '../../../lib/tasks/package/packager'
 {readFileSync} = require 'fs'
 
 describe 'Packager', ->
+
+
   files = [
     "test/fixtures/tasks/package/require"
     "test/fixtures/tasks/package/exports"
