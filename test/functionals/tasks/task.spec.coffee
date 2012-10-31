@@ -47,6 +47,31 @@ withBundledProject 'foo', ->
 
       waitsFor progress(-> ended), 'Timed out', 1000
 
+    describe 'and running cake test', ->
+      it 'should trigger the hooks', (done) ->
+
+        run 'cake', ['test'], (status) ->
+          expect(status).toBe(0)
+          expect(inProject 'test.log')
+            .toContain("""hooks added
+                          beforeTask called
+                          afterTask called""")
+          done()
+
+    describe 'and running cake lint', ->
+      it 'should trigger the hooks', ->
+        ended = false
+        runs ->
+          run 'cake', ['lint'], (status) ->
+            expect(status).toBe(0)
+            expect(inProject 'test.log')
+              .toContain("""hooks added
+                            beforeTask called
+                            afterTask called""")
+            ended = true
+
+        waitsFor progress(-> ended), 'cake lint timed out', 5000
+
     describe 'and running cake foo', ->
       it 'should trigger the hooks', ->
         ended = false
@@ -133,33 +158,5 @@ withBundledProject 'foo', ->
             ended = true
 
         waitsFor progress(-> ended), 'cake version timed out', 5000
-
-    describe 'and running cake test', ->
-      it 'should trigger the hooks', ->
-        ended = false
-        runs ->
-          run 'cake', ['test'], (status) ->
-            expect(status).toBe(0)
-            expect(inProject 'test.log')
-              .toContain("""hooks added
-                            beforeTask called
-                            afterTask called""")
-            ended = true
-
-        waitsFor progress(-> ended), 'cake test timed out', 5000
-
-    describe 'and running cake lint', ->
-      it 'should trigger the hooks', ->
-        ended = false
-        runs ->
-          run 'cake', ['lint'], (status) ->
-            expect(status).toBe(0)
-            expect(inProject 'test.log')
-              .toContain("""hooks added
-                            beforeTask called
-                            afterTask called""")
-            ended = true
-
-        waitsFor progress(-> ended), 'cake lint timed out', 5000
 
 
