@@ -4,7 +4,10 @@ Neat = require '../../../neat'
 {run} = require '../../../utils/commands'
 {error, red, yellow, puts} = require '../../../utils/logs'
 
-JASMINE = "#{Neat.neatRoot}/node_modules/.bin/jasmine-node"
+paths = Neat.paths.map (p) -> "#{p}/node_modules/.bin/jasmine-node"
+paths = paths.filter (p) -> fs.existsSync p
+
+JASMINE = paths[0]
 
 module.exports = (config) ->
   config.engines.tests.jasmine = (name, test, callback) ->
