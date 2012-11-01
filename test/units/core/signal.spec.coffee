@@ -1,7 +1,7 @@
 require '../../test_helper'
 {Signal} = require '../../../lib/core'
 
-describe Signal, ->
+describe 'Signal', ->
   it 'should have listeners', ->
     signal = new Signal
     listener = ->
@@ -191,8 +191,8 @@ describe Signal, ->
         at the end of the dispatch'.squeeze(), ->
 
       ended = false
-      listener1 = (a, b, c, callback) -> setTimeout (-> callback()), 100
-      listener2 = (a, b, c, callback) -> setTimeout (-> callback()), 100
+      listener1 = (a, b, c, callback) -> setTimeout callback, 120
+      listener2 = (a, b, c, callback) -> setTimeout callback, 120
 
       signal = new Signal
 
@@ -202,9 +202,6 @@ describe Signal, ->
 
       runs ->
         signal.dispatch 1, 2, 3, ->
-          ms = new Date().valueOf() - ms
-
-          expect(ms >= 200).toBeTruthy()
           ended = true
 
       waitsFor progress(-> ended), 'Signal timed out', 1000
