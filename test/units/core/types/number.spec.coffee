@@ -125,17 +125,19 @@ describe 'Number::weeks', ->
     expect(45.weeks()).toBe(45*7*24*60*60*1000)
 
 describe 'Number::fromNow', ->
+  beforeEach -> addDateMatchers this
   it 'should returns a Date corresponding to the current time plus
       the current number as additional milliseconds'.squeeze(), ->
 
     d = new Date
     expect(2.hours().fromNow())
-      .toEqual(new Date d.getTime() + 2*60*60*1000)
+      .toEqualDate(new Date d.getTime() + 2*60*60*1000)
 
 describe 'Number::ago', ->
+  beforeEach -> addDateMatchers this
   it 'should return a Data corresponding to the current time minus
       the current number as milliseconds'.squeeze(), ->
 
     d = new Date
     expect(2.hours().ago())
-      .toEqual(new Date d.getTime() - 2*60*60*1000)
+      .toEqualDate(new Date d.getTime() - 2*60*60*1000)
