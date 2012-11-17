@@ -91,12 +91,13 @@ module, and a <code>mustache</code> file will be processed by the <code>mustache
         <tr>
           <td class='docs'><p>Arguments are reorganized when a context is not provided.</p></td>
           <td class='code'><pre>  <span class="punctuation">[</span>context<span class="punctuation">,</span> callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">,</span> context<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> context <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+  dir <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>templatesDirectoryName
 
 </pre></td>
         </tr>
         <tr>
           <td class='docs'><p>We first search for a template file.</p></td>
-          <td class='code'><pre>  findSiblingFile file<span class="punctuation">,</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>templates<span class="string_end">"</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>e<span class="punctuation">,</span> tplfile<span class="punctuation">,</span> a<span class="group_end">)</span></span> <span class="function">-></span>
+          <td class='code'><pre>  findSiblingFile file<span class="punctuation">,</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">,</span> dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>e<span class="punctuation">,</span> tplfile<span class="punctuation">,</span> a<span class="group_end">)</span></span> <span class="function">-></span>
 </pre></td>
         </tr>
         <tr>
@@ -105,8 +106,8 @@ the function callback with an error.</p></td>
           <td class='code'><pre>    <span class="keyword">return</span> callback<span class="operators">?</span> e <span class="keyword">if</span> e<span class="operators">?</span>
     <span class="keyword">unless</span> tplfile<span class="operators">?</span>
       msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.no_template<span class="string_end">'</span></span><span class="punctuation">,</span>
-              <span class="property">paths<span class='punctuation'>:</span></span> a<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span>
-              <span class="property">missing<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.template_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> tplfile<span class="group_end">)</span></span><span class="group_end">)</span></span>
+              <span class="property">paths:</span> a<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span>
+              <span class="property">missing:</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.template_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>file<span class="hash_end">}</span></span><span class="group_end">)</span></span><span class="group_end">)</span></span>
       <span class="keyword">return</span> callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> msg
 
     puts <span class="string"><span class="string_begin">"</span>template found: <span class="subst"><span class="subst_begin">#{</span>tplfile<span class="punctuation">.</span>yellow<span class="subst_end">}</span></span><span class="string_end">"</span></span>
@@ -143,7 +144,7 @@ for the template file.</p></td>
           <td class='docs'><p>The function callback if an error occured while reading the file.</p></td>
           <td class='code'><pre>
       <span class="keyword">if</span> err<span class="operators">?</span>
-        msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.file_access<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> tplfile<span class="punctuation">.</span>red<span class="punctuation">,</span> <span class="property">stack<span class='punctuation'>:</span></span> err<span class="punctuation">.</span>stack<span class="group_end">)</span></span>
+        msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.file_access<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file:</span> tplfile<span class="punctuation">.</span>red<span class="punctuation">,</span> <span class="property">stack:</span> err<span class="punctuation">.</span>stack<span class="group_end">)</span></span>
         callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> msg
 
 </pre></td>
@@ -190,8 +191,8 @@ It will serve as message of the error in the case no file was found.</p></td>
           <td class='docs'><p>If no sibling file can be found an error is raised.</p></td>
           <td class='code'><pre>  <span class="keyword">unless</span> tplfile<span class="operators">?</span>
     msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.no_template<span class="string_end">'</span></span><span class="punctuation">,</span>
-            <span class="property">paths<span class='punctuation'>:</span></span> paths<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span>
-            <span class="property">missing<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.template_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> tplfile<span class="group_end">)</span></span><span class="group_end">)</span></span>
+            <span class="property">paths:</span> paths<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span>
+            <span class="property">missing:</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.template_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file:</span> tplfile<span class="group_end">)</span></span><span class="group_end">)</span></span>
     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> msg
 
   puts <span class="string"><span class="string_begin">"</span>template found: <span class="subst"><span class="subst_begin">#{</span>tplfile<span class="punctuation">.</span>yellow<span class="subst_end">}</span></span><span class="string_end">"</span></span>
@@ -224,8 +225,8 @@ for the template file.</p></td>
     tpl <span class="operators">=</span> fs<span class="punctuation">.</span>readFileSync tplfile
   <span class="keyword">catch</span> e
     e<span class="punctuation">.</span>message <span class="operators">=</span> error _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.file_access<span class="string_end">'</span></span><span class="punctuation">,</span>
-                        <span class="property">path<span class='punctuation'>:</span></span> tplfile<span class="punctuation">.</span>red<span class="punctuation">,</span>
-                        <span class="property">stack<span class='punctuation'>:</span></span> e<span class="punctuation">.</span>message<span class="group_end">)</span></span>
+                        <span class="property">path:</span> tplfile<span class="punctuation">.</span>red<span class="punctuation">,</span>
+                        <span class="property">stack:</span> e<span class="punctuation">.</span>message<span class="group_end">)</span></span>
 
     <span class="keyword">throw</span> e
 </pre></td>

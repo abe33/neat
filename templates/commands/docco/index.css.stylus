@@ -278,6 +278,7 @@ table
         color: #009999
 
       .literal
+      .top_level
       .constant
       .char_range_begin
       .char_range_end

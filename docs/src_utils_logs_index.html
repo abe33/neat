@@ -357,7 +357,7 @@ corresponding to the <code>Logger.DEBUG</code> level.</p></td>
           <td class='docs'><p>Generates a message for a missing resources.</p></td>
           <td class='code'><pre>missing <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span> <span class="function">-></span>
   _ <span class="operators">=</span> <span class="global">require</span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
-  red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">missing<span class='punctuation'>:</span></span> path<span class="group_end">)</span></span>
+  red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">missing:</span> path<span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -371,7 +371,7 @@ corresponding to the <code>Logger.DEBUG</code> level.</p></td>
 of a Neat project.</p></td>
           <td class='code'><pre>notOutsideNeat <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>s<span class="group_end">)</span></span> <span class="function">-></span>
   _ <span class="operators">=</span> <span class="global">require</span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
-  red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">expression<span class='punctuation'>:</span></span> s<span class="group_end">)</span></span>
+  red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.outside_neat<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">expression:</span> s<span class="group_end">)</span></span>
 
 <span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>
   blue<span class="punctuation">,</span>
@@ -386,7 +386,7 @@ of a Neat project.</p></td>
   missing<span class="punctuation">,</span>
   notOutsideNeat<span class="punctuation">,</span>
   prefix<span class="punctuation">,</span>
-  print<span class="punctuation">,</span>
+  <span class="global">print</span><span class="punctuation">,</span>
   puts<span class="punctuation">,</span>
   red<span class="punctuation">,</span>
   warn<span class="punctuation">,</span>

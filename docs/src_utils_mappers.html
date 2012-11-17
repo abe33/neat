@@ -172,7 +172,7 @@ This mapper will be used against the value extracted from the element.</p>
           <td class='docs'><p>Returns the length of the element if this element provides either
 a property or a function named <code>length</code>.</p>
 
-<pre><code>a <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>world<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">0</span><span class="hash_end">}</span></span><span class="punctuation">]</span><span class="punctuation">.</span>map length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+<pre><code>a <span class="operators">=</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>world<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="number">0</span><span class="hash_end">}</span></span><span class="punctuation">]</span><span class="punctuation">.</span>map length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
 <span class="comment"># [3, 2, 1]</span></code></pre></td>
           <td class='code'><pre>length <span class="operators">=</span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="keyword">return</span> <span class="literal">undefined</span> <span class="keyword">unless</span> el<span class="operators">?</span>
@@ -189,9 +189,9 @@ a property or a function named <code>length</code>.</p>
           <td class='docs'><p>Returns the value of the property named <code>key</code> of the element.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
-  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
-  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> false<span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="literal">false</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
 <span class="punctuation">]</span><span class="punctuation">.</span>map property <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span>
 <span class="comment"># [10, 'bar', false]</span></code></pre>
 
@@ -199,9 +199,9 @@ a property or a function named <code>length</code>.</p>
 be used to map the value of the element's property.</p>
 
 <pre><code>a <span class="operators">=</span> <span class="punctuation">[</span>
-  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
-  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
-  <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> false<span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="number">10</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="hash_end">}</span></span><span class="punctuation">,</span>
+  <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="literal">false</span><span class="hash_end">}</span></span><span class="punctuation">,</span>
 <span class="punctuation">]</span><span class="punctuation">.</span>map property <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">typeof</span> el
 <span class="comment"># ['number', 'string', 'boolean']</span></code></pre></td>
           <td class='code'><pre>property <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>key<span class="punctuation">,</span> mapper<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span>

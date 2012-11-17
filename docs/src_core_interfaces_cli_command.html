@@ -66,7 +66,7 @@ to be used as a <code>neat</code> command.</p>
 <p>The rules are simple, the function must have a property named <code>aliases</code>
 which contains an array of strings.</p></td>
           <td class='code'><pre><span class="constant">CLICommand</span> <span class="operators">=</span>
-  <span class="property">__definition__<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="property">__definition__:</span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="keyword">typeof</span> o <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span> <span class="keyword">and</span> o<span class="punctuation">.</span>aliases<span class="operators">?</span> <span class="keyword">and</span>
     <span class="constant">Array</span><span class="punctuation">.</span>isArray<span class="group"><span class="group_begin">(</span>o<span class="punctuation">.</span>aliases<span class="group_end">)</span></span> <span class="keyword">and</span> o<span class="punctuation">.</span>aliases<span class="punctuation">.</span>every isType <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span>
 
