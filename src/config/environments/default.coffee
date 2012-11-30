@@ -6,18 +6,6 @@ module.exports = (config) ->
       databases: {}
       tests: {}
       logging: {}
-
-    tasks:
-      compile:
-        coffee: "#{config.neatRoot}/node_modules/.bin/coffee"
-        src: "#{config.root}/src"
-        lib: "#{config.root}/lib"
-        args: ['-c', '-o', "#{config.root}/lib", "#{config.root}/src"]
-      package:
-        dir: "#{config.root}/packages"
-        conf: "#{config.root}/config/packages"
-        tmp: "#{config.root}/.tmp"
-
+    tasks: {}
     templatesDirectoryName: 'templates'
-
     defaultLoggingEngine: 'console'
