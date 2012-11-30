@@ -1,7 +1,42 @@
-- includes = if @includes? then @includes.map((k) -> "\"#{k}\"").join(", ") else '"TODO: includes goes here"'
-- operators = if @operators? then @operators.map((k) -> "\"#{k}\"").join(", ") else '"TODO: operators goes here"'
+- includes = if @includes? then @includes.map((k) -> "\"#{k}\"").join(", ") else ''
+- operators = if @operators? then @operators.map((k) -> "\"#{k}\"").join(", ") else ''
+:coffeescript
+
 :plain
   name: "#{@name}"
-  package: "#{@package || 'TODO: package here'}"
-  includes: [#{includes}]
-  operators: [#{operators}]
+  includes: [
+    # Place the path to the files you want to process here.
+    # The path should ommit the extension and should be relative
+    # to the project root.
+    #{includes}
+  ]
+  operators: [
+    # Removes all the calls to require in a CoffeeScript file.
+    # 'strip:requires'
+
+    # Annotates a class with comments for all its members.
+    # 'annotate:class'
+
+    # Annotates the files with a header comment.
+    # 'annotate:file'
+
+    # Join all the files in the buffer in the order defined in
+    # the include parameter.
+    # 'join'
+
+    # Replace all node exports as package affectation.
+    # 'exports:package'
+
+    # Compiles the files in the buffer through CoffeeScript.
+    # 'compile'
+
+    # Runs uglification on the buffer.
+    # 'uglify'
+
+    # Allow to specify an alternate directory for the output files.
+    # 'create:directory'
+
+    # Create the output files in their respectives path.
+    # 'create:file'
+    #{operators}
+  ]
