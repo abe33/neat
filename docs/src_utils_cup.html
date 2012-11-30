@@ -84,7 +84,7 @@ Cup is to coffee what JSON is to javascript.
 
 <pre><code>read <span class="string"><span class="string_begin">'</span>foo: 10, bar: false<span class="string_end">'</span></span> <span class="comment"># {foo: 10, bar: false}</span></code></pre></td>
           <td class='code'><pre>read <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>str<span class="group_end">)</span></span> <span class="function">-></span>
-  <span class="keyword">try</span> eval compile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="punctuation">,</span> <span class="property">bare:</span><span class="literal">true</span> <span class="keyword">catch</span> e <span class="keyword">then</span> <span class="literal">null</span>
+  <span class="keyword">try</span> <span class="top_level">eval</span> compile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>str<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="punctuation">,</span> <span class="property">bare<span class='punctuation'>:</span></span><span class="literal">true</span> <span class="keyword">catch</span> e <span class="keyword">then</span> <span class="literal">null</span>
 
 </pre></td>
         </tr>
@@ -97,13 +97,13 @@ Cup is to coffee what JSON is to javascript.
           <td class='docs'><p>Returns a string that correspond to the <code>cup</code> translation of the given
 object.</p>
 
-<pre><code>write <span class="hash"><span class="hash_begin">{</span><span class="property">foo:</span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar:</span> <span class="literal">false</span><span class="hash_end">}</span></span>
+<pre><code>write <span class="hash"><span class="hash_begin">{</span><span class="property">foo<span class='punctuation'>:</span></span> <span class="number">10</span><span class="punctuation">,</span> <span class="property">bar<span class='punctuation'>:</span></span> <span class="literal">false</span><span class="hash_end">}</span></span>
 <span class="comment"># foo: 10</span>
 <span class="comment"># bar: false</span></code></pre></td>
-          <td class='code'><pre>write = (o) ->
-  s = ''
-  s += getMember k, v, o for k,v of o
-  s.replace(/\n\s*\n|\s*\n/g, '\n').strip().replace(/\t/g, "*")
+          <td class='code'><pre>write <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span>
+  s <span class="operators">=</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+  s <span class="operators">+</span><span class="operators">=</span> getMember k<span class="punctuation">,</span> v<span class="punctuation">,</span> o <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> o
+  s<span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span><span class="regexp">/<span class="escaped">\n</span><span class="escaped">\s</span><span class="regexp_operators">*</span><span class="escaped">\n</span>|<span class="escaped">\s</span><span class="regexp_operators">*</span><span class="escaped">\n</span>/g</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>strip<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span><span class="regexp">/<span class="escaped">\t</span>/g</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -132,8 +132,8 @@ value.</p></td>
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>string<span class="string_end">'</span></span> <span class="keyword">then</span> <span class="string"><span class="string_begin">"</span>'<span class="subst"><span class="subst_begin">#{</span>v<span class="subst_end">}</span></span>'<span class="string_end">"</span></span>
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>boolean<span class="string_end">'</span></span> <span class="keyword">then</span> v
     <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>object<span class="string_end">'</span></span>
-      <span class="keyword">if</span> <span class="property">RegExp:</span><span class="punctuation">:</span>isPrototypeOf v <span class="keyword">then</span> v
-      <span class="keyword">else</span> <span class="keyword">if</span> <span class="property">Array:</span><span class="punctuation">:</span>isPrototypeOf v
+      <span class="keyword">if</span> <span class="property">RegExp<span class='punctuation'>:</span></span><span class="punctuation">:</span>isPrototypeOf v <span class="keyword">then</span> v
+      <span class="keyword">else</span> <span class="keyword">if</span> <span class="property">Array<span class='punctuation'>:</span></span><span class="punctuation">:</span>isPrototypeOf v
         <span class="string"><span class="string_begin">"</span>[<span class="subst"><span class="subst_begin">#{</span><span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span>  <span class="subst"><span class="subst_begin">#{</span>getValue n<span class="punctuation">,</span> i<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> n <span class="keyword">in</span> v<span class="group_end">)</span></span><span class="punctuation">.</span>join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="escaped">\n</span>]<span class="string_end">"</span></span>
       <span class="keyword">else</span>
         <span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span>  <span class="subst"><span class="subst_begin">#{</span>getMember m<span class="punctuation">,</span>o<span class="punctuation">,</span>v<span class="punctuation">,</span>i<span class="operators">+</span><span class="string"><span class="string_begin">'</span>  <span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">for</span> m<span class="punctuation">,</span>o <span class="keyword">of</span> v<span class="group_end">)</span></span><span class="punctuation">.</span>join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>

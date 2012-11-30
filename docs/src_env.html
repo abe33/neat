@@ -133,7 +133,7 @@ the Neat environment.</p></td>
     <span class="constant">Neat</span><span class="punctuation">.</span>beforeCommand<span class="punctuation">.</span>dispatch <span class="function">-></span>
       c<span class="punctuation">.</span>apply <span class="literal">null</span><span class="punctuation">,</span> args<span class="punctuation">.</span>concat <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
         <span class="keyword">if</span> err<span class="operators">?</span>
-          error _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.error<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">msg:</span> err<span class="punctuation">.</span>message<span class="punctuation">,</span> <span class="property">stack:</span> err<span class="punctuation">.</span>stack<span class="group_end">)</span></span>
+          error _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.error<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">msg<span class='punctuation'>:</span></span> err<span class="punctuation">.</span>message<span class="punctuation">,</span> <span class="property">stack<span class='punctuation'>:</span></span> err<span class="punctuation">.</span>stack<span class="group_end">)</span></span>
         <span class="constant">Neat</span><span class="punctuation">.</span>afterCommand<span class="punctuation">.</span>dispatch callback
 
 </pre></td>
@@ -148,8 +148,8 @@ register <span class="operators">=</span> <span class="group"><span class="group
           <td class='docs'><p>Passed-in commands are duck tested against the <code>CLICommand</code> interface.</p></td>
           <td class='code'><pre>  <span class="keyword">unless</span> c<span class="punctuation">.</span>quacksLike <span class="constant">CLICommand</span>
     <span class="keyword">return</span> error _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.invalid_command<span class="string_end">'</span></span><span class="punctuation">,</span>
-                   <span class="property">command:</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.no_register<span class="string_end">'</span></span><span class="punctuation">,</span>
-                              <span class="property">command:</span> k<span class="group_end">)</span></span><span class="punctuation">.</span>red<span class="group_end">)</span></span>
+                   <span class="property">command<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.no_register<span class="string_end">'</span></span><span class="punctuation">,</span>
+                              <span class="property">command<span class='punctuation'>:</span></span> k<span class="group_end">)</span></span><span class="punctuation">.</span>red<span class="group_end">)</span></span>
 
   <span class="keyword">for</span> alias <span class="keyword">in</span> c<span class="punctuation">.</span>aliases
     pr<span class="punctuation">.</span>command<span class="group"><span class="group_begin">(</span>alias<span class="group_end">)</span></span><span class="punctuation">.</span>description<span class="group"><span class="group_begin">(</span>c<span class="punctuation">.</span>description<span class="group_end">)</span></span><span class="punctuation">.</span>action commandTrigger c
@@ -179,8 +179,8 @@ register <span class="operators">=</span> <span class="group"><span class="group
           <td class='code'><pre>pr<span class="punctuation">.</span>command<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>action <span class="group"><span class="group_begin">(</span>command<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="constant">Neat</span><span class="punctuation">.</span>initEnvironment <span class="function">-></span>
     error _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.missing_command<span class="string_end">'</span></span><span class="punctuation">,</span>
-            <span class="property">missing:</span> missing _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.command<span class="string_end">'</span></span><span class="punctuation">,</span>
-                               <span class="property">command:</span> command<span class="group_end">)</span></span><span class="group_end">)</span></span>
+            <span class="property">missing<span class='punctuation'>:</span></span> missing _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.command<span class="string_end">'</span></span><span class="punctuation">,</span>
+                               <span class="property">command<span class='punctuation'>:</span></span> command<span class="group_end">)</span></span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>

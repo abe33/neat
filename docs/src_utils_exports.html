@@ -81,8 +81,8 @@ the resulting object will contains a property named <code>json:parse</code>.</p>
 be available in the resulting object with the namespace alone.</p>
 
 <pre><code>namespace <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span>
-  <span class="property">index:</span> <span class="function">-></span> <span class="comment"># ...</span>
-  <span class="property">bar:</span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">index<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">bar<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
 
 <span class="comment"># { foo: [Function], 'foo:bar': [Function] }</span></code></pre></td>
           <td class='code'><pre>namespace <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>namespace<span class="punctuation">,</span> <span class="global">exports</span><span class="group_end">)</span></span> <span class="function">-></span>
@@ -112,7 +112,7 @@ in a project and initialize the Neat command line tool with them.</p>
 <span class="hash"><span class="hash_begin">{</span>combine<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>../utils/exports<span class="string_end">"</span></span>
 
 paths <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span> <span class="function">-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/lib/generators<span class="string_end">"</span></span>
-<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> combine <span class="regexp">/\.gen$/, paths</code></pre></td>
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> combine <span class="regexp">/<span class="escaped">\.</span>gen<span class="regexp_operators">$</span>/</span><span class="punctuation">,</span> paths</code></pre></td>
           <td class='code'><pre>combine <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>filePattern<span class="punctuation">,</span> paths<span class="group_end">)</span></span> <span class="function">-></span>
   files <span class="operators">=</span> findSync filePattern<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span><span class="punctuation">,</span> paths
 

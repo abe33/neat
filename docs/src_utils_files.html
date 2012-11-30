@@ -299,9 +299,9 @@ both the provided <code>pattern</code> and <code>ext</code>.</p>
 <p>For instance, the following call will returns the path to all the commands
 in the <code>lib/commands</code> directories of a Neat project.</p>
 
-<pre><code>paths = Neat.paths.map (p)-> "#{p}/lib/commands"
-find /\.cmd$/, 'js', paths, (err, commands) ->
-  # do something with commands</code></pre>
+<pre><code>paths <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span><span class="function">-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/lib/commands<span class="string_end">"</span></span>
+find <span class="regexp">/<span class="escaped">\.</span>cmd<span class="regexp_operators">$</span>/</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span><span class="punctuation">,</span> paths<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> commands<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="comment"># do something with commands</span></code></pre>
 
 <p>The <code>pattern</code> argument is optional and match against the <code>basename</code>
 of the file.</p></td>
@@ -446,7 +446,7 @@ both the provided <code>pattern</code> and <code>ext</code>.</p>
 in the <code>lib/commands</code> directories of a Neat project.</p>
 
 <pre><code>paths <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span><span class="function">-></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>/lib/commands<span class="string_end">"</span></span>
-commands <span class="operators">=</span> find <span class="regexp">/\.cmd$/, 'js', paths</code></pre>
+commands <span class="operators">=</span> find <span class="regexp">/<span class="escaped">\.</span>cmd<span class="regexp_operators">$</span>/</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>js<span class="string_end">'</span></span><span class="punctuation">,</span> paths</code></pre>
 
 <p>The <code>pattern</code> argument is optional and match against the <code>basename</code>
 of the file.</p></td>
@@ -672,13 +672,13 @@ Note that, unlike the <code>basename</code> function, all the extensions
 are removed from the path. It allow to use additional extensions
 in file names and at the same time to don't have to duplicate this
 additional extensions in the searched files.</p></td>
-          <td class='code'><pre>    start = noExtension path
-    base = basename start
-    dif = relative pathRoot, resolve start, ".."
-    newPath = dif.replace /^[^\/]+/, dir
-    exts = '*' if not exts? or
-                  exts.empty() or
-                  (exts.length is 1 and exts[0] is '*')
+          <td class='code'><pre>    start <span class="operators">=</span> noExtension path
+    base <span class="operators">=</span> basename start
+    dif <span class="operators">=</span> relative pathRoot<span class="punctuation">,</span> resolve start<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
+    newPath <span class="operators">=</span> dif<span class="punctuation">.</span>replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_range"><span class="char_range_begin">[</span>^<span class="escaped">\/</span><span class="char_range_end">]</span></span><span class="regexp_operators">+</span>/</span><span class="punctuation">,</span> dir
+    exts <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>*<span class="string_end">'</span></span> <span class="keyword">if</span> <span class="keyword">not</span> exts<span class="operators">?</span> <span class="keyword">or</span>
+                  exts<span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">or</span>
+                  <span class="group"><span class="group_begin">(</span>exts<span class="punctuation">.</span>length <span class="keyword">is</span> <span class="number">1</span> <span class="keyword">and</span> exts<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>*<span class="string_end">'</span></span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>
@@ -846,10 +846,10 @@ Note that, unlike the <code>basename</code> function, all the extensions
 are removed from the path. It allow to use additional extensions
 in file names and at the same time to don't have to duplicate this
 additional extensions in the searched files.</p></td>
-          <td class='code'><pre>  start = noExtension path
-  base = basename start
-  dif = relative pathRoot, resolve start, ".."
-  newPath = dif.replace /^[^\/]+/, dir
+          <td class='code'><pre>  start <span class="operators">=</span> noExtension path
+  base <span class="operators">=</span> basename start
+  dif <span class="operators">=</span> relative pathRoot<span class="punctuation">,</span> resolve start<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>..<span class="string_end">"</span></span>
+  newPath <span class="operators">=</span> dif<span class="punctuation">.</span>replace <span class="regexp">/<span class="regexp_operators">^</span><span class="char_range"><span class="char_range_begin">[</span>^<span class="escaped">\/</span><span class="char_range_end">]</span></span><span class="regexp_operators">+</span>/</span><span class="punctuation">,</span> dir
 
 </pre></td>
         </tr>
@@ -1046,11 +1046,11 @@ and then moving up along its lineage.</p>
           <td class='docs'><p>Removes all the extensions from a file name.</p>
 
 <pre><code>noExtension <span class="string"><span class="string_begin">'</span>foo.bar.baz<span class="string_end">'</span></span> <span class="comment"># 'foo'</span></code></pre></td>
-          <td class='code'><pre>noExtension = (o) ->
-  p = o.split '/'
-  last = p.pop()
-  last = last.replace /([^/.]+)\..+$/, "$1"
-  p.concat(last).join('/')
+          <td class='code'><pre>noExtension <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>o<span class="group_end">)</span></span> <span class="function">-></span>
+  p <span class="operators">=</span> o<span class="punctuation">.</span>split <span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span>
+  last <span class="operators">=</span> p<span class="punctuation">.</span>pop<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  last <span class="operators">=</span> last<span class="punctuation">.</span>replace <span class="regexp">/<span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^/.<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\.</span>.<span class="regexp_operators">+</span><span class="regexp_operators">$</span>/</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>$1<span class="string_end">"</span></span>
+  p<span class="punctuation">.</span>concat<span class="group"><span class="group_begin">(</span>last<span class="group_end">)</span></span><span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span><span class="group_end">)</span></span>
 
 </pre></td>
         </tr>

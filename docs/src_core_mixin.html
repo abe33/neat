@@ -53,10 +53,10 @@
 the mixins functionalities.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="property">toSource:</span> <span class="function">-></span> <span class="comment"># ...</span>
-  <span class="property">fromSource:</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
 
-<span class="class"><span class="keyword">class</span> Dummy</span>
+<span class="class"><span class="keyword">class</span> <span class='title'>Dummy</span></span>
   <span class="property">@include</span> <span class="constant">Serializable</span></code></pre></td>
           <td class='code'><pre><span class="constant">Mixin</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>mixin<span class="group_end">)</span></span> <span class="function">-></span>
 </pre></td>
@@ -67,7 +67,7 @@ The mixin <code>included</code> hook is called whenever the mixin
 is used to decorate a class.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="property">included:</span> <span class="group"><span class="group_begin">(</span>ctor<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="property">included<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>ctor<span class="group_end">)</span></span> <span class="function">-></span>
     <span class="comment"># Do something with ctor</span></code></pre></td>
           <td class='code'><pre>  included <span class="operators">=</span> mixin<span class="punctuation">.</span>included
 
@@ -110,10 +110,10 @@ of the decoration process of the <code>Module.include</code> method.</p></td>
 decorated with the current mixin.</p>
 
 <pre><code><span class="constant">Serializable</span> <span class="operators">=</span> <span class="constant">Mixin</span>
-  <span class="property">toSource:</span> <span class="function">-></span> <span class="comment"># ...</span>
-  <span class="property">fromSource:</span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">toSource<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="comment"># ...</span>
+  <span class="property">fromSource<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>string<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># ...</span>
 
-<span class="class"><span class="keyword">class</span> Dummy</span>
+<span class="class"><span class="keyword">class</span> <span class='title'>Dummy</span></span>
   <span class="property">@include</span> <span class="constant">Serializable</span>
 
 dummy <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Dummy</span>

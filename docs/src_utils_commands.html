@@ -221,22 +221,22 @@ some limitations occurs:</p>
 
 <p>For instance, in the following command line input:</p>
 
-<pre><code>neat g project dummy <span class="property">author:</span><span class="string"><span class="string_begin">"</span>John Doe<span class="string_end">"</span></span> <span class="property">keywords:</span>foo<span class="punctuation">,</span>bar</code></pre>
+<pre><code>neat g project dummy <span class="property">author<span class='punctuation'>:</span></span><span class="string"><span class="string_begin">"</span>John Doe<span class="string_end">"</span></span> <span class="property">keywords<span class='punctuation'>:</span></span>foo<span class="punctuation">,</span>bar</code></pre>
 
 <p>The hash arguments, once parsed by the <code>hashArguments</code> function,
 will look like:</p>
 
-<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">author:</span> <span class="string"><span class="string_begin">'</span>John Doe<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">keywords:</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">]</span><span class="hash_end">}</span></span></code></pre>
+<pre><code><span class="hash"><span class="hash_begin">{</span><span class="property">author<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>John Doe<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">keywords<span class='punctuation'>:</span></span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">]</span><span class="hash_end">}</span></span></code></pre>
 
 <p>Basic types such <code>String</code>, <code>Number</code>, <code>Boolean</code> and <code>Array</code> are supported
 as arguments value:</p>
 
-<pre><code><span class="property">integer:</span><span class="number">0</span>                  <span class="comment"># 0</span>
-<span class="property">float:</span><span class="number">0.5</span>                  <span class="comment"># 0.5</span>
-<span class="property">string:</span>foo                 <span class="comment"># 'foo'</span>
-<span class="property">stringWithSpace:</span><span class="string"><span class="string_begin">"</span>foo bar<span class="string_end">"</span></span>  <span class="comment"># 'foo bar'</span>
-<span class="property">booleans:</span><span class="literal">yes</span>               <span class="comment"># true</span>
-<span class="property">arrays:</span>foo<span class="punctuation">,</span><span class="number">10</span><span class="punctuation">,</span><span class="literal">false</span>        <span class="comment"># ['foo', 10, false]</span></code></pre>
+<pre><code><span class="property">integer<span class='punctuation'>:</span></span><span class="number">0</span>                  <span class="comment"># 0</span>
+<span class="property">float<span class='punctuation'>:</span></span><span class="number">0.5</span>                  <span class="comment"># 0.5</span>
+<span class="property">string<span class='punctuation'>:</span></span>foo                 <span class="comment"># 'foo'</span>
+<span class="property">stringWithSpace<span class='punctuation'>:</span></span><span class="string"><span class="string_begin">"</span>foo bar<span class="string_end">"</span></span>  <span class="comment"># 'foo bar'</span>
+<span class="property">booleans<span class='punctuation'>:</span></span><span class="literal">yes</span>               <span class="comment"># true</span>
+<span class="property">arrays<span class='punctuation'>:</span></span>foo<span class="punctuation">,</span><span class="number">10</span><span class="punctuation">,</span><span class="literal">false</span>        <span class="comment"># ['foo', 10, false]</span></code></pre>
 
 <p>As you may have notice, booleans are available with various aliases:</p>
 
@@ -244,25 +244,25 @@ as arguments value:</p>
 <li><code>true</code>: <code>true</code>, <code>on</code>, <code>yes</code></li>
 <li><code>false</code>: <code>false</code>, <code>off</code>, <code>no</code></li>
 </ul></td>
-          <td class='code'><pre>hashArguments = (ary...) ->
-  ary = ary.flatten()
-  hash = {}
-  parse = (v) ->
-    switch true
-      when /^(false|no|off)$/.test v then false
-      when /^(true|yes|on)$/.test v then true
-      when /^(-*)\d+$/g.test v then parseInt v
-      when /^(-*)\d+\.\d+$/g.test v then parseFloat v
-      when ',' in String(v) then parse sub for sub in v.split ','
-      else v.replace /^('|")|('|")$/g, ''
+          <td class='code'><pre>hashArguments <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>ary<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span>
+  ary <span class="operators">=</span> ary<span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  hash <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+  parse <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>v<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">switch</span> <span class="literal">true</span>
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>false|no|off<span class="regexp_operators">)</span><span class="regexp_operators">$</span>/</span><span class="punctuation">.</span>test v <span class="keyword">then</span> <span class="literal">false</span>
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>true|yes|on<span class="regexp_operators">)</span><span class="regexp_operators">$</span>/</span><span class="punctuation">.</span>test v <span class="keyword">then</span> <span class="literal">true</span>
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>-<span class="regexp_operators">*</span><span class="regexp_operators">)</span><span class="escaped">\d</span><span class="regexp_operators">+</span><span class="regexp_operators">$</span>/g</span><span class="punctuation">.</span>test v <span class="keyword">then</span> <span class="top_level">parseInt</span> v
+      <span class="keyword">when</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>-<span class="regexp_operators">*</span><span class="regexp_operators">)</span><span class="escaped">\d</span><span class="regexp_operators">+</span><span class="escaped">\.</span><span class="escaped">\d</span><span class="regexp_operators">+</span><span class="regexp_operators">$</span>/g</span><span class="punctuation">.</span>test v <span class="keyword">then</span> <span class="top_level">parseFloat</span> v
+      <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>,<span class="string_end">'</span></span> <span class="keyword">in</span> <span class="constant">String</span><span class="group"><span class="group_begin">(</span>v<span class="group_end">)</span></span> <span class="keyword">then</span> parse sub <span class="keyword">for</span> sub <span class="keyword">in</span> v<span class="punctuation">.</span>split <span class="string"><span class="string_begin">'</span>,<span class="string_end">'</span></span>
+      <span class="keyword">else</span> v<span class="punctuation">.</span>replace <span class="regexp">/<span class="regexp_operators">^</span><span class="regexp_operators">(</span>'|"<span class="regexp_operators">)</span>|<span class="regexp_operators">(</span>'|"<span class="regexp_operators">)</span><span class="regexp_operators">$</span>/g</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
 
-  for expr in ary
-    (hash[k] = true; continue) unless ':' in expr
-    [k,v] = expr.split ':'
-    if v.empty()
-      throw new Error _('neat.commands.invalid_arguments', expression: expr)
+  <span class="keyword">for</span> expr <span class="keyword">in</span> ary
+    <span class="group"><span class="group_begin">(</span>hash<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> <span class="literal">true</span>; <span class="keyword">continue</span><span class="group_end">)</span></span> <span class="keyword">unless</span> <span class="string"><span class="string_begin">'</span>:<span class="string_end">'</span></span> <span class="keyword">in</span> expr
+    <span class="punctuation">[</span>k<span class="punctuation">,</span>v<span class="punctuation">]</span> <span class="operators">=</span> expr<span class="punctuation">.</span>split <span class="string"><span class="string_begin">'</span>:<span class="string_end">'</span></span>
+    <span class="keyword">if</span> v<span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.invalid_arguments<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">expression<span class='punctuation'>:</span></span> expr<span class="group_end">)</span></span>
 
-    hash[k] = parse v
+    hash<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="operators">=</span> parse v
 
   hash
 
@@ -291,10 +291,10 @@ as arguments value:</p>
           <td class='docs'><p>Register a cake task that will run through Neat.</p>
 
 <pre><code><span class="global">exports</span><span class="punctuation">.</span>taskName <span class="operators">=</span> neatTask
-  <span class="property">name:</span> <span class="string"><span class="string_begin">'</span>taskName<span class="string_end">'</span></span>                <span class="comment"># required</span>
-  <span class="property">description:</span> <span class="string"><span class="string_begin">'</span>task description<span class="string_end">'</span></span> <span class="comment"># optional</span>
-  <span class="property">environment:</span> <span class="string"><span class="string_begin">'</span>production<span class="string_end">'</span></span>       <span class="comment"># optional</span>
-  <span class="property">action:</span> <span class="function">-></span> <span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span>                  <span class="comment"># required</span></code></pre></td>
+  <span class="property">name<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>taskName<span class="string_end">'</span></span>                <span class="comment"># required</span>
+  <span class="property">description<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>task description<span class="string_end">'</span></span> <span class="comment"># optional</span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>production<span class="string_end">'</span></span>       <span class="comment"># optional</span>
+  <span class="property">action<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span>                  <span class="comment"># required</span></code></pre></td>
           <td class='code'><pre>neatTask <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>options<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="hash"><span class="hash_begin">{</span>name<span class="punctuation">,</span> action<span class="punctuation">,</span> description<span class="punctuation">,</span> environment<span class="hash_end">}</span></span> <span class="operators">=</span> options
 
@@ -332,8 +332,8 @@ The <code>callback</code> is called on the command exit if provided.</p>
 or register your own output listeners using the <code>options</code> hash.</p>
 
 <pre><code>options <span class="operators">=</span>
-  <span class="property">noStdout:</span> <span class="literal">true</span>
-  <span class="property">stdError:</span> <span class="group"><span class="group_begin">(</span>data<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># Do something with data</span>
+  <span class="property">noStdout<span class='punctuation'>:</span></span> <span class="literal">true</span>
+  <span class="property">stdError<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>data<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># Do something with data</span>
 
 run <span class="string"><span class="string_begin">'</span>coffee<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>src/*<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">,</span> options<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
   <span class="global">console</span><span class="punctuation">.</span>log <span class="string"><span class="string_begin">"</span>command exited with status <span class="subst"><span class="subst_begin">#{</span>status<span class="subst_end">}</span></span><span class="string_end">"</span></span></code></pre></td>
