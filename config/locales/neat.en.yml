@@ -22,6 +22,7 @@ en:
     tasks:
       no_name: Tasks must have a name
       no_action: Tasks must have an action
+      alias: "#{task} alias"
 
       compile:
         description: Compiles the sources
