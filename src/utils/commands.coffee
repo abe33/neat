@@ -167,6 +167,15 @@ neatTask = (options) ->
   task name, description, taskAction
   action
 
+##### neatTaskAlias
+neatTaskAlias = (source, alias) ->
+  neatTask
+    name: alias
+    description: _('neat.tasks.alias', task: source)
+    action: (callback) ->
+      task = Neat.task(source)
+      task callback
+
 ##### run
 
 # Runs the specified `command` with the passed-in `params`.
@@ -212,6 +221,7 @@ module.exports = {
   hashArguments,
   help,
   neatTask,
+  neatTaskAlias,
   run,
   usages,
 }
