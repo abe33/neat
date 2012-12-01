@@ -1,8 +1,10 @@
-Neat = require '../../neat'
-
-{writeFile} = require 'fs'
+glob = require 'glob'
 {compile} = require 'coffee-script'
-{chain} = Neat.require 'async'
+{writeFile} = require 'fs'
+{resolve} = require 'path'
+
+Neat = require '../../neat'
+{chain, parallel} = Neat.require 'async'
 {readFiles, ensure} = Neat.require 'utils/files'
 _ = Neat.i18n.getHelper()
 
@@ -28,10 +30,25 @@ class Packager
     operator.validate? @conf for operator in @operators
 
   process: (callback) ->
-    @conf.includes = @conf.includes.map (p) -> "#{Neat.root}/#{p}.coffee"
-    readFiles @conf.includes, (err, res) =>
-      chain.call null, @operators, res, @conf, (buffer) =>
-        @result = buffer
-        callback?()
+    @find @conf.includes, (err, files) =>
+      readFiles files, (err, res) =>
+        chain.call null, @operators, res, @conf, (buffer) =>
+          @result = buffer
+          callback?()
+
+  find: (paths, callback) ->
+    files = []
+    f = (p) -> (cb) ->
+      if p.indexOf('*') is -1
+        p = resolve Neat.root, "#{p}.coffee"
+        return cb files.push p
+      else
+        glob p, {}, (err, fs) ->
+          files = files.concat fs
+          cb()
+
+    parallel (f p for p in paths), ->
+      callback null, files.map (f) -> resolve Neat.root, f
+
 
 module.exports = Packager
