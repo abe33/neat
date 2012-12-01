@@ -26,6 +26,7 @@ project = (generator, name, args..., callback) ->
 
   dirs = [
     "config",
+    "config/packages",
     "lib",
     "src",
     "src/commands",
@@ -44,7 +45,7 @@ project = (generator, name, args..., callback) ->
   ]
 
   files = [
-    ["config/.gitkeep"],
+    ["config/packages/compile.cup", true],
     ["lib/.gitkeep"],
     ["src/commands/.gitkeep"],
     ["src/config/environments/default.coffee", true]

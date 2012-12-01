@@ -38,7 +38,8 @@ withBundledProject 'foo', ->
 
       waitsFor progress(-> ended), 'Timed out', 1000
 
-     describe 'and running cake compile', ->
+    # FIXME compilation hooks are disabled until a better solution is found
+    xdescribe 'and running cake compile', ->
       it 'should trigger the hooks', (done) ->
         run 'cake', ['compile'], (status) ->
           expect(status).toBe(0)

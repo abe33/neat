@@ -83,6 +83,9 @@
     <a href='#neattask'>neatTask</a>
   </li>
   <li class='level1'>
+    <a href='#neattaskalias'>neatTaskAlias</a>
+  </li>
+  <li class='level1'>
     <a href='#run'>run</a>
   </li>
   <li class='level1'>
@@ -317,6 +320,18 @@ as arguments value:</p>
 </pre></td>
         </tr>
         <tr>
+          <td class='docs'><h4 id='neattaskalias'>neatTaskAlias</h4></td>
+          <td class='code'><pre>neatTaskAlias <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>source<span class="punctuation">,</span> alias<span class="group_end">)</span></span> <span class="function">-></span>
+  neatTask
+    <span class="property">name<span class='punctuation'>:</span></span> alias
+    <span class="property">description<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.alias<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">task<span class='punctuation'>:</span></span> source<span class="group_end">)</span></span>
+    <span class="property">action<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+      task <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>task<span class="group"><span class="group_begin">(</span>source<span class="group_end">)</span></span>
+      task callback
+
+</pre></td>
+        </tr>
+        <tr>
           <td class='docs'><h4 id='run'>run</h4></td>
           <td class='code'><pre>
 </pre></td>
@@ -371,6 +386,7 @@ run <span class="string"><span class="string_begin">'</span>coffee<span class="s
   hashArguments<span class="punctuation">,</span>
   help<span class="punctuation">,</span>
   neatTask<span class="punctuation">,</span>
+  neatTaskAlias<span class="punctuation">,</span>
   run<span class="punctuation">,</span>
   usages<span class="punctuation">,</span>
 <span class="hash_end">}</span></span>

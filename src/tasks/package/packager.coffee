@@ -31,6 +31,7 @@ class Packager
 
   process: (callback) ->
     @find @conf.includes, (err, files) =>
+      @conf.files = files
       readFiles files, (err, res) =>
         chain.call null, @operators, res, @conf, (buffer) =>
           @result = buffer
