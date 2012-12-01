@@ -10,8 +10,10 @@ module.exports = (config) ->
       'annotate:file': op.annotateFile
       'compile': op.compile
       'create:directory': op.createDirectory
-      'create:file': op.saveToFile
+      'create:file': op.createFile
       'exports:package': op.exportsToPackage
       'join': op.join
+      'path:change': op.pathChange
+      'path:reset': op.pathReset
       'strip:requires': op.stripRequires
       'uglify': op.uglify

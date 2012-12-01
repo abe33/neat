@@ -20,8 +20,18 @@
     # Annotates the files with a header comment.
     # 'annotate:file'
 
+    # Change the path of the files in the buffer with the path
+    # defined in the path parameter.
+    # For a file such '{root}/src/dir/file.coffee' and a path such as 'lib',
+    # the resulting path will be '{root}/lib/dir/file.coffee'
+    # 'path:change'
+
+    # Remove and then recreate the defined path.
+    # 'path:reset'
+
     # Join all the files in the buffer in the order defined in
-    # the include parameter.
+    # the include parameter and changed the set the filename
+    # with the specified name parameter.
     # 'join'
 
     # Replace all node exports as package affectation.
@@ -33,7 +43,9 @@
     # Runs uglification on the buffer.
     # 'uglify'
 
-    # Allow to specify an alternate directory for the output files.
+    # Create a sub-directory of the packages folder defined with
+    # the directory parameter. All the paths in the buffer will be
+    # changed to be included in the path
     # 'create:directory'
 
     # Create the output files in their respectives path.

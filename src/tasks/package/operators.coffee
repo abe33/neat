@@ -1,8 +1,9 @@
-Neat = require '../../neat'
-
-{parallel} = Neat.require 'async'
-{ensurePath} = Neat.require 'utils/files'
+{resolve} = require 'path'
 {writeFile} = require 'fs'
+
+Neat = require '../../neat'
+{parallel} = Neat.require 'async'
+{ensurePath, rm, ensurePath} = Neat.require 'utils/files'
 {compile:coffee} = require 'coffee-script'
 {parser, uglify:pro} = require 'uglify-js'
 _ = Neat.i18n.getHelper()
@@ -176,27 +177,47 @@ join = (buffer, conf, callback) ->
   newBuffer = {}
   newPath = "#{conf.dir}/#{conf.name}.coffee"
   newContent = ''
-  newContent += buffer[k] for k in conf.includes
+  newContent += buffer[k] for k of buffer
   newBuffer[newPath] = newContent
 
   callback?(newBuffer, conf)
 
 uglify = (buffer, conf, callback) ->
+  newBuffer = {}
   for path, content of buffer
     ast = parser.parse(content)
     ast = pro.ast_mangle(ast)
     ast = pro.ast_squeeze(ast)
-    buffer[path] = pro.gen_code(ast)
+    newBuffer[path.replace /\.js$/g, '.min.js'] = pro.gen_code(ast)
 
-  callback?(buffer, conf)
+  callback?(newBuffer, conf)
 
-saveToFile = (buffer, conf, callback) ->
+createFile = (buffer, conf, callback) ->
   gen = (path, content) -> (callback) ->
-    writeFile path, content, (err) ->
-      callback?()
+    dir = resolve path, '..'
+    ensurePath dir, (err) ->
+      writeFile path, content, (err) ->
+        callback?()
 
   parallel (gen k,v for k,v of buffer), ->
     callback?(buffer, conf)
+
+preventMissingConf 'path',
+pathChange = (buffer, conf, callback) ->
+  newBuffer = {}
+  for path, content of buffer
+    rel = path.replace "#{Neat.root}/", ''
+    path = resolve Neat.root, conf.path, rel.split('/')[1..-1].join('/')
+    newBuffer[path] = content
+
+  callback?(newBuffer, conf)
+
+preventMissingConf 'path',
+pathReset = (buffer, conf, callback) ->
+  path = resolve Neat.root, conf.path
+  rm path, (err) ->
+    ensurePath path, (err) ->
+      callback?(buffer, conf)
 
 stripRequires = (buffer, conf, callback) ->
   for path, content of buffer
@@ -213,6 +234,8 @@ module.exports = {
   exportsToPackage
   join
   uglify
-  saveToFile
+  createFile
+  pathChange
+  pathReset
   stripRequires
 }
