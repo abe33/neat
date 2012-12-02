@@ -1,5 +1,5 @@
 fs = require 'fs'
-{resolve} = require 'path'
+{resolve, relative} = require 'path'
 Neat = require '../neat'
 
 {describe, usages} = Neat.require 'utils/commands'
@@ -22,8 +22,10 @@ entities =
     dir: 'test/helpers'
     ext: '_helper.coffee'
 
+context = {relative, testPath: resolve Neat.root, 'test'}
+
 usages 'neat generate source <name> [options]',
 describe _('neat.commands.generate.source.description'),
-source = multiEntity __filename, entities
+source = multiEntity __filename, entities, context
 
 exports['source'] = source

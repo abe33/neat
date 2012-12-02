@@ -1,7 +1,7 @@
 # This file contains some utility to create parameterized generators.
 
 fs = require 'fs'
-{resolve, relative} = require 'path'
+{resolve} = require 'path'
 Neat = require '../neat'
 
 {ensurePathSync, noExtension} = Neat.require 'utils/files'
@@ -81,11 +81,8 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
       dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
       path = resolve dir, "#{name}#{ext}"
       partial = partials[k] || src
-      context = if k in ['unit', 'functional']
-        ctx.concat {relative, testPath: resolve Neat.root, 'test'}
-      else
-        ctx
 
+      context = ctx.concat()
       context.merge options
       context.merge {name, path, dir}
 
