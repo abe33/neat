@@ -62,7 +62,6 @@ withProject 'neat_project', 'when outside a project', ->
       expect(inProject ".npmignore").toExist()
       expect(inProject "Cakefile").toExist()
 
-      expect(inProject "config/.gitkeep").toExist()
       expect(inProject "src/tasks/.gitkeep").toExist()
       expect(inProject "src/commands/.gitkeep").toExist()
       expect(inProject "src/generators/.gitkeep").toExist()
@@ -76,3 +75,4 @@ withProject 'neat_project', 'when outside a project', ->
       expect(inProject "test/units/.gitkeep").toExist()
       expect(inProject "test/functionals/.gitkeep").toExist()
       expect(inProject "test/fixtures/.gitkeep").toExist()
+      expect(inProject "config/packages/compile.cup").toExist()

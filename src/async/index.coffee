@@ -12,8 +12,13 @@
 #       # called after both f1 and f2 have call back
 parallel = (fns, callback) ->
   count = 0
-  cb = -> count += 1; if count is fns.length then callback?()
-  if fns.empty() then callback() else fn cb for fn in fns
+  results = []
+  cb = (res) ->
+    count += 1
+    results.push(res)
+    if count is fns.length then callback? results
+
+  if fns.empty() then callback [] else fn cb for fn in fns
 
 ##### queue
 

@@ -17,7 +17,7 @@ Neat.config =
         'create:directory': op.createDirectory
         'strip:requires': op.stripRequires
         'exports:package': op.exportsToPackage
-        'create:file': op.saveToFile
+        'create:file': op.createFile
 
 global.packagerWithFiles = (files, bare=false, block) ->
   [bare, block] = [null, bare] if typeof bare is 'function'

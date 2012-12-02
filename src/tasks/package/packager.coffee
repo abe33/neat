@@ -1,16 +1,19 @@
-Neat = require '../../neat'
-
-{writeFile} = require 'fs'
+glob = require 'glob'
 {compile} = require 'coffee-script'
-{chain} = Neat.require 'async'
+{writeFile} = require 'fs'
+{resolve, basename} = require 'path'
+
+Neat = require '../../neat'
+{chain, parallel} = Neat.require 'async'
 {readFiles, ensure} = Neat.require 'utils/files'
+{green, yellow, red, print, puts} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
 
 class Packager
-  @asCommand: (conf) ->
-    (callback) -> new Packager(conf).process callback
+  @asCommand: (conf, path) ->
+    (callback) -> new Packager(conf, path).process callback
 
-  constructor: (@conf) ->
+  constructor: (@conf, @path) ->
     malformedConf = (key, type) =>
       throw new Error _ 'neat.tasks.package.invalid_configuration', {key, type}
 
@@ -28,10 +31,40 @@ class Packager
     operator.validate? @conf for operator in @operators
 
   process: (callback) ->
-    @conf.includes = @conf.includes.map (p) -> "#{Neat.root}/#{p}.coffee"
-    readFiles @conf.includes, (err, res) =>
-      chain.call null, @operators, res, @conf, (buffer) =>
-        @result = buffer
-        callback?()
+    @find @conf.includes, (err, files) =>
+      @conf.files = files
+      readFiles files, (err, res) =>
+        errCallback = (err) =>
+          puts yellow(_ 'neat.tasks.package.process', file: basename @path)
+          stack = err.stack.split '\n'
+          stack[0] = red stack[0]
+          puts "#{stack.join '\n'}\n"
+          callback? 1
+
+        chain.call null, @operators, res, @conf, errCallback, (buffer) =>
+          @result = buffer
+          puts """
+            #{yellow(_ 'neat.tasks.package.process', file: basename @path)}
+            #{(green('.') for k of @result).join ''}
+            #{green(_ 'neat.tasks.package.processed', files: @result.length())}
+
+          """
+
+          callback? 0
+
+  find: (paths, callback) ->
+    files = []
+    f = (p) -> (cb) ->
+      if p.indexOf('*') is -1
+        p = resolve Neat.root, "#{p}.coffee"
+        return cb files.push p
+      else
+        glob p, {}, (err, fs) ->
+          files = files.concat fs
+          cb()
+
+    parallel (f p for p in paths), ->
+      callback null, files.map (f) -> resolve Neat.root, f
+
 
 module.exports = Packager
