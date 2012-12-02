@@ -13,6 +13,9 @@ describe _('neat.commands.generate.config_packager.description'),
 packagerConfig = namedEntity __filename, 'config/packages', 'cup'
 
 exports['config:packager'] = packagerConfig
+
+usages 'neat generate config:packager:compile',
+describe 'Generates the default compilation config for older projects',
 exports['config:packager:compile'] = (generator, args..., cb) ->
   unless Neat.root?
     throw new Error notOutsideNeat 'config:packager:compile'
