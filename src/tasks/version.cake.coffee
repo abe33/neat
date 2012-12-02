@@ -5,9 +5,11 @@ _ = Neat.i18n.getHelper()
 
 exports['version'] = neatTask
   name:'version'
-  description: _('neat.tasks.desciption')
+  description: _('neat.tasks.version.description')
   environment: 'production'
   action: (callback) ->
-    info _('neat.tasks.message:', name: Neat.project.name,
-                                  version: green Neat.project.version)
+    info _('neat.tasks.version.message', {
+      name: Neat.project.name,
+      version: green Neat.project.version
+    })
     callback? 0
