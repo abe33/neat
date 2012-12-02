@@ -332,3 +332,20 @@ describe 'Object::each', ->
     source.each (k,v) -> a.push k
 
     expect(a).toEqual(['foo', 'bar'])
+
+describe 'Object::destroy', ->
+  it 'should delete an existing property and return its previous value', ->
+    source =
+      foo: 10
+      bar: 20
+
+    res = source.destroy 'foo'
+
+    expect(source.foo).toBeUndefined()
+    expect(res).toBe(10)
+
+  it 'should return null if there is no property to delete', ->
+    source = {}
+    res = source.destroy 'foo'
+
+    expect(res).toBeNull()

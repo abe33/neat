@@ -28,10 +28,19 @@ Object.new = (a) -> o = {}; a.step(2, (k,v) -> o[k] = v); return o
 def Object, concat: (m) ->
   o = {}; o[k] = v for k,v of this; return o.merge(m || {})
 
-##### Object::contains
+##### Object::destroy
 
-# `Object::has` alias.
-# def Object, contains: (value) -> @has value
+# Delete the given property and return its previous value.
+#
+#     o = {foo: 10, bar: 20}
+#     o.destroy 'foo' # 10
+#     # o = {bar: 20}
+def Object, destroy: (key) ->
+  if @hasKey key
+    res = @[key]
+    delete @[key]
+    return res
+  null
 
 ##### Object::each
 #
@@ -222,7 +231,7 @@ def Object, type: ->
 ##### Object::update
 
 # `Object::merge` alias.
-def Object, update: -> (o) -> @merge o
+def Object, update: Object::merge
 
 ##### Object::values
 
