@@ -1,14 +1,13 @@
 # This file contains some utility to create parameterized generators.
 
 fs = require 'fs'
-{resolve} = require 'path'
+{resolve, relative} = require 'path'
 Neat = require '../neat'
 
-utils = resolve Neat.neatRoot, "lib/utils"
-{ensurePathSync} = require resolve utils, "files"
-{describe, usages, hashArguments} = require resolve utils, "commands"
-{render} = require resolve utils, "templates"
-{error, info, green, missing, notOutsideNeat} = require resolve utils, "logs"
+{ensurePathSync, noExtension} = Neat.require 'utils/files'
+{describe, usages, hashArguments} = Neat.require 'utils/commands'
+{render} = Neat.require 'utils/templates'
+{error, info, green, missing, notOutsideNeat} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
 
 ##### namedEntity
@@ -26,7 +25,7 @@ _ = Neat.i18n.getHelper()
 namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
   (generator, name, args..., cb) ->
     if requireNeat
-      throw new Error notOutsideNeat process.argv.join " " unless Neat.root?
+      throw new Error notOutsideNeat process.argv.join ' ' unless Neat.root?
 
     if typeof name isnt 'string'
       throw new Error _('neat.errors.missing_argument', {name:'name'})
@@ -59,5 +58,57 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
           info green _('neat.commands.generate.file_generated', {path})
           cb?()
 
-module.exports = {namedEntity}
 
+multiEntity = (src, entities, ctx={}, requireNeat=true) ->
+  (generator, name, args..., cb) ->
+    if requireNeat
+      throw new Error notOutsideNeat process.argv.join ' ' unless Neat.root?
+
+    if typeof name isnt 'string'
+      throw new Error _('neat.errors.missing_argument', {name:'name'})
+
+    a = name.split '/'
+    name = a.pop()
+    options = if args.empty() then {} else hashArguments args
+    partials =
+      unit: resolve src, '../spec.gen.coffee'
+      functional: resolve src, '../spec.gen.coffee'
+      helper: resolve noExtension(src), 'helper'
+
+    entities.each (k,v) ->
+      return if options[k]? and not options[k]
+      {dir, ext} = v
+      dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
+      path = resolve dir, "#{name}#{ext}"
+      partial = partials[k] || src
+      context = if k in ['unit', 'functional']
+        ctx.concat {relative, testPath: resolve Neat.root, 'test'}
+      else
+        ctx
+
+      context.merge options
+      context.merge {name, path, dir}
+
+      fs.exists path, (exists) ->
+        if exists
+          throw new Error _('neat.commands.generate.file_exists',
+                                 file: path)
+
+
+        render partial, context, (err, data) ->
+          throw new Error """#{missing _('neat.templates.template_for',
+                                    file: src)}
+
+                          #{err.stack}""" if err?
+
+          ensurePathSync dir
+          fs.writeFile path, data, (err) ->
+            throw new Error(_('neat.errors.file_write',
+                                    file: path, stack: e.stack)) if err
+
+            path = "#{dir}/#{name}#{ext}"
+            info green _('neat.commands.generate.file_generated', {path})
+            cb?()
+
+
+module.exports = {namedEntity, multiEntity}

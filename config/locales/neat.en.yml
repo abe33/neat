@@ -144,6 +144,11 @@ en:
           generation_done: "#{path} generated"
           generation_failed: "Cannot proceed to the generation of the project\n\n#{message}"
 
+        source:
+          description: |
+            Generates a file in the source directory.
+            Optionally, specs and helpers can be created for the file.
+
         spec:
           unit:
             description: "Generates a spec in the test/units directory"

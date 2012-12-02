@@ -43,6 +43,8 @@ namespace = (namespace, exports) ->
 #     paths = Neat.paths.map (p) -> "#{p}/lib/generators"
 #     module.exports = combine /\.gen$/, paths
 combine = (filePattern, paths) ->
+  [filePattern, paths] = [paths, filePattern] if Array.isArray filePattern
+
   files = findSync filePattern, 'js', paths
 
   packaged = {}
