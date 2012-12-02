@@ -6,6 +6,11 @@ Neat.require 'core'
 {resolve} = require 'path'
 {rmSync:rm, ensurePath, touch} = Neat.require 'utils/files'
 {print} = require 'util'
+{findSync} = Neat.require "utils/files"
+
+paths = Neat.paths.map (p) -> "#{p}/test/helpers"
+files = findSync 'coffee', paths
+files.forEach (f) -> require f
 
 global.TEST_ROOT = resolve '.'
 global.FIXTURES_ROOT = '/tmp'
