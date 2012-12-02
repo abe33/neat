@@ -93,43 +93,46 @@ analyze = (path, content) ->
     i2++
   out
 
-annotateClass = (buffer, conf, callback) ->
+annotateClass = (buffer, conf, errCallback, callback) ->
   for path, content of buffer
     content = content.split('\n')
     content = analyze path, content
     buffer[path] = content.join('\n')
-  callback?(buffer, conf)
+  callback?(buffer, conf, errCallback)
 
-annotateFile = (buffer, conf, callback) ->
+annotateFile = (buffer, conf, errCallback, callback) ->
   for p, content of buffer
     buffer[p] = "`/* #{cleanPath p} */`\n\n#{content}\n"
 
-  callback?(buffer, conf)
+  callback?(buffer, conf, errCallback)
 
 cleanPath = (path) ->
   path.replace "#{Neat.root}/", ''
 
-compile = (buffer, conf, callback) ->
+compile = (buffer, conf, errCallback, callback) ->
   newBuffer = {}
   for path, content of buffer
     path = path.replace('.coffee', '.js')
-    newBuffer[path] = coffee content, bare: conf.bare
+    try
+      newBuffer[path] = coffee content, bare: conf.bare
+    catch e
+      return errCallback? e
 
-  callback?(newBuffer, conf)
+  callback?(newBuffer, conf, errCallback)
 
 preventMissingConf 'directory',
-createDirectory = (buffer, conf, callback) ->
+createDirectory = (buffer, conf, errCallback, callback) ->
   newBuffer = {}
   path = "#{conf.dir}/#{conf.directory}"
   ensurePath path, (err) ->
     for p,c of buffer
       newBuffer[p.replace conf.dir, path] = c
 
-    callback?(newBuffer, conf)
+    callback?(newBuffer, conf, errCallback)
 
 validate 'package', PACKAGE_RE(), _('neat.tasks.package.expected_package'),
 preventMissingConf 'package',
-exportsToPackage = (buffer, conf, callback) ->
+exportsToPackage = (buffer, conf, errCallback, callback) ->
   header = (conf) ->
     header = ''
     packages = conf.package.split '.'
@@ -169,20 +172,20 @@ exportsToPackage = (buffer, conf, callback) ->
   for path, content of buffer
     buffer[path] = "#{header conf}#{convertExports content, conf}"
 
-  callback?(buffer, conf)
+  callback?(buffer, conf, errCallback)
 
 validate 'name', NAME_RE(), _('neat.tasks.package.expected_name'),
 preventMissingConf 'name',
-join = (buffer, conf, callback) ->
+join = (buffer, conf, errCallback, callback) ->
   newBuffer = {}
   newPath = "#{conf.dir}/#{conf.name}.coffee"
   newContent = ''
   newContent += buffer[k] for k in conf.files
   newBuffer[newPath] = newContent
 
-  callback?(newBuffer, conf)
+  callback?(newBuffer, conf, errCallback)
 
-uglify = (buffer, conf, callback) ->
+uglify = (buffer, conf, errCallback, callback) ->
   newBuffer = {}
   for path, content of buffer
     ast = parser.parse(content)
@@ -190,9 +193,9 @@ uglify = (buffer, conf, callback) ->
     ast = pro.ast_squeeze(ast)
     newBuffer[path.replace /\.js$/g, '.min.js'] = pro.gen_code(ast)
 
-  callback?(newBuffer, conf)
+  callback?(newBuffer, conf, errCallback)
 
-createFile = (buffer, conf, callback) ->
+createFile = (buffer, conf, errCallback, callback) ->
   gen = (path, content) -> (callback) ->
     dir = resolve path, '..'
     ensurePath dir, (err) ->
@@ -200,31 +203,31 @@ createFile = (buffer, conf, callback) ->
         callback?()
 
   parallel (gen k,v for k,v of buffer), ->
-    callback?(buffer, conf)
+    callback?(buffer, conf, errCallback)
 
 preventMissingConf 'path',
-pathChange = (buffer, conf, callback) ->
+pathChange = (buffer, conf, errCallback, callback) ->
   newBuffer = {}
   for path, content of buffer
     rel = path.replace "#{Neat.root}/", ''
     path = resolve Neat.root, conf.path, rel.split('/')[1..-1].join('/')
     newBuffer[path] = content
 
-  callback?(newBuffer, conf)
+  callback?(newBuffer, conf, errCallback)
 
 preventMissingConf 'path',
-pathReset = (buffer, conf, callback) ->
+pathReset = (buffer, conf, errCallback, callback) ->
   path = resolve Neat.root, conf.path
   rm path, (err) ->
     ensurePath path, (err) ->
-      callback?(buffer, conf)
+      callback?(buffer, conf, errCallback)
 
-stripRequires = (buffer, conf, callback) ->
+stripRequires = (buffer, conf, errCallback, callback) ->
   for path, content of buffer
     buffer[path] = content.split('\n')
                           .reject((s) -> REQUIRE_RE().test s)
                           .join('\n')
-  callback?(buffer, conf)
+  callback?(buffer, conf, errCallback)
 
 module.exports = {
   annotateClass

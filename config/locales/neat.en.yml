@@ -35,9 +35,12 @@ en:
         missing_configuration: "Missing configuration #{key}"
         expected_name: a file name such foo_bar of foo-bar
         expected_package: a path such com.exemple.foo
+        package_failed: "#{failed} failed, #{succeed} processed"
 
+        process: "Package config #{file}"
+        processed: "#{files} files processed"
         description: Generates packages for this projects
-        packages_done: All package processed
+        packages_done: "#{packages} package(s) processed"
 
       bump:
         no_neat: Can't find .neat file

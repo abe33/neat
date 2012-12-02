@@ -1,18 +1,19 @@
 glob = require 'glob'
 {compile} = require 'coffee-script'
 {writeFile} = require 'fs'
-{resolve} = require 'path'
+{resolve, basename} = require 'path'
 
 Neat = require '../../neat'
 {chain, parallel} = Neat.require 'async'
 {readFiles, ensure} = Neat.require 'utils/files'
+{green, yellow, red, print, puts} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
 
 class Packager
-  @asCommand: (conf) ->
-    (callback) -> new Packager(conf).process callback
+  @asCommand: (conf, path) ->
+    (callback) -> new Packager(conf, path).process callback
 
-  constructor: (@conf) ->
+  constructor: (@conf, @path) ->
     malformedConf = (key, type) =>
       throw new Error _ 'neat.tasks.package.invalid_configuration', {key, type}
 
@@ -33,9 +34,23 @@ class Packager
     @find @conf.includes, (err, files) =>
       @conf.files = files
       readFiles files, (err, res) =>
-        chain.call null, @operators, res, @conf, (buffer) =>
+        errCallback = (err) =>
+          puts yellow(_ 'neat.tasks.package.process', file: basename @path)
+          stack = err.stack.split '\n'
+          stack[0] = red stack[0]
+          puts "#{stack.join '\n'}\n"
+          callback? 1
+
+        chain.call null, @operators, res, @conf, errCallback, (buffer) =>
           @result = buffer
-          callback?()
+          puts """
+            #{yellow(_ 'neat.tasks.package.process', file: basename @path)}
+            #{(green('.') for k of @result).join ''}
+            #{green(_ 'neat.tasks.package.processed', files: @result.length())}
+
+          """
+
+          callback? 0
 
   find: (paths, callback) ->
     files = []

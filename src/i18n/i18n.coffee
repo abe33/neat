@@ -49,7 +49,9 @@ class I18n
   #     _('path.to.string')
   #     _('path.to.string_with_token', token: 'token substitute')
   getHelper: -> (path, tokens) =>
-    @get(path).replace /\#\{([^\}]+)\}/g, (token, key) -> tokens[key] or token
+    @get(path).replace /\#\{([^\}]+)\}/g, (token, key) ->
+      return token unless tokens[key]?
+      tokens[key]
 
   ##### I18n::load
 
