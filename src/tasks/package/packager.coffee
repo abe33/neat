@@ -64,7 +64,7 @@ class Packager
           cb()
 
     parallel (f p for p in paths), ->
-      callback null, files.map (f) -> resolve Neat.root, f
+      callback null, files.uniq().map (f) -> resolve Neat.root, f
 
 
 module.exports = Packager
