@@ -37,7 +37,7 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
 
     context = if args.empty() then {} else hashArguments args
     context.merge ctx
-    context.merge {name, path, dir}
+    context.merge {name, path, dir, relativePath: a.concat(name).join('/')}
     fs.exists path, (exists) ->
       if exists
         throw new Error _('neat.commands.generate.file_exists',
@@ -84,7 +84,7 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
 
       context = ctx.concat()
       context.merge options
-      context.merge {name, path, dir}
+      context.merge {name, path, dir, relativePath: a.concat(name).join('/')}
 
       fs.exists path, (exists) ->
         if exists

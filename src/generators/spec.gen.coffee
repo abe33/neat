@@ -12,7 +12,11 @@ meta = (name, target) ->
   describe _("neat.commands.generate.spec.#{name}.description"),
   target
 
-context = {relative, testPath: resolve Neat.root, 'test'}
+context = {
+  relative
+  root: Neat.root
+  testPath: resolve Neat.root, 'test'
+}
 
 meta 'unit',
 unit = namedEntity __filename,
