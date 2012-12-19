@@ -15,12 +15,15 @@ entities =
   unit:
     dir: 'test/units'
     ext: '.spec.coffee'
+    partial: '../spec.gen.coffee'
   functional:
     dir: 'test/functionals'
     ext: '.spec.coffee'
+    partial: '../spec.gen.coffee'
   helper:
     dir: 'test/helpers'
     ext: '_helper.coffee'
+    partial: 'helper'
 
 context = {
   relative

@@ -70,17 +70,13 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
     a = name.split '/'
     name = a.pop()
     options = if args.empty() then {} else hashArguments args
-    partials =
-      unit: resolve src, '../spec.gen.coffee'
-      functional: resolve src, '../spec.gen.coffee'
-      helper: resolve noExtension(src), 'helper'
 
     entities.each (k,v) ->
       return if options[k]? and not options[k]
-      {dir, ext} = v
+      {dir, ext, partial} = v
       dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
       path = resolve dir, "#{name}#{ext}"
-      partial = partials[k] || src
+      partial = resolve noExtension(src), partial
 
       context = ctx.concat()
       context.merge options
