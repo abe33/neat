@@ -1,14 +1,18 @@
 # This file contains some utility to create parameterized generators.
 
 fs = require 'fs'
+path = require 'path'
 {resolve} = require 'path'
 Neat = require '../neat'
 
 {ensurePathSync, noExtension} = Neat.require 'utils/files'
 {describe, usages, hashArguments} = Neat.require 'utils/commands'
 {render} = Neat.require 'utils/templates'
-{error, info, green, missing, notOutsideNeat} = Neat.require 'utils/logs'
+{error, red, info, green, missing, notOutsideNeat} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
+
+exists = fs.exists or path.exists
+existsSync = fs.existsSync or path.existsSync
 
 ##### namedEntity
 
@@ -38,7 +42,7 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
     context = if args.empty() then {} else hashArguments args
     context.merge ctx
     context.merge {name, path, dir, relativePath: a.concat(name).join('/')}
-    fs.exists path, (exists) ->
+    exists path, (exists) ->
       if exists
         throw new Error _('neat.commands.generate.file_exists',
                                file: path)
@@ -71,22 +75,20 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
     name = a.pop()
     options = if args.empty() then {} else hashArguments args
 
-    entities.each (k,v) ->
+    processEntitiesGen = (path,k,v) -> ->
       return if options[k]? and not options[k]
       {dir, ext, partial} = v
       dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
       path = resolve dir, "#{name}#{ext}"
-      partial = if partial? then resolve noExtension(src), partial else src
+      partial = resolve noExtension(src), partial
 
       context = ctx.concat()
       context.merge options
       context.merge {name, path, dir, relativePath: a.concat(name).join('/')}
 
-      fs.exists path, (exists) ->
-        if exists
-          throw new Error _('neat.commands.generate.file_exists',
-                                 file: path)
-
+      exists path, (e) ->
+        if e
+          throw new Error _('neat.commands.generate.file_exists', file: path)
 
         render partial, context, (err, data) ->
           throw new Error """#{missing _('neat.templates.template_for',
@@ -97,11 +99,16 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
           ensurePathSync dir
           fs.writeFile path, data, (err) ->
             throw new Error(_('neat.errors.file_write',
-                                    file: path, stack: e.stack)) if err
+                            file: path, stack: err.stack)) if err?
 
-            path = "#{dir}/#{name}#{ext}"
-            info green _('neat.commands.generate.file_generated', {path})
+            if existsSync path
+              path = "#{dir}/#{name}#{ext}"
+              info green _('neat.commands.generate.file_generated', {path})
+            else
+              error red "woah. file '#{path}' coulnd't be created"
             cb?()
+
+    entities.each (k,v) -> processEntitiesGen(path,k,v)()
 
 
 module.exports = {namedEntity, multiEntity}
