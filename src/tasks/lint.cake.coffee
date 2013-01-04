@@ -19,7 +19,7 @@ exports['lint'] = neatTask
   description: _('neat.tasks.lint.description')
   environment: 'default'
   action: (callback) ->
-    unless fs.existsSync COFFEE_LINT
+    unless existsSync COFFEE_LINT
       error _('neat.errors.missing_module', missing: missing 'coffeelint')
       return callback?()
 

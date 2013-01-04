@@ -1,6 +1,7 @@
 # This file contains some utility to create parameterized generators.
 
 fs = require 'fs'
+path = require 'path'
 {resolve} = require 'path'
 Neat = require '../neat'
 
@@ -9,6 +10,8 @@ Neat = require '../neat'
 {render} = Neat.require 'utils/templates'
 {error, info, green, missing, notOutsideNeat} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
+
+exists = fs.exists or path.exists
 
 ##### namedEntity
 
@@ -38,7 +41,7 @@ namedEntity = (src, dir, ext, ctx={}, requireNeat=true) ->
     context = if args.empty() then {} else hashArguments args
     context.merge ctx
     context.merge {name, path, dir, relativePath: a.concat(name).join('/')}
-    fs.exists path, (exists) ->
+    exists path, (exists) ->
       if exists
         throw new Error _('neat.commands.generate.file_exists',
                                file: path)
@@ -82,7 +85,7 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
       context.merge options
       context.merge {name, path, dir, relativePath: a.concat(name).join('/')}
 
-      fs.exists path, (exists) ->
+      exists path, (exists) ->
         if exists
           throw new Error _('neat.commands.generate.file_exists',
                                  file: path)
