@@ -80,6 +80,9 @@ en:
 
       watch:
         description: Watches for changes in the src directory and run compile
+      watch_test:
+        description: Watches for changes in the src and test directories and run compilation and tests
+
 
     commands:
       command: "Command '#{command}'"
