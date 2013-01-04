@@ -1,10 +1,12 @@
 fs = require 'fs'
-fs = require 'fs'
+path = require 'path'
 Neat = require '../neat'
 {namespace} = Neat.require 'utils/exports'
 {run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
+
+existsSync = fs.existsSync or path.existsSync
 
 bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
   # The RegExp that match the module version declaration in both
@@ -55,7 +57,7 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
   fs.readFile ".neat", replaceVersion asyncErrorTrap err, (res) ->
     fs.writeFile ".neat", res, asyncErrorTrap err, ->
 
-      unless fs.existsSync 'package.json'
+      unless existsSync 'package.json'
         info green _('neat.tasks.bump.version_bumped', version: newVersion)
         return callback? 0
 

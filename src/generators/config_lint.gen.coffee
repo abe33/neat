@@ -1,4 +1,5 @@
 fs = require 'fs'
+path = require 'path'
 {resolve} = require 'path'
 Neat = require '../neat'
 
@@ -8,6 +9,8 @@ Neat = require '../neat'
 {ensurePath} = Neat.require "utils/files"
 _ = Neat.i18n.getHelper()
 
+exists = fs.exists or path.exists
+
 usages 'neat generate config:lint {options}',
 describe _('neat.commands.generate.config_lint.description'),
 exports['config:lint'] = (generator, args..., cb) ->
@@ -16,7 +19,7 @@ exports['config:lint'] = (generator, args..., cb) ->
 
   dir = resolve Neat.root, 'config/tasks'
   path = "#{dir}/lint.json"
-  fs.exists path, (exists) ->
+  exists path, (exists) ->
     if exists
       throw new Error _('neat.commands.generate.file_exists', file: path)
 

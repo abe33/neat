@@ -21,7 +21,13 @@ exports.watch = neatTask
   name:'watch'
   description: _('neat.tasks.watch.description')
   action: (callback) ->
-    recursiveWatch path.resolve('.', 'src'), (e, f) ->
-      return if compiling
+    recompileAfter = false
+    watcher = (e, f) ->
+      if compiling
+        recompileAfter = true
+        return
       compiling = true
-      Neat.task('compile') -> compiling = false
+      Neat.task('compile') ->
+        compiling = false
+        watcher(e,f) if recompileAfter
+    recursiveWatch path.resolve('.', 'src'), watcher

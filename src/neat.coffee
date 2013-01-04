@@ -5,7 +5,10 @@
 #
 fs = require 'fs'
 pr = require 'commander'
-{resolve} = require 'path'
+path = require 'path'
+resolve = path.resolve
+
+existsSync = fs.existsSync or path.existsSync
 
 # We need a reference to the Neat module root directory for later use.
 NEAT_ROOT = resolve __dirname, '..'
@@ -248,7 +251,7 @@ class Neat
   # root directory or in the node modules installed in the project.
   discoverUserPaths: ->
     modulesDir = resolve @root, 'node_modules'
-    if fs.existsSync modulesDir
+    if existsSync modulesDir
       # All the node modules that contains a `.neat` file at their
       # root will be appended to `PATHS`.
       modules = fs.readdirSync modulesDir

@@ -1,4 +1,5 @@
 fs = require 'fs'
+path = require 'path'
 Neat = require '../neat'
 {run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
 {
@@ -6,6 +7,9 @@ Neat = require '../neat'
 } = Neat.require 'utils/logs'
 {find, findSiblingFile} = Neat.require 'utils/files'
 {queue} = Neat.require 'async'
+
+existsSync = fs.existsSync or path.existsSync
+
 _ = Neat.i18n.getHelper()
 
 COFFEE_LINT = "#{Neat.neatRoot}/node_modules/.bin/coffeelint"

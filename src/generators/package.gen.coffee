@@ -1,8 +1,8 @@
-fs = require "fs"
+fs = require 'fs'
+path = require 'path'
 {resolve} = require 'path'
 Neat = require '../neat'
 
-utils = resolve Neat.neatRoot, "lib/utils"
 {namespace} = Neat.require "utils/exports"
 {describe, usages, environment} = Neat.require "utils/commands"
 {puts, error, info, notOutsideNeat} = Neat.require "utils/logs"
@@ -10,6 +10,8 @@ utils = resolve Neat.neatRoot, "lib/utils"
 {dirWithIndexSync} = Neat.require "utils/files"
 cup = Neat.require "utils/cup"
 _ = Neat.i18n.getHelper()
+
+existsSync = fs.existsSync or path.existsSync
 
 usages 'neat generate package.json',
 environment 'production',
@@ -57,7 +59,7 @@ index = (generator, args..., cb) ->
           pkg.main = './lib/index' if hasLibIndex or hasSrcIndex
 
         ##### 4 - Binaries
-        if fs.existsSync resolve Neat.root, "bin"
+        if existsSync resolve Neat.root, "bin"
           binaries = fs.readdirSync resolve Neat.root, "bin"
           if binaries?
             pkg.bin = {}
