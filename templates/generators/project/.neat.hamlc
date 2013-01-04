@@ -5,4 +5,5 @@
   author: "#{@author or 'TODO: Your name goes here'}"
   description: "#{@description or 'TODO: Description goes here'}"
   keywords: [#{keywords}]
-
+  scripts:
+    test: 'cake test'
