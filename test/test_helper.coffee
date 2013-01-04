@@ -1,4 +1,5 @@
 fs = require 'fs'
+path = require 'path'
 Neat = require '../lib/neat'
 Neat.require 'core'
 
@@ -16,7 +17,7 @@ global.TEST_ROOT = resolve '.'
 global.FIXTURES_ROOT = '/tmp'
 global.NEAT_BIN = resolve __dirname, '../bin/neat'
 
-eS = fs.existsSync
+eS = fs.existsSync or path.existsSync
 
 options = {}
   # stderr: (data)-> print data
