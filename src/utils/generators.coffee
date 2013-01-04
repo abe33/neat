@@ -76,7 +76,7 @@ multiEntity = (src, entities, ctx={}, requireNeat=true) ->
       {dir, ext, partial} = v
       dir = resolve Neat.root,"#{dir}/#{a.join '/'}"
       path = resolve dir, "#{name}#{ext}"
-      partial = resolve noExtension(src), partial
+      partial = if partial? then resolve noExtension(src), partial else src
 
       context = ctx.concat()
       context.merge options
