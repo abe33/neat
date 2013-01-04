@@ -29,13 +29,14 @@ index = neatTask
   action: beforeTests (callback) ->
     runTests('unit', 'test/units') (statusUnit) ->
       runTests('functional', 'test/functionals') (statusFunctional) ->
-        statuses = [statusUnit, statusFunctional]
-        status = if statuses.some((n) -> n is 1) then 1 else 0
-        if status is 0
-          info green _('neat.tasks.test.tests_done')
-        else
-          error red _('neat.tasks.test.tests_failed')
-        callback? status
+        runTests('integration', 'test/integrations') (statusIntegration) ->
+          statuses = [statusUnit, statusFunctional, statusIntegration]
+          status = if statuses.some((n) -> n is 1) then 1 else 0
+          if status is 0
+            info green _('neat.tasks.test.tests_done')
+          else
+            error red _('neat.tasks.test.tests_failed')
+          callback? status
 
 unit = neatTask
   name:'test:unit'
@@ -61,4 +62,16 @@ functional = neatTask
         error red _('neat.tasks.test.tests_failed')
       callback? status
 
-module.exports = namespace 'test', {index, unit, functional}
+integration = neatTask
+  name:'test:integration'
+  description: _('neat.tasks.test.integration_description')
+  environment: 'test'
+  action: beforeTests (callback) ->
+    runTests('integration', 'test/integrations') (status) ->
+      if status is 0
+        info green _('neat.tasks.test.tests_done')
+      else
+        error red _('neat.tasks.test.tests_failed')
+      callback? status
+
+module.exports = namespace 'test', {index, unit, functional, integration}

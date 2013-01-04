@@ -70,6 +70,7 @@ en:
         description: Run all tests
         unit_description: Run unit tests
         functional_description: Run functional tests
+        integration_description: Run integration tests
         tests_done: All tests complete
         tests_failed: Some tests failed
 

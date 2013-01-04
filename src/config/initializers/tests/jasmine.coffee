@@ -17,7 +17,10 @@ module.exports = (config) ->
                Run #{yellow 'neat install'} to install the dependencies."""
       return callback?()
 
+    testDir = "#{Neat.root}/#{test}"
+    return callback? 0 unless fs.existsSync testDir
+
     args = ['.', '--color', '--coffee', '--test-dir']
 
     puts yellow "#{name.capitalize()} tests:"
-    run JASMINE, args.concat("#{Neat.root}/#{test}"), callback
+    run JASMINE, args.concat(testDir), callback
