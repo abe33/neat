@@ -1,7 +1,7 @@
 {
   "name": "neat",
   "version": "0.0.75",
-  "description": "Neat is project structure for nodejs combined with a customizable command line tool",
+  "description": "Neat is a project structure for nodejs combined with a customizable command line tool",
   "author": "Cédric Néhémie <cedric.nehemie@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -32,7 +32,8 @@
     "highlight.js": "git://github.com/abe33/highlight.js.git#node_build",
     "coffeelint": "0.2.0",
     "jasmine-node": "git://github.com/abe33/jasmine-node.git#patch-1",
-    "stylus": "0.30.1"
+    "stylus": "0.30.1",
+    "marked": "*"
   },
   "devDependencies": {},
   "main": "./lib/index",

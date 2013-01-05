@@ -16,3 +16,4 @@ npm 'coffeelint', '0.2.0'
 npm 'jasmine-node', 'git://github.com/abe33/jasmine-node.git#patch-1'
 
 npm 'stylus', '0.30.1'
+npm 'marked'
