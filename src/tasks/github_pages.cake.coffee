@@ -154,14 +154,16 @@ applyLayout = (files) ->
         dir
         path
         relative
+          config
         title: "#{Neat.project.name} - #{findTitle content}"
-        header: hamlc header.toString(), {Neat, dir, path, relative}
-        footer: hamlc footer.toString(), {Neat, dir, path, relative}
+        header: hamlc header.toString(), {Neat, dir, path, relative, config}
+        footer: hamlc footer.toString(), {Neat, dir, path, relative, config}
         navigation: hamlc navigation.toString(), {
           Neat
           dir
           path
           relative
+          config
           navigation: config.navigation
         }
         body: content
@@ -202,9 +204,8 @@ exports['github:pages'] = neatTask
       branch = currentBranch git.status
       run('neat docco')
     .then(createTempDir)
-    .then (stdout) ->
-      run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
-           rm -rf docs")
+    .then -> run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
+                  rm -rf #{Neat.root}/docs")
     .then(createPages)
     .then ->
       if 'gh-pages' in git.branches
@@ -238,9 +239,9 @@ exports['github:pages:preview'] = neatTask
     git = null
     branch = null
     createTempDir()
-    .then (stdout) ->
-      run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
-           rm -rf docs")
+    .then -> run('neat docco')
+    .then -> run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
+                  rm -rf #{Neat.root}/docs")
     .then(createPages)
     .then ->
       callback? 0
