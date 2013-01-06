@@ -3,6 +3,32 @@ toc_margin = 20px
 
 font = "Lato", Arial, sans-serif
 
+dark1 = #042029
+dark2 = #002b36
+dark3 = #001A22
+
+light1 = #AEBCBC
+light2 = #bbc4c4
+light3 = #BBC4C4
+
+nav1 = #1AB2A6
+nav2 = #1BCEC0
+nav3 = #2AA198
+
+green1 = #859900
+cyan1 = #2aa198
+cyan2 = #009999
+orange1 = #b58900
+orange2 = #cb4b16
+blue1 = #268bd2
+pink1 = #d33682
+
+docs_text = #3B4D52
+code_text = #073642
+
+code_color = #93a1a1
+
+
 transition(trans)
   -webkit-transition: trans
   -moz-transition: trans
@@ -29,7 +55,7 @@ body
   color: #252519
   margin: 0
   padding: 0
-  background: #BBC4C4
+  background: light3
 
 
 h1, h2, h3, h4, p, a, ul, li
@@ -66,16 +92,16 @@ h1, h2, h3, h4, h5, h6
   a
     padding: 4px
     display:block
-    color: #042029
+    color: dark1
     clear:both
     white-space:nowrap
     text-decoration: none
 
     &:hover
-      background-color: #1AB2A6
+      background-color: nav1
 
     &.active, &.inpath
-      background-color: #1BCEC0
+      background-color: nav2
 
   .feature
     min-width:200px
@@ -84,7 +110,7 @@ h1, h2, h3, h4, h5, h6
       white-space:normal
 
   .hasChildMenu .widget
-    color: #042029
+    color: dark1
     float:right
     text-decoration:none
     font-size:0.7em
@@ -99,7 +125,7 @@ h1, h2, h3, h4, h5, h6
     margin-top: 0
 
   #jump_show
-    color: #042029
+    color: dark1
     position: absolute
     text-align: center
     font-size: 10px
@@ -110,7 +136,7 @@ h1, h2, h3, h4, h5, h6
     top: 350px
     width: 56px
     left: 490px
-    background: #2AA198
+    background: nav3
     display: inline-block
     padding: 6px 8px 12px
 
@@ -119,13 +145,13 @@ h1, h2, h3, h4, h5, h6
 
   #jump_page
     width: 100%
-    background: #2AA198
+    background: nav3
     box-shadow(0 2px 2px rgba(4, 32, 41, 0.4))
 
 #container
   position: relative
   color: #839496
-  background: #042029
+  background: dark1
 
   &:before
     content: ''
@@ -133,7 +159,7 @@ h1, h2, h3, h4, h5, h6
     height: 100%
     margin-left: 525px
     position: fixed
-    background-color: #042029
+    background-color: dark1
     z-index: -1
     border-left: 2px solid #888888
 
@@ -144,7 +170,7 @@ h1, h2, h3, h4, h5, h6
     right: 0
     bottom: 0
     z-index: -1
-    background: #042029
+    background: dark1
     border-left: 2px solid #888888
 
 .toc
@@ -156,7 +182,7 @@ h1, h2, h3, h4, h5, h6
     list-style: none
     a
       text-decoration: none
-      color: #002b36
+      color: dark2
 
       &:hover
         text-decoration: underline
@@ -178,9 +204,9 @@ table
     td, th
       transition(background-color 0.5s ease-in-out)
       &.docs
-        background-color: #AEBCBC
+        background-color: light1
       &.code
-        background-color: #001A22
+        background-color: dark3
 
   th
   td
@@ -195,9 +221,9 @@ table
       padding: 14px 25px 16px 50px
       vertical-align: top
       text-align: left
-      background: #bbc4c4
+      background: light2
       font-size: 14px
-      color: #3B4D52
+      color: docs_text
       line-height: 18px
 
       pre
@@ -214,10 +240,10 @@ table
         // border: 1px solid #a6b0b0;
         font-size: 12px
         padding: 0 0.2em
-        color: #073642
+        color: code_text
 
       h1, h2, h3, h4, h5, h6
-        color: #002b36
+        color: dark2
 
       h1
         font-size: 28px
@@ -237,7 +263,7 @@ table
 
     &.code, &.docs pre
       border-left: 2px solid #888
-      background-color: #042029
+      background-color: dark1
       color: #93a1a1
 
 
@@ -254,17 +280,17 @@ table
       .class
       .group_begin
       .group_end
-        color: #859900
+        color: green1
 
       .params
       .subst
       .hash
       .text
-        color: #93a1a1
+        color: code_color
 
       .string
       .heredocs
-        color: #2aa198
+        color: cyan1
 
       .string_begin
       .string_end
@@ -275,7 +301,7 @@ table
         color: #C60000
 
       .number
-        color: #009999
+        color: cyan2
 
       .literal
       .top_level
@@ -285,12 +311,12 @@ table
       .range_begin
       .range_end
       .regexp_operators
-        color: #b58900
+        color: orange1
 
       .title
       .property
       .class_end
-        color: #268bd2
+        color: blue1
 
       .regexp
       .hereregexp
@@ -306,10 +332,10 @@ table
       .subst_begin
       .subst_end
       .char_range
-        color: #cb4b16
+        color: orange2
 
       .char_range > .escaped
-        color: #d33682
+        color: pink1
 
   th.docs
     h1

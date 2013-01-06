@@ -16,18 +16,21 @@
 # `npm` (having a global installation of Coffeescript is a good practice if you
 # plan to work on Neat itself):
 #
-#     npm install -g coffee-script
+# ```bash
+# npm install -g coffee-script```
 #
 # Installing Neat through `npm`:
 #
-#     npm install -g neat
+# ```bash
+# npm install -g neat```
 #
 # Installing Neat from sources:
 #
-#     git clone git://github.com/abe33/neat.git
-#     cd neat
-#     cake install
-#     cake deploy
+# ```bash
+# git clone git://github.com/abe33/neat.git
+# cd neat
+# cake install
+# cake deploy```
 
 #### A first test
 

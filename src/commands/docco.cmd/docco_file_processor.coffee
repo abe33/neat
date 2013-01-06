@@ -2,9 +2,7 @@ fs = require 'fs'
 {resolve} = require 'path'
 
 Neat = require '../../neat'
-DoccoPreProcessor = require './docco_pre_processor'
 DoccoTitleProcessor = require './docco_title_processor'
-SHOWDOWN = "#{Neat.neatRoot}/node_modules/docco/vendor/showdown"
 
 {puts, error, missing} = Neat.require 'utils/logs'
 {render} = Neat.require 'utils/templates'
@@ -13,16 +11,28 @@ _ = Neat.i18n.getHelper()
 
 try
   {parse} = require 'docco'
-  {Showdown:showdown} = require SHOWDOWN
 catch e
-  return error _('neat.commands.docco.missing_module',
+  return error _('neat.errors.missing_module',
                   missing: missing 'docco')
 
 try
   {highlight} = require 'highlight.js'
 catch e
-  return error _('neat.commands.docco.missing_module',
-                  missing: missing 'docco')
+  return error _('neat.errors.missing_module',
+                  missing: missing 'highlight')
+
+try
+  marked = require 'marked'
+catch e
+  return error _('neat.errors.missing_module',
+                  missing: missing 'marked')
+
+marked.setOptions
+  gfm: true
+  pedantic: false
+  sanitize: false
+  highlight: (code, lang) ->
+    highlight(lang or 'coffeescript', code).value
 
 class DoccoFileProcessor
 
@@ -38,13 +48,12 @@ class DoccoFileProcessor
       {code_text, docs_text} = o
       res = highlight('coffeescript', code_text)
       o.code_html = "<pre>#{res.value}</pre>"
-      o.docs_html = showdown.makeHtml docs_text
+      o.docs_html = marked docs_text
 
     titles = []
     presCmd = []
     titlesCmd = []
     for section in sections
-      presCmd.push DoccoPreProcessor.asCommand path, section
       titlesCmd.push DoccoTitleProcessor.asCommand path, section, titles
 
     parallel presCmd, =>

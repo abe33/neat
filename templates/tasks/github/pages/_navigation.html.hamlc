@@ -1,0 +1,5 @@
+%nav
+  %ul
+    - for name, h of @navigation
+      %li
+        %a{href: @relative @dir, "#{@Neat.root}/.pages/#{h.href}", class: h.class || ''}= name

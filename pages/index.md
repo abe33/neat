@@ -1,68 +1,80 @@
-# Neat
+# Introduction
+
 [![Build Status](https://travis-ci.org/abe33/neat.png?branch=0.0.70)](https://travis-ci.org/abe33/neat)
 
-A command line tool for [Coffeescript][coffee] and [Node.js][node] projects inspired by [Rails][rails].
+A command line tool for [Coffeescript][coffee] projects inspired by [Rails][rails] and running on [Node.js][node] .
 
 ### Install
 
 Install [Node.js][node], and then the [Coffeescript][coffee] compiler through
-`npm` (having a global installation of Coffeescript is a good practice if you
-plan to work on Neat itself):
+`npm`. Coffeescript is required to access the `cake` command.
 
-    npm install -g coffee-script
+```bash
+npm install -g coffee-script```
 
 Installing Neat through `npm`:
 
-    npm install -g neat
+```bash
+npm install -g neat```
 
 Installing Neat from sources:
 
-    git clone git://github.com/abe33/neat.git
-    cd neat
-    cake install
-    cake deploy
+```bash
+git clone git://github.com/abe33/neat.git
+cd neat
+cake install
+cake deploy```
 
 ### Usage
 
 Creating a new project:
 
-    neat generate project my_project
+```bash
+neat generate project my_project```
 
 #### Inside a project directory
 
 Installing the dependencies of a project:
 
-    neat install
+```bash
+neat install```
 
 Creating a new Neat command:
 
-    neat generate command my_command
+```bash
+neat generate command my_command```
 
 Creating a new Neat initializer:
 
-    neat generate initializer my_init
+```bash
+neat generate initializer my_init```
 
 Creating a new Neat task:
 
-    neat generate task my_task
+```bash
+neat generate task my_task```
 
 Creating the `package.json` file for the project:
 
-    neat generate package.json
+```bash
+neat generate package.json```
 
 #### Project Cake Tasks
 
 Compiling sources:
 
-    cake compile
+```bash
+cake compile```
 
 Testing the project:
 
-    cake test
+```bash
+cake test```
 
 Passing the project sources through [Coffeelint][lint]:
 
-    cake lint
+```bash
+cake lint```
 
 ### Useful Resources
 

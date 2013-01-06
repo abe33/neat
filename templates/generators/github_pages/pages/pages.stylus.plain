@@ -1,0 +1,224 @@
+font = "Lato", Arial, sans-serif
+
+dark1 = #042029
+dark2 = #002b36
+dark3 = #001A22
+
+mid1 = #93a1a1
+
+light1 = #AEBCBC
+light2 = #bbc4c4
+light3 = #BBC4C4
+
+nav1 = #1AB2A6
+nav2 = #1BCEC0
+nav3 = #2AA198
+
+green1 = #859900
+cyan1 = #2aa198
+cyan2 = #009999
+orange1 = #b58900
+orange2 = #cb4b16
+blue1 = #268bd2
+pink1 = #d33682
+
+code_color = #93a1a1
+
+transition(trans)
+  -webkit-transition trans
+  -moz-transition trans
+  -o-transition trans
+  transition trans
+
+border-radius(rad)
+  -webkit-border-radius rad
+  -moz-border-radius rad
+  -o-border-radius rad
+  border-radius rad
+
+box-shadow()
+  -webkit-box-shadow arguments
+  -moz-box-shadow arguments
+  -o-box-shadow arguments
+  box-shadow arguments
+
+text-shadow()
+  -webkit-text-shadow arguments
+  -moz-text-shadow arguments
+  -o-text-shadow arguments
+  text-shadow arguments
+
+a
+  color: light1
+  text-decoration: none
+
+body
+  font-family: font
+  font-size: 15px
+  font-weight: lighter
+  color: mid1
+  margin: 0
+  padding: 0
+  background: light1
+
+nav
+  ul
+    margin: 0
+    padding: 0
+
+    li
+      padding: 8px 12px
+      margin: 0
+      display: inline-block
+      list-style: none
+      text-transform: uppercase
+      font-size: 16px
+      transition(all 0.5s ease-in)
+      border-radius(2px)
+      a
+        transition(color 0.5s ease-in)
+
+      &:hover
+        a
+          color: dark1
+
+        color: dark1
+        background: nav1
+
+header
+  h1
+    margin: 12px 0
+    font-size: 40px
+    color: dark1
+    font-weight: 300
+
+footer
+  margin-top: 80px
+  background-color: dark1
+  padding: 20px 40px 60px
+  border-radius(4px 4px 0 0)
+
+nav
+  margin-top: 4px
+  background-color: dark1
+  color: #93a1a1
+  padding: 8px
+  border-radius(4px)
+
+section
+  padding: 40px
+  color: rgb(59,77,82)
+  background: light2
+  margin: 10px 0
+  box-shadow 0pt 2px 0px 0px rgb(154,171,171), 0pt 4px 8px rgba(45, 60, 60, 0.5)
+  border-radius(4px)
+
+  a
+    color: dark1
+    transition color 0.5s ease-in-out
+
+    &:hover
+      color: pink1
+
+  h1:first-child
+    margin-top: 0
+
+  h1, h2, h3
+    font-weight: 300
+    color: dark2
+
+  h1
+    font-size: 28px
+    padding-bottom: 20px
+    border-bottom: 1px solid #888888
+
+  h3
+    font-size: 20px
+    padding-bottom: 20px
+    border-bottom: 1px solid rgba(136,136,136,0.5)
+
+  h4
+    font-size: 16px
+
+  h1, h2, h3, h4, h5, h6
+    color: dark2
+
+pre
+  background-color: dark1
+  color: #93a1a1
+  padding: 4px 8px
+  border-radius(2px)
+
+
+.keyword
+.operators
+.punctuation
+.hash_begin
+.hash_end
+.function
+.params_begin
+.params_end
+.property_end
+.class
+.group_begin
+.group_end
+  color: green1
+
+.params
+.subst
+.hash
+.text
+  color: code_color
+
+.string
+.heredocs
+  color: cyan1
+
+.string_begin
+.string_end
+.heredocs_begin
+.heredocs_end
+.embedded_begin
+.embedded_end
+  color: #C60000
+
+.number
+  color: cyan2
+
+.literal
+.top_level
+.constant
+.char_range_begin
+.char_range_end
+.range_begin
+.range_end
+.regexp_operators
+  color: orange1
+
+.title
+.property
+.class_end
+  color: blue1
+
+.regexp
+.hereregexp
+  color: #ff0000
+
+.comment
+.embedded
+.string_quote
+  color: #586e75
+
+.global
+.escaped
+.subst_begin
+.subst_end
+.char_range
+  color: orange2
+
+.char_range > .escaped
+  color: pink1
+
+#main
+  margin: auto
+  width: 720px

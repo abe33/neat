@@ -1,0 +1,13 @@
+navigation:
+  Home:
+    href: 'index.html'
+  Documentation:
+    href: 'docs/src_index.html'
+  GitHub:
+    href: 'http://github.com/abe33/neat'
+    class: 'github'
+
+templates:
+  header: 'templates/pages/header.html.hamlc'
+  footer: 'templates/pages/footer.html.hamlc'
+  layout: 'templates/pages/layout.html.hamlc'
