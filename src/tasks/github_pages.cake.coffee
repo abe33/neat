@@ -43,7 +43,10 @@ marked.setOptions
 run = (command) ->
   defer = Q.defer()
   exec command, (err, stdout, stderr) ->
-    if err? then defer.reject(stderr) else defer.resolve(stdout)
+    if err?
+      defer.reject(stderr)
+    else
+      defer.resolve(stdout)
   defer.promise
 
 getGitInfo = ->
@@ -136,15 +139,23 @@ applyLayout = (files) ->
   .then (config) ->
     hamlc = Neat.config.engines.templates.hamlc.render
 
-    rfs = fs.readFileSync
-    fsf = findSiblingFileSync
+    getTemplate = (name, partial=true) ->
+      if config.templates?[name]?
+        tplPath = resolve Neat.root, config.templates[name]
+      else
+        name = "_#{name}" if partial
+        tplPath = findSiblingFileSync "#{TASK_DIR}/#{name}",
+                                      paths,
+                                      'templates',
+                                      'hamlc'
+      fs.readFileSync tplPath
 
     paths = Neat.paths
 
-    header = rfs fsf "#{TASK_DIR}/_header", paths, 'templates', 'hamlc'
-    footer = rfs fsf "#{TASK_DIR}/_footer", paths, 'templates', 'hamlc'
-    navigation = rfs fsf "#{TASK_DIR}/_navigation", paths, 'templates', 'hamlc'
-    layout = rfs fsf "#{TASK_DIR}/layout", paths, 'templates', 'hamlc'
+    header = getTemplate 'header'
+    footer = getTemplate 'footer'
+    navigation = getTemplate 'navigation'
+    layout = getTemplate 'layout', false
 
     newFiles = {}
     for path,content of files

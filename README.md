@@ -1,5 +1,5 @@
 # Neat
-![Travis status](https://travis-ci.org/abe33/neat.png)
+[![Build Status](https://travis-ci.org/abe33/neat.png?branch=0.0.70)](https://travis-ci.org/abe33/neat)
 
 A command line tool for [Coffeescript][coffee] and [Node.js][node] projects inspired by [Rails][rails].
 

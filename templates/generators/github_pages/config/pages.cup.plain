@@ -1,3 +1,5 @@
 navigation:
-  Home: 'index.html'
-  Docs: 'docs/src_index.html'
+  Home:
+    href: 'index.html'
+  Docs:
+    href: 'docs/src_index.html'
