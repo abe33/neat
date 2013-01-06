@@ -1,0 +1,52 @@
+font = "Lato", Arial, sans-serif
+
+dark1 = #042029
+dark2 = #002b36
+dark3 = #001A22
+
+mid1 = #93a1a1
+
+light1 = #AEBCBC
+light2 = #bbc4c4
+light3 = #BBC4C4
+
+nav1 = #1AB2A6
+nav2 = #1BCEC0
+nav3 = #2AA198
+
+green1 = #859900
+cyan1 = #2aa198
+cyan2 = #009999
+orange1 = #b58900
+orange2 = #cb4b16
+blue1 = #268bd2
+pink1 = #d33682
+
+transition(trans)
+  -webkit-transition: trans
+  -moz-transition: trans
+  -o-transition: trans
+  transition: trans
+
+border-radius(rad)
+  -webkit-border-radius: rad
+  -moz-border-radius: rad
+  -o-border-radius: rad
+  border-radius: rad
+
+box-shadow(shadow)
+  -webkit-box-shadow:shadow
+  -moz-box-shadow:shadow
+  -o-box-shadow:shadow
+  box-shadow:shadow
+
+body
+  font-family: font
+  font-size: 15px
+  font-weight: lighter
+  line-height: 22px
+  color: mid1
+  margin: 0
+  padding: 0
+  background: dark1
+

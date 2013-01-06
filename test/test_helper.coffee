@@ -1,12 +1,13 @@
 fs = require 'fs'
 path = require 'path'
+{print} = require 'util'
+{resolve} = require 'path'
+{exec} = require 'child_process'
+
 Neat = require '../lib/neat'
 Neat.require 'core'
-
 {run} = require '../lib/utils/commands'
-{resolve} = require 'path'
 {rmSync:rm, ensurePath, touch} = Neat.require 'utils/files'
-{print} = require 'util'
 {findSync} = Neat.require "utils/files"
 
 paths = Neat.paths.map (p) -> "#{p}/test/helpers"
@@ -74,6 +75,73 @@ global.addFileMatchers = (scope) ->
       else
         @expected = matcher
         @content.indexOf(@expected) >= 0
+
+currentBranch = (status) ->
+  status.split('\n').shift().replace /\# On branch (.+)$/gm, '$1'
+
+hasUntrackedFile = (status) -> status.indexOf('Untracked files:') isnt -1
+hasUnstagedChanges = (status) -> status.indexOf('Changes not staged') isnt -1
+
+global.git =
+  should:
+    haveBranch: (branch) ->
+      it "should have a branch #{branch}", ->
+        ended = false
+        runs ->
+          exec 'git branch', (err, branches) ->
+            throw err if err?
+            branches = branches.split('\n').map (b) -> b[2..]
+            branches.pop()
+            expect(branch in branches).toBeTruthy()
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out on git branch', 1000
+    beInBranch: (branch) ->
+      it "should be in branch #{branch}", ->
+        ended = false
+        runs ->
+          exec 'git status', (err, status) ->
+            throw err if err?
+            current = currentBranch status
+            expect(current).toBe(branch)
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out on git status', 1000
+    not:
+      haveUnstagedChange: ->
+        it "should not have unstaged changes", ->
+          ended = false
+          runs ->
+            exec 'git status', (err, status) ->
+              throw err if err?
+              expect(hasUnstagedChanges status).toBeFalsy()
+              ended = true
+
+          waitsFor progress(-> ended), 'Timed out on git status', 1000
+
+      haveUntrackedFiles: ->
+        it "should not have untracked files", ->
+          ended = false
+          runs ->
+            exec 'git status', (err, status) ->
+              throw err if err?
+              expect(hasUntrackedFile status).toBeFalsy()
+              ended = true
+
+          waitsFor progress(-> ended), 'Timed out on git status', 1000
+
+  inBranch: (branch, block) ->
+    describe "in branch #{branch}", ->
+      beforeEach ->
+        ended = false
+        runs ->
+          exec 'git checkout gh-pages', (err) ->
+            throw err if err?
+            ended = true
+
+        waitsFor progress(-> ended), 'Timed out on git checkout gh-pages', 1000
+
+      block.call this
 
 global.withSourceFile = (file, content, callback) ->
   dir = file.split('/')[0..-2].join '/'
@@ -151,6 +219,48 @@ global.withBundledProject = (name, desc=null, block, opts) ->
           callback?()
 
   withProject name, desc, block, opts
+
+global.withGitInitialized = (block) ->
+  beforeEach ->
+    process.chdir @projectPath
+    ended = false
+    command = 'cake compile;
+               git init;
+               git add .;
+               git commit -am "First commit";
+               git status'
+
+    runs ->
+      exec command, (err, stdout, stderr) =>
+        throw err if err?
+        # if err?
+        #   console.log stderr
+        # else
+        #   console.log stdout
+        ended = true
+
+    waitsFor progress(-> ended), 'Timed out on git init', 5000
+
+  block.call(this)
+
+global.withPagesInitialized = (block) ->
+  beforeEach ->
+    process.chdir @projectPath
+    ended = false
+    command = "node #{NEAT_BIN} generate github:pages"
+
+    runs ->
+      exec command, (err, stdout, stderr) =>
+        throw err if err?
+        # if err?
+        #   console.log stderr
+        # else
+        #   console.log stdout
+        ended = true
+
+    waitsFor progress(-> ended), 'Timed out on pages init', 5000
+
+  block.call(this)
 
 global.testSimpleGenerator= (name, dir, ext) ->
   describe 'when outside a project', ->

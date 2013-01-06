@@ -7,8 +7,6 @@ withBundledProject 'foo', ->
     it 'should compile the sources in the lib directory', (done) ->
       run 'cake', ['compile'], (status) ->
         expect(status).toBe(0)
-        expect(inProject 'lib/config/initializers/commands/docco.js')
-          .toExist()
         done()
 
   describe 'setting hooks on compilation', ->

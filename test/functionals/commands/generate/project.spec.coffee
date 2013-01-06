@@ -66,8 +66,7 @@ withProject 'neat_project', 'when outside a project', ->
       expect(inProject "src/commands/.gitkeep").toExist()
       expect(inProject "src/generators/.gitkeep").toExist()
 
-      expect(inProject "src/config/initializers/commands/docco.coffee")
-        .toExist()
+      expect(inProject "src/config/initializers/.gitkeep").toExist()
 
       expect(inProject "templates/.gitkeep").toExist()
 

@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    %title= @title
+    - css = @relative @dir, "#{@Neat.root}/.pages/pages.css"
+    %link{rel:'stylesheet', media:'screen', href: css}
+    %link{href:'http://fonts.googleapis.com/css?family=Lato:300', rel:'stylesheet', type:'text/css'}
+    %script{src:"http://code.jquery.com/jquery-1.6.2.min.js", type:"text/javascript", charset:"utf-8"}
+
+  %body
+    != @header
+    != @navigation
+    #main!= @body
+    != @footer

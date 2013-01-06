@@ -1,5 +1,4 @@
 fs = require 'fs'
-marked = require 'marked'
 {resolve} = require 'path'
 
 Neat = require '../../neat'
@@ -13,14 +12,20 @@ _ = Neat.i18n.getHelper()
 try
   {parse} = require 'docco'
 catch e
-  return error _('neat.commands.docco.missing_module',
+  return error _('neat.errors.missing_module',
                   missing: missing 'docco')
 
 try
   {highlight} = require 'highlight.js'
 catch e
-  return error _('neat.commands.docco.missing_module',
-                  missing: missing 'docco')
+  return error _('neat.errors.missing_module',
+                  missing: missing 'highlight')
+
+try
+  marked = require 'marked'
+catch e
+  return error _('neat.errors.missing_module',
+                  missing: missing 'marked')
 
 marked.setOptions
   gfm: true

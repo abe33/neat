@@ -32,7 +32,7 @@ context = {
   hasSource: true
 }
 
-usages 'neat generate source <name> [options]',
+usages 'neat generate source <name> [options] {helper, functional, unit}',
 describe _('neat.commands.generate.source.description'),
 source = multiEntity __filename, entities, context
 

@@ -33,7 +33,8 @@
     "coffeelint": "0.2.0",
     "jasmine-node": "git://github.com/abe33/jasmine-node.git#patch-1",
     "stylus": "0.30.1",
-    "marked": "*"
+    "marked": "*",
+    "q": "*"
   },
   "devDependencies": {},
   "main": "./lib/index",
