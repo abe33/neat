@@ -70,7 +70,7 @@ a
   color: light1
   text-decoration: none
 
-nav
+#main > nav
   ul
     margin: 0
     padding: 0
@@ -109,9 +109,6 @@ nav
         color: dark1
         background: nav1
 
-
-
-
 header
   h1
     margin: 12px 0
@@ -136,13 +133,23 @@ header
 footer
   margin-top: 40px
   background-color: dark1
-  padding: 20px 40px 20px
+  padding: 8px 40px
   margin-bottom: 20px
   border-radius(4px)
 
   .copyright
     text-align: center
     font-size: 12px
+
+  nav
+    ul
+      margin: 0
+      padding: 0
+
+      li
+        margin: 0
+        padding: 0
+        list-style: none
 
   a
     transition(all 0.5s ease)
