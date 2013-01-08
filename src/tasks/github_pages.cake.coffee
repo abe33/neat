@@ -33,6 +33,10 @@ PAGES_TEMP_DIR = "#{Neat.root}/.pages"
 CONFIG = "#{Neat.root}/config/pages.cup"
 TASK_DIR = "#{Neat.neatRoot}/src/tasks/github/pages"
 
+handleError = (err) ->
+  error red err.message
+  puts err.stack
+
 marked.setOptions
   gfm: true
   pedantic: false
@@ -70,7 +74,7 @@ checkGitStatus = (status) ->
 read = (files) ->
   defer = Q.defer()
   readFiles files, (err, buf) ->
-    if err? then defer.reject(err) else defer.resolve(buf)
+    if err? then defer.reject(err) else defer.resolve(buf.sort())
   defer.promise
 
 loadConfig = ->
@@ -207,6 +211,7 @@ createPages = ->
   .then(writeFiles)
   .then(compileStylus)
 
+
 currentBranch = (status) ->
   status.split('\n').shift().replace /\# On branch (.+)$/gm, '$1'
 
@@ -226,9 +231,9 @@ exports['github:pages'] = neatTask
       checkGitStatus git.status
       branch = currentBranch git.status
       run('neat docco')
-    .then(createTempDir)
-    .then -> run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
-                  rm -rf #{Neat.root}/docs")
+    .then(createTempDir, handleError)
+    .then -> run "cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR}"
+    .then -> run "rm -rf #{Neat.root}/docs"
     .then(createPages)
     .then ->
       if 'gh-pages' in git.branches
@@ -249,9 +254,10 @@ exports['github:pages'] = neatTask
            git commit -am 'Updates gh-pages branch';
            git checkout #{branch}")
     .then ->
+      console.log 'ended gracefully'
       callback? 0
-    .fail (err) ->
-      error red err.message
+    , (err) ->
+      handleError err
       callback? 1
 
 exports['github:pages:preview'] = neatTask
@@ -268,7 +274,6 @@ exports['github:pages:preview'] = neatTask
     .then(createPages)
     .then ->
       callback? 0
-    .fail (err) ->
-      error red err.message
-      puts err.stack
+    , (err) ->
+      handleError err
       callback? 1
