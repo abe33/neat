@@ -2,4 +2,6 @@
   %ul
     - for name, h of @navigation
       %li
-        %a{href: @relative @dir, "#{@Neat.root}/.pages/#{h.href}", class: h.class || ''}= name
+      - p = "#{@Neat.root}/.pages/#{h.href}"
+        - href = if h.href.indexOf('http://') is -1 then @relative @dir, p else h.href
+        %a{href: href, class: h.class || ''}= name
