@@ -130,6 +130,17 @@ writeFiles = (files) ->
 
   defer.promise
 
+createIndex = (files) ->
+  index = "# #{t('neat.tasks.github_pages.pages_index.title')}\n"
+  for path, content of files
+    title = /^\#\s+(.+)/g.exec(content.toString())?[1] or ''
+    index += "\n  1. [#{title}](#{
+      relative(PAGES_DIR, path).replace('md','html')
+    })"
+
+  files["#{PAGES_DIR}/pages_index.md"] = index
+  files
+
 findTitle = (content) ->
   res = /<h1>(.*)<\/h1>/g.exec content
   res?[1] or ''
@@ -184,6 +195,7 @@ applyLayout = (files) ->
 createPages = ->
   findMarkdownFiles()
   .then(read)
+  .then(createIndex)
   .then (files) ->
     newFiles = {}
     for path, content of files
