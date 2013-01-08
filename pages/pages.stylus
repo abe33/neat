@@ -1,14 +1,13 @@
 font = "Lato", Arial, sans-serif
 
 dark1 = #042029
-dark2 = #002b36
-dark3 = #001A22
+dark2 = #042b36
+dark3 = #041A22
 
 mid1 = #93a1a1
 
 light1 = #AEBCBC
 light2 = #bbc4c4
-light3 = #BBC4C4
 
 nav1 = #1AB2A6
 nav2 = #1BCEC0
@@ -30,6 +29,13 @@ transition(trans)
   -o-transition trans
   transition trans
 
+box-sizing(mode)
+  -webkit-box-sizing mode
+  -moz-box-sizing mode
+  -o-box-sizing mode
+  box-sizing mode
+
+
 border-radius(rad)
   -webkit-border-radius rad
   -moz-border-radius rad
@@ -48,9 +54,8 @@ text-shadow()
   -o-text-shadow arguments
   text-shadow arguments
 
-a
-  color: light1
-  text-decoration: none
+*
+  box-sizing border-box
 
 body
   font-family: font
@@ -61,13 +66,16 @@ body
   padding: 0
   background: light1
 
+a
+  color: light1
+  text-decoration: none
+
 nav
   ul
     margin: 0
     padding: 0
 
     li
-      padding: 8px 12px
       margin: 0
       display: inline-block
       list-style: none
@@ -76,7 +84,23 @@ nav
       transition(all 0.5s ease-in)
       border-radius(2px)
       a
-        transition(color 0.5s ease-in)
+        padding: 8px 12px
+        font-family: font !important
+        width: auto !important
+        height: auto !important
+        transition(all 0.5s ease-in)
+
+        &:before
+          display: inline !important
+          font-family: FontAwesome !important
+          margin-right: 3px
+
+      &.selected
+        a
+          color: dark1
+        background: nav3
+        color: dark1
+
 
       &:hover
         a
@@ -85,6 +109,9 @@ nav
         color: dark1
         background: nav1
 
+
+
+
 header
   h1
     margin: 12px 0
@@ -92,11 +119,37 @@ header
     color: dark1
     font-weight: 300
 
+  p
+    background: nav3
+    color: light2;
+    display: inline-block
+    position: absolute
+    margin-top: -41px
+    margin-left: 80px
+    width: auto
+    height: auto
+    font-size: 12px
+    font-weight: bold
+    padding: 3px 4px
+    border-radius(3px)
+
 footer
-  margin-top: 80px
+  margin-top: 40px
   background-color: dark1
-  padding: 20px 40px 60px
-  border-radius(4px 4px 0 0)
+  padding: 20px 40px 20px
+  margin-bottom: 20px
+  border-radius(4px)
+
+  .copyright
+    text-align: center
+    font-size: 12px
+
+  a
+    transition(all 0.5s ease)
+    border-bottom: 1px solid dark1
+    &:hover
+      border-bottom: 1px solid nav1
+      color: white
 
 nav
   margin-top: 4px
@@ -126,6 +179,7 @@ section
   h1, h2, h3
     font-weight: 300
     color: dark2
+    margin-top: 40px
 
   h1
     font-size: 28px
@@ -144,10 +198,64 @@ section
     color: dark2
 
 pre
-  background-color: dark1
+  background-color: dark2
   color: #93a1a1
-  padding: 4px 8px
-  border-radius(2px)
+  font-size: 14px
+  border-radius(3px)
+  box-shadow 0 1px 2px rgba(0, 0, 0, .8) inset
+  overflow: hidden
+
+  ol
+    padding: 0
+    padding: 2px
+    margin: 0
+    line-height: 0
+    li
+      margin: 0
+      line-height: 8px
+      display: block
+      height: 20px
+      list-style: none
+      counter-increment: index
+      position: relative
+
+      &:first-child
+        padding-top: 8px
+        &:before
+          border-radius(2px 0 0 0)
+          padding-top: 10px
+          margin-top: -8px
+
+      &:last-child
+        padding-bottom: 8px
+        &:before
+          border-radius(0 0 0 2px)
+
+      &:last-child
+      &:first-child
+      &:last-child:before
+      &:first-child:before
+        height: 28px
+
+      &:last-child:first-child
+      &:last-child:first-child:before
+        height: 36px
+
+      &:before
+        line-height: 14px
+        display: inline-block
+        text-align: right
+        content: counter(index)
+        background: mid1
+        color: dark1
+        height: 100%
+        width: 30px
+        font-size: 12px
+        padding: 2px 4px 2px
+        position: relative
+        margin-right: 8px
+        box-sizing border-box
+        box-shadow 1px 1px 2px rgba(5, 0, 0, .75)
 
 
 .keyword
@@ -222,16 +330,3 @@ pre
 #main
   margin: auto
   width: 720px
-
-.github:before
-  content: "\f092"
-  font-family: FontAwesome
-  font-weight: normal
-  font-style: normal
-  text-decoration: inherit
-  display: inline
-  margin-right: 3px
-  width: auto
-  height: auto
-  line-height: normal
-  vertical-align: baseline
