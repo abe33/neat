@@ -3,6 +3,8 @@
 
 A command line tool for [Coffeescript][coffee] and [Node.js][node] projects inspired by [Rails][rails].
 
+This README is also available in a [friendly navigable format][doc].
+
 ### Install
 
 Install [Node.js][node], and then the [Coffeescript][coffee] compiler through
@@ -78,4 +80,5 @@ The source repository:
 [node]:   http://nodejs.org/
 [rails]:  http://rubyonrails.org/
 [lint]:   http://www.coffeelint.org/
+[doc]:    http://abe33.github.com/neat/
 
