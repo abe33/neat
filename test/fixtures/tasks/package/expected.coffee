@@ -16,13 +16,13 @@ exportsFunction = -> [ "exports", "module.exports" ]
 #     class Foo extends Map
 #       get: (k) ->
 Generator = ->
-  `/* #{file[2]}<Map> line:5 */`
+  `/* #{file[2]}<Map> line:6 */`
   class Map
-    `/* #{file[2]}<Map.static> line:6 */`
+    `/* #{file[2]}<Map.static> line:7 */`
     @static: ->
-    `/* #{file[2]}<Map::constructor> line:7 */`
+    `/* #{file[2]}<Map::constructor> line:8 */`
     constructor: ->
-    `/* #{file[2]}<Map::get> line:8 */`
+    `/* #{file[2]}<Map::get> line:9 */`
     get: (k) ->
     `/* #{file[2]}<Map::set> line:10 */`
     set: (k,v) ->
