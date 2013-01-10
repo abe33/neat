@@ -230,16 +230,16 @@ exports['github:pages'] = neatTask
       git = g
       checkGitStatus git.status
       branch = currentBranch git.status
-      run('neat docco')
+      run 'neat docco'
     .then(createTempDir, handleError)
     .then -> run "cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR}"
     .then -> run "rm -rf #{Neat.root}/docs"
     .then(createPages)
     .then ->
       if 'gh-pages' in git.branches
-        run('git checkout gh-pages')
+        run 'git checkout gh-pages'
       else
-        run('git checkout -b gh-pages')
+        run 'git checkout -b gh-pages'
     .then ->
       content = fs.readdirSync Neat.root
       s = ''
@@ -254,7 +254,6 @@ exports['github:pages'] = neatTask
            git commit -am 'Updates gh-pages branch';
            git checkout #{branch}")
     .then ->
-      console.log 'ended gracefully'
       callback? 0
     , (err) ->
       handleError err
