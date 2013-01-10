@@ -93,6 +93,8 @@ en:
           Unstaged changes detected in this branch. Please either commit
           or stash this changes before running cake github:pages again.
         description: Generates or updates the gh-pages branch of the current project
+        pages_index:
+          title: Pages Index
 
     commands:
       command: "Command '#{command}'"
@@ -181,7 +183,6 @@ en:
             Generates a pages directory with a default site index.
           generation_done: "#{path} generated"
           generation_failed: "Cannot proceed to the generation of the pages files\n\n#{message}"
-
 
       docco:
         no_path: No paths specified for documentation generation.

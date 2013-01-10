@@ -7,6 +7,7 @@ Neat = require '../neat'
 {neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
 {find, ensurePath, readFiles, findSiblingFileSync} = Neat.require 'utils/files'
+{render} = Neat.require 'utils/templates'
 cup = Neat.require 'utils/cup'
 t = Neat.i18n.getHelper()
 
@@ -32,6 +33,10 @@ PAGES_DIR = "#{Neat.root}/pages"
 PAGES_TEMP_DIR = "#{Neat.root}/.pages"
 CONFIG = "#{Neat.root}/config/pages.cup"
 TASK_DIR = "#{Neat.neatRoot}/src/tasks/github/pages"
+
+handleError = (err) ->
+  error red err.message
+  puts err.stack
 
 marked.setOptions
   gfm: true
@@ -70,7 +75,7 @@ checkGitStatus = (status) ->
 read = (files) ->
   defer = Q.defer()
   readFiles files, (err, buf) ->
-    if err? then defer.reject(err) else defer.resolve(buf)
+    if err? then defer.reject(err) else defer.resolve(buf.sort())
   defer.promise
 
 loadConfig = ->
@@ -130,8 +135,19 @@ writeFiles = (files) ->
 
   defer.promise
 
+createIndex = (files) ->
+  index = "# #{t('neat.tasks.github_pages.pages_index.title')}\n"
+  for path, content of files
+    title = /^\#\s+(.+)/g.exec(content.toString())?[1] or ''
+    index += "\n  1. [#{title}](#{
+      relative(PAGES_DIR, path).replace('md','html')
+    })"
+
+  files["#{PAGES_DIR}/pages_index.md"] = index
+  files
+
 findTitle = (content) ->
-  res = /<h1>(.*)<\/h1>/g.exec content
+  res = /<h1[^>]*>(.*)<\/h1>/g.exec content
   res?[1] or ''
 
 applyLayout = (files) ->
@@ -181,9 +197,52 @@ applyLayout = (files) ->
       }
     newFiles
 
+TPL_TOC = resolve Neat.root, 'templates/commands/docco/_toc'
+
+createTOC = (files) ->
+  r = (path, content) -> (callback) ->
+    return callback?() if content.indexOf('@toc') is -1
+
+    START_TAG = /<h(\d)>/g
+    END_TAG = /<\/h(\d)>/g
+
+    titles = []
+    while startMatch = START_TAG.exec content
+      level = parseInt startMatch[1]
+      endMatch = END_TAG.exec content
+
+      title = content.substring START_TAG.lastIndex,
+                                endMatch.index
+      id = title.parameterize()
+
+      match = "<h#{level}>#{title}</h#{level}>"
+      replacement = "<h#{level} id='#{id}'>#{title}</h#{level}>"
+      content = content.replace match, replacement
+
+      titles.push {id, content:title, level}
+
+      START_TAG.lastIndex += id.length + 6
+      END_TAG.lastIndex += id.length + 6
+
+    render TPL_TOC, {titles}, (err, toc) ->
+      content = content.replace '@toc', toc
+      files[path] = content
+      callback?()
+
+  commands = (r path, content for path, content of files)
+
+  defer = Q.defer()
+
+  parallel commands, ->
+    return defer.reject(err) if err?
+    defer.resolve files
+
+  defer.promise
+
 createPages = ->
   findMarkdownFiles()
   .then(read)
+  .then(createIndex)
   .then (files) ->
     newFiles = {}
     for path, content of files
@@ -191,6 +250,7 @@ createPages = ->
       path = path.replace 'md', 'html'
       newFiles[path] = marked content
     newFiles
+  .then(createTOC)
   .then(applyLayout)
   .then(writeFiles)
   .then(compileStylus)
@@ -213,16 +273,16 @@ exports['github:pages'] = neatTask
       git = g
       checkGitStatus git.status
       branch = currentBranch git.status
-      run('neat docco')
-    .then(createTempDir)
-    .then -> run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
-                  rm -rf #{Neat.root}/docs")
+      run 'neat docco'
+    .then(createTempDir, handleError)
+    .then -> run "cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR}"
+    .then -> run "rm -rf #{Neat.root}/docs"
     .then(createPages)
     .then ->
       if 'gh-pages' in git.branches
-        run('git checkout gh-pages')
+        run 'git checkout gh-pages'
       else
-        run('git checkout -b gh-pages')
+        run 'git checkout -b gh-pages'
     .then ->
       content = fs.readdirSync Neat.root
       s = ''
@@ -238,8 +298,8 @@ exports['github:pages'] = neatTask
            git checkout #{branch}")
     .then ->
       callback? 0
-    .fail (err) ->
-      error red err.message
+    , (err) ->
+      handleError err
       callback? 1
 
 exports['github:pages:preview'] = neatTask
@@ -256,7 +316,6 @@ exports['github:pages:preview'] = neatTask
     .then(createPages)
     .then ->
       callback? 0
-    .fail (err) ->
-      error red err.message
-      puts err.stack
+    , (err) ->
+      handleError err
       callback? 1

@@ -1,11 +1,16 @@
 navigation:
   Home:
     href: 'index.html'
+    class: 'icon-home'
+  Pages:
+    href: 'pages_index.html'
+    class: 'icon-file-alt'
   Documentation:
     href: 'docs/src_index.html'
+    class: 'icon-sitemap'
   GitHub:
     href: 'http://github.com/abe33/neat'
-    class: 'github'
+    class: 'icon-github'
 
 templates:
   header: 'templates/pages/header.html.hamlc'
