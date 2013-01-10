@@ -15,16 +15,17 @@ exportsFunction = -> [ "exports", "module.exports" ]
 #
 #     class Foo extends Map
 #       get: (k) ->
-`/* #{file[2]}<Map> line:5 */`
-class Map
-  `/* #{file[2]}<Map.static> line:6 */`
-  @static: ->
-  `/* #{file[2]}<Map::constructor> line:7 */`
-  constructor: ->
-  `/* #{file[2]}<Map::get> line:8 */`
-  get: (k) ->
-  `/* #{file[2]}<Map::set> line:9 */`
-  set: (k,v) ->
+Generator = ->
+  `/* #{file[2]}<Map> line:5 */`
+  class Map
+    `/* #{file[2]}<Map.static> line:6 */`
+    @static: ->
+    `/* #{file[2]}<Map::constructor> line:7 */`
+    constructor: ->
+    `/* #{file[2]}<Map::get> line:8 */`
+    get: (k) ->
+    `/* #{file[2]}<Map::set> line:10 */`
+    set: (k,v) ->
 
 
 @neat.fixtures.a = a
