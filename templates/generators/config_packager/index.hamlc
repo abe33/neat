@@ -6,9 +6,7 @@
   name: "#{@name}"
   includes: [
     # Place the path to the files you want to process here.
-    # The path should ommit the extension and should be relative
-    # to the project root.
-    #{includes}
+    'src/**/*.coffee'
   ]
   operators: [
     # Removes all the calls to require in a CoffeeScript file.
@@ -20,21 +18,21 @@
     # Annotates the files with a header comment.
     # 'annotate:file'
 
-    # Change the path of the files in the buffer with the path
+    # Changes the path of the files in the buffer with the path
     # defined in the path parameter.
     # For a file such '{root}/src/dir/file.coffee' and a path such as 'lib',
-    # the resulting path will be '{root}/lib/dir/file.coffee'
-    # 'path:change'
+    # the resulting path will be '{root}/lib/dir/file.coffee'.
+    # 'path:change'
 
     # Remove and then recreate the defined path.
     # 'path:reset'
 
-    # Join all the files in the buffer in the order defined in
-    # the include parameter and changed the set the filename
+    # Joins all the files in the buffer in the order defined in
+    # the include parameter and changes the set the filename
     # with the specified name parameter.
     # 'join'
 
-    # Replace all node exports as package affectation.
+    # Replaces all node exports as package affectation.
     # 'exports:package'
 
     # Compiles the files in the buffer through CoffeeScript.
@@ -43,12 +41,12 @@
     # Runs uglification on the buffer.
     # 'uglify'
 
-    # Create a sub-directory of the packages folder defined with
+    # Creates a sub-directory of the packages folder defined with
     # the directory parameter. All the paths in the buffer will be
-    # changed to be included in the path
+    # changed to be included in the path.
     # 'create:directory'
 
-    # Create the output files in their respectives path.
+    # Creates the output files in their respectives path.
     # 'create:file'
     #{operators}
   ]
