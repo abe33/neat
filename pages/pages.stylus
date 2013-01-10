@@ -23,6 +23,8 @@ pink1 = #d33682
 
 code_color = #93a1a1
 
+toc_margin = 20px
+
 transition(trans)
   -webkit-transition trans
   -moz-transition trans
@@ -233,6 +235,7 @@ section
   background: light2
   margin: 10px 0
   font-size: 16px
+  line-height: 20px
   box-shadow 0pt 2px 0px 0px rgb(154,171,171), 0pt 4px 8px rgba(45, 60, 60, 0.5)
   border-radius(4px)
 
@@ -247,6 +250,10 @@ section
     &:hover
       color dark3
       border-bottom 1px solid green1
+
+  ul
+    li
+      margin: 12px 0
 
   h1:first-child
     margin-top: 0
@@ -277,6 +284,19 @@ section
 
   h1, h2, h3, h4, h5, h6
     color: dark2
+
+.toc
+  margin: 0
+  padding-left: 20px
+  border-left: 1px solid #888888
+
+  li
+    list-style: none
+    margin: 0
+
+    for n in 0 1 2 3 4 5
+      &.level{n}
+        margin-left: toc_margin * n
 
 pre
   background-color: dark2

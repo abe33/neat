@@ -7,6 +7,7 @@ Neat = require '../neat'
 {neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
 {error, info, green, red, puts} = Neat.require 'utils/logs'
 {find, ensurePath, readFiles, findSiblingFileSync} = Neat.require 'utils/files'
+{render} = Neat.require 'utils/templates'
 cup = Neat.require 'utils/cup'
 t = Neat.i18n.getHelper()
 
@@ -146,7 +147,7 @@ createIndex = (files) ->
   files
 
 findTitle = (content) ->
-  res = /<h1>(.*)<\/h1>/g.exec content
+  res = /<h1[^>]*>(.*)<\/h1>/g.exec content
   res?[1] or ''
 
 applyLayout = (files) ->
@@ -196,6 +197,48 @@ applyLayout = (files) ->
       }
     newFiles
 
+TPL_TOC = resolve Neat.root, 'templates/commands/docco/_toc'
+
+createTOC = (files) ->
+  r = (path, content) -> (callback) ->
+    return callback?() if content.indexOf('@toc') is -1
+
+    START_TAG = /<h(\d)>/g
+    END_TAG = /<\/h(\d)>/g
+
+    titles = []
+    while startMatch = START_TAG.exec content
+      level = parseInt startMatch[1]
+      endMatch = END_TAG.exec content
+
+      title = content.substring START_TAG.lastIndex,
+                                endMatch.index
+      id = title.parameterize()
+
+      match = "<h#{level}>#{title}</h#{level}>"
+      replacement = "<h#{level} id='#{id}'>#{title}</h#{level}>"
+      content = content.replace match, replacement
+
+      titles.push {id, content:title, level}
+
+      START_TAG.lastIndex += id.length + 6
+      END_TAG.lastIndex += id.length + 6
+
+    render TPL_TOC, {titles}, (err, toc) ->
+      content = content.replace '@toc', toc
+      files[path] = content
+      callback?()
+
+  commands = (r path, content for path, content of files)
+
+  defer = Q.defer()
+
+  parallel commands, ->
+    return defer.reject(err) if err?
+    defer.resolve files
+
+  defer.promise
+
 createPages = ->
   findMarkdownFiles()
   .then(read)
@@ -207,10 +250,10 @@ createPages = ->
       path = path.replace 'md', 'html'
       newFiles[path] = marked content
     newFiles
+  .then(createTOC)
   .then(applyLayout)
   .then(writeFiles)
   .then(compileStylus)
-
 
 currentBranch = (status) ->
   status.split('\n').shift().replace /\# On branch (.+)$/gm, '$1'
