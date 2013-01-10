@@ -1,7 +1,7 @@
 glob = require 'glob'
 {compile} = require 'coffee-script'
 {writeFile} = require 'fs'
-{resolve, basename} = require 'path'
+{resolve, basename, extname} = require 'path'
 
 Neat = require '../../neat'
 {chain, parallel} = Neat.require 'async'
@@ -55,13 +55,10 @@ class Packager
   find: (paths, callback) ->
     files = []
     f = (p) -> (cb) ->
-      if p.indexOf('*') is -1
-        p = resolve Neat.root, "#{p}.coffee"
-        return cb files.push p
-      else
-        glob p, {}, (err, fs) ->
-          files = files.concat fs
-          cb()
+      p = "#{p}.coffee" if extname(p) is ''
+      glob resolve(Neat.root, p), {}, (err, fs) ->
+        files = files.concat fs
+        cb()
 
     parallel (f p for p in paths), ->
       callback null, files.uniq().map (f) -> resolve Neat.root, f
