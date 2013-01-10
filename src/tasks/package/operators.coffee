@@ -23,7 +23,7 @@ PACKAGE_RE = -> ///^(#{LITERAL_RE})(\.#{LITERAL_RE})*$///
 HASH_VALUE_RE = '(\\s*:\\s*([^,}]+))*'
 HASH_RE = -> ///\{(#{HASH_KEY_RE}#{HASH_VALUE_RE},*\s*)+\}///
 REQUIRE_RE = -> ///require\s*(\(\s*)*#{STRING_RE}///gm
-CLASS_RE = -> ///^[^#]*class\s*(#{LITERAL_RE})///
+CLASS_RE = -> ///^([^#]*)class\s*(#{LITERAL_RE})///
 CLASS_MEMBER_RE = ->
   ///
     ^
@@ -75,8 +75,8 @@ analyze = (path, content) ->
   for line,i in content
     comment = null
     if CLASS_RE().test line
-      [m,curClass] = CLASS_RE().exec line
-      comment = "`/* #{cleanPath path}<#{curClass}> line:#{i+1} */`"
+      [m,s,curClass] = CLASS_RE().exec line
+      comment = "#{s}`/* #{cleanPath path}<#{curClass}> line:#{i+1} */`"
 
     if CLASS_MEMBER_RE().test line
       [m,s,p] = CLASS_MEMBER_RE().exec line
