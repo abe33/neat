@@ -1,5 +1,9 @@
-{resolve} = require 'path'
-{writeFile} = require 'fs'
+path = require 'path'
+fs = require 'fs'
+{resolve} = path
+{writeFile, readFile} = fs
+
+existsSync = fs.existsSync or path.existsSync
 
 Neat = require '../../neat'
 {parallel} = Neat.require 'async'
@@ -174,6 +178,25 @@ exportsToPackage = (buffer, conf, errCallback, callback) ->
 
   callback?(buffer, conf, errCallback)
 
+preventMissingConf 'license',
+headerLicense = (buffer, conf, errCallback, callback) ->
+  unless existsSync conf.license
+    return errCallback? new Error _('neat.tasks.package.missing_file',
+                                    file: conf.license)
+  readFile conf.license, (err, license) ->
+    return errCallback? err if err?
+    license = license.toString()
+                     .strip()
+                     .split('\n')
+                     .map((s) -> "* #{s}")
+                     .join('\n')
+
+    header = "`/*\n#{license}\n*/`\n"
+    for path, content of buffer
+      buffer[path] = "#{header}#{content}"
+
+      callback? buffer, conf, errCallback
+
 validate 'name', NAME_RE(), _('neat.tasks.package.expected_name'),
 preventMissingConf 'name',
 join = (buffer, conf, errCallback, callback) ->
@@ -235,6 +258,7 @@ module.exports = {
   createDirectory
   compile
   exportsToPackage
+  headerLicense
   join
   uglify
   createFile
