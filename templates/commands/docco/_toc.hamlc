@@ -4,4 +4,4 @@
   - for title in @titles
     - level = levels.indexOf title.level
     %li{class: "level#{level}"}
-      %a{href: "##{title.id}"}= title.content
+      %a{href: "##{title.id}"}!= title.content
