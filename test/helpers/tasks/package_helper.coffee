@@ -9,10 +9,12 @@ Neat.config =
       conf: "#{Neat.root}/src/config/packages"
       dir: "#{Neat.root}/.tests/packages"
       tmp: "#{Neat.root}/.tmp"
+      license: "#{Neat.root}/test/fixtures/tasks/package/license.txt"
       operatorsMap:
         'annotate:class': op.annotateClass
         'annotate:file': op.annotateFile
         'join': op.join
+        'header:license': op.headerLicense
         'compile': op.compile
         'create:directory': op.createDirectory
         'strip:requires': op.stripRequires
@@ -36,6 +38,7 @@ global.packagerWithFiles = (files, bare=false, block) ->
           'annotate:file'
           'join'
           'exports:package'
+          'header:license'
           'create:directory'
           'create:file'
         ]
@@ -51,7 +54,7 @@ global.packagerWithFiles = (files, bare=false, block) ->
       waitsFor progress(-> ended), 'Timed out', 1000
 
     afterEach ->
-      rmSync Neat.config.tasks.package.dir
+      rmSync "#{Neat.root}/.tests"
 
     block?.call(this)
 

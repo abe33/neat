@@ -12,6 +12,7 @@ module.exports = (config) ->
       'create:directory': op.createDirectory
       'create:file': op.createFile
       'exports:package': op.exportsToPackage
+      'header:license': op.headerLicense
       'join': op.join
       'path:change': op.pathChange
       'path:reset': op.pathReset

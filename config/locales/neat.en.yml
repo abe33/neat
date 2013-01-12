@@ -33,6 +33,7 @@ en:
         invalid_string: "Malformed string for #{key}, expect #{expect}"
         invalid_configuration: "Malformed configuration for #{key}, expect #{type}"
         missing_configuration: "Missing configuration #{key}"
+        missing_file: "Missing file #{file}"
         expected_name: a file name such foo_bar of foo-bar
         expected_package: a path such com.exemple.foo
         package_failed: "#{failed} failed, #{succeed} processed"

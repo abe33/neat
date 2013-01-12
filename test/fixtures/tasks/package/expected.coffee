@@ -1,3 +1,6 @@
+`/*
+* This is a license file
+*/`
 @neat ||= {}
 @neat.fixtures ||= {}
 
