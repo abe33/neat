@@ -251,9 +251,17 @@ section
       color dark3
       border-bottom 1px solid green1
 
-  ul
+  & > ul
     li
       margin: 12px 0
+      list-style: none
+      position: relative
+      &:before
+        content: '\f0a9'
+        font-family: FontAwesome
+        position: absolute
+        left: -20px
+
 
   h1:first-child
     margin-top: 0
@@ -280,10 +288,22 @@ section
   h4
   h5
   h6
+    margin: 10px 0
     font-size: 18px
+    font-weight: normal
 
   h1, h2, h3, h4, h5, h6
     color: dark2
+
+  h5 code
+    position: relative
+    &:before
+      content: '\f0a9'
+      font-family: FontAwesome
+      position: absolute
+      left: -20px
+      top: 0px
+
 
 .toc
   margin: 0
@@ -293,6 +313,12 @@ section
   li
     list-style: none
     margin: 0
+    &:before
+      content: ''
+
+    code
+      font-size: 14px
+      color: rgb(59,77,82)
 
     for n in 0 1 2 3 4 5
       &.level{n}
@@ -351,6 +377,7 @@ pre
         color: dark1
         height: 100%
         width: 30px
+        left: 0
         font-size: 11px
         padding: 2px 4px 2px
         position: relative
