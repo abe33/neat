@@ -1,5 +1,5 @@
 name: 'neat'
-version: "1.0.0"
+version: "1.1.0"
 description: 'Neat is a project structure for nodejs combined with a customizable command line tool'
 author: 'Cédric Néhémie <cedric.nehemie@gmail.com>'
 license: 'MIT'
