@@ -348,6 +348,7 @@ pre
       line-height: 8px
       display: block
       height: 20px
+      width: 30px
       list-style: none
       counter-increment: index
       position: relative
