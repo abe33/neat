@@ -191,9 +191,12 @@ headerLicense = (buffer, conf, errCallback, callback) ->
                      .map((s) -> "* #{s}")
                      .join('\n')
 
-    header = "`/*\n#{license}\n*/`\n"
+    header = "/*\n#{license}\n*/"
     for path, content of buffer
-      buffer[path] = "#{header}#{content}"
+      if /\.coffee$/.test path
+        buffer[path] = "`#{header}`\n#{content}"
+      else
+        buffer[path] = "#{header}\n#{content}"
 
       callback? buffer, conf, errCallback
 
