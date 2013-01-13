@@ -51,10 +51,10 @@ withBundledProject 'neat_project', ->
             expect(inProject 'Nemfile').not.toExist()
             expect(inProject 'Cakefile').not.toExist()
             expect(inProject '.npmignore').not.toExist()
-            expect(inProject '.gitignore').not.toExist()
             expect(inProject '.neat').not.toExist()
             expect(inProject 'package.json').not.toExist()
 
           it 'should have preserved all the other files and directory', ->
             expect(inProject 'node_modules').toExist()
+            expect(inProject '.gitignore').toExist()
 

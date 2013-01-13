@@ -284,8 +284,10 @@ exports['github:pages'] = neatTask
       else
         run 'git checkout -b gh-pages'
     .then(->
-      run 'git ls-files -z | xargs -0 rm -f;
-           git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir'
+      run 'cp .gitignore .gitignore_safe;
+           git ls-files -z | xargs -0 rm -f;
+           git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir;
+           mv .gitignore_safe .gitignore;'
     , handleError)
     .then ->
       run("mv .pages/* .;
