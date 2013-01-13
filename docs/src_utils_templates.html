@@ -1,0 +1,287 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/utils/templates.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/utils/templates.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/utils/</h3>
+            <h1>templates.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>This file contains the utility functions to deal with templates.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#render'>render</a>
+  </li>
+  <li class='level0'>
+    <a href='#rendersync'>renderSync</a>
+  </li>
+</ul>
+</p>
+</td>
+          <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>extname<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
+
+<span class="hash"><span class="hash_begin">{</span>findSiblingFile<span class="punctuation">,</span> findSiblingFileSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>../utils/files<span class="string_end">"</span></span>
+<span class="hash"><span class="hash_begin">{</span>puts<span class="punctuation">,</span> error<span class="punctuation">,</span> missing<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">"</span>../utils/logs<span class="string_end">"</span></span>
+_ <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='render'>render</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>render</code> function will search for a sibling file for <code>file</code> in the
+<code>templates</code> directory asynchronoulsy and will render that template.
+
+</p>
+<pre><code>render __filename<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> content<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="comment"># content contains the results</span></code></pre>
+<p>The engine used to process a given template file is defined using the
+extension of the template file, for instance, with the default engines
+provided in Neat, a <code>hamlc</code> file will be processed using the <code>haml-coffee</code>
+module, and a <code>mustache</code> file will be processed by the <code>mustache</code> module.
+</p>
+</td>
+          <td class='code'><pre>render <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>file<span class="punctuation">,</span> context<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Arguments are reorganized when a context is not provided.
+</p>
+</td>
+          <td class='code'><pre>  <span class="punctuation">[</span>context<span class="punctuation">,</span> callback<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">,</span> context<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> context <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+  dir <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>templatesDirectoryName
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>We first search for a template file.
+</p>
+</td>
+          <td class='code'><pre>  findSiblingFile file<span class="punctuation">,</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">,</span> dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>e<span class="punctuation">,</span> tplfile<span class="punctuation">,</span> a<span class="group_end">)</span></span> <span class="function">-></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If either an error is raised or no sibling file can be found,
+the function callback with an error.
+</p>
+</td>
+          <td class='code'><pre>    <span class="keyword">return</span> callback<span class="operators">?</span> e <span class="keyword">if</span> e<span class="operators">?</span>
+    <span class="keyword">unless</span> tplfile<span class="operators">?</span>
+      msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.no_template<span class="string_end">'</span></span><span class="punctuation">,</span>
+              <span class="property">paths<span class='punctuation'>:</span></span> a<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span>
+              <span class="property">missing<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.template_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>file<span class="hash_end">}</span></span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+      <span class="keyword">return</span> callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> msg
+
+    puts <span class="string"><span class="string_begin">"</span>template found: <span class="subst"><span class="subst_begin">#{</span>tplfile<span class="punctuation">.</span>yellow<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The extension is extracted from the template file name.
+</p>
+</td>
+          <td class='code'><pre>    ext <span class="operators">=</span> extname<span class="group"><span class="group_begin">(</span>tplfile<span class="group_end">)</span></span><span class="punctuation">[</span><span class="number">1.</span><span class="punctuation">.</span><span class="punctuation">]</span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>And the concrete render function is then retrieved.
+</p>
+</td>
+          <td class='code'><pre>    <span class="hash"><span class="hash_begin">{</span>render<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>engines<span class="punctuation">.</span>templates<span class="punctuation">[</span>ext<span class="punctuation">]</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The function callback with an error if no engine can be found
+for the template file.
+</p>
+</td>
+          <td class='code'><pre>    <span class="keyword">unless</span> render<span class="operators">?</span>
+      <span class="keyword">return</span> callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> missing _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.backend_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>ext<span class="hash_end">}</span></span><span class="group_end">)</span></span>
+
+    puts <span class="string"><span class="string_begin">"</span>engine found for <span class="subst"><span class="subst_begin">#{</span>ext<span class="punctuation">.</span>cyan<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The template file is then read asynchronoulsy.
+</p>
+</td>
+          <td class='code'><pre>    fs<span class="punctuation">.</span>readFile tplfile<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> tpl<span class="group_end">)</span></span> <span class="function">-></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The function callback if an error occured while reading the file.
+</p>
+</td>
+          <td class='code'><pre>
+      <span class="keyword">if</span> err<span class="operators">?</span>
+        msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.file_access<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> tplfile<span class="punctuation">.</span>red<span class="punctuation">,</span> <span class="property">stack<span class='punctuation'>:</span></span> err<span class="punctuation">.</span>stack<span class="group_end">)</span></span>
+        callback<span class="operators">?</span> <span class="keyword">new</span> <span class="constant">Error</span> msg
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The function callback with the rendered content.
+</p>
+</td>
+          <td class='code'><pre>      callback<span class="operators">?</span> <span class="literal">null</span><span class="punctuation">,</span> render tpl<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">,</span> context
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='rendersync'>renderSync</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>renderSync</code> function will search for a sibling file for <code>file</code> in the
+<code>templates</code> directory synchronoulsy and will render that template.
+
+</p>
+<pre><code>content <span class="operators">=</span> renderSync __filename<span class="punctuation">,</span> context</code></pre>
+<p>The engine used to process a given template file is defined using the
+extension of the template file, for instance, with the default engines
+provided in Neat, a <code>hamlc</code> file will be processed using the <code>haml-coffee</code>
+module, and a <code>mustache</code> file will be processed by the <code>mustache</code> module.
+</p>
+</td>
+          <td class='code'><pre>renderSync <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>file<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>paths</code> array will stores the paths tested for a templates.
+It will serve as message of the error in the case no file was found.
+</p>
+</td>
+          <td class='code'><pre>  paths <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+
+  <span class="global">console</span><span class="punctuation">.</span>log <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>We first search for a template file.
+</p>
+</td>
+          <td class='code'><pre>  tplfile <span class="operators">=</span> findSiblingFileSync file<span class="punctuation">,</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths<span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>templates<span class="string_end">"</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">"</span>*<span class="string_end">"</span></span><span class="punctuation">,</span> paths
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If no sibling file can be found an error is raised.
+</p>
+</td>
+          <td class='code'><pre>  <span class="keyword">unless</span> tplfile<span class="operators">?</span>
+    msg <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.no_template<span class="string_end">'</span></span><span class="punctuation">,</span>
+            <span class="property">paths<span class='punctuation'>:</span></span> paths<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="string_end">"</span></span><span class="group_end">)</span></span><span class="punctuation">,</span>
+            <span class="property">missing<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.template_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> tplfile<span class="group_end">)</span></span><span class="group_end">)</span></span>
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> msg
+
+  puts <span class="string"><span class="string_begin">"</span>template found: <span class="subst"><span class="subst_begin">#{</span>tplfile<span class="punctuation">.</span>yellow<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The extension is extracted from the template file name.
+</p>
+</td>
+          <td class='code'><pre>  ext <span class="operators">=</span> extname<span class="group"><span class="group_begin">(</span>tplfile<span class="group_end">)</span></span><span class="punctuation">[</span><span class="number">1.</span><span class="punctuation">.</span><span class="punctuation">]</span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>And the concrete render function is then retrieved.
+</p>
+</td>
+          <td class='code'><pre>  <span class="hash"><span class="hash_begin">{</span>render<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>engines<span class="punctuation">.</span>templates<span class="punctuation">[</span>ext<span class="punctuation">]</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The function raise an error if no engine can be found
+for the template file.
+</p>
+</td>
+          <td class='code'><pre>  <span class="keyword">unless</span> render<span class="operators">?</span>
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> missing _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.templates.backend_for<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>ext<span class="hash_end">}</span></span><span class="group_end">)</span></span>
+
+  puts <span class="string"><span class="string_begin">"</span>engine found for <span class="subst"><span class="subst_begin">#{</span>ext<span class="punctuation">.</span>cyan<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The template file is then read synchronoulsy.
+</p>
+</td>
+          <td class='code'><pre>  <span class="keyword">try</span>
+    tpl <span class="operators">=</span> fs<span class="punctuation">.</span>readFileSync tplfile
+  <span class="keyword">catch</span> e
+    e<span class="punctuation">.</span>message <span class="operators">=</span> error _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.file_access<span class="string_end">'</span></span><span class="punctuation">,</span>
+                        <span class="property">path<span class='punctuation'>:</span></span> tplfile<span class="punctuation">.</span>red<span class="punctuation">,</span>
+                        <span class="property">stack<span class='punctuation'>:</span></span> e<span class="punctuation">.</span>message<span class="group_end">)</span></span>
+
+    <span class="keyword">throw</span> e
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The rendered content is then returned
+</p>
+</td>
+          <td class='code'><pre>  render tpl<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">,</span> context
+
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>render<span class="punctuation">,</span> renderSync<span class="hash_end">}</span></span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

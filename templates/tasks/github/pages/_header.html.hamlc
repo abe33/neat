@@ -1,3 +1,0 @@
-%header
-  %h1= @Neat.project.name
-  %p= @Neat.project.version

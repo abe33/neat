@@ -1,0 +1,401 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/core/types/array.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/core/types/array.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/core/types/</h3>
+            <h1>array.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>This file contains Array&#39;s extensions that mimics some of the ruby
+Array methods.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#array'>Array</a>
+  </li>
+  <li class='level1'>
+    <a href='#class-extensions'>Class Extensions</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayisarray'>Array.isArray</a>
+  </li>
+  <li class='level1'>
+    <a href='#instances-extensions'>Instances Extensions</a>
+  </li>
+  <li class='level2'>
+    <a href='#arraycompact'>Array::compact</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayempty'>Array::empty</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayfirst'>Array::first</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayflatten'>Array::flatten</a>
+  </li>
+  <li class='level2'>
+    <a href='#arraygroup'>Array::group</a>
+  </li>
+  <li class='level2'>
+    <a href='#arraylast'>Array::last</a>
+  </li>
+  <li class='level2'>
+    <a href='#arraymax'>Array::max</a>
+  </li>
+  <li class='level2'>
+    <a href='#arraymin'>Array::min</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayreject'>Array::reject</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayrotate'>Array::rotate</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayselect'>Array::select</a>
+  </li>
+  <li class='level2'>
+    <a href='#arraystep'>Array::step</a>
+  </li>
+  <li class='level2'>
+    <a href='#arrayuniq'>Array::uniq</a>
+  </li>
+</ul>
+</p>
+</td>
+          <td class='code'><pre><span class="hash"><span class="hash_begin">{</span>def<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h1 id='array'>Array</h1>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='class-extensions'>Class Extensions</h3>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayisarray'>Array.isArray</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in object is an <code>Array</code>. This function
+use the <code>Object.prototype.toString</code> hack to test the passed-in object.
+</p>
+</td>
+          <td class='code'><pre><span class="constant">Array</span><span class="punctuation">.</span>isArray <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>a<span class="group_end">)</span></span> <span class="function">-></span> <span class="property">Object<span class='punctuation'>:</span></span><span class="punctuation">:</span>toString<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span>a<span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>[object Array]<span class="string_end">'</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='instances-extensions'>Instances Extensions</h3>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arraycompact'>Array::compact</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns a new array without all the undefined elements of the previous array.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="literal">null</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">]</span><span class="punctuation">.</span>compact<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['foo', 10]</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">compact<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@select</span> <span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="function">-></span> el<span class="operators">?</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayempty'>Array::empty</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the array is empty.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>      <span class="comment"># true</span>
+<span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># false</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">empty<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@length</span> <span class="keyword">is</span> <span class="number">0</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayfirst'>Array::first</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the first element in this array.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>first<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># 'foo'</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">first<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="keyword">if</span> <span class="property">@length</span> <span class="operators">></span> <span class="number">0</span> <span class="keyword">then</span> <span class="property">@</span><span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span> <span class="keyword">else</span> <span class="literal">undefined</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayflatten'>Array::flatten</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns a new array that is a recursice one-dimensional flattening
+of this array.
+The <code>level</code> argument allow to specify the depth at which stopping
+the flattening.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>  <span class="comment"># [0, 1, 2, 3, 4, 5]</span>
+<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span><span class="number">1</span><span class="group_end">)</span></span> <span class="comment"># [0, 1, 2, [3, 4, [5]]]</span>
+<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">1</span><span class="punctuation">,</span> <span class="number">2</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">3</span><span class="punctuation">,</span> <span class="number">4</span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="number">5</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">]</span><span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span><span class="number">2</span><span class="group_end">)</span></span> <span class="comment"># [0, 1, 2, 3, 4, [5]]</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">flatten<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>level <span class="operators">=</span> <span class="constant">Infinity</span><span class="group_end">)</span></span> <span class="function">-></span>
+  level <span class="operators">=</span> <span class="constant">Infinity</span> <span class="keyword">if</span> level <span class="operators"><</span> <span class="number">0</span>
+  a <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+  <span class="keyword">for</span> el <span class="keyword">in</span> <span class="keyword">this</span>
+    <span class="keyword">if</span> <span class="constant">Array</span><span class="punctuation">.</span>isArray<span class="group"><span class="group_begin">(</span>el<span class="group_end">)</span></span> <span class="keyword">and</span> level <span class="keyword">isnt</span> <span class="number">0</span>
+      a <span class="operators">=</span> a<span class="punctuation">.</span>concat el<span class="punctuation">.</span>flatten<span class="group"><span class="group_begin">(</span>level<span class="operators">-</span><span class="number">1</span><span class="group_end">)</span></span>
+    <span class="keyword">else</span>
+      a<span class="punctuation">.</span>push el
+  a
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arraygroup'>Array::group</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns an array whose values are grouped together in arrays
+of length <code>size</code>.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>group <span class="number">2</span>
+<span class="comment"># [['foo', 'bar'], ['baz']]</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">group<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>size<span class="group_end">)</span></span> <span class="function">-></span>
+  a <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>; <span class="property">@step</span><span class="group"><span class="group_begin">(</span>size<span class="punctuation">,</span> <span class="function">-></span> a<span class="punctuation">.</span>push <span class="group"><span class="group_begin">(</span>v <span class="keyword">for</span> v <span class="keyword">in</span> arguments<span class="group_end">)</span></span><span class="group_end">)</span></span>; <span class="keyword">return</span> a
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arraylast'>Array::last</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the last element in this array.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># 'bar'</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">last<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="keyword">if</span> <span class="property">@length</span> <span class="operators">></span> <span class="number">0</span> <span class="keyword">then</span> <span class="property">@</span><span class="punctuation">[</span><span class="property">@length</span><span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span> <span class="keyword">else</span> <span class="literal">undefined</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arraymax'>Array::max</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the maximum value contained in this array.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="number">20</span><span class="punctuation">,</span> <span class="number">30</span><span class="punctuation">]</span><span class="punctuation">.</span>max<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># 30</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">max<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="constant">Math</span><span class="punctuation">.</span>max<span class="punctuation">.</span>apply <span class="literal">null</span><span class="punctuation">,</span> <span class="keyword">this</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arraymin'>Array::min</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns the minimum value contained in this array.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">10</span><span class="punctuation">,</span> <span class="number">20</span><span class="punctuation">,</span> <span class="number">30</span><span class="punctuation">]</span><span class="punctuation">.</span>min<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># 0</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">min<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="constant">Math</span><span class="punctuation">.</span>min<span class="punctuation">.</span>apply <span class="literal">null</span><span class="punctuation">,</span> <span class="keyword">this</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayreject'>Array::reject</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns a new array that contains the elements of this array that wasn&#39;t
+rejected by the provided function.
+If no function is provided a copy of this array is returned.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>reject <span class="group"><span class="group_begin">(</span>v<span class="group_end">)</span></span> <span class="function">-></span> v<span class="punctuation">.</span>substr<span class="group"><span class="group_begin">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>b<span class="string_end">"</span></span>
+<span class="comment"># ['foo']</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">reject<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span> o <span class="keyword">for</span> o <span class="keyword">in</span> <span class="keyword">this</span> <span class="keyword">when</span> <span class="keyword">not</span> f<span class="operators">?</span> o
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayrotate'>Array::rotate</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns a new array which contains the elements of this array rotated
+according to the passed-in amount.
+The original array is leaved unchanged.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>d<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>rotate<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>   <span class="comment"># ['b', 'c', 'd', 'a']</span>
+<span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>d<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>rotate<span class="group"><span class="group_begin">(</span><span class="number">2</span><span class="group_end">)</span></span>  <span class="comment"># ['c', 'd', 'a', 'b']</span>
+<span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>d<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>rotate<span class="group"><span class="group_begin">(</span><span class="operators">-</span><span class="number">1</span><span class="group_end">)</span></span> <span class="comment"># ['d', 'a', 'b', 'c']</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">rotate<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>amount<span class="operators">=</span><span class="number">1</span><span class="group_end">)</span></span> <span class="function">-></span>
+  amount <span class="operators">=</span> <span class="number">1</span> <span class="keyword">if</span> amount <span class="keyword">is</span> <span class="number">0</span>
+  direction <span class="operators">=</span> amount <span class="operators">></span> <span class="number">0</span>
+  out <span class="operators">=</span> <span class="property">@concat</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  range <span class="operators">=</span> <span class="punctuation">[</span><span class="number">0.</span><span class="punctuation">.</span><span class="constant">Math</span><span class="punctuation">.</span>abs<span class="group"><span class="group_begin">(</span>amount<span class="group_end">)</span></span><span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span>
+  <span class="keyword">if</span> direction
+    out<span class="punctuation">.</span>push out<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">for</span> i <span class="keyword">in</span> range
+  <span class="keyword">else</span>
+    out<span class="punctuation">.</span>unshift out<span class="punctuation">.</span>pop<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">for</span> i <span class="keyword">in</span> range
+  out
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayselect'>Array::select</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns a new array which contains the elements of this array that
+was selected by the provided function.
+If no function is provided an empty array is returned.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>select <span class="group"><span class="group_begin">(</span>v<span class="group_end">)</span></span> <span class="function">-></span> v<span class="punctuation">.</span>substr<span class="group"><span class="group_begin">(</span><span class="number">0</span><span class="punctuation">,</span> <span class="number">1</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">"</span>b<span class="string_end">"</span></span>
+<span class="comment"># ['bar', 'baz']</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">select<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span> o <span class="keyword">for</span> o <span class="keyword">in</span> <span class="keyword">this</span> <span class="keyword">when</span> f<span class="operators">?</span> o
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arraystep'>Array::step</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Iterates over the array according to the given step.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>baz<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>step <span class="number">2</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="group_end">)</span></span> <span class="function">-></span> <span class="global">console</span><span class="punctuation">.</span>log a<span class="punctuation">,</span> b
+<span class="comment"># 'foo' 'bar'</span>
+<span class="comment"># 'baz' undefined</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">step<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>n<span class="punctuation">,</span>f<span class="group_end">)</span></span> <span class="function">-></span>
+  f<span class="operators">?</span><span class="punctuation">.</span>apply <span class="keyword">this</span><span class="punctuation">,</span> <span class="property">@</span><span class="punctuation">[</span>i<span class="operators">*</span>n<span class="punctuation">.</span><span class="punctuation">.</span>i<span class="operators">*</span>n <span class="operators">+</span> n<span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="number">0.</span><span class="punctuation">.</span><span class="constant">Math</span><span class="punctuation">.</span>ceil<span class="group"><span class="group_begin">(</span><span class="property">@length</span> <span class="operators">/</span> n<span class="group_end">)</span></span><span class="operators">-</span><span class="number">1</span><span class="punctuation">]</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='arrayuniq'>Array::uniq</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns a new array where all values are unique.
+
+</p>
+<pre><code><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>foo<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>bar<span class="string_end">'</span></span><span class="punctuation">]</span><span class="punctuation">.</span>uniq<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="comment"># ['foo', 'bar']</span></code></pre>
+</td>
+          <td class='code'><pre>def <span class="constant">Array</span><span class="punctuation">,</span> <span class="property">uniq<span class='punctuation'>:</span></span> <span class="function">-></span>
+  out <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+  out<span class="punctuation">.</span>push v <span class="keyword">for</span> v <span class="keyword">in</span> <span class="keyword">this</span> <span class="keyword">when</span> v <span class="keyword">not</span> <span class="keyword">in</span> out
+  out
+
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

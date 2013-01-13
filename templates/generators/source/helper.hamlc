@@ -1,1 +1,0 @@
-!= "\n#{@name} = require '#{@relative @dir, @root}/lib/#{@relativePath}'"

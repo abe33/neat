@@ -1,0 +1,385 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/tasks/github_pages.cake.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/tasks/github_pages.cake.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/tasks/</h3>
+            <h1>github_pages.cake.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'></td>
+          <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>relative<span class="punctuation">,</span> resolve<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>exec<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>child_process<span class="string_end">'</span></span>
+
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>neatTask<span class="punctuation">,</span> asyncErrorTrap<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/commands<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>error<span class="punctuation">,</span> info<span class="punctuation">,</span> green<span class="punctuation">,</span> red<span class="punctuation">,</span> puts<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/logs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>find<span class="punctuation">,</span> ensurePath<span class="punctuation">,</span> readFiles<span class="punctuation">,</span> findSiblingFileSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/files<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>render<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/templates<span class="string_end">'</span></span>
+cup <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/cup<span class="string_end">'</span></span>
+t <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+<span class="keyword">try</span>
+  <span class="constant">Q</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>q<span class="string_end">'</span></span>
+<span class="keyword">catch</span> e
+  <span class="keyword">return</span> error t<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing_module<span class="string_end">'</span></span><span class="punctuation">,</span>
+                  <span class="property">missing<span class='punctuation'>:</span></span> missing <span class="string"><span class="string_begin">'</span>q<span class="string_end">'</span></span><span class="group_end">)</span></span>
+
+<span class="keyword">try</span>
+  <span class="hash"><span class="hash_begin">{</span>highlight<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>highlight.js<span class="string_end">'</span></span>
+<span class="keyword">catch</span> e
+  <span class="keyword">return</span> error t<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing_module<span class="string_end">'</span></span><span class="punctuation">,</span>
+                  <span class="property">missing<span class='punctuation'>:</span></span> missing <span class="string"><span class="string_begin">'</span>highlight<span class="string_end">'</span></span><span class="group_end">)</span></span>
+
+<span class="keyword">try</span>
+  marked <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>marked<span class="string_end">'</span></span>
+<span class="keyword">catch</span> e
+  <span class="keyword">return</span> error t<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.errors.missing_module<span class="string_end">'</span></span><span class="punctuation">,</span>
+                  <span class="property">missing<span class='punctuation'>:</span></span> missing <span class="string"><span class="string_begin">'</span>marked<span class="string_end">'</span></span><span class="group_end">)</span></span>
+
+<span class="constant">PAGES_DIR</span> <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/pages<span class="string_end">"</span></span>
+<span class="constant">PAGES_TEMP_DIR</span> <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/.pages<span class="string_end">"</span></span>
+<span class="constant">CONFIG</span> <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/config/pages.cup<span class="string_end">"</span></span>
+<span class="constant">TASK_DIR</span> <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>neatRoot<span class="subst_end">}</span></span>/src/tasks/github/pages<span class="string_end">"</span></span>
+
+handleError <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+  error red err<span class="punctuation">.</span>message
+  puts err<span class="punctuation">.</span>stack
+
+marked<span class="punctuation">.</span>setOptions
+  <span class="property">gfm<span class='punctuation'>:</span></span> <span class="literal">true</span>
+  <span class="property">pedantic<span class='punctuation'>:</span></span> <span class="literal">false</span>
+  <span class="property">sanitize<span class='punctuation'>:</span></span> <span class="literal">false</span>
+  <span class="property">highlight<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>code<span class="punctuation">,</span> lang<span class="group_end">)</span></span> <span class="function">-></span>
+    highlight<span class="group"><span class="group_begin">(</span>lang <span class="keyword">or</span> <span class="string"><span class="string_begin">'</span>coffeescript<span class="string_end">'</span></span><span class="punctuation">,</span> code<span class="group_end">)</span></span><span class="punctuation">.</span>value
+
+run <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>command<span class="group_end">)</span></span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  exec command<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> stdout<span class="punctuation">,</span> stderr<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> err<span class="operators">?</span>
+      <span class="global">console</span><span class="punctuation">.</span>log stderr
+      defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>stderr<span class="group_end">)</span></span>
+    <span class="keyword">else</span>
+      <span class="global">console</span><span class="punctuation">.</span>log stdout
+      defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span>stdout<span class="group_end">)</span></span>
+  defer<span class="punctuation">.</span>promise
+
+getGitInfo <span class="operators">=</span> <span class="function">-></span>
+  o <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+  run<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>git status<span class="string_end">'</span></span><span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+    o<span class="punctuation">.</span>branch <span class="operators">=</span> currentBranch status
+    o<span class="punctuation">.</span>status <span class="operators">=</span> status
+    run<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>git branch<span class="string_end">'</span></span><span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>branches<span class="group_end">)</span></span> <span class="function">-></span>
+    o<span class="punctuation">.</span>branches <span class="operators">=</span> branches<span class="punctuation">.</span>split<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>b<span class="group_end">)</span></span> <span class="function">-></span> b<span class="punctuation">[</span><span class="number">2.</span><span class="punctuation">.</span><span class="punctuation">]</span>
+    o
+
+checkGitStatus <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">if</span> hasUnstagedChanges status
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> t <span class="string"><span class="string_begin">'</span>neat.tasks.github_pages.unstaged_changes<span class="string_end">'</span></span>
+
+  <span class="keyword">if</span> hasUntrackedFile status
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> t <span class="string"><span class="string_begin">'</span>neat.tasks.github_pages.untracked_files<span class="string_end">'</span></span>
+
+read <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  readFiles files<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> buf<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="keyword">else</span> defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span>buf<span class="punctuation">.</span>sort<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+  defer<span class="punctuation">.</span>promise
+
+loadConfig <span class="operators">=</span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  fs<span class="punctuation">.</span>readFile <span class="constant">CONFIG</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> conf<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> err<span class="operators">?</span>
+      defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span>
+    <span class="keyword">else</span>
+      defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span>cup<span class="punctuation">.</span>read conf<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+  defer<span class="punctuation">.</span>promise
+
+createTempDir <span class="operators">=</span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  ensurePath <span class="constant">PAGES_TEMP_DIR</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> created<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="keyword">else</span> defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span>created<span class="group_end">)</span></span>
+  defer<span class="punctuation">.</span>promise
+
+findMarkdownFiles <span class="operators">=</span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  find <span class="string"><span class="string_begin">'</span>md<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="constant">PAGES_DIR</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> files<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="keyword">else</span> defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span>
+  defer<span class="punctuation">.</span>promise
+
+compileStylus <span class="operators">=</span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  gen <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> content<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="group"><span class="group_begin">(</span>defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span>; callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+
+    fs<span class="punctuation">.</span>readFile path<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> content<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="group"><span class="group_begin">(</span>defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span>; callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+
+      css <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>engines<span class="punctuation">.</span>templates<span class="punctuation">.</span>stylus<span class="punctuation">.</span>render content<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      path <span class="operators">=</span> path<span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span><span class="constant">PAGES_DIR</span><span class="punctuation">,</span> <span class="constant">PAGES_TEMP_DIR</span><span class="group_end">)</span></span><span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>stylus<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>css<span class="string_end">'</span></span><span class="group_end">)</span></span>
+
+      fs<span class="punctuation">.</span>writeFile path<span class="punctuation">,</span> css<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+        <span class="keyword">if</span> err<span class="operators">?</span> <span class="keyword">then</span> <span class="keyword">return</span> <span class="group"><span class="group_begin">(</span>defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span>; callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+
+        callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  find <span class="string"><span class="string_begin">'</span>stylus<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="punctuation">[</span><span class="constant">PAGES_DIR</span><span class="punctuation">]</span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> files<span class="group_end">)</span></span> <span class="function">-></span>
+    parallel <span class="group"><span class="group_begin">(</span>gen file <span class="keyword">for</span> file <span class="keyword">in</span> files<span class="group_end">)</span></span><span class="punctuation">,</span> <span class="function">-></span>
+      defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  defer<span class="punctuation">.</span>promise
+
+writeFiles <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  gen <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> content<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    dir <span class="operators">=</span> resolve path<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>..<span class="string_end">'</span></span>
+    ensurePath dir<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+      fs<span class="punctuation">.</span>writeFile path<span class="punctuation">,</span> content<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+        <span class="keyword">if</span> err <span class="keyword">then</span> defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span>
+        callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  parallel <span class="group"><span class="group_begin">(</span>gen k<span class="punctuation">,</span>v <span class="keyword">for</span> k<span class="punctuation">,</span>v <span class="keyword">of</span> files<span class="group_end">)</span></span><span class="punctuation">,</span> <span class="function">-></span>
+    defer<span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  defer<span class="punctuation">.</span>promise
+
+createIndex <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+  index <span class="operators">=</span> <span class="string"><span class="string_begin">"</span># <span class="subst"><span class="subst_begin">#{</span>t<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.github_pages.pages_index.title<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="subst_end">}</span></span><span class="escaped">\n</span><span class="string_end">"</span></span>
+  <span class="keyword">for</span> path<span class="punctuation">,</span> content <span class="keyword">of</span> files
+    title <span class="operators">=</span> <span class="regexp">/<span class="regexp_operators">^</span><span class="escaped">\#</span><span class="escaped">\s</span><span class="regexp_operators">+</span><span class="regexp_operators">(</span>.<span class="regexp_operators">+</span><span class="regexp_operators">)</span>/g</span><span class="punctuation">.</span>exec<span class="group"><span class="group_begin">(</span>content<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span><span class="operators">?</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span> <span class="keyword">or</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+    index <span class="operators">+</span><span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="escaped">\n</span>  1. [<span class="subst"><span class="subst_begin">#{</span>title<span class="subst_end">}</span></span>](<span class="subst"><span class="subst_begin">#{</span>
+      relative<span class="group"><span class="group_begin">(</span><span class="constant">PAGES_DIR</span><span class="punctuation">,</span> path<span class="group_end">)</span></span><span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>md<span class="string_end">'</span></span><span class="punctuation">,</span><span class="string"><span class="string_begin">'</span>html<span class="string_end">'</span></span><span class="group_end">)</span></span>
+    <span class="subst_end">}</span></span>)<span class="string_end">"</span></span>
+
+  files<span class="punctuation">[</span><span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">PAGES_DIR</span><span class="subst_end">}</span></span>/pages_index.md<span class="string_end">"</span></span><span class="punctuation">]</span> <span class="operators">=</span> index
+  files
+
+findTitle <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>content<span class="group_end">)</span></span> <span class="function">-></span>
+  res <span class="operators">=</span> <span class="regexp">/<h1<span class="char_range"><span class="char_range_begin">[</span>^><span class="char_range_end">]</span></span><span class="regexp_operators">*</span>><span class="regexp_operators">(</span>.<span class="regexp_operators">*</span><span class="regexp_operators">)</span><<span class="escaped">\/</span>h1>/g</span><span class="punctuation">.</span>exec content
+  res<span class="operators">?</span><span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span> <span class="keyword">or</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+
+applyLayout <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+  loadConfig<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>config<span class="group_end">)</span></span> <span class="function">-></span>
+    hamlc <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>engines<span class="punctuation">.</span>templates<span class="punctuation">.</span>hamlc<span class="punctuation">.</span>render
+
+    getTemplate <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> partial<span class="operators">=</span><span class="literal">true</span><span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">if</span> config<span class="punctuation">.</span>templates<span class="operators">?</span><span class="punctuation">[</span>name<span class="punctuation">]</span><span class="operators">?</span>
+        tplPath <span class="operators">=</span> resolve <span class="constant">Neat</span><span class="punctuation">.</span>root<span class="punctuation">,</span> config<span class="punctuation">.</span>templates<span class="punctuation">[</span>name<span class="punctuation">]</span>
+      <span class="keyword">else</span>
+        name <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>_<span class="subst"><span class="subst_begin">#{</span>name<span class="subst_end">}</span></span><span class="string_end">"</span></span> <span class="keyword">if</span> partial
+        tplPath <span class="operators">=</span> findSiblingFileSync <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">TASK_DIR</span><span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span>name<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="punctuation">,</span>
+                                      paths<span class="punctuation">,</span>
+                                      <span class="string"><span class="string_begin">'</span>templates<span class="string_end">'</span></span><span class="punctuation">,</span>
+                                      <span class="string"><span class="string_begin">'</span>hamlc<span class="string_end">'</span></span>
+      fs<span class="punctuation">.</span>readFileSync tplPath
+
+    paths <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>paths
+
+    header <span class="operators">=</span> getTemplate <span class="string"><span class="string_begin">'</span>header<span class="string_end">'</span></span>
+    footer <span class="operators">=</span> getTemplate <span class="string"><span class="string_begin">'</span>footer<span class="string_end">'</span></span>
+    navigation <span class="operators">=</span> getTemplate <span class="string"><span class="string_begin">'</span>navigation<span class="string_end">'</span></span>
+    layout <span class="operators">=</span> getTemplate <span class="string"><span class="string_begin">'</span>layout<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="literal">false</span>
+
+    newFiles <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    <span class="keyword">for</span> path<span class="punctuation">,</span>content <span class="keyword">of</span> files
+      dir <span class="operators">=</span> resolve path<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>..<span class="string_end">'</span></span>
+      newFiles<span class="punctuation">[</span>path<span class="punctuation">]</span> <span class="operators">=</span> hamlc layout<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>
+        <span class="constant">Neat</span>
+        dir
+        path
+        relative
+          config
+        <span class="property">title<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>project<span class="punctuation">.</span>name<span class="subst_end">}</span></span> - <span class="subst"><span class="subst_begin">#{</span>findTitle content<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+        <span class="property">header<span class='punctuation'>:</span></span> hamlc header<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="constant">Neat</span><span class="punctuation">,</span> dir<span class="punctuation">,</span> path<span class="punctuation">,</span> relative<span class="punctuation">,</span> config<span class="hash_end">}</span></span>
+        <span class="property">footer<span class='punctuation'>:</span></span> hamlc footer<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="constant">Neat</span><span class="punctuation">,</span> dir<span class="punctuation">,</span> path<span class="punctuation">,</span> relative<span class="punctuation">,</span> config<span class="hash_end">}</span></span>
+        <span class="property">navigation<span class='punctuation'>:</span></span> hamlc navigation<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>
+          <span class="constant">Neat</span>
+          dir
+          path
+          relative
+          config
+          <span class="property">navigation<span class='punctuation'>:</span></span> config<span class="punctuation">.</span>navigation
+        <span class="hash_end">}</span></span>
+        <span class="property">body<span class='punctuation'>:</span></span> content
+      <span class="hash_end">}</span></span>
+    newFiles
+
+<span class="constant">TPL_TOC</span> <span class="operators">=</span> resolve <span class="constant">Neat</span><span class="punctuation">.</span>root<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>templates/commands/docco/_toc<span class="string_end">'</span></span>
+
+createTOC <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+  r <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> content<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">return</span> callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> content<span class="punctuation">.</span>indexOf<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span><h3>Table Of Content</h3>
+<ul class='toc'>
+</ul><span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="operators">-</span><span class="number">1</span>
+
+    <span class="constant">START_TAG</span> <span class="operators">=</span> <span class="regexp">/<h<span class="regexp_operators">(</span><span class="escaped">\d</span><span class="regexp_operators">)</span>>/g</span>
+    <span class="constant">END_TAG</span> <span class="operators">=</span> <span class="regexp">/<<span class="escaped">\/</span>h<span class="regexp_operators">(</span><span class="escaped">\d</span><span class="regexp_operators">)</span>>/g</span>
+
+    titles <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    <span class="keyword">while</span> startMatch <span class="operators">=</span> <span class="constant">START_TAG</span><span class="punctuation">.</span>exec content
+      level <span class="operators">=</span> <span class="top_level">parseInt</span> startMatch<span class="punctuation">[</span><span class="number">1</span><span class="punctuation">]</span>
+      endMatch <span class="operators">=</span> <span class="constant">END_TAG</span><span class="punctuation">.</span>exec content
+
+      title <span class="operators">=</span> content<span class="punctuation">.</span>substring <span class="constant">START_TAG</span><span class="punctuation">.</span>lastIndex<span class="punctuation">,</span>
+                                endMatch<span class="punctuation">.</span>index
+      id <span class="operators">=</span> title<span class="punctuation">.</span>parameterize<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+      match <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><h<span class="subst"><span class="subst_begin">#{</span>level<span class="subst_end">}</span></span>><span class="subst"><span class="subst_begin">#{</span>title<span class="subst_end">}</span></span></h<span class="subst"><span class="subst_begin">#{</span>level<span class="subst_end">}</span></span>><span class="string_end">"</span></span>
+      replacement <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><h<span class="subst"><span class="subst_begin">#{</span>level<span class="subst_end">}</span></span> id='<span class="subst"><span class="subst_begin">#{</span>id<span class="subst_end">}</span></span>'><span class="subst"><span class="subst_begin">#{</span>title<span class="subst_end">}</span></span></h<span class="subst"><span class="subst_begin">#{</span>level<span class="subst_end">}</span></span>><span class="string_end">"</span></span>
+      content <span class="operators">=</span> content<span class="punctuation">.</span>replace match<span class="punctuation">,</span> replacement
+
+      titles<span class="punctuation">.</span>push <span class="hash"><span class="hash_begin">{</span>id<span class="punctuation">,</span> <span class="property">content<span class='punctuation'>:</span></span>title<span class="punctuation">,</span> level<span class="hash_end">}</span></span>
+
+      <span class="constant">START_TAG</span><span class="punctuation">.</span>lastIndex <span class="operators">+</span><span class="operators">=</span> id<span class="punctuation">.</span>length <span class="operators">+</span> <span class="number">6</span>
+      <span class="constant">END_TAG</span><span class="punctuation">.</span>lastIndex <span class="operators">+</span><span class="operators">=</span> id<span class="punctuation">.</span>length <span class="operators">+</span> <span class="number">6</span>
+
+    render <span class="constant">TPL_TOC</span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>titles<span class="hash_end">}</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> toc<span class="group_end">)</span></span> <span class="function">-></span>
+      content <span class="operators">=</span> content<span class="punctuation">.</span>replace <span class="string"><span class="string_begin">'</span><h3>Table Of Content</h3>
+<ul class='toc'>
+</ul><span class="string_end">'</span></span><span class="punctuation">,</span> toc
+      files<span class="punctuation">[</span>path<span class="punctuation">]</span> <span class="operators">=</span> content
+      callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  commands <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>r path<span class="punctuation">,</span> content <span class="keyword">for</span> path<span class="punctuation">,</span> content <span class="keyword">of</span> files<span class="group_end">)</span></span>
+
+  defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  parallel commands<span class="punctuation">,</span> <span class="function">-></span>
+    <span class="keyword">return</span> defer<span class="punctuation">.</span>reject<span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="keyword">if</span> err<span class="operators">?</span>
+    defer<span class="punctuation">.</span>resolve files
+
+  defer<span class="punctuation">.</span>promise
+
+createPages <span class="operators">=</span> <span class="function">-></span>
+  findMarkdownFiles<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>read<span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>createIndex<span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+    newFiles <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    <span class="keyword">for</span> path<span class="punctuation">,</span> content <span class="keyword">of</span> files
+      path <span class="operators">=</span> path<span class="punctuation">.</span>replace <span class="constant">PAGES_DIR</span><span class="punctuation">,</span> <span class="constant">PAGES_TEMP_DIR</span>
+      path <span class="operators">=</span> path<span class="punctuation">.</span>replace <span class="string"><span class="string_begin">'</span>md<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>html<span class="string_end">'</span></span>
+      newFiles<span class="punctuation">[</span>path<span class="punctuation">]</span> <span class="operators">=</span> marked content
+    newFiles
+  <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>createTOC<span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>applyLayout<span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>writeFiles<span class="group_end">)</span></span>
+  <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>compileStylus<span class="group_end">)</span></span>
+
+currentBranch <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+  status<span class="punctuation">.</span>split<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>replace <span class="regexp">/<span class="escaped">\#</span> On branch <span class="regexp_operators">(</span>.<span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="regexp_operators">$</span>/gm</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>$1<span class="string_end">'</span></span>
+
+hasUntrackedFile <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span> status<span class="punctuation">.</span>indexOf<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>Untracked files:<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
+hasUnstagedChanges <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span> status<span class="punctuation">.</span>indexOf<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>Changes not staged<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
+
+<span class="global">exports</span><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>github:pages<span class="string_end">'</span></span><span class="punctuation">]</span> <span class="operators">=</span> neatTask
+  <span class="property">name<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>github:pages<span class="string_end">'</span></span>
+  <span class="property">description<span class='punctuation'>:</span></span> t <span class="string"><span class="string_begin">'</span>neat.tasks.github_pages.description<span class="string_end">'</span></span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>default<span class="string_end">'</span></span>
+  <span class="property">action<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    git <span class="operators">=</span> <span class="literal">null</span>
+    branch <span class="operators">=</span> <span class="literal">null</span>
+    p <span class="operators">=</span> getGitInfo<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>g<span class="group_end">)</span></span> <span class="function">-></span>
+      git <span class="operators">=</span> g
+      checkGitStatus git<span class="punctuation">.</span>status
+      branch <span class="operators">=</span> currentBranch git<span class="punctuation">.</span>status
+      run <span class="string"><span class="string_begin">'</span>neat docco<span class="string_end">'</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>createTempDir<span class="punctuation">,</span> handleError<span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="function">-></span> run <span class="string"><span class="string_begin">"</span>cp -r <span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/docs <span class="subst"><span class="subst_begin">#{</span><span class="constant">PAGES_TEMP_DIR</span><span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="function">-></span> run <span class="string"><span class="string_begin">"</span>rm -rf <span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/docs<span class="string_end">"</span></span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>createPages<span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span>
+      <span class="keyword">if</span> <span class="string"><span class="string_begin">'</span>gh-pages<span class="string_end">'</span></span> <span class="keyword">in</span> git<span class="punctuation">.</span>branches
+        run <span class="string"><span class="string_begin">'</span>git checkout gh-pages<span class="string_end">'</span></span>
+      <span class="keyword">else</span>
+        run <span class="string"><span class="string_begin">'</span>git checkout -b gh-pages<span class="string_end">'</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="function">-></span>
+      run <span class="string"><span class="string_begin">'</span>cp .gitignore .gitignore_safe;
+           git ls-files -z | xargs -0 rm -f;
+           git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir;
+           mv .gitignore_safe .gitignore;<span class="string_end">'</span></span>
+    <span class="punctuation">,</span> handleError<span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span>
+      run<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span>mv .pages/* .;
+           rm -rf .pages;
+           git add .;
+           git commit -am 'Updates gh-pages branch';
+           git checkout <span class="subst"><span class="subst_begin">#{</span>branch<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span>
+      callback<span class="operators">?</span> <span class="number">0</span>
+    <span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+      handleError err
+      callback<span class="operators">?</span> <span class="number">1</span>
+
+<span class="global">exports</span><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>github:pages:preview<span class="string_end">'</span></span><span class="punctuation">]</span> <span class="operators">=</span> neatTask
+  <span class="property">name<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>github:pages:preview<span class="string_end">'</span></span>
+  <span class="property">description<span class='punctuation'>:</span></span> t <span class="string"><span class="string_begin">'</span>neat.tasks.github_pages.description<span class="string_end">'</span></span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>default<span class="string_end">'</span></span>
+  <span class="property">action<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    git <span class="operators">=</span> <span class="literal">null</span>
+    branch <span class="operators">=</span> <span class="literal">null</span>
+    createTempDir<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span> run<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat docco<span class="string_end">'</span></span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span> run<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span>cp -r <span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/docs <span class="subst"><span class="subst_begin">#{</span><span class="constant">PAGES_TEMP_DIR</span><span class="subst_end">}</span></span>;
+                  rm -rf <span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/docs<span class="string_end">"</span></span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span>createPages<span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span>
+      callback<span class="operators">?</span> <span class="number">0</span>
+    <span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+      handleError err
+      callback<span class="operators">?</span> <span class="number">1</span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

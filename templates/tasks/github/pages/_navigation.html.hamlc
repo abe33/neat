@@ -1,9 +1,0 @@
-%nav
-  %ul
-    - for name, h of @navigation
-      - p = "#{@Neat.root}/.pages/#{h.href}"
-      - isCurrent = (f) => @relative(p, @path) is ''
-      - cls = if isCurrent h.href then 'selected' else ''
-      %li{class: cls}
-        - href = if h.href.indexOf('http://') is -1 then @relative @dir, p else h.href
-        %a{href: href, class: h.class || ''}= name

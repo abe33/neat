@@ -1,0 +1,136 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/tasks/test.cake.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/tasks/test.cake.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/tasks/</h3>
+            <h1>test.cake.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'></td>
+          <td class='code'><pre>path <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>queue<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>neatTask<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/commands<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>namespace<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/exports<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>error<span class="punctuation">,</span> info<span class="punctuation">,</span> green<span class="punctuation">,</span> red<span class="punctuation">,</span> yellow<span class="punctuation">,</span> puts<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/logs<span class="string_end">'</span></span>
+_ <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+
+beforeTests <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>test<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="constant">Neat</span><span class="punctuation">.</span>task<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>compile<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> status <span class="keyword">is</span> <span class="number">0</span> <span class="keyword">then</span> test callback <span class="keyword">else</span> callback<span class="operators">?</span> <span class="number">1</span>
+
+runTests <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> dir<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+  statuses <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+  test <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>k<span class="punctuation">,</span>f<span class="punctuation">,</span>n<span class="punctuation">,</span>d<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    f n<span class="punctuation">,</span> d<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+      statuses<span class="punctuation">.</span>push status
+      callback<span class="operators">?</span> status
+  actions <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>test k<span class="punctuation">,</span>f<span class="punctuation">,</span>name<span class="punctuation">,</span>dir <span class="keyword">for</span> k<span class="punctuation">,</span>f <span class="keyword">of</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>engines<span class="punctuation">.</span>tests<span class="group_end">)</span></span>
+  queue actions<span class="punctuation">,</span> <span class="function">-></span>
+    status <span class="operators">=</span> <span class="keyword">if</span> statuses<span class="punctuation">.</span>some<span class="group"><span class="group_begin">(</span><span class="group"><span class="group_begin">(</span>n<span class="group_end">)</span></span><span class="function">-></span> n <span class="keyword">is</span> <span class="number">1</span><span class="group_end">)</span></span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+    callback<span class="operators">?</span> status
+
+index <span class="operators">=</span> neatTask
+  <span class="property">name<span class='punctuation'>:</span></span><span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span>
+  <span class="property">description<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span>
+  <span class="property">action<span class='punctuation'>:</span></span> beforeTests <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    runTests<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>unit<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>test/units<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>statusUnit<span class="group_end">)</span></span> <span class="function">-></span>
+      runTests<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>functional<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>test/functionals<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>statusFunctional<span class="group_end">)</span></span> <span class="function">-></span>
+        runTests<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>integration<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>test/integrations<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>statusIntegration<span class="group_end">)</span></span> <span class="function">-></span>
+          statuses <span class="operators">=</span> <span class="punctuation">[</span>statusUnit<span class="punctuation">,</span> statusFunctional<span class="punctuation">,</span> statusIntegration<span class="punctuation">]</span>
+          status <span class="operators">=</span> <span class="keyword">if</span> statuses<span class="punctuation">.</span>some<span class="group"><span class="group_begin">(</span><span class="group"><span class="group_begin">(</span>n<span class="group_end">)</span></span> <span class="function">-></span> n <span class="keyword">is</span> <span class="number">1</span><span class="group_end">)</span></span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+          <span class="keyword">if</span> status <span class="keyword">is</span> <span class="number">0</span>
+            info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_done<span class="string_end">'</span></span><span class="group_end">)</span></span>
+          <span class="keyword">else</span>
+            error red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_failed<span class="string_end">'</span></span><span class="group_end">)</span></span>
+          callback<span class="operators">?</span> status
+
+unit <span class="operators">=</span> neatTask
+  <span class="property">name<span class='punctuation'>:</span></span><span class="string"><span class="string_begin">'</span>test:unit<span class="string_end">'</span></span>
+  <span class="property">description<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.unit_description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span>
+  <span class="property">action<span class='punctuation'>:</span></span> beforeTests <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    runTests<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>unit<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>test/units<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">if</span> status <span class="keyword">is</span> <span class="number">0</span>
+        info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_done<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      <span class="keyword">else</span>
+        error red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_failed<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      callback<span class="operators">?</span> status
+
+functional <span class="operators">=</span> neatTask
+  <span class="property">name<span class='punctuation'>:</span></span><span class="string"><span class="string_begin">'</span>test:functional<span class="string_end">'</span></span>
+  <span class="property">description<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.functional_description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span>
+  <span class="property">action<span class='punctuation'>:</span></span> beforeTests <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    runTests<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>functional<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>test/functionals<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">if</span> status <span class="keyword">is</span> <span class="number">0</span>
+        info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_done<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      <span class="keyword">else</span>
+        error red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_failed<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      callback<span class="operators">?</span> status
+
+integration <span class="operators">=</span> neatTask
+  <span class="property">name<span class='punctuation'>:</span></span><span class="string"><span class="string_begin">'</span>test:integration<span class="string_end">'</span></span>
+  <span class="property">description<span class='punctuation'>:</span></span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.integration_description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+  <span class="property">environment<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span>
+  <span class="property">action<span class='punctuation'>:</span></span> beforeTests <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    runTests<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>integration<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>test/integrations<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">if</span> status <span class="keyword">is</span> <span class="number">0</span>
+        info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_done<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      <span class="keyword">else</span>
+        error red _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.tasks.test.tests_failed<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      callback<span class="operators">?</span> status
+
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> namespace <span class="string"><span class="string_begin">'</span>test<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>index<span class="punctuation">,</span> unit<span class="punctuation">,</span> functional<span class="punctuation">,</span> integration<span class="hash_end">}</span></span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

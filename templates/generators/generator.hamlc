@@ -1,9 +1,0 @@
-:plain
-  Neat = require 'neat'
-  {describe, usages, hashArguments} = Neat.require 'utils/commands'
-  {render} = Neat.require 'utils/templates'
-  {puts, error, green, red} = Neat.require 'utils/logs'
-  t = Neat.i18n.getHelper()
-
-  exports.#{@name} = (generator, args..., cb) ->
-    # TODO: Generation goes here

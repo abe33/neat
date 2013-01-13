@@ -1,8 +1,0 @@
-:plain
-  npm 'neat', '#{@version}'
-
-  group 'development', 'test', ->
-    npm 'coffee-script'
-    npm 'jasmine-node'
-
-  # TODO: Dependencies goes here

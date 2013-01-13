@@ -1,0 +1,126 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/tasks/package/packager.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/tasks/package/packager.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/tasks/package/</h3>
+            <h1>packager.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'></td>
+          <td class='code'><pre>glob <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>glob<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>compile<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>coffee-script<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>writeFile<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="punctuation">,</span> basename<span class="punctuation">,</span> extname<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>chain<span class="punctuation">,</span> parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>readFiles<span class="punctuation">,</span> ensure<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/files<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>green<span class="punctuation">,</span> yellow<span class="punctuation">,</span> red<span class="punctuation">,</span> <span class="global">print</span><span class="punctuation">,</span> puts<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/logs<span class="string_end">'</span></span>
+_ <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+<span class="class"><span class="keyword">class</span> <span class='title'>Packager</span></span>
+  <span class="property">@asCommand<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>conf<span class="punctuation">,</span> path<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span> <span class="keyword">new</span> <span class="constant">Packager</span><span class="group"><span class="group_begin">(</span>conf<span class="punctuation">,</span> path<span class="group_end">)</span></span><span class="punctuation">.</span>process callback
+
+  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@conf</span><span class="punctuation">,</span> <span class="property">@path</span><span class="group_end">)</span></span> <span class="function">-></span>
+    malformedConf <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>key<span class="punctuation">,</span> type<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _ <span class="string"><span class="string_begin">'</span>neat.tasks.package.invalid_configuration<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>key<span class="punctuation">,</span> type<span class="hash_end">}</span></span>
+
+    preventMissingConf <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>key<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="keyword">unless</span> <span class="property">@conf</span><span class="punctuation">[</span>key<span class="punctuation">]</span><span class="operators">?</span>
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _ <span class="string"><span class="string_begin">'</span>neat.tasks.package.missing_configuration<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>key<span class="hash_end">}</span></span>
+
+    preventMissingConf <span class="string"><span class="string_begin">'</span>includes<span class="string_end">'</span></span>
+    preventMissingConf <span class="string"><span class="string_begin">'</span>operators<span class="string_end">'</span></span>
+    malformedConf <span class="string"><span class="string_begin">'</span>includes<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>Array<span class="string_end">'</span></span> <span class="keyword">unless</span> <span class="constant">Array</span><span class="punctuation">.</span>isArray <span class="property">@conf</span><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>includes<span class="string_end">'</span></span><span class="punctuation">]</span>
+    malformedConf <span class="string"><span class="string_begin">'</span>operators<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>Array<span class="string_end">'</span></span> <span class="keyword">unless</span> <span class="constant">Array</span><span class="punctuation">.</span>isArray <span class="property">@conf</span><span class="punctuation">[</span><span class="string"><span class="string_begin">'</span>operators<span class="string_end">'</span></span><span class="punctuation">]</span>
+
+    <span class="property">@conf</span><span class="punctuation">.</span>merge <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>tasks<span class="punctuation">.</span>package
+    <span class="property">@operators</span> <span class="operators">=</span> <span class="group"><span class="group_begin">(</span><span class="property">@conf</span><span class="punctuation">.</span>operatorsMap<span class="punctuation">[</span>k<span class="punctuation">]</span> <span class="keyword">for</span> k <span class="keyword">in</span> <span class="property">@conf</span><span class="punctuation">.</span>operators<span class="group_end">)</span></span>
+    operator<span class="punctuation">.</span>validate<span class="operators">?</span> <span class="property">@conf</span> <span class="keyword">for</span> operator <span class="keyword">in</span> <span class="property">@operators</span>
+
+  <span class="property">process<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@find</span> <span class="property">@conf</span><span class="punctuation">.</span>includes<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> files<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="property">@conf</span><span class="punctuation">.</span>files <span class="operators">=</span> files
+      readFiles files<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> res<span class="group_end">)</span></span> <span class="function">=></span>
+        errCallback <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">=></span>
+          puts yellow<span class="group"><span class="group_begin">(</span>_ <span class="string"><span class="string_begin">'</span>neat.tasks.package.process<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> basename <span class="property">@path</span><span class="group_end">)</span></span>
+          stack <span class="operators">=</span> err<span class="punctuation">.</span>stack<span class="punctuation">.</span>split <span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span>
+          stack<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span> <span class="operators">=</span> red stack<span class="punctuation">[</span><span class="number">0</span><span class="punctuation">]</span>
+          puts <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>stack<span class="punctuation">.</span>join <span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="subst_end">}</span></span><span class="escaped">\n</span><span class="string_end">"</span></span>
+          callback<span class="operators">?</span> <span class="number">1</span>
+
+        chain<span class="punctuation">.</span>call <span class="literal">null</span><span class="punctuation">,</span> <span class="property">@operators</span><span class="punctuation">,</span> res<span class="punctuation">,</span> <span class="property">@conf</span><span class="punctuation">,</span> errCallback<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>buffer<span class="group_end">)</span></span> <span class="function">=></span>
+          <span class="property">@result</span> <span class="operators">=</span> buffer
+          puts <span class="heredocs"><span class="heredocs_begin">"""</span>
+            <span class="subst"><span class="subst_begin">#{</span>yellow<span class="group"><span class="group_begin">(</span>_ <span class="string"><span class="string_begin">'</span>neat.tasks.package.process<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">file<span class='punctuation'>:</span></span> basename <span class="property">@path</span><span class="group_end">)</span></span><span class="subst_end">}</span></span>
+            <span class="subst"><span class="subst_begin">#{</span><span class="group"><span class="group_begin">(</span>green<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>.<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="keyword">for</span> k <span class="keyword">of</span> <span class="property">@result</span><span class="group_end">)</span></span><span class="punctuation">.</span>join <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="subst_end">}</span></span>
+            <span class="subst"><span class="subst_begin">#{</span>green<span class="group"><span class="group_begin">(</span>_ <span class="string"><span class="string_begin">'</span>neat.tasks.package.processed<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">files<span class='punctuation'>:</span></span> <span class="property">@result</span><span class="punctuation">.</span>length<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span><span class="subst_end">}</span></span>
+
+          <span class="heredocs_end">"""</span></span>
+
+          callback<span class="operators">?</span> <span class="number">0</span>
+
+  <span class="property">find<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>paths<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+    files <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>cb<span class="group_end">)</span></span> <span class="function">-></span>
+      p <span class="operators">=</span> <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>p<span class="subst_end">}</span></span>.coffee<span class="string_end">"</span></span> <span class="keyword">if</span> extname<span class="group"><span class="group_begin">(</span>p<span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+      glob resolve<span class="group"><span class="group_begin">(</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="punctuation">,</span> p<span class="group_end">)</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> fs<span class="group_end">)</span></span> <span class="function">-></span>
+        files <span class="operators">=</span> files<span class="punctuation">.</span>concat fs
+        cb<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+    parallel <span class="group"><span class="group_begin">(</span>f p <span class="keyword">for</span> p <span class="keyword">in</span> paths<span class="group_end">)</span></span><span class="punctuation">,</span> <span class="function">-></span>
+      callback <span class="literal">null</span><span class="punctuation">,</span> files<span class="punctuation">.</span>uniq<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>map <span class="group"><span class="group_begin">(</span>f<span class="group_end">)</span></span> <span class="function">-></span> resolve <span class="constant">Neat</span><span class="punctuation">.</span>root<span class="punctuation">,</span> f
+
+
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Packager</span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

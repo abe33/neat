@@ -1,0 +1,514 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/core/signal.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/core/signal.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/core/</h3>
+            <h1>signal.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'><p>Use a <code>Signal</code> object wherever you need to dispatch an event.
+A <code>Signal</code> is a dispatcher that have only one channel.
+<h3>Table Of Content</h3>
+<ul class='toc'>
+  <li class='level0'>
+    <a href='#signal'>Signal</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalconstructor'>Signal::constructor</a>
+  </li>
+  <li class='level1'>
+    <a href='#listeners-management'>Listeners management</a>
+  </li>
+  <li class='level2'>
+    <a href='#signaladd'>Signal::add</a>
+  </li>
+  <li class='level2'>
+    <a href='#signaladdonce'>Signal::addOnce</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalremove'>Signal::remove</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalremoveall'>Signal::removeAll</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalindexof'>Signal::indexOf</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalregistered'>Signal::registered</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalhaslisteners'>Signal::hasListeners</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalsortlisteners'>Signal::sortListeners</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalvalidate'>Signal::validate</a>
+  </li>
+  <li class='level2'>
+    <a href='#signalisasync'>Signal::isAsync</a>
+  </li>
+  <li class='level1'>
+    <a href='#signal-dispatch'>Signal Dispatch</a>
+  </li>
+  <li class='level2'>
+    <a href='#signaldispatch'>Signal::dispatch</a>
+  </li>
+</ul>
+</p>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h1 id='signal'>Signal</h1>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Signals are generally defined as property of an object. And
+their name generally end with a past tense verb, such as in:
+
+</p>
+<pre><code>myObject<span class="punctuation">.</span>somethingChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span></code></pre>
+</td>
+          <td class='code'><pre><span class="class"><span class="keyword">class</span> <span class='title'>Signal</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalconstructor'>Signal::constructor</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Optionally, a signal can have a specific signature.
+A signature is a collection of argument names such:
+
+</p>
+<pre><code>positionChanged <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>target<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>position<span class="string_end">'</span></span></code></pre>
+<p>If a signature is passed to a signal, every listener
+added to the signal must then match the signature.
+
+</p>
+<pre><code>positionChanged<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>target<span class="punctuation">,</span> position<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="comment"># will be registered</span>
+positionChanged<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>target<span class="punctuation">,</span> position<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="comment"># will be registered too</span>
+positionChanged<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># will throw an error</span></code></pre>
+<p>In the case of an asynchronous listener, the callback argument
+is not considered as being part of the signature.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span><span class="property">@signature</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The <code>asyncListeners</code> property stores the number of asynchronous
+listeners to use a synchronous dispatch when equal to 0.
+</p>
+</td>
+          <td class='code'><pre>    <span class="property">@asyncListeners</span> <span class="operators">=</span> <span class="number">0</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='listeners-management'>Listeners management</h3>
+<p>Listeners are stored internally as an array with the form:
+
+</p>
+<pre><code><span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> calledOnce<span class="punctuation">,</span> priority<span class="punctuation">]</span></code></pre>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signaladd'>Signal::add</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>You can register a listener with or without a context.
+The context is the object that can be accessed through <code>this</code>
+inside the listener function body.
+
+</p>
+<p>An optional <code>priority</code> argument allow you to force
+an order of dispatch for a listener.
+
+</p>
+<p>Signals listeners can be asynchronous, in that case the last
+argument of the listener must be named <code>callback</code>. An async
+listener blocks the dispatch loop until the callback function
+passed to the listener is triggered.
+
+</p>
+<pre><code><span class="comment"># sync listener</span>
+signal<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="group_end">)</span></span> <span class="function">-></span>
+
+<span class="comment"># async listener</span>
+signal<span class="punctuation">.</span>add <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="punctuation">,</span> c<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span> callback<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span></code></pre>
+</td>
+          <td class='code'><pre>  <span class="property">add<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> priority <span class="operators">=</span> <span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@validate</span> listener
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>A listener can be registered several times, but only
+if the context object is different each time.
+
+</p>
+<p>In other words, the following is possible:
+
+</p>
+<pre><code>listener <span class="operators">=</span> <span class="function">-></span>
+context <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener<span class="punctuation">,</span> context</code></pre>
+<p>When the following is not:
+
+</p>
+<pre><code>listener <span class="operators">=</span> <span class="function">-></span>
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener
+myObject<span class="punctuation">.</span>signal<span class="punctuation">.</span>add listener</code></pre>
+</td>
+          <td class='code'><pre>    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener<span class="punctuation">,</span> context
+      <span class="property">@listeners</span><span class="punctuation">.</span>push <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="literal">false</span><span class="punctuation">,</span> priority<span class="punctuation">]</span>
+      <span class="property">@asyncListeners</span><span class="operators">+</span><span class="operators">+</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Listeners are sorted according to their order each time
+a new listener is added.
+</p>
+</td>
+          <td class='code'><pre>      <span class="property">@sortListeners</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signaladdonce'>Signal::addOnce</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Listeners can be registered for only one call.
+
+</p>
+<p>All the others rules are the same. So you can&#39;t add
+the same listener/context couple twice through the two methods.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">addOnce<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> priority <span class="operators">=</span> <span class="number">0</span><span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@validate</span> listener
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="property">@registered</span> listener<span class="punctuation">,</span> context
+      <span class="property">@listeners</span><span class="punctuation">.</span>push <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="literal">true</span><span class="punctuation">,</span> priority<span class="punctuation">]</span>
+      <span class="property">@asyncListeners</span><span class="operators">+</span><span class="operators">+</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+      <span class="property">@sortListeners</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalremove'>Signal::remove</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Listeners can be removed, but only with the context with which
+they was added to the signal.
+
+</p>
+<p>In this regards, avoid to register listeners without a context.
+If later in the application a context is forgotten or invalid
+when removing a listener from this signal, the listener
+without context will end up being removed.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">remove<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> <span class="property">@registered</span> listener<span class="punctuation">,</span> context
+      <span class="property">@asyncListeners</span><span class="operators">-</span><span class="operators">-</span> <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+      <span class="property">@listeners</span><span class="punctuation">.</span>splice <span class="property">@indexOf</span><span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span><span class="punctuation">,</span> <span class="number">1</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalremoveall'>Signal::removeAll</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>All listeners can be removed at once if needed.
+
+</p>
+<pre><code>signal<span class="punctuation">.</span>removeAll<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span></code></pre>
+</td>
+          <td class='code'><pre>  <span class="property">removeAll<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="property">@listeners</span> <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    <span class="property">@asyncListeners</span> <span class="operators">=</span> <span class="number">0</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalindexof'>Signal::indexOf</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p><code>indexOf</code> returns the position of the listener/context couple
+in the listeners array.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">indexOf<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">return</span> i <span class="keyword">for</span> <span class="punctuation">[</span>l<span class="punctuation">,</span>c<span class="punctuation">]</span><span class="punctuation">,</span>i <span class="keyword">in</span> <span class="property">@listeners</span> <span class="keyword">when</span> listener <span class="keyword">is</span> l <span class="keyword">and</span> context <span class="keyword">is</span> c
+    <span class="operators">-</span><span class="number">1</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalregistered'>Signal::registered</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Use the <code>registered</code> method to test whether a listener/context couple
+have been registered in this signal.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">registered<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@indexOf</span><span class="group"><span class="group_begin">(</span>listener<span class="punctuation">,</span> context<span class="group_end">)</span></span> <span class="keyword">isnt</span> <span class="operators">-</span><span class="number">1</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalhaslisteners'>Signal::hasListeners</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns true if the signal has listeners.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">hasListeners<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="property">@listeners</span><span class="punctuation">.</span>length <span class="keyword">isnt</span> <span class="number">0</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalsortlisteners'>Signal::sortListeners</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The listeners are sorted according to their <code>priority</code>.
+The higher the priority the lower the listener will be
+in the call order.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">sortListeners<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="keyword">return</span> <span class="keyword">if</span> <span class="property">@listeners</span><span class="punctuation">.</span>length <span class="operators"><</span><span class="operators">=</span> <span class="number">1</span>
+    <span class="property">@listeners</span><span class="punctuation">.</span>sort <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span> b<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="punctuation">[</span>pA<span class="punctuation">,</span> pB <span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span> a<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">,</span> b<span class="punctuation">[</span><span class="number">3</span><span class="punctuation">]</span><span class="punctuation">]</span>
+
+      <span class="keyword">if</span> pA <span class="operators"><</span> pB <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="keyword">if</span> pB <span class="operators"><</span> pA <span class="keyword">then</span> <span class="operators">-</span><span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalvalidate'>Signal::validate</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Throws an error if the passed-in listener&#39;s signature
+doesn&#39;t match the signal&#39;s one.
+
+</p>
+<pre><code>signal <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Signal</span> <span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>b<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>c<span class="string_end">'</span></span>
+signal<span class="punctuation">.</span>validate <span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># false</span>
+signal<span class="punctuation">.</span>validate <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span>b<span class="punctuation">,</span>c<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># true</span>
+signal<span class="punctuation">.</span>validate <span class="group"><span class="group_begin">(</span>a<span class="punctuation">,</span>b<span class="punctuation">,</span>c<span class="punctuation">,</span>callback<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># true</span></code></pre>
+</td>
+          <td class='code'><pre>  <span class="property">validate<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">if</span> <span class="property">@signature</span><span class="punctuation">.</span>length <span class="operators">></span> <span class="number">0</span>
+      re <span class="operators">=</span> <span class="regexp">/<span class="char_range"><span class="char_range_begin">[</span>^(<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="escaped">\(</span><span class="regexp_operators">(</span><span class="char_range"><span class="char_range_begin">[</span>^)<span class="char_range_end">]</span></span><span class="regexp_operators">+</span><span class="regexp_operators">)</span><span class="escaped">\)</span>.<span class="regexp_operators">*</span><span class="regexp_operators">$</span>/m</span>
+      listenerSignature <span class="operators">=</span> <span class="property">Function<span class='punctuation'>:</span></span><span class="punctuation">:</span>toString<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span><span class="punctuation">.</span>split<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      signature <span class="operators">=</span> listenerSignature<span class="punctuation">.</span>replace<span class="group"><span class="group_begin">(</span>re<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>$1<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      args <span class="operators">=</span> signature<span class="punctuation">.</span>split <span class="regexp">/<span class="escaped">\s</span><span class="regexp_operators">*</span>,<span class="escaped">\s</span><span class="regexp_operators">*</span>/g</span>
+
+      args<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> args<span class="punctuation">.</span>first<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+      args<span class="punctuation">.</span>pop<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> args<span class="punctuation">.</span>last<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>callback<span class="string_end">'</span></span>
+
+      s1 <span class="operators">=</span> <span class="property">@signature</span><span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      s2 <span class="operators">=</span> args<span class="punctuation">.</span>join<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+      m <span class="operators">=</span> <span class="string"><span class="string_begin">"</span>The listener <span class="subst"><span class="subst_begin">#{</span>listener<span class="subst_end">}</span></span> doesn't match the signal's signature <span class="subst"><span class="subst_begin">#{</span>s1<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> m <span class="keyword">if</span> s2 <span class="keyword">isnt</span> s1
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signalisasync'>Signal::isAsync</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Returns <code>true</code> if the passed-in <code>listener</code> is asynchronous.
+
+</p>
+<pre><code>signal<span class="punctuation">.</span>isAsync <span class="function">-></span> <span class="comment"># false</span>
+signal<span class="punctuation">.</span>isAsync <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span> <span class="comment"># true</span></code></pre>
+</td>
+          <td class='code'><pre>  <span class="property">isAsync<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">Function<span class='punctuation'>:</span></span><span class="punctuation">:</span>toString<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span>listener<span class="group_end">)</span></span><span class="punctuation">.</span>indexOf<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>callback)<span class="string_end">'</span></span><span class="group_end">)</span></span> <span class="operators">!=</span> <span class="operators">-</span><span class="number">1</span>
+
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h3 id='signal-dispatch'>Signal Dispatch</h3>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><h4 id='signaldispatch'>Signal::dispatch</h4>
+</td>
+          <td class='code'><pre>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>Signals are dispatched to all the listeners. All the arguments
+passed to the dispatch become the signal&#39;s message.
+
+</p>
+<pre><code>signal<span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> <span class="literal">true</span></code></pre>
+<p>Listeners registered for only one call will be removed after
+the call.
+
+</p>
+<p>Optionally you can pass a callback argument to the dispatch function.
+In that case, the callback must be the last argument passed to the
+<code>dispatch</code> function.  This function will be called at the end
+of the dispatch, allowing to execute code after all listeners,
+even asynchronous, have been triggered.
+
+</p>
+<pre><code>signal<span class="punctuation">.</span>dispatch <span class="keyword">this</span><span class="punctuation">,</span> <span class="literal">true</span><span class="punctuation">,</span> <span class="function">-></span>
+  <span class="comment"># all listeners have finish their execution</span></code></pre>
+<p><strong>Note:</strong> As the dispatch function will automatically consider
+the last argument as the callback if its type is <code>function</code>, you should
+avoid using function as the sole argument or as the last argument
+for a listener. If that case occurs, consider either re-arranging the
+arguments order or using a value object to carry the function.
+</p>
+</td>
+          <td class='code'><pre>  <span class="property">dispatch<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>args<span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">.</span><span class="punctuation">,</span> callback<span class="group_end">)</span></span><span class="function">-></span>
+    <span class="keyword">unless</span> <span class="keyword">typeof</span> callback <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+      args<span class="punctuation">.</span>push callback
+      callback <span class="operators">=</span> <span class="literal">null</span>
+
+    listeners <span class="operators">=</span> <span class="property">@listeners</span><span class="punctuation">.</span>concat<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>If at leat one listener is async, the whole dispatch process is async
+otherwise the fast route is used.
+</p>
+</td>
+          <td class='code'><pre>    <span class="keyword">if</span> <span class="property">@asyncListeners</span> <span class="operators">></span> <span class="number">0</span>
+      next <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">=></span>
+        <span class="keyword">if</span> listeners<span class="punctuation">.</span>length
+          <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> once<span class="punctuation">,</span> priority<span class="punctuation">]</span> <span class="operators">=</span> listeners<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+          <span class="keyword">if</span> <span class="property">@isAsync</span> listener
+            listener<span class="punctuation">.</span>apply context<span class="punctuation">,</span> args<span class="punctuation">.</span>concat <span class="function">=></span>
+              <span class="property">@remove</span> listener<span class="punctuation">,</span> context <span class="keyword">if</span> once
+              next callback
+          <span class="keyword">else</span>
+            listener<span class="punctuation">.</span>apply context<span class="punctuation">,</span> args
+            <span class="property">@remove</span> listener<span class="punctuation">,</span> context <span class="keyword">if</span> once
+            next callback
+        <span class="keyword">else</span>
+          callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+      next callback
+    <span class="keyword">else</span>
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>The fast route is just a loop over the listeners.
+At that point, if your listener do async stuff, it will
+not prevent the dispatching until it&#39;s done.
+</p>
+</td>
+          <td class='code'><pre>      <span class="keyword">for</span> <span class="punctuation">[</span>listener<span class="punctuation">,</span> context<span class="punctuation">,</span> once<span class="punctuation">,</span> priority<span class="punctuation">]</span> <span class="keyword">in</span> listeners
+        listener<span class="punctuation">.</span>apply context<span class="punctuation">,</span> arguments
+        <span class="property">@remove</span> listener<span class="punctuation">,</span> context <span class="keyword">if</span> once
+
+      callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Signal</span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

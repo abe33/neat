@@ -1,9 +1,0 @@
-- keywords = if @keywords? then @keywords.map((k) -> "\"#{k}\"").join(", ") else '"TODO: Module keywords goes here"'
-:plain
-  name: "#{@name}"
-  version: "0.0.1"
-  author: "#{@author or 'TODO: Your name goes here'}"
-  description: "#{@description or 'TODO: Description goes here'}"
-  keywords: [#{keywords}]
-  scripts:
-    test: 'cake test'

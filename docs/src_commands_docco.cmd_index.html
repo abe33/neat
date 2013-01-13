@@ -1,0 +1,171 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src/commands/docco.cmd/index.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/commands/docco.cmd/index.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src/commands/docco.cmd/</h3>
+            <h1>index.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'></td>
+          <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>resolve<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span>
+<span class="constant">DoccoFile</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./docco_file<span class="string_end">'</span></span>
+<span class="constant">Processor</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./docco_file_processor<span class="string_end">'</span></span>
+
+<span class="hash"><span class="hash_begin">{</span>error<span class="punctuation">,</span> info<span class="punctuation">,</span> warn<span class="punctuation">,</span> missing<span class="punctuation">,</span> green<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/logs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>aliases<span class="punctuation">,</span> describe<span class="punctuation">,</span> environment<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/commands<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>ensureSync<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/files<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>render<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/templates<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>namespace<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/exports<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span>
+_ <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>i18n<span class="punctuation">.</span>getHelper<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+hashify <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>files<span class="group_end">)</span></span> <span class="function">-></span>
+  filesHash <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+  deepestLevel <span class="operators">=</span> <span class="number">0</span>
+  <span class="keyword">for</span> file <span class="keyword">in</span> files
+    path <span class="operators">=</span> file<span class="punctuation">.</span>relativePath<span class="punctuation">.</span>split <span class="string"><span class="string_begin">'</span>/<span class="string_end">'</span></span>
+    end <span class="operators">=</span> path<span class="punctuation">.</span>pop<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    o <span class="operators">=</span> filesHash<span class="punctuation">[</span>path<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    level <span class="operators">=</span> <span class="number">1</span>
+
+    <span class="keyword">while</span> path<span class="punctuation">.</span>length
+      p <span class="operators">=</span> path<span class="punctuation">.</span>shift<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      level <span class="operators">+</span><span class="operators">=</span> <span class="number">1</span>
+      o <span class="operators">=</span> o<span class="punctuation">[</span>p<span class="punctuation">]</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+
+    o<span class="punctuation">[</span>end<span class="punctuation">]</span> <span class="operators">=</span> file
+    level <span class="operators">+</span><span class="operators">=</span> <span class="number">1</span>
+    deepestLevel <span class="operators">=</span> <span class="constant">Math</span><span class="punctuation">.</span>max deepestLevel<span class="punctuation">,</span> level
+
+  <span class="punctuation">[</span>filesHash<span class="punctuation">,</span> deepestLevel<span class="punctuation">]</span>
+
+cmdgen <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> desc<span class="punctuation">,</span> fn<span class="group_end">)</span></span> <span class="function">-></span> <span class="group"><span class="group_begin">(</span>pr<span class="group_end">)</span></span> <span class="function">-></span>
+  <span class="keyword">unless</span> pr<span class="operators">?</span>
+    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.no_program<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">command<span class='punctuation'>:</span></span> name<span class="group_end">)</span></span>
+
+  aliases name<span class="punctuation">,</span>
+  describe desc<span class="punctuation">,</span>
+  environment <span class="string"><span class="string_begin">'</span>production<span class="string_end">'</span></span><span class="punctuation">,</span>
+  f <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>callback<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">unless</span> <span class="constant">Neat</span><span class="punctuation">.</span>root<span class="operators">?</span>
+      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="constant">Error</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">"</span>neat.errors.outside_neat<span class="string_end">"</span></span><span class="punctuation">,</span> <span class="property">expression<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">"</span>neat <span class="subst"><span class="subst_begin">#{</span>name<span class="subst_end">}</span></span><span class="string_end">"</span></span><span class="group_end">)</span></span>
+
+    ensureSync resolve <span class="constant">Neat</span><span class="punctuation">.</span>root<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>docs<span class="string_end">'</span></span>
+    fn pr<span class="punctuation">,</span> callback
+
+name <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>docco:javascript<span class="string_end">'</span></span>
+desc <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.javascript_description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+javascript <span class="operators">=</span> cmdgen name<span class="punctuation">,</span> desc<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>pr<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  dirname <span class="operators">=</span> __dirname<span class="punctuation">.</span>replace <span class="string"><span class="string_begin">'</span>.cmd<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+  jsTplPath <span class="operators">=</span> resolve dirname<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>_javascript<span class="string_end">'</span></span>
+  render jsTplPath<span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> js<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+    fs<span class="punctuation">.</span>writeFile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/docs/docco.js<span class="string_end">"</span></span><span class="punctuation">,</span> js<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+      info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.javascript_generated<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+name <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>docco:stylesheet<span class="string_end">'</span></span>
+desc <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.stylesheet_description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+stylesheet <span class="operators">=</span> cmdgen name<span class="punctuation">,</span> desc<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>pr<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  render __dirname<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> css<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+    fs<span class="punctuation">.</span>writeFile <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/docs/docco.css<span class="string_end">"</span></span><span class="punctuation">,</span> css<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+      info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.stylesheet_generated<span class="string_end">'</span></span><span class="group_end">)</span></span>
+      callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+name <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>docco:documentation<span class="string_end">'</span></span>
+desc <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+documentation <span class="operators">=</span> cmdgen name<span class="punctuation">,</span> desc<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>pr<span class="punctuation">,</span> callback<span class="group_end">)</span></span> <span class="function">-></span>
+  paths <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span>config<span class="punctuation">.</span>docco<span class="punctuation">.</span>paths<span class="punctuation">.</span>sources<span class="punctuation">.</span>concat<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+  <span class="keyword">if</span> <span class="keyword">not</span> paths<span class="operators">?</span> <span class="keyword">or</span> paths<span class="punctuation">.</span>empty<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="keyword">return</span> warn _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.no_path<span class="string_end">'</span></span><span class="group_end">)</span></span>
+
+  dirname <span class="operators">=</span> __dirname<span class="punctuation">.</span>replace <span class="string"><span class="string_begin">'</span>.cmd<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span>
+  navTplPath <span class="operators">=</span> resolve dirname<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>_navigation<span class="string_end">'</span></span>
+  headerTplPath <span class="operators">=</span> resolve dirname<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>_header<span class="string_end">'</span></span>
+  pageTplPath <span class="operators">=</span> resolve dirname<span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>_page<span class="string_end">'</span></span>
+
+  files <span class="operators">=</span> <span class="group"><span class="group_begin">(</span><span class="keyword">new</span> <span class="constant">DoccoFile</span> path <span class="keyword">for</span> path <span class="keyword">in</span> paths<span class="group_end">)</span></span>
+
+  <span class="punctuation">[</span>filesHash<span class="punctuation">,</span> deepestLevel<span class="punctuation">]</span> <span class="operators">=</span> hashify files
+
+  context <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>files<span class="punctuation">,</span> filesHash<span class="punctuation">,</span> deepestLevel<span class="hash_end">}</span></span>
+
+  render navTplPath<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> nav<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+    render headerTplPath<span class="punctuation">,</span> context<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> header<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">throw</span> err <span class="keyword">if</span> err<span class="operators">?</span>
+      processors <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+      <span class="keyword">for</span> file <span class="keyword">in</span> files
+        processors<span class="punctuation">.</span>push <span class="constant">Processor</span><span class="punctuation">.</span>asCommand<span class="group"><span class="group_begin">(</span>file<span class="punctuation">,</span> header<span class="punctuation">,</span> nav<span class="group_end">)</span></span>
+
+      parallel processors<span class="punctuation">,</span> <span class="function">-></span>
+        info green _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.documentation_generated<span class="string_end">'</span></span><span class="group_end">)</span></span>
+        callback<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+name <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>docco<span class="string_end">'</span></span>
+desc <span class="operators">=</span> _<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>neat.commands.docco.description<span class="string_end">'</span></span><span class="group_end">)</span></span>
+
+index <span class="operators">=</span> cmdgen name<span class="punctuation">,</span> desc<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>pr<span class="punctuation">,</span> cb<span class="group_end">)</span></span> <span class="function">-></span>
+  javascript<span class="group"><span class="group_begin">(</span>pr<span class="group_end">)</span></span> <span class="function">-></span> stylesheet<span class="group"><span class="group_begin">(</span>pr<span class="group_end">)</span></span> <span class="function">-></span> documentation<span class="group"><span class="group_begin">(</span>pr<span class="group_end">)</span></span> cb
+
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> namespace <span class="string"><span class="string_begin">'</span>docco<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="hash"><span class="hash_begin">{</span>
+  index
+  javascript
+  stylesheet
+  documentation
+<span class="hash_end">}</span></span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

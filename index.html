@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>neat - Introduction</title>
+    <link rel='stylesheet' media='screen' href='pages.css'>
+    <link href='http://netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css' type='text/css' rel='stylesheet'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        var pres = $('pre code')
+        pres.each(function(i,el){
+          el = $(el)
+          var text = el.html()
+          var lines = text.split('\n')
+          el.parent().append('<ol>' + lines.map(function(l){
+            return '<li></li>'
+          }).join('\n') + '</ol>')
+        })
+      })
+    </script>
+  </head>
+  <body>
+    <div id='main'>
+      <header>
+  <h1>neat</h1>
+  <p>1.1.1</p>
+</header>
+      <nav>
+  <ul>
+    <li class='selected'>
+      <a class='icon-home' href='index.html'>Home</a>
+    </li>
+    <li>
+      <a class='icon-file-alt' href='pages_index.html'>Pages</a>
+    </li>
+    <li>
+      <a class='icon-sitemap' href='docs/src_index.html'>Documentation</a>
+    </li>
+    <li>
+      <a class='icon-github' href='http://github.com/abe33/neat'>GitHub</a>
+    </li>
+  </ul>
+</nav>
+      <section><h1>Introduction</h1>
+<p><a href="https://travis-ci.org/abe33/neat"><img src="https://travis-ci.org/abe33/neat.png?branch=0.0.70" alt="Build Status"></a>
+
+</p>
+<p>A command line tool for <a href="http://jashkenas.github.com/coffee-script">Coffeescript</a> projects inspired by <a href="http://rubyonrails.org/">Rails</a> and running on <a href="http://nodejs.org/">Node.js</a> .
+
+</p>
+<h3>Install</h3>
+<p>Install <a href="http://nodejs.org/">Node.js</a>, and then the <a href="http://jashkenas.github.com/coffee-script">Coffeescript</a> compiler through
+<code>npm</code>. Coffeescript is required to access the <code>cake</code> command.
+
+</p>
+<pre><code class="lang-bash">npm install -g coffee-script</code></pre>
+<p>Installing Neat through <code>npm</code>:
+
+</p>
+<pre><code class="lang-bash">npm install -g neat</code></pre>
+<p>Installing Neat from sources:
+
+</p>
+<pre><code class="lang-bash">git clone git://github.com/abe33/neat.git
+cd neat
+cake install
+cake deploy</code></pre>
+<h3>Usage</h3>
+<p>Creating a new project:
+
+</p>
+<pre><code class="lang-bash">neat generate project my_project</code></pre>
+<h4>Inside a project directory</h4>
+<p>Installing the dependencies of a project:
+
+</p>
+<pre><code class="lang-bash">neat install</code></pre>
+<p>Creating a new Neat command:
+
+</p>
+<pre><code class="lang-bash">neat generate command my_command</code></pre>
+<p>Creating a new Neat initializer:
+
+</p>
+<pre><code class="lang-bash">neat generate initializer my_init</code></pre>
+<p>Creating a new Neat task:
+
+</p>
+<pre><code class="lang-bash">neat generate task my_task</code></pre>
+<p>Creating the <code>package.json</code> file for the project:
+
+</p>
+<pre><code class="lang-bash">neat generate package.json</code></pre>
+<h4>Project Cake Tasks</h4>
+<p>Compiling sources:
+
+</p>
+<pre><code class="lang-bash">cake compile</code></pre>
+<p>Testing the project:
+
+</p>
+<pre><code class="lang-bash">cake test</code></pre>
+<p>Passing the project sources through <a href="http://www.coffeelint.org/">Coffeelint</a>:
+
+</p>
+<pre><code class="lang-bash">cake lint</code></pre>
+<h3>Useful Resources</h3>
+<p>To suggest a feature, report a bug, or general discussion:
+
+</p>
+<p><a href="http://github.com/abe33/neat/issues/"><a href="http://github.com/abe33/neat/issues/">http://github.com/abe33/neat/issues/</a></a>
+
+</p>
+<p>The source repository:
+
+</p>
+<p><a href="git://github.com/abe33/neat.git">git://github.com/abe33/neat.git</a>
+
+</p>
+</section>
+      <footer>
+  <nav>
+    <h4>Links</h4>
+    <ul>
+      <li>
+        <a href='http://github.com/abe33/neat/issues/'>Issues</a>
+      </li>
+      <li>
+        <a href='docs/src_index.html'>Documentation</a>
+      </li>
+      <li>
+        <a href='http://github.com/abe33/neat'>GitHub</a>
+      </li>
+    </ul>
+  </nav>
+  <div class='vcard' id='contact'>
+    <h4>Contact</h4>
+    <ul>
+      <li class='icon-envelope-alt'>
+        <a class='email fn' href='mailto:cedric.nehemie@gmail.com'>Cédric Néhémie</a>
+      </li>
+      <li class='icon-home'>
+        <a class='fn url website' href='http://cedric.nehemie.com'>http://cedric.nehemie.com</a>
+      </li>
+      <li class='icon-twitter'>
+        <a class='twitter' href='http://twitter.com/cedricnehemie'>@cedricnehemie</a>
+      </li>
+    </ul>
+  </div>
+  <p class='copyright'>&copy; Copyright 2012 Cédric Néhémie</p>
+</footer>
+    </div>
+  </body>
+</html>
