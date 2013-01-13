@@ -3,6 +3,10 @@
 
 A command line tool for [Coffeescript][coffee] and [Node.js][node] projects inspired by [Rails][rails].
 
+### Documentation
+
+Please take a look at the [project pages](http://abe33.github.com/neat/) for documentation.
+
 ### Install
 
 Install [Node.js][node], and then the [Coffeescript][coffee] compiler through
