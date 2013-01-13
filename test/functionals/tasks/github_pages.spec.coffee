@@ -16,7 +16,7 @@ withBundledProject 'neat_project', ->
 
           ended = false
           runs ->
-            exec 'cake github:pages', (e,s) ->
+            exec 'git status; cake github:pages; git branch', (e,s,se) ->
               throw e if e?
               ended = true
 

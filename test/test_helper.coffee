@@ -232,11 +232,11 @@ global.withGitInitialized = (block) ->
 
     runs ->
       exec command, (err, stdout, stderr) =>
-        throw err if err?
         # if err?
         #   console.log stderr
         # else
         #   console.log stdout
+        throw err if err?
         ended = true
 
     waitsFor progress(-> ended), 'Timed out on git init', 5000
@@ -251,11 +251,11 @@ global.withPagesInitialized = (block) ->
 
     runs ->
       exec command, (err, stdout, stderr) =>
-        throw err if err?
         # if err?
         #   console.log stderr
         # else
         #   console.log stdout
+        throw err if err?
         ended = true
 
     waitsFor progress(-> ended), 'Timed out on pages init', 5000

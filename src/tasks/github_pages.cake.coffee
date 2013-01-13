@@ -275,21 +275,22 @@ exports['github:pages'] = neatTask
       branch = currentBranch git.status
       run 'neat docco'
     .then(createTempDir, handleError)
-    .then -> run "cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR}"
-    .then -> run "rm -rf #{Neat.root}/docs"
+    .then(-> run "cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR}")
+    .then(-> run "rm -rf #{Neat.root}/docs")
     .then(createPages)
     .then ->
       if 'gh-pages' in git.branches
         run 'git checkout gh-pages'
       else
         run 'git checkout -b gh-pages'
-    .then ->
+    .then(->
       content = fs.readdirSync Neat.root
       s = ''
       for p in content
         if p not in ['.pages','.git']
           s += "rm -rf #{Neat.root}/#{p};"
       run(s)
+    , handleError)
     .then ->
       run("mv .pages/* .;
            rm -rf .pages;
