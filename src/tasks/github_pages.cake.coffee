@@ -49,8 +49,10 @@ run = (command) ->
   defer = Q.defer()
   exec command, (err, stdout, stderr) ->
     if err?
+      console.log stderr
       defer.reject(stderr)
     else
+      console.log stdout
       defer.resolve(stdout)
   defer.promise
 
