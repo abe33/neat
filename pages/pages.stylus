@@ -330,13 +330,19 @@ pre
   border-radius(3px)
   box-shadow 0 1px 2px rgba(0, 0, 0, .8) inset
   overflow: hidden
+  position: relative
   code
+    display: block
     font-size: 12px
+    padding: 10px 0px 10px 38px
   ol
     padding: 0
     padding: 2px
     margin: 0
     line-height: 0
+    position: absolute
+    top: 0
+    left: 0
     li
       margin: 0
       line-height: 8px

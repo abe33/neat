@@ -17,8 +17,8 @@
           el = $(el)
           var text = el.html()
           var lines = text.split('\\n')
-          el.text('').html('<ol>' + lines.map(function(l){
-            return '<li>' + l + '</li>'
+          el.parent().append('<ol>' + lines.map(function(l){
+            return '<li></li>'
           }).join('\\n') + '</ol>')
         })
       })
