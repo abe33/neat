@@ -284,12 +284,8 @@ exports['github:pages'] = neatTask
       else
         run 'git checkout -b gh-pages'
     .then(->
-      content = fs.readdirSync Neat.root
-      s = ''
-      for p in content
-        if p not in ['.pages','.git']
-          s += "rm -rf #{Neat.root}/#{p};"
-      run(s)
+      run 'git ls-files -z | xargs -0 rm -f;
+           git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir'
     , handleError)
     .then ->
       run("mv .pages/* .;

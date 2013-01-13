@@ -40,7 +40,7 @@ withBundledProject 'neat_project', ->
           it 'should have docs directory', ->
             expect(inProject 'docs').toExist()
 
-          it 'should have removed all the other directories', ->
+          it 'should have removed all the git content', ->
             expect(inProject '.pages').not.toExist()
             expect(inProject 'src').not.toExist()
             expect(inProject 'lib').not.toExist()
@@ -54,4 +54,7 @@ withBundledProject 'neat_project', ->
             expect(inProject '.gitignore').not.toExist()
             expect(inProject '.neat').not.toExist()
             expect(inProject 'package.json').not.toExist()
+
+          it 'should have preserved all the other files and directory', ->
+            expect(inProject 'node_modules').toExist()
 
