@@ -8,7 +8,7 @@ options = {}
   # stdout: (data)-> print data
 
 describe 'when outside a project', ->
-  beforeEach -> process.chdir FIXTURES_ROOT
+  beforeEach -> process.chdir TEST_TMP_DIR
 
   describe 'running `neat install`', ->
     it "should return a status of 1 and don't install anything", ->
