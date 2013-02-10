@@ -16,10 +16,10 @@ global.promise = (promise) ->
       runs ->
         promise.call(this)
         .then =>
-          block.call(this)
+          block.apply(this, arguments)
           ended = true
         .fail =>
-          block.call(this)
+          block.apply(this, arguments)
           ended = true
 
       waitsFor progress(-> ended), "Timed out in #{@promise}", 1000

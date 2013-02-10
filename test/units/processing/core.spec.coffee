@@ -1,6 +1,9 @@
 require '../../test_helper'
+Q = require 'q'
+fs = require 'fs'
+path = require 'path'
 
-{readFiles, writeFiles} = require '../../../lib/processing/core'
+core = require '../../../lib/processing/core'
 
 describe 'processing promise', ->
   beforeEach ->
@@ -9,11 +12,11 @@ describe 'processing promise', ->
 
   describe 'readFiles', ->
     it 'should exists', ->
-      expect(readFiles).toBeDefined()
+      expect(core.readFiles).toBeDefined()
 
     describe 'when called with paths that exists', ->
       beforeEach ->
-        @readFiles = readFiles [
+        @readFiles = core.readFiles [
           fixture 'processing/file.coffee'
           fixture 'processing/file.js'
         ]
@@ -30,7 +33,7 @@ describe 'processing promise', ->
 
     describe 'when called with paths that does not exists', ->
       beforeEach ->
-        @readFiles = readFiles [
+        @readFiles = core.readFiles [
           fixture 'processing/foo.coffee'
           fixture 'processing/bar.js'
         ]
@@ -39,14 +42,14 @@ describe 'processing promise', ->
 
   describe 'writeFiles', ->
     it 'should exists', ->
-      expect(writeFiles).toBeDefined()
+      expect(core.writeFiles).toBeDefined()
 
     describe 'when called with a files buffer', ->
       beforeEach ->
         @files = {}
         @files[tmp 'processing/foo.coffee'] = 'foo.coffee'
         @files[tmp 'processing/foo.js'] = 'foo.js'
-        @writeFiles = writeFiles @files
+        @writeFiles = core.writeFiles @files
 
       afterEach -> clearTmp 'processing'
 
@@ -58,3 +61,38 @@ describe 'processing promise', ->
       .should 'have written the files on the file system', ->
         expect(tmp 'processing/foo.coffee').toContain('foo.coffee')
         expect(tmp 'processing/foo.js').toContain('foo.js')
+
+  describe 'processExtension', ->
+    it 'should exists', ->
+      expect(core.processExtension).toBeDefined()
+
+    describe 'when called with an extension and a promise returning function', ->
+      beforeEach ->
+        @processor = core.processExtension 'coffee', (buffer) ->
+          Q.fcall ->
+            newBuffer = {}
+            buffer.each (k,v) -> newBuffer["#{k}_foo"] = 'I want coffee'
+            newBuffer
+
+      it 'should return a promise return function', ->
+        expect(typeof @processor).toBe('function')
+
+      describe 'and the returned function called with a buffer', ->
+        beforeEach ->
+          @files = {}
+          @files[tmp 'processing/foo.coffee'] = 'foo.coffee'
+          @files[tmp 'processing/foo.js'] = 'foo.js'
+          @processCoffee = @processor @files
+
+        it 'should return a promise', ->
+          expect(@processCoffee).toBePromise()
+
+        promise(-> @processCoffee)
+        .should.beFulfilled()
+        .should 'have processed the file with corresponding extension', (r) ->
+          expect(r[tmp 'processing/foo.coffee']).toBeUndefined()
+          expect(r[tmp 'processing/foo.js_foo']).toBeUndefined()
+
+          expect(r[tmp 'processing/foo.coffee_foo']).toBe('I want coffee')
+          expect(r[tmp 'processing/foo.js']).toBe('foo.js')
+

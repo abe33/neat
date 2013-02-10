@@ -33,5 +33,18 @@ writeFiles = (buffer) ->
 
   defer.promise
 
+processExtension = (ext, process) -> (buffer) ->
+  defer = Q.defer()
 
-module.exports = {readFiles, writeFiles}
+  filteredBuffer = buffer.select (k) -> path.extname(k) is ".#{ext}"
+  buffer.destroy k for k of filteredBuffer
+  process(filteredBuffer)
+  .then (processedBuffer) ->
+    defer.resolve buffer.merge processedBuffer
+  .fail (err) ->
+    defer.reject err
+
+  defer.promise
+
+
+module.exports = {readFiles, writeFiles, processExtension}
