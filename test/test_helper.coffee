@@ -36,6 +36,8 @@ global.progress = (f) ->
     oldRes = res
 
 global.fixture = (path) -> resolve FIXTURES_ROOT, path
+global.tmp = (path) -> resolve TEST_TMP_DIR, path
+global.clearTmp = (path) -> rm resolve TEST_TMP_DIR, path
 
 global.addDateMatchers = (scope) ->
   scope.addMatchers

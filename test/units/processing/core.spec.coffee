@@ -1,9 +1,12 @@
 require '../../test_helper'
 
-{readFiles} = require '../../../lib/processing/core'
+{readFiles, writeFiles} = require '../../../lib/processing/core'
 
 describe 'processing promise', ->
-  beforeEach -> addPromiseMatchers this
+  beforeEach ->
+    addPromiseMatchers this
+    addFileMatchers this
+
   describe 'readFiles', ->
     it 'should exists', ->
       expect(readFiles).toBeDefined()
@@ -33,3 +36,25 @@ describe 'processing promise', ->
         ]
 
       promise(-> @readFiles).should.beRejected()
+
+  describe 'writeFiles', ->
+    it 'should exists', ->
+      expect(writeFiles).toBeDefined()
+
+    describe 'when called with a files buffer', ->
+      beforeEach ->
+        @files = {}
+        @files[tmp 'processing/foo.coffee'] = 'foo.coffee'
+        @files[tmp 'processing/foo.js'] = 'foo.js'
+        @writeFiles = writeFiles @files
+
+      afterEach -> clearTmp 'processing'
+
+      it 'should return a promise', ->
+        expect(@writeFiles).toBePromise()
+
+      promise(-> @writeFiles)
+      .should.beFulfilled()
+      .should 'have written the files on the file system', ->
+        expect(tmp 'processing/foo.coffee').toContain('foo.coffee')
+        expect(tmp 'processing/foo.js').toContain('foo.js')
