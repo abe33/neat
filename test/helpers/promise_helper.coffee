@@ -79,8 +79,8 @@ global.promise = (promise) ->
         .then (result) ->
           expect(result).toEqual(expectedResult)
           ended = true
-        .fail ->
-          expect(null).toEqual(expectedResult)
+        .fail (err) ->
+          expect(err).toEqual(expectedResult)
           ended = true
 
       waitsFor progress(-> ended), "Timed out in returns", 1000

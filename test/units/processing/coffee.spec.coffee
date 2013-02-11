@@ -42,3 +42,19 @@ describe 'coffee processing promise', ->
             expect(err.message)
             .toBe("In file 'foo.coffee': Parse error on line 1: Unexpected 'TERMINATOR'")
 
+   describe 'annotate', ->
+    it 'should exists', ->
+      expect(coffee.annotate).toBeDefined()
+
+    describe 'when called with a file buffer', ->
+      beforeEach ->
+        @annotateBuffer = coffee.annotate
+          'foo.coffee': loadFixture 'processing/coffee/class.coffee'
+
+      it 'should return a promise', ->
+        expect(@annotateBuffer).toBePromise()
+
+      promise(-> @annotateBuffer)
+      .should.beFulfilled()
+      .should.returns 'the buffer with annotated content', ->
+        'foo.coffee': loadFixture 'processing/coffee/class.annotated.coffee'
