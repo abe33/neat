@@ -4,6 +4,7 @@ Q = require 'q'
 Neat = require '../neat'
 utils = Neat.require 'utils/files'
 {parallel} = Neat.require 'async'
+{check, checkBuffer} = require './utils'
 
 exists = fs.exists or path.exists
 
@@ -17,6 +18,8 @@ readFiles = (paths) ->
   defer.promise
 
 writeFiles = (buffer) ->
+  checkBuffer buffer
+
   defer = Q.defer()
   error = null
 
@@ -33,26 +36,36 @@ writeFiles = (buffer) ->
 
   defer.promise
 
-processExtension = (ext, process) -> (buffer) ->
-  defer = Q.defer()
+processExtension = (ext, process) ->
+  check ext, 'Extension argument is mandatory'
+  check process, 'Function argument is mandatory'
 
-  filteredBuffer = buffer.select (k) -> path.extname(k) is ".#{ext}"
-  buffer.destroy k for k of filteredBuffer
-  process(filteredBuffer)
-  .then (processedBuffer) ->
-    defer.resolve buffer.merge processedBuffer
-  .fail (err) ->
-    defer.reject err
+  (buffer) ->
+    checkBuffer buffer
 
-  defer.promise
+    defer = Q.defer()
 
-join = (fileName) -> (buffer) ->
-  Q.fcall ->
-    newBuffer = {}
-    newContent = []
-    newContent.push v for k,v of buffer
-    newBuffer[fileName] = newContent.join('\n')
-    newBuffer
+    filteredBuffer = buffer.select (k) -> path.extname(k) is ".#{ext}"
+    buffer.destroy k for k of filteredBuffer
+    process(filteredBuffer)
+    .then (processedBuffer) ->
+      defer.resolve buffer.merge processedBuffer
+    .fail (err) ->
+      defer.reject err
+
+    defer.promise
+
+join = (fileName) ->
+  check fileName, 'File name argument is mandatory'
+  (buffer) ->
+    checkBuffer buffer
+
+    Q.fcall ->
+      newBuffer = {}
+      newContent = []
+      newContent.push v for k,v of buffer
+      newBuffer[fileName] = newContent.join('\n')
+      newBuffer
 
 
 module.exports = {readFiles, writeFiles, processExtension, join}
