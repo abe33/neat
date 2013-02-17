@@ -46,5 +46,13 @@ processExtension = (ext, process) -> (buffer) ->
 
   defer.promise
 
+join = (fileName) -> (buffer) ->
+  Q.fcall ->
+    newBuffer = {}
+    newContent = []
+    newContent.push v for k,v of buffer
+    newBuffer[fileName] = newContent.join('\n')
+    newBuffer
 
-module.exports = {readFiles, writeFiles, processExtension}
+
+module.exports = {readFiles, writeFiles, processExtension, join}

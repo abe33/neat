@@ -96,3 +96,29 @@ describe 'processing promise', ->
           expect(r[tmp 'processing/foo.coffee_foo']).toBe('I want coffee')
           expect(r[tmp 'processing/foo.js']).toBe('foo.js')
 
+  describe 'join', ->
+    it 'should exists', ->
+      expect(core.join).toBeDefined()
+
+    describe 'when called with a file name', ->
+      beforeEach ->
+        @joinGenerator = core.join 'foo.coffee'
+
+      it 'should return a function', ->
+        expect(typeof @joinGenerator).toBe('function')
+
+      describe 'the returned function called with a buffer', ->
+        beforeEach ->
+          @join = @joinGenerator {
+            'file.coffee': 'foo'
+            'file.js': 'bar'
+          }
+
+        it 'should return a promise', ->
+          expect(@join).toBePromise()
+
+        promise(-> @join)
+        .should.beFulfilled()
+        .should.returns 'a new buffer with only one file with all content', ->
+          'foo.coffee': 'foo\nbar'
+
