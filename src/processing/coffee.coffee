@@ -1,5 +1,6 @@
 Q = require 'q'
 {compile:coffee} = require 'coffee-script'
+{check, checkBuffer} = require './utils'
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
 STRING_RE = '["\'][^"\']+["\']'
@@ -61,6 +62,8 @@ analyze = (path, content) ->
   out
 
 annotate = (buffer) ->
+  checkBuffer buffer
+
   Q.fcall ->
     for path, content of buffer
       content = content.split('\n')
@@ -71,6 +74,8 @@ annotate = (buffer) ->
 
 
 compile = (options) -> (buffer) ->
+  checkBuffer buffer
+
   Q.fcall ->
     newBuffer = {}
     try
