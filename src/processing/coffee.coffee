@@ -8,7 +8,15 @@ HASH_KEY_RE = "(#{LITERAL_RE}|#{STRING_RE})"
 OBJECT_RE = "(\\s*#{HASH_KEY_RE}(\\s*:\\s*([^,\\n}]+)))+"
 
 EXPORTS_RE = ->
-  ///(?:\s|^)(module\.exports|exports)(\s*=\s*\n#{OBJECT_RE}|[=\[.\s].+\n)///gm
+  ///
+    (?:\s|^)                  # Indent or line start
+    (module\.exports|exports) # The exports affectation
+    (
+      \s*=\s*\n#{OBJECT_RE}   # Either an object literal
+      |
+      [=\[.\s].+\n            # Or an expression
+    )
+  ///gm
 SPLIT_MEMBER_RE = -> /\s*=\s*/g
 MEMBER_RE = -> ///\[\s*#{STRING_RE}\s*\]|\.#{LITERAL_RE}///
 NAME_RE = -> /^[a-zA-Z_$][a-zA-Z0-9_$-.]*$/
