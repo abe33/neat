@@ -78,8 +78,51 @@ annotate = (buffer) ->
       content = analyze path, content
       buffer[path] = "`/* #{path} */`\n#{content.join('\n')}"
 
-    buffer
+exportsToPackage = (pkg) ->
+  throw new Error 'missing package argument' unless pkg?
+  return (buffer) ->
+    Q.fcall ->
+      newBuffer = {}
+      header = ->
+        header = ''
+        packages = pkg.split '.'
+        _pkg = "@#{packages.shift()}"
+        header += "#{_pkg} ||= {}\n"
+        for p in packages
+          _pkg += ".#{p}"
+          header += "#{_pkg} ||= {}\n"
 
+        "#{header}\n"
+
+      convertExports = (content) ->
+        packageFor = (k,v) -> "@#{pkg}.#{k} = #{v || k}"
+
+        exp = []
+        content = content.replace EXPORTS_RE(), (m,e,p) =>
+          [member, value] = p.split SPLIT_MEMBER_RE()
+
+          if MEMBER_RE().test member
+            "@#{pkg}#{p}"
+          else
+            if HASH_RE().test value
+              values = value.replace(/\{|\}/g, '')
+                            .strip()
+                            .split(',')
+                            .map((s) -> s.strip().split(/\s*:\s*/))
+              exp.push packageFor k,v for [k,v] in values
+            else if ///#{OBJECT_RE}///m.test value
+              values = value.split('\n').map((s) -> s.strip().split(/\s*:\s*/))
+              exp.push packageFor k,v for [k,v] in values
+            else
+              value = value.strip()
+              exp.push "@#{pkg}.#{value} = #{value}"
+            ''
+        "#{content}\n#{exp.join '\n'}"
+
+      for path, content of buffer
+        newBuffer[path] = "#{header()}#{convertExports content}"
+
+      newBuffer
 
 compile = (options) -> (buffer) ->
   checkBuffer buffer
@@ -95,4 +138,4 @@ compile = (options) -> (buffer) ->
     newBuffer
 
 
-module.exports = {compile, annotate}
+module.exports = {compile, annotate, exportsToPackage}

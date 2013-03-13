@@ -88,7 +88,7 @@ describe 'coffee processing promise', ->
             expect(err.message)
             .toBe("In file 'foo.coffee': Parse error on line 1: Unexpected 'TERMINATOR'")
 
-   describe 'annotate', ->
+  describe 'annotate', ->
     it 'should exists', ->
       expect(coffee.annotate).toBeDefined()
 
@@ -110,3 +110,39 @@ describe 'coffee processing promise', ->
       .should.beFulfilled()
       .should.returns 'the buffer with annotated content', ->
         'foo.coffee': loadFixture 'processing/coffee/class.annotated.coffee'
+
+  describe 'exportsToPackage', ->
+    it 'should exists', ->
+      expect(coffee.exportsToPackage).toBeDefined()
+
+    describe 'when called without package', ->
+      it 'should raise an exception', ->
+        expect(-> coffee.exportsToPackage()).toThrow()
+
+    describe 'when called with a package name', ->
+      beforeEach ->
+        @exporterGenerator = coffee.exportsToPackage 'path.to.package'
+
+      it 'should return a function', ->
+        expect(typeof @exporterGenerator).toBe('function')
+
+      describe 'the returned function', ->
+        describe 'when called with a file buffer', ->
+          beforeEach ->
+            @exportsToPackage = @exporterGenerator
+              'foo.coffee': loadFixture 'processing/coffee/exports.coffee'
+
+          it 'should return a promise', ->
+            expect(@exportsToPackage).toBePromise()
+
+          promise(-> @exportsToPackage)
+          .should.beFulfilled()
+          .should.returns 'the buffer with exports replaced with package', ->
+            'foo.coffee': loadFixture('processing/coffee/exports.exported.coffee').strip()
+
+
+
+
+
+
+
