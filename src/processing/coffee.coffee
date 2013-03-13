@@ -82,8 +82,11 @@ annotate = (buffer) ->
     newBuffer
 
 exportsToPackage = (pkg) ->
-  throw new Error 'missing package argument' unless pkg?
+  check pkg, 'Missing package argument'
+
   return (buffer) ->
+    checkBuffer buffer
+
     Q.fcall ->
       newBuffer = {}
       header = ->
@@ -127,7 +130,7 @@ exportsToPackage = (pkg) ->
 
       newBuffer
 
-compile = (options) -> (buffer) ->
+compile = (options={}) -> (buffer) ->
   checkBuffer buffer
 
   Q.fcall ->
@@ -140,5 +143,15 @@ compile = (options) -> (buffer) ->
 
     newBuffer
 
+stripRequires = (buffer) ->
+  checkBuffer buffer
+  Q.fcall ->
+    newBuffer = {}
+    for path, content of buffer
+      newBuffer[path] = content.split('\n')
+                            .reject((s) -> REQUIRE_RE().test s)
+                            .join('\n')
+    newBuffer
 
-module.exports = {compile, annotate, exportsToPackage}
+
+module.exports = {compile, annotate, exportsToPackage, stripRequires}

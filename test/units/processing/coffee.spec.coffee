@@ -127,6 +127,12 @@ describe 'coffee processing promise', ->
         expect(typeof @exporterGenerator).toBe('function')
 
       describe 'the returned function', ->
+        describe 'when called without a valid file buffer', ->
+          it 'should raise an exception', ->
+            expect(=> @exporterGenerator 5).toThrow()
+            expect(=> @exporterGenerator 'foo').toThrow()
+            expect(=> @exporterGenerator null).toThrow()
+
         describe 'when called with a file buffer', ->
           beforeEach ->
             @exportsToPackage = @exporterGenerator
@@ -140,6 +146,28 @@ describe 'coffee processing promise', ->
           .should.returns 'the buffer with exports replaced with package', ->
             'foo.coffee': loadFixture('processing/coffee/exports.exported.coffee').strip()
 
+  describe 'stripRequires', ->
+    it 'should exists', ->
+      expect(coffee.stripRequires).toBeDefined()
+
+    describe 'when called without a valid file buffer', ->
+      it 'should raise an exception', ->
+        expect(=> coffee.stripRequires 5).toThrow()
+        expect(=> coffee.stripRequires 'foo').toThrow()
+        expect(=> coffee.stripRequires null).toThrow()
+
+    describe 'when called with a file buffer', ->
+      beforeEach ->
+        @stripRequires = coffee.stripRequires
+          'foo.coffee': loadFixture 'processing/coffee/requires.coffee'
+
+      it 'should return a promise', ->
+        expect(@stripRequires).toBePromise()
+
+      promise(-> @stripRequires)
+      .should.beFulfilled()
+      .should.returns 'the buffer with requires removed', ->
+        'foo.coffee': loadFixture 'processing/coffee/requires.stripped.coffee'
 
 
 
