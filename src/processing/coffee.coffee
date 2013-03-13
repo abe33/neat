@@ -73,10 +73,13 @@ annotate = (buffer) ->
   checkBuffer buffer
 
   Q.fcall ->
+    newBuffer = {}
     for path, content of buffer
       content = content.split('\n')
       content = analyze path, content
-      buffer[path] = "`/* #{path} */`\n#{content.join('\n')}"
+      newBuffer[path] = "`/* #{path} */`\n#{content.join('\n')}"
+
+    newBuffer
 
 exportsToPackage = (pkg) ->
   throw new Error 'missing package argument' unless pkg?
