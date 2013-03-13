@@ -57,6 +57,7 @@ processExtension = (ext, process) ->
 
 join = (fileName) ->
   check fileName, 'File name argument is mandatory'
+
   (buffer) ->
     checkBuffer buffer
 
@@ -67,5 +68,10 @@ join = (fileName) ->
       newBuffer[fileName] = newContent.join('\n')
       newBuffer
 
+relocate = (from, to) ->
+  check from, 'From argument is mandatory'
+  check to, 'To argument is mandatory'
 
-module.exports = {readFiles, writeFiles, processExtension, join}
+
+
+module.exports = {readFiles, writeFiles, processExtension, join, relocate}

@@ -5,7 +5,7 @@ path = require 'path'
 
 core = require '../../../lib/processing/core'
 
-describe 'processing promise', ->
+describe 'core processing promise', ->
   beforeEach ->
     addPromiseMatchers this
     addFileMatchers this
@@ -155,4 +155,22 @@ describe 'processing promise', ->
         .should.beFulfilled()
         .should.returns 'a new buffer with only one file with all content', ->
           'foo.coffee': 'foo\nbar'
+
+  describe 'relocate', ->
+    it 'should exists', ->
+      expect(core.relocate).toBeDefined()
+
+    describe 'when called without the from argument', ->
+      it 'should raise an exception', ->
+        expect(-> core.relocate()).toThrow()
+
+    describe 'when called without the to argument', ->
+      it 'should raise an exception', ->
+        expect(-> core.relocate 'foo').toThrow()
+
+
+
+
+
+
 
