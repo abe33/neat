@@ -664,7 +664,7 @@ rm = (path, callback) ->
         return callback? err if err?
         if stats.isDirectory()
           fs.readdir path, (err, paths) ->
-            callback? err if err?
+            return callback? err if err?
             parallel (rmIteration "#{path}/#{p}" for p in paths), ->
               fs.rmdir path, (err) ->
                 callback? err

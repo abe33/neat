@@ -2,7 +2,7 @@ fs = require 'fs'
 path = require 'path'
 Neat = require '../neat'
 {run, neatTask, asyncErrorTrap} = Neat.require 'utils/commands'
-{error, info, green, red} = Neat.require 'utils/logs'
+{error, puts, info, green, red, cyan} = Neat.require 'utils/logs'
 _ = Neat.i18n.getHelper()
 
 lastTime = 0
@@ -21,41 +21,32 @@ recursiveWatch = (dir, watcher) ->
           # Watch the directory and traverse the children files.
           recursiveWatch file, watcher
 
-compiling = false
+watchTaskGen = (name, task, description, watches...) ->
+  watches = watches.flatten()
+  rerunAfter = false
+  exports[name] = neatTask
+    name: name
+    description: description
+    action: (callback) ->
+      rerunAfter = false
+      watcher = (e, f) ->
+        if testing and changesSpacedEnough(new Date().getTime())
+          rerunAfter = true
+          return
+        puts cyan "#{f or '<file name not provided>'} #{e}d"
+        testing = true
+        # Neat.task(task) ->
+        run 'cake', [task], (status) ->
+          testing = false
+          if rerunAfter
+            rerunAfter = false
+            watcher(e,f)
 
-exports.watch = neatTask
-  name:'watch'
-  description: _('neat.tasks.watch.description')
-  action: (callback) ->
-    recompileAfter = false
-    watcher = (e, f) ->
-      if compiling and changesSpacedEnough(new Date().getTime())
-        recompileAfter = true
-        return
-      compiling = true
-      Neat.task('compile') ->
-        compiling = false
-        if recompileAfter
-          recompileAfter = false
-          watcher(e,f)
-    recursiveWatch path.resolve('.', 'src'), watcher
+      recursiveWatch path.resolve('.', w), watcher for w in watches
 
-exports['watch:test'] = neatTask
-  name:'watch:test'
-  description: _('neat.tasks.watch_test.description')
-  action: (callback) ->
-    retestAfter = false
-    watcher = (e, f) ->
-      if testing and changesSpacedEnough(new Date().getTime())
-        retestAfter = true
-        return
-      testing = true
-      Neat.task('test') ->
-        testing = false
-        if retestAfter
-          retestAfter = false
-          watcher(e,f)
-
-    recursiveWatch path.resolve('.', 'src'), watcher
-    recursiveWatch path.resolve('.', 'test'), watcher
+watchTaskGen 'watch', 'compile', _('neat.tasks.watch.description'), 'src'
+watchTaskGen 'watch:test', 'test', _('neat.tasks.watch_test.description'), 'src', 'test/units', 'test/functionals'
+watchTaskGen 'watch:test:unit', 'test:unit', _('neat.tasks.watch_test.description'), 'src', 'test/units'
+watchTaskGen 'watch:test:functional', 'test:functional', _('neat.tasks.watch_test.description'), 'src', 'test/functionals'
+watchTaskGen 'watch:test:integration', 'test:integration', _('neat.tasks.watch_test.description'), 'src', 'test/integrations'
 

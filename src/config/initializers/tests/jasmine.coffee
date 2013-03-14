@@ -1,5 +1,6 @@
 fs = require 'fs'
 path = require 'path'
+{print} = require 'util'
 Neat = require '../../../neat'
 {queue} = require '../../../async'
 {run} = require '../../../utils/commands'
@@ -25,5 +26,23 @@ module.exports = (config) ->
 
     args = ['.', '--color', '--coffee', '--test-dir']
 
+    result = null
+    options =
+      stdout: (data) ->
+        print data.toString()
+        s = data.toString()
+        res = /(\d+) tests, (\d+) assertions, (\d+) failures/.exec s
+        if res
+          result =
+            tests: parseInt res[1]
+            assertions: parseInt res[2]
+            failures: parseInt res[3]
+
     puts yellow "#{name.capitalize()} tests:"
-    run JASMINE, args.concat(testDir), callback
+    run JASMINE, args.concat(testDir), options, (status) ->
+      callback status, result
+      # i = setInterval ->
+      #   if result?
+      #     callback status, result
+      #     clearInterval i
+      # , 100
