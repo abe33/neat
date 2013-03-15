@@ -34,12 +34,13 @@ runTests = (name, dir) -> (callback) ->
 handleTestResult = (status, result) ->
   if status is 0
     info green _('neat.tasks.test.tests_done')
-    growly.notify """#{_('neat.tasks.test.tests_done')}
-                     #{("#{v} #{k}" for k,v of result).join ', '}"""
+    msg = "#{("#{v} #{k}" for k,v of result).join ', '}"
+    growly.notify msg, icon: Neat.resolve('res/success.png'), title: _('neat.tasks.test.tests_done')
+
   else
     error red _('neat.tasks.test.tests_failed')
-    growly.notify """#{_('neat.tasks.test.tests_failed')}
-                     #{("#{v} #{k}" for k,v of result).join ', '}"""
+    msg = "#{("#{v} #{k}" for k,v of result).join ', '}"
+    growly.notify msg, icon: Neat.resolve('res/failure.png'), title: _('neat.tasks.test.tests_failed')
 
 index = neatTask
   name:'test'
