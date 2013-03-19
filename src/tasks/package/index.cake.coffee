@@ -38,8 +38,8 @@ exports['package'] = neatTask
               if failed > 0
                 error red _('neat.tasks.package.package_failed',
                             {succeed, failed})
-                callback? 1
+                setTimeout (-> callback? 1), 100
               else
                 info green _('neat.tasks.package.packages_done',
                               packages: res.length)
-                callback? 0
+                setTimeout (-> callback? 0), 100

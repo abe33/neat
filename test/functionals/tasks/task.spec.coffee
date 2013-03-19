@@ -17,9 +17,8 @@ withBundledProject 'foo', ->
         exports['foo'] = neatTask
           name: 'foo'
           action: (callback) ->
-            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-              .write "task called\\n"
-            callback?()
+            stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+            stream.write "task called\\n", -> callback? 0
         """
 
       hooksPath = inProject('src/config/initializers/hooks.coffee')
@@ -28,15 +27,16 @@ withBundledProject 'foo', ->
         fs = require 'fs'
 
         module.exports = (config) ->
-          fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-            .write "hooks added\\n"
+          stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+          stream.write "hooks added\\n"
 
-          Neat.beforeTask.add ->
-            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-              .write "beforeTask called\\n"
-          Neat.afterTask.add ->
-            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-              .write "afterTask called\\n"
+          Neat.beforeTask.add (callback) ->
+            stream = fs.createWriteStream("\#{Neat.root}/test.log", flags: "a")
+            stream.write "beforeTask called\\n", -> callback?()
+
+          Neat.afterTask.add (status, callback) ->
+            stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+            stream.write "afterTask called\\n", -> callback?()
         """
 
       ended = false
