@@ -80,9 +80,17 @@ en:
         message: "#{name} version: #{version}"
 
       watch:
+        watching_singular: "Now watching directory #{dir}"
+        watching_plural: "Now watching directories #{dirs}"
         description: Watches for changes in the src directory and run compile
       watch_test:
         description: Watches for changes in the src and test directories and run compilation and tests
+      watch_test_unit:
+        description: Watches for changes in the src and test/units directories and run compilation and unit tests
+      watch_test_functional:
+        description: Watches for changes in the src and test/functionals directories and run compilation and functional tests
+      watch_test_integration:
+        description: Watches for changes in the src and test/integrations directories and run compilation and integration tests
 
       github_pages:
         untracked_files: |

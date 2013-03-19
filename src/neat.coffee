@@ -105,6 +105,10 @@ class Neat
   #     {parallel} = Neat.require 'async'
   require: (module) -> require "#{@neatRoot}/lib/#{module}"
 
+  ##### Neat::resolve
+
+  resolve: (path) -> resolve @neatRoot, path
+
   ##### Neat::task
 
   # Returns the cake task whose name is `name`.
