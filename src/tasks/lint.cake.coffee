@@ -70,7 +70,7 @@ exports['lint'] = neatTask
 
           if errors.length is 0
             info green _('neat.tasks.lint.files_linted', files: allfiles)
-            callback? 1
+            callback? 0
           else
             error() for error in errors
 
@@ -81,5 +81,5 @@ exports['lint'] = neatTask
                   #{red "#{allerrors} error#{if allerrors>0 then 's' else ''}"}
                  ".squeeze()
 
-            callback? 0
+            callback? 1
 
