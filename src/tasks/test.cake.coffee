@@ -31,16 +31,25 @@ runTests = (name, dir) -> (callback) ->
 
     callback? status, result
 
-handleTestResult = (status, result) ->
+handleTestResult = (status, result, callback) ->
   if status is 0
     info green _('neat.tasks.test.tests_done')
     msg = "#{("#{v} #{k}" for k,v of result).join ', '}"
-    growly.notify msg, icon: Neat.resolve('res/success.png'), title: _('neat.tasks.test.tests_done')
+    growly.notify msg, {
+      icon: Neat.resolve('res/success.png')
+      title: _('neat.tasks.test.tests_done')
+      label: 'success'
+    }, -> callback? status
+
 
   else
     error red _('neat.tasks.test.tests_failed')
     msg = "#{("#{v} #{k}" for k,v of result).join ', '}"
-    growly.notify msg, icon: Neat.resolve('res/failure.png'), title: _('neat.tasks.test.tests_failed')
+    growly.notify msg, {
+      icon: Neat.resolve('res/failure.png'),
+      title: _('neat.tasks.test.tests_failed')
+      label: 'failure'
+    }, -> callback? status
 
 index = neatTask
   name:'test'
@@ -62,8 +71,7 @@ index = neatTask
               for k,v of o
                 if result[k]? then result[k] += v else result[k] = v
 
-          handleTestResult status, result
-          callback? status
+          handleTestResult status, result, callback
 
 unit = neatTask
   name:'test:unit'
@@ -71,8 +79,7 @@ unit = neatTask
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('unit', 'test/units') (status, result) ->
-      handleTestResult status, result
-      callback? status
+      handleTestResult status, result, callback
 
 functional = neatTask
   name:'test:functional'
@@ -80,8 +87,7 @@ functional = neatTask
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('functional', 'test/functionals') (status, result) ->
-      handleTestResult status, result
-      callback? status
+      handleTestResult status, result, callback
 
 integration = neatTask
   name:'test:integration'
@@ -89,7 +95,6 @@ integration = neatTask
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('integration', 'test/integrations') (status, result) ->
-      handleTestResult status, result
-      callback? status
+      handleTestResult status, result, callback
 
 module.exports = namespace 'test', {index, unit, functional, integration}
