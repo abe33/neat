@@ -17,7 +17,7 @@
     "node": "~0.8.0"
   },
   "scripts": {
-    "test": "jasmine-node --coffee test/units; cake lint"
+    "test": "jasmine-node --coffee test/units && cake lint"
   },
   "dependencies": {
     "colors": "0.6.0-1",
