@@ -45,8 +45,16 @@ watchTaskGen = (name, task, description, watches...) ->
       recursiveWatch path.resolve('.', w), watcher for w in watches
 
 watchTaskGen 'watch', 'compile', _('neat.tasks.watch.description'), 'src'
-watchTaskGen 'watch:test', 'test', _('neat.tasks.watch_test.description'), 'src', 'test/units', 'test/functionals'
-watchTaskGen 'watch:test:unit', 'test:unit', _('neat.tasks.watch_test.description'), 'src', 'test/units'
-watchTaskGen 'watch:test:functional', 'test:functional', _('neat.tasks.watch_test.description'), 'src', 'test/functionals'
-watchTaskGen 'watch:test:integration', 'test:integration', _('neat.tasks.watch_test.description'), 'src', 'test/integrations'
+watchTaskGen 'watch:test', 'test',
+             _('neat.tasks.watch_test.description'),
+             'src', 'test/units', 'test/functionals'
+watchTaskGen 'watch:test:unit', 'test:unit',
+             _('neat.tasks.watch_test.description'),
+             'src', 'test/units'
+watchTaskGen 'watch:test:functional', 'test:functional',
+             _('neat.tasks.watch_test.description'),
+             'src', 'test/functionals'
+watchTaskGen 'watch:test:integration', 'test:integration',
+             _('neat.tasks.watch_test.description'),
+             'src', 'test/integrations'
 
