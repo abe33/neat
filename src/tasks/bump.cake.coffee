@@ -68,7 +68,7 @@ bump = (majorBump=0, minorBump=0, buildBump=1, callback) ->
           info green _('neat.tasks.bump.version_bumped', version: newVersion)
           callback? 0
 
-module.exports = namespace 'bump'
+module.exports = namespace 'bump',
   index:  neatTask
     name:'bump'
     description: _('neat.tasks.bump.description')
