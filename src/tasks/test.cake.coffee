@@ -48,8 +48,10 @@ index = neatTask
   environment: 'test'
   action: beforeTests (callback) ->
     runTests('unit', 'test/units') (statusUnit, resultUnit) ->
-      runTests('functional', 'test/functionals') (statusFunctional, resultFunctional) ->
-        runTests('integration', 'test/integrations') (statusIntegration, resultIntegration) ->
+      runTests('functional', 'test/functionals') (statusFunctional,
+                                                  resultFunctional) ->
+        runTests('integration', 'test/integrations') (statusIntegration,
+                                                      resultIntegration) ->
           statuses = [statusUnit, statusFunctional, statusIntegration]
           status = if statuses.some((n) -> n is 1) then 1 else 0
 

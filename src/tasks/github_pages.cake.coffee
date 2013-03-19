@@ -286,16 +286,16 @@ exports['github:pages'] = neatTask
       else
         run 'git checkout -b gh-pages'
     .then(->
-      run 'cp .gitignore .gitignore_safe;
-           git ls-files -z | xargs -0 rm -f;
-           git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir;
-           mv .gitignore_safe .gitignore;'
+      run 'cp .gitignore .gitignore_safe &&
+           git ls-files -z | xargs -0 rm -f &&
+           git ls-tree --name-only -d -r -z HEAD | sort -rz | xargs -0 rmdir &&
+           mv .gitignore_safe .gitignore'
     , handleError)
     .then ->
-      run("mv .pages/* .;
-           rm -rf .pages;
-           git add .;
-           git commit -am 'Updates gh-pages branch';
+      run("mv .pages/* . &&
+           rm -rf .pages &&
+           git add . &&
+           git commit -am 'Updates gh-pages branch' &&
            git checkout #{branch}")
     .then ->
       callback? 0
@@ -312,7 +312,7 @@ exports['github:pages:preview'] = neatTask
     branch = null
     createTempDir()
     .then -> run('neat docco')
-    .then -> run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR};
+    .then -> run("cp -r #{Neat.root}/docs #{PAGES_TEMP_DIR} &&
                   rm -rf #{Neat.root}/docs")
     .then(createPages)
     .then ->
