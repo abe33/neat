@@ -1,3 +1,5 @@
+# @toc
+
 fs = require 'fs'
 path = require 'path'
 Q = require 'q'
@@ -8,6 +10,7 @@ utils = Neat.require 'utils/files'
 
 exists = fs.exists or path.exists
 
+##### readFiles
 readFiles = (paths) ->
   defer = Q.defer()
 
@@ -17,6 +20,7 @@ readFiles = (paths) ->
 
   defer.promise
 
+##### writeFiles
 writeFiles = (buffer) ->
   checkBuffer buffer
 
@@ -36,6 +40,7 @@ writeFiles = (buffer) ->
 
   defer.promise
 
+##### processExtension
 processExtension = (ext, process) ->
   check ext, 'Extension argument is mandatory'
   check process, 'Function argument is mandatory'
@@ -55,6 +60,7 @@ processExtension = (ext, process) ->
 
     defer.promise
 
+##### join
 join = (fileName) ->
   check fileName, 'File name argument is mandatory'
 
@@ -68,6 +74,7 @@ join = (fileName) ->
       newBuffer[fileName] = newContent.join('\n')
       newBuffer
 
+##### relocate
 relocate = (from, to) ->
   check from, 'From argument is mandatory'
   check to, 'To argument is mandatory'

@@ -1,3 +1,5 @@
+# @toc
+
 Q = require 'q'
 {compile:coffee} = require 'coffee-script'
 {check, checkBuffer} = require './utils'
@@ -44,6 +46,7 @@ STATIC_MEMBER_RE = ->
     (\([^)]+\)\s*)*->   # Function
   ///
 
+##### analyze
 analyze = (path, content) ->
   out = content.concat()
   i2 = 0
@@ -69,6 +72,7 @@ analyze = (path, content) ->
     i2++
   out
 
+##### annotate
 annotate = (buffer) ->
   checkBuffer buffer
 
@@ -81,6 +85,7 @@ annotate = (buffer) ->
 
     newBuffer
 
+##### exportsToPackage
 exportsToPackage = (pkg) ->
   check pkg, 'Missing package argument'
 
@@ -130,6 +135,7 @@ exportsToPackage = (pkg) ->
 
       newBuffer
 
+##### compile
 compile = (options={}) -> (buffer) ->
   checkBuffer buffer
 
@@ -143,6 +149,7 @@ compile = (options={}) -> (buffer) ->
 
     newBuffer
 
+##### stripRequires
 stripRequires = (buffer) ->
   checkBuffer buffer
   Q.fcall ->

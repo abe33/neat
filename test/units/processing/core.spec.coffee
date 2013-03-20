@@ -25,8 +25,10 @@ describe 'core processing promise', ->
           fixture 'processing/file.js'
         ]
         @expectedResult = {}
-        @expectedResult[fixture 'processing/file.coffee'] = "# this is file.coffee\n"
-        @expectedResult[fixture 'processing/file.js'] = "// this is file.js\n"
+        coffeePath = fixture 'processing/file.coffee'
+        jsPath = fixture 'processing/file.js'
+        @expectedResult[coffeePath] = "# this is file.coffee\n"
+        @expectedResult[jsPath] = "// this is file.js\n"
 
       it 'should return a promise', ->
         expect(@readFiles).toBePromise()
@@ -76,15 +78,15 @@ describe 'core processing promise', ->
     it 'should exists', ->
       expect(core.processExtension).toBeDefined()
 
-    describe 'when called without arguments', ->
+    describe 'called without arguments', ->
       it 'should raise an exception', ->
         expect(-> core.processExtension()).toThrow()
 
-    describe 'when called with only an extension', ->
+    describe 'called with only an extension', ->
       it 'should raise an exception', ->
         expect(-> core.processExtension 'coffee').toThrow()
 
-    describe 'when called with an extension and a promise returning function', ->
+    describe 'called with an extension and a promise returning function', ->
       beforeEach ->
         @processor = core.processExtension 'coffee', (buffer) ->
           Q.fcall ->

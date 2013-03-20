@@ -29,7 +29,10 @@ describe 'coffee processing promise', ->
           beforeEach ->
             @compileBuffer = @compile 'foo.coffee': 'f = ->'
 
-            @expectedResult = '(function() {\n  var f;\n\n  f = function() {};\n\n}).call(this);\n'
+            @expectedResult = '(function() {\n
+  var f;\n\n
+  f = function() {};\n\n
+}).call(this);\n'
 
           it 'should return a promise', ->
             expect(@compileBuffer).toBePromise()
@@ -46,8 +49,8 @@ describe 'coffee processing promise', ->
           promise(-> @compileBuffer)
           .should.beRejected()
           .should.failWith 'the file name and line number', (err) ->
-            expect(err.message)
-            .toBe("In file 'foo.coffee': Parse error on line 1: Unexpected 'TERMINATOR'")
+            expect(err.message).toBe("In file 'foo.coffee':
+ Parse error on line 1: Unexpected 'TERMINATOR'")
 
     describe 'when called with options', ->
       beforeEach ->
@@ -85,8 +88,8 @@ describe 'coffee processing promise', ->
           promise(-> @compileBuffer)
           .should.beRejected()
           .should.failWith 'the file name and line number', (err) ->
-            expect(err.message)
-            .toBe("In file 'foo.coffee': Parse error on line 1: Unexpected 'TERMINATOR'")
+            expect(err.message).toBe("In file 'foo.coffee':
+ Parse error on line 1: Unexpected 'TERMINATOR'")
 
   describe 'annotate', ->
     it 'should exists', ->
@@ -141,10 +144,11 @@ describe 'coffee processing promise', ->
           it 'should return a promise', ->
             expect(@exportsToPackage).toBePromise()
 
+          fixture = 'processing/coffee/exports.exported.coffee'
           promise(-> @exportsToPackage)
           .should.beFulfilled()
           .should.returns 'the buffer with exports replaced with package', ->
-            'foo.coffee': loadFixture('processing/coffee/exports.exported.coffee').strip()
+            'foo.coffee': loadFixture(fixture).strip()
 
   describe 'stripRequires', ->
     it 'should exists', ->
