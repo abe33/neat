@@ -22,7 +22,7 @@
   "dependencies": {
     "colors": "0.6.0-1",
     "commander": "1.0.5",
-    "coffee-script": "1.4.0",
+    "coffee-script": "1.6.1",
     "haml-coffee": "1.6.2",
     "mustache": "0.7.0",
     "js-yaml": "1.0.2",
