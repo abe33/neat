@@ -1,0 +1,7 @@
+\.git
+\.pages
+.*\.tmp
+.DS_Store
+lib
+packages
+node_modules
