@@ -111,7 +111,7 @@ watcher = (file) ->
           else
             promise = p()
 
-    promise.fail((err) -> error red err)
+    promise.fail((err) -> error red err) if promise?
 
 exports['watch:new'] = neatTask
   name: 'watch:new'
