@@ -24,6 +24,18 @@ options = {}
   # stderr: (data)-> print data
   # stdout: (data)-> print data
 
+global.subject = (name, block) ->
+  [name, block] = [block, name] if typeof name is 'function'
+  beforeEach ->
+    @subject = block.call this
+    @[name] = @subject if name?
+
+global.given = (name, block) ->
+  beforeEach -> @[name] = block.call this
+
+global.waiting = ->
+
+
 cursor = 0
 global.progress = (f) ->
   oldRes = false
