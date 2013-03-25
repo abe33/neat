@@ -15,7 +15,8 @@ files = findSync 'coffee', paths
 files.forEach (f) -> require f
 
 global.TEST_ROOT = resolve '.'
-global.FIXTURES_ROOT = '/tmp'
+global.TEST_TMP_DIR = '/tmp'
+global.FIXTURES_ROOT = resolve Neat.neatRoot, 'test/fixtures'
 global.NEAT_BIN = resolve __dirname, '../bin/neat'
 
 eS = fs.existsSync or path.existsSync
@@ -45,6 +46,11 @@ global.progress = (f) ->
     setTimeout (-> print "\b" unless oldRes), 10
     print "#{'|/-\\'[p]}" unless res
     oldRes = res
+
+global.fixture = (path) -> resolve FIXTURES_ROOT, path
+global.loadFixture = (path) -> fs.readFileSync(fixture path).toString()
+global.tmp = (path) -> resolve TEST_TMP_DIR, path
+global.clearTmp = (path) -> rm resolve TEST_TMP_DIR, path
 
 global.addDateMatchers = (scope) ->
   scope.addMatchers
@@ -175,12 +181,12 @@ global.withProject = (name, desc=null, block, opts) ->
   describe (desc or "within the generated project #{name}"), ->
     beforeEach ->
       @projectName = name
-      @projectPath = "#{FIXTURES_ROOT}/#{name}"
-      global.inProject = (p) -> "#{FIXTURES_ROOT}/#{name}/#{p}"
+      @projectPath = "#{TEST_TMP_DIR}/#{name}"
+      global.inProject = (p) -> "#{TEST_TMP_DIR}/#{name}/#{p}"
 
       addFileMatchers this
 
-      process.chdir FIXTURES_ROOT
+      process.chdir TEST_TMP_DIR
       ended = false
       runs ->
         args = [
@@ -276,7 +282,7 @@ global.withPagesInitialized = (block) ->
 
 global.testSimpleGenerator= (name, dir, ext) ->
   describe 'when outside a project', ->
-    beforeEach -> process.chdir FIXTURES_ROOT
+    beforeEach -> process.chdir TEST_TMP_DIR
 
     describe "running `neat generate #{name} 'foo'`", ->
       it "should return a status of 1 and don't generate anything", ->

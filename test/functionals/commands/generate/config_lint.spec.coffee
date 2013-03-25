@@ -9,7 +9,7 @@ options = {}
 
 describe 'when outside a project', ->
   beforeEach ->
-    process.chdir FIXTURES_ROOT
+    process.chdir TEST_TMP_DIR
     addFileMatchers this
 
   describe 'running `neat generate config:lint`', ->
@@ -20,7 +20,7 @@ describe 'when outside a project', ->
         args = [NEAT_BIN, 'generate', 'config:lint']
         run 'node', args, options, (status) ->
           expect(status).toBe(1)
-          expect("#{FIXTURES_ROOT}/config/tasks/lint.json").not.toExist()
+          expect("#{TEST_TMP_DIR}/config/tasks/lint.json").not.toExist()
           ended = true
 
       waitsFor progress(-> ended), 'Timed out', 10000

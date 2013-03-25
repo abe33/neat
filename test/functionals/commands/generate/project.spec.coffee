@@ -5,7 +5,7 @@ Neat = require '../../../../lib/neat'
 {print} = require 'util'
 
 describe 'when outside a project', ->
-  beforeEach -> process.chdir FIXTURES_ROOT
+  beforeEach -> process.chdir TEST_TMP_DIR
 
   describe 'running `neat generate project`', ->
     it "should return a status of 1 and don't generate anything", (done) ->
@@ -18,7 +18,7 @@ describe 'when outside a project', ->
 
 withProject 'neat_project', 'when outside a project', ->
   describe 'running `neat generate project foo`', ->
-    beforeEach -> process.chdir FIXTURES_ROOT
+    beforeEach -> process.chdir TEST_TMP_DIR
 
     it 'should return a status code of 0', ->
       expect(@status).toBe(0)
