@@ -8,13 +8,20 @@ global.addPromiseMatchers = (scope) ->
 
       @actual? and @actual.then?
 
+    toBeSamePromise: (promise) ->
+      notText = if @isNot then " not" else ""
+      @message = ->
+        "Expected #{@actual}#{notText} to be #{promise}"
+
+      @actual is promise
+
 
 global.promise = (promise) ->
   should = (msg, block) ->
     it "the returned promise should #{msg}", ->
       ended = false
       runs ->
-        promise.call(this)
+        (promise?.call(this) or @promise or @subject)
         .then =>
           block.apply(this, arguments)
           ended = true
@@ -29,7 +36,7 @@ global.promise = (promise) ->
     it 'the returned promise should be fulfilled', ->
       ended = false
       runs ->
-        promise.call(this)
+        (promise?.call(this) or @promise or @subject)
         .then ->
           expect(true).toBeTruthy()
           ended = true
@@ -44,7 +51,7 @@ global.promise = (promise) ->
     it 'the returned promise should be rejected', ->
       ended = false
       runs ->
-        promise.call(this)
+        (promise?.call(this) or @promise or @subject)
         .then ->
           expect(false).toBeTruthy()
           ended = true
@@ -59,7 +66,7 @@ global.promise = (promise) ->
     it "the returned promise should fail with #{msg}", ->
       ended = false
       runs ->
-        promise.call(this)
+        (promise?.call(this) or @promise or @subject)
         .then =>
           block.apply(this, arguments)
           ended = true
@@ -75,7 +82,7 @@ global.promise = (promise) ->
       ended = false
       expectedResult = block.call this
       runs ->
-        promise.call(this)
+        (promise?.call(this) or @promise or @subject)
         .then (result) ->
           expect(result).toEqual(expectedResult)
           ended = true
