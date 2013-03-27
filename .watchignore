@@ -5,3 +5,5 @@
 lib
 packages
 node_modules
+test/fixtures/utils/files/foo.js
+test/fixtures/utils/files/foo/bar.coffee

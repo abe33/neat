@@ -1,11 +1,22 @@
 group 'neat', ->
   watcher 'compile', ->
-    watch 'src/(.*)\.coffee'
+    watch 'src/(.*)\\.coffee'
 
   watcher 'jasmine', ->
-    watch 'src/(.*)\.coffee', (f, m) ->
+    watch 'test/units/(.*)\\.spec\\.coffee'
+    watch 'test/functionals/(.*)\\.spec\\.coffee'
+    watch 'test/integrations/(.*)\\.spec\\.coffee'
+
+    watch 'test/(.*)_helper\.coffee', -> 'test'
+
+    watch 'src/(.*)\.coffee', (f, m, g) ->
       [
-        "test/units/#{m}.spec.coffee"
-        "test/functionals/#{m}.spec.coffee"
-        "test/integrations/#{m}.spec.coffee"
+        "test/units/#{g}.spec.coffee"
+        "test/functionals/#{g}.spec.coffee"
+        "test/integrations/#{g}.spec.coffee"
       ]
+
+  watcher 'lint', ->
+    watch 'src/.*\\.coffee$'
+    watch 'test/.*\\.coffee$'
+
