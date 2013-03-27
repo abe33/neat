@@ -19,9 +19,8 @@ withBundledProject 'foo', ->
 
         exports['foo'] = (pr) ->
           aliases 'foo', (args..., callback) ->
-            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-              .write "command called\\n"
-            callback?()
+            stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+            stream.write "command called\\n", -> callback?()
         """
 
       hooksPath = inProject('src/config/initializers/hooks.coffee')
@@ -30,15 +29,15 @@ withBundledProject 'foo', ->
         fs = require 'fs'
 
         module.exports = (config) ->
-          fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-            .write "hooks added\\n"
+          stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+          stream.write "hooks added\\n"
 
-          Neat.beforeCommand.add ->
-            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-              .write "beforeCommand called\\n"
-          Neat.afterCommand.add ->
-            fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
-              .write "afterCommand called\\n"
+          Neat.beforeCommand.add (callback) ->
+            stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+            stream.write "beforeCommand called\\n", -> callback?()
+          Neat.afterCommand.add (callback) ->
+            stream = fs.createWriteStream("\#{Neat.root}/test.log", flags:"a")
+            stream.write "afterCommand called\\n", -> callback?()
         """
 
       ended = false
@@ -47,7 +46,7 @@ withBundledProject 'foo', ->
           withCompiledFile hooksPath, hooksContent, ->
             ended = true
 
-      waitsFor progress(-> ended), 'Timed out', 5000
+      waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat foo', ->
       it 'should trigger the hooks', ->
@@ -62,7 +61,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'neat foo timed out', 5000
+        waitsFor progress(-> ended), 'neat foo timed out', 10000
 
     describe 'and running neat help', ->
       it 'should trigger the hooks', ->
@@ -76,7 +75,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate command bar', ->
       it 'should trigger the hooks', ->
@@ -90,7 +89,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate task foo', ->
       it 'should trigger the hooks', ->
@@ -104,7 +103,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate initializer foo', ->
       it 'should trigger the hooks', ->
@@ -118,7 +117,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate generator foo', ->
       it 'should trigger the hooks', ->
@@ -132,7 +131,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate spec:unit foo', ->
       it 'should trigger the hooks', ->
@@ -146,7 +145,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate spec:functional foo', ->
       it 'should trigger the hooks', ->
@@ -160,7 +159,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate package.json', ->
       it 'should trigger the hooks', ->
@@ -174,7 +173,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate config:lint foo', ->
       it 'should trigger the hooks', ->
@@ -188,7 +187,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat generate config:packager foo', ->
       it 'should trigger the hooks', ->
@@ -202,7 +201,7 @@ withBundledProject 'foo', ->
                             afterCommand called""")
             ended = true
 
-        waitsFor progress(-> ended), 'Timed out', 5000
+        waitsFor progress(-> ended), 'Timed out', 10000
 
     describe 'and running neat install', ->
       it 'should trigger the hooks', ->
