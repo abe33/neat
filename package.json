@@ -31,7 +31,7 @@
     "uglify-js": "1.3.4",
     "highlight.js": "git://github.com/abe33/highlight.js.git#node_build",
     "coffeelint": "0.2.0",
-    "jasmine-node": "*",
+    "jasmine-node": "git://github.com/abe33/jasmine-node.git#feature_multiple_paths_args",
     "stylus": "0.30.1",
     "marked": "*",
     "q": "*",

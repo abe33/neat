@@ -13,7 +13,7 @@ npm 'highlight.js', 'git://github.com/abe33/highlight.js.git#node_build'
 # These are required to provides the default `cake test` and `cake lint`
 # tasks to the user projects.
 npm 'coffeelint', '0.2.0'
-npm 'jasmine-node'
+npm 'jasmine-node',  'git://github.com/abe33/jasmine-node.git#feature_multiple_paths_args'
 npm 'stylus', '0.30.1'
 npm 'marked'
 npm 'q'
