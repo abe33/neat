@@ -9,4 +9,5 @@ describe 'PackageJson', ->
     expect(@plugin).toBeDefined()
 
   describe 'when a file watched by the plugin changed', ->
-    cliRunningPlugin(PackageJson).should.run('cake', 'package.json')
+    cliRunningPlugin(PackageJson)
+    .should.run('neat', 'generate', 'package.json')
