@@ -5,11 +5,13 @@ Neat = require '../../neat'
 Watch = require './watch'
 {parallel} = Neat.require 'async'
 {compile} = require 'coffee-script'
-{warn, error, puts, yellow, green, red, cyan} = Neat.require 'utils/logs'
+{
+  warn, error, puts, yellow,
+  green, red, cyan, inverse
+} = Neat.require 'utils/logs'
 {asyncErrorTrap} = Neat.require 'utils/commands'
 
 existsSync = fs.existsSync or path.existsSync
-n = 0
 
 class Watcher
   init: =>
@@ -64,21 +66,21 @@ class Watcher
       time = new Date()
       return unless changesSpacedEnough(time.getTime())
 
-      puts cyan "#{path} #{action}d"
       @pathChanged path, action
 
   pathChanged: (path, action) ->
+    promise = @promise.then ->
+      puts cyan "#{inverse " #{action.toUpperCase()}D "} #{path}"
     switch path
       when Neat.resolve('Watchfile'), Neat.resolve('.watchignore')
-        promise = @promise.then(@dispose).then(@init)
+        promise = promise.then(@dispose).then(@init)
       else
-        for name, plugin of @plugins
+        @plugins.each (name, plugin) ->
           if plugin.match path
             p = plugin.pathChanged path, action
-            if promise?
-              promise.then p
-            else
-              promise = if typeof p is 'function' then p() else p
+            promise = promise.then ->
+              puts cyan "#{inverse " #{name.toUpperCase()} "} #{path}"
+            promise = promise.then p
 
     @promise = promise if promise?
 
