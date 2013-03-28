@@ -2,6 +2,12 @@ group 'neat', ->
   watcher 'compile', ->
     watch 'src/(.*)\\.coffee'
 
+  watcher 'package_json', ->
+    watch '\\.neat'
+
+  watcher 'nemfile', ->
+    watch 'Nemfile'
+
   watcher 'jasmine', ->
     watch 'test/units/(.*)\\.spec\\.coffee'
     watch 'test/functionals/(.*)\\.spec\\.coffee'
@@ -16,7 +22,7 @@ group 'neat', ->
         "test/integrations/#{g}.spec.coffee"
       ]
 
-  watcher 'lint', ->
+  watcher 'lint', runAllOnStart: true ,->
     watch 'src/.*\\.coffee$'
     watch 'test/.*\\.coffee$'
 
