@@ -169,10 +169,11 @@ neatTask = (options) ->
   action
 
 ##### neatTaskAlias
-neatTaskAlias = (source, alias) ->
+neatTaskAlias = (source, alias, environment) ->
   neatTask
     name: alias
     description: _('neat.tasks.alias', task: source)
+    environment: environment
     action: (callback) ->
       task = Neat.task(source)
       task callback
