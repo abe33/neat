@@ -22,7 +22,7 @@ group 'neat', ->
         "test/integrations/#{g}.spec.coffee"
       ]
 
-  watcher 'lint', runAllOnStart: true ,->
+  watcher 'lint', ->
     watch 'src/.*\\.coffee$'
     watch 'test/.*\\.coffee$'
 
