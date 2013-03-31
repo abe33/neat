@@ -24,7 +24,7 @@ class Jasmine extends WatchPlugin
           error red 'failure'
         defer.resolve status
     else
-      puts magenta "#{inverse ' NO SPEC '} No specs can be found for #{path}"
+      puts yellow "#{inverse ' NO SPEC '} No specs can be found for #{path}"
       defer.resolve 0
     defer.promise
 
