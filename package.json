@@ -22,7 +22,7 @@
   "dependencies": {
     "colors": "0.6.0-1",
     "commander": "1.0.5",
-    "coffee-script": "1.4.0",
+    "coffee-script": "1.6.1",
     "haml-coffee": "1.6.2",
     "mustache": "0.7.0",
     "js-yaml": "1.0.2",
@@ -31,7 +31,7 @@
     "uglify-js": "1.3.4",
     "highlight.js": "git://github.com/abe33/highlight.js.git#node_build",
     "coffeelint": "0.2.0",
-    "jasmine-node": "git://github.com/abe33/jasmine-node.git#patch-1",
+    "jasmine-node": "git://github.com/abe33/jasmine-node.git#feature_multiple_paths_args",
     "stylus": "0.30.1",
     "marked": "*",
     "q": "*",

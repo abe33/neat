@@ -25,6 +25,28 @@ options = {}
   # stderr: (data)-> print data
   # stdout: (data)-> print data
 
+global.subject = (name, block) ->
+  [name, block] = [block, name] if typeof name is 'function'
+  beforeEach ->
+    @subject = block.call this
+    @[name] = @subject if name?
+
+global.given = (name, block) ->
+  beforeEach ->
+    self = this
+    Object.defineProperty this, name,
+                          configurable: true,
+                          enumerable: true,
+                          get: -> self["__#{name}"] ?= block.call self
+  afterEach ->
+    delete @[name]
+
+global.waiting = (block) ->
+  beforeEach ->
+    ended = false
+    runs -> block.call(this).then -> ended = true
+    waitsFor progress(-> ended), 'Timed out during promise', 2000
+
 cursor = 0
 global.progress = (f) ->
   oldRes = false

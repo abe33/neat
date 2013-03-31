@@ -1,6 +1,6 @@
 npm 'colors', '0.6.0-1'
 npm 'commander', '1.0.5'
-npm 'coffee-script', '1.4.0'
+npm 'coffee-script', '1.6.1'
 npm 'haml-coffee', '1.6.2'
 npm 'mustache', '0.7.0'
 npm 'js-yaml', '1.0.2'
@@ -13,8 +13,7 @@ npm 'highlight.js', 'git://github.com/abe33/highlight.js.git#node_build'
 # These are required to provides the default `cake test` and `cake lint`
 # tasks to the user projects.
 npm 'coffeelint', '0.2.0'
-npm 'jasmine-node', 'git://github.com/abe33/jasmine-node.git#patch-1'
-
+npm 'jasmine-node',  'git://github.com/abe33/jasmine-node.git#feature_multiple_paths_args'
 npm 'stylus', '0.30.1'
 npm 'marked'
 npm 'q'

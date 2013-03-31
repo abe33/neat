@@ -45,18 +45,21 @@ withBundledProject 'foo', ->
           withCompiledFile hooksPath, hooksContent, ->
             ended = true
 
-      waitsFor progress(-> ended), 'hooks compilation', 5000
+      waitsFor progress(-> ended), 'hooks compilation', 20000
 
     describe 'and running cake test', ->
-      it 'should trigger the hooks', (done) ->
+      it 'should trigger the hooks', ->
+        ended = false
+        runs ->
+          run 'cake', ['test'], (status) ->
+            expect(status).toBe(0)
+            expect(inProject 'test.log')
+              .toContain("""hooks added
+                            beforeTask called
+                            afterTask called""")
+            ended = true
 
-        run 'cake', ['test'], (status) ->
-          expect(status).toBe(0)
-          expect(inProject 'test.log')
-            .toContain("""hooks added
-                          beforeTask called
-                          afterTask called""")
-          done()
+        waitsFor progress(-> ended), 'cake test timed out', 20000
 
     describe 'and running cake lint', ->
       it 'should trigger the hooks', ->
@@ -70,7 +73,7 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake lint timed out', 5000
+        waitsFor progress(-> ended), 'cake lint timed out', 20000
 
     describe 'and running cake foo', ->
       it 'should trigger the hooks', ->
@@ -85,7 +88,7 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake foo timed out', 5000
+        waitsFor progress(-> ended), 'cake foo timed out', 20000
 
     describe 'and running cake bump', ->
       it 'should trigger the hooks', ->
@@ -100,7 +103,7 @@ withBundledProject 'foo', ->
 
             ended = true
 
-        waitsFor progress(-> ended), 'cake bumb timed out', 5000
+        waitsFor progress(-> ended), 'cake bumb timed out', 20000
 
 
     describe 'and running cake bump:minor', ->
@@ -115,7 +118,7 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake bumb:minor timed out', 5000
+        waitsFor progress(-> ended), 'cake bumb:minor timed out', 20000
 
     describe 'and running cake bump:major', ->
       it 'should trigger the hooks', ->
@@ -129,7 +132,7 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake bumb:major timed out', 5000
+        waitsFor progress(-> ended), 'cake bumb:major timed out', 20000
 
     describe 'and running cake compile', ->
       it 'should trigger the hooks', ->
@@ -143,11 +146,11 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake compile timed out', 5000
+        waitsFor progress(-> ended), 'cake compile timed out', 20000
 
     describe 'and running cake version', ->
       it 'should trigger the hooks', ->
-        ended = true
+        ended = false
         runs ->
           run 'cake', ['version'], (status) ->
             expect(status).toBe(0)
@@ -157,6 +160,6 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake version timed out', 5000
+        waitsFor progress(-> ended), 'cake version timed out', 20000
 
 

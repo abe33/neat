@@ -157,7 +157,7 @@ describe 'Signal', ->
   describe 'with an asynchronous listener', ->
 
     it 'should wait until the callback was called
-        before doing to the next listener'.squeeze(), ->
+        before going to the next listener'.squeeze(), ->
 
       listener1Called = false
       listener1Args = null

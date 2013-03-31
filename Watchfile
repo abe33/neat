@@ -1,0 +1,28 @@
+group 'neat', ->
+  watcher 'compile', ->
+    watch 'src/(.*)\\.coffee'
+
+  watcher 'package_json', ->
+    watch '\\.neat'
+
+  watcher 'nemfile', ->
+    watch 'Nemfile'
+
+  watcher 'jasmine', ->
+    watch 'test/units/(.*)\\.spec\\.coffee'
+    watch 'test/functionals/(.*)\\.spec\\.coffee'
+    watch 'test/integrations/(.*)\\.spec\\.coffee'
+
+    watch 'test/(.*)_helper\.coffee', -> 'test'
+
+    watch 'src/(.*)\.coffee', (f, m, g) ->
+      [
+        "test/units/#{g}.spec.coffee"
+        "test/functionals/#{g}.spec.coffee"
+        "test/integrations/#{g}.spec.coffee"
+      ]
+
+  watcher 'lint', ->
+    watch 'src/.*\\.coffee$'
+    watch 'test/.*\\.coffee$'
+
