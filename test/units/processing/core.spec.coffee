@@ -19,32 +19,34 @@ describe 'core processing promise', ->
         expect(-> core.readFiles()).toThrow()
 
     describe 'when called with paths that exists', ->
-      beforeEach ->
-        @readFiles = core.readFiles [
+      given 'expectedResult', ->
+        {}.tap (o) ->
+          coffeePath = fixture 'processing/file.coffee'
+          jsPath = fixture 'processing/file.js'
+          o[coffeePath] = "# this is file.coffee\n"
+          o[jsPath] = "// this is file.js\n"
+
+      subject 'promise', ->
+        core.readFiles [
           fixture 'processing/file.coffee'
           fixture 'processing/file.js'
         ]
-        @expectedResult = {}
-        coffeePath = fixture 'processing/file.coffee'
-        jsPath = fixture 'processing/file.js'
-        @expectedResult[coffeePath] = "# this is file.coffee\n"
-        @expectedResult[jsPath] = "// this is file.js\n"
 
       it 'should return a promise', ->
-        expect(@readFiles).toBePromise()
+        expect(@promise).toBePromise()
 
-      promise(-> @readFiles)
+      promise()
       .should.beFulfilled()
       .should.returns 'a hash with the paths content', -> @expectedResult
 
     describe 'when called with paths that does not exists', ->
-      beforeEach ->
-        @readFiles = core.readFiles [
+      subject 'promise', ->
+        core.readFiles [
           fixture 'processing/foo.coffee'
           fixture 'processing/bar.js'
         ]
 
-      promise(-> @readFiles).should.beRejected()
+      promise().should.beRejected()
 
   describe 'writeFiles', ->
     it 'should exists', ->
@@ -57,18 +59,19 @@ describe 'core processing promise', ->
         expect(-> core.writeFiles null).toThrow()
 
     describe 'when called with a files buffer', ->
-      beforeEach ->
-        @files = {}
-        @files[tmp 'processing/foo.coffee'] = 'foo.coffee'
-        @files[tmp 'processing/foo.js'] = 'foo.js'
-        @writeFiles = core.writeFiles @files
+      given 'files', ->
+        {}.tap (o) ->
+          o[tmp 'processing/foo.coffee'] = 'foo.coffee'
+          o[tmp 'processing/foo.js'] = 'foo.js'
+
+      subject 'promise', -> core.writeFiles @files
 
       afterEach -> clearTmp 'processing'
 
       it 'should return a promise', ->
-        expect(@writeFiles).toBePromise()
+        expect(@promise).toBePromise()
 
-      promise(-> @writeFiles)
+      promise()
       .should.beFulfilled()
       .should 'have written the files on the file system', ->
         expect(tmp 'processing/foo.coffee').toContain('foo.coffee')
