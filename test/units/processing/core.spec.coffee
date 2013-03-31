@@ -173,7 +173,40 @@ describe 'core processing promise', ->
       it 'should raise an exception', ->
         expect(-> core.relocate 'foo').toThrow()
 
+    describe 'when called with both arguments', ->
+      subject 'promiseGenerator', -> core.relocate '/foo', '/bar'
 
+      it 'should return a promise returning function', ->
+        expect(typeof @promiseGenerator).toBe('function')
+
+      describe 'the returned function called without a valid file buffer', ->
+        it 'should raise an exception', ->
+          expect(=> @promiseGenerator 5).toThrow()
+          expect(=> @promiseGenerator 'foo').toThrow()
+          expect(=> @promiseGenerator null).toThrow()
+
+
+      describe 'the returned function called with a buffer', ->
+        given 'expectedResult', ->
+          {
+            '/bar/file.coffee': 'foo'
+            '/bar/file.js': 'bar'
+            '/baz/file.js': 'baz'
+          }
+
+        subject 'promise', ->
+          @promiseGenerator {
+            '/foo/file.coffee': 'foo'
+            '/foo/file.js': 'bar'
+            '/baz/file.js': 'baz'
+          }
+
+        it 'should return a promise', ->
+          expect(@promise).toBePromise()
+
+        promise()
+        .should.beFulfilled()
+        .should.returns 'a hash with the path changed', -> @expectedResult
 
 
 

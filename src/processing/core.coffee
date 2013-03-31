@@ -79,6 +79,16 @@ relocate = (from, to) ->
   check from, 'From argument is mandatory'
   check to, 'To argument is mandatory'
 
+  (buffer) ->
+    checkBuffer buffer
+
+    Q.fcall ->
+      newBuffer = {}
+      for path, content of buffer
+        newPath = path.replace(from, to)
+        newBuffer[newPath] = content
+      newBuffer
+
 
 
 module.exports = {readFiles, writeFiles, processExtension, join, relocate}
