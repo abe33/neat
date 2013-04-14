@@ -1,13 +1,13 @@
 Q = require 'q'
 Neat = require '../neat'
-WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
+CLIWatchPlugin = Neat.require 'tasks/watch/cli_watch_plugin'
 commands = Neat.require 'utils/commands'
 {
   puts, magenta, yellow, info,
   error, red, green, inverse
 } = Neat.require 'utils/logs'
 
-class Jasmine extends WatchPlugin
+class Jasmine extends CLIWatchPlugin
   pathChanged: (path, action) -> =>
     @outputPathsFor(path).then (paths) => @runJasmine path, paths.flatten()
 
@@ -27,11 +27,5 @@ class Jasmine extends WatchPlugin
       puts yellow "#{inverse ' NO SPEC '} No specs can be found for #{path}"
       @deferred.resolve 0
     @deferred.promise
-
-  kill: (signal) ->
-    @process.kill signal
-    @deferred.resolve 1
-
-  isPending: -> @deferred? and @deferred.promise.isPending()
 
 module.exports.jasmine = Jasmine

@@ -1,10 +1,10 @@
 Q = require 'q'
 Neat = require '../neat'
-WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
+CLIWatchPlugin = Neat.require 'tasks/watch/cli_watch_plugin'
 commands = Neat.require 'utils/commands'
 {puts, info, error, red, green} = Neat.require 'utils/logs'
 
-class Lint extends WatchPlugin
+class Lint extends CLIWatchPlugin
   init: (watcher) ->
     @runCakeLint() if @options.runAllOnStart
 
@@ -27,11 +27,5 @@ class Lint extends WatchPlugin
         error red 'failure'
       @deferred.resolve status
     @deferred.promise
-
-  kill: (signal) ->
-    @process.kill signal
-    @deferred.resolve 1
-
-  isPending: -> @deferred? and @deferred.promise.isPending()
 
 module.exports.lint = Lint
