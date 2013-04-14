@@ -206,6 +206,7 @@ run = (command, params, options, callback) ->
     exe.stderr.on 'data',  options?.stderr || (data) -> print data.toString()
 
   exe.on 'exit', (status) -> callback? status
+  exe
 
 ##### usages
 

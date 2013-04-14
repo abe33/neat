@@ -11,6 +11,11 @@ class WatchPlugin
   #### Promise Returning Methods
   init: (watcher) -> null
   dispose: -> null
-  pathChanged: (path) -> null
+  # You can return a function instead of a promise to chain with
+  # the previous promise in the queue.
+  pathChanged: (path) -> => null
+
+  #### Other Abstract Methods
+  kill: ->
 
 module.exports = WatchPlugin

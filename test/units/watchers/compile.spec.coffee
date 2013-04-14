@@ -8,4 +8,6 @@ describe 'Compile', ->
     expect(@subject).toBeDefined()
 
   describe 'when a file watched by the plugin changed', ->
-    cliRunningPlugin(Compile).should.run('cake', 'compile')
+    cliRunningPlugin(Compile)
+    .should.run('cake', 'compile')
+    .should.storeProcessAndKillIt()

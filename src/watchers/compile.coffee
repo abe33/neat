@@ -5,8 +5,13 @@ commands = Neat.require 'utils/commands'
 
 class Compile extends WatchPlugin
   pathChanged: (path, action) -> =>
-    defer = Q.defer()
-    commands.run 'cake', ['compile'], (status) -> defer.resolve status
-    defer.promise
+    @deferred = Q.defer()
+    @process = commands.run 'cake', ['compile'], (status) =>
+      @deferred.resolve status
+    @deferred.promise
+
+  kill: (signal) ->
+    @process.kill signal
+    @deferred.resolve 1
 
 module.exports.compile = Compile

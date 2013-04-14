@@ -12,20 +12,24 @@ class Lint extends WatchPlugin
     @outputPathsFor(path).then (paths) => @runLint paths.flatten()
 
   runCakeLint: (paths) ->
-    defer = Q.defer()
-    commands.run 'cake', ['lint'], (status) ->
-      defer.resolve status
-    defer.promise
+    @deferred = Q.defer()
+    @process = commands.run 'cake', ['lint'], (status) =>
+      @deferred.resolve status
+    @deferred.promise
 
   runLint: (paths) ->
-    defer = Q.defer()
+    @deferred = Q.defer()
     coffeelint = Neat.resolve 'node_modules/.bin/coffeelint'
-    commands.run coffeelint, paths, (status) ->
+    @process = commands.run coffeelint, paths, (status) =>
       if status is 0
         info green 'success'
       else
         error red 'failure'
-      defer.resolve status
-    defer.promise
+      @deferred.resolve status
+    @deferred.promise
+
+  kill: (signal) ->
+    @process.kill signal
+    @deferred.resolve 1
 
 module.exports.lint = Lint

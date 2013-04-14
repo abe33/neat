@@ -32,12 +32,14 @@ class Watcher
       puts yellow "#{data.watchedPaths.length} files watched"
     .then(@initializePlugins)
     .then ->
-      data
+      return data
     .fail (err) ->
       error red err.message
       puts err.stack.join '\n'
 
     @promise ||= promise
+
+    # process.on 'SIGINT', => @activePlugin.kill('SIGINT')
 
     promise
 
@@ -75,10 +77,11 @@ class Watcher
       when Neat.resolve('Watchfile'), Neat.resolve('.watchignore')
         promise = promise.then(@dispose).then(@init)
       else
-        @plugins.each (name, plugin) ->
+        @plugins.each (name, plugin) =>
           if plugin.match path
             p = plugin.pathChanged path, action
-            promise = promise.then ->
+            promise = promise.then =>
+              @activePlugin = plugin
               puts cyan "#{inverse " #{name.toUpperCase()} "} #{path}"
             promise = promise.then p
 

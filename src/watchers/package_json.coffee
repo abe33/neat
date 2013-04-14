@@ -5,9 +5,13 @@ commands = Neat.require 'utils/commands'
 
 class PackageJson extends WatchPlugin
   pathChanged: (path, action) -> =>
-    defer = Q.defer()
-    commands.run 'neat', ['generate', 'package.json'], (status) ->
-      defer.resolve status
-    defer.promise
+    @deferred = Q.defer()
+    @process = commands.run 'neat', ['generate', 'package.json'], (status) =>
+      @deferred.resolve status
+    @deferred.promise
+
+  kill: (signal) ->
+    @process.kill signal
+    @deferred.resolve 1
 
 module.exports.package_json = PackageJson

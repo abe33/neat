@@ -12,20 +12,24 @@ class Jasmine extends WatchPlugin
     @outputPathsFor(path).then (paths) => @runJasmine path, paths.flatten()
 
   runJasmine: (path, paths) ->
-    defer = Q.defer()
+    @deferred = Q.defer()
 
     if paths.length > 0
       puts yellow "run jasmine-node --coffee #{paths.join ' '}"
       jasmine = Neat.resolve 'node_modules/.bin/jasmine-node'
-      commands.run jasmine, ['--coffee'].concat(paths), (status) ->
+      @process = commands.run jasmine, ['--coffee'].concat(paths), (status) =>
         if status is 0
           info green 'success'
         else
           error red 'failure'
-        defer.resolve status
+        @deferred.resolve status
     else
       puts yellow "#{inverse ' NO SPEC '} No specs can be found for #{path}"
-      defer.resolve 0
-    defer.promise
+      @deferred.resolve 0
+    @deferred.promise
+
+  kill: (signal) ->
+    @process.kill signal
+    @deferred.resolve 1
 
 module.exports.jasmine = Jasmine

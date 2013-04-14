@@ -6,9 +6,14 @@ commands = Neat.require 'utils/commands'
 
 class Nemfile extends WatchPlugin
   pathChanged: (path, action) -> =>
-    defer = Q.defer()
-    commands.run 'neat', ['install'], (status) ->
-      defer.resolve status
-    defer.promise
+    @deferred = Q.defer()
+    @process = commands.run 'neat', ['install'], (status) =>
+      @deferred.resolve status
+    @deferred.promise
+
+  kill: (signal) ->
+    @process.kill signal
+    @deferred.resolve 1
+
 
 module.exports.nemfile = Nemfile

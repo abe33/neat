@@ -5,6 +5,11 @@ WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
 Watch = Neat.require 'tasks/watch/watch'
 commands = Neat.require 'utils/commands'
 
+class MockPlugin extends WatchPlugin
+  pathChanged: (path) -> => Q.fcall ->
+
+global.MockPlugin = MockPlugin
+
 global.addWatchesMatcher = (scope) ->
   scope.addMatchers
     isWatch: ->
@@ -49,12 +54,27 @@ global.withWatchSpies = (block) ->
               node_modules
             '''
       spyOn(Neat, 'require').andCallFake (path) ->
-        mockPlugin: class MockPlugin extends WatchPlugin
-          pathChanged: (path) -> Q.fcall ->
+        mockPlugin: MockPlugin
 
     block.call this
 
 global.cliRunningPlugin = (klass) ->
+  setupTest = (klass, changedPath, block) ->
+    describe "plugin", ->
+      given 'changedPath', -> Neat.resolve changedPath
+
+      beforeEach ->
+        @plugin.watch new Watch /src\/.*\.coffee$/
+
+        spyOn(commands, 'run').andCallFake (c, a, options, callback) =>
+          if typeof options is 'function'
+            [options, callback] = [callback, options]
+          setTimeout callback, 1000, 0
+          kill: (signal) => @signal = signal
+
+      block.call this
+
+
   changedPath = 'src/neat.coffee'
   should =
     withChangedPath: (path) ->
@@ -62,17 +82,7 @@ global.cliRunningPlugin = (klass) ->
       this
     should:
       run: (command, cargs...) ->
-        describe '', ->
-          given 'changedPath', -> Neat.resolve changedPath
-
-          beforeEach ->
-            @plugin.watch new Watch /src\/.*\.coffee$/
-
-            spyOn(commands, 'run').andCallFake (c, a, options, callback) ->
-              if typeof options is 'function'
-                [options, callback] = [callback, options]
-              callback 0
-
+        setupTest klass, changedPath, ->
           subject 'promise', ->
             promise = @plugin.pathChanged(@changedPath, 'change')
             promise = promise() if typeof promise is 'function'
@@ -82,12 +92,55 @@ global.cliRunningPlugin = (klass) ->
 
           promise().should.beFulfilled()
 
-          it "should have ran #{command} #{cargs.join ' '}", ->
+          it "should run #{command} #{cargs.join ' '}", ->
             expect(commands.run).toHaveBeenCalled()
             expect(commands.run.argsForCall[0]).toContain(command)
             expect(commands.run.argsForCall[0]).toContain(cargs)
 
-        this
+        should
+
+      storeProcessAndKillIt: ->
+        setupTest klass, changedPath, ->
+          describe 'when the plugin was triggered by a change', ->
+            subject 'promise', ->
+              promise = @plugin.pathChanged(@changedPath, 'change')
+              promise = promise() if typeof promise is 'function'
+              promise
+
+            it 'should have stored the child process object', ->
+              ended = false
+              runs ->
+                @promise.then ->
+                  ended = true
+                  expect(@plugin.process).toBeDefined()
+
+              waitsFor progress(-> ended), 'Timed out during promise', 2000
+
+            it 'should have stored the deferred promise object', ->
+              ended = false
+              runs ->
+                @promise.then ->
+                  ended = true
+                  expect(@plugin.deferred).toBeDefined()
+
+              waitsFor progress(-> ended), 'Timed out during promise', 2000
+
+            describe '::kill method', ->
+              it 'should kill the child process', ->
+                ended = false
+                runs ->
+                  waits this, 1000, (=> @plugin.process?), =>
+                    @plugin.kill('SIGINT')
+
+                  @promise.then (res) =>
+                    ended = true
+                    expect(@signal).toBe('SIGINT')
+                    expect(res).toBe(1)
+
+
+                waitsFor progress(-> ended), 'Timed out during promise', 2000
+
+        should
 
   should
 
