@@ -15,3 +15,4 @@ describe 'Jasmine', ->
               '--coffee',
               Neat.resolve('src/core/types/object.coffee'))
   .should.storeProcessAndKillIt()
+  .should.bePendingUntilEnd()

@@ -11,3 +11,4 @@ describe 'Compile', ->
     cliRunningPlugin(Compile)
     .should.run('cake', 'compile')
     .should.storeProcessAndKillIt()
+    .should.bePendingUntilEnd()

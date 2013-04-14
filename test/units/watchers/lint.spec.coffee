@@ -13,4 +13,5 @@ describe 'Lint', ->
     .should.run(Neat.resolve('node_modules/.bin/coffeelint'),
                 Neat.resolve('src/neat.coffee'))
     .should.storeProcessAndKillIt()
+    .should.bePendingUntilEnd()
 

@@ -32,4 +32,6 @@ class Lint extends WatchPlugin
     @process.kill signal
     @deferred.resolve 1
 
+  isPending: -> @deferred? and @deferred.promise.isPending()
+
 module.exports.lint = Lint

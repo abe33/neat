@@ -39,7 +39,12 @@ class Watcher
 
     @promise ||= promise
 
-    # process.on 'SIGINT', => @activePlugin.kill('SIGINT')
+    process.on 'SIGINT', =>
+      if @activePlugin.isPending()
+        puts yellow "\n#{@activePlugin} interrupted"
+        @activePlugin?.kill('SIGINT')
+      else
+        process.exit(1)
 
     promise
 

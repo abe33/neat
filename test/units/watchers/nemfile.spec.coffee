@@ -12,3 +12,4 @@ describe 'Nemfile', ->
     cliRunningPlugin(Nemfile)
     .should.run('neat', 'install')
     .should.storeProcessAndKillIt()
+    .should.bePendingUntilEnd()

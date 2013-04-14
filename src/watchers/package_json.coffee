@@ -14,4 +14,6 @@ class PackageJson extends WatchPlugin
     @process.kill signal
     @deferred.resolve 1
 
+  isPending: -> @deferred? and @deferred.promise.isPending()
+
 module.exports.package_json = PackageJson

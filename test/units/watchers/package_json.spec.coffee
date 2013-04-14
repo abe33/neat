@@ -12,3 +12,4 @@ describe 'PackageJson', ->
     cliRunningPlugin(PackageJson)
     .should.run('neat', 'generate', 'package.json')
     .should.storeProcessAndKillIt()
+    .should.bePendingUntilEnd()

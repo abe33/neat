@@ -99,6 +99,28 @@ global.cliRunningPlugin = (klass) ->
 
         should
 
+      bePendingUntilEnd: ->
+        setupTest klass, changedPath, ->
+          subject 'promise', ->
+            promise = @plugin.pathChanged(@changedPath, 'change')
+            promise = promise() if typeof promise is 'function'
+            promise
+
+          it 'should be pending until the command end', ->
+            ended = false
+            runs ->
+              waits this, 1000, (=> @plugin.process?), =>
+                expect(@plugin.isPending()).toBeTruthy()
+
+              @promise.then (res) =>
+                ended = true
+                expect(@plugin.isPending()).toBeFalsy()
+
+
+            waitsFor progress(-> ended), 'Timed out during promise', 2000
+
+        should
+
       storeProcessAndKillIt: ->
         setupTest klass, changedPath, ->
           describe 'when the plugin was triggered by a change', ->
