@@ -9,6 +9,8 @@ Watcher = require '../../../../lib/tasks/watch/watcher'
 
 describe 'Watcher', ->
   withWatchSpies ->
+    afterEach -> @watcher.dispose()
+
     subject 'watcher', -> new Watcher
 
     it 'should exist', ->

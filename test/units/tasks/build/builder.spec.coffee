@@ -30,8 +30,8 @@ describe 'Builder', ->
 
           it 'should contains the specified sources', ->
             expect(@build.sources).toEqual([
-              'test/fixtures/tasks/build/*.coffee'
-              'test/fixtures/tasks/build/some_file_2.coffee'
+              Neat.rootResolve('test/fixtures/tasks/build/*.coffee')
+              Neat.rootResolve('test/fixtures/tasks/build/some_file_2.coffee')
             ])
 
           it 'should contains the specified promises', ->

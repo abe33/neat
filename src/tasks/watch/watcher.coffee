@@ -50,14 +50,16 @@ class Watcher
 
     @promise ||= promise
 
-    process.on 'SIGINT', =>
-      if @activePlugin?.isPending()
-        puts yellow "\n#{@activePlugin} interrupted"
-        @activePlugin.kill('SIGINT')
-      else
-        process.exit(1)
+    process.on 'SIGINT', @handleSigint
 
     promise
+
+  handleSigint: =>
+    if @activePlugin?.isPending()
+      puts yellow "\n#{@activePlugin} interrupted"
+      @activePlugin.kill('SIGINT')
+    else
+      process.exit(1)
 
   dispose: =>
     promise = Q.fcall =>
@@ -66,6 +68,7 @@ class Watcher
       @ignoreList = null
       @watchedPaths = null
       @ignoredPaths = null
+      process.removeListener 'SIGINT', @handleSigint
     promise = promise.then(-> plugin.dispose()) for k,plugin of @plugins
     promise.then => @plugins = null
 
