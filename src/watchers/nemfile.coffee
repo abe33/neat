@@ -9,6 +9,19 @@ class Nemfile extends CLIWatchPlugin
     @deferred = Q.defer()
     @process = commands.run 'neat', ['install'], (status) =>
       @deferred.resolve status
+      if status is 0
+        @watcher?.notifier.notify {
+          success: true
+          title: 'npm'
+          message: "Bundle complete"
+        }
+      else
+        @watcher?.notifier.notify {
+          success: false
+          title: 'npm'
+          message: "Bundle failed"
+        }
+
     @deferred.promise
 
 module.exports.nemfile = Nemfile

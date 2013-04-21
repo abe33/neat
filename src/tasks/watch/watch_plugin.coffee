@@ -1,7 +1,7 @@
 Q = require 'q'
 
 class WatchPlugin
-  constructor: (@options) -> @watches = []
+  constructor: (@options, @watcher) -> @watches = []
   watch: (watch) -> @watches.push watch
   match: (path) -> @watches.some (w) -> w.match path
   watchesForPath: (path) -> @watches.select (w) -> w.match path

@@ -54,6 +54,7 @@ describe 'Watcher', ->
 
       it 'should have evaluated the Watchfile and initialized the plugins', ->
         expect(@watcher.plugins.mockPlugin).toBeDefined()
+        expect(@watcher.plugins.mockPlugin.watcher).toBe(@watcher)
 
       describe 'once called,', ->
         given 'plugin', -> @watcher.plugins.mockPlugin

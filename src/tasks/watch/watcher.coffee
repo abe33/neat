@@ -1,8 +1,10 @@
 fs = require 'fs'
+os = require 'os'
 path = require 'path'
 Q = require 'q'
 Neat = require '../../neat'
 Watch = require './watch'
+n = Neat.require 'notifications'
 {parallel} = Neat.require 'async'
 {compile} = require 'coffee-script'
 {
@@ -14,6 +16,15 @@ Watch = require './watch'
 existsSync = fs.existsSync or path.existsSync
 
 class Watcher
+  constructor: ->
+    switch os.platform()
+      when 'darwin'
+        @notifier = new n.Notifier new n.plugins.Growly
+      when 'linux'
+        @notifier = new n.Notifier new n.plugins.NotifySend
+
+    @notifier.notify success: true, title: 'Watchfile', message: 'loaded'
+
   init: =>
     data = {}
     @watches = {}
@@ -185,7 +196,7 @@ class Watcher
       [options, block] = [block, options] if typeof options is 'function'
       options ||= {}
       if name of plugins
-        @plugins[name] ?= new plugins[name] options
+        @plugins[name] ?= new plugins[name] options, this
         currentWatcher = name
         block.call()
       else

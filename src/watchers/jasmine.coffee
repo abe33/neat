@@ -19,9 +19,20 @@ class Jasmine extends CLIWatchPlugin
       jasmine = Neat.resolve 'node_modules/.bin/jasmine-node'
       @process = commands.run jasmine, ['--coffee'].concat(paths), (status) =>
         if status is 0
+          @watcher?.notifier.notify {
+            success: true
+            title: 'Jasmine'
+            message: "All specs passed"
+          }
           info green 'success'
         else
+          @watcher?.notifier.notify {
+            success: false
+            title: 'Jasmine'
+            message: "Some specs failed"
+          }
           error red 'failure'
+
         @deferred.resolve status
     else
       puts yellow "#{inverse ' NO SPEC '} No specs can be found for #{path}"
