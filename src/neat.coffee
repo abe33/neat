@@ -109,6 +109,10 @@ class Neat
 
   resolve: (path) -> resolve @neatRoot, path
 
+  ##### Neat::rootResolve
+
+  rootResolve: (path) -> resolve @root, path
+
   ##### Neat::task
 
   # Returns the cake task whose name is `name`.

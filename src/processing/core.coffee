@@ -84,11 +84,30 @@ relocate = (from, to) ->
 
     Q.fcall ->
       newBuffer = {}
-      for path, content of buffer
-        newPath = path.replace(from, to)
+      for p, content of buffer
+        newPath = p.replace(from, to)
         newBuffer[newPath] = content
       newBuffer
 
+remove = (path) ->
+  check path, 'Path argument is mandatory'
+
+  (buffer) ->
+    checkBuffer buffer
+
+    defer = Q.defer()
+    utils.rm Neat.rootResolve(path), (err) ->
+      return defer.reject err if err?
+      defer.resolve buffer
+
+    defer.promise
 
 
-module.exports = {readFiles, writeFiles, processExtension, join, relocate}
+module.exports = {
+  readFiles
+  writeFiles
+  processExtension
+  join
+  relocate
+  remove
+}

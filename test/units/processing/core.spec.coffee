@@ -208,6 +208,59 @@ describe 'core processing promise', ->
         .should.beFulfilled()
         .should.returns 'a hash with the path changed', -> @expectedResult
 
+describe 'remove', ->
+  beforeEach ->
+    spyOn(fs, 'unlink').andCallFake (path, cb) -> cb?()
+    spyOn(fs, 'rmdir').andCallFake (path, cb) -> cb?()
+
+  it 'should exists', ->
+    expect(core.remove).toBeDefined()
+
+  describe 'when called without the path argument', ->
+    it 'should raise an exception', ->
+      expect(-> core.remove()).toThrow()
+
+  describe 'when called with path argument', ->
+    subject 'promiseGenerator', -> core.remove '/foo'
+    given 'buffer', ->
+      {
+        '/foo/file.coffee': 'foo'
+        '/foo/file.js': 'bar'
+        '/baz/file.js': 'baz'
+      }
+
+    it 'should return a promise returning function', ->
+      expect(typeof @promiseGenerator).toBe('function')
+
+    describe 'the returned function called without a valid file buffer', ->
+      it 'should raise an exception', ->
+        expect(=> @promiseGenerator 5).toThrow()
+        expect(=> @promiseGenerator 'foo').toThrow()
+        expect(=> @promiseGenerator null).toThrow()
+
+    describe 'for a directory', ->
+      given 'promiseGenerator', ->
+        core.remove 'test/fixtures/processing'
+
+      subject 'promise', -> @promiseGenerator @buffer
+
+      promise()
+      .should.beFulfilled()
+      .should 'have called fs.', ->
+        expect(fs.rmdir).toHaveBeenCalled()
+
+    describe 'for a file', ->
+      given 'promiseGenerator', ->
+        core.remove 'test/fixtures/processing/file.coffee'
+
+      subject 'promise', -> @promiseGenerator @buffer
+
+      promise()
+      .should.beFulfilled()
+      .should 'have called fs.unlink', ->
+        expect(fs.unlink).toHaveBeenCalled()
+
+
 
 
 

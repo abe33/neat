@@ -667,11 +667,9 @@ rm = (path, callback) ->
           fs.readdir path, (err, paths) ->
             return callback? err if err?
             parallel (rmIteration "#{path}/#{p}" for p in paths), ->
-              fs.rmdir path, (err) ->
-                callback? err
+              fs.rmdir path, (err) -> callback? err
         else
-          fs.unlink path, (err) ->
-            callback? err
+          fs.unlink path, (err) -> callback? err
     else
       callback?()
 
