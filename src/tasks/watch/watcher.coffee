@@ -1,8 +1,10 @@
 fs = require 'fs'
+os = require 'os'
 path = require 'path'
 Q = require 'q'
 Neat = require '../../neat'
 Watch = require './watch'
+n = Neat.require 'notifications'
 {parallel} = Neat.require 'async'
 {compile} = require 'coffee-script'
 {
@@ -14,6 +16,15 @@ Watch = require './watch'
 existsSync = fs.existsSync or path.existsSync
 
 class Watcher
+  constructor: ->
+    switch os.platform()
+      when 'darwin'
+        @notifier = new n.Notifier new n.plugins.Growly
+      when 'linux'
+        @notifier = new n.Notifier new n.plugins.NotifySend
+
+    @notifier.notify success: true, title: 'Watchfile', message: 'loaded'
+
   init: =>
     data = {}
     @watches = {}
@@ -32,12 +43,19 @@ class Watcher
       puts yellow "#{data.watchedPaths.length} files watched"
     .then(@initializePlugins)
     .then ->
-      data
+      return data
     .fail (err) ->
       error red err.message
       puts err.stack.join '\n'
 
     @promise ||= promise
+
+    process.on 'SIGINT', =>
+      if @activePlugin?.isPending()
+        puts yellow "\n#{@activePlugin} interrupted"
+        @activePlugin.kill('SIGINT')
+      else
+        process.exit(1)
 
     promise
 
@@ -75,10 +93,11 @@ class Watcher
       when Neat.resolve('Watchfile'), Neat.resolve('.watchignore')
         promise = promise.then(@dispose).then(@init)
       else
-        @plugins.each (name, plugin) ->
+        @plugins.each (name, plugin) =>
           if plugin.match path
             p = plugin.pathChanged path, action
-            promise = promise.then ->
+            promise = promise.then =>
+              @activePlugin = plugin
               puts cyan "#{inverse " #{name.toUpperCase()} "} #{path}"
             promise = promise.then p
 
@@ -177,7 +196,7 @@ class Watcher
       [options, block] = [block, options] if typeof options is 'function'
       options ||= {}
       if name of plugins
-        @plugins[name] ?= new plugins[name] options
+        @plugins[name] ?= new plugins[name] options, this
         currentWatcher = name
         block.call()
       else

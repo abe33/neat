@@ -11,3 +11,5 @@ describe 'Nemfile', ->
   describe 'when a file watched by the plugin changed', ->
     cliRunningPlugin(Nemfile)
     .should.run('neat', 'install')
+    .should.storeProcessAndKillIt()
+    .should.bePendingUntilEnd()

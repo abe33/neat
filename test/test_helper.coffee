@@ -47,6 +47,14 @@ global.waiting = (block) ->
     runs -> block.call(this).then -> ended = true
     waitsFor progress(-> ended), 'Timed out during promise', 2000
 
+global.waits = (scope, timeout, blockWait, block) ->
+  start = new Date()
+  f = ->
+    return scope.fail(new Error 'Timed out') if new Date() - start > timeout
+
+    if blockWait() then block() else setTimeout f, 0
+  f()
+
 cursor = 0
 global.progress = (f) ->
   oldRes = false

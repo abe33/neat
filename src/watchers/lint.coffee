@@ -1,10 +1,10 @@
 Q = require 'q'
 Neat = require '../neat'
-WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
+CLIWatchPlugin = Neat.require 'tasks/watch/cli_watch_plugin'
 commands = Neat.require 'utils/commands'
 {puts, info, error, red, green} = Neat.require 'utils/logs'
 
-class Lint extends WatchPlugin
+class Lint extends CLIWatchPlugin
   init: (watcher) ->
     @runCakeLint() if @options.runAllOnStart
 
@@ -12,20 +12,45 @@ class Lint extends WatchPlugin
     @outputPathsFor(path).then (paths) => @runLint paths.flatten()
 
   runCakeLint: (paths) ->
-    defer = Q.defer()
-    commands.run 'cake', ['lint'], (status) ->
-      defer.resolve status
-    defer.promise
+    @deferred = Q.defer()
+    @process = commands.run 'cake', ['lint'], (status) =>
+      @deferred.resolve status
+      if status is 1
+        @watcher?.notifier.notify {
+          success: false
+          title: 'Lint'
+          message: "Lint failed"
+        }
+      else
+        @watcher?.notifier.notify {
+          success: true
+          title: 'Lint'
+          message: "Lint successful"
+        }
+
+    @deferred.promise
 
   runLint: (paths) ->
-    defer = Q.defer()
+    @deferred = Q.defer()
     coffeelint = Neat.resolve 'node_modules/.bin/coffeelint'
-    commands.run coffeelint, paths, (status) ->
+    @process = commands.run coffeelint, paths, (status) =>
       if status is 0
+        @watcher?.notifier.notify {
+          success: true
+          title: 'Lint'
+          message: "Lint successful"
+        }
         info green 'success'
       else
+        @watcher?.notifier.notify {
+          success: false
+          title: 'Lint'
+          message: "Lint failed"
+        }
         error red 'failure'
-      defer.resolve status
-    defer.promise
+
+      @deferred.resolve status
+
+    @deferred.promise
 
 module.exports.lint = Lint

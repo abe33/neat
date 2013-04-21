@@ -1,12 +1,13 @@
 Q = require 'q'
 Neat = require '../neat'
-WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
+CLIWatchPlugin = Neat.require 'tasks/watch/cli_watch_plugin'
 commands = Neat.require 'utils/commands'
 
-class Compile extends WatchPlugin
+class Compile extends CLIWatchPlugin
   pathChanged: (path, action) -> =>
-    defer = Q.defer()
-    commands.run 'cake', ['compile'], (status) -> defer.resolve status
-    defer.promise
+    @deferred = Q.defer()
+    @process = commands.run 'cake', ['compile'], (status) =>
+      @deferred.resolve status
+    @deferred.promise
 
 module.exports.compile = Compile

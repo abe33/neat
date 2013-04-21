@@ -35,7 +35,8 @@
     "stylus": "0.30.1",
     "marked": "*",
     "q": "*",
-    "growly": "*"
+    "growly": "*",
+    "notify-send": "*"
   },
   "devDependencies": {},
   "main": "./lib/index",

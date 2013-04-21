@@ -1,7 +1,8 @@
+require '../../../test_helper'
+
 fs = require 'fs'
 Q = require 'q'
 path = require 'path'
-require '../../../test_helper'
 Neat = require '../../../../lib/neat'
 
 Watcher = require '../../../../lib/tasks/watch/watcher'
@@ -53,6 +54,7 @@ describe 'Watcher', ->
 
       it 'should have evaluated the Watchfile and initialized the plugins', ->
         expect(@watcher.plugins.mockPlugin).toBeDefined()
+        expect(@watcher.plugins.mockPlugin.watcher).toBe(@watcher)
 
       describe 'once called,', ->
         given 'plugin', -> @watcher.plugins.mockPlugin
@@ -101,7 +103,7 @@ describe 'Watcher', ->
             it 'should have called the plugin pathChanged method', ->
               expect(@plugin.pathChanged).toHaveBeenCalled()
 
-            it 'should have stored the promise in the promiseS queue', ->
+            it 'should have stored the promise in the promises queue', ->
               expect(@watcher.promise).toBe(@promise)
 
 
