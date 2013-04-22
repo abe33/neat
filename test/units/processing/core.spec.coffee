@@ -8,7 +8,6 @@ core = require '../../../lib/processing/core'
 describe 'core processing promise', ->
   beforeEach ->
     addPromiseMatchers this
-    addFileMatchers this
 
   describe 'readFiles', ->
     it 'should exists', ->
@@ -208,57 +207,126 @@ describe 'core processing promise', ->
         .should.beFulfilled()
         .should.returns 'a hash with the path changed', -> @expectedResult
 
-describe 'remove', ->
-  beforeEach ->
-    spyOn(fs, 'unlink').andCallFake (path, cb) -> cb?()
-    spyOn(fs, 'rmdir').andCallFake (path, cb) -> cb?()
+  describe 'remove', ->
+    beforeEach ->
+      spyOn(fs, 'unlink').andCallFake (path, cb) -> cb?()
+      spyOn(fs, 'rmdir').andCallFake (path, cb) -> cb?()
 
-  it 'should exists', ->
-    expect(core.remove).toBeDefined()
+    it 'should exists', ->
+      expect(core.remove).toBeDefined()
 
-  describe 'when called without the path argument', ->
-    it 'should raise an exception', ->
-      expect(-> core.remove()).toThrow()
-
-  describe 'when called with path argument', ->
-    subject 'promiseGenerator', -> core.remove '/foo'
-    given 'buffer', ->
-      {
-        '/foo/file.coffee': 'foo'
-        '/foo/file.js': 'bar'
-        '/baz/file.js': 'baz'
-      }
-
-    it 'should return a promise returning function', ->
-      expect(typeof @promiseGenerator).toBe('function')
-
-    describe 'the returned function called without a valid file buffer', ->
+    describe 'when called without the path argument', ->
       it 'should raise an exception', ->
-        expect(=> @promiseGenerator 5).toThrow()
-        expect(=> @promiseGenerator 'foo').toThrow()
-        expect(=> @promiseGenerator null).toThrow()
+        expect(-> core.remove()).toThrow()
 
-    describe 'for a directory', ->
-      given 'promiseGenerator', ->
-        core.remove 'test/fixtures/processing'
+    describe 'when called with path argument', ->
+      subject 'promiseGenerator', -> core.remove '/foo'
+      given 'buffer', ->
+        {
+          '/foo/file.coffee': 'foo'
+          '/foo/file.js': 'bar'
+          '/baz/file.js': 'baz'
+        }
+
+      it 'should return a promise returning function', ->
+        expect(typeof @promiseGenerator).toBe('function')
+
+      describe 'the returned function called without a valid file buffer', ->
+        it 'should raise an exception', ->
+          expect(=> @promiseGenerator 5).toThrow()
+          expect(=> @promiseGenerator 'foo').toThrow()
+          expect(=> @promiseGenerator null).toThrow()
+
+      describe 'for a directory', ->
+        given 'promiseGenerator', ->
+          core.remove 'test/fixtures/processing'
+
+        subject 'promise', -> @promiseGenerator @buffer
+
+        promise()
+        .should.beFulfilled()
+        .should 'have called fs.', ->
+          expect(fs.rmdir).toHaveBeenCalled()
+
+      describe 'for a file', ->
+        given 'promiseGenerator', ->
+          core.remove 'test/fixtures/processing/file.coffee'
+
+        subject 'promise', -> @promiseGenerator @buffer
+
+        promise()
+        .should.beFulfilled()
+        .should 'have called fs.unlink', ->
+          expect(fs.unlink).toHaveBeenCalled()
+
+  describe 'fileHeader', ->
+    it 'should exists', ->
+      expect(core.fileHeader).toBeDefined()
+
+    describe 'when called without the header argument', ->
+      it 'should raise an exception', ->
+        expect(-> core.fileHeader()).toThrow()
+
+    describe 'when called with header argument', ->
+      subject 'promiseGenerator', -> core.fileHeader 'Header'
+      given 'buffer', ->
+        {
+          '/foo/file.coffee': 'foo'
+          '/foo/file.js': 'bar'
+          '/baz/file.js': 'baz'
+        }
+
+      it 'should return a promise returning function', ->
+        expect(typeof @promiseGenerator).toBe('function')
+
+      describe 'the returned function called without a valid file buffer', ->
+        it 'should raise an exception', ->
+          expect(=> @promiseGenerator 5).toThrow()
+          expect(=> @promiseGenerator 'foo').toThrow()
+          expect(=> @promiseGenerator null).toThrow()
 
       subject 'promise', -> @promiseGenerator @buffer
 
       promise()
       .should.beFulfilled()
-      .should 'have called fs.', ->
-        expect(fs.rmdir).toHaveBeenCalled()
+      .should 'returns a buffer decorated with the header', (buffer) ->
+        expect(buffer['/foo/file.coffee'])
+        .toContain('Header\nfoo')
 
-    describe 'for a file', ->
-      given 'promiseGenerator', ->
-        core.remove 'test/fixtures/processing/file.coffee'
+  describe 'fileFooter', ->
+    it 'should exists', ->
+      expect(core.fileFooter).toBeDefined()
+
+    describe 'when called without the header argument', ->
+      it 'should raise an exception', ->
+        expect(-> core.fileFooter()).toThrow()
+
+    describe 'when called with header argument', ->
+      subject 'promiseGenerator', -> core.fileFooter 'footer'
+      given 'buffer', ->
+        {
+          '/foo/file.coffee': 'foo'
+          '/foo/file.js': 'bar'
+          '/baz/file.js': 'baz'
+        }
+
+      it 'should return a promise returning function', ->
+        expect(typeof @promiseGenerator).toBe('function')
+
+      describe 'the returned function called without a valid file buffer', ->
+        it 'should raise an exception', ->
+          expect(=> @promiseGenerator 5).toThrow()
+          expect(=> @promiseGenerator 'foo').toThrow()
+          expect(=> @promiseGenerator null).toThrow()
 
       subject 'promise', -> @promiseGenerator @buffer
 
       promise()
       .should.beFulfilled()
-      .should 'have called fs.unlink', ->
-        expect(fs.unlink).toHaveBeenCalled()
+      .should 'returns a buffer decorated with the footer', (buffer) ->
+        expect(buffer['/foo/file.coffee'])
+        .toContain('foo\nfooter\n')
+
 
 
 

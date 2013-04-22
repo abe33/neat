@@ -89,6 +89,7 @@ relocate = (from, to) ->
         newBuffer[newPath] = content
       newBuffer
 
+##### remove
 remove = (path) ->
   check path, 'Path argument is mandatory'
 
@@ -102,12 +103,41 @@ remove = (path) ->
 
     defer.promise
 
+##### fileHeader
+fileHeader = (header) ->
+  check header, 'Header argument is mandatory'
+
+  (buffer) ->
+    checkBuffer buffer
+
+    Q.fcall ->
+      newBuffer = {}
+
+      newBuffer[path] = "#{header}\n#{content}" for path,content of buffer
+
+      newBuffer
+
+##### fileFooter
+fileFooter = (footer) ->
+  check footer, 'Footer argument is mandatory'
+
+  (buffer) ->
+    checkBuffer buffer
+
+    Q.fcall ->
+      newBuffer = {}
+
+      newBuffer[path] = "#{content}\n#{footer}\n" for path,content of buffer
+
+      newBuffer
 
 module.exports = {
   readFiles
   writeFiles
   processExtension
   join
+  fileHeader
+  fileFooter
   relocate
   remove
 }
