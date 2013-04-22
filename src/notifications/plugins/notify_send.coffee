@@ -13,8 +13,8 @@ class NotifySend extends NotificationPlugin
       icon = 'res/failure.png'
       label = 'failure'
 
-    Neat.resolve(icon)
 
-    notify_send.notify notification.title, callback
+    n = notify_send.icon Neat.resolve(icon)
+    n.notify notification.title, notification.message, callback
 
 module.exports = NotifySend
