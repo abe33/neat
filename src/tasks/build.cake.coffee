@@ -6,5 +6,10 @@ exports['build'] = neatTask
   name: 'build'
   description: 'Attempt to create a promise-based build task'
   environment: 'default'
-  action: (callback) -> new Builder().init().then callback
+  action: (callback) ->
+    new Builder().init()
+    .then ->
+      callback? 0
+    .fail ->
+      callback? 1
 

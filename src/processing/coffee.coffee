@@ -139,26 +139,26 @@ exportsToPackage = (pkg) ->
 compile = (options={}) -> (buffer) ->
   checkBuffer buffer
 
-  Q.fcall ->
-    newBuffer = {}
-    try
-      for path, content of buffer
-        newBuffer[path.replace '.coffee', '.js'] = coffee content, options
-    catch e
-      throw new Error "In file '#{path}': #{e.message}"
+  newBuffer = {}
+  try
+    for path, content of buffer
+      currentOptions = options.concat()
+      newBuffer[path.replace '.coffee', '.js'] = coffee content, currentOptions
+  catch e
+    throw new Error "In file '#{path}': #{e.message}"
 
-    newBuffer
+  newBuffer
 
 ##### stripRequires
 stripRequires = (buffer) ->
   checkBuffer buffer
-  Q.fcall ->
-    newBuffer = {}
-    for path, content of buffer
-      newBuffer[path] = content.split('\n')
-                            .reject((s) -> REQUIRE_RE().test s)
-                            .join('\n')
-    newBuffer
+
+  newBuffer = {}
+  for path, content of buffer
+    newBuffer[path] = content.split('\n')
+                          .reject((s) -> REQUIRE_RE().test s)
+                          .join('\n')
+  newBuffer
 
 
 module.exports = {compile, annotate, exportsToPackage, stripRequires}

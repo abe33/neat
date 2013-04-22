@@ -4,6 +4,7 @@ build 'lib', (b) ->
   b.source 'src/tasks/**/*.coffee'
 
   # Invoke the processors you need
-  b.do(compile bare: true)
+  b.do(compile bare: false)
+  .then(remove 'lib')
   .then(relocate 'src', 'lib')
   .then(writeFiles)
