@@ -65,7 +65,8 @@ describe 'core processing promise', ->
 
       subject 'promise', -> core.writeFiles @files
 
-      afterEach -> clearTmp 'processing'
+      beforeEach ->
+        spyOn(fs, "writeFile").andCallFake (p,c,cb) -> cb?( )
 
       it 'should return a promise', ->
         expect(@promise).toBePromise()
@@ -73,8 +74,7 @@ describe 'core processing promise', ->
       promise()
       .should.beFulfilled()
       .should 'have written the files on the file system', ->
-        expect(tmp 'processing/foo.coffee').toContain('foo.coffee')
-        expect(tmp 'processing/foo.js').toContain('foo.js')
+        expect(fs.writeFile).toHaveBeenCalled()
 
   describe 'processExtension', ->
     it 'should exists', ->
