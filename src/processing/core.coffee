@@ -5,7 +5,7 @@ path = require 'path'
 Q = require 'q'
 Neat = require '../neat'
 utils = Neat.require 'utils/files'
-{parallel} = Neat.require 'async'
+{parallel, queue} = Neat.require 'async'
 {check, checkBuffer} = require './utils'
 
 exists = fs.exists or path.exists
@@ -30,12 +30,12 @@ writeFiles = (buffer) ->
   gen = (p, content) -> (callback) ->
     dir = path.resolve p, '..'
     utils.ensurePath dir, (err) ->
+      return defer.reject err if err?
       fs.writeFile p, content, (err) ->
-        error = err if err?
+        return defer.reject err if err?
         callback?()
 
-  parallel (gen k,v for k,v of buffer), ->
-    return defer.reject error if error?
+  queue (gen k,v for k,v of buffer), ->
     defer.resolve buffer
 
   defer.promise
@@ -113,8 +113,7 @@ fileHeader = (header) ->
     Q.fcall ->
       newBuffer = {}
 
-      newBuffer[path] = "#{header}\n#{content}" for path,content of buffer
-
+      newBuffer[file] = "#{header}\n#{content}" for file, content of buffer
       newBuffer
 
 ##### fileFooter
@@ -127,7 +126,7 @@ fileFooter = (footer) ->
     Q.fcall ->
       newBuffer = {}
 
-      newBuffer[path] = "#{content}\n#{footer}\n" for path,content of buffer
+      newBuffer[file] = "#{content}\n#{footer}\n" for file, content of buffer
 
       newBuffer
 
