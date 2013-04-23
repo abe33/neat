@@ -1,6 +1,7 @@
 glob = require 'glob'
 Q = require 'q'
 Neat = require '../../neat'
+logs = Neat.require 'utils/logs'
 processors = Neat.require 'processing'
 
 class Build
@@ -16,12 +17,21 @@ class Build
 
   then: Build::do
 
+  fail: (handler) ->
+    @failHandler = handler
+    this
+
   process: ->
-    @findSources()
+    promise = @findSources()
     .then (files) =>
       @loadBuffer files
     .then (buffer) =>
       @processBuffer buffer
+    .then =>
+      logs.info logs.green "#{@name} build completed"
+
+    promise.fail @failHandler if @failHandler?
+    promise
 
   findSources: ->
     findOneSources = (path) ->
@@ -40,7 +50,9 @@ class Build
 
   processBuffer: (buffer) ->
     promise = Q.fcall(-> buffer)
-    promise = promise.then(processor) for processor in @processors
+    for processor in @processors
+      promise = promise.then(processor).fail (err) ->
+        console.log "failed in processor #{processor} with #{err}\n#{err.stack}"
     promise
 
   toString: -> "[Build: #{@name}]"

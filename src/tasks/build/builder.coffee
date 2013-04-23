@@ -5,6 +5,7 @@ Q = require 'q'
 {compile} = require 'coffee-script'
 Neat = require '../../neat'
 Build = require './build'
+logs = Neat.require 'utils/logs'
 processors = Neat.require 'processing'
 
 class Builder
@@ -15,6 +16,8 @@ class Builder
     @loadNeatfile()
     .then(@compileNeatfile())
     .then (neatfile) =>
+      logs.puts logs.yellow 'Neatfile loaded'
+      load = (path) -> fs.readFileSync Neat.rootResolve path
 
       build = (name, block) =>
         b = new Build name
@@ -23,10 +26,13 @@ class Builder
 
       eval "#{@getLocals(processors)}\n#{neatfile}"
     .then =>
+      logs.puts logs.yellow 'Neatfile evaluated'
       runBuild = (build) -> -> build.process()
       promise = Q.fcall ->
       promise = promise.then runBuild build for build in @builds
       promise
+    .fail (err) ->
+      console.error err
 
   glob: (path) ->
     defer = Q.defer()
