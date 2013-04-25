@@ -4,7 +4,7 @@ Builder = Neat.require 'tasks/build/builder'
 
 exports['build'] = neatTask
   name: 'build'
-  description: 'Attempt to create a promise-based build task'
+  description: 'Run builds defined in the Neatfile'
   environment: 'default'
   action: (callback) ->
     new Builder().init()
