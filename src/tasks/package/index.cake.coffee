@@ -9,6 +9,7 @@ op = require './operators'
 {error, info, green, red, puts, error} = Neat.require 'utils/logs'
 {ensure, rm, find, readFiles} = Neat.require 'utils/files'
 {read} = Neat.require 'utils/cup'
+{deprecated} = Neat.require 'utils/lib'
 _ = Neat.i18n.getHelper()
 
 exports['package'] = neatTask
@@ -16,6 +17,10 @@ exports['package'] = neatTask
   description: _('neat.tasks.package.description')
   environment: 'default'
   action: (callback) ->
+    deprecated 'The old packager based compilation will no longer
+    be supported in future version of Neat. Use a Neatfile and The
+    cake build task instead.'.squeeze()
+
     {dir, conf, tmp} = Neat.config.tasks.package
 
     err = -> callback? 1
