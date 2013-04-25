@@ -1,5 +1,5 @@
-require '../../../test_helper'
-Neat = require '../../../../lib/neat'
+require '../../test_helper'
+Neat = require '../../../lib/neat'
 
 {run} = Neat.require 'utils/commands'
 {print} = require 'util'
@@ -60,7 +60,6 @@ withProject 'neat_project', 'when outside a project', ->
     it 'should generates a project in the current directory', ->
       expect(inProject ".gitignore").toExist()
       expect(inProject ".npmignore").toExist()
-      expect(inProject "Cakefile").toExist()
 
       expect(inProject "src/tasks/.gitkeep").toExist()
       expect(inProject "src/commands/.gitkeep").toExist()
@@ -76,4 +75,20 @@ withProject 'neat_project', 'when outside a project', ->
       expect(inProject "test/functionals/.gitkeep").toExist()
       expect(inProject "test/integrations/.gitkeep").toExist()
       expect(inProject "test/fixtures/.gitkeep").toExist()
-      expect(inProject "config/packages/compile.cup").toExist()
+
+      expect(inProject "config").not.toExist()
+      expect(inProject "config/packages").not.toExist()
+      expect(inProject "config/packages/compile.cup").not.toExist()
+
+      expect(inProject "Cakefile")
+      .toContain(loadFixture 'generators/project/Cakefile')
+
+      expect(inProject "Neatfile")
+      .toContain(loadFixture 'generators/project/Neatfile')
+
+      expect(inProject "Watchfile")
+      .toContain(loadFixture 'generators/project/Watchfile')
+
+
+
+

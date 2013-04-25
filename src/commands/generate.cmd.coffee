@@ -4,6 +4,7 @@ Neat = require '../neat'
 
 {renderSync:render} = Neat.require "utils/templates"
 {puts, error, warn, missing} = Neat.require "utils/logs"
+{deprecated} = Neat.require "utils/lib"
 {
   run, aliases, usages, describe, help, environment
 } = Neat.require "utils/commands"
@@ -59,11 +60,14 @@ generate = (pr, commands) ->
       args.push(command) and command = callback
 
     unless generator of generators
-      return callback? new Error missing _('neat.commands.generate.generator',
-                                           {generator})
-      callback?()
+      return callback?(
+        new Error missing _('neat.commands.generate.generator.name',
+                            {generator})
+      )
 
     gen = generators[generator]
+
+    deprecated gen.deprecated if gen?.deprecated?
 
     unless typeof gen is "function"
       return callback? new Error _('neat.commands.generate.invalid_generator',

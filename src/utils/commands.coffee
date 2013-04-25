@@ -56,6 +56,10 @@ asyncErrorTrap = (errCallback, callback) -> (err, args...) ->
     if errCallback? then return errCallback err else return err
   callback?.apply null, args
 
+##### deprecated
+
+deprecated = (message, target) -> decorate target, 'deprecated', message
+
 ##### describe
 
 # Defines the description of the `target`.
@@ -216,15 +220,16 @@ run = (command, params, options, callback) ->
 usages = (usages..., target) -> decorate target, 'usages', usages
 
 module.exports = {
-  aliases,
-  asyncErrorTrap,
-  decorate,
-  describe,
-  environment,
-  hashArguments,
-  help,
-  neatTask,
-  neatTaskAlias,
-  run,
-  usages,
+  aliases
+  asyncErrorTrap
+  decorate
+  describe
+  deprecated
+  environment
+  hashArguments
+  help
+  neatTask
+  neatTaskAlias
+  run
+  usages
 }

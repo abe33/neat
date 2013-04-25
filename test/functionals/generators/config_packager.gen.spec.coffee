@@ -1,14 +1,14 @@
-require '../../../test_helper'
-Neat = require '../../../../lib/neat'
-{run} = require '../../../../lib/utils/commands'
+require '../../test_helper'
+Neat = require '../../../lib/neat'
+{run} = Neat.require 'utils/commands'
 {print} = require 'util'
 fs = require 'fs'
-
-testSimpleGenerator 'config:packager', 'config/packages', '.cup'
 
 options = {}
   # stderr: (data)-> print data
   # stdout: (data)-> print data
+
+testSimpleGenerator 'config:packager', 'config/packages', '.cup'
 
 describe 'when outside a project', ->
   beforeEach ->
@@ -28,16 +28,12 @@ describe 'when outside a project', ->
 
       waitsFor progress(-> ended), 'Timed out', 10000
 
-withProject 'neat_project', ->
+withBundledProject 'neat_project', ->
   describe 'running `neat generate config:packager:compile`', ->
-    args = [
-      NEAT_BIN,
-      'generate',
-      'config:packager:compile',
-    ]
+    args = [NEAT_BIN, 'generate', 'config:packager:compile']
 
     it 'should generate a default config for compilation', (done) ->
-      run 'node', args, (status) ->
+      run 'node', args, options, (status) ->
         expect(inProject 'config/packages/compile.cup').toExist()
         done()
 , init: (callback) ->

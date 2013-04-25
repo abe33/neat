@@ -25,8 +25,6 @@ project = (generator, name, args..., callback) ->
   ensureSync path
 
   dirs = [
-    'config',
-    'config/packages',
     'lib',
     'src',
     'src/commands',
@@ -45,7 +43,6 @@ project = (generator, name, args..., callback) ->
   ]
 
   files = [
-    ['config/packages/compile.cup', true],
     ['lib/.gitkeep'],
     ['src/commands/.gitkeep'],
     ['src/config/environments/default.coffee', true]
@@ -67,6 +64,8 @@ project = (generator, name, args..., callback) ->
     ['.npmignore', true],
     ['Cakefile', true],
     ['Nemfile', true],
+    ['Neatfile', true],
+    ['Watchfile', true],
   ]
 
   t = (a, b, c=false) ->

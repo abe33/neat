@@ -1,5 +1,5 @@
 class Notifier
   constructor: (@plugin) ->
-  notify: (notification) -> @plugin?.notify notification
+  notify: (notification, callback) -> @plugin?.notify notification, callback
 
 module.exports = Notifier

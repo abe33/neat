@@ -6,17 +6,17 @@ _ = Neat.i18n.getHelper()
 
 class Growly extends NotificationPlugin
   constructor: ->
-    growly.register 'Neat', 'res/success.png', [
+    growly.register 'Neat', Neat.resolve('res/success.png'), [
       {label: 'success', dispname: 'Success'}
       {label: 'failure', dispname: 'Failure'}
     ]
 
   notify: (notification, callback) ->
     if notification.success
-      icon = 'res/success.png'
+      icon = Neat.resolve('res/success.png')
       label = 'success'
     else
-      icon = 'res/failure.png'
+      icon = Neat.resolve('res/failure.png')
       label = 'failure'
 
     growly.notify notification.message, {

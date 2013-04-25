@@ -1,6 +1,11 @@
 require '../../test_helper'
 Neat = require '../../../lib/neat'
-{run} = require '../../../lib/utils/commands'
+{run} = Neat.require 'utils/commands'
+{print} = require 'util'
+
+options = {}
+  # stderr: (data)-> print data
+  # stdout: (data)-> print data
 
 withBundledProject 'foo', ->
 
@@ -43,7 +48,8 @@ withBundledProject 'foo', ->
       runs ->
         withCompiledFile taskPath, taskContent, ->
           withCompiledFile hooksPath, hooksContent, ->
-            ended = true
+            run 'node', [NEAT_BIN, 'g', 'config:packager:compile'], options, ->
+              ended = true
 
       waitsFor progress(-> ended), 'hooks compilation', 20000
 
@@ -51,7 +57,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['test'], (status) ->
+          run 'cake', ['test'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -65,7 +71,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['lint'], (status) ->
+          run 'cake', ['lint'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -79,7 +85,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['foo'], (status) ->
+          run 'cake', ['foo'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -94,7 +100,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['bump'], (status) ->
+          run 'cake', ['bump'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -110,7 +116,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['bump:minor'], (status) ->
+          run 'cake', ['bump:minor'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -124,7 +130,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['bump:major'], (status) ->
+          run 'cake', ['bump:major'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -138,7 +144,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['compile'], (status) ->
+          run 'cake', ['compile'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -152,7 +158,7 @@ withBundledProject 'foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['version'], (status) ->
+          run 'cake', ['version'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
