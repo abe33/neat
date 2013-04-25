@@ -6,7 +6,7 @@ commands = Neat.require 'utils/commands'
 class Compile extends CLIWatchPlugin
   pathChanged: (path, action) -> =>
     @deferred = Q.defer()
-    @process = commands.run 'cake', ['compile'], (status) =>
+    @process = commands.run 'cake', ['build'], (status) =>
       @deferred.resolve status
     @deferred.promise
 
