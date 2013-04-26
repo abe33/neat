@@ -41,7 +41,6 @@ global.promise = (promise) ->
           expect(true).toBeTruthy()
           ended = true
         .fail (err) ->
-          console.log err
           expect(false).toBeTruthy()
           ended = true
 

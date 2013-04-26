@@ -66,7 +66,8 @@ describe 'core processing promise', ->
       subject 'promise', -> core.writeFiles @files
 
       beforeEach ->
-        spyOn(fs, "writeFile").andCallFake (p,c,cb) -> cb?( )
+        spyOn(fs, "mkdir").andCallFake (p,cb) -> cb?()
+        spyOn(fs, "writeFile").andCallFake (p,c,cb) -> cb?()
 
       it 'should return a promise', ->
         expect(@promise).toBePromise()
