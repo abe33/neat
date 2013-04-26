@@ -40,7 +40,8 @@ global.promise = (promise) ->
         .then ->
           expect(true).toBeTruthy()
           ended = true
-        .fail ->
+        .fail (err) ->
+          console.log err
           expect(false).toBeTruthy()
           ended = true
 
