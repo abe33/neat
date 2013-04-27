@@ -1,5 +1,6 @@
 fs = require 'fs'
 os = require 'os'
+rl = require 'readline'
 path = require 'path'
 Q = require 'q'
 Neat = require '../../neat'
@@ -42,6 +43,7 @@ class Watcher
       puts green 'Watcher initialized'
       puts yellow "#{data.watchedPaths.length} files watched"
     .then(@initializePlugins)
+    .then(@startCLI)
     .then ->
       return data
     .fail (err) ->
@@ -50,12 +52,8 @@ class Watcher
 
     @promise ||= promise
 
-    process.on 'SIGINT', =>
-      if @activePlugin?.isPending()
-        puts yellow "\n#{@activePlugin} interrupted"
-        @activePlugin.kill('SIGINT')
-      else
-        process.exit(1)
+    process.on 'SIGINT', @sigintListener
+    process.stdin.on 'keypress', @keypressListener
 
     promise
 
@@ -66,6 +64,10 @@ class Watcher
       @ignoreList = null
       @watchedPaths = null
       @ignoredPaths = null
+      @cli.close()
+      @cli.removeListener 'line', @lineListener
+      process.removeListener 'SIGINT', @sigintListener
+      process.stdin.removeListener 'keypress', @keypressListener
     promise = promise.then(-> plugin.dispose()) for k,plugin of @plugins
     promise.then => @plugins = null
 
@@ -87,8 +89,9 @@ class Watcher
       @pathChanged path, action
 
   pathChanged: (path, action) ->
-    promise = @promise.then ->
-      puts cyan "#{inverse " #{action.toUpperCase()}D "} #{path}"
+    promise = @promise.then =>
+      @cli.pause()
+      puts cyan "\r#{inverse " #{action.toUpperCase()}D "} #{path}"
     switch path
       when Neat.resolve('Watchfile'), Neat.resolve('.watchignore')
         promise = promise.then(@dispose).then(@init)
@@ -102,6 +105,9 @@ class Watcher
             promise = promise.then p
 
     @promise = promise if promise?
+    @promise = @promise.then =>
+      @cli.resume()
+      @cli.prompt()
 
   enqueue: (promise) ->
     @promise = @promise.then promise
@@ -215,8 +221,30 @@ class Watcher
 
     eval compile watchfile, bare: true
 
+  startCLI: =>
+    @cli = rl.createInterface
+      input: process.stdin
+      output: process.stdout
+      # completer: -> console.log arguments
+    @cli.setPrompt 'neat: '
+    @cli.on 'line', @lineListener
+    @cli.prompt()
+
   toString: -> "[object Watcher]"
 
+  sigintListener: =>
+    if @activePlugin?.isPending()
+      puts yellow "\n#{@activePlugin} interrupted"
+      @activePlugin.kill('SIGINT')
+    else
+      process.exit(1)
 
+  keypressListener: (s, key) =>
+    if key.ctrl && key.name == 'l'
+      process.stdout.write '\u001B[2J\u001B[0;0f'
+
+  lineListener: (line) =>
+    console.log line
+    @cli.prompt()
 
 module.exports = Watcher

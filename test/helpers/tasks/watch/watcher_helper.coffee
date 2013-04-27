@@ -1,4 +1,7 @@
 fs = require 'fs'
+growly = require 'growly'
+notifySend = require 'notify-send'
+rl = require 'readline'
 Q = require 'q'
 Neat = require '../../../../lib/neat'
 WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
@@ -26,12 +29,37 @@ global.addWatchesMatcher = (scope) ->
 
       @actual? and @actual.some (o) -> o.regexp.toString() is re.toString()
 
+MOCK_CLI =
+  close: ->
+  on: ->
+  pause: ->
+  resume: ->
+  prompt: ->
+  setPrompt: ->
+  removeListener: ->
+
 global.withWatchSpies = (block) ->
   describe '', ->
     beforeEach ->
       addPromiseMatchers this
       addWatchesMatcher this
       spyOn(fs, 'watch').andCallFake -> close: ->
+      spyOn(process, 'on').andCallFake ->
+      spyOn(process.stdin, 'on').andCallFake ->
+      spyOn(process.stdin, 'removeListener').andCallFake ->
+      spyOn(process.stdout, 'on').andCallFake ->
+      spyOn(process.stdout, 'removeListener').andCallFake ->
+      spyOn(process, 'removeListener').andCallFake ->
+      spyOn(growly, 'notify').andCallFake (m,o,c) -> c?()
+      spyOn(notifySend, 'notify').andCallFake (m,c) -> c?()
+      spyOn(rl,'createInterface').andCallFake -> MOCK_CLI
+      spyOn(MOCK_CLI, 'on').andCallFake ->
+      spyOn(MOCK_CLI, 'close').andCallFake ->
+      spyOn(MOCK_CLI, 'pause').andCallFake ->
+      spyOn(MOCK_CLI, 'resume').andCallFake ->
+      spyOn(MOCK_CLI, 'prompt').andCallFake ->
+      spyOn(MOCK_CLI, 'setPrompt').andCallFake ->
+      spyOn(MOCK_CLI, 'removeListener').andCallFake ->
       spyOn(fs, 'readFile').andCallFake (path, callback) ->
         switch path
           when Neat.resolve 'Watchfile'

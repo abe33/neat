@@ -1,8 +1,9 @@
 require '../../../test_helper'
 
 fs = require 'fs'
-Q = require 'q'
+rl = require 'readline'
 path = require 'path'
+Q = require 'q'
 Neat = require '../../../../lib/neat'
 
 Watcher = require '../../../../lib/tasks/watch/watcher'
@@ -14,6 +15,31 @@ describe 'Watcher', ->
     it 'should exist', ->
       expect(@watcher).toBeDefined()
 
+    describe '::dispose', ->
+      subject 'promise', -> @watcher.init().then @watcher.dispose
+
+      waiting -> @promise
+
+      it 'should return a promise', ->
+        expect(@promise).toBePromise()
+
+      promise().should.beFulfilled()
+
+      it 'should unregister the listener on SIGINT', ->
+        expect(process.removeListener)
+        .toHaveBeenCalledWith('SIGINT', @watcher.sigintListener)
+
+      it 'should unregister the listener on stdin keypress', ->
+        expect(process.stdin.removeListener)
+        .toHaveBeenCalledWith('keypress', @watcher.keypressListener)
+
+      it 'should unregister the listener on the cli', ->
+        expect(@watcher.cli.removeListener)
+        .toHaveBeenCalledWith('line', @watcher.lineListener)
+
+      it 'should have closed the cli', ->
+        expect(@watcher.cli.close).toHaveBeenCalled()
+
     describe '#init', ->
 
       given 'value', -> @promise.valueOf()
@@ -24,6 +50,21 @@ describe 'Watcher', ->
 
       it 'should return a promise', ->
         expect(@promise).toBePromise()
+
+      it 'should register an event on SIGINT', ->
+        expect(process.on)
+        .toHaveBeenCalledWith('SIGINT', @watcher.sigintListener)
+
+      it 'should register an event on stdin keypress', ->
+        expect(process.stdin.on)
+        .toHaveBeenCalledWith('keypress', @watcher.keypressListener)
+
+      it 'should have created a cli and opened a prompt', ->
+        expect(rl.createInterface).toHaveBeenCalled()
+        expect(@watcher.cli.setPrompt).toHaveBeenCalled()
+        expect(@watcher.cli.prompt).toHaveBeenCalled()
+        expect(@watcher.cli.on)
+        .toHaveBeenCalledWith('line', @watcher.lineListener)
 
       promise().should.beFulfilled()
 
@@ -99,6 +140,13 @@ describe 'Watcher', ->
             waiting -> @promise
 
             promise().should.beFulfilled()
+
+            it 'should have paused the cli interface', ->
+              expect(@watcher.cli.pause).toHaveBeenCalled()
+
+            it 'should have resumed the cli interface', ->
+              expect(@watcher.cli.resume).toHaveBeenCalled()
+              expect(@watcher.cli.prompt).toHaveBeenCalled()
 
             it 'should have called the plugin pathChanged method', ->
               expect(@plugin.pathChanged).toHaveBeenCalled()
