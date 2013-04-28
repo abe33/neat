@@ -175,15 +175,20 @@ class Watcher
           file = path.resolve directory, file
 
           unless file of @watches or @isIgnored file
-            stats = fs.lstatSync file
-            if stats.isDirectory()
-              @watchDirectory file, watcher
-            else
-              w = watcher(file)
-              w 'create', file
-              @rewatch file, w
+            # FIXME In some cases, when exiting, an exception
+            # is raised here due to an ENOENT error.
+            # Currently the exception is silently handled.
+            try
+              stats = fs.lstatSync file
+              if stats.isDirectory()
+                @watchDirectory file, watcher
+              else
+                w = watcher(file)
+                w 'create', file
+                @rewatch file, w
 
-            @watchedPaths.push file
+              @watchedPaths.push file
+
       , 0
 
   rewatch: (file, watcher) =>
