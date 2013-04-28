@@ -1,5 +1,6 @@
 fs = require 'fs'
 os = require 'os'
+rl = require 'readline'
 path = require 'path'
 Q = require 'q'
 Neat = require '../../neat'
@@ -42,6 +43,7 @@ class Watcher
       puts green 'Watcher initialized'
       puts yellow "#{data.watchedPaths.length} files watched"
     .then(@initializePlugins)
+    .then(@startCLI)
     .then ->
       return data
     .fail (err) ->
@@ -50,16 +52,10 @@ class Watcher
 
     @promise ||= promise
 
-    process.on 'SIGINT', @handleSigint
+    process.on 'SIGINT', @sigintListener
+    process.stdin.on 'keypress', @keypressListener
 
     promise
-
-  handleSigint: =>
-    if @activePlugin?.isPending()
-      puts yellow "\n#{@activePlugin} interrupted"
-      @activePlugin.kill('SIGINT')
-    else
-      process.exit(1)
 
   dispose: =>
     promise = Q.fcall =>
@@ -68,7 +64,11 @@ class Watcher
       @ignoreList = null
       @watchedPaths = null
       @ignoredPaths = null
-      process.removeListener 'SIGINT', @handleSigint
+      @cli.close()
+      @cli.removeListener 'line', @lineListener
+      @cli.removeListener 'SIGINT', @lineListener
+      process.removeListener 'SIGINT', @sigintListener
+      process.stdin.removeListener 'keypress', @keypressListener
     promise = promise.then(-> plugin.dispose()) for k,plugin of @plugins
     promise.then => @plugins = null
 
@@ -90,8 +90,9 @@ class Watcher
       @pathChanged path, action
 
   pathChanged: (path, action) ->
-    promise = @promise.then ->
-      puts cyan "#{inverse " #{action.toUpperCase()}D "} #{path}"
+    promise = @promise.then =>
+      @cliPaused = true
+      puts cyan "\r#{inverse " #{action.toUpperCase()}D "} #{path}"
     switch path
       when Neat.resolve('Watchfile'), Neat.resolve('.watchignore')
         promise = promise.then(@dispose).then(@init)
@@ -104,7 +105,21 @@ class Watcher
               puts cyan "#{inverse " #{name.toUpperCase()} "} #{path}"
             promise = promise.then p
 
-    @promise = promise if promise?
+    @promise = promise.then =>
+      @cliPaused = false
+      @cli.prompt()
+
+  runAll: ->
+    promise = @promise.then =>
+      @cliPaused = true
+      puts cyan "\r#{inverse ' WATCH '} Run all"
+
+    @plugins.each (name, plugin) =>
+      promise = promise.then plugin.runAll
+
+    @promise = promise.then =>
+      @cliPaused = false
+      @cli.prompt()
 
   enqueue: (promise) ->
     @promise = @promise.then promise
@@ -148,22 +163,32 @@ class Watcher
     defer.promise
 
   watchDirectory: (directory, watcher) =>
+    return unless existsSync directory
     @watches[directory] = fs.watch directory, (action) =>
       @enqueue Q.fcall =>
-        files = fs.readdirSync directory
+        files = try
+          fs.readdirSync directory
+        catch err
+          []
+
         for file in files
           file = path.resolve directory, file
 
           unless file of @watches or @isIgnored file
-            stats = fs.lstatSync file
-            if stats.isDirectory()
-              @watchDirectory file, watcher
-            else
-              w = watcher(file)
-              w 'create', file
-              @rewatch file, w
+            # FIXME In some cases, when exiting, an exception
+            # is raised here due to an ENOENT error.
+            # Currently the exception is silently handled.
+            try
+              stats = fs.lstatSync file
+              if stats.isDirectory()
+                @watchDirectory file, watcher
+              else
+                w = watcher(file)
+                w 'create', file
+                @rewatch file, w
 
-            @watchedPaths.push file
+              @watchedPaths.push file
+
       , 0
 
   rewatch: (file, watcher) =>
@@ -218,8 +243,44 @@ class Watcher
 
     eval compile watchfile, bare: true
 
+  startCLI: =>
+    @cli = rl.createInterface
+      input: process.stdin
+      output: process.stdout
+      # completer: -> console.log arguments
+    @cli.setPrompt 'neat: '
+    @cli.on 'line', @lineListener
+    @cli.on 'SIGINT', @sigintListener
+    @cli.prompt()
+
   toString: -> "[object Watcher]"
 
+  sigintListener: =>
+    if @activePlugin?.isPending()
+      puts yellow "\n#{@activePlugin} interrupted"
+      @activePlugin.kill('SIGINT')
+    else
+      process.exit(1)
 
+  keypressListener: (s, key) =>
+    if key? and key.ctrl and key.name is 'l'
+      process.stdout.write '\u001B[2J\u001B[0;0f'
+      @cli.prompt() unless @cliPaused
+
+  lineListener: (line) =>
+    unless @cliPaused
+      switch line
+        when '', 'a', 'all' then @runAll()
+        when 'q', 'quit', 'e', 'exit' then process.exit(1)
+        when 'h', 'help'
+          console.log """
+          #{cyan '↩, a, all'}: Run all plugins.
+          #{cyan 'h, help'}: Print this message.
+          #{cyan 'q, quit, e, exit'}: Kill cake watch.
+          """
+          @cli.prompt()
+        else
+          puts red "Unknown command '#{line}'"
+          @cli.prompt()
 
 module.exports = Watcher

@@ -6,27 +6,30 @@ commands = Neat.require 'utils/commands'
 
 class Lint extends CLIWatchPlugin
   init: (watcher) ->
-    @runCakeLint() if @options.runAllOnStart
+    @runAll() if @options.runAllOnStart
 
   pathChanged: (path, action) -> =>
     @outputPathsFor(path).then (paths) => @runLint paths.flatten()
 
-  runCakeLint: (paths) ->
+  handleStatus: (status) ->
+    if status is 1
+      @watcher?.notifier.notify {
+        success: false
+        title: 'Lint'
+        message: "Lint failed"
+      }
+    else
+      @watcher?.notifier.notify {
+        success: true
+        title: 'Lint'
+        message: "Lint successful"
+      }
+    @deferred.resolve status
+
+  runAll: (paths) =>
     @deferred = Q.defer()
     @process = commands.run 'cake', ['lint'], (status) =>
-      @deferred.resolve status
-      if status is 1
-        @watcher?.notifier.notify {
-          success: false
-          title: 'Lint'
-          message: "Lint failed"
-        }
-      else
-        @watcher?.notifier.notify {
-          success: true
-          title: 'Lint'
-          message: "Lint successful"
-        }
+      @handleStatus status
 
     @deferred.promise
 
@@ -34,22 +37,7 @@ class Lint extends CLIWatchPlugin
     @deferred = Q.defer()
     coffeelint = Neat.resolve 'node_modules/.bin/coffeelint'
     @process = commands.run coffeelint, paths, (status) =>
-      if status is 0
-        @watcher?.notifier.notify {
-          success: true
-          title: 'Lint'
-          message: "Lint successful"
-        }
-        info green 'success'
-      else
-        @watcher?.notifier.notify {
-          success: false
-          title: 'Lint'
-          message: "Lint failed"
-        }
-        error red 'failure'
-
-      @deferred.resolve status
+      @handleStatus status
 
     @deferred.promise
 

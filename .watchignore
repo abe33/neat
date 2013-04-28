@@ -1,5 +1,6 @@
 \.git
 \.pages
+\.tests
 .*\.tmp
 .DS_Store
 lib

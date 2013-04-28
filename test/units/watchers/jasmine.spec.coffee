@@ -16,3 +16,5 @@ describe 'Jasmine', ->
               Neat.resolve('src/core/types/object.coffee'))
   .should.storeProcessAndKillIt()
   .should.bePendingUntilEnd()
+  .should.runAllWith(Neat.resolve('node_modules/.bin/jasmine-node'),
+                    '--coffee', Neat.resolve('test'))
