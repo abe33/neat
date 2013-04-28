@@ -16,6 +16,7 @@ class WatchPlugin
   # You can return a function instead of a promise to chain with
   # the previous promise in the queue.
   pathChanged: (path) -> => null
+  runAll: -> null
 
   #### Other Abstract Methods
   kill: ->

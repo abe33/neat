@@ -127,6 +127,22 @@ global.cliRunningPlugin = (klass) ->
 
         should
 
+      runAllWith: (command, cargs...) ->
+        setupTest klass, changedPath, ->
+          describe 'when calling runAll', ->
+            subject 'promise', -> @plugin.runAll()
+
+            waiting -> @promise
+
+            promise().should.beFulfilled()
+
+            it "should run #{command} #{cargs.join ' '}", ->
+              expect(commands.run).toHaveBeenCalled()
+              expect(commands.run.argsForCall[0]).toContain(command)
+              expect(commands.run.argsForCall[0]).toContain(cargs)
+
+        should
+
       bePendingUntilEnd: ->
         setupTest klass, changedPath, ->
           subject 'promise', ->

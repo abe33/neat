@@ -14,4 +14,4 @@ describe 'Lint', ->
                 Neat.resolve('src/neat.coffee'))
     .should.storeProcessAndKillIt()
     .should.bePendingUntilEnd()
-
+    .should.runAllWith('cake', 'lint')
