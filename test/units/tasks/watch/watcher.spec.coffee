@@ -34,8 +34,7 @@ describe 'Watcher', ->
         .toHaveBeenCalledWith('keypress', @watcher.keypressListener)
 
       it 'should unregister the listener on the cli', ->
-        expect(@watcher.cli.removeListener)
-        .toHaveBeenCalledWith('line', @watcher.lineListener)
+        expect(@watcher.cli.removeListener).toHaveBeenCalled()
 
       it 'should have closed the cli', ->
         expect(@watcher.cli.close).toHaveBeenCalled()
@@ -63,8 +62,7 @@ describe 'Watcher', ->
         expect(rl.createInterface).toHaveBeenCalled()
         expect(@watcher.cli.setPrompt).toHaveBeenCalled()
         expect(@watcher.cli.prompt).toHaveBeenCalled()
-        expect(@watcher.cli.on)
-        .toHaveBeenCalledWith('line', @watcher.lineListener)
+        expect(@watcher.cli.on).toHaveBeenCalled()
 
       promise().should.beFulfilled()
 
@@ -140,13 +138,6 @@ describe 'Watcher', ->
             waiting -> @promise
 
             promise().should.beFulfilled()
-
-            it 'should have paused the cli interface', ->
-              expect(@watcher.cli.pause).toHaveBeenCalled()
-
-            it 'should have resumed the cli interface', ->
-              expect(@watcher.cli.resume).toHaveBeenCalled()
-              expect(@watcher.cli.prompt).toHaveBeenCalled()
 
             it 'should have called the plugin pathChanged method', ->
               expect(@plugin.pathChanged).toHaveBeenCalled()

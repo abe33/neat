@@ -66,6 +66,7 @@ class Watcher
       @ignoredPaths = null
       @cli.close()
       @cli.removeListener 'line', @lineListener
+      @cli.removeListener 'SIGINT', @lineListener
       process.removeListener 'SIGINT', @sigintListener
       process.stdin.removeListener 'keypress', @keypressListener
     promise = promise.then(-> plugin.dispose()) for k,plugin of @plugins
@@ -90,7 +91,7 @@ class Watcher
 
   pathChanged: (path, action) ->
     promise = @promise.then =>
-      @cli.pause()
+      @cliPaused = true
       puts cyan "\r#{inverse " #{action.toUpperCase()}D "} #{path}"
     switch path
       when Neat.resolve('Watchfile'), Neat.resolve('.watchignore')
@@ -106,7 +107,7 @@ class Watcher
 
     @promise = promise if promise?
     @promise = @promise.then =>
-      @cli.resume()
+      @cliPaused = false
       @cli.prompt()
 
   enqueue: (promise) ->
@@ -228,6 +229,7 @@ class Watcher
       # completer: -> console.log arguments
     @cli.setPrompt 'neat: '
     @cli.on 'line', @lineListener
+    @cli.on 'SIGINT', @sigintListener
     @cli.prompt()
 
   toString: -> "[object Watcher]"
@@ -240,11 +242,12 @@ class Watcher
       process.exit(1)
 
   keypressListener: (s, key) =>
-    if key.ctrl && key.name == 'l'
+    if key? and key.ctrl and key.name is 'l'
       process.stdout.write '\u001B[2J\u001B[0;0f'
 
   lineListener: (line) =>
-    console.log line
-    @cli.prompt()
+    unless @cliPaused
+      console.log line
+      @cli.prompt()
 
 module.exports = Watcher
