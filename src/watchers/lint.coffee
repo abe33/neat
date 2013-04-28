@@ -26,7 +26,7 @@ class Lint extends CLIWatchPlugin
       }
     @deferred.resolve status
 
-  runAll: (paths) ->
+  runAll: (paths) =>
     @deferred = Q.defer()
     @process = commands.run 'cake', ['lint'], (status) =>
       @handleStatus status

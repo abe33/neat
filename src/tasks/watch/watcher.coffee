@@ -105,8 +105,19 @@ class Watcher
               puts cyan "#{inverse " #{name.toUpperCase()} "} #{path}"
             promise = promise.then p
 
-    @promise = promise if promise?
-    @promise = @promise.then =>
+    @promise = promise.then =>
+      @cliPaused = false
+      @cli.prompt()
+
+  runAll: ->
+    promise = @promise.then =>
+      @cliPaused = true
+      puts cyan "\r#{inverse ' WATCH '} Run all"
+
+    @plugins.each (name, plugin) =>
+      promise = promise.then plugin.runAll
+
+    @promise = promise.then =>
       @cliPaused = false
       @cli.prompt()
 
@@ -152,9 +163,14 @@ class Watcher
     defer.promise
 
   watchDirectory: (directory, watcher) =>
+    return unless existsSync directory
     @watches[directory] = fs.watch directory, (action) =>
       @enqueue Q.fcall =>
-        files = fs.readdirSync directory
+        files = try
+          fs.readdirSync directory
+        catch err
+          []
+
         for file in files
           file = path.resolve directory, file
 
@@ -244,10 +260,22 @@ class Watcher
   keypressListener: (s, key) =>
     if key? and key.ctrl and key.name is 'l'
       process.stdout.write '\u001B[2J\u001B[0;0f'
+      @cli.prompt() unless @cliPaused
 
   lineListener: (line) =>
     unless @cliPaused
-      console.log line
-      @cli.prompt()
+      switch line
+        when '', 'a', 'all' then @runAll()
+        when 'q', 'quit', 'e', 'exit' then process.exit(1)
+        when 'h', 'help'
+          console.log """
+          #{cyan '↩, a, all'}: Run all plugins.
+          #{cyan 'h, help'}: Print this message.
+          #{cyan 'q, quit, e, exit'}: Kill cake watch.
+          """
+          @cli.prompt()
+        else
+          puts red "Unknown command '#{line}'"
+          @cli.prompt()
 
 module.exports = Watcher
