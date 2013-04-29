@@ -91,8 +91,8 @@ describe 'core processing promise', ->
 
     describe 'called with an extension and a promise returning function', ->
       beforeEach ->
-        @processor = core.processExtension 'coffee', (buffer) ->
-          Q.fcall ->
+        @processor = core.processExtension 'coffee', (unit) ->
+          unit.then (buffer) ->
             newBuffer = {}
             buffer.each (k,v) -> newBuffer["#{k}_foo"] = 'I want coffee'
             newBuffer

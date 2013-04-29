@@ -52,7 +52,7 @@ processExtension = (ext, process) ->
 
     filteredBuffer = buffer.select (k) -> path.extname(k) is ".#{ext}"
     buffer.destroy k for k of filteredBuffer
-    process(filteredBuffer)
+    process(Q.fcall -> filteredBuffer)
     .then (processedBuffer) ->
       defer.resolve buffer.merge processedBuffer
     .fail (err) ->
