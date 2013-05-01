@@ -52,7 +52,7 @@
           <td class='docs'></td>
           <td class='code'><pre><span class="constant">Q</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>q<span class="string_end">'</span></span>
 <span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../neat<span class="string_end">'</span></span>
-<span class="hash"><span class="hash_begin">{</span>parser<span class="punctuation">,</span> <span class="property">uglify<span class='punctuation'>:</span></span>pro<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>uglify-js<span class="string_end">'</span></span>
+uglifier <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>uglify-js<span class="string_end">'</span></span>
 <span class="hash"><span class="hash_begin">{</span>check<span class="punctuation">,</span> checkBuffer<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./utils<span class="string_end">'</span></span>
 
 uglify <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>buffer<span class="group_end">)</span></span> <span class="function">-></span>
@@ -61,12 +61,13 @@ uglify <span class="operators">=</span> <span class="group"><span class="group_b
   <span class="constant">Q</span><span class="punctuation">.</span>fcall <span class="function">-></span>
     newBuffer <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
     <span class="keyword">for</span> path<span class="punctuation">,</span> content <span class="keyword">of</span> buffer
-      ast <span class="operators">=</span> parser<span class="punctuation">.</span>parse<span class="group"><span class="group_begin">(</span>content<span class="group_end">)</span></span>
-      ast <span class="operators">=</span> pro<span class="punctuation">.</span>ast_mangle<span class="group"><span class="group_begin">(</span>ast<span class="group_end">)</span></span>
-      ast <span class="operators">=</span> pro<span class="punctuation">.</span>ast_squeeze<span class="group"><span class="group_begin">(</span>ast<span class="group_end">)</span></span>
-      newBuffer<span class="punctuation">[</span>path<span class="punctuation">.</span>replace <span class="regexp">/<span class="escaped">\.</span>js<span class="regexp_operators">$</span>/g</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>.min.js<span class="string_end">'</span></span><span class="punctuation">]</span> <span class="operators">=</span> pro<span class="punctuation">.</span>gen_code<span class="group"><span class="group_begin">(</span>ast<span class="group_end">)</span></span>
+      output <span class="operators">=</span> path<span class="punctuation">.</span>replace <span class="regexp">/<span class="escaped">\.</span>js<span class="regexp_operators">$</span>/g</span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>.min.js<span class="string_end">'</span></span>
+      newBuffer<span class="punctuation">[</span>output<span class="punctuation">]</span> <span class="operators">=</span> uglifier<span class="punctuation">.</span>minify content<span class="punctuation">,</span> <span class="property">fromString<span class='punctuation'>:</span></span> <span class="literal">true</span>
 
     newBuffer
+  <span class="punctuation">.</span>fail <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="global">console</span><span class="punctuation">.</span>log err<span class="punctuation">.</span>message
+    <span class="global">console</span><span class="punctuation">.</span>log err<span class="punctuation">.</span>stack
 
 <span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span>uglify<span class="hash_end">}</span></span>
 
