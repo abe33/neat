@@ -100,7 +100,7 @@ _ <span class="operators">=</span> <span class="constant">Neat</span><span class
 
         logs <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
         opts <span class="operators">=</span>
-          <span class="property">noStdout<span class='punctuation'>:</span></span> <span class="literal">true</span>
+          <span class="property">stdout<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>data<span class="group_end">)</span></span> <span class="function">-></span> logs<span class="punctuation">.</span>push <span class="function">-></span> <span class="global">print</span> data
           <span class="property">stderr<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>data<span class="group_end">)</span></span> <span class="function">-></span> logs<span class="punctuation">.</span>push <span class="function">-></span> <span class="global">print</span> data
 
         run <span class="constant">COFFEE_LINT</span><span class="punctuation">,</span> params<span class="punctuation">,</span> opts<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>status<span class="group_end">)</span></span> <span class="function">-></span>
