@@ -1,0 +1,353 @@
+
+<html>
+  <meta charset='utf-8'>
+  <title>src&#47;tasks&#47;watch&#47;watcher.coffee</title>
+  <head>
+    <link rel='stylesheet' media='all' href='docco.css'>
+<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+<script src='http://code.jquery.com/jquery-1.6.2.min.js' type='text/javascript' charset='utf-8'></script>
+<script src='docco.js' type='text/javascript' charset='utf-8'></script>
+    <script>
+      $(document).ready(function(){
+        $('#menu').columnview();
+        $('#jump_show').click(function(){
+          $('#jump_to').toggleClass('visible')
+        })
+        var p = "src/tasks/watch/watcher.coffee".split('/')
+        var f = p.pop()
+        for(var i=0;i<p.length;i++){
+          var s = p[i] + "/"
+          $("#jump_page div a span.label").filter(function(){
+            return $(this).text() == s
+          }).parent().click()
+        }
+    
+        $("#jump_page div a span.label").filter(function(){
+          return $(this).text() == f
+        }).last().parent().toggleClass('active')
+      })
+    </script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='jump_to'><div id='jump_page'>
+  <ul class='menu' id='menu'>
+    <li class='leaf'><a href='#'>src/</a><ul class='menu'><li class='leaf'><a href='#'>async/</a><ul class='menu'><li class='leaf'><a href='src_async_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='#'>docco.cmd/</a><ul class='menu'><li class='leaf'><a href='src_commands_docco.cmd_docco_file.html'>docco_file.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_file_processor.html'>docco_file_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_docco_title_processor.html'>docco_title_processor.coffee</a></li><li class='leaf'><a href='src_commands_docco.cmd_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_commands_generate.cmd.html'>generate.cmd.coffee</a></li><li class='leaf'><a href='src_commands_help.cmd.html'>help.cmd.coffee</a></li><li class='leaf'><a href='src_commands_index.html'>index.coffee</a></li><li class='leaf'><a href='src_commands_install.cmd.html'>install.cmd.coffee</a></li><li class='leaf'><a href='src_commands_list.cmd.html'>list.cmd.coffee</a></li></ul></li><li class='leaf'><a href='#'>config/</a><ul class='menu'><li class='leaf'><a href='#'>environments/</a><ul class='menu'><li class='leaf'><a href='src_config_environments_default.html'>default.coffee</a></li><li class='leaf'><a href='src_config_environments_development.html'>development.coffee</a></li><li class='leaf'><a href='src_config_environments_production.html'>production.coffee</a></li><li class='leaf'><a href='src_config_environments_test.html'>test.coffee</a></li></ul></li><li class='leaf'><a href='#'>initializers/</a><ul class='menu'><li class='leaf'><a href='#'>commands/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_commands_docco.html'>docco.coffee</a></li></ul></li><li class='leaf'><a href='#'>logging/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_logging_console.html'>console.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tasks_package.html'>package.coffee</a></li></ul></li><li class='leaf'><a href='#'>templates/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_templates_haml_coffee.html'>haml_coffee.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_mustache.html'>mustache.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_plain.html'>plain.coffee</a></li><li class='leaf'><a href='src_config_initializers_templates_stylus.html'>stylus.coffee</a></li></ul></li><li class='leaf'><a href='#'>tests/</a><ul class='menu'><li class='leaf'><a href='src_config_initializers_tests_jasmine.html'>jasmine.coffee</a></li></ul></li></ul></li></ul></li><li class='leaf'><a href='#'>core/</a><ul class='menu'><li class='leaf'><a href='src_core_index.html'>index.coffee</a></li><li class='leaf'><a href='#'>interfaces/</a><ul class='menu'><li class='leaf'><a href='src_core_interfaces_cli_command.html'>cli_command.coffee</a></li></ul></li><li class='leaf'><a href='src_core_signal.html'>signal.coffee</a></li><li class='leaf'><a href='#'>types/</a><ul class='menu'><li class='leaf'><a href='src_core_types_array.html'>array.coffee</a></li><li class='leaf'><a href='src_core_types_function.html'>function.coffee</a></li><li class='leaf'><a href='src_core_types_index.html'>index.coffee</a></li><li class='leaf'><a href='src_core_types_number.html'>number.coffee</a></li><li class='leaf'><a href='src_core_types_object.html'>object.coffee</a></li><li class='leaf'><a href='src_core_types_string.html'>string.coffee</a></li><li class='leaf'><a href='src_core_types_utils.html'>utils.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='src_env.html'>env.coffee</a></li><li class='leaf'><a href='#'>generators/</a><ul class='menu'><li class='leaf'><a href='src_generators_command.gen.html'>command.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_lint.gen.html'>config_lint.gen.coffee</a></li><li class='leaf'><a href='src_generators_config_packager.gen.html'>config_packager.gen.coffee</a></li><li class='leaf'><a href='src_generators_generator.gen.html'>generator.gen.coffee</a></li><li class='leaf'><a href='src_generators_github_pages.gen.html'>github_pages.gen.coffee</a></li><li class='leaf'><a href='src_generators_index.html'>index.coffee</a></li><li class='leaf'><a href='src_generators_initializer.gen.html'>initializer.gen.coffee</a></li><li class='leaf'><a href='src_generators_package.gen.html'>package.gen.coffee</a></li><li class='leaf'><a href='src_generators_project.gen.html'>project.gen.coffee</a></li><li class='leaf'><a href='src_generators_source.gen.html'>source.gen.coffee</a></li><li class='leaf'><a href='src_generators_spec.gen.html'>spec.gen.coffee</a></li><li class='leaf'><a href='src_generators_task.gen.html'>task.gen.coffee</a></li></ul></li><li class='leaf'><a href='#'>i18n/</a><ul class='menu'><li class='leaf'><a href='src_i18n_i18n.html'>i18n.coffee</a></li><li class='leaf'><a href='src_i18n_index.html'>index.coffee</a></li></ul></li><li class='leaf'><a href='src_index.html'>index.coffee</a></li><li class='leaf'><a href='src_neat.html'>neat.coffee</a></li><li class='leaf'><a href='#'>notifications/</a><ul class='menu'><li class='leaf'><a href='src_notifications_index.html'>index.coffee</a></li><li class='leaf'><a href='src_notifications_notification.html'>notification.coffee</a></li><li class='leaf'><a href='src_notifications_notification_plugin.html'>notification_plugin.coffee</a></li><li class='leaf'><a href='src_notifications_notifier.html'>notifier.coffee</a></li><li class='leaf'><a href='#'>plugins/</a><ul class='menu'><li class='leaf'><a href='src_notifications_plugins_growly.html'>growly.coffee</a></li><li class='leaf'><a href='src_notifications_plugins_notify_send.html'>notify_send.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>processing/</a><ul class='menu'><li class='leaf'><a href='src_processing_coffee.build.html'>coffee.build.coffee</a></li><li class='leaf'><a href='src_processing_core.build.html'>core.build.coffee</a></li><li class='leaf'><a href='src_processing_index.html'>index.coffee</a></li><li class='leaf'><a href='src_processing_javascript.build.html'>javascript.build.coffee</a></li><li class='leaf'><a href='src_processing_utils.html'>utils.coffee</a></li></ul></li><li class='leaf'><a href='#'>tasks/</a><ul class='menu'><li class='leaf'><a href='src_tasks_build.cake.html'>build.cake.coffee</a></li><li class='leaf'><a href='#'>build/</a><ul class='menu'><li class='leaf'><a href='src_tasks_build_build.html'>build.coffee</a></li><li class='leaf'><a href='src_tasks_build_builder.html'>builder.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_bump.cake.html'>bump.cake.coffee</a></li><li class='leaf'><a href='src_tasks_compile.cake.html'>compile.cake.coffee</a></li><li class='leaf'><a href='src_tasks_deploy.cake.html'>deploy.cake.coffee</a></li><li class='leaf'><a href='src_tasks_github_pages.cake.html'>github_pages.cake.coffee</a></li><li class='leaf'><a href='src_tasks_index.html'>index.coffee</a></li><li class='leaf'><a href='src_tasks_lint.cake.html'>lint.cake.coffee</a></li><li class='leaf'><a href='src_tasks_list.cake.html'>list.cake.coffee</a></li><li class='leaf'><a href='#'>package/</a><ul class='menu'><li class='leaf'><a href='src_tasks_package_index.cake.html'>index.cake.coffee</a></li><li class='leaf'><a href='src_tasks_package_operators.html'>operators.coffee</a></li><li class='leaf'><a href='src_tasks_package_packager.html'>packager.coffee</a></li></ul></li><li class='leaf'><a href='src_tasks_test.cake.html'>test.cake.coffee</a></li><li class='leaf'><a href='src_tasks_version.cake.html'>version.cake.coffee</a></li><li class='leaf'><a href='src_tasks_watch.cake.html'>watch.cake.coffee</a></li><li class='leaf'><a href='#'>watch/</a><ul class='menu'><li class='leaf'><a href='src_tasks_watch_cli_watch_plugin.html'>cli_watch_plugin.coffee</a></li><li class='leaf'><a href='src_tasks_watch_watch.html'>watch.coffee</a></li><li class='leaf'><a href='src_tasks_watch_watch_plugin.html'>watch_plugin.coffee</a></li><li class='leaf'><a href='src_tasks_watch_watcher.html'>watcher.coffee</a></li></ul></li></ul></li><li class='leaf'><a href='#'>utils/</a><ul class='menu'><li class='leaf'><a href='src_utils_commands.html'>commands.coffee</a></li><li class='leaf'><a href='src_utils_cup.html'>cup.coffee</a></li><li class='leaf'><a href='src_utils_exports.html'>exports.coffee</a></li><li class='leaf'><a href='src_utils_files.html'>files.coffee</a></li><li class='leaf'><a href='src_utils_generators.html'>generators.coffee</a></li><li class='leaf'><a href='src_utils_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_lib.html'>lib.coffee</a></li><li class='leaf'><a href='#'>logs/</a><ul class='menu'><li class='leaf'><a href='src_utils_logs_index.html'>index.coffee</a></li><li class='leaf'><a href='src_utils_logs_logger.html'>logger.coffee</a></li></ul></li><li class='leaf'><a href='src_utils_mappers.html'>mappers.coffee</a></li><li class='leaf'><a href='src_utils_matchers.html'>matchers.coffee</a></li><li class='leaf'><a href='src_utils_templates.html'>templates.coffee</a></li></ul></li><li class='leaf'><a href='#'>watchers/</a><ul class='menu'><li class='leaf'><a href='src_watchers_compile.html'>compile.coffee</a></li><li class='leaf'><a href='src_watchers_index.html'>index.coffee</a></li><li class='leaf'><a href='src_watchers_jasmine.html'>jasmine.coffee</a></li><li class='leaf'><a href='src_watchers_lint.html'>lint.coffee</a></li><li class='leaf'><a href='src_watchers_nemfile.html'>nemfile.coffee</a></li><li class='leaf'><a href='src_watchers_package_json.html'>package_json.coffee</a></li></ul></li></ul></li>
+  </ul>
+</div>
+<div id='jump_show'>
+  Jump To &hellip;
+</div></div>
+      <table cellpadding='0' cellspacing='0'>
+        <tr>
+          <th class='docs'>
+            <h3>src&#47;tasks&#47;watch&#47;</h3>
+            <h1>watcher.coffee</h1>
+          </th>
+          <th class='code'>
+            <pre></pre>
+          </th>
+        </tr>
+        <tr>
+          <td class='docs'></td>
+          <td class='code'><pre>fs <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>fs<span class="string_end">'</span></span>
+os <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>os<span class="string_end">'</span></span>
+rl <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>readline<span class="string_end">'</span></span>
+path <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>path<span class="string_end">'</span></span>
+<span class="constant">Q</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>q<span class="string_end">'</span></span>
+<span class="constant">Neat</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>../../neat<span class="string_end">'</span></span>
+<span class="constant">Watch</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>./watch<span class="string_end">'</span></span>
+n <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>notifications<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>parallel<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>async<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>compile<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>coffee-script<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>
+  warn<span class="punctuation">,</span> error<span class="punctuation">,</span> puts<span class="punctuation">,</span> yellow<span class="punctuation">,</span>
+  green<span class="punctuation">,</span> red<span class="punctuation">,</span> cyan<span class="punctuation">,</span> inverse
+<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/logs<span class="string_end">'</span></span>
+<span class="hash"><span class="hash_begin">{</span>asyncErrorTrap<span class="hash_end">}</span></span> <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/commands<span class="string_end">'</span></span>
+
+existsSync <span class="operators">=</span> fs<span class="punctuation">.</span>existsSync <span class="keyword">or</span> path<span class="punctuation">.</span>existsSync
+
+<span class="class"><span class="keyword">class</span> <span class='title'>Watcher</span></span>
+  <span class="property">constructor<span class='punctuation'>:</span></span> <span class="function">-></span>
+    <span class="keyword">switch</span> os<span class="punctuation">.</span>platform<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>darwin<span class="string_end">'</span></span>
+        <span class="property">@notifier</span> <span class="operators">=</span> <span class="keyword">new</span> n<span class="punctuation">.</span><span class="constant">Notifier</span> <span class="keyword">new</span> n<span class="punctuation">.</span>plugins<span class="punctuation">.</span><span class="constant">Growly</span>
+      <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>linux<span class="string_end">'</span></span>
+        <span class="property">@notifier</span> <span class="operators">=</span> <span class="keyword">new</span> n<span class="punctuation">.</span><span class="constant">Notifier</span> <span class="keyword">new</span> n<span class="punctuation">.</span>plugins<span class="punctuation">.</span><span class="constant">NotifySend</span>
+
+    <span class="property">@notifier</span><span class="punctuation">.</span>notify <span class="property">success<span class='punctuation'>:</span></span> <span class="literal">true</span><span class="punctuation">,</span> <span class="property">title<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>Watchfile<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">message<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>loaded<span class="string_end">'</span></span>
+
+  <span class="property">init<span class='punctuation'>:</span></span> <span class="function">=></span>
+    data <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    <span class="property">@watches</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    promise <span class="operators">=</span> <span class="property">@loadWatchignore</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>ignoreList<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="property">@ignoreList</span> <span class="operators">=</span> data<span class="punctuation">.</span>ignoreList <span class="operators">=</span> ignoreList
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@indexPaths</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="group"><span class="group_begin">(</span>paths<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="hash"><span class="hash_begin">{</span><span class="property">@watchedPaths</span><span class="punctuation">,</span> <span class="property">@ignoredPaths</span><span class="hash_end">}</span></span> <span class="operators">=</span> paths
+      data <span class="operators">=</span> data<span class="punctuation">.</span>merge paths
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@loadWatchfile</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@evaluateWatchfile</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@registerWatchers</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span>
+      puts green <span class="string"><span class="string_begin">'</span>Watcher initialized<span class="string_end">'</span></span>
+      puts yellow <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>data<span class="punctuation">.</span>watchedPaths<span class="punctuation">.</span>length<span class="subst_end">}</span></span> files watched<span class="string_end">"</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@initializePlugins</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@startCLI</span><span class="group_end">)</span></span>
+    <span class="punctuation">.</span><span class="keyword">then</span> <span class="function">-></span>
+      <span class="keyword">return</span> data
+    <span class="punctuation">.</span>fail <span class="group"><span class="group_begin">(</span>err<span class="group_end">)</span></span> <span class="function">-></span>
+      error red err<span class="punctuation">.</span>message
+      puts err<span class="punctuation">.</span>stack<span class="punctuation">.</span>join <span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span>
+
+    <span class="property">@promise</span> <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> promise
+
+    process<span class="punctuation">.</span><span class="literal">on</span> <span class="string"><span class="string_begin">'</span>SIGINT<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@sigintListener</span>
+    process<span class="punctuation">.</span>stdin<span class="punctuation">.</span><span class="literal">on</span> <span class="string"><span class="string_begin">'</span>keypress<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@keypressListener</span>
+
+    promise
+
+  <span class="property">dispose<span class='punctuation'>:</span></span> <span class="function">=></span>
+    promise <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>fcall <span class="function">=></span>
+      watch<span class="punctuation">.</span>close<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">for</span> k<span class="punctuation">,</span>watch <span class="keyword">of</span> <span class="property">@watches</span>
+      <span class="property">@watches</span> <span class="operators">=</span> <span class="literal">null</span>
+      <span class="property">@ignoreList</span> <span class="operators">=</span> <span class="literal">null</span>
+      <span class="property">@watchedPaths</span> <span class="operators">=</span> <span class="literal">null</span>
+      <span class="property">@ignoredPaths</span> <span class="operators">=</span> <span class="literal">null</span>
+      <span class="property">@cli</span><span class="punctuation">.</span>close<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      <span class="property">@cli</span><span class="punctuation">.</span>removeListener <span class="string"><span class="string_begin">'</span>line<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@lineListener</span>
+      <span class="property">@cli</span><span class="punctuation">.</span>removeListener <span class="string"><span class="string_begin">'</span>SIGINT<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@lineListener</span>
+      process<span class="punctuation">.</span>removeListener <span class="string"><span class="string_begin">'</span>SIGINT<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@sigintListener</span>
+      process<span class="punctuation">.</span>stdin<span class="punctuation">.</span>removeListener <span class="string"><span class="string_begin">'</span>keypress<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@keypressListener</span>
+    promise <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="function">-></span> plugin<span class="punctuation">.</span>dispose<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span> <span class="keyword">for</span> k<span class="punctuation">,</span>plugin <span class="keyword">of</span> <span class="property">@plugins</span>
+    promise<span class="punctuation">.</span><span class="keyword">then</span> <span class="function">=></span> <span class="property">@plugins</span> <span class="operators">=</span> <span class="literal">null</span>
+
+  <span class="property">isIgnored<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>file<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@ignoreList</span><span class="punctuation">.</span>some <span class="group"><span class="group_begin">(</span>i<span class="group_end">)</span></span> <span class="function">-></span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span>i<span class="subst_end">}</span></span><span class="hereregexp_end">///</span></span><span class="punctuation">.</span>test file
+
+  <span class="property">watcher<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span> <span class="function">=></span>
+    lastTime <span class="operators">=</span> <span class="number">0</span>
+
+    changesSpacedEnough <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>time<span class="group_end">)</span></span> <span class="function">-></span>
+      result <span class="operators">=</span> time <span class="operators">-</span> lastTime <span class="operators">></span><span class="operators">=</span> <span class="number">1000</span>
+      lastTime <span class="operators">=</span> time
+      result
+
+    <span class="group"><span class="group_begin">(</span>action<span class="group_end">)</span></span> <span class="function">=></span>
+      time <span class="operators">=</span> <span class="keyword">new</span> <span class="constant">Date</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      <span class="keyword">return</span> <span class="keyword">unless</span> changesSpacedEnough<span class="group"><span class="group_begin">(</span>time<span class="punctuation">.</span>getTime<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="group_end">)</span></span>
+
+      <span class="property">@pathChanged</span> path<span class="punctuation">,</span> action
+
+  <span class="property">pathChanged<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>path<span class="punctuation">,</span> action<span class="group_end">)</span></span> <span class="function">-></span>
+    promise <span class="operators">=</span> <span class="property">@promise</span><span class="punctuation">.</span><span class="keyword">then</span> <span class="function">=></span>
+      <span class="property">@cliPaused</span> <span class="operators">=</span> <span class="literal">true</span>
+      puts cyan <span class="string"><span class="string_begin">"</span><span class="escaped">\r</span><span class="subst"><span class="subst_begin">#{</span>inverse <span class="string"><span class="string_begin">"</span> <span class="subst"><span class="subst_begin">#{</span>action<span class="punctuation">.</span>toUpperCase<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="subst_end">}</span></span>D <span class="string_end">"</span></span><span class="subst_end">}</span></span> <span class="subst"><span class="subst_begin">#{</span>path<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+    <span class="keyword">switch</span> path
+      <span class="keyword">when</span> <span class="constant">Neat</span><span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>Watchfile<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="constant">Neat</span><span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>.watchignore<span class="string_end">'</span></span><span class="group_end">)</span></span>
+        promise <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@dispose</span><span class="group_end">)</span></span><span class="punctuation">.</span><span class="keyword">then</span><span class="group"><span class="group_begin">(</span><span class="property">@init</span><span class="group_end">)</span></span>
+      <span class="keyword">else</span>
+        <span class="property">@plugins</span><span class="punctuation">.</span>each <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> plugin<span class="group_end">)</span></span> <span class="function">=></span>
+          <span class="keyword">if</span> plugin<span class="punctuation">.</span>match path
+            p <span class="operators">=</span> plugin<span class="punctuation">.</span>pathChanged path<span class="punctuation">,</span> action
+            promise <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span> <span class="function">=></span>
+              <span class="property">@activePlugin</span> <span class="operators">=</span> plugin
+              puts cyan <span class="string"><span class="string_begin">"</span><span class="subst"><span class="subst_begin">#{</span>inverse <span class="string"><span class="string_begin">"</span> <span class="subst"><span class="subst_begin">#{</span>name<span class="punctuation">.</span>toUpperCase<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="subst_end">}</span></span> <span class="string_end">"</span></span><span class="subst_end">}</span></span> <span class="subst"><span class="subst_begin">#{</span>path<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+            promise <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span> p
+
+    <span class="property">@promise</span> <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span> <span class="function">=></span>
+      <span class="property">@cliPaused</span> <span class="operators">=</span> <span class="literal">false</span>
+      <span class="property">@cli</span><span class="punctuation">.</span>prompt<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  <span class="property">runAll<span class='punctuation'>:</span></span> <span class="function">-></span>
+    promise <span class="operators">=</span> <span class="property">@promise</span><span class="punctuation">.</span><span class="keyword">then</span> <span class="function">=></span>
+      <span class="property">@cliPaused</span> <span class="operators">=</span> <span class="literal">true</span>
+      puts cyan <span class="string"><span class="string_begin">"</span><span class="escaped">\r</span><span class="subst"><span class="subst_begin">#{</span>inverse <span class="string"><span class="string_begin">'</span> WATCH <span class="string_end">'</span></span><span class="subst_end">}</span></span> Run all<span class="string_end">"</span></span>
+
+    <span class="property">@plugins</span><span class="punctuation">.</span>each <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> plugin<span class="group_end">)</span></span> <span class="function">=></span>
+      promise <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span> plugin<span class="punctuation">.</span>runAll
+
+    <span class="property">@promise</span> <span class="operators">=</span> promise<span class="punctuation">.</span><span class="keyword">then</span> <span class="function">=></span>
+      <span class="property">@cliPaused</span> <span class="operators">=</span> <span class="literal">false</span>
+      <span class="property">@cli</span><span class="punctuation">.</span>prompt<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  <span class="property">enqueue<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>promise<span class="group_end">)</span></span> <span class="function">-></span>
+    <span class="property">@promise</span> <span class="operators">=</span> <span class="property">@promise</span><span class="punctuation">.</span><span class="keyword">then</span> promise
+
+  <span class="property">loadWatchfile<span class='punctuation'>:</span></span> <span class="function">=></span>
+    defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    fs<span class="punctuation">.</span>readFile <span class="constant">Neat</span><span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>Watchfile<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> file<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">return</span> defer<span class="punctuation">.</span>reject err <span class="keyword">if</span> err<span class="operators">?</span>
+      defer<span class="punctuation">.</span>resolve file<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+    defer<span class="punctuation">.</span>promise
+
+  <span class="property">initializePlugins<span class='punctuation'>:</span></span> <span class="function">=></span>
+    <span class="constant">Q</span><span class="punctuation">.</span>all<span class="group"><span class="group_begin">(</span>plugin<span class="punctuation">.</span>init<span class="group"><span class="group_begin">(</span><span class="keyword">this</span><span class="group_end">)</span></span> <span class="keyword">for</span> k<span class="punctuation">,</span> plugin <span class="keyword">of</span> <span class="property">@plugins</span><span class="group_end">)</span></span>
+
+  <span class="property">loadWatchignore<span class='punctuation'>:</span></span> <span class="function">=></span>
+    defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    fs<span class="punctuation">.</span>readFile <span class="constant">Neat</span><span class="punctuation">.</span>resolve<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>.watchignore<span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> file<span class="group_end">)</span></span> <span class="function">-></span>
+      <span class="keyword">return</span> defer<span class="punctuation">.</span>reject err <span class="keyword">if</span> err<span class="operators">?</span>
+      defer<span class="punctuation">.</span>resolve file<span class="punctuation">.</span>toString<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span><span class="punctuation">.</span>split<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span><span class="escaped">\n</span><span class="string_end">'</span></span><span class="group_end">)</span></span><span class="punctuation">.</span>select <span class="group"><span class="group_begin">(</span>s<span class="group_end">)</span></span> <span class="function">-></span> s<span class="punctuation">.</span>length <span class="operators">></span> <span class="number">0</span>
+
+    defer<span class="punctuation">.</span>promise
+
+  <span class="property">indexPaths<span class='punctuation'>:</span></span> <span class="function">=></span>
+    defer <span class="operators">=</span> <span class="constant">Q</span><span class="punctuation">.</span>defer<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+    watchedPaths <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    ignoredPaths <span class="operators">=</span> <span class="punctuation">[</span><span class="punctuation">]</span>
+    search <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>root<span class="group_end">)</span></span> <span class="function">=></span> <span class="group"><span class="group_begin">(</span>cb<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="keyword">return</span> ignoredPaths<span class="punctuation">.</span>push<span class="group"><span class="group_begin">(</span>root<span class="group_end">)</span></span> <span class="keyword">and</span> cb<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">if</span> <span class="property">@isIgnored</span> root
+
+      watchedPaths<span class="punctuation">.</span>push root
+      fs<span class="punctuation">.</span>lstat root<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> stats<span class="group_end">)</span></span> <span class="function">-></span>
+        <span class="keyword">if</span> stats<span class="punctuation">.</span>isDirectory<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+          fs<span class="punctuation">.</span>readdir root<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>err<span class="punctuation">,</span> paths<span class="group_end">)</span></span> <span class="function">-></span>
+            parallel <span class="group"><span class="group_begin">(</span>search<span class="group"><span class="group_begin">(</span>path<span class="punctuation">.</span>resolve root<span class="punctuation">,</span> p<span class="group_end">)</span></span> <span class="keyword">for</span> p <span class="keyword">in</span> paths<span class="group_end">)</span></span><span class="punctuation">,</span> cb
+        <span class="keyword">else</span>
+          cb<span class="operators">?</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+    search<span class="group"><span class="group_begin">(</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="group_end">)</span></span> <span class="function">-></span>
+      defer<span class="punctuation">.</span>resolve <span class="hash"><span class="hash_begin">{</span>watchedPaths<span class="punctuation">,</span> ignoredPaths<span class="hash_end">}</span></span>
+    defer<span class="punctuation">.</span>promise
+
+  <span class="property">watchDirectory<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>directory<span class="punctuation">,</span> watcher<span class="group_end">)</span></span> <span class="function">=></span>
+    <span class="keyword">return</span> <span class="keyword">unless</span> existsSync directory
+    <span class="property">@watches</span><span class="punctuation">[</span>directory<span class="punctuation">]</span> <span class="operators">=</span> fs<span class="punctuation">.</span>watch directory<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>action<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="property">@enqueue</span> <span class="constant">Q</span><span class="punctuation">.</span>fcall <span class="function">=></span>
+        files <span class="operators">=</span> <span class="keyword">try</span>
+          fs<span class="punctuation">.</span>readdirSync directory
+        <span class="keyword">catch</span> err
+          <span class="punctuation">[</span><span class="punctuation">]</span>
+
+        <span class="keyword">for</span> file <span class="keyword">in</span> files
+          file <span class="operators">=</span> path<span class="punctuation">.</span>resolve directory<span class="punctuation">,</span> file
+
+          <span class="keyword">unless</span> file <span class="keyword">of</span> <span class="property">@watches</span> <span class="keyword">or</span> <span class="property">@isIgnored</span> file
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>FIXME In some cases, when exiting, an exception
+is raised here due to an ENOENT error.
+Currently the exception is silently handled.</p>
+</td>
+          <td class='code'><pre>            <span class="keyword">try</span>
+              stats <span class="operators">=</span> fs<span class="punctuation">.</span>lstatSync file
+              <span class="keyword">if</span> stats<span class="punctuation">.</span>isDirectory<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+                <span class="property">@watchDirectory</span> file<span class="punctuation">,</span> watcher
+              <span class="keyword">else</span>
+                w <span class="operators">=</span> watcher<span class="group"><span class="group_begin">(</span>file<span class="group_end">)</span></span>
+                w <span class="string"><span class="string_begin">'</span>create<span class="string_end">'</span></span><span class="punctuation">,</span> file
+                <span class="property">@rewatch</span> file<span class="punctuation">,</span> w
+
+              <span class="property">@watchedPaths</span><span class="punctuation">.</span>push file
+
+      <span class="punctuation">,</span> <span class="number">0</span>
+
+  <span class="property">rewatch<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>file<span class="punctuation">,</span> watcher<span class="group_end">)</span></span> <span class="function">=></span>
+    <span class="keyword">if</span> <span class="property">@watches</span><span class="punctuation">[</span>file<span class="punctuation">]</span><span class="operators">?</span>
+      <span class="property">@watches</span><span class="punctuation">[</span>file<span class="punctuation">]</span><span class="punctuation">.</span>close<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+    <span class="property">@watches</span><span class="punctuation">[</span>file<span class="punctuation">]</span> <span class="operators">=</span> fs<span class="punctuation">.</span>watch file<span class="punctuation">,</span> <span class="group"><span class="group_begin">(</span>action<span class="group_end">)</span></span> <span class="function">=></span>
+      exist <span class="operators">=</span> existsSync file
+      action <span class="operators">=</span> <span class="string"><span class="string_begin">'</span>delete<span class="string_end">'</span></span> <span class="keyword">unless</span> exist
+
+      watcher action<span class="punctuation">,</span> file
+      <span class="keyword">if</span> exist
+        <span class="property">@rewatch</span> file<span class="punctuation">,</span> watcher
+      <span class="keyword">else</span>
+        <span class="property">@watchedPaths</span>
+
+  <span class="property">registerWatchers<span class='punctuation'>:</span></span> <span class="function">=></span>
+    <span class="property">@watchedPaths</span><span class="punctuation">.</span>forEach <span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span> <span class="function">=></span>
+      stats <span class="operators">=</span> fs<span class="punctuation">.</span>lstatSync path
+      <span class="keyword">if</span> stats<span class="punctuation">.</span>isDirectory<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+        <span class="property">@watchDirectory</span> path<span class="punctuation">,</span> <span class="property">@watcher</span>
+      <span class="keyword">else</span>
+        <span class="property">@rewatch</span> path<span class="punctuation">,</span> <span class="property">@watcher</span><span class="group"><span class="group_begin">(</span>path<span class="group_end">)</span></span>
+
+  <span class="property">evaluateWatchfile<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>watchfile<span class="group_end">)</span></span> <span class="function">=></span>
+    <span class="property">@plugins</span> <span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+    currentWatcher <span class="operators">=</span> <span class="literal">null</span>
+    currentGroup <span class="operators">=</span> <span class="literal">null</span>
+
+    plugins <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>watchers<span class="string_end">'</span></span>
+
+    watcher <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> options<span class="punctuation">,</span> block<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="punctuation">[</span>options<span class="punctuation">,</span> block<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>block<span class="punctuation">,</span> options<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> options <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+      options <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+      <span class="keyword">if</span> name <span class="keyword">of</span> plugins
+        <span class="property">@plugins</span><span class="punctuation">[</span>name<span class="punctuation">]</span> <span class="operators">?</span><span class="operators">=</span> <span class="keyword">new</span> plugins<span class="punctuation">[</span>name<span class="punctuation">]</span> options<span class="punctuation">,</span> <span class="keyword">this</span>
+        currentWatcher <span class="operators">=</span> name
+        block<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      <span class="keyword">else</span>
+        warn yellow <span class="string"><span class="string_begin">"</span>Unregistered plugin <span class="subst"><span class="subst_begin">#{</span>name<span class="subst_end">}</span></span><span class="string_end">"</span></span>
+
+    group <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>name<span class="punctuation">,</span> block<span class="group_end">)</span></span> <span class="function">=></span>
+      currentGroup <span class="operators">=</span> name
+      block<span class="punctuation">.</span>call<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+    watch <span class="operators">=</span> <span class="group"><span class="group_begin">(</span>pattern<span class="punctuation">,</span> options<span class="punctuation">,</span> block<span class="group_end">)</span></span> <span class="function">=></span>
+      <span class="punctuation">[</span>options<span class="punctuation">,</span> block<span class="punctuation">]</span> <span class="operators">=</span> <span class="punctuation">[</span>block<span class="punctuation">,</span> options<span class="punctuation">]</span> <span class="keyword">if</span> <span class="keyword">typeof</span> options <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>function<span class="string_end">'</span></span>
+      options <span class="operators">|</span><span class="operators">|</span><span class="operators">=</span> <span class="hash"><span class="hash_begin">{</span><span class="hash_end">}</span></span>
+
+      re <span class="operators">=</span> <span class="hereregexp"><span class="hereregexp_begin">///</span><span class="subst"><span class="subst_begin">#{</span><span class="constant">Neat</span><span class="punctuation">.</span>root<span class="subst_end">}</span></span>/<span class="subst"><span class="subst_begin">#{</span>pattern<span class="subst_end">}</span></span><span class="hereregexp_end">///</span></span>
+      <span class="property">@plugins</span><span class="punctuation">[</span>currentWatcher<span class="punctuation">]</span><span class="punctuation">.</span>watch <span class="keyword">new</span> <span class="constant">Watch</span> re<span class="punctuation">,</span> options<span class="punctuation">,</span> block
+
+    <span class="top_level">eval</span> compile watchfile<span class="punctuation">,</span> <span class="property">bare<span class='punctuation'>:</span></span> <span class="literal">true</span>
+
+  <span class="property">startCLI<span class='punctuation'>:</span></span> <span class="function">=></span>
+    <span class="property">@cli</span> <span class="operators">=</span> rl<span class="punctuation">.</span>createInterface
+      <span class="property">input<span class='punctuation'>:</span></span> process<span class="punctuation">.</span>stdin
+      <span class="property">output<span class='punctuation'>:</span></span> process<span class="punctuation">.</span>stdout
+</pre></td>
+        </tr>
+        <tr>
+          <td class='docs'><p>completer: -&gt; console.log arguments</p>
+</td>
+          <td class='code'><pre>    <span class="property">@cli</span><span class="punctuation">.</span>setPrompt <span class="string"><span class="string_begin">'</span>neat: <span class="string_end">'</span></span>
+    <span class="property">@cli</span><span class="punctuation">.</span><span class="literal">on</span> <span class="string"><span class="string_begin">'</span>line<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@lineListener</span>
+    <span class="property">@cli</span><span class="punctuation">.</span><span class="literal">on</span> <span class="string"><span class="string_begin">'</span>SIGINT<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="property">@sigintListener</span>
+    <span class="property">@cli</span><span class="punctuation">.</span>prompt<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+  <span class="property">toString<span class='punctuation'>:</span></span> <span class="function">-></span> <span class="string"><span class="string_begin">"</span>[object Watcher]<span class="string_end">"</span></span>
+
+  <span class="property">sigintListener<span class='punctuation'>:</span></span> <span class="function">=></span>
+    <span class="keyword">if</span> <span class="property">@activePlugin</span><span class="operators">?</span><span class="punctuation">.</span>isPending<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+      puts yellow <span class="string"><span class="string_begin">"</span><span class="escaped">\n</span><span class="subst"><span class="subst_begin">#{</span><span class="property">@activePlugin</span><span class="subst_end">}</span></span> interrupted<span class="string_end">"</span></span>
+      <span class="property">@activePlugin</span><span class="punctuation">.</span>kill<span class="group"><span class="group_begin">(</span><span class="string"><span class="string_begin">'</span>SIGINT<span class="string_end">'</span></span><span class="group_end">)</span></span>
+    <span class="keyword">else</span>
+      process<span class="punctuation">.</span>exit<span class="group"><span class="group_begin">(</span><span class="number">1</span><span class="group_end">)</span></span>
+
+  <span class="property">keypressListener<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>s<span class="punctuation">,</span> key<span class="group_end">)</span></span> <span class="function">=></span>
+    <span class="keyword">if</span> key<span class="operators">?</span> <span class="keyword">and</span> key<span class="punctuation">.</span>ctrl <span class="keyword">and</span> key<span class="punctuation">.</span>name <span class="keyword">is</span> <span class="string"><span class="string_begin">'</span>l<span class="string_end">'</span></span>
+      process<span class="punctuation">.</span>stdout<span class="punctuation">.</span>write <span class="string"><span class="string_begin">'</span><span class="escaped">\u</span>001B[2J<span class="escaped">\u</span>001B[0;0f<span class="string_end">'</span></span>
+      <span class="property">@cli</span><span class="punctuation">.</span>prompt<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">unless</span> <span class="property">@cliPaused</span>
+
+  <span class="property">lineListener<span class='punctuation'>:</span></span> <span class="group"><span class="group_begin">(</span>line<span class="group_end">)</span></span> <span class="function">=></span>
+    <span class="keyword">unless</span> <span class="property">@cliPaused</span>
+      <span class="keyword">switch</span> line
+        <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span><span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>a<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>all<span class="string_end">'</span></span> <span class="keyword">then</span> <span class="property">@runAll</span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+        <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>q<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>quit<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>e<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>exit<span class="string_end">'</span></span> <span class="keyword">then</span> process<span class="punctuation">.</span>exit<span class="group"><span class="group_begin">(</span><span class="number">1</span><span class="group_end">)</span></span>
+        <span class="keyword">when</span> <span class="string"><span class="string_begin">'</span>h<span class="string_end">'</span></span><span class="punctuation">,</span> <span class="string"><span class="string_begin">'</span>help<span class="string_end">'</span></span>
+          <span class="global">console</span><span class="punctuation">.</span>log <span class="heredocs"><span class="heredocs_begin">"""</span>
+          <span class="subst"><span class="subst_begin">#{</span>cyan <span class="string"><span class="string_begin">'</span>↩, a, all<span class="string_end">'</span></span><span class="subst_end">}</span></span>: Run all plugins.
+          <span class="subst"><span class="subst_begin">#{</span>cyan <span class="string"><span class="string_begin">'</span>h, help<span class="string_end">'</span></span><span class="subst_end">}</span></span>: Print this message.
+          <span class="subst"><span class="subst_begin">#{</span>cyan <span class="string"><span class="string_begin">'</span>q, quit, e, exit<span class="string_end">'</span></span><span class="subst_end">}</span></span>: Kill cake watch.
+          <span class="heredocs_end">"""</span></span>
+          <span class="property">@cli</span><span class="punctuation">.</span>prompt<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+        <span class="keyword">else</span>
+          puts red <span class="string"><span class="string_begin">"</span>Unknown command '<span class="subst"><span class="subst_begin">#{</span>line<span class="subst_end">}</span></span>'<span class="string_end">"</span></span>
+          <span class="property">@cli</span><span class="punctuation">.</span>prompt<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span>
+
+<span class="global">module</span><span class="punctuation">.</span><span class="global">exports</span> <span class="operators">=</span> <span class="constant">Watcher</span>
+
+</pre></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

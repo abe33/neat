@@ -25,7 +25,7 @@
     <div id='main'>
       <header>
   <h1>neat</h1>
-  <p>1.1.2</p>
+  <p>1.2.0</p>
 </header>
       <nav>
   <ul>
@@ -36,22 +36,18 @@
       <a class='icon-file-alt' href='pages_index.html'>Pages</a>
     </li>
     <li>
-      <a class='icon-sitemap' href='docs/src_index.html'>Documentation</a>
+      <a class='icon-sitemap' href='docs&#47;src_index.html'>Documentation</a>
     </li>
     <li>
-      <a class='icon-github' href='http://github.com/abe33/neat'>GitHub</a>
+      <a class='icon-github' href='http:&#47;&#47;github.com&#47;abe33&#47;neat'>GitHub</a>
     </li>
   </ul>
 </nav>
       <section><h1>Cup Files</h1>
 <p>Cup files are simple CoffeeScript code compiled and then evaluated with the
-<code>eval</code> function.
-
-</p>
+<code>eval</code> function.</p>
 <p>For instance, in the exemple below, the cup string will be evaluated
-as an object:
-
-</p>
+as an object:</p>
 <pre><code>cup <span class="operators">=</span> <span class="constant">Neat</span><span class="punctuation">.</span><span class="global">require</span> <span class="string"><span class="string_begin">'</span>utils/cup<span class="string_end">'</span></span>
 
 source <span class="operators">=</span> <span class="heredocs"><span class="heredocs_begin">"""</span>
@@ -63,39 +59,33 @@ age: 31
 object <span class="operators">=</span> cup<span class="punctuation">.</span>read source
 <span class="comment"># object = {firstName: 'Cédric', lastName: 'Néhémie', age: 31}</span></code></pre>
 <p>Any CoffeeScript expression can be used as a cup content,
-as long as it return a value. All the following forms are valid cup string:
-
-</p>
-<p>An object literal:
-</p>
+as long as it return a value. All the following forms are valid cup string:</p>
+<p>An object literal:</p>
 <pre><code><span class="property">firstName<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>Cédric<span class="string_end">'</span></span>
 <span class="property">lastName<span class='punctuation'>:</span></span> <span class="string"><span class="string_begin">'</span>Néhémie<span class="string_end">'</span></span>
 <span class="property">age<span class='punctuation'>:</span></span> <span class="number">31</span></code></pre>
-<p>A function declaration:
-</p>
+<p>A function declaration:</p>
 <pre><code><span class="function">-></span> <span class="string"><span class="string_begin">"</span>Hello World<span class="string_end">"</span></span></code></pre>
-<p>A self-called function that return a value:
-</p>
+<p>A self-called function that return a value:</p>
 <pre><code><span class="group"><span class="group_begin">(</span><span class="function">-></span>
   <span class="constant">Faker</span> <span class="operators">=</span> <span class="global">require</span> <span class="string"><span class="string_begin">'</span>Faker<span class="string_end">'</span></span>
 
   <span class="constant">Faker</span><span class="punctuation">.</span><span class="constant">Helpers</span><span class="punctuation">.</span>createCard<span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="punctuation">[</span><span class="number">0.</span><span class="number">.20</span><span class="punctuation">]</span>
 <span class="group_end">)</span></span><span class="group"><span class="group_begin">(</span><span class="group_end">)</span></span></code></pre>
-<p>The only constraint is that the value must be returned synchronously.
-</p>
+<p>The only constraint is that the value must be returned synchronously.</p>
 </section>
       <footer>
   <nav>
     <h4>Links</h4>
     <ul>
       <li>
-        <a href='http://github.com/abe33/neat/issues/'>Issues</a>
+        <a href='http:&#47;&#47;github.com&#47;abe33&#47;neat&#47;issues&#47;'>Issues</a>
       </li>
       <li>
-        <a href='docs/src_index.html'>Documentation</a>
+        <a href='docs&#47;src_index.html'>Documentation</a>
       </li>
       <li>
-        <a href='http://github.com/abe33/neat'>GitHub</a>
+        <a href='http:&#47;&#47;github.com&#47;abe33&#47;neat'>GitHub</a>
       </li>
     </ul>
   </nav>
