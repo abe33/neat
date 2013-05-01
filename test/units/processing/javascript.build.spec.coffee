@@ -1,6 +1,6 @@
 require '../../test_helper'
 
-javascript = require '../../../lib/processing/javascript'
+javascript = require '../../../lib/processing/javascript.build'
 
 describe 'javascript processing promise', ->
   given 'buffer', ->

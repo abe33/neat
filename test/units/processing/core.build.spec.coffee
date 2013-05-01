@@ -3,7 +3,7 @@ Q = require 'q'
 fs = require 'fs'
 path = require 'path'
 
-core = require '../../../lib/processing/core'
+core = require '../../../lib/processing/core.build'
 
 describe 'core processing promise', ->
   beforeEach ->

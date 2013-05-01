@@ -46,7 +46,7 @@ class Build
     .then (paths) -> paths.flatten().uniq()
 
   loadBuffer: (paths) ->
-    processors.core.readFiles(paths)
+    processors.readFiles(paths)
 
   processBuffer: (buffer) ->
     promise = Q.fcall(-> buffer)

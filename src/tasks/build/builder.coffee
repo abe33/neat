@@ -2,7 +2,7 @@ fs = require 'fs'
 path = require 'path'
 glob = require 'glob'
 Q = require 'q'
-{compile} = require 'coffee-script'
+{compile:compileCoffee} = require 'coffee-script'
 Neat = require '../../neat'
 Build = require './build'
 logs = Neat.require 'utils/logs'
@@ -32,7 +32,8 @@ class Builder
       promise = promise.then runBuild build for build in @builds
       promise
     .fail (err) ->
-      console.error err
+      console.error err.message
+      console.error err.stack
 
   glob: (path) ->
     defer = Q.defer()
@@ -41,9 +42,8 @@ class Builder
 
   getLocals: (processors) ->
     lines = []
-    processors.each (pkg,collection) ->
-      collection.each (name, processor) ->
-        lines.push "var #{name} = processors.#{pkg}.#{name};"
+    processors.each (name,collection) ->
+      lines.push "var #{name} = processors.#{name};"
 
     lines.join '\n'
 
@@ -56,6 +56,6 @@ class Builder
 
     defer.promise
 
-  compileNeatfile: -> (neatfile) => compile neatfile
+  compileNeatfile: -> (neatfile) => compileCoffee neatfile
 
 module.exports = Builder

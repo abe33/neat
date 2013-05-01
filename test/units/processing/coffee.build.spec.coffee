@@ -1,6 +1,6 @@
 require '../../test_helper'
 
-coffee = require '../../../lib/processing/coffee'
+coffee = require '../../../lib/processing/coffee.build'
 
 describe 'coffee processing promise', ->
   beforeEach ->

@@ -88,9 +88,9 @@ describe 'Build', ->
 
     withBuildSpies ->
       beforeEach ->
-        @build.do processors.coffee.compile bare: true
-        @build.do processors.core.relocate 'test/units/tasks/build', 'lib'
-        @build.do processors.core.writeFiles
+        @build.do processors.compile bare: true
+        @build.do processors.relocate 'test/units/tasks/build', 'lib'
+        @build.do processors.writeFiles
 
       subject 'promise', -> @build.processBuffer @buffer
 
@@ -106,9 +106,9 @@ describe 'Build', ->
       beforeEach ->
         @build.source fixture 'tasks/build/**/*.coffee'
         @build.source fixture 'tasks/build/**/*.coffee'
-        @build.do processors.coffee.compile bare: true
-        @build.do processors.core.relocate 'test/units/tasks/build', 'lib'
-        @build.do processors.core.writeFiles
+        @build.do processors.compile bare: true
+        @build.do processors.relocate 'test/units/tasks/build', 'lib'
+        @build.do processors.writeFiles
 
       subject 'promise', -> @build.process()
 
