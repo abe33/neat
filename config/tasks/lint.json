@@ -18,7 +18,7 @@
 
   "indentation" : {
     "value" : 2,
-    "level" : "error"
+    "level" : "ignore"
   },
 
   "no_implicit_braces" : {
@@ -37,8 +37,11 @@
     "level" : "error"
   },
 
+  "no_backticks" : {
+    "level" : "ignore"
+  },
+
   "cyclomatic_complexity" : {
-    "value" : 11,
     "level" : "ignore"
   }
 

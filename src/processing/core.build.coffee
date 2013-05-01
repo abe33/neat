@@ -45,7 +45,7 @@ processExtension = (ext, process) ->
   check ext, 'Extension argument is mandatory'
   check process, 'Function argument is mandatory'
 
-  (buffer) ->
+  return (buffer) ->
     checkBuffer buffer
 
     defer = Q.defer()

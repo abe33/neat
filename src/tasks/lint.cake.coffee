@@ -44,7 +44,7 @@ exports['lint'] = neatTask
 
         logs = []
         opts =
-          noStdout: true
+          stdout: (data) -> logs.push -> print data
           stderr: (data) -> logs.push -> print data
 
         run COFFEE_LINT, params, opts, (status) ->
