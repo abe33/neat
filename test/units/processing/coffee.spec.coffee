@@ -49,8 +49,8 @@ describe 'coffee processing promise', ->
           promise(-> @compileBuffer)
           .should.beRejected()
           .should.failWith 'the file name and line number', (err) ->
-            expect(err.message).toBe("In file 'foo.coffee':
- Parse error on line 1: Unexpected 'TERMINATOR'")
+            expect(err.message)
+            .toBe("In file 'foo.coffee': unexpected TERMINATOR")
 
     describe 'when called with options', ->
       beforeEach ->
@@ -88,8 +88,8 @@ describe 'coffee processing promise', ->
           promise(-> @compileBuffer)
           .should.beRejected()
           .should.failWith 'the file name and line number', (err) ->
-            expect(err.message).toBe("In file 'foo.coffee':
- Parse error on line 1: Unexpected 'TERMINATOR'")
+            expect(err.message)
+            .toBe("In file 'foo.coffee': unexpected TERMINATOR")
 
   describe 'annotate', ->
     it 'should exists', ->
