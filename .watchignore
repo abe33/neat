@@ -1,0 +1,10 @@
+\.git
+\.pages
+\.tests
+.*\.tmp
+.DS_Store
+lib
+packages
+node_modules
+test/fixtures/utils/files/foo.js
+test/fixtures/utils/files/foo/bar.coffee

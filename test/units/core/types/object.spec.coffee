@@ -278,3 +278,12 @@ describe 'Object::destroy', ->
     res = source.destroy 'foo'
 
     expect(res).toBeNull()
+
+describe 'Object::tap', ->
+  it 'should call the passed-in block with the current object', ->
+    source = {}
+    tapped = source.tap (o) ->
+      o.foo = 'bar'
+
+    expect(source).toBe(tapped)
+    expect(source.foo).toBe('bar')

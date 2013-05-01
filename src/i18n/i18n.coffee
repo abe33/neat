@@ -61,7 +61,7 @@ class I18n
     @locales = {}
     docs = readFilesSync findSync 'yml', @paths
 
-    @deepMerge @locales, yaml.load content for path, content of docs
+    @deepMerge @locales, yaml.load content.toString() for path, content of docs
     @languages = @locales.sortedKeys()
 
   ##### I18n::deepMerge

@@ -56,6 +56,10 @@ asyncErrorTrap = (errCallback, callback) -> (err, args...) ->
     if errCallback? then return errCallback err else return err
   callback?.apply null, args
 
+##### deprecated
+
+deprecated = (message, target) -> decorate target, 'deprecated', message
+
 ##### describe
 
 # Defines the description of the `target`.
@@ -169,10 +173,11 @@ neatTask = (options) ->
   action
 
 ##### neatTaskAlias
-neatTaskAlias = (source, alias) ->
+neatTaskAlias = (source, alias, environment) ->
   neatTask
     name: alias
     description: _('neat.tasks.alias', task: source)
+    environment: environment
     action: (callback) ->
       task = Neat.task(source)
       task callback
@@ -205,6 +210,7 @@ run = (command, params, options, callback) ->
     exe.stderr.on 'data',  options?.stderr || (data) -> print data.toString()
 
   exe.on 'exit', (status) -> callback? status
+  exe
 
 ##### usages
 
@@ -214,15 +220,16 @@ run = (command, params, options, callback) ->
 usages = (usages..., target) -> decorate target, 'usages', usages
 
 module.exports = {
-  aliases,
-  asyncErrorTrap,
-  decorate,
-  describe,
-  environment,
-  hashArguments,
-  help,
-  neatTask,
-  neatTaskAlias,
-  run,
-  usages,
+  aliases
+  asyncErrorTrap
+  decorate
+  describe
+  deprecated
+  environment
+  hashArguments
+  help
+  neatTask
+  neatTaskAlias
+  run
+  usages
 }

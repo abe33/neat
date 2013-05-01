@@ -1,18 +1,25 @@
+os = require 'os'
 path = require 'path'
-growly = require 'growly'
 Neat = require '../neat'
 {queue} = Neat.require 'async'
 {neatTask} = Neat.require 'utils/commands'
 {namespace} = Neat.require 'utils/exports'
 {error, info, green, red, yellow, puts} = Neat.require 'utils/logs'
+n = Neat.require 'notifications'
 _ = Neat.i18n.getHelper()
 
+notifier = switch os.platform()
+  when 'darwin'
+    new n.Notifier new n.plugins.Growly
+  when 'linux'
+    new n.Notifier new n.plugins.NotifySend
 
 beforeTests = (test) -> (callback) ->
-  Neat.task('compile') (status) ->
+  Neat.task('build') (status) ->
     if status is 0 then test callback else callback? 1
 
 runTests = (name, dir) -> (callback) ->
+
   statuses = []
   test = (k,f,n,d) -> (callback) ->
     f n, d, (status, result) ->
@@ -35,21 +42,21 @@ handleTestResult = (status, result, callback) ->
   if status is 0
     info green _('neat.tasks.test.tests_done')
     msg = "#{("#{v} #{k}" for k,v of result).join ', '}"
-    growly.notify msg, {
-      icon: Neat.resolve('res/success.png')
+    notifier.notify
       title: _('neat.tasks.test.tests_done')
-      label: 'success'
-    }, -> callback? status
+      message: msg
+      success: true
+    , -> callback? status
 
 
   else
     error red _('neat.tasks.test.tests_failed')
     msg = "#{("#{v} #{k}" for k,v of result).join ', '}"
-    growly.notify msg, {
-      icon: Neat.resolve('res/failure.png'),
+    notifier.notify
       title: _('neat.tasks.test.tests_failed')
-      label: 'failure'
-    }, -> callback? status
+      message: msg
+      success: true
+    , -> callback? status
 
 index = neatTask
   name:'test'

@@ -1,21 +1,25 @@
-npm 'colors', '0.6.0-1'
-npm 'commander', '1.0.5'
-npm 'coffee-script', '1.4.0'
-npm 'haml-coffee', '1.6.2'
-npm 'mustache', '0.7.0'
-npm 'js-yaml', '1.0.2'
-npm 'glob', '3.1.14'
+npm 'colors', '~0.6.0-1 '
+npm 'commander', '~1.1.1'
+npm 'coffee-script', '~1.6.2'
+npm 'haml-coffee', '~1.11.1'
+npm 'mustache', '~0.7.2'
+npm 'js-yaml', '2.0.5'
+npm 'glob', '~3.2.1'
+npm 'uglify-js', '~1.3.4'
+npm 'stylus', '~0.30.1'
+npm 'marked', '~0.2.8'
+npm 'q', '0.9.3'
+npm 'growly', '~1.1.1'
+npm 'notify-send', '~0.1.2'
 
+# Theses are version customized for Neat
 npm 'docco', 'git://github.com/abe33/docco.git#feature-exports'
-npm 'uglify-js', '1.3.4'
 npm 'highlight.js', 'git://github.com/abe33/highlight.js.git#node_build'
 
 # These are required to provides the default `cake test` and `cake lint`
 # tasks to the user projects.
-npm 'coffeelint', '0.2.0'
-npm 'jasmine-node', 'git://github.com/abe33/jasmine-node.git#patch-1'
 
-npm 'stylus', '0.30.1'
-npm 'marked'
-npm 'q'
-npm 'growly'
+# The latest for which I know promise chaining doesn't fail
+npm 'coffeelint', '~0.2.0'
+
+npm 'jasmine-node',  'git://github.com/abe33/jasmine-node.git#feature_multiple_paths_args'

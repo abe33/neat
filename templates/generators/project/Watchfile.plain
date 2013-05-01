@@ -1,0 +1,13 @@
+group 'neat', ->
+  watcher 'compile', ->
+    watch 'src/(.*)\\.coffee'
+
+  watcher 'package_json', ->
+    watch '\\.neat'
+
+  watcher 'nemfile', ->
+    watch 'Nemfile'
+
+  watcher 'lint', ->
+    watch 'src/.*\\.coffee$'
+    watch 'test/.*\\.coffee$'

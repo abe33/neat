@@ -1,6 +1,11 @@
 require '../../test_helper'
 Neat = require '../../../lib/neat'
-{run} = require '../../../lib/utils/commands'
+{run} = Neat.require 'utils/commands'
+{print} = require 'util'
+
+options = {}
+  # stderr: (data)-> print data
+  # stdout: (data)-> print data
 
 withBundledProject 'foo', ->
 
@@ -43,26 +48,16 @@ withBundledProject 'foo', ->
       runs ->
         withCompiledFile taskPath, taskContent, ->
           withCompiledFile hooksPath, hooksContent, ->
-            ended = true
+            run 'node', [NEAT_BIN, 'g', 'config:packager:compile'], options, ->
+              ended = true
 
-      waitsFor progress(-> ended), 'hooks compilation', 5000
+      waitsFor progress(-> ended), 'hooks compilation', 20000
 
     describe 'and running cake test', ->
-      it 'should trigger the hooks', (done) ->
-
-        run 'cake', ['test'], (status) ->
-          expect(status).toBe(0)
-          expect(inProject 'test.log')
-            .toContain("""hooks added
-                          beforeTask called
-                          afterTask called""")
-          done()
-
-    describe 'and running cake lint', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['lint'], (status) ->
+          run 'cake', ['test'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -70,13 +65,27 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake lint timed out', 5000
+        waitsFor progress(-> ended), 'cake test timed out', 20000
+
+    describe 'and running cake lint', ->
+      it 'should trigger the hooks', ->
+        ended = false
+        runs ->
+          run 'cake', ['lint'], options, (status) ->
+            expect(status).toBe(0)
+            expect(inProject 'test.log')
+              .toContain("""hooks added
+                            beforeTask called
+                            afterTask called""")
+            ended = true
+
+        waitsFor progress(-> ended), 'cake lint timed out', 20000
 
     describe 'and running cake foo', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['foo'], (status) ->
+          run 'cake', ['foo'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -85,13 +94,13 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake foo timed out', 5000
+        waitsFor progress(-> ended), 'cake foo timed out', 20000
 
     describe 'and running cake bump', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['bump'], (status) ->
+          run 'cake', ['bump'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -100,14 +109,14 @@ withBundledProject 'foo', ->
 
             ended = true
 
-        waitsFor progress(-> ended), 'cake bumb timed out', 5000
+        waitsFor progress(-> ended), 'cake bumb timed out', 20000
 
 
     describe 'and running cake bump:minor', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['bump:minor'], (status) ->
+          run 'cake', ['bump:minor'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -115,13 +124,13 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake bumb:minor timed out', 5000
+        waitsFor progress(-> ended), 'cake bumb:minor timed out', 20000
 
     describe 'and running cake bump:major', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['bump:major'], (status) ->
+          run 'cake', ['bump:major'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -129,13 +138,13 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake bumb:major timed out', 5000
+        waitsFor progress(-> ended), 'cake bumb:major timed out', 20000
 
     describe 'and running cake compile', ->
       it 'should trigger the hooks', ->
         ended = false
         runs ->
-          run 'cake', ['compile'], (status) ->
+          run 'cake', ['compile'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -143,13 +152,13 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake compile timed out', 5000
+        waitsFor progress(-> ended), 'cake compile timed out', 20000
 
     describe 'and running cake version', ->
       it 'should trigger the hooks', ->
-        ended = true
+        ended = false
         runs ->
-          run 'cake', ['version'], (status) ->
+          run 'cake', ['version'], options, (status) ->
             expect(status).toBe(0)
             expect(inProject 'test.log')
               .toContain("""hooks added
@@ -157,6 +166,6 @@ withBundledProject 'foo', ->
                             afterTask called""")
             ended = true
 
-        waitsFor progress(-> ended), 'cake version timed out', 5000
+        waitsFor progress(-> ended), 'cake version timed out', 20000
 
 

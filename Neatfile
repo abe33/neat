@@ -1,0 +1,10 @@
+build 'lib', (b) ->
+  # Use glob like expression to source the build
+  b.source 'src/**/*.coffee'
+  b.source 'src/tasks/**/*.coffee'
+
+  # Invoke the processors you need
+  b.do(compile bare: false)
+  .then(remove 'lib')
+  .then(relocate 'src', 'lib')
+  .then(writeFiles)

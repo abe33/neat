@@ -24,7 +24,7 @@ module.exports = (config) ->
     testDir = "#{Neat.root}/#{test}"
     return callback? 0 unless existsSync testDir
 
-    args = ['.', '--color', '--coffee', '--test-dir']
+    args = ['--color', '--coffee', '--test-dir']
 
     result = null
     options =

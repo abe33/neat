@@ -1,6 +1,8 @@
 # Introduction
 
 [![Build Status](https://travis-ci.org/abe33/neat.png?branch=0.0.70)](https://travis-ci.org/abe33/neat)
+[![Dependency Status](https://gemnasium.com/abe33/neat.png)](https://gemnasium.com/abe33/neat)
+[![NPM version](https://badge.fury.io/js/neat.png)](http://badge.fury.io/js/neat)
 
 A command line tool for [Coffeescript][coffee] projects inspired by [Rails][rails] and running on [Node.js][node] .
 

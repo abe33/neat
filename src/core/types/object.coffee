@@ -221,6 +221,12 @@ def Object, sortedKeys: -> @keys().sort()
 #     object.sortedValues() # [20, 10]
 def Object, sortedValues: -> @[k] for k in @sortedKeys()
 
+##### Object::tap
+
+# Pass a block to the `tap` method in order to configure an object.
+# The object is returned.
+def Object, tap: (block) -> block.call(this, this); this
+
 ##### Object::type
 
 # Returns the results of calling `Object::toString` on the current object

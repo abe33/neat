@@ -7,232 +7,220 @@ As result, Neat provides tools to deal with compilation and packaging of
 These tools will allow you to perform operation on files at any point
 of the process. And you can even easily build your own operators.
 
-Most of the hard work is handled by the `cake package` task,
-also aliased as `cake compile`. Basically, it takes a bunch
-of compilation configuration files, loaded from the
-`config/packages` directory, and process them.
+Most of the hard work is handled by the `cake build` task,
+also aliased as `cake compile`. Builds are defined in the project `Neatfile`.
 
 @toc
 
-## Package Configuration
+## Neatfile
 
-Compilation configuration file are [cup files](cup.html) defining
-the files to include in the package, in which order, and what to do with
-them.
+Every Neat project have a `Neatfile` at its root. The `Neatfile` describes
+the build process to operate for a project.
 
-The default compilation configuration file (the one created for a new project)
-look like that:
+The default `Neatfile` look like this:
 
 ```
-name: "myProject"
-path: 'lib'
-includes: [
-  'src/**/*.coffee'
-]
-operators: [
-  'path:change'
-  'path:reset'
-  'compile'
-  'create:file'
-]
+build 'lib', (build) ->
+  # Use glob like expression to source the build
+  build.source 'src/**/*.coffee'
+
+  # Invoke the processors you need
+  build
+  .do(compile bare: false)      # compile all the files
+  .then(remove 'lib')           # removes the lib directory
+  .then(relocate 'src', 'lib')  # relocate the compiled file to lib
+  .then(writeFiles)             # write files to their path
 ```
 
-The first property `name` is only used to define the final filename when using
-the `join` operator, but is also useful as reminder.
+The `build` call initiate a new build with the name `lib`. The build is then
+passed as argument to the block.
 
-The `path` property is an option for the `path:change` and `path:reset`
-operators, it defines the relative path, inside the project, where place
-the packaged files. By default the package tasks place output files in
-the `packages` directory, this operator allow you to change that from
-a configuration file.
+The `build.source` method allow to defines the patterns for files to process
+in this build. As for the example, all the files with a coffee extension
+will be processed by the build.
 
-The `includes` property is an array that contains
-[`glob`](https://github.com/isaacs/node-glob) patterns of files to include
-in the package. These files are read and then stored in a hash with the file
-path as key and its content as value as returned by `fs.readFile`.
-This `buffer` will be passed sequencially to the specified `operators`.
+The `build.do` and `build.then` add operations in the build stack.
+Each of these operation will be executed sequentially, passing from one
+to another their results.
 
-The `operators` property is an arrays containing the identifier of the
-operators to apply to the packaged files. See below for the details about
-operators.
+### Build Operators
 
-## Custom Configuration
+Operators are promise that operates on a file buffer. A file buffer
+is a simple object where keys contains the file's path and values are
+the content of these files. Such as
 
-Neat provides a generator to create compilation configuration file, run :
-```bash
-neat generate config:packager my_package_name
 ```
-And then a `my_package_name.cup` will have been generated
-in the `config/packages` directory.
-
-You can obviously create your configuration file by hand, just keep
-in mind that the minimal requirement a compilation configuration need
-to fullfil is to have the following properties:
-```
-includes: []
-operators: []
+buffer = {
+  '/path/to/file_1': 'Content file 1'
+  '/path/to/file_2': 'Content file 2'
+}
 ```
 
-## Operators
+The following operators are currently available:
 
-Operators are simple asynchronous function with the following signature:
-```
-my_operator = (buffer, config, errCallback, callback) ->
-  # must return a buffer, config and errCallback in the callback for chaining.
-  callback buffer, config, errCallback
-```
-Given the files that were found using the patterns in `includes`, an object
-is created with the path of the file as key and its content as value.
-This object is then passed to the first operator in the list and processed
-all along the stack of operators.
+**Note:** Some processors requires a configuration, they'll be listed with
+their arguments in the list below such as `compile(options)`. Processors
+that don't needs arguments must be passed direcly without calling them.
 
-Note that some operators return a buffer where all the paths was changed,
-it means that the order of the operators will have an impact on their
-utility. For instance the `annotate` operators may allways be placed
-before a `join` or any other operator that changes the path or the content
-of the file, if not, the files and line numbers present in the annotations
-won't make sense.
+#### Common
 
-The following operators are available from start at this time:
+  * `fileFooter(footer)`: Appends the given `footer` to each files in the
+    buffer.
 
-##### `annotate:class`
-Annotates a class with comments for all its members.
-The annotation appears as javascript comments wrapped in backticks.
-```
-`/* /path/to/file&lt;Class&gt: line: X */`
-`/* /path/to/file&lt;Class.member&gt: line: X */`
-`/* /path/to/file&lt;Class::member&gt: line: X */`
-```
-##### `annotate:file`
-Annotates the files start with a header comment.
-The annotation appears as javascript comments wrapped in backticks.
-```
-`/* /path/to/file */`
-```
-##### `compile`
-Compiles the files in the buffer through CoffeeScript.
-The extension in the file path is replaced with `.js`.
-The `compile` operator accept a `bare` property which, when true,
-compile the source without the wrapper function.
+  * `fileHeader(header)`: Prepends the given `header` to each files in the
+    buffer.
 
-##### `create:file`
-Creates the output files in their respectives path.
-This operator can be called anytime, meaning you can, in one config,
-produce and output a joined CoffeeScript file, then the compiled
-javascript file, and then the minified Javascript file, below an example:
+    Given a file `templates/LICENSE` containing:
+    ```javascript
+    /*
+     * This is the license file.
+     */
+    ```
+
+    You can prepend it to all files in the build with:
+    ```
+    build.do(fileHeader load 'templates/LICENSE')
+    ```
+  * `join(filename)`: Joins all the files in the buffer into a single file
+    whose path is `filename`.
+  * `processExtension(ext, process)`: Performs operations on files that matches
+    the passed-in extension. The `process` argument is a promise returning
+    function that takes a promise whose value is a filtered buffer.
+    The function must return a promise whose value is a buffer as well.
+    ```
+    build 'documentation', (build) ->
+      build.source 'src/**/*.coffee'
+      build.source 'src/**/*.js'
+      build.source 'templates/**/*.html'
+
+      build
+      .do(remove 'docs')
+      .then(processExtension 'coffee', (unit) ->
+        unit.then(compile bare: true)
+
+      ).then(processExtension 'js', (unit) ->
+        unit
+        .then(uglify)
+        .then(fileHeader load 'templates/LICENSE')
+        .then(relocate 'src', 'docs/js')
+
+      ).then(processExtension 'html', (unit) ->
+        unit.then(relocate 'templates', 'docs')
+
+      ).then(writeFiles)
+
+    ```
+  * `readFiles(paths)`: Loads the specified files and return a files buffer.
+    This processor is automatically added at the build start provides the
+    buffer containing all the files matching the patterns defined with the
+    `build.source` method.
+  * `relocate(from, to)`: Replace the `from` pattern with the `to` pattern
+    in the files paths.
+  * `remove(path)`: Removes the given path.
+  * `writeFiles`: Writes all the files in the buffer at their respective
+    path. Missing directories are created.
+
+    The processor can be placed severla time in the processing stack.
+    For instance you can write the files berfore and minification it will
+    give you files with `min.js` extension for the minified versions.
+
+#### CoffeeSCript
+
+  * `annotate`: Add JavaScript annotation comments in the coffee script files.
+    The results looks as:
+    ```
+    `/* foo.coffee */`
+    Generator = ->
+      `/* foo.coffee<Foo> line:2 */`
+      class Foo
+        `/* foo.coffee<Foo.static> line:3 */`
+        @static: ->
+        `/* foo.coffee<Foo::constructor> line:4 */`
+        constructor: ->
+        `/* foo.coffee<Foo::method> line:5 */`
+        method: ->
+    ```
+  * `compile(options)`: Compiles the files in the buffer through the
+    the CoffeeScript compiler and change the path extension from `coffee`
+    to `js`.
+  * `exportsToPackage(package)`: Replace the module exports of nodejs code
+    with a packaged version.
+
+    For instance:
+    ```
+    build.do(exportsToPackage 'path.to.package')
+    ```
+    Will prepend the following snippet in all files:
+    ```
+    @path ||= {}
+    @path.to ||= {}
+    @path.to.package ||= {}
+    ```
+    Below is various use cases and their results:
+    ```
+    # before
+    exports.a = -> #...
+    # after
+    @path.to.package.a = -> #...
+    ```
+    ```
+    # before
+    exports['a'] = -> #...
+    # after
+    @path.to.package['a'] = -> #...
+    ```
+    ```
+    # before
+    module.exports = {a,b,c: 10}
+    # after
+    @path.to.package.a = a
+    @path.to.package.b = b
+    @path.to.package.c = 10
+    ```
+    ```
+    # before
+    module.exports = MyClass
+    # after
+    @path.to.package.MyClass = MyClass
+    # When a variable name is affected as exports, the variable
+    # name is used as property name on the package. It's useful
+    # to have a class available as module in node and accessible
+    # through its name when stored in a package.
+    ```
+
+  * `stripRequires`: Removes all lines that contains a call to `require`.
+
+#### JavaScript
+
+  * `uglify`: Minify the javascripts file through `uglify-js` and changes
+    the file extension from `js` to `min.js`.
+
+### Build Utilities
+
+  * `load`: Loads the given file from the project root and returns its
+    content as a string.
+
+### Custom Build Operators
+
+Custom build operators should be placed in the `lib/processing` directory.
+
+#### Without Configuration
+
 ```
-operators: [
-  # ...
-  'create:file' # create the coffee files
-  'compile'
-  'create:file' # create the js files
-  'uglify'
-  'create:file' # create the minified js files
-]
+myCustomOperator = (buffer) ->
+  # Either return a new buffer synchronously
+  # or a promise whose value is a buffer
 ```
 
-##### `create:directory`
-Creates a sub-directory of the packages folder defined with the `directory`
-property. All the paths in the buffer will be changed to be included
-in the path.
+#### With Configuration
+
 ```
-path: 'lib'
-directory: 'demos'
-operators: [
-  # ...
-  'create:directory' # creates the directory and change files path
-  'create:file'      # creates the files at their new path
-]
-```
-##### `exports:package`
-Replaces all node exports as package affectation.
-The operator require the definition of a package property in the
-configuration such as :
-```
-package: 'path.to.package'
-```
-It will inject a package declaration at the top of each files in the buffer
-such as:
-```
-@path ||= {}
-@path.to ||= {}
-@path.to.package ||= {}
-```
-Below is various use cases and their results:
-```
-# before
-exports.a = -> #...
-# after
-@path.to.package.a = -> #...
-```
-```
-# before
-exports['a'] = -> #...
-# after
-@path.to.package['a'] = -> #...
-```
-```
-# before
-module.exports = {a,b,c: 10}
-# after
-@path.to.package.a = a
-@path.to.package.b = b
-@path.to.package.c = 10
-```
-```
-# before
-module.exports = MyClass
-# after
-@path.to.package.MyClass = MyClass
-# When a variable name is affected as exports, the variable
-# name is used as property name on the package. It's useful
-# to have a class available as module in node and accessible
-# through its name when stored in a package.
+myCustomOperator = (args...) ->
+  # The operator function returns a promise returning function
+  # taking the buffer as argument.
+
+  return (buffer) ->
+    # Either return a new buffer synchronously
+    # or a promise whose value is a buffer
 ```
 
-##### `header:license`
-Insert the content of a license file as header comment in all generated
-files. The license file is specfied in a `license` property
-in the configuration file.
-
-##### `join`
-Joins all the files in the buffer in the order defined in
-the include parameter and changes the filename with the specified
-name parameter.
-
-##### `path:change`
-Changes the path of the files in the buffer with the path
-defined in the path property.
-For a file such `{root}/src/dir/file.coffee` and a path such as `lib`,
-the resulting path will be `{root}/lib/dir/file.coffee`.
-The `path` property is mandatory.
-
-##### `path:reset`
-Removes and then recreates the defined path.
-
-##### `strip:requires`
-Removes all the lines in a CoffeeScript file that
-contain a call to `require`. Calls to `require` in comments are preserved.
-
-##### `uglify`
-Runs uglification on the buffer. The path of the files contained
-in the buffer are then suffixed with `.min.js` rather than `.js`.
-
-## Custom Operators
-
-Operators are defined in the `operatorsMap` of the `tasks.package` config
-namespace. To start creating your firsts operators generate a new initializer:
-
-```bash
-neat g initializer tasks/package/my_operators
-```
-
-Then you can start adding your own operators in the newly created initializer:
-```
-module.exports = (config) ->
-  config.tasks.package.operatorsMap.merge
-    my_operator: (buffers, config, errCallback, callback) ->
-      for path, content of buffer
-        buffer[path] = someOperationOn(content)
-      callback buffers, config, errCallback
-```

@@ -35,10 +35,10 @@ class Packager
       @conf.files = files
       readFiles files, (err, res) =>
         errCallback = (err) =>
-          puts yellow(_ 'neat.tasks.package.process', file: basename @path)
+          puts yellow(_ 'neat.tasks.package.process', file: basename @path), 5
           stack = err.stack.split '\n'
           stack[0] = red stack[0]
-          puts "#{stack.join '\n'}\n"
+          puts "#{stack.join '\n'}\n", 5
           callback? 1
 
         chain.call null, @operators, res, @conf, errCallback, (buffer) =>
@@ -48,7 +48,7 @@ class Packager
             #{(green('.') for k of @result).join ''}
             #{green(_ 'neat.tasks.package.processed', files: @result.length())}
 
-          """
+          """, 5
 
           callback? 0
 

@@ -4,4 +4,4 @@ Neat = require '../neat'
 {rm} = require '../utils/files'
 _ = Neat.i18n.getHelper()
 
-exports.compile = neatTaskAlias 'package', 'compile'
+exports.compile = neatTaskAlias 'build', 'compile', 'production'

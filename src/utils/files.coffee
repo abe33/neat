@@ -627,19 +627,20 @@ noExtension = (o) ->
 # Reads an array of path and return a hash with the path
 # of the file as key and the content of the file as value.
 #
-#     readFiles ['foo.txt', 'bar.txt'], (docs) ->
+#     readFiles ['foo.txt', 'bar.txt'], (err, docs) ->
 #       # docs = {'foo.txt': '...', 'bar.txt': '...'}
 readFiles = (files, callback) ->
   res = {}
-  readIteration = (path) -> (callback) ->
+  error = null
+  readIteration = (path) -> (cb) ->
     fs.readFile path, (err, content) ->
-      throw err if err?
+      return (error = err; cb()) if err?
 
       res[path] = String(content)
-      callback?()
+      cb()
 
   parallel (readIteration p for p in files), ->
-    callback? null, res
+    callback? error, res
 
 ##### readFilesSync
 
@@ -666,11 +667,9 @@ rm = (path, callback) ->
           fs.readdir path, (err, paths) ->
             return callback? err if err?
             parallel (rmIteration "#{path}/#{p}" for p in paths), ->
-              fs.rmdir path, (err) ->
-                callback? err
+              fs.rmdir path, (err) -> callback? err
         else
-          fs.unlink path, (err) ->
-            callback? err
+          fs.unlink path, (err) -> callback? err
     else
       callback?()
 
