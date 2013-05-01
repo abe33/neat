@@ -197,5 +197,30 @@ that don't needs arguments must be passed direcly without calling them.
 
 ### Build Utilities
 
-  * `load`
+  * `load`: Loads the given file from the project root and returns its
+    content as a string.
+
+### Custom Build Operators
+
+Custom build operators should be placed in the `lib/processing` directory.
+
+#### Without Configuration
+
+```
+myCustomOperator = (buffer) ->
+  # Either return a new buffer synchronously
+  # or a promise whose value is a buffer
+```
+
+#### With Configuration
+
+```
+myCustomOperator = (args...) ->
+  # The operator function returns a promise returning function
+  # taking the buffer as argument.
+
+  return (buffer) ->
+    # Either return a new buffer synchronously
+    # or a promise whose value is a buffer
+```
 
