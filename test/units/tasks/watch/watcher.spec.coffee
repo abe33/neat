@@ -133,6 +133,44 @@ describe 'Watcher', ->
                 @watcher.sigintListener()
                 expect(process.exit).toHaveBeenCalled()
 
+          describe 'while waiting for input', ->
+            beforeEach ->
+              spyOn(process, 'exit').andCallFake(->)
+              spyOn(@watcher, 'runAll').andCallThrough()
+              spyOn(@watcher, 'displayHelp').andCallFake(->)
+
+            ['', 'a', 'all'].forEach (val) ->
+              describe "when '#{val}' is submitted", ->
+                beforeEach ->
+                  @watcher.lineListener val
+
+                it 'should call runAll', ->
+                  expect(@watcher.runAll).toHaveBeenCalled()
+
+            ['h', 'help'].forEach (val) ->
+              describe "when '#{val}' is submitted", ->
+                beforeEach ->
+                  @watcher.lineListener val
+
+                it 'should call displayHelp', ->
+                  expect(@watcher.displayHelp).toHaveBeenCalled()
+
+            ['e', 'q', 'exit', 'quit'].forEach (val) ->
+              describe "when '#{val}' is submitted", ->
+                beforeEach ->
+                  @watcher.lineListener val
+
+                it 'should call ', ->
+                  expect(process.exit).toHaveBeenCalled()
+
+            describe "when 'foo' is submitted", ->
+              beforeEach ->
+                spyOn(process.stdout, 'write').andCallFake ->
+                @watcher.lineListener 'foo'
+
+              it 'should have printed an error', ->
+                expect(process.stdout.write).toHaveBeenCalled()
+
 
         describe 'the instanciated plugin', ->
           subject -> @plugin
