@@ -1,8 +1,8 @@
 # Neat
-[![Build Status](https://travis-ci.org/abe33/neat.png?branch=feature_istanbul_coverage)](https://travis-ci.org/abe33/neat)
+[![Build Status](https://travis-ci.org/abe33/neat.png?branch=master)](https://travis-ci.org/abe33/neat)
 [![Dependency Status](https://gemnasium.com/abe33/neat.png)](https://gemnasium.com/abe33/neat)
 [![NPM version](https://badge.fury.io/js/neat.png)](http://badge.fury.io/js/neat)
-[![Coverage Status](https://coveralls.io/repos/abe33/neat/badge.png?branch=feature_istanbul_coverage)](https://coveralls.io/r/abe33/neat)
+[![Coverage Status](https://coveralls.io/repos/abe33/neat/badge.png?branch=master)](https://coveralls.io/r/abe33/neat)
 
 A command line tool for [Coffeescript][coffee] and [Node.js][node] projects inspired by [Rails][rails].
 
