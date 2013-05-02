@@ -36,6 +36,15 @@ describe 'property', ->
 
     expect(res).toEqual([3,3,3])
 
+  it 'should return undefined for null entries', ->
+    res = [
+      {foo: 10},
+      null
+    ].map _.property 'foo'
+
+    expect(res).toEqual([10, undefined])
+
+
 describe 'first', ->
   it 'should map the given value at first index in the element', ->
 
@@ -56,6 +65,15 @@ describe 'first', ->
     ].map _.first _.property 'foo'
 
     expect(res).toEqual([10, 'foo', true])
+
+  it 'should return undefined for null entries', ->
+    res = [
+      [10, 20, 30],
+      null
+    ].map _.first()
+
+    expect(res).toEqual([10, undefined])
+
 
 describe 'last', ->
   it 'should map the given value at last index in the element', ->
@@ -78,6 +96,15 @@ describe 'last', ->
 
     expect(res).toEqual([10, 'foo', true])
 
+  it 'should return undefined for null entries', ->
+    res = [
+      [10, 20, 30],
+      null
+    ].map _.last()
+
+    expect(res).toEqual([30, undefined])
+
+
 describe 'at', ->
   it 'should map the given value at index in the element', ->
 
@@ -99,6 +126,23 @@ describe 'at', ->
 
     expect(res).toEqual([10, 'foo', true])
 
+  it 'should default to 0 without an index', ->
+    res = [
+      [10, 20, 30],
+      ['foo', 'bar', 'baz'],
+      [true, false, undefined]
+    ].map _.at()
+
+    expect(res).toEqual([10, 'foo', true])
+
+  it 'should return undefined for null entries', ->
+    res = [
+      [10, 20, 30],
+      null
+    ].map _.at 0
+
+    expect(res).toEqual([10, undefined])
+
 describe 'length', ->
   it 'should map the length of the element', ->
 
@@ -109,3 +153,12 @@ describe 'length', ->
     ].map _.length()
 
     expect(res).toEqual([3,2,1])
+
+  it 'should return undefined for null entries', ->
+    res = [
+      [10, 20, 30],
+      null
+    ].map _.length()
+
+    expect(res).toEqual([3, undefined])
+
