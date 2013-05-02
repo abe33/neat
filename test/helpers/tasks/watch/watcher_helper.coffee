@@ -77,10 +77,11 @@ global.withWatchSpies = (block) ->
         switch path
           when Neat.resolve 'Watchfile'
             callback null, '''
-              watcher 'mockPlugin', option: 'irrelevant', ->
-                watch 'src/(.*)\\\\.coffee$',
-                      anotherOption: 'irrelevant',
-                      (p,m,g) -> "lib/#{g}.js"
+              group 'mockGroup', ->
+                watcher 'mockPlugin', option: 'irrelevant', ->
+                  watch 'src/(.*)\\\\.coffee$',
+                        anotherOption: 'irrelevant',
+                        (p,m,g) -> "lib/#{g}.js"
 
               watcher 'inexistent', ->
             '''
