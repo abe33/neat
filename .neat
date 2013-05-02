@@ -11,4 +11,4 @@ repository:
 engine:
   node: '~0.8.0'
 scripts:
-  test: 'istanbul cover cake test:unit && (cat coverage/lcov.info | node_modules/.bin/coveralls) > /dev/null 2>&1 && cake lint'
+  test: 'istanbul cover jasmine-node -- --coffee test/units && (cat coverage/lcov.info | node_modules/.bin/coveralls) > /dev/null 2>&1 && cake lint'
