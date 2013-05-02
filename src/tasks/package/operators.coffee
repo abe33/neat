@@ -9,7 +9,7 @@ Neat = require '../../neat'
 {parallel} = Neat.require 'async'
 {ensurePath, rm, ensurePath} = Neat.require 'utils/files'
 {compile:coffee} = require 'coffee-script'
-{parser, uglify:pro} = require 'uglify-js'
+uglifier = require 'uglify-js'
 _ = Neat.i18n.getHelper()
 
 LITERAL_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*'
@@ -214,10 +214,8 @@ join = (buffer, conf, errCallback, callback) ->
 uglify = (buffer, conf, errCallback, callback) ->
   newBuffer = {}
   for path, content of buffer
-    ast = parser.parse(content)
-    ast = pro.ast_mangle(ast)
-    ast = pro.ast_squeeze(ast)
-    newBuffer[path.replace /\.js$/g, '.min.js'] = pro.gen_code(ast)
+    output = path.replace /\.js$/g, '.min.js'
+    newBuffer[output] = uglifier.minify(content, fromString: true)
 
   callback?(newBuffer, conf, errCallback)
 
