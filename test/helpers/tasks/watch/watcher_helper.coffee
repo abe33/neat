@@ -9,7 +9,13 @@ Watch = Neat.require 'tasks/watch/watch'
 commands = Neat.require 'utils/commands'
 
 class MockPlugin extends WatchPlugin
-  pathChanged: (path) -> => Q.fcall ->
+  pathChanged: (path) -> =>
+    @deferred = Q.defer()
+    setTimeout =>
+      @deferred.resolve null
+    , 10
+    @deferred.promise
+  isPending: -> @deferred.promise.isPending()
 
 global.MockPlugin = MockPlugin
 
@@ -38,12 +44,19 @@ MOCK_CLI =
   setPrompt: ->
   removeListener: ->
 
+MOCK_WATCHES = {}
+
+global.triggerChangesFor = (path) ->
+  MOCK_WATCHES[path]?(path, 'change')
+
 global.withWatchSpies = (block) ->
   describe '', ->
     beforeEach ->
       addPromiseMatchers this
       addWatchesMatcher this
-      spyOn(fs, 'watch').andCallFake -> close: ->
+      spyOn(fs, 'watch').andCallFake (path, watcher) ->
+        MOCK_WATCHES[path] = watcher
+        close: ->
       spyOn(process, 'on').andCallFake ->
       spyOn(process.stdin, 'on').andCallFake ->
       spyOn(process.stdin, 'removeListener').andCallFake ->

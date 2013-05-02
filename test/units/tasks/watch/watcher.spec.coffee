@@ -104,6 +104,36 @@ describe 'Watcher', ->
         given 'watchOptions', -> @watch.options
         given 'pluginOptions', -> @plugin.options
 
+        describe 'the watcher cli', ->
+          describe 'when a ctrl + l is pressed', ->
+            beforeEach ->
+              spyOn(process.stdout, 'write').andCallFake ->
+              @watcher.keypressListener 'l', name: 'l', ctrl: true
+
+            it 'should have cleared the terminal', ->
+              expect(process.stdout.write)
+              .toHaveBeenCalledWith('\u001B[2J\u001B[0;0f')
+
+          describe 'when a sigint is triggered', ->
+            beforeEach ->
+              spyOn(process, 'exit').andCallFake(->)
+              spyOn(@plugin, 'kill').andCallFake(->)
+
+            describe 'during a plugin run', ->
+              it 'should kill the plugin running', (done) ->
+                triggerChangesFor Neat.resolve('src/neat.coffee')
+                setTimeout =>
+                  @watcher.sigintListener()
+                  expect(@plugin.kill).toHaveBeenCalled()
+                  done()
+                , 5
+
+            describe 'between plugin runs', ->
+              it 'should kill the process', ->
+                @watcher.sigintListener()
+                expect(process.exit).toHaveBeenCalled()
+
+
         describe 'the instanciated plugin', ->
           subject -> @plugin
 
@@ -135,7 +165,8 @@ describe 'Watcher', ->
             beforeEach -> spyOn(@plugin, 'pathChanged').andCallThrough()
 
             subject 'promise', ->
-              @watcher.pathChanged Neat.resolve('src/neat.coffee'), 'change'
+              triggerChangesFor Neat.resolve('src/neat.coffee')
+              @watcher.promise
 
             waiting -> @promise
 
@@ -156,7 +187,8 @@ describe 'Watcher', ->
               spyOn(@plugin, 'dispose').andCallThrough()
 
             subject 'promise', ->
-              @watcher.pathChanged Neat.resolve(name), 'change'
+              triggerChangesFor Neat.resolve(name)
+              @watcher.promise
 
             waiting -> @promise
 
