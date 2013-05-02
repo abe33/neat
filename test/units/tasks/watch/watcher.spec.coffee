@@ -89,6 +89,9 @@ describe 'Watcher', ->
         for path in @value.watchedPaths
           expect(@paths).toContain(path)
 
+      it 'should have registered watchers for the parent directories', ->
+        expect(@paths).toContain(Neat.resolve 'src')
+
       it 'should not have registered doublons', ->
         uniqPaths = @paths.uniq()
         expect(@paths.length).toBe(uniqPaths.length)
@@ -104,6 +107,48 @@ describe 'Watcher', ->
         given 'watchOptions', -> @watch.options
         given 'pluginOptions', -> @plugin.options
 
+        describe 'when a new file appear in a watched directory', ->
+          beforeEach ->
+            @files = ['neat.coffee', 'index.coffee', 'foo.coffee']
+            @existsSync = (p) => true
+
+            spyOn(@watcher,'rewatch').andCallThrough()
+            spyOn(fs,'readdirSync').andCallFake (path) => @files
+            spyOn(fs,'lstatSync').andCallFake (path) =>
+              isDirectory: -> path.indexOf('.') is -1
+
+            if fs.existsSync?
+              spyOn(fs, 'existsSync').andCallFake (p) => @existsSync p
+            if path.existsSync?
+              spyOn(path, 'existsSync').andCallFake (p) => @existsSync p
+
+            triggerChangesFor Neat.resolve('src')
+
+          subject 'promise', -> @watcher.promise
+          waiting -> @promise
+
+          it 'should have registered a new watcher', ->
+            args = @watcher.rewatch.argsForCall[0]
+            expect(@watcher.rewatch)
+            .toHaveBeenCalledWith(Neat.resolve('src/foo.coffee'), args[1])
+
+          describe 'when this file disappear', ->
+            beforeEach ->
+              @existsSync = (p) => p isnt Neat.resolve 'src/foo.coffee'
+              @files = ['neat.coffee', 'index.coffee']
+              triggerChangesFor Neat.resolve('src/foo.coffee')
+
+            subject 'promise', -> @watcher.promise
+            waiting -> @promise
+
+            it 'should have removed the file from watched', ->
+              expect(@watcher.watchedPaths)
+              .not.toContain(Neat.resolve 'src/foo.coffee')
+
+            it 'should have remove the watch', ->
+              p = Neat.resolve 'src/foo.coffee'
+              expect(p of @watcher.watches).toBeFalsy()
+
         describe 'the watcher cli', ->
           describe 'when a ctrl + l is pressed', ->
             beforeEach ->
@@ -116,8 +161,8 @@ describe 'Watcher', ->
 
           describe 'when a sigint is triggered', ->
             beforeEach ->
-              spyOn(process, 'exit').andCallFake(->)
-              spyOn(@plugin, 'kill').andCallFake(->)
+              spyOn(process, 'exit').andCallFake ->
+              spyOn(@plugin, 'kill').andCallFake ->
 
             describe 'during a plugin run', ->
               it 'should kill the plugin running', (done) ->
@@ -135,9 +180,10 @@ describe 'Watcher', ->
 
           describe 'while waiting for input', ->
             beforeEach ->
-              spyOn(process, 'exit').andCallFake(->)
+              spyOn(process.stdout, 'write').andCallFake ->
+              spyOn(process, 'exit').andCallFake ->
               spyOn(@watcher, 'runAll').andCallThrough()
-              spyOn(@watcher, 'displayHelp').andCallFake(->)
+              spyOn(@watcher, 'displayHelp').andCallThrough()
 
             ['', 'a', 'all'].forEach (val) ->
               describe "when '#{val}' is submitted", ->
@@ -165,7 +211,6 @@ describe 'Watcher', ->
 
             describe "when 'foo' is submitted", ->
               beforeEach ->
-                spyOn(process.stdout, 'write').andCallFake ->
                 @watcher.lineListener 'foo'
 
               it 'should have printed an error', ->

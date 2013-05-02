@@ -14,8 +14,6 @@ n = Neat.require 'notifications'
 } = Neat.require 'utils/logs'
 {asyncErrorTrap} = Neat.require 'utils/commands'
 
-existsSync = fs.existsSync or path.existsSync
-
 class Watcher
   constructor: ->
     switch os.platform()
@@ -163,6 +161,7 @@ class Watcher
     defer.promise
 
   watchDirectory: (directory, watcher) =>
+    existsSync = fs.existsSync or path.existsSync
     return unless existsSync directory
     @watches[directory] = fs.watch directory, (action) =>
       @enqueue Q.fcall =>
@@ -196,6 +195,7 @@ class Watcher
       @watches[file].close()
 
     @watches[file] = fs.watch file, (action) =>
+      existsSync = fs.existsSync or path.existsSync
       exist = existsSync file
       action = 'delete' unless exist
 
@@ -203,7 +203,8 @@ class Watcher
       if exist
         @rewatch file, watcher
       else
-        @watchedPaths
+        @watchedPaths.splice(@watchedPaths.indexOf file, 1)
+        delete @watches[file]
 
   registerWatchers: =>
     @watchedPaths.forEach (path) =>
