@@ -3,29 +3,30 @@ Packager = require '../../../lib/tasks/package/packager'
 op = require '../../../lib/tasks/package/operators'
 {ensurePathSync, rmSync} = Neat.require 'utils/files'
 
-Neat.config =
-  tasks:
-    package:
-      conf: "#{Neat.root}/src/config/packages"
-      dir: "#{Neat.root}/.tests/packages"
-      tmp: "#{Neat.root}/.tmp"
-      license: "#{Neat.root}/test/fixtures/tasks/package/license.txt"
-      operatorsMap:
-        'annotate:class': op.annotateClass
-        'annotate:file': op.annotateFile
-        'join': op.join
-        'header:license': op.headerLicense
-        'compile': op.compile
-        'create:directory': op.createDirectory
-        'strip:requires': op.stripRequires
-        'exports:package': op.exportsToPackage
-        'create:file': op.createFile
 
 global.packagerWithFiles = (files, bare=false, block) ->
   [bare, block] = [null, bare] if typeof bare is 'function'
 
   describe "with [#{files}] as target", ->
     beforeEach ->
+      Neat.config =
+        tasks:
+          package:
+            conf: "#{Neat.root}/src/config/packages"
+            dir: "#{Neat.root}/.tests/packages"
+            tmp: "#{Neat.root}/.tmp"
+            license: "#{Neat.root}/test/fixtures/tasks/package/license.txt"
+            operatorsMap:
+              'annotate:class': op.annotateClass
+              'annotate:file': op.annotateFile
+              'join': op.join
+              'header:license': op.headerLicense
+              'compile': op.compile
+              'create:directory': op.createDirectory
+              'strip:requires': op.stripRequires
+              'exports:package': op.exportsToPackage
+              'create:file': op.createFile
+
       @packager = new Packager
         name: 'fixtures'
         package: 'neat.fixtures'
