@@ -1,7 +1,7 @@
 # This file contains utilities to setup commands and generators.
 # @toc
 
-{spawn} = require 'child_process'
+cp = require 'child_process'
 {resolve} = require 'path'
 {puts, print, error} = require './logs'
 Neat = require '../neat'
@@ -202,7 +202,7 @@ neatTaskAlias = (source, alias, environment) ->
 run = (command, params, options, callback) ->
   [callback, options] = [options, callback] if typeof options is 'function'
 
-  exe = spawn command, params
+  exe = cp.spawn command, params
 
   unless options?.noStdout?
     exe.stdout.on 'data', options?.stdout || (data) -> print data.toString()
