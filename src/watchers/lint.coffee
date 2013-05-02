@@ -2,6 +2,7 @@ Q = require 'q'
 Neat = require '../neat'
 CLIWatchPlugin = Neat.require 'tasks/watch/cli_watch_plugin'
 commands = Neat.require 'utils/commands'
+{findSiblingFile} = Neat.require 'utils/files'
 {puts, info, error, red, green} = Neat.require 'utils/logs'
 
 class Lint extends CLIWatchPlugin
@@ -35,9 +36,13 @@ class Lint extends CLIWatchPlugin
 
   runLint: (paths) ->
     @deferred = Q.defer()
-    coffeelint = Neat.resolve 'node_modules/.bin/coffeelint'
-    @process = commands.run coffeelint, paths, (status) =>
-      @handleStatus status
+    d = 'config'
+    p = Neat.resolve 'lib/tasks/lint.cake.coffee'
+    findSiblingFile p, Neat.paths, d, 'json', (e, c, p) =>
+      return @deferred.reject e if e?
+      coffeelint = Neat.resolve 'node_modules/.bin/coffeelint'
+      @process = commands.run coffeelint, ['-f', c].concat(paths), (status) =>
+        @handleStatus status
 
     @deferred.promise
 

@@ -11,6 +11,8 @@ describe 'Lint', ->
   describe 'when a file watched by the plugin changed', ->
     cliRunningPlugin(Lint)
     .should.run(Neat.resolve('node_modules/.bin/coffeelint'),
+                '-f',
+                Neat.resolve('config/tasks/lint.json'),
                 Neat.resolve('src/neat.coffee'))
     .should.storeProcessAndKillIt()
     .should.bePendingUntilEnd()
