@@ -129,21 +129,22 @@ notOutsideNeat = (s) ->
   red _('neat.errors.outside_neat', expression: s)
 
 module.exports = {
-  blue,
-  cyan,
-  debug,
-  error,
-  green,
-  info,
-  inverse,
-  logger,
-  magenta,
-  missing,
-  notOutsideNeat,
-  prefix,
-  print,
-  puts,
-  red,
-  warn,
-  yellow,
+  blue
+  cyan
+  debug
+  error
+  fatal
+  green
+  info
+  inverse
+  logger
+  magenta
+  missing
+  notOutsideNeat
+  prefix
+  print
+  puts
+  red
+  warn
+  yellow
 }
