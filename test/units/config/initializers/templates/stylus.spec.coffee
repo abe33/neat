@@ -11,10 +11,15 @@ describe 'stylus initializer', ->
 
   beforeEach ->
     @stylusRenderCalled = false
-    safeStylus = require.cache[@stylusPath].exports
-    require.cache[@stylusPath].exports = =>
-      render: (tpl) =>
+    @safeStylus = require.cache[@stylusPath].exports
+    require.cache[@stylusPath].exports = (tpl) =>
+      render: (cb) =>
         @stylusRenderCalled = true
+        cb? null, 'irrelevant'
+
+  afterEach ->
+    require.cache[@stylusPath].exports = @safeStylus
+
 
   it 'should exist', ->
     expect(initializer).toBeDefined()
@@ -33,7 +38,8 @@ describe 'stylus initializer', ->
 
       describe 'when called', ->
         it 'should have called the stylus render method', ->
-          @render 'foo'
+          result = @render 'foo'
           expect(@stylusRenderCalled).toBeTruthy()
+          expect(result).toBe('irrelevant')
 
 
