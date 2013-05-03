@@ -27,6 +27,13 @@ describe 'deprecated', ->
     cmd.deprecated 'irrelevant', target
     expect(target.deprecated).toEqual('irrelevant')
 
+describe 'describe', ->
+  it 'should decorate the target with an description property', ->
+    target = {}
+
+    cmd.describe 'irrelevant', target
+    expect(target.description).toEqual('irrelevant')
+
 describe 'environment', ->
   it 'should decorate the target with an environment property', ->
     target = {}
