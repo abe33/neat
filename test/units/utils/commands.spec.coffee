@@ -1,9 +1,10 @@
 cp = require 'child_process'
 require '../../test_helper'
 {resolve} = require "path"
-cmd = require "../../../lib/utils/commands"
+Neat = require '../../../lib/neat'
+cmd = Neat.require 'utils/commands'
 
-global.task = ->
+global.task = (name, description, action) ->
 
 describe 'decorate', ->
   it 'should create a new property on the target', ->
@@ -56,30 +57,69 @@ describe 'usages', ->
     expect(target.usages).toEqual(['foo', 'bar'])
 
 describe 'neatTask', ->
+  beforeEach ->
+    @actionCalled = false
+    spyOn(global, 'task').andCallFake (name, desc, action) =>
+      @action = action
+
+
   given 'parameters', ->
     {
       name: 'name'
       description: 'description'
       environment: 'environment'
-      action: (callback) ->
+      action: (callback) =>
+        @actionCalled = true
     }
-
-  beforeEach ->
-    spyOn(global, 'task')
 
   it 'should register a task with the task method', ->
     cmd.neatTask @parameters
 
     expect(task).toHaveBeenCalled()
 
+  describe 'when invoking the registered task', ->
+    it 'should have called the action', ->
+      cmd.neatTask @parameters
+      @action()
+      expect(@actionCalled).toBeTruthy()
+
+
 describe 'neatTaskAlias', ->
   beforeEach ->
-    spyOn(global, 'task')
+    @actionCalled = false
+    spyOn(global, 'task').andCallFake (name, desc, action) =>
+      @action = action
+
+  given 'parameters', ->
+    {
+      name: 'name'
+      description: 'description'
+      environment: 'environment'
+      action: (callback) =>
+        @actionCalled = true
+    }
+
+  beforeEach ->
+    spyOn(Neat, 'require').andCallFake => name: @parameters.action
+    cmd.neatTask @parameters
 
   it 'should register a task with the task method', ->
-    cmd.neatTaskAlias 'compile', 'compileAlias', 'environment'
+    cmd.neatTaskAlias 'name', 'nameAlias', 'environment'
 
     expect(task).toHaveBeenCalled()
+
+  describe 'when invoking the registered alias', ->
+    it 'should have called the action', ->
+      cmd.neatTaskAlias 'name', 'nameAlias', 'environment'
+      @action()
+      expect(@actionCalled).toBeTruthy()
+
+
+  describe 'when invoking the registered task', ->
+    it 'should have called the action', ->
+      cmd.neatTask @parameters
+      @action()
+      expect(@actionCalled).toBeTruthy()
 
 describe 'run', ->
   beforeEach ->
