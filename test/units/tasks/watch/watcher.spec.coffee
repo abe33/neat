@@ -152,7 +152,6 @@ describe 'Watcher', ->
         describe 'the watcher cli', ->
           describe 'when a ctrl + l is pressed', ->
             beforeEach ->
-              spyOn(process.stdout, 'write').andCallFake ->
               @watcher.keypressListener 'l', name: 'l', ctrl: true
 
             it 'should have cleared the terminal', ->
@@ -180,7 +179,6 @@ describe 'Watcher', ->
 
           describe 'while waiting for input', ->
             beforeEach ->
-              spyOn(process.stdout, 'write').andCallFake ->
               spyOn(process, 'exit').andCallFake ->
               spyOn(@watcher, 'runAll').andCallThrough()
               spyOn(@watcher, 'displayHelp').andCallThrough()

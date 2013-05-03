@@ -62,6 +62,7 @@ global.withWatchSpies = (block) ->
       spyOn(process.stdin, 'removeListener').andCallFake ->
       spyOn(process.stdout, 'on').andCallFake ->
       spyOn(process.stdout, 'removeListener').andCallFake ->
+      spyOn(process.stdout, 'write').andCallFake ->
       spyOn(process, 'removeListener').andCallFake ->
       spyOn(growly, 'notify').andCallFake (m,o,c) -> c?()
       spyOn(notifySend, 'notify').andCallFake (m,c) -> c?()
