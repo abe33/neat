@@ -35,11 +35,6 @@ class Builder
       console.error err.message
       console.error err.stack
 
-  glob: (path) ->
-    defer = Q.defer()
-    glob path, defer.makeNodeResolver()
-    defer.promise
-
   getLocals: (processors) ->
     lines = []
     processors.each (name,collection) ->
