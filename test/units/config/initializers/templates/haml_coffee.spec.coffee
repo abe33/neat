@@ -10,10 +10,14 @@ describe 'haml_coffee initializer', ->
   given 'config', -> engines: { templates: {} }
 
   beforeEach ->
-    @haml_coffeeRenderCalled = false
-    safehaml_coffee = require.cache[@hamlcPath].exports
+    @hamlcRenderCalled = false
+    @safeHamlc = require.cache[@hamlcPath].exports
     require.cache[@hamlcPath].exports = compile: => =>
-      @haml_coffeeRenderCalled = true
+      @hamlcRenderCalled = true
+      'irrelevant'
+
+  afterEach ->
+    require.cache[@hamlcPath].exports = @safeHamlc
 
   it 'should exist', ->
     expect(initializer).toBeDefined()
@@ -32,7 +36,7 @@ describe 'haml_coffee initializer', ->
 
       describe 'when called', ->
         it 'should have called the haml_coffee render method', ->
-          @render 'foo'
-          expect(@haml_coffeeRenderCalled).toBeTruthy()
-
+          result = @render 'foo'
+          expect(@hamlcRenderCalled).toBeTruthy()
+          expect(result).toBe('irrelevant')
 

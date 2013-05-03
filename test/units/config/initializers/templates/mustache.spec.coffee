@@ -9,7 +9,7 @@ describe 'mustache initializer', ->
   given 'config', -> engines: { templates: {} }
 
   beforeEach ->
-    spyOn(mustache, 'to_html').andCallFake ->
+    spyOn(mustache, 'to_html').andCallFake -> 'irrelevant'
 
   it 'should exist', ->
     expect(initializer).toBeDefined()
@@ -28,7 +28,7 @@ describe 'mustache initializer', ->
 
       describe 'when called', ->
         it 'should have called the mustache render method', ->
-          @render 'foo'
+          result = @render 'foo'
           expect(mustache.to_html).toHaveBeenCalled()
-
+          expect(result).toBe('irrelevant')
 
