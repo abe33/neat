@@ -43,7 +43,7 @@ describe 'Watcher', ->
       it 'should have closed the cli', ->
         expect(@watcher.cli.close).toHaveBeenCalled()
 
-    describe '#init', ->
+    describe '::init', ->
 
       given 'value', -> @promise.valueOf()
       given 'paths', -> fs.watch.argsForCall.map (a) -> a[0]
@@ -156,9 +156,9 @@ describe 'Watcher', ->
             beforeEach ->
               @watcher.keypressListener 'l', name: 'l', ctrl: true
 
-            xit 'should have cleared the terminal', ->
-              expect(logger.log)
-              .toHaveBeenCalledWith('\u001B[2J\u001B[0;0f')
+            it 'should have cleared the terminal', ->
+              expect(logger.log.argsForCall.last())
+              .toEqual(['\u001B[2J\u001B[0;0f\n', 0]  )
 
           describe 'when a sigint is triggered', ->
             beforeEach ->
