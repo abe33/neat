@@ -3,8 +3,10 @@ require '../../../test_helper'
 fs = require 'fs'
 rl = require 'readline'
 path = require 'path'
+util = require 'util'
 Q = require 'q'
 Neat = require '../../../../lib/neat'
+{logger} = Neat.require 'utils/logs'
 
 Watcher = require '../../../../lib/tasks/watch/watcher'
 
@@ -154,8 +156,8 @@ describe 'Watcher', ->
             beforeEach ->
               @watcher.keypressListener 'l', name: 'l', ctrl: true
 
-            it 'should have cleared the terminal', ->
-              expect(process.stdout.write)
+            xit 'should have cleared the terminal', ->
+              expect(logger.log)
               .toHaveBeenCalledWith('\u001B[2J\u001B[0;0f')
 
           describe 'when a sigint is triggered', ->
@@ -212,7 +214,7 @@ describe 'Watcher', ->
                 @watcher.lineListener 'foo'
 
               it 'should have printed an error', ->
-                expect(process.stdout.write).toHaveBeenCalled()
+                expect(logger.log).toHaveBeenCalled()
 
 
         describe 'the instanciated plugin', ->

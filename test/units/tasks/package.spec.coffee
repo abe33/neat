@@ -2,10 +2,12 @@ require '../../test_helper'
 require '../../helpers/tasks/package_helper'
 Neat = require '../../../lib/neat'
 Packager = require '../../../lib/tasks/package/packager'
-
+{logger} = Neat.require 'utils/logs'
 {readFileSync} = require 'fs'
 
 describe 'Packager', ->
+  beforeEach ->
+    spyOn(logger, 'log').andCallFake ->
 
 
   files = [
@@ -15,7 +17,8 @@ describe 'Packager', ->
   ]
   exp = "#{Neat.root}/test/fixtures/tasks/package/expected.coffee"
   packagerWithFiles.call this, files, ->
-    beforeEach -> addFileMatchers this
+    beforeEach ->
+      addFileMatchers this
     it 'should apply the operators on the file', ->
       path = "#{Neat.root}/.tests/packages/directory/fixtures.coffee"
       repl = (m,n) -> "#{files[parseInt n]}.coffee"

@@ -3,6 +3,7 @@ require '../../test_helper'
 {resolve} = require "path"
 Neat = require '../../../lib/neat'
 cmd = Neat.require 'utils/commands'
+{logger} = Neat.require 'utils/logs'
 
 global.task = (name, description, action) ->
 
@@ -11,7 +12,6 @@ describe 'decorate', ->
     target = {}
 
     cmd.decorate target, "foo", "bar"
-
     expect(target.foo).toBe("bar")
 
 describe 'aliases', ->
@@ -59,6 +59,8 @@ describe 'usages', ->
 describe 'neatTask', ->
   beforeEach ->
     @actionCalled = false
+    spyOn(logger, 'log').andCallFake ->
+    spyOn(logger, 'add').andCallFake ->
     spyOn(global, 'task').andCallFake (name, desc, action) =>
       @action = action
 
@@ -87,6 +89,8 @@ describe 'neatTask', ->
 describe 'neatTaskAlias', ->
   beforeEach ->
     @actionCalled = false
+    spyOn(logger, 'log').andCallFake ->
+    spyOn(logger, 'add').andCallFake ->
     spyOn(global, 'task').andCallFake (name, desc, action) =>
       @action = action
 
@@ -111,13 +115,6 @@ describe 'neatTaskAlias', ->
   describe 'when invoking the registered alias', ->
     it 'should have called the action', ->
       cmd.neatTaskAlias 'name', 'nameAlias', 'environment'
-      @action()
-      expect(@actionCalled).toBeTruthy()
-
-
-  describe 'when invoking the registered task', ->
-    it 'should have called the action', ->
-      cmd.neatTask @parameters
       @action()
       expect(@actionCalled).toBeTruthy()
 

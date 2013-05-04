@@ -7,6 +7,7 @@ Neat = require '../../../../lib/neat'
 WatchPlugin = Neat.require 'tasks/watch/watch_plugin'
 Watch = Neat.require 'tasks/watch/watch'
 commands = Neat.require 'utils/commands'
+{logger} = Neat.require 'utils/logs'
 
 class MockPlugin extends WatchPlugin
   pathChanged: (path) -> =>
@@ -57,12 +58,12 @@ global.withWatchSpies = (block) ->
       spyOn(fs, 'watch').andCallFake (path, watcher) ->
         MOCK_WATCHES[path] = watcher
         close: ->
+      spyOn(logger, 'log').andCallFake ->
       spyOn(process, 'on').andCallFake ->
       spyOn(process.stdin, 'on').andCallFake ->
       spyOn(process.stdin, 'removeListener').andCallFake ->
       spyOn(process.stdout, 'on').andCallFake ->
       spyOn(process.stdout, 'removeListener').andCallFake ->
-      spyOn(process.stdout, 'write').andCallFake ->
       spyOn(process, 'removeListener').andCallFake ->
       spyOn(growly, 'notify').andCallFake (m,o,c) -> c?()
       spyOn(notifySend, 'notify').andCallFake (m,c) -> c?()
@@ -108,7 +109,7 @@ global.cliRunningPlugin = (klass) ->
 
       beforeEach ->
         @plugin.watch new Watch /src\/.*\.coffee$/
-
+        spyOn(logger, 'log').andCallFake ->
         spyOn(commands, 'run').andCallFake (c, a, options, callback) =>
           if typeof options is 'function'
             [options, callback] = [callback, options]

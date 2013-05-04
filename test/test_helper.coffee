@@ -51,8 +51,9 @@ global.progress = (f) ->
   ->
     res = f.apply(this, arguments)
     p = Math.round(new Date().getMilliseconds() / 60) % 4
-    setTimeout (-> print "\b" unless oldRes), 10
-    print "#{'|/-\\'[p]}" unless res
+    unless process.env['TRAVIS']
+      setTimeout (-> print "\b" unless oldRes), 10
+      print "#{'|/-\\'[p]}" unless res
     oldRes = res
 
 global.fixture = (path) -> resolve FIXTURES_ROOT, path

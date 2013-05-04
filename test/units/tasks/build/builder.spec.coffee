@@ -2,8 +2,11 @@ require '../../../test_helper'
 fs = require 'fs'
 Neat = require '../../../../lib/neat'
 Builder = Neat.require 'tasks/build/builder'
+{logger} = Neat.require 'utils/logs'
 
 describe 'Builder', ->
+  beforeEach ->
+    spyOn(logger, 'log').andCallFake ->
   withBuildSpies ->
     subject 'builder', -> new Builder
 

@@ -3,9 +3,12 @@ require '../../../test_helper'
 fs = require 'fs'
 Build = require '../../../../lib/tasks/build/build'
 Neat = require '../../../../lib/neat'
+{logger} = Neat.require 'utils/logs'
 processors = Neat.require 'processing'
 
 describe 'Build', ->
+  beforeEach -> spyOn(logger, 'log').andCallFake ->
+
   subject 'build', -> new Build 'irrelevant'
 
   it 'should exist', ->

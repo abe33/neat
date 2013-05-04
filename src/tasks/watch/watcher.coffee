@@ -257,7 +257,7 @@ class Watcher
   toString: -> "[object Watcher]"
 
   displayHelp: ->
-    console.log """
+    puts """
     #{cyan '↩, a, all'}: Run all plugins.
     #{cyan 'h, help'}: Print this message.
     #{cyan 'q, quit, e, exit'}: Kill cake watch.
@@ -273,7 +273,7 @@ class Watcher
 
   keypressListener: (s, key) =>
     if key? and key.ctrl and key.name is 'l'
-      process.stdout.write '\u001B[2J\u001B[0;0f'
+      puts '\u001B[2J\u001B[0;0f'
       @cli.prompt() if @cliPaused
 
   lineListener: (line) =>
@@ -283,7 +283,7 @@ class Watcher
         when 'q', 'quit', 'e', 'exit' then process.exit(1)
         when 'h', 'help' then @displayHelp()
         else
-          process.stdout.write red "Unknown command '#{line}'"
+          puts red "Unknown command '#{line}'"
           @cli.prompt()
 
 module.exports = Watcher

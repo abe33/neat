@@ -4,6 +4,9 @@ Neat = require '../../lib/neat'
 {logger} = Neat.require 'utils/logs'
 
 describe 'Neat', ->
+  beforeEach ->
+    spyOn(logger, 'log').andCallFake ->
+
   it 'should exist', ->
     expect(Neat).toBeDefined()
 
