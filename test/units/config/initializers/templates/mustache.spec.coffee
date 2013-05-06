@@ -32,3 +32,15 @@ describe 'mustache initializer', ->
           expect(mustache.to_html).toHaveBeenCalled()
           expect(result).toBe('irrelevant')
 
+  describe 'when the module isnt installed', ->
+    beforeEach ->
+      spyOn(require('module'), '_load').andCallFake ->
+        throw new Error 'irrelevant'
+
+      initializer @config
+
+    subject 'render', -> @config.engines.templates.mustache.render
+
+    it 'should throw an exception', ->
+      expect(-> @render 'foo').toThrow()
+

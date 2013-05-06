@@ -54,3 +54,15 @@ describe 'stylus initializer', ->
     it 'should have raised an error', ->
       expect(-> @render 'foo').toThrow()
 
+  describe 'when the module is not installed', ->
+    beforeEach ->
+      spyOn(require('module'), '_load').andCallFake ->
+        throw new Error 'irrelevant'
+
+      initializer @config
+
+    subject 'render', -> @config.engines.templates.stylus.render
+
+    it 'should throw an exception', ->
+      expect(-> @render 'foo').toThrow()
+
