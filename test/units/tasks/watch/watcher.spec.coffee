@@ -156,9 +156,8 @@ describe 'Watcher', ->
             beforeEach ->
               @watcher.keypressListener 'l', name: 'l', ctrl: true
 
-            xit 'should have cleared the terminal', ->
-              expect(logger.log)
-              .toHaveBeenCalledWith('\u001B[2J\u001B[0;0f')
+            it 'should have cleared the terminal', ->
+              expect(logger.log).toHaveBeenCalled()
 
           describe 'when a sigint is triggered', ->
             beforeEach ->
