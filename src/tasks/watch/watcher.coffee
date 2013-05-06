@@ -113,7 +113,9 @@ class Watcher
       puts cyan "\r#{inverse ' WATCH '} Run all"
 
     @plugins.each (name, plugin) =>
-      promise = promise.then plugin.runAll
+      promise = promise.then =>
+        @activePlugin = plugin
+        plugin.runAll()
 
     @promise = promise.then =>
       @cliPaused = false
@@ -274,7 +276,7 @@ class Watcher
   keypressListener: (s, key) =>
     if key? and key.ctrl and key.name is 'l'
       puts '\u001B[2J\u001B[0;0f'
-      @cli.prompt() if @cliPaused
+      @cli.prompt() unless @cliPaused
 
   lineListener: (line) =>
     unless @cliPaused
