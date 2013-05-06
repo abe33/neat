@@ -154,11 +154,37 @@ describe 'Watcher', ->
         describe 'the watcher cli', ->
           describe 'when a ctrl + l is pressed', ->
             beforeEach ->
-              @watcher.keypressListener 'l', name: 'l', ctrl: true
+              @watcher.cli.prompt.reset()
 
-            it 'should have cleared the terminal', ->
-              expect(logger.log.argsForCall.last())
-              .toEqual(['\u001B[2J\u001B[0;0f\n', 0]  )
+            describe 'when the cli is active', ->
+              beforeEach ->
+                @watcher.keypressListener 'l', name: 'l', ctrl: true
+
+
+              it 'should have cleared the terminal', ->
+                expect(logger.log).toHaveBeenCalled()
+
+              it 'should have called the cli prompt', ->
+                expect(@watcher.cli.prompt).toHaveBeenCalled()
+
+            describe 'when a plugin is running', ->
+              given 'whenRunning', -> (block) =>
+                triggerChangesFor Neat.resolve('src/neat.coffee')
+                setTimeout =>
+                  block.call(this)
+                , 5
+
+              it 'should have cleared the terminal', (done) ->
+                @whenRunning ->
+                  @watcher.keypressListener 'l', name: 'l', ctrl: true
+                  expect(logger.log).toHaveBeenCalled()
+                  done()
+
+              it 'should not have called the cli prompt', (done) ->
+                @whenRunning ->
+                  @watcher.keypressListener 'l', name: 'l', ctrl: true
+                  expect(@watcher.cli.prompt).not.toHaveBeenCalled()
+                  done()
 
           describe 'when a sigint is triggered', ->
             beforeEach ->
