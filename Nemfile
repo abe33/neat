@@ -23,4 +23,4 @@ npm 'highlight.js', 'git://github.com/abe33/highlight.js.git#node_build'
 # The latest for which I know promise chaining doesn't fail
 npm 'coffeelint', '~0.5.4'
 
-npm 'jasmine-node',  'git://github.com/abe33/jasmine-node.git#feature_multiple_paths_args'
+npm 'jasmine-node',  '~1.7.0'
