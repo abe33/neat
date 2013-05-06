@@ -17,24 +17,20 @@ describe 'stylus initializer', ->
         @stylusRenderCalled = true
         cb? null, 'irrelevant'
 
-  afterEach ->
-    require.cache[@stylusPath].exports = @safeStylus
-
+  afterEach -> require.cache[@stylusPath].exports = @safeStylus
 
   it 'should exist', ->
     expect(initializer).toBeDefined()
 
   describe 'when called', ->
-    beforeEach ->
-      initializer @config
+    beforeEach -> initializer @config
 
     it 'should have added the stylus template engine to the config', ->
       expect(@config.engines.templates.stylus).toBeDefined()
       expect(@config.engines.templates.stylus.render).toBeDefined()
 
     describe 'the defined render method', ->
-      subject 'render', ->
-        @config.engines.templates.stylus.render
+      subject 'render', -> @config.engines.templates.stylus.render
 
       describe 'when called', ->
         it 'should have called the stylus render method', ->
@@ -42,4 +38,19 @@ describe 'stylus initializer', ->
           expect(@stylusRenderCalled).toBeTruthy()
           expect(result).toBe('irrelevant')
 
+  describe 'when the stylus render fails', ->
+    beforeEach ->
+      @stylusRenderCalled = false
+      @safeStylus = require.cache[@stylusPath].exports
+      require.cache[@stylusPath].exports = (tpl) =>
+        render: (cb) => cb? new Error('irrelevant')
+
+      initializer @config
+
+    subject 'render', -> @config.engines.templates.stylus.render
+
+    afterEach -> require.cache[@stylusPath].exports = @safeStylus
+
+    it 'should have raised an error', ->
+      expect(-> @render 'foo').toThrow()
 
