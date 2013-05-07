@@ -17,3 +17,4 @@ describe 'Lint', ->
     .should.storeProcessAndKillIt()
     .should.bePendingUntilEnd()
     .should.runAllWith('cake', 'lint')
+    .should.supportRunAllOnStart()

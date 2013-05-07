@@ -159,6 +159,22 @@ global.cliRunningPlugin = (klass) ->
 
         should
 
+      supportRunAllOnStart: ->
+        setupTest klass, changedPath, ->
+          describe 'when initialized with runAllOnStart', ->
+            beforeEach ->
+              @plugin.options.runAllOnStart = true
+
+              spyOn(@plugin, 'runAll').andCallFake -> Q.fcall ->
+
+            subject 'promise', -> @plugin.init()
+
+            waiting -> @promise
+
+            it 'should have called runAll during the plugin init', ->
+              expect(@plugin.runAll).toHaveBeenCalled()
+
+
       bePendingUntilEnd: ->
         setupTest klass, changedPath, ->
           subject 'promise', ->

@@ -8,6 +8,9 @@ commands = Neat.require 'utils/commands'
 } = Neat.require 'utils/logs'
 
 class Jasmine extends CLIWatchPlugin
+  init: (watcher) ->
+    @runAll() if @options.runAllOnStart
+
   pathChanged: (path, action) -> =>
     @outputPathsFor(path).then (paths) => @runJasmine path, paths.flatten()
 

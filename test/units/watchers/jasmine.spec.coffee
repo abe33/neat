@@ -18,3 +18,4 @@ describe 'Jasmine', ->
   .should.bePendingUntilEnd()
   .should.runAllWith(Neat.resolve('node_modules/.bin/jasmine-node'),
                     '--coffee', Neat.resolve('test'))
+  .should.supportRunAllOnStart()
