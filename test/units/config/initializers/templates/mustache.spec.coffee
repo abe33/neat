@@ -2,8 +2,8 @@ require '../../../../test_helper'
 
 Neat = require '../../../../../lib/neat'
 initializer = Neat.require 'config/initializers/templates/mustache'
-
 mustache = require 'mustache'
+{logger} = Neat.require 'utils/logs'
 
 describe 'mustache initializer', ->
   given 'config', -> engines: { templates: {} }
@@ -36,11 +36,13 @@ describe 'mustache initializer', ->
     beforeEach ->
       spyOn(require('module'), '_load').andCallFake ->
         throw new Error 'irrelevant'
+      spyOn(logger, 'log').andCallFake ->
 
       initializer @config
 
     subject 'render', -> @config.engines.templates.mustache.render
 
-    it 'should throw an exception', ->
-      expect(-> @render 'foo').toThrow()
+    it 'should log an error', ->
+      @render 'foo'
+      expect(logger.log).toHaveBeenCalled()
 

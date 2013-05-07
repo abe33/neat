@@ -4,6 +4,7 @@ Neat = require '../../../../../lib/neat'
 initializer = Neat.require 'config/initializers/templates/haml_coffee'
 
 haml_coffee = require 'haml-coffee'
+{logger} = Neat.require 'utils/logs'
 
 describe 'haml_coffee initializer', ->
   given 'hamlcPath', -> Neat.resolve 'node_modules/haml-coffee/index.js'
@@ -41,11 +42,13 @@ describe 'haml_coffee initializer', ->
     beforeEach ->
       spyOn(require('module'), '_load').andCallFake ->
         throw new Error 'irrelevant'
+      spyOn(logger, 'log').andCallFake ->
 
       initializer @config
 
     subject 'render', -> @config.engines.templates.hamlc.render
 
-    it 'should throw an exception', ->
-      expect(-> @render 'foo').toThrow()
+    it 'should log an error', ->
+      @render 'foo'
+      expect(logger.log).toHaveBeenCalled()
 

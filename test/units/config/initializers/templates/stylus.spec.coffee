@@ -4,6 +4,7 @@ Neat = require '../../../../../lib/neat'
 initializer = Neat.require 'config/initializers/templates/stylus'
 
 stylus = require 'stylus'
+{logger} = Neat.require 'utils/logs'
 
 describe 'stylus initializer', ->
   given 'stylusPath', -> Neat.resolve 'node_modules/stylus/index.js'
@@ -58,11 +59,13 @@ describe 'stylus initializer', ->
     beforeEach ->
       spyOn(require('module'), '_load').andCallFake ->
         throw new Error 'irrelevant'
+      spyOn(logger, 'log').andCallFake ->
 
       initializer @config
 
     subject 'render', -> @config.engines.templates.stylus.render
 
-    it 'should throw an exception', ->
-      expect(-> @render 'foo').toThrow()
+    it 'should log an error', ->
+      @render 'foo'
+      expect(logger.log).toHaveBeenCalled()
 
