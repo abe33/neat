@@ -37,7 +37,7 @@
     "docco": "git://github.com/abe33/docco.git#feature-exports",
     "highlight.js": "git://github.com/abe33/highlight.js.git#node_build",
     "coffeelint": "~0.5.4",
-    "jasmine-node": "~1.7.0"
+    "jasmine-node": "~1.7.1"
   },
   "devDependencies": {},
   "main": "./lib/index",
